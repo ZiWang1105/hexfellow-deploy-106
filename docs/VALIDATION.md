@@ -6,6 +6,17 @@ PD-plus-feedforward torque. No physical robot was operated for this validation.
 Compact records, plots and SHA-256 hashes of the full original artifacts are in
 [`evidence/20261005_mit`](../evidence/20261005_mit/README.md).
 
+## Physical RGB-D matching regression
+
+The 20:33 real run failed in the camera component before any policy call. A
+read-only reproduction found 180 fresh frames rejected by latest-only encoder
+matching (median skew 94.74 ms versus the configured 80 ms). Encoder history
+rescued all 180. The revised actual camera component completed a 20-second
+passive run with 260 publications, zero matching failures and maximum absolute
+encoder skew 5.27 ms. Freshness/skew limits were unchanged; no motion was sent.
+See [sensor evidence](../evidence/20261005_camera/README.md). This is a sensor-path
+test with real SHM and a concurrent image consumer, not complete agent execution.
+
 ## Completed pickup validation
 
 **`da_mit_pickup_05` passed the complete simulated pickup experiment.** It ran the

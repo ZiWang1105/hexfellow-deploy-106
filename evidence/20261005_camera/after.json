@@ -1,0 +1,99 @@
+{
+  "mode": "actual_revised_NativeCamera_read_only",
+  "acquisition_requested": false,
+  "motion_commands_sent": 0,
+  "scope": "Actual unmodified NativeCamera.run; passive endpoint feedback producer into real DA SHM at250Hz, concurrent15Hz image consumer; no IK/policy workload",
+  "source_sha256": {
+    "third_party/hexfellow-deploy/src/hexfellow_deploy/camera.py": "c5939811c0f5aefc15c0755aebbc5a6a5aef7c6306e733d02d082719dd7c961c",
+    "third_party/hexfellow-deploy/src/hexfellow_deploy/camera_sync.py": "5bfe4913c38135e533bdbbfa5dd244616d835d455d42b87ceeefeaa5cd59c761",
+    "src/mobile_manipulator/hardware/camera_stream.py": "f38af9df3f6c3844ff3c7448a4e33e4c413b64d040ce8046cdf10f33ab584ac7"
+  },
+  "endpoint_open_s": 0.5093947540153749,
+  "status": "completed",
+  "component_elapsed_s": 20.625988835992757,
+  "component_ready": true,
+  "owned_endpoints": [],
+  "endpoint_write_count": 0,
+  "blocked_control_messages": [
+    0,
+    0,
+    0,
+    0
+  ],
+  "endpoint_close_errors": [],
+  "feedback_samples": 4996,
+  "feedback_publications": 4964,
+  "feedback_errors": {},
+  "consumer_unique_publications": 260,
+  "camera_health": {
+    "observed_s": 256194.709952924,
+    "error": null,
+    "capture": {
+      "sequence": 261,
+      "age_s": 0.13576780099538155,
+      "available": true,
+      "received_s": 256193.946856352,
+      "error": null,
+      "running": true
+    },
+    "counts": {
+      "published": 260
+    },
+    "last_publication_s": 256194.019392488,
+    "last_frame_received_s": 256193.946856352,
+    "feedback_history": {
+      "samples": 68,
+      "rejected": 0,
+      "oldest_s": 256194.381736359,
+      "newest_s": 256194.701866447
+    },
+    "feedback_reads": 4864,
+    "feedback_read_misses": 81,
+    "feedback_error": null,
+    "max_age_s": 0.25,
+    "max_skew_s": 0.08
+  },
+  "recent_statistics": {
+    "frame_age_s": {
+      "count": 256,
+      "min": 0.041160264023346826,
+      "p50": 0.058968529003323056,
+      "p99": 0.07278566649474669,
+      "max": 0.07480854997993447
+    },
+    "encoder_skew_s": {
+      "count": 256,
+      "min": -0.004771209001773968,
+      "p50": 0.0006045299960533157,
+      "p99": 0.004545309400418773,
+      "max": 0.005265218991553411
+    },
+    "snapshot_ms": {
+      "count": 256,
+      "min": 0.14445700799115002,
+      "p50": 0.386994011932984,
+      "p99": 1.3519863568944845,
+      "max": 2.7743669925257564
+    },
+    "prepare_ms": {
+      "count": 256,
+      "min": 0.17333999858237803,
+      "p50": 0.34354900708422065,
+      "p99": 1.3478266046149652,
+      "max": 2.302105975104496
+    },
+    "publish_ms": {
+      "count": 256,
+      "min": 0.34942501224577427,
+      "p50": 0.683375503285788,
+      "p99": 2.383078853017648,
+      "max": 3.582867997465655
+    }
+  },
+  "recent_publication_max_interval_s": 0.11609192701871507,
+  "source_unchanged": {
+    "third_party/hexfellow-deploy/src/hexfellow_deploy/camera.py": true,
+    "third_party/hexfellow-deploy/src/hexfellow_deploy/camera_sync.py": true,
+    "src/mobile_manipulator/hardware/camera_stream.py": true
+  }
+}

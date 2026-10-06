@@ -5,9 +5,10 @@ actuator stream. MuJoCo and the real robot select different device adapters;
 they use the same controller, reference ownership, serialized commands, feedback
 contract and command-health checks.
 
-The native SDK adapter and physical RGB-D adapter are implemented. **This change
-has not been tested on the physical robot.** Simulator results establish software
-and modeled-plant behavior, not firmware dynamics, network reliability or hardware
+The native SDK adapter and physical RGB-D adapter are implemented. The physical
+RGB-D/encoder matcher has passed a read-only connected-device test; the full
+physical agent task remains unqualified. Simulator results establish software and
+modeled-plant behavior, not firmware dynamics, network reliability or hardware
 stopping. See [architecture](docs/ARCHITECTURE.md) and [validation](docs/VALIDATION.md).
 
 DA is pinned to `6c2bda40ebee56ab3a50b8dd62aaf4df5814e5a8`. Robot assets,
@@ -65,7 +66,9 @@ The terminal prints the clickable dashboard URL, normally
 <http://127.0.0.1:8765/>. It displays RGB, control state, actuator acceptance,
 latest agent action, model-call state and errors. The last action remains visible
 during inference. API requests, sensor images, responses and reported costs are
-archived under `policy/`. Only the API client reads the external key file.
+archived under `policy/`. Physical camera matching diagnostics are saved to
+`camera_health.json`, including frame ages, encoder skew and publication failures.
+Only the API client reads the external key file.
 
 Astra with medium effort is the default. There is no default execution duration,
 call count or API spending cap. Ctrl-C closes the run. `--duration-s` optionally

@@ -20,7 +20,7 @@ def build(config_path, overrides=(), *, prompt=None, camera=True, execute_author
     if config.interface.backend.backend == 'hardware':
         config.interface.camera = dict(_target_='hexfellow_deploy.camera.NativeCamera',
             name='hexfellow_camera', feedback='${topic:feedback}', images='${topic:images}',
-            workspace='${workspace}', deployment_config='${deployment_config}', fps=15)
+            workspace='${workspace}', deployment_config='${deployment_config}', output='${output}', fps=15)
     if not camera:
         del config.interface.camera
     if prompt:

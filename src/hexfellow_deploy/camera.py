@@ -1,5 +1,6 @@
 """Independent rendering component; privileged plant topic ends here."""
 from pathlib import Path
+from collections import Counter, deque
 import json
 import math
 import time
@@ -60,6 +61,10 @@ class CameraAvailability:
         self.last_publication = None
 
     def check(self, health, now):
+        self.check_capture(health, now)
+        self.check_publication(health, now)
+
+    def check_capture(self, health, now):
         if health.get('error'):
             raise RuntimeError(health['error'])
         if not health.get('running'):
@@ -69,6 +74,9 @@ class CameraAvailability:
             raise RuntimeError('RGB-D capture timestamp is invalid or future-dated')
         if age is not None and age > self.max_age:
             raise RuntimeError(f'RGB-D capture expired: age {age:.3f}s exceeds {self.max_age:.3f}s')
+
+    def check_publication(self, health, now):
+        age = health.get('age_s')
         if self.last_publication is None:
             if now-self.started > self.startup_timeout:
                 detail = 'no captured frame' if age is None else 'no frame matched with encoder feedback'
@@ -136,15 +144,18 @@ class SimulationCamera(DABaseInterface):
 class NativeCamera(DABaseInterface):
     """Physical RGB-D capture; only matched physical encoders accompany images."""
     def __init__(self,name,feedback,images,workspace,deployment_config,fps=15,time_budget=.04,
-                 startup_timeout_s=None):
+                 startup_timeout_s=None, output=None, feedback_hz=250):
         super().__init__(name,[feedback,images],time_budget)
         self.feedback,self.images = feedback,images
         self.workspace,self.config,self.fps = workspace,deployment_config,fps
         self.startup_timeout = startup_timeout_s
+        self.output, self.feedback_hz = output, feedback_hz
 
     def initialize(self):
         if not math.isfinite(self.fps) or not 0 < self.fps <= 120:
             raise ValueError("Camera frequency must be finite and in (0, 120] Hz")
+        if not math.isfinite(self.feedback_hz) or not 0 < self.feedback_hz <= 1000:
+            raise ValueError('Camera feedback frequency must be finite and in (0, 1000] Hz')
         self._initialized.value = True
         return True
 
@@ -158,6 +169,7 @@ class NativeCamera(DABaseInterface):
         from mobile_manipulator.hardware.camera_stream import CameraStream,make_source
         from mobile_manipulator.hardware.observations import HardwareKinematics
         from mobile_manipulator.robot.assembly import load_assembly
+        from .camera_sync import EncoderHistory, FeedbackSampler
         config = load_deployment(root/self.config,execute=True,mock=False,research=True)
         primary = config['robot']['policy_camera']
         cfg = config['camera_configs'][primary]
@@ -168,22 +180,91 @@ class NativeCamera(DABaseInterface):
         startup_timeout = self.startup_timeout if self.startup_timeout is not None else cfg.get('startup_timeout_s', 30.)
         availability = CameraAvailability(config['robot']['camera_max_age_s'], startup_timeout,
                                           started_s=time.monotonic())
+        max_skew = config['robot']['camera_encoder_max_skew_s']
+        history = EncoderHistory(availability.max_age+max_skew)
+        sampler = FeedbackSampler(self.feedback, history, 1/self.feedback_hz).start()
+        counts, events = Counter(), deque(maxlen=256)
+        last_frame = None
+        last_report = 0.
+        failure = None
+        health = {}
+
+        def report(now):
+            nonlocal last_report
+            if self.output is not None:
+                path = Path(self.output)/'camera_health.json'
+                path.parent.mkdir(parents=True, exist_ok=True)
+                temporary = path.with_suffix('.tmp')
+                temporary.write_text(json.dumps(dict(
+                    observed_s=now, error=failure, capture=health, counts=dict(counts),
+                    last_publication_s=availability.last_publication, last_frame_received_s=last_frame,
+                    feedback_history=history.stats(), feedback_reads=sampler.reads,
+                    feedback_read_misses=sampler.misses, feedback_error=sampler.error,
+                    max_age_s=availability.max_age, max_skew_s=max_skew,
+                    recent_attempts=list(events)), allow_nan=False))
+                temporary.replace(path)
+            last_report = now
+
         stream = CameraStream(lambda: make_source(cfg),fps=self.fps).start()
         try:
             while not self.stopping:
                 started = time.monotonic()
-                health,frame = stream.snapshot()
-                row = self.feedback.get()
-                availability.check(health,time.monotonic())
-                if frame is not None and row is not None:
-                    measured = row['measured']
-                    if (0 <= time.monotonic()-frame.received_s < config['robot']['camera_max_age_s']
-                            and abs(frame.received_s-measured['timestamp_s']) < config['robot']['camera_encoder_max_skew_s']):
+                if sampler.error:
+                    raise RuntimeError(f'Camera encoder sampler failed: {sampler.error}')
+                health = stream.health()
+                availability.check_capture(health, time.monotonic())
+                # Poll only metadata between captures. Retry SHM contention at
+                # the feedback cadence, rather than losing a full camera period.
+                if health.get('received_s') is not None and health['received_s'] != last_frame:
+                    health, frame = stream.snapshot()
+                    now = time.monotonic()
+                    attempt = dict(started_s=started, capture_sequence=health.get('sequence'),
+                                   snapshot_ms=(now-started)*1000)
+                    if frame is None:
+                        reason = 'no_frame'
+                    else:
+                        attempt.update(frame_received_s=frame.received_s,
+                                       device_timestamp_s=frame.device_timestamp_s,
+                                       frame_age_s=now-frame.received_s)
+                        row = history.closest(frame.received_s, now, max_skew)
+                        reason = 'no_encoder_match' if row is None else 'matched'
+                        if row is not None:
+                            measured = row['measured']
+                            attempt.update(encoder_timestamp_s=measured['timestamp_s'],
+                                           encoder_skew_s=measured['timestamp_s']-frame.received_s)
+                    if reason == 'matched':
                         rgb, depth, k = resize_registered_rgbd(frame, self.images.width, self.images.height)
                         kin.update(measured['joint_positions'])
-                        if self.images.put(measured,rgb,depth,k,kin.packet()):
-                            availability.published(time.monotonic())
+                        attempt['prepare_ms'] = (time.monotonic()-now)*1000
+                        publish_started = time.monotonic()
+                        if not 0 <= publish_started-frame.received_s <= availability.max_age:
+                            reason = 'expired_before_publication'
+                        elif self.images.put(measured,rgb,depth,k,kin.packet()):
+                            completed = time.monotonic()
+                            availability.published(completed)
+                            last_frame = frame.received_s
+                            reason = 'published'
                             self._ready.value = True
-                time.sleep(max(0.,started+1/self.fps-time.monotonic()))
+                        else:
+                            reason = 'image_topic_busy'
+                        attempt['publish_ms'] = (time.monotonic()-publish_started)*1000
+                    counts[reason] += 1
+                    events.append(dict(attempt, result=reason, completed_s=time.monotonic()))
+                # A valid recovered frame must get a publication attempt before
+                # the previous publication gap is evaluated.
+                health = stream.health()
+                now = time.monotonic()
+                availability.check(health, now)
+                if now-last_report >= 1.:
+                    report(now)
+                time.sleep(max(0.,started+1/self.feedback_hz-time.monotonic()))
+        except Exception as error:
+            failure = f'{type(error).__name__}: {error}'
+            report(time.monotonic())
+            raise
         finally:
-            stream.close()
+            try:
+                stream.close()
+            finally:
+                sampler.close()
+                report(time.monotonic())

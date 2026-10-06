@@ -1,0 +1,108 @@
+{
+  "mode": "read_only_sensor_timing",
+  "acquisition_requested": false,
+  "motion_commands_sent": 0,
+  "scope": "Passive 250 Hz feedback thread and original 15 Hz latest-only camera matcher; single process, no policy/controller workload",
+  "limits": {
+    "camera_max_age_s": 0.25,
+    "camera_encoder_max_skew_s": 0.08,
+    "camera_fps": 15
+  },
+  "endpoint_open_s": 0.4789460939937271,
+  "status": "completed",
+  "elapsed_s": 15.0215943090152,
+  "capture_final_health": {
+    "sequence": 192,
+    "age_s": 0.11111810497823171,
+    "available": true,
+    "received_s": 255963.335595742,
+    "error": null,
+    "running": true
+  },
+  "owned_endpoints": [],
+  "endpoint_write_count": 0,
+  "blocked_control_messages": [
+    0,
+    0,
+    0,
+    0
+  ],
+  "endpoint_close_errors": [],
+  "samples": 225,
+  "publications": 11,
+  "reject_reasons": {
+    "no_frame": 34,
+    "encoder_skew": 180
+  },
+  "would_fault": {
+    "publication_expired": 160
+  },
+  "history_rescues": 180,
+  "statistics": {
+    "snapshot_ms": {
+      "count": 225,
+      "min": 0.0037669960875064135,
+      "p50": 0.3296879876870662,
+      "p99": 1.2013951945118606,
+      "max": 1.2917109997943044
+    },
+    "resize_ms": {
+      "count": 11,
+      "min": 0.12246999540366232,
+      "p50": 0.2930890186689794,
+      "p99": 0.9979699825635181,
+      "max": 1.02676497772336
+    },
+    "fk_ms": {
+      "count": 11,
+      "min": 0.19737999537028372,
+      "p50": 0.2511909988243133,
+      "p99": 0.3272340080002323,
+      "max": 0.32886600820347667
+    },
+    "send_ms": {
+      "count": 11,
+      "min": 0.33523800084367394,
+      "p50": 0.6656579789705575,
+      "p99": 2.500613575102762,
+      "max": 2.6486439746804535
+    },
+    "loop_ms": {
+      "count": 225,
+      "min": 0.009688024874776602,
+      "p50": 0.4803400079254061,
+      "p99": 2.3639347683638294,
+      "max": 5.20727998809889
+    },
+    "latest_skew_s": {
+      "count": 191,
+      "min": -0.10758845901000313,
+      "p50": -0.09473952301777899,
+      "p99": -0.06391445980698339,
+      "max": -0.05164834499009885
+    },
+    "history_min_abs_skew_s": {
+      "count": 191,
+      "min": 1.5349010936915874e-05,
+      "p50": 0.0015652239962946624,
+      "p99": 0.013606410200009115,
+      "max": 0.015380719007225707
+    },
+    "frame_age_s": {
+      "count": 191,
+      "min": 0.057879955013049766,
+      "p50": 0.10245825198944658,
+      "p99": 0.11149738310487009,
+      "max": 0.11173037299886346
+    },
+    "successful_publication_interval_s": {
+      "count": 10,
+      "min": 0.12979524800903164,
+      "p50": 0.9672638964984799,
+      "p99": 3.605963385260839,
+      "max": 3.67208274800214
+    }
+  },
+  "feedback_samples": 3662,
+  "feedback_errors": {}
+}

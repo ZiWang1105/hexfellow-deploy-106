@@ -1,0 +1,29 @@
+{
+  "finding": "Live latest-only image/encoder pairing starvation reproduced during passive sampling",
+  "first_publication_elapsed_s": 2.270877841016045,
+  "first_original_watchdog_failure_elapsed_s": 2.670651976019144,
+  "first_failure_reason": "publication_expired",
+  "timing_rootcause_evidence": "180 latest-frame/latest-encoder pairs exceeded the 80 ms skew limit while all 180 had existing feedback history within the same limit; captured image age stayed below 112 ms and all attempted shared-memory sends succeeded.",
+  "phase_delay_inference": "Configured external ZED worker, CameraStream IPC polling, and NativeCamera consumer each run at 15 Hz; independent latest-value polling phases can accumulate image delay. Exact per-hop timing was not recorded.",
+  "scope_limit": "Stationary read-only sensors in one process, no IK or policy workload; this reproduces the matching failure class but not the exact historical failed frame.",
+  "authorization_evidence": {
+    "owned_endpoints": [],
+    "endpoint_write_count": 0,
+    "blocked_control_messages": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "endpoint_close_errors": []
+  },
+  "remaining_probe_processes": [],
+  "artifact_sha256": {
+    "probe.py": "704212b16d1fdd7dd508c0034e798d475449995f68c089277db7ee396a67a187",
+    "summary.json": "839b72a952259c1784f0c45b5c81639ea365978e3a39cb4da0f7754008636e6c",
+    "samples.jsonl": "d915a28d2a6a67bc3a977fcdbe86aa245b8830ea7c9f77fa10e2efc792aa6fcb",
+    "feedback.jsonl": "0b78816a07dd1b4308d68b2bf3535c36999216b0cbdc417809033d0f455d50e1",
+    "consumer.jsonl": "3c33ee59c19a1f8736143ca65e186d4f1d53f6c9c81bea6dc3f55260e1e7a136",
+    "console.log": "f6007e0a7ae40c70516689953281fe5777a8669746c90c0d9c1e78e347e803db"
+  }
+}

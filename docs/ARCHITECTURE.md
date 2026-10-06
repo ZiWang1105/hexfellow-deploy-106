@@ -94,6 +94,16 @@ multiple control sessions. Native and simulation cameras publish the same
 registered metric depth/physical feedback contract. Physical extrinsic calibration
 remains provisional as documented in the parent workspace.
 
+Physical camera capture remains at 15 Hz. Its process samples the existing
+feedback SHM independently at 250 Hz into a bounded encoder history and pairs each
+new image with the closest recorded host receipt timestamp. Original timestamps
+and encoder values are preserved; no interpolation or synthetic time refresh is
+used. A metadata-only poll avoids another full camera-period delay and retries
+transient SHM contention promptly. Fresh candidate publication precedes evaluation
+of the previous publication gap. The 250 ms image-age and 80 ms matching limits
+remain unchanged. `camera_health.json` records ages, skew, rejection counts and
+bounded recent publication timings independently of the control process.
+
 ## Timeouts
 
 | Condition | Shared response |
