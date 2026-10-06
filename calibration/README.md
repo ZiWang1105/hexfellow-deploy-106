@@ -6,6 +6,12 @@ solvers, measured-joint capture/eligibility logic, browser controls, robot pose
 planning, simulator checks, coarse head calibration, landmark PnP refinement,
 and full-arm real/simulation overlays. The original source worktree is retained.
 
+The saved head and right-wrist parameter snapshot, frame/TCP conventions, SDK
+intrinsics, board dimensions and physical validation evidence are documented in
+[Camera parameters](docs/camera_parameters.md). The snapshot is
+[config/camera/camera_parameters_20261006.json](config/camera/camera_parameters_20261006.json);
+the left D405 matrix remains `null` until calibrated.
+
 Run commands from `third_party/hexfellow-deploy`:
 
 ```bash
@@ -20,9 +26,9 @@ click to begin movement and the existing read-only startup audit.
 
 | Camera | Serial | Constant calibrated transform | Workflow |
 | --- | --- | --- | --- |
-| ZED 2i head | 32701991 | lift link → LEFT rectified optical | Coarse board/hand-eye fit, landmark PnP refinement, measured-arm overlays |
-| D435i right wrist | 243222074562 | right flange → color optical | Fixed 33° mount, 30 simulated board views, automatic collection/fit/guarded return |
-| D405 left wrist | 230422271628 | left flange → color optical | Camera-only board detection and shared offline eye-in-hand fit; no validated automatic left motion route yet |
+| ZED 2i head | 32701991 | LEFT rectified optical → lift link | Coarse board/hand-eye fit, landmark PnP refinement, measured-arm overlays |
+| D435i right wrist | 243222074562 | color optical → right flange | Fixed 33° mount, 30 simulated board views, automatic collection/fit/guarded return |
+| D405 left wrist | 230422271628 | color optical → left flange | Camera-only board detection and shared offline eye-in-hand fit; no validated automatic left motion route yet |
 
 The source is split into `tools/camera/` (commands and web UI),
 `src/policy_sim/calibration/` (detectors and solvers), `config/camera/` (board,

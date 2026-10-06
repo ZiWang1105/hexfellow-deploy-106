@@ -21,7 +21,9 @@
       "kind": "eye_in_hand",
       "mount": "fixed 33 degrees; outside right arm at default",
       "pose_plan": "config/camera/realsense_d435i_right_fixed33_outside_plan.json",
-      "worker": "wrist_camera_worker.py"
+      "worker": "wrist_camera_worker.py",
+      "candidate": "config/camera/realsense_d435i_right_candidate_20261006.json",
+      "calibration_status": "candidate_requires_physical_validation"
     },
     "left": {
       "model": "RealSense D405",
@@ -31,7 +33,9 @@
       "kind": "eye_in_hand",
       "pose_plan": null,
       "worker": "wrist_camera_worker.py",
-      "status": "Shared camera/PnP and offline solver available; left mount geometry and motion route not yet validated"
+      "status": "Shared camera/PnP and offline solver available; left mount geometry and motion route not yet validated",
+      "calibration_status": "uncalibrated"
     }
-  }
+  },
+  "parameter_snapshot": "config/camera/camera_parameters_20261006.json"
 }

@@ -1,0 +1,48 @@
+{
+  "source_run": "20261006T212257.169425Z",
+  "scope": "Physical right-wrist fit: portable numerical observations and archived held-out plots; raw frames remain local.",
+  "files": [
+    {
+      "path": "capture-summary.json",
+      "sha256": "381a6634ac308b64df81beb120be0900058e42b452527b521d86f621dda888ca",
+      "bytes": 1550
+    },
+    {
+      "path": "dataset.json",
+      "sha256": "7ed15cdc5f34978250b19c2198b2df814f5d7808b4ca44d171f0e824305807ad",
+      "bytes": 164932
+    },
+    {
+      "path": "heldout-errors.png",
+      "sha256": "c1cff8eb1684f01bb38ad8da56ae3c3079f592f548d0b8248456dea8ae122d82",
+      "bytes": 35751
+    },
+    {
+      "path": "heldout-reprojection.json",
+      "sha256": "3f3a3aa1eb4bda1329c85ecabe658b526a47fcc020e5cf58ca19d53dc7356239",
+      "bytes": 24073
+    },
+    {
+      "path": "heldout-reprojection.png",
+      "sha256": "abb6601712b1403db942f289d0db3567900b5dd8289358da636b9ddeb75da909",
+      "bytes": 2977939
+    }
+  ],
+  "verification": {
+    "calibration_tests_staged_snapshot": {
+      "passed": 190,
+      "failed": 0
+    },
+    "deployment_tests": {
+      "passed": 148,
+      "failed": 0
+    },
+    "portable_numerical_refit": {
+      "max_camera_matrix_difference": 0.0,
+      "max_board_matrix_difference": 0.0,
+      "heldout_reprojection_rms_px": 11.38241799965472
+    },
+    "devices_opened": false,
+    "robot_motion_commands_sent": 0
+  }
+}

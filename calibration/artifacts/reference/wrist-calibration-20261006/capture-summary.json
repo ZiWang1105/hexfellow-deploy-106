@@ -1,0 +1,55 @@
+{
+  "source_run": "20261006T212257.169425Z",
+  "original_result_sha256": "dc382c08d09e17a7f2c37e5fc481201bb66b05542e56ed5c2091d19be0962ff7",
+  "attempted_poses": 30,
+  "eligible_captures": 27,
+  "training_pose_ids": [
+    2,
+    3,
+    4,
+    5,
+    7,
+    9,
+    10,
+    11,
+    13,
+    14,
+    15,
+    16,
+    19,
+    20,
+    21,
+    22,
+    24,
+    25,
+    26,
+    27,
+    29,
+    30
+  ],
+  "validation_pose_ids": [
+    6,
+    12,
+    17,
+    23,
+    28
+  ],
+  "excluded_poses": [
+    {
+      "pose_id": 1,
+      "reason": "Calibration measured-pose settling timed out: reference still settling; maximum right-arm target offset 0.534 deg"
+    },
+    {
+      "pose_id": 8,
+      "reason": "Calibration measured-pose settling timed out: reference still settling; maximum right-arm target offset 0.803 deg"
+    },
+    {
+      "pose_id": 18,
+      "reason": "Calibration measured-pose settling timed out: reference still settling; maximum right-arm target offset 1.225 deg"
+    }
+  ],
+  "optimizer_converged": true,
+  "session_passed": false,
+  "session_finish_reason": "HardwareSafetyError: calibration: right arm arrival timed out after 10 seconds. right J1 position error -1.372 deg (allowed +/-1.146; target 15.217, measured 13.845). The arm is stationary, but outside the position tolerance. Calibration stopped; no capture accepted for this pose.",
+  "note": "Fit saved before the subsequent automatic return failed its arrival check. The saved calibration candidate is retained; optimizer convergence is not physical accuracy qualification."
+}

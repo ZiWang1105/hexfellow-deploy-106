@@ -21,6 +21,11 @@ Camera calibration code for the ZED 2i head and both RealSense wrists is now
 PnP refinement, measured-arm overlays and simulation checks. `list` shows the
 actions supported for each device; the D405 motion route remains unvalidated.
 
+Saved head/right-wrist extrinsics, SDK intrinsics, board scale and validation
+evidence are versioned in the [camera parameter guide](calibration/docs/camera_parameters.md)
+and [parameter snapshot](calibration/config/camera/camera_parameters_20261006.json).
+The left D405 remains explicitly uncalibrated.
+
 DA is pinned to `6c2bda40ebee56ab3a50b8dd62aaf4df5814e5a8`. Robot assets,
 active calibration configuration, sensor contracts, policy client and PinkIK are imported from the
 parent `agentic-mobile-manipulator` workspace. This repository is not yet a
