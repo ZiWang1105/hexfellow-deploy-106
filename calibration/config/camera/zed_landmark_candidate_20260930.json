@@ -1,0 +1,364 @@
+{
+  "T_mount_from_camera": [
+    [
+      0.03286887515108732,
+      -0.6582920059073717,
+      0.7520447273964169,
+      4.625040707960471e-05
+    ],
+    [
+      -0.9985207394208218,
+      0.010979465416036512,
+      0.05325208245386404,
+      0.044946487632226396
+    ],
+    [
+      -0.04331246925306048,
+      -0.7526825933271122,
+      -0.6569573378154595,
+      0.14750687943496776
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "refinement": "all pairs, soft_l1",
+  "robust_loss_scale_px": 3.0,
+  "reprojection_threshold_px": 6.0,
+  "errors_px": [
+    2.583914132070887,
+    12.966637624143186,
+    5.272887829935682,
+    10.385053670472113,
+    4.6053197729895485,
+    16.404917827905273,
+    2.5804831660173484,
+    17.245443013055283,
+    25.72843787676732,
+    0.9726836667292935,
+    17.973974176614423,
+    2.8452461854323627,
+    4.357933845830703,
+    10.044236304382592,
+    6.433609426332089,
+    24.54271005900102,
+    10.099087935939332,
+    11.2503102053315,
+    0.8065055973711543,
+    1.9720381925076331,
+    9.70944821388869
+  ],
+  "inliers": [
+    true,
+    false,
+    true,
+    false,
+    true,
+    false,
+    true,
+    false,
+    false,
+    true,
+    false,
+    true,
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    true,
+    true,
+    false
+  ],
+  "inlier_rms_px": 3.24756891258271,
+  "all_rms_px": 11.932156102275737,
+  "point_spread_singular_values_m": [
+    0.4542527104424788,
+    0.21005992997911396,
+    0.17888319935885463
+  ],
+  "per_pose": [
+    {
+      "pose_id": 1,
+      "count": 6,
+      "inliers": 3,
+      "rms_px": 10.006608553644638,
+      "max_px": 16.404917827905273
+    },
+    {
+      "pose_id": 2,
+      "count": 8,
+      "inliers": 4,
+      "rms_px": 13.282445994436491,
+      "max_px": 25.72843787676732
+    },
+    {
+      "pose_id": 3,
+      "count": 7,
+      "inliers": 2,
+      "rms_px": 11.818406183300796,
+      "max_px": 24.54271005900102
+    }
+  ],
+  "leave_one_pose_out": [
+    {
+      "held_out_pose": 1,
+      "training_inliers": 9,
+      "held_out_rms_px": 15.795653450846872,
+      "held_out_max_px": 24.410589914182772,
+      "held_out_positive_depth": true,
+      "T_mount_from_camera": [
+        [
+          0.03935104118654178,
+          -0.6720450951049339,
+          0.7394639177829673,
+          0.00477937682077955
+        ],
+        [
+          -0.9991101028744408,
+          -0.015219049743449193,
+          0.03933678760563463,
+          0.049813466224906545
+        ],
+        [
+          -0.015182157019326492,
+          -0.740353814517293,
+          -0.6720459295598283,
+          0.158711526584702
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "held_out_pose": 2,
+      "training_inliers": 7,
+      "held_out_rms_px": 16.791154549610233,
+      "held_out_max_px": 25.378278094260494,
+      "held_out_positive_depth": true,
+      "T_mount_from_camera": [
+        [
+          0.009080165327441176,
+          -0.6370681878549204,
+          0.7707539650374003,
+          -0.011872724081619483
+        ],
+        [
+          -0.9989848466585198,
+          0.028231384561127285,
+          0.035103633322142766,
+          0.05436869643597267
+        ],
+        [
+          -0.0441228596566456,
+          -0.7702902783684925,
+          -0.6361651203160311,
+          0.13644562254605969
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "held_out_pose": 3,
+      "training_inliers": 8,
+      "held_out_rms_px": 14.935600554664074,
+      "held_out_max_px": 29.833048627134374,
+      "held_out_positive_depth": true,
+      "T_mount_from_camera": [
+        [
+          0.02781867114012916,
+          -0.658899895366249,
+          0.7517160696847869,
+          -0.0025733727247796647
+        ],
+        [
+          -0.9984525691189391,
+          0.017908930327780976,
+          0.052647292753803,
+          0.04228810056064995
+        ],
+        [
+          -0.04815172640505529,
+          -0.7520174187483032,
+          -0.6573820906773717,
+          0.1498360503445227
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    }
+  ],
+  "status": "provisional landmark fit; physical matches require review",
+  "camera_frame": "rectified LEFT optical; x right, y down, z forward",
+  "mount_frame": "maver_x4_asm_URDF_link_1",
+  "point_file": "artifacts/reference/camera-calibration/landmark-points.json",
+  "offline_only": true,
+  "hardware_commands_sent": 0,
+  "active_configuration_changed": false,
+  "point_file_sha256": "2fe4a18709cb1401515a2f700094d7719bedb69f60d1f425264eab3548b26aac",
+  "K": [
+    [
+      1055.28076171875,
+      0.0,
+      980.4390869140625
+    ],
+    [
+      0.0,
+      1055.28076171875,
+      559.5460815429688
+    ],
+    [
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "source_comparisons": "/home/ziwang/projects/UMI_Hardware_camera/runs/both-j6-correction/whole-arm-overlays",
+  "selected_pairs": 22,
+  "usable_pairs": 21,
+  "fit_inliers": 9,
+  "previous_board_fit_landmark_rms_px": 57.6647240563235,
+  "previous_inlier_only_fit_landmark_rms_px": 13.320743736918208,
+  "camera_translation_change_mm": 13.748323196529283,
+  "camera_rotation_change_deg": 4.134022936133375,
+  "calibration_accepted": false,
+  "limitation": "Approximate arm/CAD feature matches; held-out-pose RMS remains 14.9\u201316.8 pixels. Fixed arm/model errors can be absorbed by this camera fit. Intrinsics and robot kinematics were held fixed.",
+  "base_frame": "maver_x4_asm_maver_x4_base_link",
+  "T_base_from_camera_at_captures": [
+    {
+      "pose_id": 1,
+      "lift_joint_m": 0.30146142916102087,
+      "T_base_from_camera": [
+        [
+          0.032868875151087315,
+          -0.6582920059073716,
+          0.7520447273964168,
+          0.11494625040707959
+        ],
+        [
+          -0.9985207394208218,
+          0.010979465416036512,
+          0.05325208245386404,
+          0.044946487632226396
+        ],
+        [
+          -0.04331246925306048,
+          -0.7526825933271122,
+          -0.6569573378154595,
+          1.3214683085959886
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "pose_id": 2,
+      "lift_joint_m": 0.3014591820760518,
+      "T_base_from_camera": [
+        [
+          0.03286887515108732,
+          -0.6582920059073717,
+          0.7520447273964169,
+          0.11494625040707962
+        ],
+        [
+          -0.9985207394208218,
+          0.010979465416036512,
+          0.05325208245386404,
+          0.044946487632226396
+        ],
+        [
+          -0.04331246925306048,
+          -0.7526825933271122,
+          -0.6569573378154595,
+          1.3214660615110199
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "pose_id": 3,
+      "lift_joint_m": 0.3014576840194058,
+      "T_base_from_camera": [
+        [
+          0.03286887515108732,
+          -0.6582920059073717,
+          0.7520447273964169,
+          0.1149462504070796
+        ],
+        [
+          -0.9985207394208218,
+          0.010979465416036512,
+          0.05325208245386404,
+          0.044946487632226396
+        ],
+        [
+          -0.04331246925306048,
+          -0.7526825933271122,
+          -0.6569573378154595,
+          1.3214645634543736
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    }
+  ],
+  "render_checks": [
+    {
+      "pose_id": 1,
+      "measured_q_exact": true,
+      "image_registration_applied": false,
+      "source_image_sha256": "26689221b252e226cbacf82102c3c5d77b0e379110edb27b530a6a37d8ce3ce3",
+      "simulated_visible_pixels": 184694
+    },
+    {
+      "pose_id": 2,
+      "measured_q_exact": true,
+      "image_registration_applied": false,
+      "source_image_sha256": "d365a9d19c4a39432e6ace4cba53bf24b5f429a64cb51985c9540b8bee950a01",
+      "simulated_visible_pixels": 260195
+    },
+    {
+      "pose_id": 3,
+      "measured_q_exact": true,
+      "image_registration_applied": false,
+      "source_image_sha256": "07f392e95d775f7b45fa24ef1e3b47bcb8bc5f2661b55e56b8c691aa1ce02389",
+      "simulated_visible_pixels": 223547
+    }
+  ],
+  "base_transform_note": "Camera is on the moving lift. The fixed extrinsic is T_mount_from_camera; T_base_from_camera = FK(base_from_mount, measured lift) @ T_mount_from_camera.",
+  "original_camera_configuration_unchanged": true,
+  "original_camera_configuration_sha256": "779af49f88ae316a67027dbd056d34a633eb0266ccbd09e81eacd83504ce9d90",
+  "solver_tests_passed": 8,
+  "original_point_file": "/home/ziwang/projects/UMI_Hardware_camera/runs/manual-camera-pnp/assistant-selection/points-with-3d.json"
+}

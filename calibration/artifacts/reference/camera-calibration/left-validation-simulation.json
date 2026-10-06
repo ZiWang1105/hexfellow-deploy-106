@@ -1,0 +1,28 @@
+{
+  "passed": true,
+  "simulation_only": true,
+  "hardware_commands_sent": 0,
+  "poses": [
+    {
+      "pose_id": 1,
+      "visible_gripper_pixels": 28478,
+      "maximum_left_target_error_deg": 0.003533061339529251
+    },
+    {
+      "pose_id": 2,
+      "visible_gripper_pixels": 25277,
+      "maximum_left_target_error_deg": 0.004565112550622849
+    },
+    {
+      "pose_id": 3,
+      "visible_gripper_pixels": 37673,
+      "maximum_left_target_error_deg": 0.005331457341459221
+    }
+  ],
+  "returned_to_default": true,
+  "minimum_measured_path_clearance_m": 0.015001710002839067,
+  "measured_samples": 2812,
+  "plan_file": "/home/ziwang/projects/UMI_Hardware_camera/runs/both-j6-correction/left-plan/plan.json",
+  "plan_sha256": "e65290182be21f0063cc8a08a4a6ff063ed6dd4f15f5f7d65781867cf2bf536b",
+  "limitations": "Nominal simulated dynamics, sampled geometry, no desks/cables/people. Actual starting state and room clearance must be checked before a physical run."
+}

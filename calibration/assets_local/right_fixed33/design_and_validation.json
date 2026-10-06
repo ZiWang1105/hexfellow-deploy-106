@@ -1,0 +1,126 @@
+{
+  "revision": "V12_ONEPIECE_RING_FIXED33_FIT_TRIAL",
+  "units": "mm",
+  "camera_transform_mm": [
+    [
+      0.838670567945424,
+      0.0,
+      -0.5446390350150271,
+      63.63436288344522
+    ],
+    [
+      0.0,
+      1.0,
+      0.0,
+      32.5
+    ],
+    [
+      0.5446390350150271,
+      0.0,
+      0.838670567945424,
+      49.534647545263
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "fixed_camera_pitch_deg": 33,
+  "RGB_pupil_mm": [
+    52.33054310341884,
+    0.0,
+    66.94100358179989
+  ],
+  "body_closure_per_half_mm": 0,
+  "wrist_lip_thickness_mm": 2.4,
+  "outer_loop_radius_mm": 45.5,
+  "rear_bridge_inner_radius_mm": 38.5,
+  "ring_Z_mm": [
+    2.6,
+    5
+  ],
+  "green_internal_notch_width_mm": 32,
+  "hardware": {
+    "M3x25_anchors": 2,
+    "M3x8_camera": 2,
+    "OD7_ID3p2_thickness0p5_washers": 4
+  },
+  "anchor_holes_mm": [
+    [
+      26.5,
+      -7,
+      8
+    ],
+    [
+      26.5,
+      7,
+      8
+    ]
+  ],
+  "anchor_direction": [
+    -1,
+    0,
+    0
+  ],
+  "anchor_under_head_X_mm": 43.5,
+  "anchor_grip_including_washer_mm": 17,
+  "anchor_nominal_insertion_mm": 8,
+  "anchor_user_reported_insertion_capacity_approx_mm": 10,
+  "camera_nominal_screw_insertion_mm": 2.5,
+  "print_transform_xyz_mm": [
+    -16.718807220458984,
+    -10.75400161743164,
+    -2.5999999046325684
+  ],
+  "print_SHA256": "4eeb42bd6dd7253c15de72035dade35e185478ba76c74b18330880852aef73be",
+  "prior_parts_reused": [],
+  "gripper_removal_required": true,
+  "uses_factory_flange_as_sandwich": false,
+  "physical_fit_and_vibration_tested": false,
+  "limitations": [
+    "New thin rear closure crosses the historical conservative all-Z cable keepout; the actual cable bend path must be checked before this mount replaces the previous version.",
+    "Cap-band contact rails at Z6.2..10.8 remain dependent on actual green PCB edge clearance.",
+    "No FEA, strength rating, zero-vibration guarantee or manufacturer threaded-cap load rating.",
+    "Original gripper installation screws/interfaces remain unchanged; follow actual factory assembly."
+  ],
+  "checks": {
+    "native_valid": true,
+    "solid_count": 1,
+    "volume_mm3": 58838.89124164289,
+    "watertight": true,
+    "winding_consistent": true,
+    "mesh_body_count": 1,
+    "camera_overlap_mm3": 0,
+    "camera_housing_minimum_X_gap_mm": 13.005049761825916,
+    "green_groove_keepout_overlap_mm3": 0,
+    "legacy_all_Z_rear_keepout_overlap_mm3": 549.8313305731028,
+    "legacy_all_Z_rear_keepout_passed": false,
+    "new_rear_bridge_is_physical_fit_dependency": true,
+    "anchors": {
+      "-7": {
+        "missing_washer_bearing_mm3": 0,
+        "bolt_and_washer_overlap_mm3": 0,
+        "driver_overlap_mm3": 0
+      },
+      "7": {
+        "missing_washer_bearing_mm3": 0,
+        "bolt_and_washer_overlap_mm3": 0,
+        "driver_overlap_mm3": 0
+      }
+    },
+    "camera_screws": {
+      "-22.5": {
+        "hardware_overlap_mm3": 0,
+        "driver_overlap_mm3": 0
+      },
+      "22.5": {
+        "hardware_overlap_mm3": 0,
+        "driver_overlap_mm3": 0
+      }
+    },
+    "failures": [],
+    "passed": true
+  }
+}

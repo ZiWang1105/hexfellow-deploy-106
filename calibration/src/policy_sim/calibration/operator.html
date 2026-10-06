@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Camera calibration · operator rehearsal</title>
+<style>
+body{margin:0;background:#101923;color:#e9f0f4;font:16px system-ui,sans-serif}main{max-width:1200px;margin:auto;padding:24px}h1{font-size:28px;margin:4px 0 12px}.tag{color:#f3c780;font-weight:700;letter-spacing:1px;font-size:13px}.note{color:#b8c8d4;line-height:1.5}section{background:#1a2735;border:1px solid #344659;border-radius:12px;padding:20px;margin-top:18px}.row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}button{padding:12px 18px;border:0;border-radius:7px;background:#58d1bf;color:#092b27;font-weight:700;font-size:15px;cursor:pointer}button:disabled{opacity:.35;cursor:default}.pause{background:#ffbf73}.secondary{background:#c3d1e0;color:#152d43}video{width:100%;background:#050b12;border-radius:8px}#raw{width:100%;display:none}#error{color:#ff9999;min-height:24px}#message{min-height:24px}#grid{display:grid;grid-template-columns:repeat(15,1fr);gap:5px;margin:16px 0}.pose{padding:7px 0;text-align:center;border:1px solid #657486;border-radius:4px}.done{background:#205b50}.current{outline:2px solid #f3c780}a{color:#83dacf}code{overflow-wrap:anywhere}#solution{white-space:pre-wrap}progress{width:100%;height:10px}@media(max-width:700px){#grid{grid-template-columns:repeat(10,1fr)}main{padding:12px}}
+</style><main>
+<div class="tag">SIMULATION REHEARSAL · NO ROBOT CONNECTION</div>
+<h1>Camera calibration</h1>
+<p class="note">Practise the operator sequence using the validated 40° mount simulation. Captures are synthetic. Pausing freezes recorded playback; it does not test physical braking.</p>
+<section><div class="row"><strong id="phase">Connecting…</strong><span id="count">0 / 30 captured</span></div>
+<div id="grid"></div><progress id="progress" max="30" value="0"></progress>
+<p id="message"></p><div class="row">
+<button id="next" onclick="act('next')">Next pose</button>
+<button id="pause" class="pause" onclick="act('pause')">Pause · Space</button>
+<button id="resume" class="secondary" onclick="act('resume')">Resume</button>
+<button id="capture" onclick="act('capture')">Capture · C</button>
+<button id="solve" class="secondary" onclick="act('solve')">Solve &amp; validate</button>
+<button id="return" class="secondary" onclick="act('return')">Return to start</button>
+</div><p id="error" role="alert"></p>
+<div class="note">Next moves one pose only. Capture never starts movement. Capture again saves a new attempt and retains earlier files. Closing this page pauses playback after 2 seconds.</div></section>
+<section><h2>Recorded robot and camera view</h2>
+<p class="note">Timeline follows the original simulation at 1× speed. The source video label says 6× because the video file itself is compressed in time.</p>
+<video id="video" src="/video.mp4" preload="auto" muted playsinline></video>
+<p id="imageLabel">Full-resolution image appears when a pose settles.</p><img id="raw" alt="Synthetic ChArUco capture from the settled pose"></section>
+<section><h2>Session output</h2><code id="output"></code><p id="solution"></p>
+<p class="note">24 poses are used for fitting; poses 5, 10, 15, 20, 25 and 30 are held out. No ground-truth transform is passed to the solver.</p>
+<a href="http://127.0.0.1:8767" target="_blank" rel="noopener">Open separate real ZED preview</a></section>
+</main><script>
+const token='__TOKEN__';let state=null,busy=false,imageKey='',polling=false;
+const el=id=>document.getElementById(id);
+async function post(path,data){const r=await fetch(path,{method:'POST',headers:{'Content-Type':'application/json','X-Calibration-Token':token},body:JSON.stringify(data)});const v=await r.json();if(!r.ok)throw Error(v.error);return v;}
+function paint(s){state=s;el('phase').textContent=`Pose ${s.pose} / ${s.count} · ${s.phase.replaceAll('_',' ')}`;el('count').textContent=`${s.captured.length} / 30 captured`;el('progress').value=s.captured.length;el('message').textContent=s.message;el('output').textContent=s.output;
+for(const a of ['next','pause','resume','capture','solve','return'])el(a).disabled=(busy&&a!=='pause')||!s['can_'+a];
+el('capture').textContent=s.captured.includes(s.pose)?'Capture again · C':'Capture · C';
+el('grid').replaceChildren(...Array.from({length:30},(_,i)=>{const n=document.createElement('span');n.className='pose'+(s.captured.includes(i+1)?' done':'')+(s.pose===i+1?' current':'');n.textContent=i+1;return n}));
+const v=el('video');if(v.readyState>=1&&!v.seeking&&Math.abs(v.currentTime-s.time_s/6)>.07)v.currentTime=s.time_s/6;
+const key=s.phase==='at_pose'?String(s.pose):'';if(key!==imageKey){imageKey=key;el('raw').style.display=key?'block':'none';if(key)el('raw').src='/image.png?pose='+key;}
+el('imageLabel').textContent=key?`Pose ${s.pose}: ${s.corners} detected corners · synthetic image`:'Full-resolution capture disabled while travelling or paused between poses.';
+if(s.solution)el('solution').textContent=`${s.solution.converged?'Converged':'Not converged'} · held-out closure: ${s.solution.validation.position_rms_mm.toFixed(3)} mm / ${s.solution.validation.angle_rms_deg.toFixed(3)}°\n${s.solution.file}\nSimulation only — not a physical calibration.`;}
+async function act(a){if(!state||(busy&&a!=='pause'))return;busy=true;el('error').textContent='';paint(state);try{paint(await post('/command',{action:a,version:state.version}));}catch(e){el('error').textContent=e.message;}finally{busy=false;await poll();}}
+async function poll(){if(polling)return;polling=true;try{paint(await post('/heartbeat',{}));}catch(e){el('error').textContent='Connection lost. Playback will pause; reconnect before continuing.';for(const a of ['next','pause','resume','capture','solve','return'])el(a).disabled=true;}finally{polling=false;}}
+document.addEventListener('keydown',e=>{if(e.repeat)return;if(e.code==='Space'){e.preventDefault();act('pause');}else if(e.key.toLowerCase()==='c'&&state?.can_capture)act('capture');});
+setInterval(poll,250);poll();
+</script></html>

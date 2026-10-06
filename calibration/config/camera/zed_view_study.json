@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "provenance": "ZED SDK readback and read-only robot snapshot on 2026-09-29; PoolBot URDF nominal mount and table dimensions",
+  "q": [
+    -5.619212547369894e-08,
+    -1.388048325092992e-08,
+    -0.0001938939094543457,
+    0.4219988120410797,
+    1.5873678633226713,
+    1.537814241827242,
+    0.003823681091529303,
+    0.02275854243797652,
+    -0.022846426753949135,
+    -0.017698303340230585,
+    -0.05595164963250612,
+    -1.563655426516499,
+    1.5717105234180935,
+    0.11155365950339848,
+    -0.053493085893172226,
+    -0.4208665043106516,
+    -0.07659357821511492,
+    0.023862988631546005
+  ],
+  "K": [
+    [
+      1055.5648193359375,
+      0.0,
+      980.4373779296875
+    ],
+    [
+      0.0,
+      1055.5648193359375,
+      559.5449829101562
+    ],
+    [
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "serial": 32701991,
+  "resolution": [
+    1920,
+    1080
+  ],
+  "table_config": {
+    "variant": "chinese_eight_ball_seven_foot",
+    "length_m": 1.9812,
+    "width_m": 0.9906,
+    "cloth_height_m": 0.79,
+    "ball_radius_m": 0.028575,
+    "ball_mass_kg": 0.17,
+    "pocket_mouth_m": 0.09,
+    "rolling_friction": 0.01,
+    "sliding_friction": 0.2,
+    "restitution_ball": 0.95,
+    "restitution_cushion": 0.8,
+    "restitution_cue": 0.8
+  },
+  "camera_mount_calibrated": false,
+  "mount_frame": "maver_x4_asm_URDF_link_1",
+  "nominal_camera_link_in_mount_xyz_m": [
+    0.0415897578,
+    0,
+    0.2475441443
+  ],
+  "nominal_existing_pitch_deg": 32,
+  "camera_link_to_left_optical_origin_m": [
+    -0.01,
+    0.06,
+    0.015
+  ]
+}

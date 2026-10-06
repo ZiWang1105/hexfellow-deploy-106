@@ -1,0 +1,40 @@
+{
+  "T_hand_from_board": [
+    [
+      0.03432278662077074,
+      -0.06299310440004892,
+      0.9974235886104912,
+      -0.040103464436283355
+    ],
+    [
+      0.9916436910877819,
+      -0.12203663112934288,
+      -0.04183121547839593,
+      -0.03510887810209635
+    ],
+    [
+      0.12435729268677544,
+      0.990524572870681,
+      0.0582780773101724,
+      0.06771456382308928
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "description": "Right-hand board faces robot right (-base Y) with arm at deployment resting pose; printed top assumed up.",
+  "position_assumption": "Rough photo estimate: pattern center 120 mm along flange +Z, 65 mm outward from the flange reference. Not measured. Planning tests include +/-40 mm position uncertainty.",
+  "reference_default_arm_q": [
+    -1.5864368388503365,
+    1.5045156734535452,
+    -0.06609799378008539,
+    0.060197261042310456,
+    0.03228040859944582,
+    -0.0696427277700081,
+    -0.13406003387565812
+  ],
+  "geometry_status": "approximate, not calibrated"
+}

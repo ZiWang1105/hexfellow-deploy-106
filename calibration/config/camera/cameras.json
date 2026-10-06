@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "board_config": "config/camera/charuco_87mm.json",
+  "base_frame": "maver_x4_asm_maver_x4_base_link",
+  "cameras": {
+    "head": {
+      "model": "ZED 2i",
+      "serial": "32701991",
+      "parent_frame": "maver_x4_asm_URDF_link_1",
+      "camera_frame": "zed_left_camera_frame_optical",
+      "kind": "eye_to_hand",
+      "candidate": "config/camera/zed_landmark_candidate_20260930.json",
+      "pose_plan": "config/camera/right_centered_candidates.json",
+      "worker": "calibration_camera_worker.py"
+    },
+    "right": {
+      "model": "RealSense D435i",
+      "serial": "243222074562",
+      "parent_frame": "maver_x4_asm_mount2",
+      "camera_frame": "realsense_243222074562_color_optical",
+      "kind": "eye_in_hand",
+      "mount": "fixed 33 degrees; outside right arm at default",
+      "pose_plan": "config/camera/realsense_d435i_right_fixed33_outside_plan.json",
+      "worker": "wrist_camera_worker.py"
+    },
+    "left": {
+      "model": "RealSense D405",
+      "serial": "230422271628",
+      "parent_frame": "maver_x4_asm_mount1",
+      "camera_frame": "realsense_230422271628_color_optical",
+      "kind": "eye_in_hand",
+      "pose_plan": null,
+      "worker": "wrist_camera_worker.py",
+      "status": "Shared camera/PnP and offline solver available; left mount geometry and motion route not yet validated"
+    }
+  }
+}

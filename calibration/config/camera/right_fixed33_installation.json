@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "parent_frame": "maver_x4_asm_mount2",
+  "mount_side_at_default": "outside_right_arm",
+  "T_parent_from_design": [
+    [-1.0, 0.0, 0.0, 0.0],
+    [0.0, -1.0, 0.0, 0.0],
+    [0.0, 0.0, 1.0, 0.0],
+    [0.0, 0.0, 0.0, 1.0]
+  ],
+  "fixed_camera_pitch_deg": 33,
+  "source": "User correction on 2026-10-06: camera is on the outside of the right arm at default pose; consistent with supplied IMG_5426/IMG_5427 mounting photos.",
+  "interpretation": "Rotate the complete design 180 degrees about the wrist/flange Z axis. Apply to mount mesh, camera housing and RGB optical transform together.",
+  "outside_check": "In the URDF base frame at default, the camera center has a more negative Y coordinate than the right wrist. Base +Y is robot left.",
+  "nominal_geometry_only": true,
+  "measured_extrinsic": false
+}

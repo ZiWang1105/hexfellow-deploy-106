@@ -15,8 +15,14 @@ parity, deliberate robot-specific differences and unresolved recovery behavior.
 Native policy observations now add an [uncalibrated wrist RGB view](docs/WRIST_RGB.md)
 to head RGB-D. Its independent capture supplies no invented camera-to-base transform.
 
+Camera calibration code for the ZED 2i head and both RealSense wrists is now
+[consolidated here](calibration/README.md), with a common
+`./scripts/calibrate_camera.sh` launcher for collection, fitting, head landmark
+PnP refinement, measured-arm overlays and simulation checks. `list` shows the
+actions supported for each device; the D405 motion route remains unvalidated.
+
 DA is pinned to `6c2bda40ebee56ab3a50b8dd62aaf4df5814e5a8`. Robot assets,
-calibration, sensor contracts, policy client and PinkIK are imported from the
+active calibration configuration, sensor contracts, policy client and PinkIK are imported from the
 parent `agentic-mobile-manipulator` workspace. This repository is not yet a
 standalone robot distribution. The sibling source checkouts are not modified.
 

@@ -1,0 +1,237 @@
+{
+  "date": "2026-10-06",
+  "scope": "Calibration code consolidation; offline only",
+  "hardware_commands_sent": 0,
+  "physical_devices_opened": false,
+  "production_camera_configuration_changed": false,
+  "shared_control_revision": "9398b61972bf983c7ab5609591b7eb4c95c6357d",
+  "calibration_tests": {
+    "tests": 185,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "report": "runs/consolidation-tests.xml"
+  },
+  "deployment_regression_tests": {
+    "tests": 148,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "passed": 148,
+    "scope": "All hexfellow-deploy/tests",
+    "report": "runs/deployment-tests.xml"
+  },
+  "head": {
+    "startup_simulation_probe": "readonly_exit",
+    "coarse_reference_refit_converged": true,
+    "landmark_pnp_refit_matches_saved_candidate_atol": 1e-12,
+    "all_point_rms_px": 11.932156102275737,
+    "note": "Reproduction of original evidence, not a new physical calibration or accuracy improvement"
+  },
+  "left_wrist": {
+    "camera_serial": "230422271628",
+    "shared_capture_and_solver_ported": true,
+    "sdk_none_brown_inverse_brown_projection_tests_passed": true,
+    "actual_urdf_left_fk_transform_recovery_test_passed": true,
+    "automatic_motion_plan_validated": false,
+    "physical_calibration_performed": false
+  },
+  "retained_failure": {
+    "report": "runs/migration-e2e/session/failed_cycle.json",
+    "lift_m": 0.422,
+    "failure": "BoundaryStateUnrecoverable: finite base state is outside the braking envelope during lift-retreat",
+    "limits_relaxed": false,
+    "note": "Current shared controller rejects historical endpoint start. Default-height rehearsal does not qualify endpoint retreat."
+  },
+  "right_wrist_historical_inner_mount": {
+    "session": "controlled_session_exit",
+    "passed": true,
+    "attempted": 30,
+    "eligible": 27,
+    "invalid_pose_ids": [
+      28,
+      29,
+      30
+    ],
+    "invalid_reasons": {
+      "28": "Calibration measured-pose settling timed out: reference still settling; maximum right-arm target offset 0.939 deg",
+      "29": "Calibration measured-pose settling timed out: reference still settling; maximum right-arm target offset 0.939 deg",
+      "30": "Calibration measured-pose settling timed out: reference still settling; maximum right-arm target offset 0.939 deg"
+    },
+    "snapshot": "config/camera/both_j6_sim_start.json",
+    "simulation_start_lift_m": 0.3,
+    "ground_truth_recovery_passed": true,
+    "camera_error": {
+      "translation_mm": 0.20957472682291886,
+      "rotation_deg": 0.05689129798233081
+    },
+    "board_error": {
+      "translation_mm": 0.09289180581812344,
+      "rotation_deg": 0.03275591987652338
+    },
+    "held_out_reprojection_rms_px": 0.12480999397072588,
+    "measured_fk_verified": true,
+    "independent_pinocchio_mujoco_fk_verified": true,
+    "ground_truth_used_for_fit": false,
+    "scheduling_pause": "Feedback delay during concurrent offline checks at pose 18; explicitly resumed through the simulation UI command and a new path check. Not an uninterrupted run.",
+    "report": "runs/migration-default-e2e/ground-truth-verification.json",
+    "mount_geometry_status": "superseded_inner_side",
+    "applicable_to_physical_outside_mount": false
+  },
+  "right_wrist_open_gripper_visibility_historical_inner_mount": {
+    "scope": "Offline visibility review; recorded arm/lift replay with explicit open-jaw override",
+    "report": "runs/right-wrist-open-gripper/visibility-report.json",
+    "nominal_opening_m": 0.08,
+    "accepted_nominal_views": 30,
+    "minimum_charuco_corners": 16,
+    "open_center_ray_occluded_count": 0,
+    "gripper_full_image_fraction_closed": 0.2796064453125,
+    "gripper_full_image_fraction_open": 0.15934331597222226,
+    "camera_pose_invariance_passed": true,
+    "videos_full_decode_passed": true,
+    "new_controller_rehearsal_performed": false,
+    "hardware_commands_sent": 0,
+    "mount_geometry_status": "superseded_inner_side",
+    "applicable_to_physical_outside_mount": false
+  },
+  "right_wrist": {
+    "mount_geometry_status": "outside_right_arm_at_default",
+    "installation": "config/camera/right_fixed33_installation.json",
+    "plan": "config/camera/realsense_d435i_right_fixed33_outside_plan.json",
+    "mount_side_validation": {
+      "passed": true,
+      "optical_minus_wrist_base_y_m": -0.05747663434455519,
+      "T_base_from_optical_at_default": [
+        [
+          -0.9922685663911998,
+          -0.037782596268103597,
+          0.11821830472137024,
+          0.07279933299126348
+        ],
+        [
+          0.023240432438115785,
+          0.8791187840301425,
+          0.47603576112037344,
+          -0.3273517260413138
+        ],
+        [
+          -0.12191379926834633,
+          0.4751027667616821,
+          -0.8714438516412587,
+          0.5107772018022771
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "T_base_from_wrist_at_default": [
+        [
+          0.032699151933936424,
+          0.9922685663911995,
+          0.11972408953403907,
+          0.06649604666466175
+        ],
+        [
+          0.9965587074632941,
+          -0.023240432438115726,
+          -0.07956522405660499,
+          -0.2698750916967586
+        ],
+        [
+          -0.07616763119521125,
+          0.1219137992683463,
+          -0.989613822410574,
+          0.5730370507255158
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    "geometric_validation": {
+      "passed": true,
+      "poses_accepted": 30,
+      "rendered_charuco_detections": 30,
+      "minimum_detection_corners": 14,
+      "path_sample_count": 13530,
+      "minimum_path_clearance_m": 0.015001149816571954,
+      "target_joint_limit_reserve_rad": 0.15,
+      "collision_pair_count": 478,
+      "method": "Bounded optical-pose FK optimization; kinematic interpolation at <=.005 sum-joint-step, MuJoCo mesh/box separation, real ChArUco detection in 30 renders.",
+      "limitation": "Geometric trajectory validation only. Motor dynamics, payload torque, cable routing, actual table and physical mounting are not qualified.",
+      "camera_translation_span_m": [
+        0.21448617007159254,
+        0.32283081738574115,
+        0.1757594804593019
+      ],
+      "rotation_excitation_singular_values_rad": [
+        6.2756966036380275,
+        1.4205177173518106,
+        0.6177980750892224
+      ]
+    },
+    "geometric_report": "runs/right-wrist-outside/planning/summary.json",
+    "new_end_to_end_controller_rehearsal_performed": false,
+    "physical_calibration_performed": false,
+    "superseded_plan_rejected_by_launcher": true,
+    "upstream_control_or_robot_assets_changed": false,
+    "hardware_commands_sent": 0,
+    "note": "Corrected nominal mount/poses only; the previous end-to-end fit belongs to inward-side simulation geometry.",
+    "independent_camera_fk_parity_report": "runs/right-wrist-outside/fk-camera-parity.json",
+    "independent_camera_fk_parity_passed": true
+  },
+  "right_wrist_open_gripper_visibility": {
+    "mount_geometry_status": "outside_right_arm_at_default",
+    "scope": "Corrected nominal target renders with explicit 80 mm jaw override; no measured-state replay",
+    "report": "runs/right-wrist-outside/open-gripper/visibility-report.json",
+    "accepted_nominal_views": 30,
+    "minimum_charuco_corners": 16,
+    "open_center_ray_occluded_count": 0,
+    "nominal_opening_m": 0.08,
+    "gripper_full_image_fraction_closed": 0.27940147569444446,
+    "gripper_full_image_fraction_open": 0.15934215856481482,
+    "rendered_installation_checked_against_plan": true,
+    "videos_full_decode_passed": true,
+    "open_jaw_trajectory_clearance_validated": false,
+    "hardware_commands_sent": 0
+  },
+  "consolidated_launcher": {
+    "actions": {
+      "head": [
+        "run",
+        "camera",
+        "fit",
+        "refine",
+        "validate",
+        "overlay",
+        "review",
+        "verify"
+      ],
+      "right": [
+        "run",
+        "camera",
+        "fit",
+        "plan",
+        "preview",
+        "verify"
+      ],
+      "left": [
+        "camera",
+        "fit"
+      ]
+    },
+    "head_coarse_reproduction": "runs/consolidation/head-coarse.json",
+    "head_pnp_reproduction": "runs/consolidation/head-pnp.json",
+    "head_pnp_matches_saved_candidate_atol": 1e-12,
+    "head_review_report": "runs/consolidation/head-review/report.json",
+    "left_automatic_route_validated": false,
+    "sdk_or_robot_devices_opened": false,
+    "motion_commands_sent": 0
+  }
+}

@@ -1,0 +1,1660 @@
+{
+  "status": "assistant-selected approximate correspondences; review required",
+  "camera": "rectified LEFT optical",
+  "source": "runs/both-j6-correction/whole-arm-overlays",
+  "features": {
+    "1": "Forearm upper rail proximal cap",
+    "2": "Forearm lower rail proximal cap",
+    "3": "Forearm upper rail distal cap",
+    "4": "Forearm lower rail distal cap",
+    "5": "Forearm cover proximal upper junction",
+    "6": "Forearm cover proximal lower junction",
+    "7": "Elbow bracket upper screw",
+    "8": "Elbow bracket lower screw",
+    "9": "Wrist round cap upper screw",
+    "10": "Wrist round cap lower screw"
+  },
+  "observations": [
+    {
+      "pose_id": 1,
+      "feature_id": "1",
+      "real_uv": [
+        229,
+        748
+      ],
+      "sim_uv": [
+        166.00000000000045,
+        773.9999999999995
+      ],
+      "eligible": true,
+      "p_mount": [
+        0.23604267290932432,
+        0.3408368734644918,
+        -0.1473492745416709
+      ],
+      "body_name": "maver_x4_asm_7_urdf_SLDASM_link_5",
+      "p_body_local": [
+        0.017313409682206984,
+        -0.034950979020133416,
+        0.0020962418420319372
+      ],
+      "ray_distance_m": 0.48113677975762287,
+      "geom_id": 19,
+      "comparison_file": "/home/ziwang/projects/UMI_Hardware_camera/runs/both-j6-correction/whole-arm-overlays/pose-01/comparison.json",
+      "comparison_sha256": "e7be6413f9db60f1d6274054eab95d1a273a3a627addd64d0fd9bc1a4aeb5552",
+      "independent_ray_pick": {
+        "eligible": true,
+        "reason": null,
+        "p_mount": [
+          0.23604267290932432,
+          0.3408368734644918,
+          -0.1473492745416709
+        ],
+        "body_name": "maver_x4_asm_7_urdf_SLDASM_link_5",
+        "p_body_local": [
+          0.017313409682206984,
+          -0.034950979020133416,
+          0.0020962418420319372
+        ],
+        "ray_distance_m": 0.4811367797576229,
+        "geom_id": 19
+      },
+      "original_sim_pick_uv": [
+        166,
+        774
+      ],
+      "model_anchor": {
+        "body_name": "maver_x4_asm_7_urdf_SLDASM_link_5",
+        "p_body_local": [
+          0.017313409682206984,
+          -0.034950979020133416,
+          0.0020962418420319372
+        ],
+        "source_pose_id": 1,
+        "source_sim_uv": [
+          166,
+          774
+        ],
+        "geom_id": 19
+      },
+      "left_arm_surface_occlusion_mm": -5.551115123125783e-14
+    },
+    {
+      "pose_id": 1,
+      "feature_id": "2",
+      "real_uv": [
+        360,
+        905
+      ],
+      "sim_uv": [
+        285.00000000000045,
+        937.9999999999999
+      ],
+      "eligible": true,
+      "p_mount": [
+        0.20239261684554638,
+        0.3027609178592188,
+        -0.1983884630503101
+      ],
+      "body_name": "maver_x4_asm_7_urdf_SLDASM_link_5",
+      "p_body_local": [
+        0.009482136689706235,
+        0.036635143079421416,
+        0.0010000128353544744
+      ],
+      "ray_distance_m": 0.477843802767838,
+      "geom_id": 19,
+      "comparison_file": "/home/ziwang/projects/UMI_Hardware_camera/runs/both-j6-correction/whole-arm-overlays/pose-01/comparison.json",
+      "comparison_sha256": "e7be6413f9db60f1d6274054eab95d1a273a3a627addd64d0fd9bc1a4aeb5552",
+      "independent_ray_pick": {
+        "eligible": true,
+        "reason": null,
+        "p_mount": [
+          0.20239261684554638,
+          0.3027609178592188,
+          -0.1983884630503101
+        ],
+        "body_name": "maver_x4_asm_7_urdf_SLDASM_link_5",
+        "p_body_local": [
+          0.009482136689706235,
+          0.036635143079421416,
+          0.0010000128353544744
+        ],
+        "ray_distance_m": 0.47784380276783794,
+        "geom_id": 19
+      },
+      "original_sim_pick_uv": [
+        285,
+        938
+      ],
+      "model_anchor": {
+        "body_name": "maver_x4_asm_7_urdf_SLDASM_link_5",
+        "p_body_local": [
+          0.009482136689706235,
+          0.036635143079421416,
+          0.0010000128353544744
+        ],
+        "source_pose_id": 1,
+        "source_sim_uv": [
+          285,
+          938
+        ],
+        "geom_id": 19
+      },
+      "left_arm_surface_occlusion_mm": 1.6653345369377348e-13
+    },
+    {
+      "pose_id": 1,
+      "feature_id": "3",
+      "real_uv": [
+        644,
+        525
+      ],
+      "sim_uv": [
+        599.9999999999999,
+        547.9999999999999
+      ],
+      "eligible": true,
+      "p_mount": [
+        0.40998968945249264,
+        0.2416666451964438,
+        -0.18273019111154087
+      ],
+      "body_name": "maver_x4_asm_7_urdf_SLDASM_link_5",
+      "p_body_local": [
+        0.015345526178447172,
+        -0.0358455241640961,
+        0.20541725703680022
+      ],
+      "ray_distance_m": 0.5680215955162987,
+      "geom_id": 19,
+      "comparison_file": "/home/ziwang/projects/UMI_Hardware_camera/runs/both-j6-correction/whole-arm-overlays/pose-01/comparison.json",
+      "comparison_sha256": "e7be6413f9db60f1d6274054eab95d1a273a3a627addd64d0fd9bc1a4aeb5552",
+      "independent_ray_pick": {
+        "eligible": true,
+        "reason": null,
+        "p_mount": [
+          0.40998968945249264,
+          0.24166664519644376,
+          -0.18273019111154087
+        ],
+        "body_name": "maver_x4_asm_7_urdf_SLDASM_link_5",
+        "p_body_local": [
+          0.015345526178447172,
+          -0.0358455241640961,
+          0.20541725703680022
+        ],
+        "ray_distance_m": 0.5680215955162987,
+        "geom_id": 19
+      },
+      "original_sim_pick_uv": [
+        600,
+        548
+      ],
+      "model_anchor": {
+        "body_name": "maver_x4_asm_7_urdf_SLDASM_link_5",
+        "p_body_local": [
+          0.015345526178447172,
+          -0.0358455241640961,
+          0.20541725703680022
+        ],
+        "source_pose_id": 1,
+        "source_sim_uv": [
+          600,
+          548
+        ],
+        "geom_id": 19
+      },
+      "left_arm_surface_occlusion_mm": 1.1102230246251565e-13
+    },
+    {
+      "pose_id": 1,
+      "feature_id": "4",
+      "real_uv": [
+        749,
+        610
+      ],
+      "sim_uv": [
+        691.0000000000001,
+        638.0
+      ],
+      "eligible": true,
+      "p_mount": [
+        0.37392429573196934,
+        0.19326364361861012,
+        -0.2115816579815658
+      ],
+      "body_name": "maver_x4_asm_7_urdf_SLDASM_link_5",
+      "p_body_local": [
+        0.031190995647107988,
+        0.02912908479552675,
+        0.20363074804602913
+      ],
+      "ray_distance_m": 0.5455307555605344,
+      "geom_id": 19,
+      "comparison_file": "/home/ziwang/projects/UMI_Hardware_camera/runs/both-j6-correction/whole-arm-overlays/pose-01/comparison.json",
+      "comparison_sha256": "e7be6413f9db60f1d6274054eab95d1a273a3a627addd64d0fd9bc1a4aeb5552",
+      "independent_ray_pick": {
+        "eligible": true,
+        "reason": null,
+        "p_mount": [
+          0.37392429573196945,
+          0.19326364361861012,
+          -0.2115816579815658
+        ],
+        "body_name": "maver_x4_asm_7_urdf_SLDASM_link_5",
+        "p_body_local": [
+          0.031190995647107988,
+          0.02912908479552675,
+          0.20363074804602913
+        ],
+        "ray_distance_m": 0.5455307555605344,
+        "geom_id": 19
+      },
+      "original_sim_pick_uv": [
+        691,
+        638
+      ],
+      "model_anchor": {
+        "body_name": "maver_x4_asm_7_urdf_SLDASM_link_5",
+        "p_body_local": [
+          0.031190995647107988,
+          0.02912908479552675,
+          0.20363074804602913
+        ],
+        "source_pose_id": 1,
+        "source_sim_uv": [
+          691,
+          638
+        ],
+        "geom_id": 19
+      },
+      "left_arm_surface_occlusion_mm": -1.1102230246251565e-13
+    },
+    {
+      "pose_id": 1,
+      "feature_id": "5",
+      "real_uv": [
+        288,
+        726
+      ],
+      "sim_uv": [
+        226.99999999999997,
+        744.9999999999998
+      ],
+      "eligible": true,
+      "p_mount": [
+        0.2521752364613311,
+        0.32937144609062774,
+        -0.1504653531439848
+      ],
+      "body_name": "maver_x4_asm_7_urdf_SLDASM_link_5",
+      "p_body_local": [
+        0.01866244647352103,
+        -0.03376112337297625,
+        0.0220509385512104
+      ],
+      "ray_distance_m": 0.4848816634297505,
+      "geom_id": 19,
+      "comparison_file": "/home/ziwang/projects/UMI_Hardware_camera/runs/both-j6-correction/whole-arm-overlays/pose-01/comparison.json",
+      "comparison_sha256": "e7be6413f9db60f1d6274054eab95d1a273a3a627addd64d0fd9bc1a4aeb5552",
+      "independent_ray_pick": {
+        "eligible": true,
+        "reason": null,
+        "p_mount": [
+          0.2521752364613311,
+          0.32937144609062774,
+          -0.1504653531439848
+        ],
+        "body_name": "maver_x4_asm_7_urdf_SLDASM_link_5",
+        "p_body_local": [
+          0.01866244647352103,
+          -0.03376112337297625,
+          0.0220509385512104
+        ],
+        "ray_distance_m": 0.48488166342975053,
+        "geom_id": 19
+      },
+      "original_sim_pick_uv": [
+        227,
+        745
+      ],
+      "model_anchor": {
+        "body_name": "maver_x4_asm_7_urdf_SLDASM_link_5",
+        "p_body_local": [
+          0.01866244647352103,
+          -0.03376112337297625,
+          0.0220509385512104
+        ],
+        "source_pose_id": 1,
+        "source_sim_uv": [
+          227,
+          745
+        ],
+        "geom_id": 19
+      },
+      "left_arm_surface_occlusion_mm": -5.551115123125783e-14
+    },
+    {
+      "pose_id": 1,
+      "feature_id": "6",
+      "real_uv": [
+        407,
+        870
+      ],
+      "sim_uv": [
+        348.00000000000006,
+        880.9999999999998
+      ],
+      "eligible": true,
+      "p_mount": [
+        0.22215752435095162,
+        0.28685387680047725,
+        -0.1925451886899041
+      ],
+      "body_name": "maver_x4_asm_7_urdf_SLDASM_link_5",
+      "p_body_local": [
+        0.019586789956675753,
+        0.033107913694429704,
+        0.024733618006349187
+      ],
+      "ray_distance_m": 0.47481471458403296,
+      "geom_id": 19,
+      "comparison_file": "/home/ziwang/projects/UMI_Hardware_camera/runs/both-j6-correction/whole-arm-overlays/pose-01/comparison.json",
+      "comparison_sha256": "e7be6413f9db60f1d6274054eab95d1a273a3a627addd64d0fd9bc1a4aeb5552",
+      "independent_ray_pick": {
+        "eligible": true,
+        "reason": null,
+        "p_mount": [
+          0.22215752435095162,
+          0.28685387680047725,
+          -0.1925451886899041
+        ],
+        "body_name": "maver_x4_asm_7_urdf_SLDASM_link_5",
+        "p_body_local": [
+          0.019586789956675753,
+          0.033107913694429704,
+          0.024733618006349187
+        ],
+        "ray_distance_m": 0.47481471458403296,
+        "geom_id": 19
+      },
+      "original_sim_pick_uv": [
+        348,
+        881
+      ],
+      "model_anchor": {
+        "body_name": "maver_x4_asm_7_urdf_SLDASM_link_5",
+        "p_body_local": [
+          0.019586789956675753,
+          0.033107913694429704,
+          0.024733618006349187
+        ],
+        "source_pose_id": 1,
+        "source_sim_uv": [
+          348,
+          881
+        ],
+        "geom_id": 19
+      },
+      "left_arm_surface_occlusion_mm": 0.0
+    },
+    {
+      "pose_id": 2,
+      "feature_id": "1",
+      "real_uv": [
+        577,
+        611
+      ],
+      "sim_uv": [
+        533.1403953882818,
+        635.3106318989879
+      ],
+      "eligible": true,
+      "p_mount": [
+        0.28297913111016654,
+        0.21940591853904212,
+        -0.12465680561601156
+      ],
+      "body_name": "maver_x4_asm_7_urdf_SLDASM_link_5",
+      "p_body_local": [
+        0.017313409682206984,
+        -0.034950979020133416,
+        0.0020962418420319372
+      ],
+      "ray_distance_m": 0.4345248054112587,
+      "geom_id": 19,
+      "comparison_file": "/home/ziwang/projects/UMI_Hardware_camera/runs/both-j6-correction/whole-arm-overlays/pose-02/comparison.json",
+      "comparison_sha256": "cd6a33bf90dce6ade4cdca83d8eeaf373d76f8324b0bd014813d55cb2bc6425d",
+      "independent_ray_pick": {
+        "eligible": true,
+        "reason": null,
+        "p_mount": [
+          0.2868699654492444,
+          0.2241684082819844,
+          -0.1234198887754312
+        ],
+        "body_name": "maver_x4_asm_7_urdf_SLDASM_link_5",
+        "p_body_local": [
+          0.013202873290451715,
+          -0.039688576127362096,
+          0.0021885884603934512
+        ],
+        "ray_distance_m": 0.43823355795969254,
+        "geom_id": 19
+      },
+      "original_sim_pick_uv": [
+        523,
+        626
+      ],
+      "model_anchor": {
+        "body_name": "maver_x4_asm_7_urdf_SLDASM_link_5",
+        "p_body_local": [
+          0.017313409682206984,
+          -0.034950979020133416,
+          0.0020962418420319372
+        ],
+        "source_pose_id": 1,
+        "source_sim_uv": [
+          166,
+          774
+        ],
+        "geom_id": 19
+      },
+      "left_arm_surface_occlusion_mm": 3.3306690738754696e-13
+    },
+    {
+      "pose_id": 2,
+      "feature_id": "2",
+      "real_uv": [
+        655,
+        789
+      ],
+      "sim_uv": [
+        590.790784095071,
+        812.8923333885606
+      ],
+      "eligible": true,
+      "p_mount": [
+        0.2454992162976947,
+        0.20077452274245788,
+        -0.18326764512792604
+      ],
+      "body_name": "maver_x4_asm_7_urdf_SLDASM_link_5",
+      "p_body_local": [
+        0.009482136689706235,
+        0.036635143079421416,
+        0.0010000128353544744
+      ],
+      "ray_distance_m": 0.4447285073974734,
+      "geom_id": 19,
+      "comparison_file": "/home/ziwang/projects/UMI_Hardware_camera/runs/both-j6-correction/whole-arm-overlays/pose-02/comparison.json",
+      "comparison_sha256": "cd6a33bf90dce6ade4cdca83d8eeaf373d76f8324b0bd014813d55cb2bc6425d",
+      "independent_ray_pick": {
+        "eligible": true,
+        "reason": null,
+        "p_mount": [
+          0.24440814188477422,
+          0.19114244581042303,
+          -0.17957909965649854
+        ],
+        "body_name": "maver_x4_asm_7_urdf_SLDASM_link_5",
+        "p_body_local": [
+          0.019277992449473622,
+          0.03781390445543207,
+          0.004197582013060033
+        ],
+        "ray_distance_m": 0.4382190636858678,
+        "geom_id": 19
+      },
+      "original_sim_pick_uv": [
+        613,
+        809
+      ],
+      "model_anchor": {
+        "body_name": "maver_x4_asm_7_urdf_SLDASM_link_5",
+        "p_body_local": [
+          0.009482136689706235,
+          0.036635143079421416,
+          0.0010000128353544744
+        ],
+        "source_pose_id": 1,
+        "source_sim_uv": [
+          285,
+          938
+        ],
+        "geom_id": 19
+      },
+      "left_arm_surface_occlusion_mm": 4.996003610813204e-13
+    },
+    {
+      "pose_id": 2,
+      "feature_id": "3",
+      "real_uv": [
+        884,
+        489
+      ],
+      "sim_uv": [
+        863.0375976305235,
+        516.3191768051065
+      ],
+      "eligible": true,
+      "p_mount": [
+        0.4432036592399941,
+        0.11153934047825158,
+        -0.1881942742416941
+      ],
+      "body_name": "maver_x4_asm_7_urdf_SLDASM_link_5",
+      "p_body_local": [
+        0.015345526178447172,
+        -0.0358455241640961,
+        0.20541725703680022
+      ],
+      "ray_distance_m": 0.5685040907177811,
+      "geom_id": 19,
+      "comparison_file": "/home/ziwang/projects/UMI_Hardware_camera/runs/both-j6-correction/whole-arm-overlays/pose-02/comparison.json",
+      "comparison_sha256": "cd6a33bf90dce6ade4cdca83d8eeaf373d76f8324b0bd014813d55cb2bc6425d",
+      "independent_ray_pick": {
+        "eligible": true,
+        "reason": null,
+        "p_mount": [
+          0.4437078375466124,
+          0.11404415669449626,
+          -0.18502298514233972
+        ],
+        "body_name": "maver_x4_asm_7_urdf_SLDASM_link_5",
+        "p_body_local": [
+          0.015083752140032672,
+          -0.03941624844583184,
+          0.20347643838212215
+        ],
+        "ray_distance_m": 0.5672997515095104,
+        "geom_id": 19
+      },
+      "original_sim_pick_uv": [
+        858,
+        511
+      ],
+      "model_anchor": {
+        "body_name": "maver_x4_asm_7_urdf_SLDASM_link_5",
+        "p_body_local": [
+          0.015345526178447172,
+          -0.0358455241640961,
+          0.20541725703680022
+        ],
+        "source_pose_id": 1,
+        "source_sim_uv": [
+          600,
+          548
+        ],
+        "geom_id": 19
+      },
+      "left_arm_surface_occlusion_mm": 1.1102230246251565e-13
+    },
+    {
+      "pose_id": 2,
+      "feature_id": "5",
+      "real_uv": [
+        624,
+        600
+      ],
+      "sim_uv": [
+        580.5045755152101,
+        621.582004280568
+      ],
+      "eligible": true,
+      "p_mount": [
+        0.29754370054102525,
+        0.20719004234124228,
+        -0.13098699230318034
+      ],
+      "body_name": "maver_x4_asm_7_urdf_SLDASM_link_5",
+      "p_body_local": [
+        0.01866244647352103,
+        -0.03376112337297625,
+        0.0220509385512104
+      ],
+      "ray_distance_m": 0.44403981905292755,
+      "geom_id": 19,
+      "comparison_file": "/home/ziwang/projects/UMI_Hardware_camera/runs/both-j6-correction/whole-arm-overlays/pose-02/comparison.json",
+      "comparison_sha256": "cd6a33bf90dce6ade4cdca83d8eeaf373d76f8324b0bd014813d55cb2bc6425d",
+      "independent_ray_pick": {
+        "eligible": true,
+        "reason": null,
+        "p_mount": [
+          0.29832319683458,
+          0.20746855747571327,
+          -0.12874023696982517
+        ],
+        "body_name": "maver_x4_asm_7_urdf_SLDASM_link_5",
+        "p_body_local": [
+          0.019493924243976248,
+          -0.035993923171283346,
+          0.021813568675966583
+        ],
+        "ray_distance_m": 0.443269600083222,
+        "geom_id": 19
+      },
+      "original_sim_pick_uv": [
+        579,
+        616
+      ],
+      "model_anchor": {
+        "body_name": "maver_x4_asm_7_urdf_SLDASM_link_5",
+        "p_body_local": [
+          0.01866244647352103,
+          -0.03376112337297625,
+          0.0220509385512104
+        ],
+        "source_pose_id": 1,
+        "source_sim_uv": [
+          227,
+          745
+        ],
+        "geom_id": 19
+      },
+      "left_arm_surface_occlusion_mm": 1.1102230246251565e-13
+    },
+    {
+      "pose_id": 2,
+      "feature_id": "6",
+      "real_uv": [
+        690,
+        768
+      ],
+      "sim_uv": [
+        650.9615558153084,
+        775.1328211305597
+      ],
+      "eligible": true,
+      "p_mount": [
+        0.26295177000663267,
+        0.18148501076258014,
+        -0.18219411086788506
+      ],
+      "body_name": "maver_x4_asm_7_urdf_SLDASM_link_5",
+      "p_body_local": [
+        0.019586789956675753,
+        0.033107913694429704,
+        0.024733618006349187
+      ],
+      "ray_distance_m": 0.44833269205380877,
+      "geom_id": 19,
+      "comparison_file": "/home/ziwang/projects/UMI_Hardware_camera/runs/both-j6-correction/whole-arm-overlays/pose-02/comparison.json",
+      "comparison_sha256": "cd6a33bf90dce6ade4cdca83d8eeaf373d76f8324b0bd014813d55cb2bc6425d",
+      "independent_ray_pick": {
+        "eligible": true,
+        "reason": null,
+        "p_mount": [
+          0.2600401962763556,
+          0.1804882213197371,
+          -0.18471220466080507
+        ],
+        "body_name": "maver_x4_asm_7_urdf_SLDASM_link_5",
+        "p_body_local": [
+          0.01979264711441558,
+          0.03696124030647965,
+          0.023773855545310023
+        ],
+        "ray_distance_m": 0.44814278364520477,
+        "geom_id": 19
+      },
+      "original_sim_pick_uv": [
+        653,
+        785
+      ],
+      "model_anchor": {
+        "body_name": "maver_x4_asm_7_urdf_SLDASM_link_5",
+        "p_body_local": [
+          0.019586789956675753,
+          0.033107913694429704,
+          0.024733618006349187
+        ],
+        "source_pose_id": 1,
+        "source_sim_uv": [
+          348,
+          881
+        ],
+        "geom_id": 19
+      },
+      "left_arm_surface_occlusion_mm": 5.551115123125783e-14
+    },
+    {
+      "pose_id": 2,
+      "feature_id": "7",
+      "real_uv": [
+        394,
+        754
+      ],
+      "sim_uv": [
+        350.9999999999996,
+        772.0
+      ],
+      "eligible": true,
+      "p_mount": [
+        0.19445578934274446,
+        0.23766198789666015,
+        -0.09718916842780767
+      ],
+      "body_name": "maver_x4_asm_7_urdf_SLDASM_link_3",
+      "p_body_local": [
+        0.019739448167649193,
+        -0.02094262879415069,
+        0.12500771905420208
+      ],
+      "ray_distance_m": 0.36978873631019976,
+      "geom_id": 17,
+      "comparison_file": "/home/ziwang/projects/UMI_Hardware_camera/runs/both-j6-correction/whole-arm-overlays/pose-02/comparison.json",
+      "comparison_sha256": "cd6a33bf90dce6ade4cdca83d8eeaf373d76f8324b0bd014813d55cb2bc6425d",
+      "independent_ray_pick": {
+        "eligible": true,
+        "reason": null,
+        "p_mount": [
+          0.19445578934274457,
+          0.23766198789666013,
+          -0.09718916842780767
+        ],
+        "body_name": "maver_x4_asm_7_urdf_SLDASM_link_3",
+        "p_body_local": [
+          0.019739448167649193,
+          -0.02094262879415069,
+          0.12500771905420208
+        ],
+        "ray_distance_m": 0.3697887363101999,
+        "geom_id": 17
+      },
+      "original_sim_pick_uv": [
+        351,
+        772
+      ],
+      "model_anchor": {
+        "body_name": "maver_x4_asm_7_urdf_SLDASM_link_3",
+        "p_body_local": [
+          0.019739448167649193,
+          -0.02094262879415069,
+          0.12500771905420208
+        ],
+        "source_pose_id": 2,
+        "source_sim_uv": [
+          351,
+          772
+        ],
+        "geom_id": 17
+      },
+      "left_arm_surface_occlusion_mm": -1.1102230246251565e-13
+    },
+    {
+      "pose_id": 2,
+      "feature_id": "8",
+      "real_uv": [
+        440,
+        885
+      ],
+      "sim_uv": [
+        394.99999999999983,
+        904.0000000000005
+      ],
+      "eligible": true,
+      "p_mount": [
+        0.1732881081678975,
+        0.2281798950178688,
+        -0.13304472203487983
+      ],
+      "body_name": "maver_x4_asm_7_urdf_SLDASM_link_3",
+      "p_body_local": [
+        0.01937196881158163,
+        0.021759210820644262,
+        0.12486847614841687
+      ],
+      "ray_distance_m": 0.3794568455144042,
+      "geom_id": 17,
+      "comparison_file": "/home/ziwang/projects/UMI_Hardware_camera/runs/both-j6-correction/whole-arm-overlays/pose-02/comparison.json",
+      "comparison_sha256": "cd6a33bf90dce6ade4cdca83d8eeaf373d76f8324b0bd014813d55cb2bc6425d",
+      "independent_ray_pick": {
+        "eligible": true,
+        "reason": null,
+        "p_mount": [
+          0.1732881081678976,
+          0.22817989501786878,
+          -0.13304472203487983
+        ],
+        "body_name": "maver_x4_asm_7_urdf_SLDASM_link_3",
+        "p_body_local": [
+          0.01937196881158163,
+          0.021759210820644262,
+          0.12486847614841687
+        ],
+        "ray_distance_m": 0.3794568455144041,
+        "geom_id": 17
+      },
+      "original_sim_pick_uv": [
+        395,
+        904
+      ],
+      "model_anchor": {
+        "body_name": "maver_x4_asm_7_urdf_SLDASM_link_3",
+        "p_body_local": [
+          0.01937196881158163,
+          0.021759210820644262,
+          0.12486847614841687
+        ],
+        "source_pose_id": 2,
+        "source_sim_uv": [
+          395,
+          904
+        ],
+        "geom_id": 17
+      },
+      "left_arm_surface_occlusion_mm": 3.3306690738754696e-13
+    },
+    {
+      "pose_id": 3,
+      "feature_id": "1",
+      "real_uv": [
+        137,
+        611
+      ],
+      "sim_uv": [
+        72.47590884807839,
+        638.4853703458698
+      ],
+      "eligible": true,
+      "p_mount": [
+        0.2411527081719755,
+        0.3444205997938258,
+        -0.08605517666131757
+      ],
+      "body_name": "maver_x4_asm_7_urdf_SLDASM_link_5",
+      "p_body_local": [
+        0.017313409682206984,
+        -0.034950979020133416,
+        0.0020962418420319372
+      ],
+      "ray_distance_m": 0.45122217535483566,
+      "geom_id": 19,
+      "comparison_file": "/home/ziwang/projects/UMI_Hardware_camera/runs/both-j6-correction/whole-arm-overlays/pose-03/comparison.json",
+      "comparison_sha256": "fe9754b6cac656597e557c6be05647e18957081d350cc3300683d3a005b55d36",
+      "independent_ray_pick": {
+        "eligible": true,
+        "reason": null,
+        "p_mount": [
+          0.2387995542634908,
+          0.3363697765974449,
+          -0.0867802533984603
+        ],
+        "body_name": "maver_x4_asm_7_urdf_SLDASM_link_5",
+        "p_body_local": [
+          0.02234304814312674,
+          -0.029655836922442537,
+          0.0062846819871034115
+        ],
+        "ray_distance_m": 0.4451211024904682,
+        "geom_id": 19
+      },
+      "original_sim_pick_uv": [
+        94,
+        645
+      ],
+      "model_anchor": {
+        "body_name": "maver_x4_asm_7_urdf_SLDASM_link_5",
+        "p_body_local": [
+          0.017313409682206984,
+          -0.034950979020133416,
+          0.0020962418420319372
+        ],
+        "source_pose_id": 1,
+        "source_sim_uv": [
+          166,
+          774
+        ],
+        "geom_id": 19
+      },
+      "left_arm_surface_occlusion_mm": 2.7755575615628914e-13
+    },
+    {
+      "pose_id": 3,
+      "feature_id": "3",
+      "real_uv": [
+        667,
+        373
+      ],
+      "sim_uv": [
+        630.7059722971447,
+        402.89576979298715
+      ],
+      "eligible": true,
+      "p_mount": [
+        0.3829357407405652,
+        0.19871459894624044,
+        -0.08267272355922883
+      ],
+      "body_name": "maver_x4_asm_7_urdf_SLDASM_link_5",
+      "p_body_local": [
+        0.015345526178447172,
+        -0.0358455241640961,
+        0.20541725703680022
+      ],
+      "ray_distance_m": 0.47952859586377156,
+      "geom_id": 19,
+      "comparison_file": "/home/ziwang/projects/UMI_Hardware_camera/runs/both-j6-correction/whole-arm-overlays/pose-03/comparison.json",
+      "comparison_sha256": "fe9754b6cac656597e557c6be05647e18957081d350cc3300683d3a005b55d36",
+      "independent_ray_pick": {
+        "eligible": true,
+        "reason": null,
+        "p_mount": [
+          0.3864392659691546,
+          0.1966173887778532,
+          -0.08134959670557551
+        ],
+        "body_name": "maver_x4_asm_7_urdf_SLDASM_link_5",
+        "p_body_local": [
+          0.015316241501319742,
+          -0.03749996333627817,
+          0.20937776427979857
+        ],
+        "ray_distance_m": 0.4811482762458195,
+        "geom_id": 19
+      },
+      "original_sim_pick_uv": [
+        637,
+        396
+      ],
+      "model_anchor": {
+        "body_name": "maver_x4_asm_7_urdf_SLDASM_link_5",
+        "p_body_local": [
+          0.015345526178447172,
+          -0.0358455241640961,
+          0.20541725703680022
+        ],
+        "source_pose_id": 1,
+        "source_sim_uv": [
+          600,
+          548
+        ],
+        "geom_id": 19
+      },
+      "left_arm_surface_occlusion_mm": 5.551115123125783e-14
+    },
+    {
+      "pose_id": 3,
+      "feature_id": "4",
+      "real_uv": [
+        779,
+        501
+      ],
+      "sim_uv": [
+        713.501451011949,
+        532.5611506581407
+      ],
+      "eligible": true,
+      "p_mount": [
+        0.3431553484775505,
+        0.1621942716920165,
+        -0.12216647515561863
+      ],
+      "body_name": "maver_x4_asm_7_urdf_SLDASM_link_5",
+      "p_body_local": [
+        0.031190995647107988,
+        0.02912908479552675,
+        0.20363074804602913
+      ],
+      "ray_distance_m": 0.4590171490996282,
+      "geom_id": 19,
+      "comparison_file": "/home/ziwang/projects/UMI_Hardware_camera/runs/both-j6-correction/whole-arm-overlays/pose-03/comparison.json",
+      "comparison_sha256": "fe9754b6cac656597e557c6be05647e18957081d350cc3300683d3a005b55d36",
+      "independent_ray_pick": {
+        "eligible": true,
+        "reason": null,
+        "p_mount": [
+          0.3963786147992254,
+          0.17218306294919256,
+          -0.16683680323343864
+        ],
+        "body_name": "robot_base",
+        "p_body_local": [
+          -0.024337270500223957,
+          0.012979018919832224,
+          0.005000001514452769
+        ],
+        "ray_distance_m": 0.5288662564674381,
+        "geom_id": 22
+      },
+      "original_sim_pick_uv": [
+        728,
+        539
+      ],
+      "model_anchor": {
+        "body_name": "maver_x4_asm_7_urdf_SLDASM_link_5",
+        "p_body_local": [
+          0.031190995647107988,
+          0.02912908479552675,
+          0.20363074804602913
+        ],
+        "source_pose_id": 1,
+        "source_sim_uv": [
+          691,
+          638
+        ],
+        "geom_id": 19
+      },
+      "left_arm_surface_occlusion_mm": -5.551115123125783e-14
+    },
+    {
+      "pose_id": 3,
+      "feature_id": "5",
+      "real_uv": [
+        203,
+        584
+      ],
+      "sim_uv": [
+        144.08512173801617,
+        611.7318215492401
+      ],
+      "eligible": true,
+      "p_mount": [
+        0.2536181434355796,
+        0.328738869183851,
+        -0.08570614049448033
+      ],
+      "body_name": "maver_x4_asm_7_urdf_SLDASM_link_5",
+      "p_body_local": [
+        0.01866244647352103,
+        -0.03376112337297625,
+        0.0220509385512104
+      ],
+      "ray_distance_m": 0.44831498645976864,
+      "geom_id": 19,
+      "comparison_file": "/home/ziwang/projects/UMI_Hardware_camera/runs/both-j6-correction/whole-arm-overlays/pose-03/comparison.json",
+      "comparison_sha256": "fe9754b6cac656597e557c6be05647e18957081d350cc3300683d3a005b55d36",
+      "independent_ray_pick": {
+        "eligible": true,
+        "reason": null,
+        "p_mount": [
+          0.25521339756196476,
+          0.32861560206626517,
+          -0.0854636832205462
+        ],
+        "body_name": "maver_x4_asm_7_urdf_SLDASM_link_5",
+        "p_body_local": [
+          0.017985934360491018,
+          -0.03461807389306032,
+          0.023245418859445543
+        ],
+        "ray_distance_m": 0.4490565998556648,
+        "geom_id": 19
+      },
+      "original_sim_pick_uv": [
+        147,
+        608
+      ],
+      "model_anchor": {
+        "body_name": "maver_x4_asm_7_urdf_SLDASM_link_5",
+        "p_body_local": [
+          0.01866244647352103,
+          -0.03376112337297625,
+          0.0220509385512104
+        ],
+        "source_pose_id": 1,
+        "source_sim_uv": [
+          227,
+          745
+        ],
+        "geom_id": 19
+      },
+      "left_arm_surface_occlusion_mm": 0.0
+    },
+    {
+      "pose_id": 3,
+      "feature_id": "6",
+      "real_uv": [
+        321,
+        767
+      ],
+      "sim_uv": [
+        262.521745949198,
+        778.5681412407089
+      ],
+      "eligible": true,
+      "p_mount": [
+        0.22444362993048786,
+        0.2958577835838407,
+        -0.13617594601978422
+      ],
+      "body_name": "maver_x4_asm_7_urdf_SLDASM_link_5",
+      "p_body_local": [
+        0.019586789956675753,
+        0.033107913694429704,
+        0.024733618006349187
+      ],
+      "ray_distance_m": 0.44219271659671344,
+      "geom_id": 19,
+      "comparison_file": "/home/ziwang/projects/UMI_Hardware_camera/runs/both-j6-correction/whole-arm-overlays/pose-03/comparison.json",
+      "comparison_sha256": "fe9754b6cac656597e557c6be05647e18957081d350cc3300683d3a005b55d36",
+      "independent_ray_pick": {
+        "eligible": true,
+        "reason": null,
+        "p_mount": [
+          0.22468476007532698,
+          0.297277174712972,
+          -0.13880437123509415
+        ],
+        "body_name": "maver_x4_asm_7_urdf_SLDASM_link_5",
+        "p_body_local": [
+          0.017021589309506476,
+          0.03436063188417103,
+          0.0238215451948163
+        ],
+        "ray_distance_m": 0.4447957917044124,
+        "geom_id": 19
+      },
+      "original_sim_pick_uv": [
+        262,
+        783
+      ],
+      "model_anchor": {
+        "body_name": "maver_x4_asm_7_urdf_SLDASM_link_5",
+        "p_body_local": [
+          0.019586789956675753,
+          0.033107913694429704,
+          0.024733618006349187
+        ],
+        "source_pose_id": 1,
+        "source_sim_uv": [
+          348,
+          881
+        ],
+        "geom_id": 19
+      },
+      "left_arm_surface_occlusion_mm": 1.6653345369377348e-13
+    },
+    {
+      "pose_id": 3,
+      "feature_id": "9",
+      "real_uv": [
+        681,
+        413
+      ],
+      "sim_uv": [
+        640.0,
+        437.99999999999983
+      ],
+      "eligible": true,
+      "p_mount": [
+        0.3599353471112803,
+        0.18982512002528096,
+        -0.08577904663689728
+      ],
+      "body_name": "maver_x4_asm_7_urdf_SLDASM_link_6",
+      "p_body_local": [
+        0.027199998166796868,
+        -0.018928731743819024,
+        -0.01747954021461888
+      ],
+      "ray_distance_m": 0.4596591716459907,
+      "geom_id": 20,
+      "comparison_file": "/home/ziwang/projects/UMI_Hardware_camera/runs/both-j6-correction/whole-arm-overlays/pose-03/comparison.json",
+      "comparison_sha256": "fe9754b6cac656597e557c6be05647e18957081d350cc3300683d3a005b55d36",
+      "independent_ray_pick": {
+        "eligible": true,
+        "reason": null,
+        "p_mount": [
+          0.3599353471112803,
+          0.18982512002528096,
+          -0.08577904663689728
+        ],
+        "body_name": "maver_x4_asm_7_urdf_SLDASM_link_6",
+        "p_body_local": [
+          0.027199998166796868,
+          -0.018928731743819024,
+          -0.01747954021461888
+        ],
+        "ray_distance_m": 0.45965917164599074,
+        "geom_id": 20
+      },
+      "original_sim_pick_uv": [
+        640,
+        438
+      ],
+      "model_anchor": {
+        "body_name": "maver_x4_asm_7_urdf_SLDASM_link_6",
+        "p_body_local": [
+          0.027199998166796868,
+          -0.018928731743819024,
+          -0.01747954021461888
+        ],
+        "source_pose_id": 3,
+        "source_sim_uv": [
+          640,
+          438
+        ],
+        "geom_id": 20
+      },
+      "left_arm_surface_occlusion_mm": -5.551115123125783e-14
+    },
+    {
+      "pose_id": 3,
+      "feature_id": "10",
+      "real_uv": [
+        758,
+        465
+      ],
+      "sim_uv": [
+        714.9999999999999,
+        489.0
+      ],
+      "eligible": true,
+      "p_mount": [
+        0.3588393296441549,
+        0.1627007403438614,
+        -0.1107909375641396
+      ],
+      "body_name": "maver_x4_asm_7_urdf_SLDASM_link_6",
+      "p_body_local": [
+        0.030725551165892876,
+        0.013047344351272302,
+        0.0006209832241607651
+      ],
+      "ray_distance_m": 0.464902901445915,
+      "geom_id": 20,
+      "comparison_file": "/home/ziwang/projects/UMI_Hardware_camera/runs/both-j6-correction/whole-arm-overlays/pose-03/comparison.json",
+      "comparison_sha256": "fe9754b6cac656597e557c6be05647e18957081d350cc3300683d3a005b55d36",
+      "independent_ray_pick": {
+        "eligible": true,
+        "reason": null,
+        "p_mount": [
+          0.3588393296441549,
+          0.16270074034386137,
+          -0.1107909375641396
+        ],
+        "body_name": "maver_x4_asm_7_urdf_SLDASM_link_6",
+        "p_body_local": [
+          0.030725551165892876,
+          0.013047344351272302,
+          0.0006209832241607651
+        ],
+        "ray_distance_m": 0.46490290144591506,
+        "geom_id": 20
+      },
+      "original_sim_pick_uv": [
+        715,
+        489
+      ],
+      "model_anchor": {
+        "body_name": "maver_x4_asm_7_urdf_SLDASM_link_6",
+        "p_body_local": [
+          0.030725551165892876,
+          0.013047344351272302,
+          0.0006209832241607651
+        ],
+        "source_pose_id": 3,
+        "source_sim_uv": [
+          715,
+          489
+        ],
+        "geom_id": 20
+      },
+      "left_arm_surface_occlusion_mm": -5.551115123125783e-14
+    },
+    {
+      "pose_id": 2,
+      "feature_id": "4",
+      "real_uv": [
+        965,
+        594
+      ],
+      "sim_uv": [
+        926.6348569933878,
+        623.5906260169685
+      ],
+      "eligible": true,
+      "independent_ray_pick": {
+        "eligible": false,
+        "reason": "Simulated pixel does not intersect a left-arm visual mesh",
+        "p_mount": null,
+        "body_name": null,
+        "p_body_local": null,
+        "ray_distance_m": null,
+        "geom_id": null
+      },
+      "original_sim_pick_uv": [
+        930,
+        617
+      ],
+      "p_mount": [
+        0.40164867117622655,
+        0.07750078669041563,
+        -0.2280757254385224
+      ],
+      "p_body_local": [
+        0.031190995647107988,
+        0.02912908479552675,
+        0.20363074804602913
+      ],
+      "body_name": "maver_x4_asm_7_urdf_SLDASM_link_5",
+      "model_anchor": {
+        "body_name": "maver_x4_asm_7_urdf_SLDASM_link_5",
+        "p_body_local": [
+          0.031190995647107988,
+          0.02912908479552675,
+          0.20363074804602913
+        ],
+        "source_pose_id": 1,
+        "source_sim_uv": [
+          691,
+          638
+        ],
+        "geom_id": 19
+      },
+      "geom_id": 19,
+      "ray_distance_m": 0.5592787837113077,
+      "left_arm_surface_occlusion_mm": 1.1102230246251565e-13,
+      "comparison_file": "/home/ziwang/projects/UMI_Hardware_camera/runs/both-j6-correction/whole-arm-overlays/pose-02/comparison.json"
+    }
+  ],
+  "K": [
+    [
+      1055.28076171875,
+      0.0,
+      980.4390869140625
+    ],
+    [
+      0.0,
+      1055.28076171875,
+      559.5460815429688
+    ],
+    [
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "ineligible": [
+    {
+      "pose_id": 3,
+      "feature_id": "2",
+      "real_uv": [
+        264,
+        800
+      ],
+      "sim_uv": [
+        193.93160595774688,
+        826.2475472661878
+      ],
+      "eligible": false,
+      "p_mount": [
+        0.21214059409147915,
+        0.3166650153230142,
+        -0.1458467161902044
+      ],
+      "body_name": "maver_x4_asm_7_urdf_SLDASM_link_5",
+      "p_body_local": [
+        0.009482136689706235,
+        0.036635143079421416,
+        0.0010000128353544744
+      ],
+      "ray_distance_m": 0.4539076035389264,
+      "geom_id": 19,
+      "comparison_file": "/home/ziwang/projects/UMI_Hardware_camera/runs/both-j6-correction/whole-arm-overlays/pose-03/comparison.json",
+      "comparison_sha256": "fe9754b6cac656597e557c6be05647e18957081d350cc3300683d3a005b55d36",
+      "independent_ray_pick": {
+        "eligible": true,
+        "reason": null,
+        "p_mount": [
+          0.20897450037734053,
+          0.31242463839874446,
+          -0.139933853791383
+        ],
+        "body_name": "maver_x4_asm_7_urdf_SLDASM_link_5",
+        "p_body_local": [
+          0.01727050003882674,
+          0.035491048819222416,
+          0.0019996789195246595
+        ],
+        "ray_distance_m": 0.4460535425617783,
+        "geom_id": 19
+      },
+      "original_sim_pick_uv": [
+        193,
+        823
+      ],
+      "model_anchor": {
+        "body_name": "maver_x4_asm_7_urdf_SLDASM_link_5",
+        "p_body_local": [
+          0.009482136689706235,
+          0.036635143079421416,
+          0.0010000128353544744
+        ],
+        "source_pose_id": 1,
+        "source_sim_uv": [
+          285,
+          938
+        ],
+        "geom_id": 19
+      },
+      "left_arm_surface_occlusion_mm": 7.146945170388053,
+      "reason": "Fixed CAD landmark is occluded by another left-arm surface"
+    }
+  ],
+  "hardware_commands_sent": 0,
+  "offline_only": true,
+  "point_method": "One body-local visual-mesh anchor per feature, carried through measured-joint FK; real pixels assistant-picked",
+  "seed_T_mount_from_camera": [
+    [
+      -0.008877231598696595,
+      -0.6282879615574676,
+      0.7779302231698596,
+      -0.011064277241818856
+    ],
+    [
+      -0.9999603985036791,
+      0.005087984354791111,
+      -0.007301632664674272,
+      0.05297457029033484
+    ],
+    [
+      0.0006294310983226784,
+      -0.7779642342532005,
+      -0.6283082476295586,
+      0.14856633916231302
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "feature_ray_consistency": [
+    {
+      "feature_id": "1",
+      "bodies": [
+        "maver_x4_asm_7_urdf_SLDASM_link_5"
+      ],
+      "same_body": true,
+      "maximum_pairwise_distance_mm": 14.176622816134952
+    },
+    {
+      "feature_id": "2",
+      "bodies": [
+        "maver_x4_asm_7_urdf_SLDASM_link_5"
+      ],
+      "same_body": true,
+      "maximum_pairwise_distance_mm": 10.371726813503864
+    },
+    {
+      "feature_id": "3",
+      "bodies": [
+        "maver_x4_asm_7_urdf_SLDASM_link_5"
+      ],
+      "same_body": true,
+      "maximum_pairwise_distance_mm": 6.209013389806401
+    },
+    {
+      "feature_id": "4",
+      "bodies": [
+        "maver_x4_asm_7_urdf_SLDASM_link_5",
+        "robot_base"
+      ],
+      "same_body": false,
+      "maximum_pairwise_distance_mm": 206.87770889298233
+    },
+    {
+      "feature_id": "5",
+      "bodies": [
+        "maver_x4_asm_7_urdf_SLDASM_link_5"
+      ],
+      "same_body": true,
+      "maximum_pairwise_distance_mm": 2.4934292997815986
+    },
+    {
+      "feature_id": "6",
+      "bodies": [
+        "maver_x4_asm_7_urdf_SLDASM_link_5"
+      ],
+      "same_body": true,
+      "maximum_pairwise_distance_mm": 3.976386189763887
+    }
+  ],
+  "model_anchors": {
+    "1": {
+      "body_name": "maver_x4_asm_7_urdf_SLDASM_link_5",
+      "p_body_local": [
+        0.017313409682206984,
+        -0.034950979020133416,
+        0.0020962418420319372
+      ],
+      "source_pose_id": 1,
+      "source_sim_uv": [
+        166,
+        774
+      ],
+      "geom_id": 19
+    },
+    "2": {
+      "body_name": "maver_x4_asm_7_urdf_SLDASM_link_5",
+      "p_body_local": [
+        0.009482136689706235,
+        0.036635143079421416,
+        0.0010000128353544744
+      ],
+      "source_pose_id": 1,
+      "source_sim_uv": [
+        285,
+        938
+      ],
+      "geom_id": 19
+    },
+    "3": {
+      "body_name": "maver_x4_asm_7_urdf_SLDASM_link_5",
+      "p_body_local": [
+        0.015345526178447172,
+        -0.0358455241640961,
+        0.20541725703680022
+      ],
+      "source_pose_id": 1,
+      "source_sim_uv": [
+        600,
+        548
+      ],
+      "geom_id": 19
+    },
+    "4": {
+      "body_name": "maver_x4_asm_7_urdf_SLDASM_link_5",
+      "p_body_local": [
+        0.031190995647107988,
+        0.02912908479552675,
+        0.20363074804602913
+      ],
+      "source_pose_id": 1,
+      "source_sim_uv": [
+        691,
+        638
+      ],
+      "geom_id": 19
+    },
+    "5": {
+      "body_name": "maver_x4_asm_7_urdf_SLDASM_link_5",
+      "p_body_local": [
+        0.01866244647352103,
+        -0.03376112337297625,
+        0.0220509385512104
+      ],
+      "source_pose_id": 1,
+      "source_sim_uv": [
+        227,
+        745
+      ],
+      "geom_id": 19
+    },
+    "6": {
+      "body_name": "maver_x4_asm_7_urdf_SLDASM_link_5",
+      "p_body_local": [
+        0.019586789956675753,
+        0.033107913694429704,
+        0.024733618006349187
+      ],
+      "source_pose_id": 1,
+      "source_sim_uv": [
+        348,
+        881
+      ],
+      "geom_id": 19
+    },
+    "7": {
+      "body_name": "maver_x4_asm_7_urdf_SLDASM_link_3",
+      "p_body_local": [
+        0.019739448167649193,
+        -0.02094262879415069,
+        0.12500771905420208
+      ],
+      "source_pose_id": 2,
+      "source_sim_uv": [
+        351,
+        772
+      ],
+      "geom_id": 17
+    },
+    "8": {
+      "body_name": "maver_x4_asm_7_urdf_SLDASM_link_3",
+      "p_body_local": [
+        0.01937196881158163,
+        0.021759210820644262,
+        0.12486847614841687
+      ],
+      "source_pose_id": 2,
+      "source_sim_uv": [
+        395,
+        904
+      ],
+      "geom_id": 17
+    },
+    "9": {
+      "body_name": "maver_x4_asm_7_urdf_SLDASM_link_6",
+      "p_body_local": [
+        0.027199998166796868,
+        -0.018928731743819024,
+        -0.01747954021461888
+      ],
+      "source_pose_id": 3,
+      "source_sim_uv": [
+        640,
+        438
+      ],
+      "geom_id": 20
+    },
+    "10": {
+      "body_name": "maver_x4_asm_7_urdf_SLDASM_link_6",
+      "p_body_local": [
+        0.030725551165892876,
+        0.013047344351272302,
+        0.0006209832241607651
+      ],
+      "source_pose_id": 3,
+      "source_sim_uv": [
+        715,
+        489
+      ],
+      "geom_id": 20
+    }
+  }
+}

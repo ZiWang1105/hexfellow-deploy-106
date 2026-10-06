@@ -1,0 +1,39 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Left-hand camera validation</title>
+<style>body{background:#101923;color:#eef4f8;font:17px system-ui;margin:30px auto;max-width:1150px;padding:0 20px}button{font:700 16px system-ui;border:0;border-radius:7px;background:#67d8bc;padding:14px 20px;margin:5px;cursor:pointer}.stop{background:#ffb564}button:disabled{opacity:.4;cursor:default}img{max-width:100%;border-radius:8px;background:#263548}section{padding:20px;background:#1a2a39;border-radius:12px;margin:20px 0}#error{color:#ffa4a4}pre{white-space:pre-wrap;overflow-wrap:anywhere}small{color:#b9cad8}a{color:#67d8bc}</style>
+<h1>Left-hand camera validation</h1><p id="mode">Connecting…</p>
+<section><h2 id="pose" style="font-size:36px;margin:0">Pose — / 3</h2><progress id="progress" max="3" value="0" style="width:100%;height:18px"></progress>
+<p id="stage">Ready to start</p><p id="message"></p><p id="settling"></p>
+<button onclick="act('start')" id="start">Start validation</button>
+<button class="stop" onclick="act('pause')">Pause · Space</button>
+<button onclick="act('return-default')">Return arms to default</button>
+<button class="stop" onclick="act('quit')">Stop &amp; quit</button>
+<details><summary>Preparation</summary><button onclick="act('full-default')">Move to default · lift 300 mm</button></details>
+<p id="error"></p><small>Start moves to default, then visits three left-hand poses, captures each image with measured joints, returns the arms, and creates overlays. No board detection is needed. Keep the motion area and camera cable clear and this page open. Pause stops movement and automatic advance; Start resumes. Unreachable poses are marked invalid and skipped after stationary HOLD. Physical E-stop remains available.</small></section>
+<p id="cameraLabel">Live rectified-left camera</p><img id="camera" src="/camera.jpg" alt="Camera preview" onerror="this.style.display='none'" onload="this.style.display='block'">
+<section><h2>Real / simulation / overlay</h2><p id="results">Images will appear after capture and return to default.</p><div id="comparisons"></div><p id="count"></p><small id="output"></small></section>
+<script>
+let s=null,polling=false,shown='';const token='__TOKEN__';const e=id=>document.getElementById(id);
+async function post(path,body){const r=await fetch(path,{method:'POST',headers:{'Content-Type':'application/json','X-Calibration-Token':token},body:JSON.stringify(body)});const v=await r.json();if(!r.ok)throw Error(v.error);return v;}
+async function act(action){if(!s)return;try{e('error').textContent='';s=await post('/command',{action,revision:s.revision});}catch(err){e('error').textContent=err.message;}}
+async function poll(){if(polling)return;polling=true;try{
+ s=await post('/heartbeat',{});const total=s.pose_count;
+ e('mode').textContent=s.mode==='live'?'LIVE ROBOT · operator-started validation':'SIMULATION · full capture workflow';
+ e('pose').textContent=s.target_pose>0?`Pose ${s.target_pose} / ${total}`:s.target_pose===-2?'Moving to default':s.target_pose===-1?'Returned / returning to default':`Pose — / ${total}`;
+ e('progress').max=total;e('progress').value=s.attempted.length;
+ e('stage').textContent=s.activity==='solve'?'Rendering comparisons…':s.activity==='capture'?'Capturing image and measured joints…':s.sequence==='complete'?'Complete — overlays ready below':`${s.sequence} · ${s.phase} · ${s.attempted.length}/${total} attempted`;
+ e('message').textContent=s.message;
+ e('settling').textContent=s.pose_settling&&s.target_pose>0?`Left-arm target error ${s.pose_settling.maximum_active_offset_deg.toFixed(2)}° / 5° · stationary ${s.pose_settling.stationary_duration_s.toFixed(1)} s · replay uses measured angles`:'';
+ e('cameraLabel').textContent=s.mode==='sim'?'Last simulated capture':'Live rectified-left ZED preview';
+ const automatic=['running','returning'].includes(s.sequence);
+ e('start').textContent=s.sequence==='complete'?'Validation complete':automatic?'Validation running':s.prepared||s.paused||s.attempted.length?'Resume validation':'Start validation';
+ const allowed={start:!automatic&&s.sequence!=='complete',pause:true,quit:true,'return-default':true,'full-default':['readonly','hold','ready'].includes(s.phase)&&!automatic};
+ for(const b of document.querySelectorAll('button')){const action=b.getAttribute('onclick').match(/act\('([^']+)'/)[1];b.disabled=s.finished||!!s.failure_detail||!allowed[action]||(s.busy&&!['pause','quit','return-default'].includes(action));}
+ e('count').textContent=`Captured: ${s.captured.join(', ')||'none'}. Invalid: ${Object.entries(s.ineligible).map(([n,v])=>`${n}: ${v.reason}`).join('; ')||'none'}.`;
+ e('output').textContent=s.output;
+ if(s.solution){e('results').textContent='Compare the hand housing and wrist outlines across all views. The simulation uses the measured joints, unchanged extrinsics and matching intrinsics. No image registration or automatic accuracy verdict.';
+ const key=JSON.stringify(s.solution.comparisons);if(key!==shown){shown=key;e('comparisons').replaceChildren();for(const row of s.solution.comparisons){const h=document.createElement('h3');h.textContent=`Pose ${row.pose_id}`;const link=document.createElement('a');link.href=`/comparison-${row.pose_id}.png`;link.target='_blank';const img=document.createElement('img');img.src=link.href;img.alt=`Pose ${row.pose_id}: real, simulation and overlay`;link.append(img);e('comparisons').append(h,link);}}}
+ }catch(err){e('error').textContent='Connection lost — motion watchdog will request stop. Saved captures remain on disk.';}finally{polling=false;}}
+setInterval(poll,250);setInterval(()=>{e('camera').src='/camera.jpg?t='+Date.now()},600);poll();
+document.addEventListener('keydown',v=>{if(v.code==='Space'&&!v.repeat){v.preventDefault();act('pause');}});
+</script></html>

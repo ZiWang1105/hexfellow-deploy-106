@@ -1,0 +1,817 @@
+{
+  "source_repository": "/home/ziwang/projects/UMI_Hardware_camera",
+  "source_revision": "32d373cb584783046349f53f0343f518cad56d6c",
+  "includes_uncommitted_wrist_work": true,
+  "license": "Source checkout has no repository-level LICENSE. No new license is assigned. Dependency assets retain their upstream notices.",
+  "files": [
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/tools/camera/verify_centered_calibration.py",
+      "destination": "tools/camera/verify_centered_calibration.py",
+      "source_sha256": "3a07e1b5dda79007f70642667f29320402e8540cdca7f02cb261f2be6e69a728",
+      "migrated_sha256": "3a07e1b5dda79007f70642667f29320402e8540cdca7f02cb261f2be6e69a728",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/tools/camera/calibration_runtime.py",
+      "destination": "tools/camera/calibration_runtime.py",
+      "source_sha256": "84b950306e0fdc4957d71392088c98353e05b882f1bcb4cb9ce8c8d4ab71e4f1",
+      "migrated_sha256": "84b950306e0fdc4957d71392088c98353e05b882f1bcb4cb9ce8c8d4ab71e4f1",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/tools/camera/refit_coarse_reference.py",
+      "destination": "tools/camera/refit_coarse_reference.py",
+      "source_sha256": "5c0c5e2ec79e69728e4e52a001952090f162507108d0930f646223815124f675",
+      "migrated_sha256": "5c0c5e2ec79e69728e4e52a001952090f162507108d0930f646223815124f675",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/tools/camera/verify_left_hand_validation.py",
+      "destination": "tools/camera/verify_left_hand_validation.py",
+      "source_sha256": "41d9bf5bcb63b3469475809a652163dcbde25a4cb74d119f75bfc25ed47b567a",
+      "migrated_sha256": "77891f947a34a8f55c73a9949b0907e0ab531360a59caeb58e759b44185e0941",
+      "adapted": true
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/tools/camera/run_calibration.sh",
+      "destination": "tools/camera/run_calibration.sh",
+      "source_sha256": "f249178dab9acd0819fa9e7157f32671d39891181e1ab7ee6bccdd9bc7a90644",
+      "migrated_sha256": "9ea4a1c997d65e64b0a3721919ad8095b49d0bd6f9e7ad653175383dcb6fd7ee",
+      "adapted": true
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/tools/camera/assemble_short_tilt_study.py",
+      "destination": "tools/camera/assemble_short_tilt_study.py",
+      "source_sha256": "7ae827c9842db3eb0388bf96d8158bf2fa8a273eed51dc91f3a6c1b8d57ab1a1",
+      "migrated_sha256": "7ae827c9842db3eb0388bf96d8158bf2fa8a273eed51dc91f3a6c1b8d57ab1a1",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/tools/camera/calibration_console.py",
+      "destination": "tools/camera/calibration_console.py",
+      "source_sha256": "d506a81fc340468381342f24edd8a4974389b5405393196e45f1991698ac0b0b",
+      "migrated_sha256": "d506a81fc340468381342f24edd8a4974389b5405393196e45f1991698ac0b0b",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/tools/camera/filter_calibration_views.py",
+      "destination": "tools/camera/filter_calibration_views.py",
+      "source_sha256": "2f2864c8c1b199cee70732ebf441612174090be2b8fb3d5e572d984b5d475832",
+      "migrated_sha256": "2f2864c8c1b199cee70732ebf441612174090be2b8fb3d5e572d984b5d475832",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/tools/camera/calibrate_robot.py",
+      "destination": "tools/camera/calibrate_robot.py",
+      "source_sha256": "ece1e730c736ae9ec822d985fd075f6df90a52eb626aa1a2fb4b4a1ad0f1d68d",
+      "migrated_sha256": "49f27d546c029649e6af813facd24c1156317305f00e03f25a336c7f7fc708aa",
+      "adapted": true
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/tools/camera/plan_poses.py",
+      "destination": "tools/camera/plan_poses.py",
+      "source_sha256": "3cd7599ec1a399cccc373ecad50a1ce02b480667910db7b004588c02c34384a0",
+      "migrated_sha256": "3cd7599ec1a399cccc373ecad50a1ce02b480667910db7b004588c02c34384a0",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/tools/camera/test_left_hand_validation_ui.py",
+      "destination": "tools/camera/test_left_hand_validation_ui.py",
+      "source_sha256": "1f9e607b52d7d1872220e759885b50135cd30d90fc7567228881a3d820e0cff1",
+      "migrated_sha256": "1f9e607b52d7d1872220e759885b50135cd30d90fc7567228881a3d820e0cff1",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/tools/camera/verify_wrist_ground_truth.py",
+      "destination": "tools/camera/verify_wrist_ground_truth.py",
+      "source_sha256": "3a591d3b389a6fe78e4e1135f15b10aced646bb3461294db541c38ce7fa420a3",
+      "migrated_sha256": "3a591d3b389a6fe78e4e1135f15b10aced646bb3461294db541c38ce7fa420a3",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/tools/camera/verify_measured_capture.py",
+      "destination": "tools/camera/verify_measured_capture.py",
+      "source_sha256": "1a74bc136d4b86d12a1d99282954aa681c2b80c596b0d688d27459102936afcb",
+      "migrated_sha256": "62d337207f30bff152ca319b2734222f5ef13417dd428b29167fcd0ae6752b17",
+      "adapted": true
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/tools/camera/plan_left_hand_validation.py",
+      "destination": "tools/camera/plan_left_hand_validation.py",
+      "source_sha256": "45f5d82e776ad25493d30e2d70b1ef61c31bdac8c390cb16937bea07cc4d1212",
+      "migrated_sha256": "9f0711aef7549dfe0b205d2de51fe2c70dd50219fc947e84cafbcf29207e1856",
+      "adapted": true
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/tools/camera/render_calibration_route.py",
+      "destination": "tools/camera/render_calibration_route.py",
+      "source_sha256": "384d4ba03bec1f469741c6a1bc7ab9a96561a82a1a8546a7b369b65ef8561a7b",
+      "migrated_sha256": "384d4ba03bec1f469741c6a1bc7ab9a96561a82a1a8546a7b369b65ef8561a7b",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/tools/camera/calibration_outcomes.py",
+      "destination": "tools/camera/calibration_outcomes.py",
+      "source_sha256": "3ef3e1398e766f58b564129e3a43c6d47073d01b285d6803848c0aa4e5e6beaf",
+      "migrated_sha256": "3ef3e1398e766f58b564129e3a43c6d47073d01b285d6803848c0aa4e5e6beaf",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/tools/camera/wrist_calibration_geometry.py",
+      "destination": "tools/camera/wrist_calibration_geometry.py",
+      "source_sha256": "c5e4cbeceafd8c298071a67e050b11c515467146090ce21b1e8afc0efa23fae5",
+      "migrated_sha256": "09fd9a863de3c1ddf98feae3dd8f5ed7f72c3823375fa160fa6b85fc76f94b78",
+      "adapted": true
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/tools/camera/plan_centered_calibration.py",
+      "destination": "tools/camera/plan_centered_calibration.py",
+      "source_sha256": "3fd0071dd47df22b139ccfaf5c15ff0c6e12fd2a1c1146876d972de113cc980a",
+      "migrated_sha256": "3fd0071dd47df22b139ccfaf5c15ff0c6e12fd2a1c1146876d972de113cc980a",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/tools/camera/left_hand_validation.html",
+      "destination": "tools/camera/left_hand_validation.html",
+      "source_sha256": "4f08d681b13a5130863c3c69577f4acac778a782d8afb326a214fa15eeca0b39",
+      "migrated_sha256": "4f08d681b13a5130863c3c69577f4acac778a782d8afb326a214fa15eeca0b39",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/tools/camera/run_left_hand_validation.sh",
+      "destination": "tools/camera/run_left_hand_validation.sh",
+      "source_sha256": "819e2057e1484dca38c90737132470215baa07762cdf688f218c5f596310c067",
+      "migrated_sha256": "f2948dacc64186eb26fdbec60d394e4108371c15c6c2ca20d99d842c8800a6e0",
+      "adapted": true
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/tools/camera/validate_camera_overlay.py",
+      "destination": "tools/camera/validate_camera_overlay.py",
+      "source_sha256": "9d4d8c7f4a6ce7a07e5e05622cb2140fdb557fcb9f7c1c79e8d1be7f37396a22",
+      "migrated_sha256": "9d4d8c7f4a6ce7a07e5e05622cb2140fdb557fcb9f7c1c79e8d1be7f37396a22",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/tools/camera/plan_calibration_route.py",
+      "destination": "tools/camera/plan_calibration_route.py",
+      "source_sha256": "b20844bfedee66322a586e02b5850ea7404a31258274d2c7dd00fb5fc6f15322",
+      "migrated_sha256": "b20844bfedee66322a586e02b5850ea7404a31258274d2c7dd00fb5fc6f15322",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/tools/camera/left_hand_validation.py",
+      "destination": "tools/camera/left_hand_validation.py",
+      "source_sha256": "0adb6a13a2702e799b3536744885b2b47663baba3dd7491f664423935b27c7bd",
+      "migrated_sha256": "0adb6a13a2702e799b3536744885b2b47663baba3dd7491f664423935b27c7bd",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/tools/camera/calibration_live.html",
+      "destination": "tools/camera/calibration_live.html",
+      "source_sha256": "f4e2e6f7610bd2bbf8d3dbf1af2cf642bfe98f3ef9661d99457fb705374b4c1f",
+      "migrated_sha256": "f4e2e6f7610bd2bbf8d3dbf1af2cf642bfe98f3ef9661d99457fb705374b4c1f",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/tools/camera/render_view_study.py",
+      "destination": "tools/camera/render_view_study.py",
+      "source_sha256": "296db32384043dee081ea89237a48e5e0eb05e746d41384cf1fdec4ed24a2170",
+      "migrated_sha256": "296db32384043dee081ea89237a48e5e0eb05e746d41384cf1fdec4ed24a2170",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/tools/camera/mounted_view.py",
+      "destination": "tools/camera/mounted_view.py",
+      "source_sha256": "c7722c9f47a0ceaf54be31246c24647a710d79f45d3152905406c0d4ea28445d",
+      "migrated_sha256": "c7722c9f47a0ceaf54be31246c24647a710d79f45d3152905406c0d4ea28445d",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/tools/camera/validate_calibration_poses.py",
+      "destination": "tools/camera/validate_calibration_poses.py",
+      "source_sha256": "bd682d08c00f3457e3672e097dff089ec83217bee5c32ac9eca6ffa44785fc04",
+      "migrated_sha256": "bd682d08c00f3457e3672e097dff089ec83217bee5c32ac9eca6ffa44785fc04",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/tools/camera/calibration_path.py",
+      "destination": "tools/camera/calibration_path.py",
+      "source_sha256": "cdd0035b976118fe712630ef39222aa31a3a7ac10ff84af22493124cdd4378dd",
+      "migrated_sha256": "cdd0035b976118fe712630ef39222aa31a3a7ac10ff84af22493124cdd4378dd",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/tools/camera/verify_view_projection.py",
+      "destination": "tools/camera/verify_view_projection.py",
+      "source_sha256": "51dc77cd4bb06ae63c7e8fb9be190f6c4ea4b86b3fa7b8828ef91c4b695fcd6a",
+      "migrated_sha256": "51dc77cd4bb06ae63c7e8fb9be190f6c4ea4b86b3fa7b8828ef91c4b695fcd6a",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/tools/camera/fit_landmark_extrinsics.py",
+      "destination": "tools/camera/fit_landmark_extrinsics.py",
+      "source_sha256": "0ae7e09cd6f81cb6d24d803793cda2b7bc9c7fbdb9a819fbbac429572f9be769",
+      "migrated_sha256": "0ae7e09cd6f81cb6d24d803793cda2b7bc9c7fbdb9a819fbbac429572f9be769",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/tools/camera/wrist_camera_worker.py",
+      "destination": "tools/camera/wrist_camera_worker.py",
+      "source_sha256": "29e6d01f9d669b5747a547ce61618c57fbe8a5c6695f466f6e1d34b385fd05cc",
+      "migrated_sha256": "f3122c0ecc9d1e278e3db84b88f6c365f217036f0aca555e977be3122f896657",
+      "adapted": true
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/tools/camera/calibration_camera_worker.py",
+      "destination": "tools/camera/calibration_camera_worker.py",
+      "source_sha256": "b5f83d8917d084cf867d11dff658c7523b5e91e796418af3cd3ad5c7d42c90d4",
+      "migrated_sha256": "ab0ef2c29070aee7e7a0e92226451ecface8840d46407194d84b75b6c561a857",
+      "adapted": true
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/tools/camera/calibration_sequence.py",
+      "destination": "tools/camera/calibration_sequence.py",
+      "source_sha256": "93e76de0a93b28c30eba0311c1d78215be32d175bdcef57d59b1416c771809d8",
+      "migrated_sha256": "93e76de0a93b28c30eba0311c1d78215be32d175bdcef57d59b1416c771809d8",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/tools/camera/verify_handeye_ground_truth.py",
+      "destination": "tools/camera/verify_handeye_ground_truth.py",
+      "source_sha256": "4dfd78e8414f97b3750cfba47c04407fe70ad8d20fd2c02833366d18e32a9853",
+      "migrated_sha256": "4dfd78e8414f97b3750cfba47c04407fe70ad8d20fd2c02833366d18e32a9853",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/tools/camera/solve_handeye.py",
+      "destination": "tools/camera/solve_handeye.py",
+      "source_sha256": "e232c3ac93fc7939c548568288c9c3ae9af5ec59c080f6b9a90ff66e4648cb35",
+      "migrated_sha256": "e232c3ac93fc7939c548568288c9c3ae9af5ec59c080f6b9a90ff66e4648cb35",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/tools/camera/plan_wrist_calibration.py",
+      "destination": "tools/camera/plan_wrist_calibration.py",
+      "source_sha256": "661d79c491f81bf1d54a3a969250fc270d19c5bd20aeede8a4d54289e4cb8b93",
+      "migrated_sha256": "a24bcbd52e369e4ad75d795ab5e9625197097bc6afb112672ba1b9e2e175b12a",
+      "adapted": true
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/tools/camera/wrist_calibration_live.html",
+      "destination": "tools/camera/wrist_calibration_live.html",
+      "source_sha256": "ce52e868db76e68247848a05f28694b70477dfa1a7be8b089a1b3c8ed8db6cfa",
+      "migrated_sha256": "ce52e868db76e68247848a05f28694b70477dfa1a7be8b089a1b3c8ed8db6cfa",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/tools/camera/replay_joint_mapping.py",
+      "destination": "tools/camera/replay_joint_mapping.py",
+      "source_sha256": "fb5e8674e8ec7cc7a48cdf5a6dd04df51349725be5706e950c3d188de2a5a3ef",
+      "migrated_sha256": "fb5e8674e8ec7cc7a48cdf5a6dd04df51349725be5706e950c3d188de2a5a3ef",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/tools/camera/solve_wrist_calibration.py",
+      "destination": "tools/camera/solve_wrist_calibration.py",
+      "source_sha256": "1b71a5aadbcbee862fe6d4338c77eee4ce0a702e5b9b7419fa15ea630ad84e34",
+      "migrated_sha256": "1b71a5aadbcbee862fe6d4338c77eee4ce0a702e5b9b7419fa15ea630ad84e34",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/tools/camera/robot_snapshot.py",
+      "destination": "tools/camera/robot_snapshot.py",
+      "source_sha256": "9f8699ca79de3f0f41d16f1fba58f341ad1b7de6ab27959b3a8d9ac389422c79",
+      "migrated_sha256": "1ea6e7ffea8f2ed38716bd69bc94c3f8c5e86c3cb8ce7f1d07ab2a639e7f80ad",
+      "adapted": true
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/tools/camera/check_charuco.py",
+      "destination": "tools/camera/check_charuco.py",
+      "source_sha256": "b2cacb7a4cf79e21a10b4c4384174b6c366df4e9068e01ef27587fedf115bc6c",
+      "migrated_sha256": "892b13437309c28a8ad1747c9a6483f2fdcdcd358c5446dac363571af6c20af9",
+      "adapted": true
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/tools/camera/run_wrist_calibration.sh",
+      "destination": "tools/camera/run_wrist_calibration.sh",
+      "source_sha256": "ab3922e90442f5487c08ad0ffa9893fb1d48a4f1686ca0137189d5ad47edf15d",
+      "migrated_sha256": "1e2f13afbfb3488e64301aced301438852790b860056b3ee3e122bf4debf919a",
+      "adapted": true
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/tools/camera/simulate_calibration_route.py",
+      "destination": "tools/camera/simulate_calibration_route.py",
+      "source_sha256": "ae60c9f9efde555420d2698ced212420ef9ba4dc9dcef90e78f695e14421959f",
+      "migrated_sha256": "ae60c9f9efde555420d2698ced212420ef9ba4dc9dcef90e78f695e14421959f",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/src/policy_sim/calibration/wrist_handeye.py",
+      "destination": "src/policy_sim/calibration/wrist_handeye.py",
+      "source_sha256": "39d3ef67149a249fd86792cda1fa8d5a122c50aa9236b58be07bf0cbdd21866c",
+      "migrated_sha256": "39d3ef67149a249fd86792cda1fa8d5a122c50aa9236b58be07bf0cbdd21866c",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/src/policy_sim/calibration/charuco.py",
+      "destination": "src/policy_sim/calibration/charuco.py",
+      "source_sha256": "55e73a15e1fb5d77461c7503dc3d510cafccd9a75fd11227eb71ac43b063df37",
+      "migrated_sha256": "fc9cd6203be4cd72f062fea07a8d08fe2ca3285a7ad82a6bc363aeb5735890be",
+      "adapted": true
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/src/policy_sim/calibration/__init__.py",
+      "destination": "src/policy_sim/calibration/__init__.py",
+      "source_sha256": "5c748726342f1b8e9dec8cbc9455155106863fd063ca8ad3ee59cce38863f19e",
+      "migrated_sha256": "5c748726342f1b8e9dec8cbc9455155106863fd063ca8ad3ee59cce38863f19e",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/src/policy_sim/calibration/operator.py",
+      "destination": "src/policy_sim/calibration/operator.py",
+      "source_sha256": "060a2635de25f6b532ab7229558ad80c4a339c58f44bb145b3e138c0e4e9bd32",
+      "migrated_sha256": "060a2635de25f6b532ab7229558ad80c4a339c58f44bb145b3e138c0e4e9bd32",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/src/policy_sim/calibration/handeye.py",
+      "destination": "src/policy_sim/calibration/handeye.py",
+      "source_sha256": "5fdd1302a2ead1dedd07b277cb138586ab97f8125fde1c51925def7bc44eb294",
+      "migrated_sha256": "5fdd1302a2ead1dedd07b277cb138586ab97f8125fde1c51925def7bc44eb294",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/src/policy_sim/calibration/operator.html",
+      "destination": "src/policy_sim/calibration/operator.html",
+      "source_sha256": "b4f5fbb6c88fe2f9520541fe70977133c365c9e114d9cddfef35611738cd19da",
+      "migrated_sha256": "b4f5fbb6c88fe2f9520541fe70977133c365c9e114d9cddfef35611738cd19da",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/tests/calibration/test_operator.py",
+      "destination": "tests/calibration/test_operator.py",
+      "source_sha256": "76bcef580a0783162147017056da362831d3d52634c6245a8c2eb68b3fddc0ab",
+      "migrated_sha256": "76bcef580a0783162147017056da362831d3d52634c6245a8c2eb68b3fddc0ab",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/tests/calibration/test_both_j6_mapping.py",
+      "destination": "tests/calibration/test_both_j6_mapping.py",
+      "source_sha256": "8bc836b4a5929f394fb8e248a198c5b8d944ce0e6fddb871bc9c2ce4985a322b",
+      "migrated_sha256": "8bc836b4a5929f394fb8e248a198c5b8d944ce0e6fddb871bc9c2ce4985a322b",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/tests/calibration/test_lift_status.py",
+      "destination": "tests/calibration/test_lift_status.py",
+      "source_sha256": "cbc77fe758cbd7cf590daf73aa104d69d5540c574c7df4bc4f9ad2f9ce3ed435",
+      "migrated_sha256": "cbc77fe758cbd7cf590daf73aa104d69d5540c574c7df4bc4f9ad2f9ce3ed435",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/tests/calibration/test_measured_arrival.py",
+      "destination": "tests/calibration/test_measured_arrival.py",
+      "source_sha256": "88964fd0403cb3795a28a7bf3f2b866e75af3fbb9f8b186b9c83f3efbc640b81",
+      "migrated_sha256": "88964fd0403cb3795a28a7bf3f2b866e75af3fbb9f8b186b9c83f3efbc640b81",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/tests/calibration/test_view_margin.py",
+      "destination": "tests/calibration/test_view_margin.py",
+      "source_sha256": "55f4320d932acd0c0a31aa770fda8041d38a01942ef9758386aaa85a5f7f8e69",
+      "migrated_sha256": "55f4320d932acd0c0a31aa770fda8041d38a01942ef9758386aaa85a5f7f8e69",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/tests/calibration/test_handeye.py",
+      "destination": "tests/calibration/test_handeye.py",
+      "source_sha256": "647e3ba3fa37497e13c66a2c6caf1c727a13e20c373bcbe2860ed296dfeaf940",
+      "migrated_sha256": "647e3ba3fa37497e13c66a2c6caf1c727a13e20c373bcbe2860ed296dfeaf940",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/tests/calibration/test_right_j6_mapping.py",
+      "destination": "tests/calibration/test_right_j6_mapping.py",
+      "source_sha256": "d6657538b4c625eabb118f885b2e8a1cf813b9833463a4279f243b441e041a2a",
+      "migrated_sha256": "d6657538b4c625eabb118f885b2e8a1cf813b9833463a4279f243b441e041a2a",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/tests/calibration/test_wrist_camera_worker.py",
+      "destination": "tests/calibration/test_wrist_camera_worker.py",
+      "source_sha256": "6d06ce1630f0f2cfa95cbf16f502f753959fd0752a4865bd7b4ef0bfb4cb6a44",
+      "migrated_sha256": "6d06ce1630f0f2cfa95cbf16f502f753959fd0752a4865bd7b4ef0bfb4cb6a44",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/tests/calibration/test_camera_overlay.py",
+      "destination": "tests/calibration/test_camera_overlay.py",
+      "source_sha256": "73948b2706a4d1a75b7216773b8f52d50df7426d87043fa42ba040c3427d85d6",
+      "migrated_sha256": "73948b2706a4d1a75b7216773b8f52d50df7426d87043fa42ba040c3427d85d6",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/tests/calibration/test_live_pairing.py",
+      "destination": "tests/calibration/test_live_pairing.py",
+      "source_sha256": "0927036581360faa21a5b074f1be8c932fc2ad8768cf483f8fef6aa2fe155dca",
+      "migrated_sha256": "0927036581360faa21a5b074f1be8c932fc2ad8768cf483f8fef6aa2fe155dca",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/tests/calibration/test_landmark_pnp.py",
+      "destination": "tests/calibration/test_landmark_pnp.py",
+      "source_sha256": "d10b83a1656df9627139e0d5305503e0316390e738f5d4cb464c3c186f38ddea",
+      "migrated_sha256": "d10b83a1656df9627139e0d5305503e0316390e738f5d4cb464c3c186f38ddea",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/tests/calibration/test_invalid_pose.py",
+      "destination": "tests/calibration/test_invalid_pose.py",
+      "source_sha256": "e591f9896d620eeb6cc7b109b4df0b6f2e5eb444bc3fa6885950689b2d5b9f20",
+      "migrated_sha256": "e591f9896d620eeb6cc7b109b4df0b6f2e5eb444bc3fa6885950689b2d5b9f20",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/tests/calibration/test_pose_clearance.py",
+      "destination": "tests/calibration/test_pose_clearance.py",
+      "source_sha256": "3461c9e9720e1ee1ec1573d11328c373265705396950934b7cdf2c4426a583db",
+      "migrated_sha256": "3461c9e9720e1ee1ec1573d11328c373265705396950934b7cdf2c4426a583db",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/tests/calibration/test_sequence.py",
+      "destination": "tests/calibration/test_sequence.py",
+      "source_sha256": "9dec36e3c961fc7dc8f0e6a649080e7a6a6019d642278b518804d717be55b803",
+      "migrated_sha256": "9dec36e3c961fc7dc8f0e6a649080e7a6a6019d642278b518804d717be55b803",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/tests/calibration/test_left_validation.py",
+      "destination": "tests/calibration/test_left_validation.py",
+      "source_sha256": "8f745e563c0a9492e7ad47aaccd2793d0fe7c3fc870e9568dcb1924a4e444bac",
+      "migrated_sha256": "8f745e563c0a9492e7ad47aaccd2793d0fe7c3fc870e9568dcb1924a4e444bac",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/tests/calibration/test_wrist_geometry.py",
+      "destination": "tests/calibration/test_wrist_geometry.py",
+      "source_sha256": "2cbea19021259c15cead62a42ae0a8852de5a81f7f08758ca88a1096cedb4b19",
+      "migrated_sha256": "0a2cefcc084ca68c2ebc75c14a414bce7b4e49d7e16915b62cb26dddc468bbb4",
+      "adapted": true
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/tests/calibration/test_mounted_camera.py",
+      "destination": "tests/calibration/test_mounted_camera.py",
+      "source_sha256": "1128b8197e2bad51ca83fc6ee9b3699c0e8f8d97e17016c2cf4dec0d1deaae63",
+      "migrated_sha256": "1128b8197e2bad51ca83fc6ee9b3699c0e8f8d97e17016c2cf4dec0d1deaae63",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/tests/calibration/test_wrist_handeye.py",
+      "destination": "tests/calibration/test_wrist_handeye.py",
+      "source_sha256": "1467ede44d7944ef5a3de2f9febeaa065e91c02c397bb6ba410fddcb0c9b59a1",
+      "migrated_sha256": "1a8c5fbf49cca0ab13ecd7b85f57908267d435043f9d9d49d1d9f1f128c8dc50",
+      "adapted": true
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/tests/calibration/test_charuco_compat.py",
+      "destination": "tests/calibration/test_charuco_compat.py",
+      "source_sha256": "6df5a88466f04676c712574e465eef9f65b74ae304da8e5dec6c8cda710c1912",
+      "migrated_sha256": "6df5a88466f04676c712574e465eef9f65b74ae304da8e5dec6c8cda710c1912",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/tests/calibration/test_startup_retry.py",
+      "destination": "tests/calibration/test_startup_retry.py",
+      "source_sha256": "6dee75b8cac7804c08a83f88135a711d53cb6e6354b1cc364c17f19210bc0c7d",
+      "migrated_sha256": "6dee75b8cac7804c08a83f88135a711d53cb6e6354b1cc364c17f19210bc0c7d",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/tests/calibration/test_arrival_diagnostics.py",
+      "destination": "tests/calibration/test_arrival_diagnostics.py",
+      "source_sha256": "9ca0be5922e4007989f3dd00a4324ac44252678b2cfcfec9e8e164d3283674b1",
+      "migrated_sha256": "9ca0be5922e4007989f3dd00a4324ac44252678b2cfcfec9e8e164d3283674b1",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/tests/calibration/test_wrist_fit_process.py",
+      "destination": "tests/calibration/test_wrist_fit_process.py",
+      "source_sha256": "1c6e5ff368fc78d16ce5a99a67e4d1271dfc24b59acc36f93871564080469609",
+      "migrated_sha256": "1c6e5ff368fc78d16ce5a99a67e4d1271dfc24b59acc36f93871564080469609",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/config/camera/both_j6_sim_start.json",
+      "destination": "config/camera/both_j6_sim_start.json",
+      "source_sha256": "f73a08691ae3349a7c13a62e85aa2fa4df57e819a7531432d3ae654e73ca382d",
+      "migrated_sha256": "f73a08691ae3349a7c13a62e85aa2fa4df57e819a7531432d3ae654e73ca382d",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/config/camera/board_right_outward.json",
+      "destination": "config/camera/board_right_outward.json",
+      "source_sha256": "bbdbf05394ad955f163d5677f470ad79a3c4bccb6fcf9ea1c3173bd3766ae61f",
+      "migrated_sha256": "bbdbf05394ad955f163d5677f470ad79a3c4bccb6fcf9ea1c3173bd3766ae61f",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/config/camera/board_right_centered.json",
+      "destination": "config/camera/board_right_centered.json",
+      "source_sha256": "22e77990d3a2100b38b268054a19d97e04fa9d17790a7e6fea52aedecc48ea3b",
+      "migrated_sha256": "22e77990d3a2100b38b268054a19d97e04fa9d17790a7e6fea52aedecc48ea3b",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/config/camera/right_centered_candidates.json",
+      "destination": "config/camera/right_centered_candidates.json",
+      "source_sha256": "40ceff52d77240e51bb7e0376c5bff7dd9768bcf288e6d0b358bc82384e2efc5",
+      "migrated_sha256": "40ceff52d77240e51bb7e0376c5bff7dd9768bcf288e6d0b358bc82384e2efc5",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/config/camera/left_hand_validation.json",
+      "destination": "config/camera/left_hand_validation.json",
+      "source_sha256": "66283d0e0ffc46da9ea3ef9b2dadd9ca2b4b10749c3757646103b53de2123784",
+      "migrated_sha256": "66283d0e0ffc46da9ea3ef9b2dadd9ca2b4b10749c3757646103b53de2123784",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/config/camera/charuco_87mm.json",
+      "destination": "config/camera/charuco_87mm.json",
+      "source_sha256": "7f6de34e8fa30f41a94909d9926b4b6c3ded1fecbf57b969371951ce778ef419",
+      "migrated_sha256": "7f6de34e8fa30f41a94909d9926b4b6c3ded1fecbf57b969371951ce778ef419",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/config/camera/zed_landmark_candidate_20260930.json",
+      "destination": "config/camera/zed_landmark_candidate_20260930.json",
+      "source_sha256": "65e235c13d7a64657838d311b66ab64918ad86f533edbf3b479c297bcfd9c6fd",
+      "migrated_sha256": "65e235c13d7a64657838d311b66ab64918ad86f533edbf3b479c297bcfd9c6fd",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/config/camera/zed_view_study.json",
+      "destination": "config/camera/zed_view_study.json",
+      "source_sha256": "d77bd48e71f931857e6f095eb7682dc0ef6eec6a99dbffd44a1536b5701b34f7",
+      "migrated_sha256": "d77bd48e71f931857e6f095eb7682dc0ef6eec6a99dbffd44a1536b5701b34f7",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/config/camera/right_j6_sim_start.json",
+      "destination": "config/camera/right_j6_sim_start.json",
+      "source_sha256": "a28cce722446ab0fb15ee47ff4db234679985c9aa871534827977d4d79b6746f",
+      "migrated_sha256": "a28cce722446ab0fb15ee47ff4db234679985c9aa871534827977d4d79b6746f",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/config/camera/realsense_d435i_right_fixed33_plan.json",
+      "destination": "config/camera/realsense_d435i_right_fixed33_plan.json",
+      "source_sha256": "46db34550828266be5d4d1049c6b230ea414eda32b5ac457bf478de42ab17340",
+      "migrated_sha256": "9b5952e6fb142f80510c2fbbc336378e757338b0307b2e280b753b4c2b55f164",
+      "adapted": true
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/config/camera/right_outward_candidates.json",
+      "destination": "config/camera/right_outward_candidates.json",
+      "source_sha256": "824d7c644b7a19421df81249d9abd8872cd3e9d2687555303265bfc39627df7b",
+      "migrated_sha256": "824d7c644b7a19421df81249d9abd8872cd3e9d2687555303265bfc39627df7b",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/config/camera/zed_candidate_20260930.json",
+      "destination": "config/camera/zed_candidate_20260930.json",
+      "source_sha256": "779af49f88ae316a67027dbd056d34a633eb0266ccbd09e81eacd83504ce9d90",
+      "migrated_sha256": "779af49f88ae316a67027dbd056d34a633eb0266ccbd09e81eacd83504ce9d90",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/docs/camera_overlay_validation.md",
+      "destination": "docs/camera_overlay_validation.md",
+      "source_sha256": "c7f808f18ae03ceb27125f4736c176088530f0051b9aeaa70959988ad80ab2e0",
+      "migrated_sha256": "f7f12716ddc8f642a19e6441359bf31b723541c8daeafe5ea309decb5d8ab9ef",
+      "adapted": true
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/docs/camera_view_study.md",
+      "destination": "docs/camera_view_study.md",
+      "source_sha256": "eacf4d447f7d6f69949f57a58d3fedce3b74842fc72b4b1a18d252561e710f0b",
+      "migrated_sha256": "16a492a0fad5b10631161e61b921e4de4b6d2a4235c4c5a92fcb65a886e285b8",
+      "adapted": true
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/docs/camera_calibration.md",
+      "destination": "docs/camera_calibration.md",
+      "source_sha256": "71dab06a44ac097c5f731ff8c54a6be518682ee0e856642ce1196a7f69c9f8e8",
+      "migrated_sha256": "557dffa10abda1254968cd056c46a1410ac7d421ced7720c8aadf8ddd1f311ec",
+      "adapted": true
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/docs/camera_calibration_40deg.md",
+      "destination": "docs/camera_calibration_40deg.md",
+      "source_sha256": "32e15bd7bbdd773ec0c1ea6b71840580bffd5ec2ac37373cdb7db9808168574a",
+      "migrated_sha256": "32e15bd7bbdd773ec0c1ea6b71840580bffd5ec2ac37373cdb7db9808168574a",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/docs/camera_calibration_live.md",
+      "destination": "docs/camera_calibration_live.md",
+      "source_sha256": "5820e93ce1e58b99aae7ee0afaf27ddc7559ae60752c81804956f2a9241049c2",
+      "migrated_sha256": "881566111ef535ce87983383f181585476b17aea9454910a78fefdd4206f3e24",
+      "adapted": true
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/docs/camera_calibration_operator.md",
+      "destination": "docs/camera_calibration_operator.md",
+      "source_sha256": "3885a90854a78e31956549ae30ea1426f4b541e999ec40494415efd2053ca915",
+      "migrated_sha256": "efff369878f9cbc2bb2cae515c4b67cdbb2f972b640343cb15cf3be04c221e05",
+      "adapted": true
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/docs/realsense_wrist_calibration.md",
+      "destination": "docs/realsense_wrist_calibration.md",
+      "source_sha256": "201c08f3884f799ca3426f75e818941e6ff2d9ba8c8314338bec9087b1c318b1",
+      "migrated_sha256": "0f4c36e8452693cfb95a0b5a31f80785dfeb7adaa038584d618f8980ab96fe4c",
+      "adapted": true
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/docs/images/camera-calibration-before-after.jpg",
+      "destination": "docs/images/camera-calibration-before-after.jpg",
+      "source_sha256": "b7e5a56f17eed065797f913b1af947f126c545b586174f5f0bf554fe3375cbef",
+      "migrated_sha256": "b7e5a56f17eed065797f913b1af947f126c545b586174f5f0bf554fe3375cbef",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/config/hardware/hexfellow_default_pose_both_j6.yaml",
+      "destination": "config/hardware/hexfellow_default_pose_both_j6.yaml",
+      "source_sha256": "2bc1901be5970af1efe433577a099a74b78f5dce95f2907ebf848aa04e5b31d6",
+      "migrated_sha256": "2bc1901be5970af1efe433577a099a74b78f5dce95f2907ebf848aa04e5b31d6",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/config/hardware/hexfellow_gp80_highspeed_both_j6.json",
+      "destination": "config/hardware/hexfellow_gp80_highspeed_both_j6.json",
+      "source_sha256": "7107ac5fef59ecfacdbf83b1c282d1d8d9f03f05849dac1072e2d18c81da4198",
+      "migrated_sha256": "7107ac5fef59ecfacdbf83b1c282d1d8d9f03f05849dac1072e2d18c81da4198",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/config/hardware/hexfellow_default_pose_right_j6.yaml",
+      "destination": "config/hardware/hexfellow_default_pose_right_j6.yaml",
+      "source_sha256": "daaac30a6bdc04daded3595565384d5ea8591197f3ac57618b3180668fffada3",
+      "migrated_sha256": "daaac30a6bdc04daded3595565384d5ea8591197f3ac57618b3180668fffada3",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/config/hardware/hexfellow_gp80_highspeed_right_j6.json",
+      "destination": "config/hardware/hexfellow_gp80_highspeed_right_j6.json",
+      "source_sha256": "fe551961d35ddd351657b5dbad0fb7cb54e3b818c9b06ded9d81c91be7e433fa",
+      "migrated_sha256": "fe551961d35ddd351657b5dbad0fb7cb54e3b818c9b06ded9d81c91be7e433fa",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/artifacts/reference/camera-calibration/coarse-board-pairs.json",
+      "destination": "artifacts/reference/camera-calibration/coarse-board-pairs.json",
+      "source_sha256": "f8777ce7a1342a5618eb79c904c2cfe479ae6ee6d5db9d01f73833318c980fe3",
+      "migrated_sha256": "f8777ce7a1342a5618eb79c904c2cfe479ae6ee6d5db9d01f73833318c980fe3",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/artifacts/reference/camera-calibration/initial-right-route.json",
+      "destination": "artifacts/reference/camera-calibration/initial-right-route.json",
+      "source_sha256": "60eaba9b7ab0fd5eae8609b49b1feb2444b1597b2d0a6630266f4c3543312936",
+      "migrated_sha256": "60eaba9b7ab0fd5eae8609b49b1feb2444b1597b2d0a6630266f4c3543312936",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/artifacts/reference/camera-calibration/landmark-points.json",
+      "destination": "artifacts/reference/camera-calibration/landmark-points.json",
+      "source_sha256": "2fe4a18709cb1401515a2f700094d7719bedb69f60d1f425264eab3548b26aac",
+      "migrated_sha256": "2fe4a18709cb1401515a2f700094d7719bedb69f60d1f425264eab3548b26aac",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/artifacts/reference/camera-calibration/left-validation-plan.json",
+      "destination": "artifacts/reference/camera-calibration/left-validation-plan.json",
+      "source_sha256": "e65290182be21f0063cc8a08a4a6ff063ed6dd4f15f5f7d65781867cf2bf536b",
+      "migrated_sha256": "e65290182be21f0063cc8a08a4a6ff063ed6dd4f15f5f7d65781867cf2bf536b",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/artifacts/reference/camera-calibration/left-measured-captures.json",
+      "destination": "artifacts/reference/camera-calibration/left-measured-captures.json",
+      "source_sha256": "86bee9bc2970ca709836e912db93af9c932087754bc0c2cd7c34caf8d834eefa",
+      "migrated_sha256": "86bee9bc2970ca709836e912db93af9c932087754bc0c2cd7c34caf8d834eefa",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/artifacts/reference/camera-calibration/initial-geometry-snapshot.json",
+      "destination": "artifacts/reference/camera-calibration/initial-geometry-snapshot.json",
+      "source_sha256": "d4221efa97333a1bd10360966a9dde1b40b4828130391ab6051150ef26fb14f6",
+      "migrated_sha256": "d4221efa97333a1bd10360966a9dde1b40b4828130391ab6051150ef26fb14f6",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/artifacts/reference/camera-calibration/left-validation-simulation.json",
+      "destination": "artifacts/reference/camera-calibration/left-validation-simulation.json",
+      "source_sha256": "dd6901fd5b4665e470eab510778e30fec231ff65d2280850f857d4966f3956e6",
+      "migrated_sha256": "dd6901fd5b4665e470eab510778e30fec231ff65d2280850f857d4966f3956e6",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/artifacts/d435i_wrist_v12_onepiece_ring/design_and_validation.json",
+      "destination": "assets_local/right_fixed33/design_and_validation.json",
+      "source_sha256": "03aac81c01704fb3671af45a86521ae182bf7bbfd53c5fff8ceac2c9552bac0b",
+      "migrated_sha256": "03aac81c01704fb3671af45a86521ae182bf7bbfd53c5fff8ceac2c9552bac0b",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/artifacts/d435i_wrist_v12_onepiece_ring/assembly_mm/01_onepiece_ring_camera_33deg.stl",
+      "destination": "assets_local/right_fixed33/assembly_mm/01_onepiece_ring_camera_33deg.stl",
+      "source_sha256": "7c67164ec4539639b9e96f2d15885e50613ddfe63efafb7bc85efc9c591805f5",
+      "migrated_sha256": "7c67164ec4539639b9e96f2d15885e50613ddfe63efafb7bc85efc9c591805f5",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/RealSense_camera/outputs/right_wrist_calibration_preview/robot_snapshot.json",
+      "destination": "artifacts/reference/wrist-planning/robot_snapshot.json",
+      "source_sha256": "b757fe8d1eeb5ba87245aad1aa7caebee168749944468ae444643f9a11aa5831",
+      "migration": "selected planning inputs; no SDK health/controller logs",
+      "migrated_sha256": "9e1513f881b006db07525153c1b719d31dcb3792a877a49aa3949254048a666a",
+      "adapted": true
+    },
+    {
+      "source": "/home/ziwang/projects/RealSense_camera/outputs/right_wrist_calibration_preview/deployed_bounds.json",
+      "destination": "artifacts/reference/wrist-planning/deployed_bounds.json",
+      "source_sha256": "77280abd03a7909faa9ea89d54860fa9515f0b84eb0a3e60ba3cbd4c8590dd78",
+      "migration": "selected planning inputs; no SDK health/controller logs",
+      "migrated_sha256": "ab229867524b5dff477368088556684379334b616bc43323c669ef32135b4502",
+      "adapted": true
+    },
+    {
+      "source": "/home/ziwang/projects/RealSense_camera/outputs/right_wrist_calibration_preview/planning_seed.json",
+      "destination": "artifacts/reference/wrist-planning/planning_seed.json",
+      "source_sha256": "a08dba1f2428c6709d0059a7d2014cb7292c17b29d842ef62b5e13d269b16100",
+      "migration": "selected planning inputs; no SDK health/controller logs",
+      "migrated_sha256": "a8410b223d76c6c4237a6ea7677aa2e0a5f3c160ac3053197cd19db986d45a15",
+      "adapted": true
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/config/hardware/hexfellow_gp80_highspeed_j357.json",
+      "destination": "config/hardware/hexfellow_gp80_highspeed_j357.json",
+      "source_sha256": "6086dad3e9e0336cba62a2ad3e2da6e61b23fb4c6242920341695e41520ebdea",
+      "migrated_sha256": "6086dad3e9e0336cba62a2ad3e2da6e61b23fb4c6242920341695e41520ebdea",
+      "adapted": false
+    },
+    {
+      "source": "/home/ziwang/projects/UMI_Hardware_camera/config/hardware/hexfellow_default_pose_j357.yaml",
+      "destination": "config/hardware/hexfellow_default_pose_j357.yaml",
+      "source_sha256": "a6b74bd2e97e2278503faebd9e9f782143b9650eabe0b85c574ddd99bfd05be9",
+      "migrated_sha256": "a6b74bd2e97e2278503faebd9e9f782143b9650eabe0b85c574ddd99bfd05be9",
+      "adapted": false
+    }
+  ],
+  "runtime_dependency": {
+    "repository": "../UMI_Hardware",
+    "revision": "9398b61972bf983c7ab5609591b7eb4c95c6357d",
+    "note": "Controller imported from current sibling submodule; source checkout is not modified.",
+    "relative_symlinks": {
+      "urdf": "../../UMI_Hardware/urdf",
+      "assets": "../../UMI_Hardware/assets",
+      "config/control": "../../../UMI_Hardware/config/control"
+    }
+  },
+  "source_policy": "Original worktree preserved. New code owned by hexfellow-deploy/calibration; no private runtime bindings or raw device health copied.",
+  "generated_and_derived_files": {
+    "assets_local/right_fixed33/design_and_validation.json": "03aac81c01704fb3671af45a86521ae182bf7bbfd53c5fff8ceac2c9552bac0b",
+    "assets_local/right_fixed33/assembly_mm/01_onepiece_ring_camera_33deg.stl": "7c67164ec4539639b9e96f2d15885e50613ddfe63efafb7bc85efc9c591805f5",
+    "artifacts/reference/wrist-planning/planning_seed.json": "a8410b223d76c6c4237a6ea7677aa2e0a5f3c160ac3053197cd19db986d45a15",
+    "artifacts/reference/wrist-planning/robot_snapshot.json": "9e1513f881b006db07525153c1b719d31dcb3792a877a49aa3949254048a666a",
+    "artifacts/reference/wrist-planning/deployed_bounds.json": "ab229867524b5dff477368088556684379334b616bc43323c669ef32135b4502"
+  },
+  "new_owned_files_sha256": {
+    "cli.py": "8d06f2d7ae20bf99ce359cff4e010d5194e95304d13fd903cb70cb74de81c5f6",
+    "VALIDATION.json": "dd2111272b21bdf4ed56e9944bdf80ce5990c7dea58332e32792ea2560006743",
+    "README.md": "415bd74ca4072e763bc8e6184589f7d19f4181374eec736f59ca321c2db9a873",
+    "pytest.ini": "7b6f3507e4d1883fc88f5384071664f0071bb18002b17297b7fbc69fb25db50c",
+    "config/camera/cameras.json": "bc2ff3b06a3709815e3665131b6a5eb917376c3d46a5581e75afa5b49100a62b",
+    "src/policy_sim/__init__.py": "1599e038fddf0b7d2274f37da6ddee3c4813e9c0596168095a84295cbddf485b",
+    "tests/calibration/test_wrist_rectification.py": "bac532ee7de93288d68d898938ed62bea4e655651ebc778057d2123865840f10",
+    "tests/calibration/test_migration.py": "23d9836467c69d1f63deb838cba2714cbba744a21d8e04ac3e1f060ac12d58e5",
+    "tools/camera/calibration_paths.py": "21c740740d6246139b70bc30283d7a66abb5c982ef344b26fd41d996900bd8bb",
+    "scripts/calibrate_camera.sh": "c04edc1028a122033d5b9be0869c7e67946ee360351351682d65e0c469b1b9cb",
+    "src/hexfellow_deploy/calibration.py": "cc8b02f8f02bbad194bd80f0e9c36b0782e7b10724c7195e03c90e8d70efe010",
+    "config/camera/right_fixed33_installation.json": "feb04517432ebb9770be3903d4c359cbb0851e059a031a24a3411e0deb13f10b",
+    "config/camera/realsense_d435i_right_fixed33_outside_plan.json": "b95404258127824e0bdac960af620ca300ffe8bec10c18874eb374361bc56dde",
+    "tools/camera/render_wrist_open_gripper.py": "e07c4f5bf024982ad1b827aafc0cb5b3df61678aefd07c9e931310eab353c5f8"
+  },
+  "mount_installation_correction": {
+    "date": "2026-10-06",
+    "physical_mount_side": "outside_right_arm_at_default",
+    "preserved_design_stl": "assets_local/right_fixed33/assembly_mm/01_onepiece_ring_camera_33deg.stl",
+    "installed_design_transform": "config/camera/right_fixed33_installation.json",
+    "active_plan": "config/camera/realsense_d435i_right_fixed33_outside_plan.json",
+    "superseded_plan": "config/camera/realsense_d435i_right_fixed33_plan.json",
+    "raw_historical_evidence_preserved": true
+  }
+}
