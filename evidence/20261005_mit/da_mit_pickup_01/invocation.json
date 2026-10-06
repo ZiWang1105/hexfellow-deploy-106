@@ -1,0 +1,11 @@
+{
+  "workspace": "/home/ziwang/projects/agentic-mobile-manipulator",
+  "config": "/home/ziwang/projects/agentic-mobile-manipulator/third_party/hexfellow-deploy/configs/simulation.yaml",
+  "overrides": [
+    "interface.control.startup_carry=true"
+  ],
+  "prompt": "Pick up the apple and hold it at least 20 cm above the table. Use a top-side grasp that leaves the head camera view clear.",
+  "action_file": null,
+  "duration_s": 240.0,
+  "camera": true
+}

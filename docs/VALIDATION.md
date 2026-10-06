@@ -1,69 +1,209 @@
-# Initial migration evidence — 2026-10-05
+# Shared MIT validation — 2026-10-05
 
-All runs below used MuJoCo position actuators on the development workstation.
-No physical device was opened. There is no native MIT, hardware stopping or
-pickup qualification claim. No before/after hardware latency comparison was run.
+Current simulator runs use the same DA controller, actuator owner, command schema
+and deployment profile as the native adapter. Arm physics now evaluates MIT
+PD-plus-feedforward torque. No physical robot was operated for this validation.
+Compact records, plots and SHA-256 hashes of the full original artifacts are in
+[`evidence/20261005_mit`](../evidence/20261005_mit/README.md).
 
-| Run | Accepted / generated | Compute + submit p99 | Actual solve interval p99 | Outcome |
+## Completed pickup validation
+
+**`da_mit_pickup_05` passed the complete simulated pickup experiment.** It ran the
+fixed 360-second budget plus an uninterrupted 14-second final HOLD, closed normally
+at 374.06 wall seconds and accepted all 18,646 generated MIT frames. The apple
+finished 30.33 cm above its initial center of mass, held by opposing right jaws
+without support for 209.06 simulated seconds. All 181,408 physics steps were
+audited at 2 ms with complete coverage and zero robot/static contact steps.
+
+The agent initiated 41 API requests: 40 completed responses and one explicitly
+interrupted at the fixed-budget transition to HOLD. The boundary audit passed all
+41 recorded inputs and 195 observation/history entries, including exact RGB/depth
+bytes and physical-encoder FK. No action was invented for the canceled request.
+Recorded API cost was $10.5734045. Native hardware remains unqualified.
+
+Compute/submission p99 was 3.983 ms, solve interval p99 20.083 ms (maximum 26.820 ms),
+and application latency p99 5.905 ms. Eleven budget overruns warned without
+terminating control. Complete MIT vectors are recorded for every frame, with zero
+position-reference mismatch and zero predicted effort-limit exceedances at the
+source feedback. Actual actuator torque maxima are separately recorded.
+
+At the end of HOLD, measured TCP-to-MIT-reference errors were 0.337 mm / 0.0559°
+for the left arm and 3.065 mm / 0.3795° for the loaded right arm. The last active
+right TCP target error before HOLD was 3.602 mm / 0.3063°; plots leave inactive
+target intervals blank rather than assigning a fictitious HOLD target. Maximum
+lift speed was 0.025213 m/s with a 0.025 m/s internal drive limit; this small
+mechanical transient is retained in the evidence.
+
+The full outcome-labeled replay and TCP plot are in
+`runs/da_mit_pickup_05/analysis/replay/pickup.mp4` and
+`runs/da_mit_pickup_05/analysis/tcp_tracking.png`. This successful episode follows
+the preserved failed attempts below; it does not relabel them as passes.
+The movie contains all 5,443 recorded frames at 15 Hz (362.867 simulated seconds).
+It replays the exact compiled `plant.mjb`; final recorded-state evaluation matches
+the original record exactly. The outcome label and loaded grasp were inspected.
+
+## Completed controller cases
+
+| Run under parent `runs/` | Accepted / generated | Compute + submit p99 | Solve interval p99 | Outcome |
 |---|---:|---:|---:|---|
-| Paired target, camera active, 24 s | 1201 / 1201 | 3.74 ms | 20.10 ms | Closed normally, no budget overruns |
-| Paired target, 30 ms acceptance delay and 30 ms compute delay every 10 solves, 26 s | 689 / 689 | 33.73 ms | 66.00 ms | 69 warnings; closed normally |
-| HOLD, 30 ms compute delay every 10 solves, 8 s | 378 / 378 | 32.48 ms | 34.36 ms | 37 warnings; closed normally |
-| Astra medium agent, camera active, 60 s | 2995 / 2995 | 3.10 ms | 20.09 ms | 7 completed model calls; closed normally |
-| Astra medium agent, decision archive/provenance, 25 s | 1252 / 1252 | 3.11 ms | 20.09 ms | 3 completed calls; one request interrupted at diagnostic stop |
-| Injected 200 ms acceptance delay | 0 / 1 | Not meaningful | Not meaningful | Expected acceptance-health fault; no second solve |
+| `da_mit_final_nominal`, final revision, paired target, 24 s | 1200 / 1201 | 4.093 ms | 20.083 ms | Normal close, one warning, final pending frame canceled |
+| `da_mit_final_delayed`, final revision, 30 ms application delay plus periodic 30 ms work delay, 28 s | 695 / 695 | 33.782 ms | 70.372 ms | Normal close, 70 warnings |
+| `da_mit_unify_03`, paired target, 24 s | 1201 / 1202 | 3.189 ms | 20.075 ms | Normal close, one budget warning, final pending frame canceled |
+| `da_mit_compute_jitter_02`, 30 ms work delay every 10 solves, 28 s | 1281 / 1282 | 32.483 ms | 39.459 ms | Normal close, 129 warnings, final pending frame canceled |
+| `da_mit_delay_diagnosis_02`, 30 ms application delay plus periodic 30 ms work delay, 28 s | 704 / 704 | 33.015 ms | 69.576 ms | Normal close, 72 warnings |
 
-These are different workloads, not controlled throughput comparisons. The
-delayed paired run had no camera; it also overlapped part of the separate agent
-run. No real-time scheduling privilege was available. Worst-case latency is not
-bounded by these finite samples.
+Each run records `accepted_before_solve == sequence - 1` throughout. The baseline
+ended below 0.000260 mm / 0.000052 degrees actual TCP target error. Both delayed
+cases ended below 0.000267 mm / 0.000052 degrees. These tiny steady-state values
+reflect the consistent idealized model, not achievable physical robot accuracy.
+Transient target/reference/actual errors are retained in the plots rather than
+hidden by reporting only the endpoint.
 
-Every recorded solve had `accepted_before_solve == sequence - 1`. The delayed
-paired run ended with maximum measured TCP error 0.144 mm and 0.0791 degrees;
-the baseline converged below 0.001 mm / 0.001 degrees in this idealized model.
-The acceptance timeout test retained the unresolved pending reference and fault.
-It did not declare that reference accepted or advance the solver.
+The deliberate delays produce warnings and longer intervals, not the old 40 ms
+source-lease termination. This is not a worst-case scheduling guarantee. The
+velocity source still comes from the fixed 20 ms PinkIK profile; the owner waits
+for acceptance before the next solve, so delayed execution slows trajectory
+progress rather than solving speculative intermediate references.
+The shared command watchdog allows 100 ms from command creation. Upstream strict
+feedback checks still impose 40 ms sensor age and 20 ms coupled-device skew;
+those independent limits were not removed. Simulation provides synchronous
+per-device snapshot timestamps, so these cases do not test real asynchronous
+device feedback or establish hardware timeout reliability.
 
-The 60-second agent run returned seven navigation estimates, decreasing from
-2.32 m to 0.707 m, and emitted 343 control samples with nonzero base velocity.
-Those distances are model outputs, not privileged measurements. No pickup
-completion was evaluated. Reported API cost was $1.050468. The later 25-second
-run recorded $0.232375 for its three completed responses; the fourth request was
-interrupted and its eventual provider cost is unknown. Production has no default
-duration/call/spend cap; these durations were explicit test limits.
+`scripts/analyze_mit_run.py` writes robot-relative TCP plots, compressed samples,
+reference/actual/target error statistics, gripper states, commanded navigation and
+compute/acceptance timing. New logs record active target poses directly. Older logs
+only infer a submitted target when both independently computed TCP errors match
+the controller's recorded error magnitudes; HOLD/navigation gaps remain blank.
 
-The actual saved API request used `openai/gpt-6-astra` / `medium`. Model input
-contained unannotated RGB, registered depth, physical encoder/gripper feedback,
-robot-only TCP/camera FK and static intrinsics. No root pose, scene objects,
-contacts or evaluator fields were included. HTTP `/status`, `/rgb.jpg` and `/`
-were fetched successfully during the baseline run; `/status` showed live agent
-inference in the agent run. The component contract test additionally checks
-decision persistence during inference and after stopping, without API access.
+## Bugs exposed by MIT physics
 
-## PinkIK qualification
+The initial `da_mit_delay_01` failed after 71 accepted references with PinkIK
+`NoSolutionFound`; it is preserved as a failed attempt. The position-actuator tests
+from the initial migration did not expose this physical-model behavior.
 
-`scripts/qualify_ik.py` ran four 1,100-step cases: precision and real-profile
-settings, each with ideal reference following and MuJoCo position actuation.
-All four passed the 3 mm / 1.2 degree terminal error criteria. Both reference
-TCP errors and measured TCP errors are archived separately. Holding submission
-pending never advanced the actual core's committed reference array.
+The original lift used an underdamped position motor without the native SDK's
+speed-limited inner controller. Under a carried load, v1's lift HOLD request
+followed the measured height, and the plain servo could continue descending while
+PinkIK remained in BRAKING. The lift model now uses a bounded velocity demand and
+PI force servo. Correcting it also exposed the source URDF's 10 N joint-level
+clamp, inconsistent with the assembly's 1800 N actuator and approximately 158 N
+robot gravity load. Both force clamps now use the explicit assembly limit.
 
-Both profiles rejected a 30 ms `dt`: their motion profile fixes the integration
-step to 20 ms. This is a real integration constraint, not evidence that PinkIK
-cannot solve the target. It means the new native adapter still needs a tested
-missed-cycle MIT position/velocity/torque contract. Position-plant tests alone
-cannot qualify that behavior.
+Four motor regressions exercise actual MuJoCo forces, not a duplicate formula:
 
-Seven focused tests pass: remaining-budget sleep, nonterminal cycle overrun,
-reference ownership while pending/rejected, malformed acceptance receipts,
-cross-process DA shared-memory coherence, and policy observation/decision flow.
-The initial smoke run exposed an incorrect `BASE_JOINTS` import and was corrected;
-the initial policy archive assertion compared JSON lists to tuples and was also
-corrected. Failed raw attempts remain in ignored `runs/`.
+- Actual arm actuator **and transmitted joint** torques match upstream `mit_torque`
+  for unsaturated and positive/negative saturated references.
+- Reloaded configured XML preserves those torque semantics and matches the exact
+  compiled model's gains, limits and gravity-compensation flags.
+- A 25-second scalar lift test covers unknown 0/10/100 N loads, incremental position
+  commands and HOLD targets updated from measurement. Drift is below 1 mm and final
+  speed below 0.1 micrometer/s, with finite motor effort and bounded drive velocity.
+- A 25-second full-robot test adds elbow motion and a 10 N downward wrist force;
+  lift HOLD drift remains below 1 mm and final speed below 1 micrometer/s.
 
-Compact machine-readable results and raw-file hashes are in
-[`evidence/20261005`](../evidence/20261005/). Large raw logs, XML assets and API
-requests remain in the corresponding local `runs/` directories. The initial
-60-second run preceded the addition of code-provenance recording and persistent
-decision JSONL; the later agent run verifies that addition. Current output always
-records invocation, code hashes and dependency versions.
+The coupled DA jitter run observed a maximum lift speed of 0.025103 m/s with a
+0.025 m/s internal command limit. The small mechanical transient is recorded;
+there is no hidden joint-position or joint-velocity clamp. Lift servo gains remain
+explicit simulator assumptions, not measurements of the physical controller.
+
+Runs through pickup attempt 04 saved the scene XML before runtime actuator
+conversion. Their recorded-state replays reproduce geometry and contacts but that
+XML alone cannot restart the original MIT dynamics. Subsequent runs export the
+configured XML plus the exact compiled model; a regression verifies the reloaded
+torque law and flags. Historical artifacts are preserved without rewriting them.
+
+## Agent pickup attempts
+
+`da_mit_pickup_01` completed its fixed 240-second wall-clock budget with 16 model
+responses and 11,964 generated / 11,963 accepted controller frames. It navigated,
+positioned the right arm and closed its gripper. Control compute/submission p99 was
+2.975 ms, solve interval p99 20.080 ms and application latency p99 5.921 ms. There
+was one budget warning and no runtime fault or premature reference-history advance.
+
+**Pickup acceptance failed.** The apple reached a maximum 8.73 cm elevation and
+ended at 2.36 cm, with opposing right-jaw contacts. It never met the 10 cm / 10 s
+retention criterion; three sampled robot/table contact frames also reject the run.
+After the last lift, both TCP heights fell approximately 6 cm while the lift target
+followed measured height and the controller remained BRAKING. This prompted the
+lift inner-servo correction above. A successful motor test does not relabel this
+failed agent episode as successful.
+
+The full 232.867-second simulated trajectory is exported at
+`runs/da_mit_pickup_01/analysis/replay/pickup.mp4`. Replay final evaluation exactly
+matches the original record. `tcp_tracking.png` shows desired, reference and
+measured trajectories through the final descent. Video includes all recorded
+frames, including the later loss of elevation.
+
+`da_mit_pickup_03` used the corrected lift model. The policy grasped the apple with
+its right hand, raised it 24.77 cm and retained it for 35.60 simulated seconds, with
+zero sampled robot/static contact frames. Nevertheless, **the full experiment
+failed**: after 9,609 generated / 9,608 accepted references, command admission
+rejected a lift position/source-velocity mismatch at the 0.398 m model margin.
+The final source was 0.398000061 m and reference 0.3979999999 m. It ended after
+192.82 wall seconds, before its fixed 360-second budget and 14-second final HOLD.
+This is retained-grasp evidence, not a completed-run pass. The cause was a
+coordinate mismatch in command admission: PinkIK clips the measured lift to its
+planning bounds before integration, while admission reconstructed the velocity
+from the raw encoder value. At the upper margin, a 61 nm difference became a
+3 micrometer/s mismatch. Admission now uses the same explicit planning projection;
+a regression compares the real upstream projection and still rejects an altered
+1 mm target. This correction was included in the completed attempt 05 above.
+
+Its compute/submission p99 was 2.729 ms, interval p99 20.081 ms and application
+latency p99 5.933 ms. Full replay video at
+`runs/da_mit_pickup_03/analysis/replay/pickup.mp4` contains all 2,804 frames at 15 Hz
+(186.93 simulated seconds), including the final fault interval; re-evaluated final
+contacts exactly match the original record. RGB-D request audits passed for both
+pickup runs: 16 calls / 70 history entries for attempt 01 and 19 calls / 85 entries
+for attempt 03. The auditor checks exact sensor PNG bytes, metric depth,
+robot-only encoder FK, allowed fields and observation/action history. Older
+non-contiguous observation IDs are mapped to their original call-indexed archives
+without changing recordings.
+
+`da_mit_pickup_04` also **failed the full experiment**. It accepted all 12,156
+generated references and retained a right-hand grasp for 97.13 simulated seconds,
+ending 26.18 cm above the initial object height, with zero recorded robot/static
+contact frames. It stopped at 243.93 wall seconds, before the 360-second budget
+and final HOLD. The captured QP proves incompatible lift constraints: acceleration
+required velocity at least 0.015 m/s while the position limit allowed at most
+0.012913 m/s. This is a feasible-deceleration problem near a limit, not an inference
+timeout or gateway queue delay. Compute/submission p99 was 2.764 ms, solve interval
+p99 20.082 ms and application latency p99 5.935 ms. All 28 model requests and 130
+observation/history entries passed the offline boundary audit. The entire recorded
+trajectory is retained in `runs/da_mit_pickup_04/analysis/replay/pickup.mp4`.
+The replay displays a persistent overall `RUN FAILED` label, QP error and missing
+budget/final HOLD completion even while the per-frame retained-grasp flag is true.
+The prior unannotated movie is preserved as `pickup_unannotated.mp4`.
+
+Offline pickup acceptance requires the specified body to finish at least 10 cm
+above its initial height, held by opposing jaws without support for at least 10 s,
+a completed fixed budget and uninterrupted final constrained HOLD, zero sampled
+robot/static contacts, and no control/backend/shutdown fault. Tests explicitly
+reject early stops, wrong objects, short retention, support contacts and incomplete
+HOLD. Privileged evaluator data never stops the live episode or enters policy.
+
+The historical recorder samples contact evidence at 15 Hz. Passing those records
+would not prove the absence of contact between samples. Subsequent runs add a
+separate plant-only audit after every 2 ms integration step, including a coverage
+check from the initial state. A transient robot/table contact or loss of one jaw
+between video frames is captured and invalidates contact/retention evidence.
+Tests exercise those missed-frame cases and missing initial/interior samples.
+The analyzer prefers this dense evidence whenever present. No evaluation field
+is published to the controller or agent. This remains discrete simulation evidence;
+hardware calibration, transport timing, native stopping and real pickup remain
+unqualified.
+
+The final focused analyzer, physics-audit and MuJoCo actuator regression command
+passed 31 tests (23 analyzer, four physics-audit and four actuator tests). The
+parent policy-boundary suite passed 31 tests, including non-contiguous historical
+observation IDs and explicit final-request cancellation at a completed budget.
+These are separate suites; the counts are not an additional whole-project total.
+
+## Historical position-plant evidence
+
+The original migration's position-actuator controller cases and short navigation
+agent runs remain archived in [`evidence/20261005`](../evidence/20261005/). They
+predate shared MIT physics and are not evidence that this native actuator path or
+a full pickup succeeds. `scripts/qualify_ik.py` keeps that historical scope in its
+output label. Do not combine its position-plant results with the MIT cases above.

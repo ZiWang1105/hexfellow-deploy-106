@@ -1,0 +1,20 @@
+{
+  "time_s": 27.199999999995804,
+  "objects": [
+    {
+      "name": "entity_apple_body",
+      "position_m": [
+        2.2500000527255253,
+        9.220465989933416e-09,
+        0.7499052586703491
+      ],
+      "height_gain_m": -0.0010947413296509279,
+      "opposing_jaw_contacts": false,
+      "grasping_arms": [],
+      "support_contact": true,
+      "retained_s": 0.0
+    }
+  ],
+  "robot_static_contact_frames": 0,
+  "first_robot_static_contact": null
+}

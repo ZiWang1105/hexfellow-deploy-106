@@ -1,0 +1,21 @@
+{
+  "workspace": "/home/ziwang/projects/agentic-mobile-manipulator",
+  "config": "/home/ziwang/projects/agentic-mobile-manipulator/third_party/hexfellow-deploy/configs/simulation.yaml",
+  "overrides": [
+    "interface.control.startup_carry=false",
+    "interface.control.inject_every=10",
+    "interface.control.inject_delay_s=0.03",
+    "interface.backend.submit_delay_s=0.03",
+    "interface.dashboard.port=8875"
+  ],
+  "prompt": null,
+  "action_file": "third_party/hexfellow-deploy/tests/fixtures/paired_pose.json",
+  "duration_s": 28.0,
+  "duration_source": "duration_s",
+  "settle_s": 0.0,
+  "task": null,
+  "catalog": null,
+  "seed": null,
+  "respect_policy_limits": false,
+  "camera": false
+}

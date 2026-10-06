@@ -1,102 +1,145 @@
-# Runtime boundary and migration status
-
-## Implemented
+# Shared DA control and actuation
 
 ```mermaid
 flowchart LR
-  A[Agent process / Astra] -->|latest paired target and observed encoders| R[(DA shared memory)]
-  R --> C[Control process / PinkIK and submission owner]
-  C -->|one unacknowledged reference| P[Independent MuJoCo plant thread]
-  P -->|actual sample and acceptance receipt| C
-  P --> S[(Private renderer state)]
-  S --> V[Camera process / RGB-D]
-  V --> I[(DA atomic RGB-D frame)]
+  A[Agent process / Astra] -->|paired TCPs, binary grippers, navigation| R[(DA request topic)]
+  R --> C[Control process / PinkIK and reference owner]
+  C -->|one pending MIT frame| F[(DA frame topic)]
+  F --> B[Backend process / common stream contract]
+  B --> S[MuJoCo MIT motor and SDK servo models]
+  B --> H[Native SDK adapter / MIT packets]
+  S --> O[(DA physical feedback topic)]
+  H --> O
+  O --> C
+  B -->|explicit receipt| C
+  S --> V[Private render state]
+  V --> K[Simulation camera process]
+  H --> L[Physical camera process]
+  K --> I[(DA atomic RGB-D topic)]
+  L --> I
   I --> A
-  C --> T[(DA control telemetry)]
-  T --> D[Dashboard process]
+  C --> D[Read-only dashboard]
   I --> D
-  A --> J[(DA agent decision)]
-  J --> D
+  A --> D
 ```
 
-The exact DA components reused are `DAManager`, `DABaseInterface`,
-`ArrayCommWrapper`/`DASHMComm`, the YAML topic registry, topic resolver and Hydra
-instantiation. Topics are actual named shared-memory arrays guarded by DA's
-named semaphores. Readers obtain a coherent latest publication, not an unbounded
-FIFO. Bounded JSON is used for low-rate control requests/diagnostics; RGB-D uses
-one binary array with encoder metadata from the same plant snapshot.
+## Shared implementation
 
-The manager subclass only replaces its empty staged pipeline loop with a
-cooperative wait on DA component stop flags. Control, rendering and network
-inference have different clocks, so they are independently clocked DA interfaces,
-not inference/output stages behind one shared cycle barrier. DA itself supplies
-process creation, affinity/priority requests, shared-memory lifecycle and cleanup.
-This is an explicit deviation from DA's synchronized staged scheduling mode.
+Both backends run the same `ControlComponent`, `BackendComponent`,
+`StreamContract`, `ReferenceOwner`, paired-pose executor and upstream
+`PinkIKCore`. The shared deployment YAML supplies robot geometry, MIT gains and
+effort assumptions, per-joint velocity limits, lift speed and calibration.
+Control receives robot-only metadata, never the scene configuration or root pose.
 
-At 50 Hz, the control owner reads actual feedback, consumes the newest target,
-solves once and submits one reference. Its remaining sleep is
-`max(0, cycle_start + period - now)`. A compute-budget overrun records a warning;
-there is no catch-up burst of speculative IK steps. Acceptance waits are measured
-in the interval and handoff metrics rather than hidden in compute time.
+Each command frame contains sequence, creation time, physical joint positions
+and velocities, the MIT position/velocity/feedforward/gain vectors, body-frame
+base velocity and binary gripper commands. Feedback carries physical encoder and
+gripper state plus the original per-device receipt timestamps. Serialization and
+command admission are common to both adapters.
 
-PinkIK owns all joint reference integration and constrained braking. There is
-no second joint interpolator. PinkIK currently commits its internal reference
-before returning. `ReferenceOwner` prevents the next solve until the previous
-submission has an explicit receipt. A rejected/unknown submission latches the
-session fault; it never fabricates acceptance or resets to measured positions.
-Receipts distinguish simulator application, SDK acceptance and UDP submission.
-None means that the hardware reached the reference.
+MuJoCo evaluates the arm motor law
+`tau = clip(kp*(q_ref-q) + kd*(v_ref-v) + torque_ff, effort_limits)`.
+It does not assign commanded arm positions to the plant state. The native adapter
+maps the same MIT values into the SDK's motor commands. Model torque saturation
+is explicit; native firmware does not expose a matching programmable total-effort
+clamp in this MIT packet. Simulated and real dynamics are therefore not identical.
+New runs save both configured `plant.xml` and compiled `plant.mjb`, including MIT
+gain/bias terms, disabled position-input clamps, lift force limits and zero body
+gravity compensation. Export tests reload both models and check actual torques;
+the original scene's position-servo template is not the exported actuator model.
 
-The simulator's actuator worker runs independently. Its position actuators are
-not physical MIT torque loops. Feedback timestamps are generated at actual
-sampling; delayed camera publication does not refresh the encoder timestamp.
-Simulator base/object state is available only to the plant and renderer, never
-to policy/control observations. The policy receives RGB-D, physical joint/gripper
-feedback and robot-only FK. Navigation XY/yaw remains policy output.
+The shared reference owner allows one unresolved frame. PinkIK commits its history
+before returning; the owner prevents another solve until an explicit receipt
+arrives. Unknown/rejected publication faults the session without resetting to
+measurement or fabricating acceptance. Native receipts cover all primary device
+groups, not just one arm. A receipt means command publication/application at the
+reported scope, not physical target arrival. A last pending frame can be canceled
+at shutdown; generated and accepted counts are deliberately reported separately.
 
-## Timeout semantics
+## DA scheduling and shared memory
 
-| Condition | Current simulator behavior |
+The implementation reuses `DAManager`, `DABaseInterface`,
+`ArrayCommWrapper`/`DASHMComm`, Hydra construction and DA's YAML topic registry.
+Topics are named shared-memory arrays with DA semaphores and coherent latest-value
+snapshots. There is no unbounded command FIFO. RGB-D uses one binary publication
+with the corresponding physical encoder metadata.
+
+The manager's empty staged cycle is replaced with a cooperative wait on DA stop
+flags. Independent interface processes own control, device streaming, camera,
+policy and dashboard clocks. This intentionally uses DA's lifecycle and transport
+without placing image rendering or remote inference behind the 50 Hz control
+barrier. The device SDK and feedback builder keep their independent workers.
+
+Control waits only the remaining period:
+`max(0, cycle_started + period - now)`. Work overruns warn; they do not add a fresh
+20 ms sleep or create a catch-up burst of IK solves. Acceptance waits appear in
+interval/handoff metrics. PinkIK remains the only joint trajectory integrator;
+no second DA joint interpolator was added. The lift and gripper inner servos model
+the hardware SDK's actuator behavior rather than a second arm trajectory planner.
+
+## Native adapter boundary
+
+The new native driver reuses calibrated mappings, packet encoders, ownership
+acquisition, health checks, GP80 integer endpoint handling and stop confirmation
+from the existing endpoint. It does not instantiate the old gateway supervisor or
+its command/feedback mailbox runtime. A finite `ContinuousGate` replaces the old
+source-feedback-derived 40 ms authorization rule, while retaining payload matching,
+sequence checks, disallowed automatic rearm/clear-stop rejection and checked
+transport handling of expired retransmissions. Publication failure remains distinct
+from physical stop-confirmation failure.
+
+Startup constructs the controller and publishes its initialization state before
+native acquisition. It then shares the acquired measured seed rather than opening
+multiple control sessions. Native and simulation cameras publish the same
+registered metric depth/physical feedback contract. Physical extrinsic calibration
+remains provisional as documented in the parent workspace.
+
+## Timeouts
+
+| Condition | Shared response |
 |---|---|
-| Compute exceeds 6 ms budget | Warning; next cycle after remaining sleep |
-| Work exceeds 20 ms period | Warning; no extra fixed sleep or catch-up burst |
-| Submission takes 30 ms | Wait for receipt; no additional IK solve |
-| Actual feedback or acceptance unavailable for 100 ms | Fault this control session; keep diagnostic service available |
-| Inference is slow or errors | Control continues independently; API error is displayed |
-| Target's observation expired/posture changed | Reject that target and reobserve |
-| Operator closes the run | Stop components and preserve final reports |
+| Compute exceeds its 6 ms budget | Record warning; continue with remaining-period sleep |
+| Work exceeds the 20 ms control period | No extra fixed sleep and no speculative catch-up solves |
+| Application delayed 30 ms | Wait for the actual receipt; do not advance PinkIK again |
+| Command source stops updating for configured 100 ms | Fault and stop the stream |
+| Actual device feedback stale for configured 100 ms | Fault independently of command freshness |
+| Upstream strict sensor age exceeds 40 ms or coupled-device skew exceeds 20 ms | PinkIK rejects the feedback independently of the 100 ms stream watchdog |
+| Unknown/partially failed publication or device ownership loss | Fault; do not automatically rearm |
+| Inference is slow or returns an error | Control continues independently; show the policy error |
+| Observation is stale or posture changed during inference | Reject that target and request a new observation |
+| Final diagnostic HOLD requested | Stop new policy targets, complete constrained braking and record final state |
 
-The 100 ms simulator health limit is not a reviewed hardware stopping envelope.
-No duration value from this simulator config may silently become a native MIT
-watchdog. The previous `min(source_feedback)+40 ms` gateway authorization scheme
-is absent from this runtime; removing it from an actual hardware deployment
-still requires implementing and validating the native adapter below.
+The old command's feedback age does not determine the new stream's liveness.
+Command creation time and actual feedback receipt clocks are checked separately.
+These finite values are software configuration, **not a measured hardware stopping
+envelope**. Real devices, operating-system scheduling and networks still require
+onsite qualification. The upstream PinkIK motion profile retains its own feedback,
+reference, acceleration, jerk and effort constraints. Not every IK failure is a
+scheduler warning, and simulator-only passing tests cannot justify ignoring it.
+In particular, the adapter still selects upstream `feedback_policy="strict"`:
+per-device timestamps must be at most 40 ms old and span at most 20 ms. These
+sensor-clock checks are separate from the 100 ms watchdog measured from command
+creation. Simulation publishes one coherent physics snapshot with equal group
+timestamps, so its passing delay cases do not validate asynchronous hardware
+sensor delivery or prove that a real session will satisfy the upstream checks.
 
-## Native MIT work not yet implemented
+## Plant assumptions and qualification boundary
 
-1. Implement one native DA hardware owner using the existing calibrated mappings,
-   MIT encoding, binary GP80 commands and SDK ownership/health semantics. Replace
-   the old gateway dispatch/authorization loop, rather than wrap it under a new name.
-2. Keep feedback sampling and SDK publication independent of network inference.
-   Give each accepted reference an explicit publication receipt. Define what a
-   partial group submission means; never acknowledge an all-device transaction
-   when only one arm was submitted.
-3. Separate host cycle warnings from command-source loss and real device faults.
-   Define the finite native hold/brake behavior from measured device behavior and
-   a trajectory timing contract. Do not turn a compute warning into automatic
-   rearm, clear-stop, indefinite old-velocity streaming or a fake feedback refresh.
-4. Resolve delayed-step MIT semantics. Current profile-bound PinkIK rejects
-   variable `dt`; a 30 ms delayed cycle cannot simply be passed as `dt=.03`.
-   Position-plant convergence does not validate the commanded MIT velocity,
-   acceleration or torque during that gap. Test accepted reference history,
-   missed-cycle hold/brake and resumption before enabling native motion.
-5. Port the physical RGB-D adapter and actual per-device receipt timestamps.
-   Keep telemetry/visualization outside the publication path. Reproduce startup,
-   delayed feedback, partial writes, session loss and lift stop confirmation.
-6. Only then qualify continuous native MIT, base/lift/binary grippers and policy
-   execution onsite. Add upstream changes on UMI `zi/dev_camera`, with a separate
-   commit/push and parent pin update if needed.
+The lift accepts the same SDK-style position request with the configured speed
+limit. The simulation leaf uses a position-to-bounded-velocity inner PI force
+servo, implicit velocity damping and a finite 1800 N assembly force limit. Integral
+feedback rejects unknown carried loads; it is not given object identity or mass.
+Both the actuator and joint force clamps use that explicit assembly limit; the
+source URDF's placeholder 10 N clamp cannot support the robot's lift gravity.
+The inner gains are modeling assumptions, not identified firmware gains.
 
-This initial migration deliberately does not rewrite UMI's reference internals,
-change existing robot release bindings or claim that historical hardware errors
-have been fixed. The simulator and hardware qualification boundaries remain explicit.
+The base remains a planar velocity-servo approximation, not a wheel/traction model.
+Binary GP80 commands map to finite-travel contact jaws in MuJoCo and calibrated
+motor endpoints on hardware. Neither this jaw model nor idealized camera rendering
+establishes physical grasp reliability. Simulator root/object state and contact
+scoring stay private to the plant, renderer and post-run evaluator.
+
+The common runtime and MIT frame contract are implemented and exercised in
+simulation. Physical sensor timing, sustained MIT publication, partial transport
+failures, real gains, gripper contact force and stopping still require hardware
+validation. No hardware qualification is claimed by this migration.

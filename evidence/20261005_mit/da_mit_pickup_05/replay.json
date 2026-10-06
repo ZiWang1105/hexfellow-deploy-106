@@ -1,0 +1,13 @@
+{
+  "source": "/home/ziwang/projects/agentic-mobile-manipulator/runs/da_mit_pickup_05",
+  "scope": "Offline recorded-state rendering and sampled contact re-evaluation; no controller or physics stepping",
+  "model_source": "plant.mjb",
+  "operator_annotation": [
+    "RUN PASSED: simulated pickup validation",
+    "Full budget completed | Final HOLD verified",
+    "Offline recorded-state replay | Native hardware not qualified"
+  ],
+  "complete_trajectory": true,
+  "last_time_s": 362.8000000010042,
+  "video": true
+}

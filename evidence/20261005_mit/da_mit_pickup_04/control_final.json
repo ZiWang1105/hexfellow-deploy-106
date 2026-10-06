@@ -1,0 +1,203 @@
+{
+  "phase": "fault",
+  "diagnostic": {
+    "arrived": true,
+    "mode": "arm",
+    "needs_observation": false,
+    "ik_status": "TRACKING",
+    "arm_errors": {
+      "left": {
+        "position_m": 0.0007056368191903311,
+        "orientation_rad": 0.00012545065793320899
+      },
+      "right": {
+        "position_m": 0.004061886952678617,
+        "orientation_rad": 0.016856963899335217
+      }
+    },
+    "arm_position_error_m": 0.004061886952678617,
+    "arm_orientation_error_rad": 0.016856963899335217,
+    "base_stopped": true
+  },
+  "request_id": 55,
+  "controller": {
+    "implementation": "policy_sim.control.ik_core.PinkIKCore",
+    "upstream_commit": "23e2cfaf97acfbdffcf40d3ae9aeeb916a815b14",
+    "motion_profile": "x7-gp80-highspeed-fixed-base-v1",
+    "motion_profile_sha256": "ee1e86a556b1b54b84a43dd8c4bb821b878da4eaba1f1d757a1dfa1245528f36",
+    "base_mode": "fixed",
+    "state_coordinates": [
+      "maver_x4_asm_URDF_joint_1",
+      "maver_x4_asm_7_urdf_SLDASM_joint_1",
+      "maver_x4_asm_7_urdf_SLDASM_joint_2",
+      "maver_x4_asm_7_urdf_SLDASM_joint_3",
+      "maver_x4_asm_7_urdf_SLDASM_joint_4",
+      "maver_x4_asm_7_urdf_SLDASM_joint_5",
+      "maver_x4_asm_7_urdf_SLDASM_joint_6",
+      "maver_x4_asm_7_urdf_SLDASM_joint_7",
+      "maver_x4_asm_7_urdf_SLDASM2_joint_1",
+      "maver_x4_asm_7_urdf_SLDASM2_joint_2",
+      "maver_x4_asm_7_urdf_SLDASM2_joint_3",
+      "maver_x4_asm_7_urdf_SLDASM2_joint_4",
+      "maver_x4_asm_7_urdf_SLDASM2_joint_5",
+      "maver_x4_asm_7_urdf_SLDASM2_joint_6",
+      "maver_x4_asm_7_urdf_SLDASM2_joint_7"
+    ],
+    "locked_joints": [],
+    "controlled_arms": [
+      "left",
+      "right"
+    ],
+    "measured_pose_tracking": false,
+    "runtime_velocity_bounds": {
+      "maver_x4_asm_URDF_joint_1": 0.025,
+      "maver_x4_asm_7_urdf_SLDASM_joint_1": 2.5408080208833543,
+      "maver_x4_asm_7_urdf_SLDASM_joint_2": 2.5408080208833543,
+      "maver_x4_asm_7_urdf_SLDASM_joint_3": 2.585188990822622,
+      "maver_x4_asm_7_urdf_SLDASM_joint_4": 2.585188990822622,
+      "maver_x4_asm_7_urdf_SLDASM_joint_5": 8.592099854868263,
+      "maver_x4_asm_7_urdf_SLDASM_joint_6": 8.592099854868263,
+      "maver_x4_asm_7_urdf_SLDASM_joint_7": 8.592099854868263,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_1": 2.5408080208833543,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_2": 2.5408080208833543,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_3": 2.585188990822622,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_4": 2.585188990822622,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_5": 8.592099854868263,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_6": 8.592099854868263,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_7": 8.592099854868263
+    },
+    "lift_position_max_m": 0.4,
+    "policy_T_umi_tcp": {
+      "left": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.017000000000000015
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "right": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.017000000000000015
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    "self_collision_enabled": false,
+    "actuation": "Shared MIT frame -> DA actuator owner -> native SDK or MuJoCo torque servo",
+    "upstream_path": "third_party/UMI_Hardware"
+  },
+  "ticks": 12156,
+  "timing": {
+    "elapsed_ms": 2.1364509884733707,
+    "budget_overrun": false,
+    "sleep_s": 0.01786354901152663,
+    "overruns": 1
+  },
+  "request_error": null,
+  "fault_feedback": {
+    "timestamp_s": 253246.566065269,
+    "joint_positions": {
+      "maver_x4_asm_URDF_joint_1": 0.3977130408830765,
+      "maver_x4_asm_7_urdf_SLDASM_joint_1": 1.48978914994595,
+      "maver_x4_asm_7_urdf_SLDASM_joint_2": 1.4321729067331865,
+      "maver_x4_asm_7_urdf_SLDASM_joint_3": 1.3260611501677673,
+      "maver_x4_asm_7_urdf_SLDASM_joint_4": 1.1135019806378763,
+      "maver_x4_asm_7_urdf_SLDASM_joint_5": 0.16815243909615743,
+      "maver_x4_asm_7_urdf_SLDASM_joint_6": -0.40259135822555514,
+      "maver_x4_asm_7_urdf_SLDASM_joint_7": 0.1688684219401291,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_1": -0.3780797173419134,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_2": 1.3076069761439644,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_3": -0.29661164664181455,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_4": 1.1988383832378338,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_5": -0.6056682390552307,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_6": 0.6717091848206348,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_7": 0.6872886319034444
+    },
+    "joint_velocities": {
+      "maver_x4_asm_URDF_joint_1": 0.018142787758560316,
+      "maver_x4_asm_7_urdf_SLDASM_joint_1": -0.020786841072771393,
+      "maver_x4_asm_7_urdf_SLDASM_joint_2": 0.012808260920654662,
+      "maver_x4_asm_7_urdf_SLDASM_joint_3": -0.002038903159187253,
+      "maver_x4_asm_7_urdf_SLDASM_joint_4": -0.0930901416172919,
+      "maver_x4_asm_7_urdf_SLDASM_joint_5": -0.0025128843023129303,
+      "maver_x4_asm_7_urdf_SLDASM_joint_6": -0.06585728675909974,
+      "maver_x4_asm_7_urdf_SLDASM_joint_7": -0.010150122073655022,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_1": 0.04044612321635082,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_2": 0.0028649167202762595,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_3": 0.14933021467213273,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_4": -0.08378239617747364,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_5": -0.10363131976249998,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_6": -0.09480979215587784,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_7": 0.008247358826383992
+    },
+    "gripper_state": {
+      "left": "open",
+      "right": "between"
+    }
+  },
+  "ik_fault_info": [
+    "qp_no_solution",
+    {
+      "exception": "NoSolutionFound",
+      "message": "QP solver did not find a solution to the differential IK problem",
+      "qp_feasibility": "infeasible_scalar_intervals",
+      "scalar_conflicts": [
+        {
+          "index": 0,
+          "joint": "maver_x4_asm_URDF_joint_1",
+          "minimum_velocity": 0.014999999999999996,
+          "maximum_velocity": 0.01291316026155759,
+          "lower_row": 75,
+          "upper_row": 0,
+          "lower_constraint": "AccelerationLimit",
+          "upper_constraint": "ConfigurationLimit"
+        }
+      ]
+    }
+  ],
+  "fault": "IK failed: RuntimeError: UMI IK stopped: NoSolutionFound: QP solver did not find a solution to the differential IK problem",
+  "generated": 12156,
+  "accepted": 12156,
+  "pending": null,
+  "recording_error": [],
+  "evidence_kind": "shared_MIT_control_and_actuator_protocol"
+}

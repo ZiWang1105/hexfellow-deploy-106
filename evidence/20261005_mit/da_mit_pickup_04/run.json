@@ -1,0 +1,25 @@
+{
+  "status": "error",
+  "fault": "IK failed: RuntimeError: UMI IK stopped: NoSolutionFound: QP solver did not find a solution to the differential IK problem",
+  "backend": "simulation",
+  "policy_calls": 28,
+  "cost_usd": 7.017654,
+  "request_interrupted": false,
+  "ticks": 12156,
+  "termination": {
+    "reason": "control_fault",
+    "budget_reason": null,
+    "elapsed_wall_s": 243.93075055701775,
+    "settle_s": 14.0,
+    "final_hold_requested_s": null,
+    "stationary_since_s": null
+  },
+  "native_qualified": false,
+  "evaluation": {
+    "retained_pickup": true,
+    "robot_static_contact_frames": 0,
+    "final_hold_verified": false,
+    "evaluated_body": "entity_apple_body",
+    "accepted": false
+  }
+}

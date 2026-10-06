@@ -1,0 +1,22 @@
+{
+  "status": "completed_budget",
+  "fault": null,
+  "backend": "simulation",
+  "policy_calls": 0,
+  "cost_usd": 0,
+  "request_interrupted": false,
+  "ticks": 1282,
+  "termination": {
+    "reason": "completed_budget",
+    "elapsed_wall_s": 28.016380959015805,
+    "settle_s": 0.0
+  },
+  "native_qualified": false,
+  "evaluation": {
+    "retained_pickup": false,
+    "robot_static_contact_frames": 0,
+    "final_hold_verified": false,
+    "evaluated_body": null,
+    "accepted": false
+  }
+}

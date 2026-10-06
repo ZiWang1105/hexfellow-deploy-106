@@ -1,0 +1,42 @@
+{
+  "passed": true,
+  "sensor_profile": "registered_rgbd_binary_v2",
+  "requests": 19,
+  "observation_entries_including_history": 85,
+  "observation_id_to_call": {
+    "1": 1,
+    "2": 2,
+    "3": 3,
+    "4": 4,
+    "5": 5,
+    "6": 6,
+    "7": 7,
+    "8": 8,
+    "9": 9,
+    "10": 10,
+    "11": 11,
+    "12": 12,
+    "13": 13,
+    "14": 14,
+    "15": 15,
+    "16": 16,
+    "17": 17,
+    "18": 18,
+    "19": 19
+  },
+  "failed_action_requests": [],
+  "stale_action_requests": [],
+  "missing_final_action_records": [],
+  "image_bytes_match_saved_sensor_pngs": true,
+  "fk_matches_physical_joint_encoders": true,
+  "proprioception_fields": [
+    "camera_T_base_from_optical",
+    "gripper_state",
+    "joint_positions",
+    "joint_velocities",
+    "tcp_poses",
+    "timestamp_s"
+  ],
+  "system_context_sha256": "e73832de04af614e757249325c4b74d4747c92f4f6704dc9104e793870cedfba",
+  "scope": "Offline schema, image, FK and history consistency; review static prompt and sensor provenance separately"
+}

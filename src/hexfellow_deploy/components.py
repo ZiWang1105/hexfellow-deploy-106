@@ -10,25 +10,23 @@ import json
 from deploy_anything.components.interface.base_interface import DABaseInterface
 from .reference import ReferenceOwner
 from .timing import CycleBudget
-from .workspace import activate, build_executor
+from .workspace import activate, build_shared_executor
 
 
 class ControlComponent(DABaseInterface):
-    def __init__(self, name, request, status, measured, plant_state, workspace,
-                 output, scene, controller, period_s, time_budget,
-                 backend="simulation", health_timeout_s=.1, startup_carry=False,
-                 inject_every=0, inject_delay_s=0., submit_delay_s=0.):
-        super().__init__(name, [request, status, measured, plant_state], time_budget)
-        self.request, self.status, self.measured_topic, self.plant_topic = request, status, measured, plant_state
-        self.workspace, self.output, self.scene, self.controller = workspace, output, scene, controller
+    def __init__(self, name, request, status, frames, feedback, backend_status, workspace,
+                 output, period_s, time_budget, health_timeout_s=.1, startup_carry=False,
+                 inject_every=0, inject_delay_s=0.):
+        super().__init__(name, [request, status, frames, feedback, backend_status], time_budget)
+        self.request, self.status = request, status
+        self.frames, self.feedback, self.backend_status = frames, feedback, backend_status
+        self.workspace, self.output = workspace, output
         self.period, self.health_timeout = period_s, health_timeout_s
-        self.backend, self.startup_carry = backend, startup_carry
-        self.inject_every, self.inject_delay, self.submit_delay = inject_every, inject_delay_s, submit_delay_s
+        self.startup_carry = startup_carry
+        self.inject_every, self.inject_delay = inject_every, inject_delay_s
 
     def initialize(self):
-        if self.backend != "simulation":
-            raise ValueError("Native MIT migration requires the qualified native adapter; old gateway is not a fallback")
-        if self.health_timeout <= self.period or self.inject_delay < 0 or self.submit_delay < 0:
+        if self.health_timeout <= self.period or self.inject_delay < 0:
             raise ValueError("Invalid timing configuration")
         self._initialized.value = True
         return True
@@ -39,14 +37,16 @@ class ControlComponent(DABaseInterface):
 
     def run(self):
         root = activate(self.workspace)
-        from .simulation import SimulationPlant
+        from .backend import BackendProxy
+        from .actuation import encode_mit
         from mobile_manipulator.interfaces.contract import Action
         from mobile_manipulator.control.startup_pose import DEFAULT_STARTUP_POSE, load_ik_pose
-        from mobile_manipulator.sim.scene_config import load_scene
         logger = logging.getLogger(self.name)
         output = Path(self.output)
         output.mkdir(parents=True, exist_ok=True)
         owner, plant = ReferenceOwner(), None
+        executor = None
+        measured = None
         budget = CycleBudget(self.period, self.time_budget)
         rows = queue.Queue(maxsize=4096)
         recording_error = []
@@ -63,7 +63,9 @@ class ControlComponent(DABaseInterface):
         writer = threading.Thread(target=write, name="control-recording", daemon=True)
         writer.start()
         ticks = 0
+        dropped_records = 0
         last_request = None
+        final_hold = False
         pending_since = None
         previous_solve_started = None
         accepted_latency_ms = None
@@ -74,17 +76,18 @@ class ControlComponent(DABaseInterface):
                 self.status.put(dict(state, published_s=time.monotonic(), generated=owner.generated,
                     accepted=owner.accepted, pending=owner.pending, fault=owner.fault,
                     acknowledgement=None if owner.last_receipt is None else asdict(owner.last_receipt)))
-                if plant is not None:
-                    snapshot = plant.snapshot
-                    self.measured_topic.put(snapshot["measured"])
-                    self.plant_topic.put(snapshot)
         publisher = threading.Thread(target=publish, name="telemetry-publish", daemon=True)
         publisher.start()
         try:
-            scene_path = root / self.scene
-            executor = build_executor(load_scene(scene_path), root / self.controller, self.period)
-            plant = SimulationPlant(scene_path, output, submit_delay_s=self.submit_delay)
+            plant = BackendProxy(self.frames, self.feedback, self.backend_status)
+            executor = build_shared_executor(plant.metadata, self.period)
             executor.ik.control_clock = time.monotonic
+            executor.ik.feedback_provider = plant.received_for
+            executor.ik.report['actuation'] = 'Shared MIT frame -> DA actuator owner -> native SDK or MuJoCo torque servo'
+            state = dict(state, phase='initialized')
+            self.status.put(state, timeout=.01)
+            seed = plant.wait_ready(lambda: self.stopping)
+            executor.ik.initialize_reference(seed,stationary_reference=True)
             if self.startup_carry:
                 executor.start_carry(load_ik_pose(DEFAULT_STARTUP_POSE), plant.read())
             self._ready.value = True
@@ -108,10 +111,14 @@ class ControlComponent(DABaseInterface):
                         time.sleep(min(.001, self.period))
                         continue
                 request = self.request.get()
-                if request is not None and request["id"] != last_request:
+                if request is not None and request["id"] != last_request and not final_hold:
                     last_request = request["id"]
                     try:
-                        if request["operation"] == "hold":
+                        if request['operation'] == 'final_hold':
+                            executor.hold(measured)
+                            final_hold = True
+                            state = dict(state, final_hold=True)
+                        elif request["operation"] == "hold":
                             executor.hold(measured)
                         elif request["operation"] == "target":
                             observed = request["observed"]
@@ -131,10 +138,12 @@ class ControlComponent(DABaseInterface):
                     time.sleep(self.inject_delay)
                     # Read actual new feedback after the injected delay.
                     measured = plant.read()
+                plant.created_s = time.monotonic()
                 generated = owner.generate(lambda: executor.tick(measured))
                 sequence, (command, diagnostic) = generated
                 solved = time.monotonic()
-                plant.submit(sequence, command, executor.ik.last_result.mit)
+                plant.submit(sequence, command, executor.ik.last_result.mit,
+                             {n:float(executor.ik.last_result.velocity[i]) for n,i in executor.ik.indices.items()})
                 pending_since = time.monotonic()
                 ticks += 1
                 timing = budget.finish(started)
@@ -145,17 +154,36 @@ class ControlComponent(DABaseInterface):
                 try:
                     rows.put_nowait(dict(sequence=sequence, started_s=started, solved_s=solved,
                         submitted_s=pending_since, timing=timing, measured=measured,
-                        reference=command, diagnostic=diagnostic,
+                        reference=command, diagnostic=diagnostic, request_id=last_request,
+                        mit=encode_mit(executor.ik.last_result.mit),
+                        reference_velocity={n:float(executor.ik.last_result.velocity[i]) for n,i in executor.ik.indices.items()},
+                        source_received=plant.received_for(measured),
+                        active_tcp_targets=None if executor.target is None or executor.requires_base else {
+                            side: dict(position_m=pos.tolist(),rotation=rot.tolist())
+                            for side,(pos,rot) in executor.arm_targets.items()},
                         interval_ms=None if previous_solve_started is None else (started-previous_solve_started)*1000,
                         previous_acceptance_ms=accepted_latency_ms,
                         accepted_before_solve=owner.accepted))
                 except queue.Full:
+                    dropped_records += 1
                     logger.warning("Control recording queue full; dropped a diagnostic row")
                 previous_solve_started = started
                 # Work includes validation, submission and recording enqueue.
                 time.sleep(max(0., started+self.period-time.monotonic()))
         except BaseException as error:
             owner.fail(f"{type(error).__name__}: {error}")
+            state = dict(state, fault_feedback=measured)
+            if executor is not None:
+                state = dict(state, ik_fault_info=getattr(executor.ik.core,"_fault_info",None))
+                capture = getattr(executor.ik.core,'last_qp_failure',None)
+                if capture is not None:
+                    try:
+                        (output/'qp_failure.json').write_text(json.dumps(dict(
+                            scalar_conflicts=capture.scalar_conflicts(),fault=owner.fault),indent=2))
+                        import numpy as np
+                        np.savez_compressed(output/'qp_failure.npz',**capture.arrays)
+                    except Exception as diagnostic_error:
+                        recording_error.append(str(diagnostic_error))
             state = dict(state, phase="fault", fault=owner.fault)
             logger.exception("Control session failed; diagnostics remain available")
         finally:
@@ -171,7 +199,7 @@ class ControlComponent(DABaseInterface):
                         else:
                             time.sleep(.001)
                     if owner.pending is not None and not owner.fault:
-                        owner.fail('Final actuator acknowledgement unavailable')
+                        state = dict(state, cancelled_pending=owner.pending)
                     plant.close()
                 except Exception as error:
                     owner.fail(f'Cleanup failed: {error}')
@@ -180,7 +208,8 @@ class ControlComponent(DABaseInterface):
             publisher.join(2)
             final = dict(state, generated=owner.generated, accepted=owner.accepted,
                          pending=owner.pending, fault=owner.fault, recording_error=recording_error,
-                         evidence_kind="simulation_position_actuators_not_native_MIT")
+                         dropped_records=dropped_records,
+                         evidence_kind="shared_MIT_control_and_actuator_protocol")
             self.status.put(final, timeout=.01)
             (output / "control_final.json").write_text(json.dumps(final, indent=2)+"\n")
             rows.put(None, timeout=2)

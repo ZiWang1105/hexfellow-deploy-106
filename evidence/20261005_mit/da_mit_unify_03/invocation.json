@@ -1,0 +1,9 @@
+{
+  "workspace": "/home/ziwang/projects/agentic-mobile-manipulator",
+  "config": "/home/ziwang/projects/agentic-mobile-manipulator/third_party/hexfellow-deploy/configs/simulation.yaml",
+  "overrides": [],
+  "prompt": null,
+  "action_file": "tests/fixtures/paired_pose.json",
+  "duration_s": 24.0,
+  "camera": false
+}

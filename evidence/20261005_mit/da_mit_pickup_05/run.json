@@ -1,0 +1,30 @@
+{
+  "status": "completed_budget",
+  "fault": null,
+  "backend": "simulation",
+  "policy_calls": 41,
+  "cost_usd": 10.573404499999999,
+  "request_interrupted": true,
+  "ticks": 18646,
+  "termination": {
+    "reason": "completed_budget",
+    "budget_reason": "duration_s",
+    "elapsed_wall_s": 374.06489114800934,
+    "settle_s": 14.0,
+    "final_hold_requested_s": 254261.864636894,
+    "stationary_since_s": 254261.914892733
+  },
+  "native_qualified": false,
+  "evaluation": {
+    "retained_pickup": true,
+    "robot_static_contact_steps": 0,
+    "final_hold_verified": true,
+    "evaluated_body": "entity_apple_body",
+    "sampling": "every_physics_step",
+    "timestep_s": 0.002,
+    "samples": 181408,
+    "complete": true,
+    "first_robot_static_contact": null,
+    "accepted": true
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "sampling": "every_physics_step",
+  "timestep_s": 0.002,
+  "samples": 13625,
+  "initial_time_s": 0.0,
+  "first_time_s": 0.002,
+  "time_s": 27.249999999995776,
+  "max_sample_interval_s": 0.002000000000000668,
+  "complete": true,
+  "robot_static_contact_steps": 0,
+  "first_robot_static_contact": null,
+  "contact_groups": [],
+  "objects": [
+    {
+      "name": "entity_apple_body",
+      "com_m": [
+        2.2499656193822903,
+        4.900623584280969e-06,
+        0.7814064176976058
+      ],
+      "height_gain_m": -0.0010935823023942026,
+      "grasping_arms": [],
+      "opposing_jaw_contacts": false,
+      "support_contact": true,
+      "retained_s": 0.0
+    }
+  ],
+  "criterion": "10 cm COM rise, opposing jaws of one hand, no support, uninterrupted sampled retention",
+  "limitation": "Discrete physics-step evidence; no assertion about contacts between integration steps"
+}

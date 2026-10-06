@@ -1,0 +1,14 @@
+{
+  "phase": "closed",
+  "fault": null,
+  "receipt": {
+    "sequence": 704,
+    "accepted_at": 252470.63798082,
+    "scope": "simulator_applied"
+  },
+  "backend": "simulation",
+  "published_s": 252470.63512985,
+  "pending": 704,
+  "latest_sequence": 704,
+  "cancelled_pending": null
+}

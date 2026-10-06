@@ -1,0 +1,15 @@
+{
+  "scalar_conflicts": [
+    {
+      "index": 0,
+      "joint": "maver_x4_asm_URDF_joint_1",
+      "minimum_velocity": 0.014999999999999996,
+      "maximum_velocity": 0.01291316026155759,
+      "lower_row": 75,
+      "upper_row": 0,
+      "lower_constraint": "AccelerationLimit",
+      "upper_constraint": "ConfigurationLimit"
+    }
+  ],
+  "fault": "IK failed: RuntimeError: UMI IK stopped: NoSolutionFound: QP solver did not find a solution to the differential IK problem"
+}

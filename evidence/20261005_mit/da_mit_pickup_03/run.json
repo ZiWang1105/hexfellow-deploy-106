@@ -1,0 +1,24 @@
+{
+  "status": "error",
+  "fault": "RuntimeError: ValueError: Lift position does not match its source and solved velocity",
+  "backend": "simulation",
+  "policy_calls": 19,
+  "cost_usd": 4.468252,
+  "request_interrupted": false,
+  "ticks": 9609,
+  "termination": {
+    "reason": "control_fault",
+    "elapsed_wall_s": 192.82317000601324,
+    "settle_s": 14.0,
+    "final_hold_requested_s": null,
+    "stationary_since_s": null
+  },
+  "native_qualified": false,
+  "evaluation": {
+    "retained_pickup": true,
+    "robot_static_contact_frames": 0,
+    "final_hold_verified": false,
+    "evaluated_body": "entity_apple_body",
+    "accepted": false
+  }
+}

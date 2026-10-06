@@ -1,0 +1,14 @@
+{
+  "phase": "fault",
+  "fault": "ValueError: Lift position does not match its source and solved velocity",
+  "receipt": {
+    "sequence": 9608,
+    "accepted_at": 252775.373889121,
+    "scope": "simulator_applied"
+  },
+  "backend": "simulation",
+  "published_s": 252775.393026144,
+  "pending": null,
+  "latest_sequence": 9608,
+  "cancelled_pending": null
+}

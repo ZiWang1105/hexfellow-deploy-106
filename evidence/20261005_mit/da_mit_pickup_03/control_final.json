@@ -1,0 +1,187 @@
+{
+  "phase": "fault",
+  "diagnostic": {
+    "arrived": true,
+    "mode": "arm",
+    "needs_observation": false,
+    "ik_status": "TRACKING",
+    "arm_errors": {
+      "left": {
+        "position_m": 3.75931072031907e-05,
+        "orientation_rad": 7.014855566874445e-05
+      },
+      "right": {
+        "position_m": 0.006115200722443481,
+        "orientation_rad": 0.02980848033600818
+      }
+    },
+    "arm_position_error_m": 0.006115200722443481,
+    "arm_orientation_error_rad": 0.02980848033600818,
+    "base_stopped": true
+  },
+  "request_id": 37,
+  "controller": {
+    "implementation": "policy_sim.control.ik_core.PinkIKCore",
+    "upstream_commit": "23e2cfaf97acfbdffcf40d3ae9aeeb916a815b14",
+    "motion_profile": "x7-gp80-highspeed-fixed-base-v1",
+    "motion_profile_sha256": "ee1e86a556b1b54b84a43dd8c4bb821b878da4eaba1f1d757a1dfa1245528f36",
+    "base_mode": "fixed",
+    "state_coordinates": [
+      "maver_x4_asm_URDF_joint_1",
+      "maver_x4_asm_7_urdf_SLDASM_joint_1",
+      "maver_x4_asm_7_urdf_SLDASM_joint_2",
+      "maver_x4_asm_7_urdf_SLDASM_joint_3",
+      "maver_x4_asm_7_urdf_SLDASM_joint_4",
+      "maver_x4_asm_7_urdf_SLDASM_joint_5",
+      "maver_x4_asm_7_urdf_SLDASM_joint_6",
+      "maver_x4_asm_7_urdf_SLDASM_joint_7",
+      "maver_x4_asm_7_urdf_SLDASM2_joint_1",
+      "maver_x4_asm_7_urdf_SLDASM2_joint_2",
+      "maver_x4_asm_7_urdf_SLDASM2_joint_3",
+      "maver_x4_asm_7_urdf_SLDASM2_joint_4",
+      "maver_x4_asm_7_urdf_SLDASM2_joint_5",
+      "maver_x4_asm_7_urdf_SLDASM2_joint_6",
+      "maver_x4_asm_7_urdf_SLDASM2_joint_7"
+    ],
+    "locked_joints": [],
+    "controlled_arms": [
+      "left",
+      "right"
+    ],
+    "measured_pose_tracking": false,
+    "runtime_velocity_bounds": {
+      "maver_x4_asm_URDF_joint_1": 0.025,
+      "maver_x4_asm_7_urdf_SLDASM_joint_1": 2.5408080208833543,
+      "maver_x4_asm_7_urdf_SLDASM_joint_2": 2.5408080208833543,
+      "maver_x4_asm_7_urdf_SLDASM_joint_3": 2.585188990822622,
+      "maver_x4_asm_7_urdf_SLDASM_joint_4": 2.585188990822622,
+      "maver_x4_asm_7_urdf_SLDASM_joint_5": 8.592099854868263,
+      "maver_x4_asm_7_urdf_SLDASM_joint_6": 8.592099854868263,
+      "maver_x4_asm_7_urdf_SLDASM_joint_7": 8.592099854868263,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_1": 2.5408080208833543,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_2": 2.5408080208833543,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_3": 2.585188990822622,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_4": 2.585188990822622,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_5": 8.592099854868263,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_6": 8.592099854868263,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_7": 8.592099854868263
+    },
+    "lift_position_max_m": 0.4,
+    "policy_T_umi_tcp": {
+      "left": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.017000000000000015
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "right": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.017000000000000015
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    "self_collision_enabled": false,
+    "actuation": "Shared MIT frame -> DA actuator owner -> native SDK or MuJoCo torque servo",
+    "upstream_path": "third_party/UMI_Hardware"
+  },
+  "ticks": 9609,
+  "timing": {
+    "elapsed_ms": 2.2149459982756525,
+    "budget_overrun": false,
+    "sleep_s": 0.017785054001724348,
+    "overruns": 1
+  },
+  "request_error": null,
+  "fault_feedback": {
+    "timestamp_s": 252775.384274401,
+    "joint_positions": {
+      "maver_x4_asm_URDF_joint_1": 0.39800006137472715,
+      "maver_x4_asm_7_urdf_SLDASM_joint_1": 1.4887281974600186,
+      "maver_x4_asm_7_urdf_SLDASM_joint_2": 1.4143979547244785,
+      "maver_x4_asm_7_urdf_SLDASM_joint_3": 1.297425836520035,
+      "maver_x4_asm_7_urdf_SLDASM_joint_4": 1.1254212299877344,
+      "maver_x4_asm_7_urdf_SLDASM_joint_5": 0.18764610719209182,
+      "maver_x4_asm_7_urdf_SLDASM_joint_6": -0.3995012990826345,
+      "maver_x4_asm_7_urdf_SLDASM_joint_7": 0.1897992183379718,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_1": 0.0746649803236575,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_2": 1.5666339678576078,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_3": -2.306870529727211,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_4": -0.8726523674136787,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_5": -1.625934629752389,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_6": -0.050385482132470884,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_7": -0.6888318385085255
+    },
+    "joint_velocities": {
+      "maver_x4_asm_URDF_joint_1": 4.194316947710566e-05,
+      "maver_x4_asm_7_urdf_SLDASM_joint_1": 0.0013902903659974136,
+      "maver_x4_asm_7_urdf_SLDASM_joint_2": 0.005948040022467706,
+      "maver_x4_asm_7_urdf_SLDASM_joint_3": 0.010127391915481577,
+      "maver_x4_asm_7_urdf_SLDASM_joint_4": -0.0003235184594462251,
+      "maver_x4_asm_7_urdf_SLDASM_joint_5": -0.006661588774260094,
+      "maver_x4_asm_7_urdf_SLDASM_joint_6": 0.0012277740744036439,
+      "maver_x4_asm_7_urdf_SLDASM_joint_7": -0.006802032988013641,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_1": 0.6241267448125919,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_2": -0.03826323859821497,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_3": -0.28363025240466383,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_4": -0.2968350500551377,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_5": -0.018583170112330058,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_6": -0.6417112821929982,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_7": 0.0011473050925414861
+    },
+    "gripper_state": {
+      "left": "open",
+      "right": "between"
+    }
+  },
+  "ik_fault_info": [
+    null,
+    null
+  ],
+  "fault": "RuntimeError: ValueError: Lift position does not match its source and solved velocity",
+  "generated": 9609,
+  "accepted": 9608,
+  "pending": 9609,
+  "recording_error": [],
+  "evidence_kind": "shared_MIT_control_and_actuator_protocol"
+}

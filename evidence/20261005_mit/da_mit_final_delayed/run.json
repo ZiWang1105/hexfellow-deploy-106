@@ -1,0 +1,32 @@
+{
+  "status": "completed_budget",
+  "fault": null,
+  "backend": "simulation",
+  "policy_calls": 0,
+  "cost_usd": 0,
+  "request_interrupted": false,
+  "ticks": 695,
+  "termination": {
+    "reason": "completed_budget",
+    "budget_reason": "duration_s",
+    "elapsed_wall_s": 28.026556725002592,
+    "settle_s": 0.0,
+    "final_hold_requested_s": null,
+    "stationary_since_s": null
+  },
+  "native_qualified": false,
+  "report_errors": [],
+  "shutdown_reports_present": true,
+  "evaluation": {
+    "retained_pickup": false,
+    "robot_static_contact_steps": 0,
+    "final_hold_verified": false,
+    "evaluated_body": null,
+    "sampling": "every_physics_step",
+    "timestep_s": 0.002,
+    "samples": 13625,
+    "complete": true,
+    "first_robot_static_contact": null,
+    "accepted": false
+  }
+}

@@ -32,12 +32,12 @@ class RGBDTopic(ArrayCommWrapper):
         self.width, self.height = width, height
         super().__init__(prefix+name, shape=(8192+width*height*7,), dtype="uint8", create=create)
 
-    def put(self, measured, rgb, depth_m, intrinsics):
+    def put(self, measured, rgb, depth_m, intrinsics, robot_fk=None):
         from mobile_manipulator.interfaces.contract import validate_sensor_packet
         validate_sensor_packet(dict(measured, rgb=rgb, depth_m=depth_m), image=True)
         if rgb.shape != (self.height, self.width, 3):
             raise ValueError("Camera resolution differs from shared-memory schema")
-        meta = json.dumps(dict(measured=measured, intrinsics=intrinsics), allow_nan=False).encode()
+        meta = json.dumps(dict(measured=measured, intrinsics=intrinsics, robot_fk=robot_fk), allow_nan=False).encode()
         if len(meta) >= 8192:
             raise ValueError("Camera metadata exceeds capacity")
         buf = np.zeros(self.shape, dtype=np.uint8)

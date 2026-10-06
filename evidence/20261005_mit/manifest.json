@@ -1,0 +1,424 @@
+{
+  "da_mit_unify_03": {
+    "source": "/home/ziwang/projects/agentic-mobile-manipulator/runs/da_mit_unify_03",
+    "copied_record_sha256": {
+      "control_final.json": "b2ad9a422f5c69a9c30f621d6895f21e12ec55114a7157b077bed9ba149cf60e",
+      "backend_final.json": "d14463e401c13e6b1e3b094ad0b51b5313cc5bb4b82fcf9be2326da8a9ee7ad2",
+      "invocation.json": "564e99cf509b5dfc6c79ee84bfbd0d9cd5d45894b0d23347f6abac95818d2305",
+      "provenance.json": "9a62e573d70fbff021157eafcdb1356e1148760f97db4c909f02c521ec0ba27d",
+      "actuation.json": "92b769851ef3cf8cc3d618cf2655c18f2022e4683838f72773505e76b5f0fd8b",
+      "final_evaluation.json": "6b5194b26e4d392e92707d0917499c1f0f00d53b117b3ef2e2893de9de3e741d"
+    },
+    "large_original_records": {
+      "control.jsonl": {
+        "sha256": "d5296cf150cf6811157e40611ba6410b2d904511686d1903aa1b495ae94f8ddb",
+        "bytes": 4393042
+      },
+      "trajectory.jsonl": {
+        "sha256": "6d9a47243786c427d81ea83bb7faee448c972a87f98e837d452e64536bcae89c",
+        "bytes": 584394
+      },
+      "evaluation.jsonl": {
+        "sha256": "8e66fce70cc8e68a1ba292a05d4b8541da0578ffcc3b89f3a9f608c03b6900df",
+        "bytes": 126111
+      },
+      "plant.xml": {
+        "sha256": "a0a08903850f01d94f9201b7f732f8da4cdf6f964c77098bbff722c47ac9128d",
+        "bytes": 83417
+      },
+      "config.yaml": {
+        "sha256": "48adb19b8870b07a1cdd1ac12793a682fe12158150f0261c76bf53455f87141b",
+        "bytes": 2616
+      }
+    }
+  },
+  "da_mit_delay_01": {
+    "source": "/home/ziwang/projects/agentic-mobile-manipulator/runs/da_mit_delay_01",
+    "copied_record_sha256": {
+      "control_final.json": "d5b7ae8d861170499d59b5bfe36817d02c41686b45339ca5fce2fe8eb7148398",
+      "backend_final.json": "53bc0031be2d523ae85ac68a0a7bac3cac75b25b3cf4ffedc0671e6240ce11f0",
+      "invocation.json": "c55e72622ffb54b60280b3501b2c4a71dc4eab02727168d98a8e85371ba86c63",
+      "provenance.json": "8f90a1c3a2f59dbe20cabf788ea3f8330e8cb281de40d8b6d41c15349d349b5b",
+      "actuation.json": "aa07406efcf44915aaa720dae5bf6ac670f6a745bd9812201eebf8bc1f7134d8",
+      "final_evaluation.json": "aab27e1cd470711669b45cb78395c3889023d2e60f1a7bb1c9c2f610de26dcce"
+    },
+    "large_original_records": {
+      "control.jsonl": {
+        "sha256": "aad81d13b05ee1e65b64ccb4c660d2e8e1e77fadb81b40acb924df08fc673d4a",
+        "bytes": 256609
+      },
+      "trajectory.jsonl": {
+        "sha256": "bef63ba6a2ba137e9dfcc193e4de1dd44c228c33d86abf80f17045ca305163d2",
+        "bytes": 67995
+      },
+      "evaluation.jsonl": {
+        "sha256": "597e43b0447d6d7d810bf699663deae2568b49c3e8ae5d5ffdb5955d042b6c8d",
+        "bytes": 14568
+      },
+      "plant.xml": {
+        "sha256": "a21cd195d358c5b00b1190e6434028c869d3d74883aada49decd800be22ae45b",
+        "bytes": 83417
+      },
+      "config.yaml": {
+        "sha256": "af12a240727f0effcce048f6733746f4e67f6fbc0f05db7638b31dc8eee05e1a",
+        "bytes": 2619
+      }
+    }
+  },
+  "da_mit_compute_jitter_02": {
+    "source": "/home/ziwang/projects/agentic-mobile-manipulator/runs/da_mit_compute_jitter_02",
+    "copied_record_sha256": {
+      "control_final.json": "db88d192f1d440e250bdfddc47387041c24f94b445971df8712b91c82124db5d",
+      "backend_final.json": "e1ce94f965dc2bdc1711eaeabb3d9bc2f1c2dcfc5654763bd928f155d4dad57b",
+      "backend_metadata.json": "116e83f5746a2bc5dba1ca690113a1b886355a2be0d2f7e7f0ece8f7ca5e7461",
+      "termination.json": "6e8c7e66d8c709a52347285f81b94752b25851ef58c4f6bb9ecda873376bc361",
+      "run.json": "98808abd780a34326e4116b1cdc6f3cc3294ef2d82f2c4c7c9eea05dc1584bc9",
+      "invocation.json": "14dffc1be8feaa85f696b5cdfd51b14ecf605e110a0a1147e51d89029d019b56",
+      "provenance.json": "52ce881df6b33bd966637b6b91eb76ef04e372c07cd41376681786fe74f32c95",
+      "actuation.json": "57269dc76b3f9869850e2651b4ec56d9b4e67c0e6e9ed62bf931792ff7b17c57",
+      "final_evaluation.json": "f4d58a164244610b1120db49b601eb14c248d2ba0587ba931e1f8c7e51980f72"
+    },
+    "large_original_records": {
+      "control.jsonl": {
+        "sha256": "ac2ab6da113a205094e065f00e163a24cee954d27b6a99c0c0a02af2c022c2dc",
+        "bytes": 5169163
+      },
+      "trajectory.jsonl": {
+        "sha256": "5c2b9e06ed9a859a651ecc930fb1644586dab8619f1af1d5eca4146759d2e1a0",
+        "bytes": 680166
+      },
+      "evaluation.jsonl": {
+        "sha256": "86810561cc6104eb4a5854d40fb15004a5de9ffcab927eaad5c3af5cd6d93a68",
+        "bytes": 147082
+      },
+      "plant.xml": {
+        "sha256": "495a56073b4d622e842602cfed5dedef004d42a5da161669a10f1b1343fcbc91",
+        "bytes": 83444
+      },
+      "config.yaml": {
+        "sha256": "4c2b5fd7eda435d5b80cb2041cfb60f6209a0a54627096707ac1ad586e542640",
+        "bytes": 2618
+      }
+    }
+  },
+  "da_mit_delay_diagnosis_02": {
+    "source": "/home/ziwang/projects/agentic-mobile-manipulator/runs/da_mit_delay_diagnosis_02",
+    "copied_record_sha256": {
+      "control_final.json": "c26d237b9f5ae63b1909c114410535b3dcf1ef7970502c9d244447dc0566e530",
+      "backend_final.json": "6d5fe00b30f67015123d1096b319833d7691daa6a0c8742ab59822cb56231290",
+      "backend_metadata.json": "116e83f5746a2bc5dba1ca690113a1b886355a2be0d2f7e7f0ece8f7ca5e7461",
+      "termination.json": "c59b1bf163030fc92be6da60e6dac6ff11059e7574003018de9b7c9f849e544d",
+      "run.json": "62eed4d158b2b1a78ee43695d9e9f91a3e0af8ebb61777d8fa3147ccac90bef8",
+      "invocation.json": "113938202856c15781f608f55697f1777b6615a0200a777b7ef94f893caf35ba",
+      "provenance.json": "3fa8fe29e388c88f54149c75dc6fdf5e3f591f30ea95cd4171a81bf2e7b9cc11",
+      "actuation.json": "88c2f705a3e6b8bf29104518193ed17b1b74fa9c669b1c651fc22ce8fb0219b8",
+      "final_evaluation.json": "e71d5af49b181839f1979a8ae4fab4e1c78a8306bc6698db433497ccb87c4346"
+    },
+    "large_original_records": {
+      "control.jsonl": {
+        "sha256": "07750d0b97112ab7309f78fd9332d54ea57d0bf5413cef418e771c75c33e0b75",
+        "bytes": 2834461
+      },
+      "trajectory.jsonl": {
+        "sha256": "80b8b98ee1848c3108fe04aa639f8075e2a9009244f98c77c57822e76adcea56",
+        "bytes": 678971
+      },
+      "evaluation.jsonl": {
+        "sha256": "d0fca482d7526ef9e7c49f08df963c015e2ab8b4bd7b9d87c32b5d1fdd6c159c",
+        "bytes": 146720
+      },
+      "plant.xml": {
+        "sha256": "fd973b5c77fdfc756fa6944a34eebef9c99549409934330e79fece938a0d01de",
+        "bytes": 83447
+      },
+      "config.yaml": {
+        "sha256": "269562705e67d655e4f51324ad34b31e1fbd0e5ce702f49c6fa9393ff40bdd57",
+        "bytes": 2619
+      }
+    }
+  },
+  "da_mit_pickup_01": {
+    "source": "/home/ziwang/projects/agentic-mobile-manipulator/runs/da_mit_pickup_01",
+    "copied_record_sha256": {
+      "control_final.json": "ede7b71c4fde63661ed6c1d21f9b9c80cb9ac4892952005cf56dfdc7d9ac613d",
+      "backend_final.json": "ff8417143aa096280c87dac394905808aff78b1a7ee81ed0f8ca4e424b258259",
+      "invocation.json": "7e6def372774871f1f9fa037a2aa79a89062f81f32f0e81213397a18a1d2d9c1",
+      "provenance.json": "975e4830b2584a75f65aa4fde787b82a8155abc2f14bf0416ebb475c3e071b16",
+      "actuation.json": "514241a835b90ba7e3423ed7c0dd345e6d12bdcad23b22b0ff70d01f0febf73f",
+      "final_evaluation.json": "4960732bdbe274f0b7321fde78c3d56a89fae3fadac8437befdb358d9488ce81"
+    },
+    "large_original_records": {
+      "control.jsonl": {
+        "sha256": "7079cc37d29d3404b465ddb36251120c7a3ac449d17906171ea17d43cd097797",
+        "bytes": 41685317
+      },
+      "trajectory.jsonl": {
+        "sha256": "6104d97f6c304add63c1b0d2ccd099e6eb9be749cb24abfd24a53c53707cd77b",
+        "bytes": 5874502
+      },
+      "evaluation.jsonl": {
+        "sha256": "5d586d531fb6ba441794dd9233465e867de5f022d0971df35e3773bb42208aef",
+        "bytes": 1325517
+      },
+      "plant.xml": {
+        "sha256": "51aa17b4527658fc5695f0aa185c48e041abcfbce69f29f113685cae116ef959",
+        "bytes": 83420
+      },
+      "config.yaml": {
+        "sha256": "1e6cc377a781cbf52ca68ff50b0ba0ad6a3d756c6d37333606e6f304643e1e54",
+        "bytes": 3387
+      },
+      "decisions.jsonl": {
+        "sha256": "47e516f0f44be56cd49b602a65aa302e91b46c76ab2a30ca302bb069168ee210",
+        "bytes": 20415
+      },
+      "analysis/replay/pickup.mp4": {
+        "sha256": "35afe773c41cd98f362eb96750098e5ff50386dbb3bb4fd524cac8a7b3f8e70c",
+        "bytes": 6652940
+      }
+    }
+  },
+  "da_mit_pickup_03": {
+    "source": "/home/ziwang/projects/agentic-mobile-manipulator/runs/da_mit_pickup_03",
+    "copied_record_sha256": {
+      "control_final.json": "8aaf311007573fac504f74931012da433f44d270689346263457f97bdb17d004",
+      "backend_final.json": "549daea193ab7d72776d9a3d413fc80f0e61f949e48d0d0c41ac269d2874926a",
+      "backend_metadata.json": "116e83f5746a2bc5dba1ca690113a1b886355a2be0d2f7e7f0ece8f7ca5e7461",
+      "termination.json": "b6d62bc4db4efd38cb54f7dc9c88e8d725c704b87ef78cf39392462ee73d4c52",
+      "run.json": "469b3f47f5fb0dc21329f70aa86eaac888dc8bf0ffa24ccc47ce90d7e182b719",
+      "invocation.json": "d5780001cdbd5dd3809ab2d1f096b5f57e78ecf9921a30d9615a63132ea6eccb",
+      "provenance.json": "382af089555c72b42d17de7c659abd20b00672008403f90257974149942f4e7a",
+      "actuation.json": "f68ecde505cef491833bbcfd1f70a7e240322b1020cc435b1b502640aa9518a4",
+      "final_evaluation.json": "5c7eb5e8fe3c312a5ced139229c7a97f4da4f820372fb3216a8790465b271d62"
+    },
+    "large_original_records": {
+      "control.jsonl": {
+        "sha256": "3ef54227462fb38cbae3db70014ac34322ef76bd987e2b81c151c8ae51416cde",
+        "bytes": 34842770
+      },
+      "trajectory.jsonl": {
+        "sha256": "31f5c14e5c25aa872b1a3e43ec823bb19e53140746b3872f6cfd93ba69ee1924",
+        "bytes": 4714901
+      },
+      "evaluation.jsonl": {
+        "sha256": "2809014c6feed6826e8b66fc05c1e64e0fce9f62b2548e4422cdb085d374cbeb",
+        "bytes": 1021787
+      },
+      "plant.xml": {
+        "sha256": "c817a2b771cedf97e9aaa3daac3359fab6471588bc9031dab0a069bb121432f9",
+        "bytes": 83420
+      },
+      "config.yaml": {
+        "sha256": "65e4810b30b0d83d120520bf2940a377d2bb4e4c598590f404b60ff4250e1552",
+        "bytes": 3534
+      },
+      "decisions.jsonl": {
+        "sha256": "1b9e46e6baa5fae73e5371158acc547099f8631536406ee9c1cc5145bc1505eb",
+        "bytes": 25036
+      },
+      "analysis/replay/pickup.mp4": {
+        "sha256": "39918fad55069c3c47c85b6e4e01c2ae8c1c5d4d4c3c5198fb0bb49a2c51fc17",
+        "bytes": 5395903
+      }
+    }
+  },
+  "da_mit_pickup_04": {
+    "source": "/home/ziwang/projects/agentic-mobile-manipulator/runs/da_mit_pickup_04",
+    "copied_record_sha256": {
+      "control_final.json": "8046f5d28537ff3dbe7fca4a41c9bd4f62b2a5505c9f974c285a26b52bfefbd7",
+      "backend_final.json": "1afe0b2f71f92b32831e5449024aac1da86134987add5e7a628ad12c17b5daab",
+      "backend_metadata.json": "a36487c6c1e664113db738a297c02918a52a787e23606146b76b0cf6a25f09fb",
+      "termination.json": "2aee5e0c65cd070442e07f325742601fe1437076ee0b8c9f4d653fb14029cc56",
+      "run.json": "4642cebc47be35666ad2931bc2a55e19d5e499fdca50708d31fa57ff919af044",
+      "invocation.json": "a3c40e901efe7c147b8090399d6177ed777d7a701047f04fd1f7ebb412cda76f",
+      "provenance.json": "e70f6e522d0389de6a0c775052f9b15664b2ed35c25f855487d577086e309cb1",
+      "actuation.json": "6686d691967bbf6d23b139c68d3937793c3535b0a458532518dd2bebffd85d31",
+      "final_evaluation.json": "e421fd239c4f551611522b2f9e4cc9f96987640d9bd4f202984719879751018c",
+      "qp_failure.json": "383b7195d324004ae59542d9d3361089fb9baaa35549d52a24b7d424198a7001"
+    },
+    "large_original_records": {
+      "control.jsonl": {
+        "sha256": "cc4abc7538446be1b3a87ba592305d9702c32241132c7b0a2367f57a0e6c1345",
+        "bytes": 43828827
+      },
+      "trajectory.jsonl": {
+        "sha256": "6498d76184d626a661be83a0208ee65688331690deb282b5664fd6146db64ec4",
+        "bytes": 5940430
+      },
+      "evaluation.jsonl": {
+        "sha256": "43ca666780dad9e5b658104af930f4ae3ab8fd5a29a72b1c0a9ea5bf1ea8e307",
+        "bytes": 1305219
+      },
+      "plant.xml": {
+        "sha256": "9b57791e46430a4e1ce08dd605751de0cc3f619dfccef903aa499b3fa664522a",
+        "bytes": 83420
+      },
+      "config.yaml": {
+        "sha256": "18bc80234cefc727d72bc4758eae272e37be59aad1bb16aec1290a5f87382709",
+        "bytes": 3674
+      },
+      "decisions.jsonl": {
+        "sha256": "bb20c489337b0607dceb9e571866bb52005a82ef8e6569c30d1eabc4214e38d9",
+        "bytes": 36205
+      },
+      "analysis/replay/pickup.mp4": {
+        "sha256": "add36c4d31fb478d31f503a4746cfc474bf3cdb45e5981c4e5c0d12e72d4c82a",
+        "bytes": 6755108
+      },
+      "qp_failure.npz": {
+        "sha256": "7a5694e20e49e019e085ab8816d14455d909ee204bf60bb576ddea1dfd0af58a",
+        "bytes": 6972
+      },
+      "analysis/replay/pickup_unannotated.mp4": {
+        "sha256": "8c884a3b52735062fab4ba38a3e2ec6c866e630309471a92081d829914831a9a",
+        "bytes": 6469840
+      }
+    }
+  },
+  "da_mit_pickup_05": {
+    "source": "/home/ziwang/projects/agentic-mobile-manipulator/runs/da_mit_pickup_05",
+    "copied_record_sha256": {
+      "control_final.json": "ce8b50cbacf11e4bfc46d00612fe37ca6d2646169939ca1ad6cda868544c9ddc",
+      "backend_final.json": "24f20c7ff62b09558437b4aecfb2a111691d1959c5305caeaccd58c63bcbf74f",
+      "backend_metadata.json": "a36487c6c1e664113db738a297c02918a52a787e23606146b76b0cf6a25f09fb",
+      "termination.json": "d1f8d23aec95aa7b539493dd3a5a05fd590044265ac150cd0f8a3fc5ec7462c8",
+      "run.json": "25a983b82db3d9f494b4bc658b36efacb9c1da9f87295e8b28b4f237e59a4921",
+      "invocation.json": "a3c40e901efe7c147b8090399d6177ed777d7a701047f04fd1f7ebb412cda76f",
+      "provenance.json": "e8d1412412e211c90adba277c96514e4e999fad3ecca6b8ca1320a51e85147df",
+      "actuation.json": "fbd31727c66ec2602de5b97220b3444ddbbe04dff5d145a586733fa31eff7d92",
+      "final_evaluation.json": "ba3ef766864d6d788e5bb29a06b514f6661c8672b7f45bcdbfb404433450ead4",
+      "physics_evaluation.json": "acd2f98b48886ab9aaf9044a757c9677d12dfa224e91d7c75568a50f3ca499eb",
+      "analysis.json": "41f3a627a3eadfccdcefb00a29f3d43f2ef4e8dbcb607a131256d100fe3ff12e",
+      "tcp_tracking.png": "75e3eaaba429e664a663a71b300a41ae3c793f7438bae93f8c4636713f7b5ad3",
+      "policy_audit.json": "25a180a8e66dbd51b833de3ad8274b23be08d231df40a6811ffeb0d7e01ed22f",
+      "replay.json": "15ef41c077c80e74bd76706e993727f6db07bbd9cf59334c177c0511013c4f89",
+      "frame_350s_labeled.png": "e91660a3c1aeb7034661cc7759e84611eade58b482a55362a98547cd6e0c48bd"
+    },
+    "large_original_records": {
+      "control.jsonl": {
+        "sha256": "f7b2333d13564d7daf662986579cb456df2dd9ef29a739a8d0b188c23e5f77b1",
+        "bytes": 110459746
+      },
+      "trajectory.jsonl": {
+        "sha256": "f54fcdfc28c2b9c0a4a01af8537a0509fa350fe5cea176be4f3b40e99591f978",
+        "bytes": 9140180
+      },
+      "evaluation.jsonl": {
+        "sha256": "94d9deba8b9eff8179540d1f47381e77f74c2bc6b4923d53d2688da0f9917e39",
+        "bytes": 2020916
+      },
+      "plant.xml": {
+        "sha256": "c8a6b724d73eb75bc0a4eecf194215a3d8b408f638d4d73d480ec8069355561a",
+        "bytes": 84179
+      },
+      "plant.mjb": {
+        "sha256": "2b010e9f74de04321e084e970996873f98d266dc34e0bb75275b047df0fb58fb",
+        "bytes": 110485594
+      },
+      "config.yaml": {
+        "sha256": "18bc80234cefc727d72bc4758eae272e37be59aad1bb16aec1290a5f87382709",
+        "bytes": 3674
+      },
+      "decisions.jsonl": {
+        "sha256": "917310c626be3b6b751997064ddfa8b47926a261579272dc4e597e4d9ed7d85f",
+        "bytes": 51585
+      },
+      "analysis/replay/pickup.mp4": {
+        "sha256": "52421865f9fb956a31075c489940f8edd81b7d88c4a2962b2a476ed062fc487f",
+        "bytes": 7488546
+      }
+    }
+  },
+  "da_mit_final_nominal": {
+    "source": "/home/ziwang/projects/agentic-mobile-manipulator/runs/da_mit_final_nominal",
+    "copied_record_sha256": {
+      "control_final.json": "8b167a83cfbd69ed0bbeb6cbd3ded6e5ec89831e276fe0fffc582791c6b55219",
+      "backend_final.json": "36544ae4bbb42a5aed06685f3530c80e30489d4c17fc24092247029c9cb9921a",
+      "backend_metadata.json": "7c8e3e0693bcddea91310d9fac3c826e5ed4999d6ec76faadf5ce288e8b34b96",
+      "termination.json": "4abaff99dacaf72b69b1c08d1624fe683b254d8e0dc301b385f24125b54bca14",
+      "run.json": "96bbe42067e3c51bc92252aea3629fd6f51ed0fbe99ff525738ab1cd586676bd",
+      "invocation.json": "3cad1a9313d8fe07718aee3a692f5316f340f32adcb1b6cfaff9e56e838d8079",
+      "provenance.json": "4d490ddb521deb2a8807b3e5453555a2f98ff06f05153f12d843104c112a8a3e",
+      "actuation.json": "612d6c18fe01ccd7ef8a0e312bae988c610eac907ab9e74be8db0236339e7872",
+      "final_evaluation.json": "6282eb59b38c4d1f1b5f4a75ddf723e6a350f87d17c56a51140a8a58e1d379d0",
+      "physics_evaluation.json": "e33102b7685d6cf58972d3f7b6ff1070d4c98b36e949de51404128e4066d75d9",
+      "analysis.json": "bd072d32efb8228dfe3ea293a881e31a16335b4098e43afe60819755a49ac63d",
+      "tcp_tracking.png": "2a3b17ba791f4a1dfec6db001fdeddd396316fbc4e7f8009acc186d48e8ef744"
+    },
+    "large_original_records": {
+      "control.jsonl": {
+        "sha256": "79fe2c8661a6b0f94a1dabd8cfa1f1a1acc52b7ba45b97932888a8521299ba26",
+        "bytes": 8212245
+      },
+      "trajectory.jsonl": {
+        "sha256": "50068eff7468266fb3353531e7294306f7558c3f63e777f2d2028e368e993541",
+        "bytes": 584648
+      },
+      "evaluation.jsonl": {
+        "sha256": "4740ef927de30cd22f3a104cf0950f9371f70ba44d588f3b5ba7feaac58c2534",
+        "bytes": 126116
+      },
+      "plant.xml": {
+        "sha256": "3baf5e70eafcdaccaaad8f3f452c989e2277b2fb379b4bb38fc80e34324f9992",
+        "bytes": 84191
+      },
+      "plant.mjb": {
+        "sha256": "669611c724e17bb39723aa13e99d7ba841a0447927b0e48444e43bfecde36062",
+        "bytes": 110485606
+      },
+      "config.yaml": {
+        "sha256": "1171b55770a163195862138a11b5818898982025cf2b4460d9fa120c06efb112",
+        "bytes": 2730
+      }
+    }
+  },
+  "da_mit_final_delayed": {
+    "source": "/home/ziwang/projects/agentic-mobile-manipulator/runs/da_mit_final_delayed",
+    "copied_record_sha256": {
+      "control_final.json": "78467696214022d8d9ac759484b3f32c2bbbaadc46139029c496c3fd23b54ec1",
+      "backend_final.json": "4b544df8beadd5e26cef49f28c4807a31696a44cbc4b50c3d51014d700a2242e",
+      "backend_metadata.json": "7c8e3e0693bcddea91310d9fac3c826e5ed4999d6ec76faadf5ce288e8b34b96",
+      "termination.json": "4fc1c594b03377c90544669e673816ffdb03fe93f7157474bef5d84b01977a59",
+      "run.json": "120cb503cc6f4669756c1196429c3f0336c16723b3107de2091cb55797d499bd",
+      "invocation.json": "cc80513c00cbef27c71f3ce120e17c8f7252b286841563d3e136ae3a1e4f54eb",
+      "provenance.json": "4d490ddb521deb2a8807b3e5453555a2f98ff06f05153f12d843104c112a8a3e",
+      "actuation.json": "128721b643f0b66b4fc24981bac3768bb255913dad256d2d52540884098368ea",
+      "final_evaluation.json": "b47ed4a50bf73e4459124f3cb41f625183ddaabfc94e38e19d231e5b8a30153d",
+      "physics_evaluation.json": "3b99f26e8d87a654c9a05aa7e009b05621dffae74aeb25e688ed00cce69d7d7c",
+      "analysis.json": "2078887c82a3c1045cb721aeef17147d6ef3153fc6055e2805af16650cd92521",
+      "tcp_tracking.png": "b4aab149c3c636b93010dd1c83197e1f7462067c14ed684591debf333cd0f5ec"
+    },
+    "large_original_records": {
+      "control.jsonl": {
+        "sha256": "933f900de630c0f29588afc4d94c37cbdfce18a7a98e3b19309ef5deaa29c3ad",
+        "bytes": 4749674
+      },
+      "trajectory.jsonl": {
+        "sha256": "63a884a1f8a2f0c4592c8fd352b942b0cb3a6ce084be26784d5e47cf826b9658",
+        "bytes": 680168
+      },
+      "evaluation.jsonl": {
+        "sha256": "8da33506a1e4856400f8ec5cff355982c05800078b4ff00a1047b70998ccc71b",
+        "bytes": 147098
+      },
+      "plant.xml": {
+        "sha256": "c32a89fbb07f3b1ef01aa6855c24e20618c01eba76ae36dabd1cffb3572de8b4",
+        "bytes": 84191
+      },
+      "plant.mjb": {
+        "sha256": "c183953f1c41e2951a2cc2c18798a93831cc11e82fc61dde87653ecdd7ad88d4",
+        "bytes": 110485606
+      },
+      "config.yaml": {
+        "sha256": "a08793134d1a9847833bca69ccd20b00bc4ea29681aa30401e75c00b6a247987",
+        "bytes": 2733
+      }
+    }
+  },
+  "native_preflight": {
+    "copied_record_sha256": {
+      "native_preflight.json": "3eb6de57a78c47ae3322f62e0368ba319e7564fd6161eef91afdc76e14c36986"
+    },
+    "scope": "Configuration-only; no device access or hardware qualification"
+  }
+}

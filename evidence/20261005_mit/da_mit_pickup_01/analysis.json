@@ -1,0 +1,396 @@
+{
+  "run": "/home/ziwang/projects/agentic-mobile-manipulator/runs/da_mit_pickup_01",
+  "phase": "closed",
+  "fault": null,
+  "evidence_kind": "shared_MIT_control_and_actuator_protocol",
+  "native_qualified": false,
+  "ticks": 11964,
+  "generated": 11964,
+  "accepted": 11963,
+  "pending": 11964,
+  "wall_span_s": 240.03318847098853,
+  "overruns": 1,
+  "history_advanced_without_acceptance": 0,
+  "target_sources": {
+    "proposal_matched_to_recorded_errors": 1919
+  },
+  "final_tcp": {
+    "actual": {
+      "left": {
+        "position_m": [
+          0.5058492120311187,
+          0.24529204532325682,
+          0.8217346571895909
+        ],
+        "quaternion_xyzw": [
+          0.7077057395930124,
+          -6.274007743488193e-07,
+          0.7065073149116223,
+          -1.109428407782542e-05
+        ]
+      },
+      "right": {
+        "position_m": [
+          0.5618565242526438,
+          0.0024007601259691536,
+          0.8216834570949193
+        ],
+        "quaternion_xyzw": [
+          0.6644089727268773,
+          0.6430597792337298,
+          0.292048076217685,
+          -0.2444233181785889
+        ]
+      }
+    },
+    "reference": {
+      "left": {
+        "position_m": [
+          0.5058875266845952,
+          0.2452938650771487,
+          0.8220530652980639
+        ],
+        "quaternion_xyzw": [
+          0.7073552447218134,
+          6.282803946551932e-06,
+          0.7068582302413637,
+          -8.069509596397686e-06
+        ]
+      },
+      "right": {
+        "position_m": [
+          0.5625920075170562,
+          0.0031469283401800996,
+          0.824096583901799
+        ],
+        "quaternion_xyzw": [
+          0.6634152896947265,
+          0.6428989706675577,
+          0.29433567134973193,
+          -0.24480110188673412
+        ]
+      }
+    }
+  },
+  "tcp_error": {
+    "left": {
+      "actual_to_reference": {
+        "position_mm": {
+          "statistics": {
+            "p50": 0.3304706450449129,
+            "p95": 0.6895549578732515,
+            "p99": 2.277161102534948,
+            "max": 16.877279800426265
+          },
+          "last_available": 0.3207102239040361,
+          "last_available_time_s": 240.03318847098853
+        },
+        "orientation_deg": {
+          "statistics": {
+            "p50": 0.05672987614169574,
+            "p95": 0.058799284854941576,
+            "p99": 0.36967168868291983,
+            "max": 5.097679160585045
+          },
+          "last_available": 0.056840777989758486,
+          "last_available_time_s": 240.03318847098853
+        }
+      },
+      "actual_to_desired": {
+        "position_mm": {
+          "statistics": {
+            "p50": 1.851347866615899,
+            "p95": 1.9028602007972775,
+            "p99": 2.588577071469849,
+            "max": 5.609265651100782
+          },
+          "last_available": 1.6523496391192545,
+          "last_available_time_s": 213.2025244300021
+        },
+        "orientation_deg": {
+          "statistics": {
+            "p50": 0.011448182747049595,
+            "p95": 0.021881034763232086,
+            "p99": 0.04870615257185514,
+            "max": 0.33004088890169025
+          },
+          "last_available": 0.05173497280666315,
+          "last_available_time_s": 213.2025244300021
+        }
+      },
+      "reference_to_desired": {
+        "position_mm": {
+          "statistics": {
+            "p50": 1.7849399089047595,
+            "p95": 1.81511853392214,
+            "p99": 2.1184953244763296,
+            "max": 3.5858532196158195
+          },
+          "last_available": 1.0906166108221984,
+          "last_available_time_s": 213.2025244300021
+        },
+        "orientation_deg": {
+          "statistics": {
+            "p50": 0.06437040569210102,
+            "p95": 0.0687240396615261,
+            "p99": 0.08381230630084058,
+            "max": 0.17772967024950284
+          },
+          "last_available": 0.003326266308806685,
+          "last_available_time_s": 213.2025244300021
+        }
+      }
+    },
+    "right": {
+      "actual_to_reference": {
+        "position_mm": {
+          "statistics": {
+            "p50": 0.33047076036714834,
+            "p95": 2.6303845435306865,
+            "p99": 5.977271550983443,
+            "max": 16.877249082713863
+          },
+          "last_available": 2.6307572336136857,
+          "last_available_time_s": 240.03318847098853
+        },
+        "orientation_deg": {
+          "statistics": {
+            "p50": 0.056762926497826,
+            "p95": 0.2896487387166421,
+            "p99": 1.325119799715269,
+            "max": 4.911172717057002
+          },
+          "last_available": 0.2896488561433133,
+          "last_available_time_s": 240.03318847098853
+        }
+      },
+      "actual_to_desired": {
+        "position_mm": {
+          "statistics": {
+            "p50": 9.698868028879549,
+            "p95": 32.147774038940454,
+            "p99": 107.2752632968871,
+            "max": 173.18096482225846
+          },
+          "last_available": 4.8420486615765554,
+          "last_available_time_s": 213.2025244300021
+        },
+        "orientation_deg": {
+          "statistics": {
+            "p50": 4.16163389171269,
+            "p95": 8.761541907083505,
+            "p99": 44.79943402611869,
+            "max": 62.76373922279841
+          },
+          "last_available": 1.18033126848996,
+          "last_available_time_s": 213.2025244300021
+        }
+      },
+      "reference_to_desired": {
+        "position_mm": {
+          "statistics": {
+            "p50": 9.459264382771662,
+            "p95": 34.62244139599704,
+            "p99": 98.9784592468719,
+            "max": 173.06779823909883
+          },
+          "last_available": 2.5116423028654666,
+          "last_available_time_s": 213.2025244300021
+        },
+        "orientation_deg": {
+          "statistics": {
+            "p50": 4.165795668429588,
+            "p95": 8.733245698319463,
+            "p99": 44.139763192803066,
+            "max": 62.77434920286287
+          },
+          "last_available": 1.2207455358096173,
+          "last_available_time_s": 213.2025244300021
+        }
+      }
+    }
+  },
+  "timing": {
+    "compute_and_submit_ms": {
+      "p50": 1.7296305013587698,
+      "p95": 2.5143810431472957,
+      "p99": 2.975390217325187,
+      "max": 18.465361004928127
+    },
+    "interval_ms": {
+      "p50": 20.062928000697866,
+      "p95": 20.073868703912012,
+      "p99": 20.079686840763316,
+      "max": 26.793611992616206
+    },
+    "acceptance_ms": {
+      "p50": 3.2786049996502697,
+      "p95": 5.412717998842708,
+      "p99": 5.920513226883482,
+      "max": 6.38510801945813
+    },
+    "feedback_age_at_solve_ms": {
+      "p50": 4.7493280144408345,
+      "p95": 7.00168091134401,
+      "p99": 7.679935800260866,
+      "max": 24.24316300312057
+    }
+  },
+  "base_commands": {
+    "translation_samples": 441,
+    "rotation_samples": 0,
+    "max_absolute_xyz": [
+      0.4,
+      0.0008849535864385829,
+      0.0
+    ],
+    "scope": "Commanded body velocity only; no inferred measured travel"
+  },
+  "grippers": {
+    "left": {
+      "commanded_values": [
+        1
+      ],
+      "measured_states": [
+        "open"
+      ],
+      "final_state": "open"
+    },
+    "right": {
+      "commanded_values": [
+        0,
+        1
+      ],
+      "measured_states": [
+        "between",
+        "open"
+      ],
+      "final_state": "between"
+    }
+  },
+  "actuation": {
+    "mode": "MIT",
+    "profile_torque_limits_nm": [
+      [
+        -52.0,
+        52.0
+      ],
+      [
+        -52.0,
+        52.0
+      ],
+      [
+        -28.0,
+        28.0
+      ],
+      [
+        -28.0,
+        28.0
+      ],
+      [
+        -6.8,
+        6.8
+      ],
+      [
+        -6.8,
+        6.8
+      ],
+      [
+        -6.8,
+        6.8
+      ],
+      [
+        -52.0,
+        52.0
+      ],
+      [
+        -52.0,
+        52.0
+      ],
+      [
+        -28.0,
+        28.0
+      ],
+      [
+        -28.0,
+        28.0
+      ],
+      [
+        -6.8,
+        6.8
+      ],
+      [
+        -6.8,
+        6.8
+      ],
+      [
+        -6.8,
+        6.8
+      ]
+    ],
+    "maximum_observed_torque_nm": [
+      4.56041071272773,
+      1.2016093307504434,
+      3.7583801692305485,
+      7.326117540135186,
+      2.17415016237905,
+      1.7036955613974563,
+      0.5408985316884376,
+      11.272258794885133,
+      3.2888205227607727,
+      5.81681729637296,
+      7.325839785552091,
+      2.747778368366557,
+      2.6514090846467653,
+      2.6346274810389474
+    ],
+    "gravity_compensation": "MIT_feedforward_only"
+  },
+  "pickup": {
+    "passed": false,
+    "final_hold_verified": false,
+    "final_retained_objects": [],
+    "evaluated_body": null,
+    "completed_budget": false,
+    "final_hold_interval_completed": false,
+    "maximum_by_object": {
+      "entity_apple_body": {
+        "height_gain_m": 0.08731813089984797,
+        "retained_s": 0.0,
+        "opposing_jaw_frames": 522
+      }
+    },
+    "final": {
+      "time_s": 232.80000000038348,
+      "objects": [
+        {
+          "name": "entity_apple_body",
+          "position_m": [
+            2.2327211697130567,
+            0.0004875497009755404,
+            0.774623441759142
+          ],
+          "height_gain_m": 0.023623441759141994,
+          "opposing_jaw_contacts": true,
+          "grasping_arms": [
+            "right"
+          ],
+          "support_contact": false,
+          "retained_s": 0.0
+        }
+      ],
+      "robot_static_contact_frames": 3,
+      "first_robot_static_contact": {
+        "time_s": 181.9340000001406,
+        "bodies": [
+          [
+            "entity_table_body",
+            "right_jaw_negative"
+          ]
+        ]
+      }
+    },
+    "samples": 3493,
+    "scope": "Recorded 15 Hz contact samples; not a continuous-contact guarantee or hardware qualification"
+  }
+}

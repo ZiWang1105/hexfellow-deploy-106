@@ -25,37 +25,47 @@ topics:
   decision:
     _target_: hexfellow_deploy.topics.JsonTopic
     prefix: ${topic_prefix}
+  health:
+    _target_: hexfellow_deploy.topics.JsonTopic
+    prefix: ${topic_prefix}
   images:
     _target_: hexfellow_deploy.topics.RGBDTopic
     prefix: ${topic_prefix}
     width: 640
     height: 360
+  frames:
+    _target_: hexfellow_deploy.topics.JsonTopic
+    prefix: ${topic_prefix}
+  feedback:
+    _target_: hexfellow_deploy.topics.JsonTopic
+    prefix: ${topic_prefix}
+  backend_status:
+    _target_: hexfellow_deploy.topics.JsonTopic
+    prefix: ${topic_prefix}
 interface:
   control:
     _target_: hexfellow_deploy.components.ControlComponent
     name: hexfellow_control
     request: ${topic:request}
     status: ${topic:status}
-    measured: ${topic:measured}
-    plant_state: ${topic:plant_state}
     workspace: ${workspace}
     output: ${output}
-    scene: configs/scenes/apple_on_table.yaml
-    controller: configs/controller/umi_pink_mobile.yaml
-    backend: simulation
-    startup_carry: false
+    startup_carry: true
     period_s: ${timing.control_period_s}
     time_budget: ${timing.compute_budget_s}
     health_timeout_s: ${timing.feedback_health_timeout_s}
     inject_every: 0
     inject_delay_s: 0.0
-    submit_delay_s: 0.0
+    frames: ${topic:frames}
+    feedback: ${topic:feedback}
+    backend_status: ${topic:backend_status}
   dashboard:
     _target_: hexfellow_deploy.dashboard.DashboardComponent
     name: hexfellow_dashboard
     status: ${topic:status}
     decision: ${topic:decision}
     images: ${topic:images}
+    health: ${topic:health}
     port: 8765
   camera:
     _target_: hexfellow_deploy.camera.SimulationCamera
@@ -64,10 +74,29 @@ interface:
     images: ${topic:images}
     workspace: ${workspace}
     output: ${output}
-    scene: ${interface.control.scene}
+    scene: ${interface.backend.scene}
     fps: 15
+  backend:
+    _target_: hexfellow_deploy.backend.BackendComponent
+    name: hexfellow_backend
+    workspace: ${workspace}
+    output: ${output}
+    deployment_config: ${deployment_config}
+    scene: configs/scenes/apple_on_table.yaml
+    backend: simulation
+    execute: false
+    submit_delay_s: 0.0
+    command_timeout_s: 0.1
+    feedback_timeout_s: ${timing.feedback_health_timeout_s}
+    frames: ${topic:frames}
+    feedback: ${topic:feedback}
+    backend_status: ${topic:backend_status}
+    measured: ${topic:measured}
+    plant_state: ${topic:plant_state}
+    control_status: ${topic:status}
 preprocess: {}
 input: {}
 inference: {}
 output_components: {}
 affinities: {}
+deployment_config: configs/local/desktop.yaml

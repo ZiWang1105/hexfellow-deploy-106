@@ -1,0 +1,18 @@
+{
+  "result": "passed",
+  "operation": "configuration-only; deployment(execute=True)",
+  "devices_opened": 0,
+  "hardware_commands_sent": 0,
+  "hardware_qualified": false,
+  "upstream_commit": "9398b61972bf983c7ab5609591b7eb4c95c6357d",
+  "research_authorization": "operator_requested_research_trial",
+  "source_binding_changes": [
+    {
+      "path": "src/policy_sim/control/ik_core.py",
+      "previous_sha256": "021c1906dc16a81c4b5d1d44aabb7577d7b3d444e3d254d94fc05e74003b7bb6",
+      "sha256": "b0e480d6f3329288b8380fc5f1caf37923229a31cc3ebf266086007886d7d185"
+    }
+  ],
+  "calibration_and_hardware_review_annotations_changed": false,
+  "scope": "Configuration and existing operator-requested research source identity only; no firmware, transport, sensor or stopping verification."
+}
