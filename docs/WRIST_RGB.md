@@ -14,6 +14,12 @@ allowlisted `geometry`. Geometry supplies active-profile K, fixed
 at the matched wrist encoder time. The optical-to-base transform is
 `FK_base_from_maver_x4_asm_mount2(q_measured) @ T_parent_from_optical`.
 The fixed wrist frame is not a TCP frame. Translations are meters.
+`geometry.right_tcp_T_from_wrist_optical` additionally maps camera optical points
+into the configured right TCP frame. It includes the actual URDF/assembly tool
+offset and is constant across arm/lift motion. The prompt uses it for gripper-relative
+alignment while retaining base-frame output targets. Its composition with the
+matched right TCP pose must equal the dynamic camera-to-base transform. This
+adds a convenient coordinate representation, not new calibration accuracy or depth.
 
 The candidate status, source SHA-256, and held-out RMS (11.3824 pixels at
 1280 x 720) remain visible. This is not independently validated physical accuracy.
