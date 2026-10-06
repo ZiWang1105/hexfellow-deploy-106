@@ -1,5 +1,13 @@
 # Shared MIT validation — 2026-10-05
 
+Operator-reported deployment result (2026-10-05)
+
+The operator reports that the last real deployment ran without control-stack
+errors, although it did not complete the requested task. This is evidence of
+an error-free reported run, not a successful pickup. No run directory, duration
+or exact source revision was supplied with this report; it is not attributed to
+the newly added wrist RGB input, and the saved logs have not been audited here.
+
 Fixed numeric DA control transport (2026-10-05)
 
 Replaced high-frequency feedback/reference/measurement JSON topics with fixed
