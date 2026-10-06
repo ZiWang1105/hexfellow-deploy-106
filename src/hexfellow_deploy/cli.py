@@ -23,6 +23,15 @@ def build(config_path, overrides=(), *, prompt=None, camera=True, execute_author
             workspace='${workspace}', deployment_config='${deployment_config}', output='${output}', fps=15)
     if not camera:
         del config.interface.camera
+    wrist = config.get('wrist_camera', {})
+    use_wrist = camera and config.interface.backend.backend == 'hardware' and wrist.get('enabled', False)
+    if use_wrist:
+        config.topics.wrist_images = dict(_target_='hexfellow_deploy.topics.RGBTopic', prefix='${topic_prefix}',
+                                         width=wrist.width, height=wrist.height)
+        config.interface.wrist_camera = dict(_target_='hexfellow_deploy.wrist_camera.NativeWristCamera',
+            name='hexfellow_wrist_camera', images='${topic:wrist_images}', output='${output}',
+            serial=wrist.get('serial'), fps=wrist.fps)
+        config.interface.dashboard.wrist_images = '${topic:wrist_images}'
     if prompt:
         if not camera:
             raise ValueError('Policy requires registered RGB-D camera')
@@ -37,6 +46,8 @@ def build(config_path, overrides=(), *, prompt=None, camera=True, execute_author
             output='${output}', prompt=prompt, agent_config='${policy.agent_config}',
             model='${policy.model}', reasoning_effort='${policy.reasoning_effort}',
             respect_limits=respect_policy_limits, base_config=base_config)
+        if use_wrist:
+            config.interface.agent.wrist_images = '${topic:wrist_images}'
     topics = build_topic_registry(config.topics)
     register_topic_resolver(topics)
     groups = {key: {name: instantiate(spec) for name, spec in config[key].items()}

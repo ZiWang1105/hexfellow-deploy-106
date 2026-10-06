@@ -1,0 +1,24 @@
+{
+  "scope": "Actual D435i RGB-only component and DA RGB topic; robot and ZED imports blocked; no API calls",
+  "frames_observed": 100,
+  "max_consumer_age_s": 0.005656394001562148,
+  "observed_fps": 29.983688246540627,
+  "exit_code": 0,
+  "health": {
+    "modality": "rgb_only",
+    "extrinsics_available": false,
+    "frames": 101,
+    "publications": 101,
+    "publication_misses": 0,
+    "error": null,
+    "serial": "243222074562",
+    "device": "RealSense D435I",
+    "width": 640,
+    "height": 480,
+    "fps": 30,
+    "received_s": 261717.889580311,
+    "published_s": 261717.889645833,
+    "closed": true,
+    "observed_s": 261718.666846569
+  }
+}

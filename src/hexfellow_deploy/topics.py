@@ -26,6 +26,24 @@ class JsonTopic(ArrayCommWrapper):
         return json.loads(row.array.tobytes().split(b"\0", 1)[0])
 
 
+class RGBTopic(ArrayCommWrapper):
+    """Uncalibrated RGB pixels with their original host receipt timestamp."""
+    def __init__(self, name, width=640, height=480, prefix='', *, create=True):
+        self.width, self.height = width, height
+        super().__init__(prefix+name, shape=(height,width,3), dtype='uint8', create=create)
+
+    def put(self, value, *, timeout=.001):
+        from mobile_manipulator.interfaces.contract import validate_rgb_camera
+        validate_rgb_camera(value)
+        if value['rgb'].shape != self.shape:
+            raise ValueError('RGB camera resolution differs from shared-memory schema')
+        return self.send(self.ArrayData(value['received_s'], value['rgb']), timeout=timeout)
+
+    def get(self, *, timeout=.001):
+        row = self.receive(timeout=timeout)
+        return None if row.timestamp <= 0 else dict(rgb=row.array, received_s=row.timestamp)
+
+
 class RGBDTopic(ArrayCommWrapper):
     """One atomic DA shared-memory publication of RGB, depth and encoder metadata."""
     def __init__(self, name, width=640, height=360, prefix="", *, create=True):

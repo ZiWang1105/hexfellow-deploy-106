@@ -3,6 +3,7 @@ from concurrent.futures import Future
 from collections import deque
 import threading
 import json
+import math
 from pathlib import Path
 import time
 import yaml
@@ -22,11 +23,29 @@ def request_async(callback, observation):
     return future
 
 
+def wrist_context(topic, head_timestamp, now, max_age=.5, max_skew=.15):
+    """Do not send stale context or pretend the two cameras are synchronized."""
+    from mobile_manipulator.interfaces.contract import validate_rgb_camera
+    frame = topic.get()
+    if frame is None:
+        return None
+    validate_rgb_camera(frame)
+    if not all(math.isfinite(x) for x in (head_timestamp,now)):
+        raise ValueError('Invalid observation clock')
+    age = now-frame['received_s']
+    if not 0 <= age <= max_age or abs(frame['received_s']-head_timestamp) > max_skew:
+        return None
+    return {'wrist':frame}
+
+
 class AgentComponent(DABaseInterface):
     def __init__(self, name, request, status, decision, images, workspace, output,
                  prompt, agent_config='configs/agent/rgbd_full.yaml', time_budget=.1,
-                 model='openai/gpt-6-astra', reasoning_effort='medium', respect_limits=False, base_config=None):
-        super().__init__(name, [request, status, decision, images], time_budget)
+                 model='openai/gpt-6-astra', reasoning_effort='medium', respect_limits=False, base_config=None,
+                 wrist_images=None):
+        super().__init__(name, [request, status, decision, images]
+                         +([wrist_images] if wrist_images is not None else []), time_budget)
+        self.wrist_images = wrist_images
         self.request, self.status, self.decision, self.images = request, status, decision, images
         self.workspace, self.output, self.prompt, self.agent_config = workspace, output, prompt, agent_config
         self.model, self.reasoning_effort = model, reasoning_effort
@@ -106,6 +125,13 @@ class AgentComponent(DABaseInterface):
                     waiting('waiting_for_camera', 'Waiting for a fresh matched RGB-D observation.')
                     time.sleep(.05)
                     continue
+                rgb_cameras = {}
+                if self.wrist_images is not None:
+                    rgb_cameras = wrist_context(self.wrist_images, frame['measured']['timestamp_s'], time.monotonic())
+                    if rgb_cameras is None:
+                        waiting('waiting_for_wrist_camera', 'Waiting for fresh wrist RGB near the head observation time.')
+                        time.sleep(.05)
+                        continue
                 identifier += 1
                 measured = frame['measured']
                 if not frame.get('robot_fk'):
@@ -122,7 +148,7 @@ class AgentComponent(DABaseInterface):
                     break
                 observation_id = client.calls+1
                 observation = Observation(observation_id, measured['timestamp_s'], frame['rgb'], frame['depth_m'],
-                                          {**measured, **frame['robot_fk']})
+                                          {**measured, **frame['robot_fk']}, rgb_cameras=rgb_cameras)
                 publish(phase='thinking', message='Model request in progress.', thinking_started_s=time.monotonic(),
                         observation_id=observation_id, model=config['model'], error=None)
                 future = request_async(client.act, observation)

@@ -30,7 +30,9 @@ figure{margin:0}img{max-width:100%;height:auto}figcaption{margin:8px 0;color:#cb
 <details><summary>Recent agent events</summary><pre id="events"></pre></details></section>
 <div class="views"><figure>
 <img id="camera" width="640" alt="Latest RGB observation"><figcaption>RGB observation</figcaption></figure><figure>
-<img id="depth" width="640" alt="Registered metric depth"><figcaption>Registered depth: 0-3 m; black = invalid</figcaption></figure></div>
+<img id="depth" width="640" alt="Registered metric depth"><figcaption>Registered depth: 0-3 m; black = invalid</figcaption></figure>
+<figure id="wrist-view" hidden><img id="wrist" width="640" alt="Uncalibrated wrist RGB">
+<figcaption id="wrist-status">Wrist RGB only; no camera-to-base calibration</figcaption></figure></div>
 <details><summary>Component health</summary><pre id="health"></pre></details>
 <details><summary>Control and actuator acceptance</summary><pre id="control"></pre></details>
 <details><summary>Agent decision / raw telemetry</summary><pre id="decision"></pre></details>
@@ -62,6 +64,11 @@ document.getElementById('health').textContent=JSON.stringify(s.health,null,2);
 document.getElementById('control').textContent=JSON.stringify(s.control,null,2);
 document.getElementById('decision').textContent=JSON.stringify(s.decision,null,2);
 document.getElementById('camera-health').textContent=JSON.stringify(s.camera,null,2);
+document.getElementById('wrist-view').hidden=!s.wrist;
+if(s.wrist){document.getElementById('wrist-status').textContent=s.wrist.available
+ ? 'Wrist RGB only; uncalibrated; age '+s.wrist.age_s.toFixed(2)+' s':'Waiting for fresh wrist RGB';
+ document.getElementById('wrist').style.opacity=s.wrist.available?'1':'.25';
+ if(s.wrist.available)document.getElementById('wrist').src='/wrist.jpg?t='+Date.now();}
 document.getElementById('camera').src='/rgb.jpg?t='+Date.now();
 document.getElementById('depth').src='/depth.jpg?t='+Date.now();
 }catch(e){document.getElementById('phase').textContent='Diagnostic connection unavailable'}
@@ -70,8 +77,9 @@ setTimeout(refresh,500)}refresh();</script></html>'''
 
 class DashboardComponent(DABaseInterface):
     def __init__(self, name, status, decision, images, port=8765, time_budget=.01, health=None,
-                 backend_status=None, output=None):
-        super().__init__(name, [status, decision, images]+[t for t in (health,backend_status) if t is not None], time_budget)
+                 backend_status=None, output=None, wrist_images=None):
+        super().__init__(name, [status, decision, images]+[t for t in (health,backend_status,wrist_images) if t is not None], time_budget)
+        self.wrist_images = wrist_images
         self.status, self.decision, self.images, self.port = status, decision, images, port
         self.health = health
         self.backend_status, self.output = backend_status, output
@@ -117,6 +125,11 @@ class DashboardComponent(DABaseInterface):
                         break
                 except OSError:
                     pass
+            if self.wrist_images is not None:
+                frame = self.wrist_images.get()
+                age = None if frame is None else time.monotonic()-frame['received_s']
+                self._latest['wrist'] = dict(available=age is not None and 0 <= age <= .5, age_s=age,
+                                            modality='rgb_only', extrinsics_available=False)
             return dict(self._latest, observed_s=time.monotonic())
 
     def run(self):
@@ -128,6 +141,14 @@ class DashboardComponent(DABaseInterface):
                 elif self.path == '/status':
                     body = json.dumps(owner.snapshot()).encode()
                     content_type = 'application/json'
+                elif self.path.startswith('/wrist.jpg'):
+                    import cv2
+                    frame = None if owner.wrist_images is None else owner.wrist_images.get()
+                    if frame is None or not 0 <= time.monotonic()-frame['received_s'] <= .5:
+                        self.send_error(503, 'Waiting for fresh wrist RGB')
+                        return
+                    body = cv2.imencode('.jpg', cv2.cvtColor(frame['rgb'], cv2.COLOR_RGB2BGR))[1].tobytes()
+                    content_type = 'image/jpeg'
                 elif self.path.startswith(('/rgb.jpg', '/depth.jpg')):
                     import cv2
                     frame = owner.images.get()

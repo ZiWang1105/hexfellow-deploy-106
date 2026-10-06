@@ -75,7 +75,8 @@ def test_yaml_override_cannot_supply_hardware_authorization(tmp_path):
     assert not (output/'topics.json').exists()
 
 
-def test_build_uses_deployment_relative_base_config_for_policy(monkeypatch, tmp_path):
+@pytest.mark.parametrize('backend', ['simulation','hardware'])
+def test_build_uses_deployment_relative_base_config_for_policy(monkeypatch, tmp_path, backend):
     import hydra.utils
     from hexfellow_deploy import cli, manager
     import deploy_anything.utils.config_utils as config_utils
@@ -90,8 +91,15 @@ def test_build_uses_deployment_relative_base_config_for_policy(monkeypatch, tmp_
         name=spec.name, base_config=spec.get('base_config')))
     monkeypatch.setattr(manager, 'InterfaceManager', lambda **kwargs: SimpleNamespace(**kwargs))
     config_path = ROOT/'third_party/hexfellow-deploy/configs/simulation.yaml'
-    _, _, selected = cli.build(config_path, [f'deployment_config={deployment}'], prompt='Diagnostic')
+    config, _, selected = cli.build(config_path, [f'deployment_config={deployment}',
+        f'interface.backend.backend={backend}',f'interface.backend.execute={str(backend=="hardware").lower()}'],
+        prompt='Diagnostic', execute_authorized=backend=='hardware')
     assert selected.interface['agent'].base_config == str(tmp_path/'controls/base.yaml')
+    assert ('wrist_images' in config.topics) == (backend=='hardware')
+    assert ('wrist_camera' in config.interface) == (backend=='hardware')
+    if backend=='hardware':
+        assert config.topics.wrist_images._target_ == 'hexfellow_deploy.topics.RGBTopic'
+        assert 'wrist_images' in config.interface.agent and 'wrist_images' in config.interface.dashboard
 
 
 @pytest.mark.parametrize('missing', ['control', 'backend', 'both'])

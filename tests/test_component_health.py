@@ -122,8 +122,9 @@ def test_dashboard_serves_fault_and_registered_depth(monkeypatch):
             return self.value
     health = dict(fault='camera: ValueError: camera failed', components={'camera': {'phase': 'failed'}})
     image = dict(rgb=np.zeros((24,32,3),dtype=np.uint8), depth_m=np.ones((24,32),dtype=np.float32))
+    wrist = Topic(dict(rgb=image['rgb'], received_s=time.monotonic()))
     dashboard = DashboardComponent('dashboard', Topic({'phase':'running'}), Topic({'phase':'thinking'}),
-                                   Topic(image), health=Topic(health), port=0)
+                                   Topic(image), health=Topic(health), port=0, wrist_images=wrist)
     dashboard.initialize()
     thread = threading.Thread(target=dashboard.run, daemon=True)
     thread.start()
@@ -141,6 +142,14 @@ def test_dashboard_serves_fault_and_registered_depth(monkeypatch):
         with urlopen(base+'/depth.jpg', timeout=1.) as response:
             assert response.headers['Content-Type'] == 'image/jpeg'
             assert response.read().startswith(b'\xff\xd8')
+        wrist.value['received_s'] = time.monotonic()
+        with urlopen(base+'/wrist.jpg',timeout=1.) as response:
+            assert response.headers['Content-Type']=='image/jpeg'
+        wrist.value['received_s'] -= 1.
+        from urllib.error import HTTPError
+        with pytest.raises(HTTPError) as error:
+            urlopen(base+'/wrist.jpg',timeout=1.)
+        assert error.value.code == 503
     finally:
         dashboard.signal_stop()
         thread.join(2.)

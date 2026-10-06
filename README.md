@@ -12,6 +12,8 @@ modeled-plant behavior, not firmware dynamics, network reliability or hardware
 stopping. See [architecture](docs/ARCHITECTURE.md) and [validation](docs/VALIDATION.md).
 The [DA alignment audit](docs/DEPLOY_ANYTHING_ALIGNMENT.md) lists implemented
 parity, deliberate robot-specific differences and unresolved recovery behavior.
+Native policy observations now add an [uncalibrated wrist RGB view](docs/WRIST_RGB.md)
+to head RGB-D. Its independent capture supplies no invented camera-to-base transform.
 
 DA is pinned to `6c2bda40ebee56ab3a50b8dd62aaf4df5814e5a8`. Robot assets,
 calibration, sensor contracts, policy client and PinkIK are imported from the

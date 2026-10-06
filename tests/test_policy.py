@@ -10,7 +10,8 @@ from hexfellow_deploy.policy import AgentComponent
 from hexfellow_deploy.workspace import activate
 
 
-def test_policy_boundary_and_decision_archive(monkeypatch, tmp_path):
+@pytest.mark.parametrize('include_wrist', [False, True])
+def test_policy_boundary_and_decision_archive(monkeypatch, tmp_path, include_wrist):
     """Exercise the component contract with a stub API; no model/hardware claim."""
     root = Path(__file__).resolve().parents[3]
     monkeypatch.chdir(root)
@@ -65,13 +66,17 @@ def test_policy_boundary_and_decision_archive(monkeypatch, tmp_path):
             return super().put(value, **kwargs)
     decision = Topic()
     agent = AgentComponent('test_agent', Requests(), status, decision, Topic(frame), str(root), str(tmp_path),
-                           'Diagnostic paired target', base_config=str(base_config))
+                           'Diagnostic paired target', base_config=str(base_config),
+                           wrist_images=Topic(dict(rgb=frame['rgb'],received_s=measured['timestamp_s'])) if include_wrist else None)
     agent.initialize()
     agent.run()
     assert len(observations) == 1
     assert set(observations[0].proprioception) == policy.PROPRIOCEPTION_FIELDS
     assert observations[0].timestamp_s == measured['timestamp_s']
     assert observations[0].cameras == {}
+    assert set(observations[0].rgb_cameras) == ({'wrist'} if include_wrist else set())
+    if include_wrist:
+        assert set(observations[0].rgb_cameras['wrist']) == {'rgb','received_s'}
     events = [json.loads(line) for line in (tmp_path/'decisions.jsonl').read_text().splitlines()]
     assert [row['phase'] for row in events] == ['waiting_for_control','thinking','submitted','executing','stopped']
     assert events[0]['policy_calls'] == 0 and events[0]['prompt'] == 'Diagnostic paired target'

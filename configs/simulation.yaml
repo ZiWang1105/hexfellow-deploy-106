@@ -5,6 +5,13 @@ policy:
   agent_config: configs/agent/rgbd_full.yaml
   model: openai/gpt-6-astra
   reasoning_effort: medium
+wrist_camera:
+  # Native RGB-only context; no fabricated simulated mount or extrinsics.
+  enabled: true
+  serial: null
+  width: 640
+  height: 480
+  fps: 30
 timing:
   control_period_s: 0.02
   compute_budget_s: 0.006
