@@ -146,3 +146,23 @@ def test_dashboard_serves_fault_and_registered_depth(monkeypatch):
         thread.join(2.)
         dashboard.clean_up()
     assert not thread.is_alive()
+
+
+def test_dashboard_keeps_decision_on_busy_read_and_restores_durable_failure(tmp_path):
+    class Topic:
+        name = 'test'
+        def __init__(self, value=None): self.value = value
+        def get(self, **kwargs): return self.value
+    action = {'left': {'gripper_open': 1}, 'right': {'gripper_open': 0}}
+    decision = Topic(dict(phase='submitted', action=action, published_s=1.))
+    control = Topic(dict(phase='running'))
+    dashboard = DashboardComponent('dashboard', control, decision, Topic(), output=str(tmp_path))
+    assert dashboard.snapshot()['decision']['action'] == action
+    decision.value = None
+    assert dashboard.snapshot()['decision']['action'] == action
+    (tmp_path/'decisions.jsonl').write_text(json.dumps(dict(phase='stopped', action=action,
+        error='original control fault', published_s=2.))+'\n')
+    (tmp_path/'control_final.json').write_text(json.dumps(dict(phase='fault', fault='original control fault')))
+    result = dashboard.snapshot()
+    assert result['decision']['phase'] == 'stopped' and result['decision']['action'] == action
+    assert result['control']['fault'] == 'original control fault'

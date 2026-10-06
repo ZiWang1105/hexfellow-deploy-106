@@ -66,6 +66,8 @@ interface:
     decision: ${topic:decision}
     images: ${topic:images}
     health: ${topic:health}
+    backend_status: ${topic:backend_status}
+    output: ${output}
     port: 8765
   camera:
     _target_: hexfellow_deploy.camera.SimulationCamera

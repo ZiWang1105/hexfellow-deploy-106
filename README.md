@@ -64,8 +64,10 @@ A `--hold-only` diagnostic keeps the measured initial posture instead.
 
 The terminal prints the clickable dashboard URL, normally
 <http://127.0.0.1:8765/>. It displays RGB, control state, actuator acceptance,
-latest agent action, model-call state and errors. The last action remains visible
-during inference. API requests, sensor images, responses and reported costs are
+startup stage, model-call state and errors. The Agent activity panel appears above
+the camera images and shows the latest left/right TCP, binary grippers and base
+XY/yaw decision. The last action remains visible during inference; a failure
+before the first model call is stated explicitly. Raw telemetry is collapsible. API requests, sensor images, responses and reported costs are
 archived under `policy/`. Physical camera matching diagnostics are saved to
 `camera_health.json`, including frame ages, encoder skew and publication failures.
 Only the API client reads the external key file.

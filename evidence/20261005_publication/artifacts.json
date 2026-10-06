@@ -1,0 +1,26 @@
+{
+  "runs/real_20261005_204438/control_final.json": {
+    "bytes": 6347,
+    "sha256": "31eae8b69d1691e3416ad4ac62fe037d73729b1efe6b07a185f459deaca9422d"
+  },
+  "runs/real_20261005_204438/backend_final.json": {
+    "bytes": 7634,
+    "sha256": "4142ce819d4bba8a637d8c1cee19e9800e879fcb88645d210bddc401c1ad006f"
+  },
+  "runs/real_20261005_204438/camera_health.json": {
+    "bytes": 35142,
+    "sha256": "564934053587fd9b64245f08cfcb4b82405007dd5e6e6cb3d19c838930c34635"
+  },
+  "runs/shm_retry_204438_verified/control.jsonl": {
+    "bytes": 5141513,
+    "sha256": "dadbe811d9dd64946977b04d0dc036840cd833b0329cf1df99182362c9d65add"
+  },
+  "runs/shm_retry_204438_verified/backend_final.json": {
+    "bytes": 288,
+    "sha256": "7d6f2465d7950c84fc72b0090fd5715062edef7e34fe74842369bb7595fa1d89"
+  },
+  "runs/shm_retry_204438_verified/contention_injection.json": {
+    "bytes": 9776,
+    "sha256": "4dcfc0f1e4eae17a041b2766844b00c05f2f9a6df3f2bf44fab3beb9125d55c0"
+  }
+}

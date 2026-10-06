@@ -53,12 +53,32 @@ class BackendProxy:
             raise RuntimeError('Feedback provenance does not match selected sample')
         return self.selected['received']
 
-    def submit(self, sequence, command, mit, reference_velocity):
+    def submit(self, sequence, command, mit, reference_velocity, *, timeout_s=.1,
+               stopped=lambda: False, on_wait=None):
         frame = dict(sequence=sequence, created_s=float(mit.timestamp_s), command=command,
                      mit=encode_mit(mit), received=self.selected['received'],
                      measured=self.selected['measured'], reference_velocity=reference_velocity)
-        if not self.frames.put(frame, timeout=.001):
-            raise RuntimeError('Reference publication unavailable; do not advance history')
+        # A failed semaphore acquisition writes nothing. Keep this exact pending
+        # reference and retry; PinkIK must not solve again or refresh its clock.
+        deadline = frame['created_s']+timeout_s
+        started = time.monotonic()
+        retries = 0
+        while True:
+            if stopped():
+                raise RuntimeError('Reference publication cancelled by stop request')
+            status = self.status.get()
+            if status and status.get('fault'):
+                raise RuntimeError(status['fault'])
+            remaining = deadline-time.monotonic()
+            if remaining <= 0:
+                raise RuntimeError(f'Reference publication deadline expired after {retries} retries; '
+                                   'IK history remains pending')
+            if self.frames.put(frame, timeout=min(.001, remaining)):
+                return dict(retries=retries, elapsed_ms=(time.monotonic()-started)*1000)
+            retries += 1
+            if on_wait is not None:
+                on_wait(retries)
+            time.sleep(max(0., min(.001, deadline-time.monotonic())))
 
     def acknowledgement(self, sequence):
         status = self.status.get()

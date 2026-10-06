@@ -142,18 +142,26 @@ class ControlComponent(DABaseInterface):
                 generated = owner.generate(lambda: executor.tick(measured))
                 sequence, (command, diagnostic) = generated
                 solved = time.monotonic()
-                plant.submit(sequence, command, executor.ik.last_result.mit,
-                             {n:float(executor.ik.last_result.velocity[i]) for n,i in executor.ik.indices.items()})
+                def publication_wait(retries):
+                    nonlocal state
+                    state = dict(state, phase='waiting_for_publication', publication_retries=retries)
+                    if retries == 1:
+                        logger.warning('Reference shared memory busy; retrying pending sequence %s', sequence)
+                publication = plant.submit(sequence, command, executor.ik.last_result.mit,
+                             {n:float(executor.ik.last_result.velocity[i]) for n,i in executor.ik.indices.items()},
+                             timeout_s=self.health_timeout, stopped=lambda: self.stopping,
+                             on_wait=publication_wait)
                 pending_since = time.monotonic()
                 ticks += 1
                 timing = budget.finish(started)
                 if timing["budget_overrun"]:
                     logger.warning("Control budget exceeded: %.3f ms; execution continues", timing["elapsed_ms"])
                 state = dict(state, phase="running", ticks=ticks, diagnostic=diagnostic,
-                             timing=timing, request_id=last_request)
+                             timing=timing, request_id=last_request, publication=publication,
+                             publication_retries=publication['retries'])
                 try:
                     rows.put_nowait(dict(sequence=sequence, started_s=started, solved_s=solved,
-                        submitted_s=pending_since, timing=timing, measured=measured,
+                        submitted_s=pending_since, timing=timing, publication=publication, measured=measured,
                         reference=command, diagnostic=diagnostic, request_id=last_request,
                         mit=encode_mit(executor.ik.last_result.mit),
                         reference_velocity={n:float(executor.ik.last_result.velocity[i]) for n,i in executor.ik.indices.items()},

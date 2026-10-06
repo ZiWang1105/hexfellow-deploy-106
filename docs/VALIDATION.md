@@ -6,6 +6,17 @@ PD-plus-feedforward torque. No physical robot was operated for this validation.
 Compact records, plots and SHA-256 hashes of the full original artifacts are in
 [`evidence/20261005_mit`](../evidence/20261005_mit/README.md).
 
+## Shared reference publication contention
+
+The physical 20:44 attempt exposed a bug also present in the shared simulator
+path: a single 1 ms reference-topic lock miss was treated as fatal. The fix
+retains and retries the exact pending reference. A 15-second MuJoCo fixture with
+camera/dashboard and 100 injected 20 ms semaphore holds completed with 257
+recovered publication attempts, no control/backend/shutdown fault and exit 0.
+115 deployment tests and recorded-data browser checks passed. The original run
+had zero model calls; startup failure and agent waiting/output are now visible at
+the top of the dashboard. [Evidence and scope](../evidence/20261005_publication/README.md).
+
 ## Physical RGB-D matching regression
 
 The 20:33 real run failed in the camera component before any policy call. A

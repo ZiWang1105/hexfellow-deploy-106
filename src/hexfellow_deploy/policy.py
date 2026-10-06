@@ -1,5 +1,6 @@
 """Optional asynchronous policy component, outside the control clock."""
 from concurrent.futures import Future
+from collections import deque
 import threading
 import json
 from pathlib import Path
@@ -56,16 +57,34 @@ class AgentComponent(DABaseInterface):
         future = None
         identifier = 0
         decision_state = {}
+        events = deque(maxlen=12)
+        last_state = None
         budget_exhausted = False
         def stopped():
+            nonlocal last_state
             state = self.status.get()
+            if state is not None:
+                last_state = state
             return self.stopping or bool(state and (state.get('final_hold') or state.get('phase') in ('fault', 'closed')))
         def publish(**changes):
             decision_state.update(changes, published_s=time.monotonic())
+            events.append(dict(changes, observed_s=decision_state['published_s']))
+            decision_state['events'] = list(events)
             self.decision.put(decision_state, timeout=.001)
             with (Path(self.output)/'decisions.jsonl').open('a') as stream:
                 stream.write(json.dumps(decision_state, allow_nan=False)+'\n')
         self._ready.value = True
+        publish(phase='waiting_for_control', message='Waiting for controller startup; no model call yet.',
+                prompt=self.prompt, model=self.model, reasoning_effort=self.reasoning_effort,
+                policy_calls=0, cost_usd=0.)
+        last_wait = None
+        last_heartbeat = time.monotonic()
+        def waiting(phase, message):
+            nonlocal last_wait, last_heartbeat
+            now = time.monotonic()
+            if (phase, message) != last_wait or now-last_heartbeat >= 1.:
+                publish(phase=phase, message=message)
+                last_wait, last_heartbeat = (phase, message), now
         # API waiting cannot block either control or the diagnostic component.
         try:
             while not stopped():
@@ -73,10 +92,18 @@ class AgentComponent(DABaseInterface):
                 if state and state.get('final_hold'):
                     break
                 if not state or state.get('phase') != 'running' or state.get('diagnostic', {}).get('mode') == 'startup_carry':
+                    diagnostic = (state or {}).get('diagnostic', {})
+                    if diagnostic.get('mode') == 'startup_carry':
+                        waiting('waiting_for_startup',
+                                f"Preparing carrying pose: stage {diagnostic.get('startup_stage', '?')}/"
+                                f"{diagnostic.get('startup_stages', '?')}. No model call yet.")
+                    else:
+                        waiting('waiting_for_control', 'Waiting for controller readiness.')
                     time.sleep(.1)
                     continue
                 frame = self.images.get()
                 if frame is None or time.monotonic()-frame['measured']['timestamp_s'] > .5:
+                    waiting('waiting_for_camera', 'Waiting for a fresh matched RGB-D observation.')
                     time.sleep(.05)
                     continue
                 identifier += 1
@@ -96,7 +123,8 @@ class AgentComponent(DABaseInterface):
                 observation_id = client.calls+1
                 observation = Observation(observation_id, measured['timestamp_s'], frame['rgb'], frame['depth_m'],
                                           {**measured, **frame['robot_fk']})
-                publish(phase='thinking', observation_id=observation_id, model=config['model'], error=None)
+                publish(phase='thinking', message='Model request in progress.', thinking_started_s=time.monotonic(),
+                        observation_id=observation_id, model=config['model'], error=None)
                 future = request_async(client.act, observation)
                 while not future.done() and not stopped():
                     time.sleep(.05)
@@ -105,7 +133,7 @@ class AgentComponent(DABaseInterface):
                 try:
                     action, record = future.result()
                 except Exception as error:
-                    publish(phase='api_error', error=str(error), policy_calls=client.calls)
+                    publish(phase='api_error', message='Model request failed; retrying.', error=str(error), policy_calls=client.calls)
                     time.sleep(.5)
                     continue
                 proposal = dict(id=identifier, operation='target', action=action.to_dict(), observed=measured)
@@ -113,7 +141,7 @@ class AgentComponent(DABaseInterface):
                     time.sleep(.001)
                 if stopped():
                     break
-                publish(phase='submitted', action=action.to_dict(), observation_id=observation_id,
+                publish(phase='submitted', message='Decision submitted to controller.', action=action.to_dict(), observation_id=observation_id,
                         action_observation_id=observation_id, request_id=identifier,
                         policy_calls=client.calls, cost_usd=client.cost)
                 accepted_at = None
@@ -127,10 +155,11 @@ class AgentComponent(DABaseInterface):
                     if state and state.get('request_id') == identifier:
                         if state.get('request_error'):
                             client.reject_stale_action(record)
-                            publish(phase='rejected', error=state['request_error'])
+                            publish(phase='rejected', message='Controller rejected this decision; reobserving.', error=state['request_error'])
                             break
                         if accepted_at is None:
                             accepted_at = time.monotonic()
+                            publish(phase='executing', message='Controller accepted the decision.')
                         diagnostic = state.get('diagnostic', {})
                         if state.get('phase') == 'fault' or diagnostic.get('needs_observation') or (diagnostic.get('arrived') and time.monotonic()-accepted_at >= 1.):
                             break
@@ -150,6 +179,9 @@ class AgentComponent(DABaseInterface):
         finally:
             if stopped() or budget_exhausted:
                 self.signal_stop()
-            publish(phase='stopped', policy_calls=0 if client is None else client.calls,
+            cause = (last_state or {}).get('fault')
+            publish(phase='stopped', message=('Stopped before the first model call. ' if client is None else 'Agent stopped. ')
+                    + (cause or 'Control ended or stop requested.'), error=cause or decision_state.get('error'),
+                    policy_calls=0 if client is None else client.calls,
                     cost_usd=0 if client is None else client.cost,
                     request_interrupted=future is not None and not future.done())

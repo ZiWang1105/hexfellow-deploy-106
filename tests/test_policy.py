@@ -73,7 +73,8 @@ def test_policy_boundary_and_decision_archive(monkeypatch, tmp_path):
     assert observations[0].timestamp_s == measured['timestamp_s']
     assert observations[0].cameras == {}
     events = [json.loads(line) for line in (tmp_path/'decisions.jsonl').read_text().splitlines()]
-    assert [row['phase'] for row in events] == ['thinking','submitted','stopped']
+    assert [row['phase'] for row in events] == ['waiting_for_control','thinking','submitted','executing','stopped']
+    assert events[0]['policy_calls'] == 0 and events[0]['prompt'] == 'Diagnostic paired target'
     assert Action.from_dict(events[-1]['action']) == action
 
 
@@ -115,4 +116,34 @@ def test_explicit_exhausted_budget_stops_without_request_retry(monkeypatch, tmp_
     assert decision.value['policy_calls'] == calls
     assert agent.stopping
     events = [json.loads(line) for line in (tmp_path/'decisions.jsonl').read_text().splitlines()]
-    assert [row['phase'] for row in events] == ['budget_exhausted','stopped']
+    assert [row['phase'] for row in events] == ['waiting_for_control','budget_exhausted','stopped']
+
+
+def test_startup_and_failure_are_visible_before_any_api_call(monkeypatch, tmp_path):
+    root = Path(__file__).resolve().parents[3]
+    monkeypatch.chdir(root)
+    from mobile_manipulator.agent import policy
+    def forbidden(*args, **kwargs):
+        raise AssertionError('Startup must not construct the model client')
+    monkeypatch.setattr(policy, 'OpenRouterPolicy', forbidden)
+    class Topic:
+        name = 'stub'
+        def __init__(self, value=None): self.value = value
+        def get(self, **kwargs): return self.value
+        def put(self, value, **kwargs): self.value = value.copy(); return True
+    status = Topic(dict(phase='running', diagnostic=dict(mode='startup_carry', startup_stage=1, startup_stages=2)))
+    class Decisions(Topic):
+        def put(self, value, **kwargs):
+            if value['phase'] == 'waiting_for_startup':
+                status.value = dict(phase='fault', fault='test publication failure')
+            return super().put(value, **kwargs)
+    decision = Decisions()
+    agent = AgentComponent('startup_test', Topic(), status, decision, Topic(), str(root), str(tmp_path), 'Pick up the orange.')
+    agent.initialize()
+    agent.run()
+    events = [json.loads(line) for line in (tmp_path/'decisions.jsonl').read_text().splitlines()]
+    assert [row['phase'] for row in events] == ['waiting_for_control', 'waiting_for_startup', 'stopped']
+    assert 'stage 1/2' in events[1]['message']
+    assert events[-1]['policy_calls'] == 0
+    assert 'before the first model call' in events[-1]['message']
+    assert events[-1]['error'] == 'test publication failure'

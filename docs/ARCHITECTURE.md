@@ -114,7 +114,8 @@ bounded recent publication timings independently of the control process.
 | Command source stops updating for configured 100 ms | Fault and stop the stream |
 | Actual device feedback stale for configured 100 ms | Fault independently of command freshness |
 | Upstream strict sensor age exceeds 40 ms or coupled-device skew exceeds 20 ms | PinkIK rejects the feedback independently of the 100 ms stream watchdog |
-| Unknown/partially failed publication or device ownership loss | Fault; do not automatically rearm |
+| Reference SHM semaphore busy for 1 ms | Retry the exact pending frame within the existing finite health deadline; never re-solve or retimestamp |
+| Persistently unavailable or unknown/partially failed publication, or device ownership loss | Fault; do not automatically rearm |
 | Inference is slow or returns an error | Control continues independently; show the policy error |
 | Observation is stale or posture changed during inference | Reject that target and request a new observation |
 | Final diagnostic HOLD requested | Stop new policy targets, complete constrained braking and record final state |

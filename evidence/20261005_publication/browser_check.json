@@ -1,0 +1,11 @@
+{
+  "passed": true,
+  "checked": [
+    "last decision stays visible while thinking",
+    "TCP and gripper visible above fold",
+    "original control failure takes priority",
+    "no output explicitly shown before first API call",
+    "startup stage visible"
+  ],
+  "page_errors": []
+}

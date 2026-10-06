@@ -1,0 +1,13 @@
+{
+  "scope": "Shared MIT MuJoCo stack, camera and dashboard enabled; no model or physical devices",
+  "exit_code": 0,
+  "injections": 100,
+  "retries": 257,
+  "retried_commands": 98,
+  "generated": 751,
+  "accepted": 750,
+  "control_fault": null,
+  "backend_fault": null,
+  "shutdown_error": null,
+  "cancelled_pending": 751
+}
