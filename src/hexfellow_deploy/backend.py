@@ -21,8 +21,9 @@ def diagnostic_value(value):
 
 
 class BackendProxy:
-    def __init__(self, frames, feedback, backend_status, timeout=30.):
+    def __init__(self, frames, feedback, backend_status, timeout=30., receipts=None):
         self.frames, self.feedback, self.status = frames, feedback, backend_status
+        self.receipts = receipts
         self.selected = None
         self.created_s = None
         until = time.monotonic()+timeout
@@ -36,9 +37,9 @@ class BackendProxy:
             time.sleep(.01)
         raise RuntimeError('Backend metadata unavailable')
 
-    def read(self, *, timeout_s=0.):
+    def read(self, *, timeout_s=.001):
         started = time.monotonic()
-        status = self.status.get()
+        status = self._actuator_status()
         if status and status.get('fault'):
             raise RuntimeError(status['fault'])
         row = self.feedback.get(timeout=timeout_s)
@@ -52,6 +53,19 @@ class BackendProxy:
         self.feedback_read.update(publication_sequence=row.get('publication_sequence'),
                                   published_s=row.get('published_s'), received=row['received'])
         return row['measured']
+
+    def _actuator_status(self):
+        topic = getattr(self, 'receipts', None)
+        if topic is None:
+            return self.status.get()
+        state = topic.get()
+        if state is None or state.get('fault'):
+            detail = self.status.get(timeout=.001)
+            if detail and detail.get('fault'):
+                return detail
+            if state and state.get('fault'):
+                return dict(state, fault='Actuator fault; detailed diagnostic publication pending')
+        return state
 
     def read_for_control(self, *, timeout_s, min_validity_s, stopped=lambda: False, on_wait=None):
         """Refresh before entering stateful IK; never renew sensor/command clocks."""
@@ -92,7 +106,7 @@ class BackendProxy:
         until = time.monotonic()+30
         while time.monotonic() < until and not stopped():
             self.read()
-            status = self.status.get()
+            status = self.status.get(timeout=.001)
             if status and status.get('phase') == 'running':
                 return status['reference_seed']
             time.sleep(.004)
@@ -116,7 +130,7 @@ class BackendProxy:
         while True:
             if stopped():
                 raise RuntimeError('Reference publication cancelled by stop request')
-            status = self.status.get()
+            status = self._actuator_status()
             if status and status.get('fault'):
                 raise RuntimeError(status['fault'])
             remaining = deadline-time.monotonic()
@@ -132,7 +146,7 @@ class BackendProxy:
             time.sleep(max(0., min(.001, deadline-time.monotonic())))
 
     def acknowledgement(self, sequence):
-        status = self.status.get()
+        status = self._actuator_status()
         if status and status.get('fault'):
             raise RuntimeError(status['fault'])
         value = None if not status else status.get('receipt')
@@ -146,8 +160,10 @@ class BackendComponent(DABaseInterface):
     def __init__(self, name, frames, feedback, backend_status, control_status, measured,
                  plant_state, workspace, output, deployment_config, scene, backend='simulation',
                  execute=False, period_s=.004, command_timeout_s=.1, feedback_timeout_s=.1,
-                 submit_delay_s=0., time_budget=.003):
-        super().__init__(name, [frames,feedback,backend_status,control_status,measured,plant_state], time_budget)
+                 submit_delay_s=0., time_budget=.003, receipts=None):
+        super().__init__(name, [frames,feedback,backend_status,control_status,measured,plant_state]
+                         +([receipts] if receipts is not None else []), time_budget)
+        self.receipts = receipts
         self.frames, self.feedback, self.status, self.control = frames, feedback, backend_status, control_status
         self.measured, self.plant_state = measured, plant_state
         self.workspace, self.output, self.config, self.scene = workspace, output, deployment_config, scene
@@ -213,6 +229,7 @@ class BackendComponent(DABaseInterface):
             first_until = time.monotonic()+1.
             next_render = 0.
             feedback_sequence = 0
+            next_status = 0.
             while not self.stopping:
                 started = time.monotonic()
                 snapshot = driver.snapshot
@@ -250,13 +267,19 @@ class BackendComponent(DABaseInterface):
                     state['latest_sequence'] = pending
                     state.pop('reference_seed',None)
                 state.update(published_s=time.monotonic(), pending=pending)
-                self.status.put(state)
+                if self.receipts is not None:
+                    self.receipts.put(state)
+                if started >= next_status or self.receipts is None:
+                    self.status.put(state, timeout=.001)
+                    next_status = started+.1
                 time.sleep(max(0.,started+self.period-time.monotonic()))
         except BaseException as error:
             state.update(phase='fault',fault=f'{type(error).__name__}: {error}')
             if 'frame' in locals() and frame is not None:
                 state['rejected_frame'] = frame
             self.status.put(state, timeout=.01)
+            if self.receipts is not None:
+                self.receipts.put(state, timeout=.001)
         finally:
             if driver is not None:
                 if hasattr(driver, 'diagnostics'):
@@ -272,6 +295,8 @@ class BackendComponent(DABaseInterface):
                             state['receipt'] = asdict(receipt)
                             pending = None
                             self.status.put(state,timeout=.001)
+                            if self.receipts is not None:
+                                self.receipts.put(state,timeout=.001)
                         else:
                             time.sleep(.001)
                     state.update(cancelled_pending=pending, pending=pending, published_s=time.monotonic())

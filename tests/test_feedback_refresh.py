@@ -10,11 +10,13 @@ activate(Path(__file__).resolve().parents[3])
 from policy_sim.control.feedback_policy import FeedbackAgeError, validate_received
 from hexfellow_deploy.backend import BackendProxy
 from hexfellow_deploy.reference import ReferenceOwner
-from hexfellow_deploy.topics import JsonTopic
+from hexfellow_deploy.control_topics import FeedbackTopic
+from mobile_manipulator.robot.joints import JOINTS
 
 
 def row(stamp):
-    return dict(measured={'timestamp_s': stamp},
+    return dict(measured=dict(timestamp_s=stamp, joint_positions=dict.fromkeys(JOINTS,0.),
+                joint_velocities=dict.fromkeys(JOINTS,0.), gripper_state=dict(left='closed',right='open')),
                 received=dict.fromkeys(('left', 'right', 'base', 'theta'), stamp))
 
 
@@ -28,7 +30,7 @@ def proxy_for(topic):
 
 
 def test_real_shm_busy_read_reproduces_stale_cache_then_refresh_recovers():
-    topic = JsonTopic('feedback_retry_'+uuid.uuid4().hex)
+    topic = FeedbackTopic('feedback_retry_'+uuid.uuid4().hex)
     topic.initialize()
     proxy = proxy_for(topic)
     locked, release = threading.Event(), threading.Event()

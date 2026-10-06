@@ -17,7 +17,7 @@ topics:
     _target_: hexfellow_deploy.topics.JsonTopic
     prefix: ${topic_prefix}
   measured:
-    _target_: hexfellow_deploy.topics.JsonTopic
+    _target_: hexfellow_deploy.control_topics.MeasuredTopic
     prefix: ${topic_prefix}
   plant_state:
     _target_: hexfellow_deploy.topics.JsonTopic
@@ -34,10 +34,13 @@ topics:
     width: 640
     height: 360
   frames:
-    _target_: hexfellow_deploy.topics.JsonTopic
+    _target_: hexfellow_deploy.control_topics.ReferenceTopic
     prefix: ${topic_prefix}
   feedback:
-    _target_: hexfellow_deploy.topics.JsonTopic
+    _target_: hexfellow_deploy.control_topics.FeedbackTopic
+    prefix: ${topic_prefix}
+  receipts:
+    _target_: hexfellow_deploy.control_topics.ReceiptTopic
     prefix: ${topic_prefix}
   backend_status:
     _target_: hexfellow_deploy.topics.JsonTopic
@@ -59,6 +62,7 @@ interface:
     frames: ${topic:frames}
     feedback: ${topic:feedback}
     backend_status: ${topic:backend_status}
+    receipts: ${topic:receipts}
   dashboard:
     _target_: hexfellow_deploy.dashboard.DashboardComponent
     name: hexfellow_dashboard
@@ -96,6 +100,7 @@ interface:
     measured: ${topic:measured}
     plant_state: ${topic:plant_state}
     control_status: ${topic:status}
+    receipts: ${topic:receipts}
 preprocess: {}
 input: {}
 inference: {}

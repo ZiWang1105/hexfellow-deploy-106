@@ -8,7 +8,8 @@ import pytest
 
 from hexfellow_deploy.backend import BackendProxy
 from hexfellow_deploy.reference import ReferenceOwner, Receipt
-from hexfellow_deploy.topics import JsonTopic
+from hexfellow_deploy.control_topics import ReferenceTopic
+from mobile_manipulator.robot.joints import JOINTS
 from hexfellow_deploy.actuation import decode_mit
 from test_actuation import example
 
@@ -22,12 +23,13 @@ def pending(frames):
     proxy = object.__new__(BackendProxy)
     proxy.frames, proxy.status = frames, Status()
     frame, measured = example(time.monotonic())
-    proxy.selected = dict(measured=measured, received={'left': measured['timestamp_s']})
+    proxy.selected = dict(measured=measured,
+                          received=dict.fromkeys(('left','right','theta','base'), measured['timestamp_s']))
     return proxy, frame, decode_mit(frame['mit'])
 
 
 def test_real_shm_lock_delay_retries_exact_reference_without_advancing_ik():
-    frames = JsonTopic('retry_'+uuid.uuid4().hex)
+    frames = ReferenceTopic('retry_'+uuid.uuid4().hex)
     frames.initialize()
     locked = threading.Event()
     def reader():
@@ -44,7 +46,7 @@ def test_real_shm_lock_delay_retries_exact_reference_without_advancing_ik():
         solves = []
         sequence, _ = owner.generate(lambda: solves.append(1))
         waits = []
-        result = proxy.submit(sequence, frame['command'], mit, {}, on_wait=waits.append)
+        result = proxy.submit(sequence, frame['command'], mit, dict.fromkeys(JOINTS,0.), on_wait=waits.append)
         assert result['retries'] > 0 and waits
         assert solves == [1] and owner.pending == sequence and owner.accepted == 0
         assert owner.generate(lambda: solves.append(2)) is None
@@ -60,14 +62,14 @@ def test_real_shm_lock_delay_retries_exact_reference_without_advancing_ik():
 
 
 def test_wedged_shm_still_expires_with_no_partial_publication():
-    frames = JsonTopic('wedged_'+uuid.uuid4().hex)
+    frames = ReferenceTopic('wedged_'+uuid.uuid4().hex)
     frames.initialize()
     try:
         proxy, frame, mit = pending(frames)
         started = time.monotonic()
         with frames._hold(None):
             with pytest.raises(RuntimeError, match='publication deadline expired'):
-                proxy.submit(1, frame['command'], mit, {}, timeout_s=.025)
+                proxy.submit(1, frame['command'], mit, dict.fromkeys(JOINTS,0.), timeout_s=.025)
         assert time.monotonic()-started < .2
         assert frames.get() is None
     finally:

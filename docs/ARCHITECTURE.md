@@ -64,6 +64,13 @@ Topics are named shared-memory arrays with DA semaphores and coherent latest-val
 snapshots. There is no unbounded command FIFO. RGB-D uses one binary publication
 with the corresponding physical encoder metadata.
 
+Control feedback, MIT references, measured proprioception and actuator receipts
+now use fixed float64 layouts rather than JSON-filled 64 KiB arrays. Backend
+diagnostic JSON publishes at 10 Hz plus lifecycle transitions. Numeric channels
+use bounded semaphore waits and preserve source timestamps on retries. This is
+alignment of selected DA mechanisms, not identical YAM recovery behavior; see
+the explicit [alignment audit](DEPLOY_ANYTHING_ALIGNMENT.md).
+
 The manager's empty staged cycle is replaced with a cooperative wait on DA stop
 flags. Independent interface processes own control, device streaming, camera,
 policy and dashboard clocks. This intentionally uses DA's lifecycle and transport

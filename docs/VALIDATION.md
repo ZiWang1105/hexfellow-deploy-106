@@ -1,5 +1,28 @@
 # Shared MIT validation — 2026-10-05
 
+Fixed numeric DA control transport (2026-10-05)
+
+Replaced high-frequency feedback/reference/measurement JSON topics with fixed
+float64 DA ArrayCommWrapper layouts and added a separate numeric receipt topic.
+Backend diagnostic JSON is now 10 Hz plus lifecycle/fault updates. Finite lock
+waits, exact pending-frame retry, source-clock preservation and pre-IK feedback
+refresh remain; no motion history reset or hardware watchdog relaxation.
+
+140 deployment tests pass. Public run_agent.py HOLD completed 502/502 accepted
+cycles. Three shared MuJoCo paired-pose fixtures with camera/dashboard survived
+54 injected semaphore holds each: feedback 45 ms (500 retries), reference 20 ms
+(283 retries), receipt 20 ms (acceptance waiting). No control/backend/shutdown
+faults. The reference fixture canceled its final pending sequence at shutdown.
+Local put/get microbenchmark savings are microseconds, not proof that JSON caused
+the original 50 ms hardware feedback gap. No API or hardware run in this change.
+
+The DA alignment audit retracts complete-parity claims and explicitly preserves
+the unaligned recovery semantics: YAM resets motion history after chunk failure;
+stateful PinkIK cannot safely copy that operation. Native SDK/firmware timing,
+physical freshness root cause and lift stop confirmation remain unqualified.
+See third_party/hexfellow-deploy/docs/DEPLOY_ANYTHING_ALIGNMENT.md and its
+evidence/20261005_numeric_control directory.
+
 Feedback refresh before stateful IK (2026-10-05, 21:12 run)
 
 Physical real_20261005_211146 reused the same per-device feedback in references

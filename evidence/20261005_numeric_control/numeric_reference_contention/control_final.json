@@ -1,0 +1,149 @@
+{
+  "phase": "closed",
+  "diagnostic": {
+    "arrived": true,
+    "mode": "arm",
+    "needs_observation": false,
+    "ik_status": "TRACKING",
+    "arm_errors": {
+      "left": {
+        "position_m": 2.510260404525024e-07,
+        "orientation_rad": 9.038241068372491e-07
+      },
+      "right": {
+        "position_m": 2.6612583050877143e-07,
+        "orientation_rad": 8.381976344531803e-07
+      }
+    },
+    "arm_position_error_m": 2.6612583050877143e-07,
+    "arm_orientation_error_rad": 9.038241068372491e-07,
+    "base_stopped": true
+  },
+  "request_id": 1,
+  "controller": {
+    "implementation": "policy_sim.control.ik_core.PinkIKCore",
+    "upstream_commit": "9398b61972bf983c7ab5609591b7eb4c95c6357d",
+    "motion_profile": "x7-gp80-highspeed-fixed-base-v1",
+    "motion_profile_sha256": "ee1e86a556b1b54b84a43dd8c4bb821b878da4eaba1f1d757a1dfa1245528f36",
+    "base_mode": "fixed",
+    "state_coordinates": [
+      "maver_x4_asm_URDF_joint_1",
+      "maver_x4_asm_7_urdf_SLDASM_joint_1",
+      "maver_x4_asm_7_urdf_SLDASM_joint_2",
+      "maver_x4_asm_7_urdf_SLDASM_joint_3",
+      "maver_x4_asm_7_urdf_SLDASM_joint_4",
+      "maver_x4_asm_7_urdf_SLDASM_joint_5",
+      "maver_x4_asm_7_urdf_SLDASM_joint_6",
+      "maver_x4_asm_7_urdf_SLDASM_joint_7",
+      "maver_x4_asm_7_urdf_SLDASM2_joint_1",
+      "maver_x4_asm_7_urdf_SLDASM2_joint_2",
+      "maver_x4_asm_7_urdf_SLDASM2_joint_3",
+      "maver_x4_asm_7_urdf_SLDASM2_joint_4",
+      "maver_x4_asm_7_urdf_SLDASM2_joint_5",
+      "maver_x4_asm_7_urdf_SLDASM2_joint_6",
+      "maver_x4_asm_7_urdf_SLDASM2_joint_7"
+    ],
+    "locked_joints": [],
+    "controlled_arms": [
+      "left",
+      "right"
+    ],
+    "measured_pose_tracking": false,
+    "runtime_velocity_bounds": {
+      "maver_x4_asm_URDF_joint_1": 0.025,
+      "maver_x4_asm_7_urdf_SLDASM_joint_1": 2.5408080208833543,
+      "maver_x4_asm_7_urdf_SLDASM_joint_2": 2.5408080208833543,
+      "maver_x4_asm_7_urdf_SLDASM_joint_3": 2.585188990822622,
+      "maver_x4_asm_7_urdf_SLDASM_joint_4": 2.585188990822622,
+      "maver_x4_asm_7_urdf_SLDASM_joint_5": 8.592099854868263,
+      "maver_x4_asm_7_urdf_SLDASM_joint_6": 8.592099854868263,
+      "maver_x4_asm_7_urdf_SLDASM_joint_7": 8.592099854868263,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_1": 2.5408080208833543,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_2": 2.5408080208833543,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_3": 2.585188990822622,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_4": 2.585188990822622,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_5": 8.592099854868263,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_6": 8.592099854868263,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_7": 8.592099854868263
+    },
+    "lift_position_max_m": 0.4,
+    "policy_T_umi_tcp": {
+      "left": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.017000000000000015
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "right": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.017000000000000015
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    "self_collision_enabled": false,
+    "actuation": "Shared MIT frame -> DA actuator owner -> native SDK or MuJoCo torque servo",
+    "upstream_path": "third_party/UMI_Hardware"
+  },
+  "ticks": 728,
+  "timing": {
+    "elapsed_ms": 2.89405498187989,
+    "budget_overrun": false,
+    "sleep_s": 0.01710594501812011,
+    "overruns": 34
+  },
+  "publication": {
+    "retries": 0,
+    "elapsed_ms": 0.04994400660507381
+  },
+  "publication_retries": 0,
+  "request_error": null,
+  "cancelled_pending": 728,
+  "generated": 728,
+  "accepted": 727,
+  "pending": 728,
+  "fault": null,
+  "recording_error": [],
+  "dropped_records": 0,
+  "evidence_kind": "shared_MIT_control_and_actuator_protocol"
+}

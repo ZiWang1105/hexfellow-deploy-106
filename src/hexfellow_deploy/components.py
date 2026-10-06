@@ -16,8 +16,10 @@ from .workspace import activate, build_shared_executor
 class ControlComponent(DABaseInterface):
     def __init__(self, name, request, status, frames, feedback, backend_status, workspace,
                  output, period_s, time_budget, health_timeout_s=.1, startup_carry=False,
-                 inject_every=0, inject_delay_s=0.):
-        super().__init__(name, [request, status, frames, feedback, backend_status], time_budget)
+                 inject_every=0, inject_delay_s=0., receipts=None):
+        super().__init__(name, [request, status, frames, feedback, backend_status]
+                         +([receipts] if receipts is not None else []), time_budget)
+        self.receipts = receipts
         self.request, self.status = request, status
         self.frames, self.feedback, self.backend_status = frames, feedback, backend_status
         self.workspace, self.output = workspace, output
@@ -79,7 +81,7 @@ class ControlComponent(DABaseInterface):
         publisher = threading.Thread(target=publish, name="telemetry-publish", daemon=True)
         publisher.start()
         try:
-            plant = BackendProxy(self.frames, self.feedback, self.backend_status)
+            plant = BackendProxy(self.frames, self.feedback, self.backend_status, receipts=self.receipts)
             executor = build_shared_executor(plant.metadata, self.period)
             executor.ik.control_clock = time.monotonic
             executor.ik.feedback_provider = plant.received_for

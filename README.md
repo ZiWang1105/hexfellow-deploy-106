@@ -10,6 +10,8 @@ RGB-D/encoder matcher has passed a read-only connected-device test; the full
 physical agent task remains unqualified. Simulator results establish software and
 modeled-plant behavior, not firmware dynamics, network reliability or hardware
 stopping. See [architecture](docs/ARCHITECTURE.md) and [validation](docs/VALIDATION.md).
+The [DA alignment audit](docs/DEPLOY_ANYTHING_ALIGNMENT.md) lists implemented
+parity, deliberate robot-specific differences and unresolved recovery behavior.
 
 DA is pinned to `6c2bda40ebee56ab3a50b8dd62aaf4df5814e5a8`. Robot assets,
 calibration, sensor contracts, policy client and PinkIK are imported from the

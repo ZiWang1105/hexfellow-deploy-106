@@ -1,0 +1,16 @@
+{
+  "scope": "Shared MIT MuJoCo paired-pose fixture with camera/dashboard; no API or hardware",
+  "channel": "receipts",
+  "hold_ms": 20.0,
+  "exit_code": 0,
+  "injections": 54,
+  "generated": 724,
+  "accepted": 724,
+  "feedback_retries": 0,
+  "publication_retries": 0,
+  "max_source_age_ms": 5.977524007903412,
+  "max_previous_acceptance_ms": 6.147812004201114,
+  "control_fault": null,
+  "backend_fault": null,
+  "shutdown_error": null
+}

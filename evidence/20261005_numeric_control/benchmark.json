@@ -1,0 +1,65 @@
+{
+  "scope": "Uncontended same-process DA put/get cost, not a hardware latency benchmark.",
+  "results": [
+    {
+      "message": "FeedbackTopic",
+      "implementation": "JsonTopic",
+      "payload_bytes": 65536,
+      "samples": 3000,
+      "median_us": 21.05,
+      "p95_us": 23.78604999999999,
+      "p99_us": 31.945019999999857,
+      "max_us": 127.298
+    },
+    {
+      "message": "FeedbackTopic",
+      "implementation": "FeedbackTopic",
+      "payload_bytes": 320,
+      "samples": 3000,
+      "median_us": 15.299,
+      "p95_us": 16.531449999999996,
+      "p99_us": 21.80079999999998,
+      "max_us": 59.852
+    },
+    {
+      "message": "ReferenceTopic",
+      "implementation": "JsonTopic",
+      "payload_bytes": 65536,
+      "samples": 3000,
+      "median_us": 43.261,
+      "p95_us": 46.416549999999994,
+      "p99_us": 60.176799999999915,
+      "max_us": 144.54
+    },
+    {
+      "message": "ReferenceTopic",
+      "implementation": "ReferenceTopic",
+      "payload_bytes": 1168,
+      "samples": 3000,
+      "median_us": 28.153,
+      "p95_us": 30.306,
+      "p99_us": 37.02009,
+      "max_us": 69.25
+    },
+    {
+      "message": "ReceiptTopic",
+      "implementation": "JsonTopic",
+      "payload_bytes": 65536,
+      "samples": 3000,
+      "median_us": 9.257,
+      "p95_us": 9.558,
+      "p99_us": 11.432589999999987,
+      "max_us": 15.599
+    },
+    {
+      "message": "ReceiptTopic",
+      "implementation": "ReceiptTopic",
+      "payload_bytes": 56,
+      "samples": 3000,
+      "median_us": 9.227,
+      "p95_us": 9.398,
+      "p99_us": 11.371,
+      "max_us": 15.77
+    }
+  ]
+}
