@@ -1,5 +1,20 @@
 # Shared MIT validation — 2026-10-05
 
+Firmware timeout investigation (2026-10-05, 20:58 run)
+
+Both arm firmware logs reported API communication timeout, followed by SDK
+attempted auto-clear/reinitialization blocked by the wire guard. A 58.03 ms
+reference-to-SDK-acceptance delay is recorded; no UDP history was saved, so this
+is not proof of a wire outage or its CPU/network cause. Camera failure followed
+loss of encoder publications, while capture remained healthy. Restored omitted
+process-local GIL/GC settings through shared DA YAML and record actual runtime
+settings. Native failures now retain bounded gate/SDK/UDP/KCP evidence before
+close, written after stopping. 124 tests pass; 10-second shared MuJoCo HOLD with
+camera/dashboard completed 504 accepted cycles, no faults or API calls. No
+physical rerun or automatic stop clearing. Firmware root cause and lift stop
+confirmation remain unresolved. Evidence: deployment repo
+`evidence/20261005_firmware_timeout` and parent `runs/da_scheduling_205821`.
+
 Current simulator runs use the same DA controller, actuator owner, command schema
 and deployment profile as the native adapter. Arm physics now evaluates MIT
 PD-plus-feedforward torque. No physical robot was operated for this validation.

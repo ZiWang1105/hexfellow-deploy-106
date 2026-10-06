@@ -1,0 +1,11 @@
+{
+  "phase": "fault",
+  "fault": "RuntimeError: HardwareSafetyError: unexpected SDK command, automatic rearm or clear-stop blocked",
+  "receipt": null,
+  "ticks": 1039,
+  "generated": 1039,
+  "accepted": 1038,
+  "pending": 1039,
+  "latest_sequence": null,
+  "shutdown_error": null
+}

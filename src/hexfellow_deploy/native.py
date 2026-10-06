@@ -129,6 +129,9 @@ class NativeDriver:
         return dict(measured=sensor_packet(state,hands,self.endpoint.grippers),received=dict(state.received))
 
     def check(self):
+        for name, gate in self.endpoint.direct_gates.items():
+            if gate.fault and gate.phase != 'stopping':
+                raise HardwareSafetyError(f'{name} downlink: {gate.fault}')
         self.endpoint.check_transport()
         if self.acquired:
             self.endpoint.check_health(self.state,'whole-body',check_timing=False)
@@ -165,3 +168,50 @@ class NativeDriver:
         failures = self.endpoint.close()
         if failures:
             raise RuntimeError('Native close: '+str(failures))
+
+    def diagnostics(self):
+        """Freeze bounded evidence before close clears SDK clients and stop buffers.
+
+        Never wait for a sender lock or serialize to disk in this path. An
+        unavailable section is explicit; collecting evidence must not block stop.
+        """
+        from .scheduling import runtime_state
+        started = time.monotonic()
+        result = dict(observed_s=started, runtime=runtime_state(), devices={})
+        endpoint = self.endpoint
+        for name, gate in endpoint.direct_gates.items():
+            row = result['devices'][name] = {}
+            if gate.lock.acquire(blocking=False):
+                try:
+                    row['gate'] = dict(phase=gate.phase, fault=gate.fault,
+                        sequence=gate.sequence, deadline=gate.deadline,
+                        rejected_packet=getattr(gate, 'hand_rejection', None),
+                        counts=dict(gate.counts), first_dispatch=gate.first_dispatch,
+                        first_dispatch_timing=list(gate.first_dispatch_timing.copy()),
+                        authorization_timing=list(gate.authorization_timing.copy()))
+                finally:
+                    gate.lock.release()
+            else:
+                row['gate_error'] = 'Sender lock busy at diagnostic capture'
+            try:
+                # API construction follows tap order, which can differ from
+                # the sorted order used to lock gates during group admission.
+                api = endpoint.apis[list(endpoint.taps).index(name)]
+                client = getattr(api, '_HexDeviceApi__kcp_client', None)
+                transport = getattr(client, '_policy_udp', None)
+                row['transport_fault'] = getattr(transport, 'fault', None)
+                for key, attribute in [('udp_send', 'rows'), ('udp_receive', 'receive_rows'),
+                                       ('kcp_process', 'process_rows')]:
+                    values = getattr(transport, attribute, None)
+                    row[key] = list(values.copy()) if values is not None else []
+                tap = endpoint.taps[name]
+                row['feedback'] = list(tap.frames.copy())
+                latest = getattr(tap, 'value', None) or {}
+                row['latest_health'] = {key: latest[key] for key in
+                    ('received', 'parking_stop', 'session_holder', 'mine', 'initialized', 'state')
+                    if key in latest}
+                row['clock_note'] = 'Host send return is not device receipt; kernel clock conversion is estimated'
+            except Exception as error:
+                row['capture_error'] = f'{type(error).__name__}: {error}'
+        result['capture_ms'] = (time.monotonic()-started)*1000
+        return result

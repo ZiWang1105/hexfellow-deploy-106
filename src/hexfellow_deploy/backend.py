@@ -10,6 +10,14 @@ from .reference import Receipt
 from .workspace import activate
 
 
+def diagnostic_value(value):
+    """SDK telemetry arrays remain numeric in the offline diagnostic artifact."""
+    import numpy as np
+    if isinstance(value, (np.ndarray, np.generic)):
+        return value.tolist()
+    raise TypeError(f'Unsupported diagnostic value: {type(value).__name__}')
+
+
 class BackendProxy:
     def __init__(self, frames, feedback, backend_status, timeout=30.):
         self.frames, self.feedback, self.status = frames, feedback, backend_status
@@ -117,6 +125,7 @@ class BackendComponent(DABaseInterface):
     def run(self):
         root = activate(self.workspace)
         driver = None
+        native_diagnostic = None
         pending = None
         stream = StreamContract(self.command_timeout, self.feedback_timeout)
         state = dict(phase='starting', fault=None, receipt=None, backend=self.backend)
@@ -199,6 +208,11 @@ class BackendComponent(DABaseInterface):
             self.status.put(state, timeout=.01)
         finally:
             if driver is not None:
+                if hasattr(driver, 'diagnostics'):
+                    try:
+                        native_diagnostic = driver.diagnostics()
+                    except Exception as error:
+                        state['native_diagnostic_error'] = f'{type(error).__name__}: {error}'
                 try:
                     until = time.monotonic()+self.command_timeout
                     while pending is not None and not state.get('fault') and time.monotonic() < until:
@@ -213,6 +227,16 @@ class BackendComponent(DABaseInterface):
                     driver.close()
                 except Exception as error:
                     state['shutdown_error'] = f'{type(error).__name__}: {error}'
+            if native_diagnostic is not None:
+                try:
+                    # Large evidence belongs on disk after stop, never in the
+                    # periodic shared-memory status or the policy observation.
+                    path = output/'native_transport.json'
+                    path.write_text(json.dumps(native_diagnostic, indent=2, allow_nan=False,
+                                               default=diagnostic_value)+'\n')
+                    state['native_diagnostic_path'] = str(path)
+                except Exception as error:
+                    state['native_diagnostic_error'] = f'{type(error).__name__}: {error}'
             if not state.get('fault'):
                 state['phase'] = 'closed'
             self.status.put(state,timeout=.01)

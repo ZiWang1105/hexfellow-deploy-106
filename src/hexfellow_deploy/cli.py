@@ -44,7 +44,8 @@ def build(config_path, overrides=(), *, prompt=None, camera=True, execute_author
     manager = InterfaceManager(topics=topics, interface=groups['interface'],
         preprocess=groups['preprocess'], input=groups['input'], inference=groups['inference'],
         output=groups['output_components'], loop_time=config.timing.control_period_s,
-        affinities=OmegaConf.to_container(config.affinities), shutdown_timeout_s=8.)
+        affinities=OmegaConf.to_container(config.affinities), shutdown_timeout_s=8.,
+        python_scheduling=OmegaConf.to_container(OmegaConf.create(config.get('python_scheduling', {}))))
     return config, topics, manager
 
 

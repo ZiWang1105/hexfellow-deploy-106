@@ -1,0 +1,29 @@
+{
+  "observed_s": 257162.489123251,
+  "error": "RuntimeError: Registered RGB-D publication expired: no matched frame published for 0.251s",
+  "capture": {
+    "sequence": 303,
+    "age_s": 0.11020781699335203,
+    "available": true,
+    "received_s": 257161.79823257,
+    "error": null,
+    "running": true
+  },
+  "counts": {
+    "published": 300,
+    "no_encoder_match": 46
+  },
+  "last_publication_s": 257161.657709012,
+  "last_frame_received_s": 257161.598437417,
+  "feedback_history": {
+    "samples": 1,
+    "rejected": 230,
+    "oldest_s": 257161.548355199,
+    "newest_s": 257161.548355199
+  },
+  "feedback_reads": 5477,
+  "feedback_read_misses": 206,
+  "feedback_error": null,
+  "max_age_s": 0.25,
+  "max_skew_s": 0.08
+}

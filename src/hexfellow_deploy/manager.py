@@ -7,10 +7,14 @@ import queue
 import time
 import traceback
 from deploy_anything.manager import DAManager
+from .scheduling import python_scheduling, runtime_state, validate_settings
 
 
 class InterfaceManager(DAManager):
     def __init__(self, *args, **kwargs):
+        self._python_scheduling = kwargs.pop('python_scheduling', {})
+        for settings in self._python_scheduling.values():
+            validate_settings(settings)
         self._health_topic = kwargs.get('topics', {}).get('health')
         output = os.environ.get('HEXFELLOW_OUTPUT')
         self._health_path = Path(output)/'component_health.json' if output else None
@@ -32,7 +36,11 @@ class InterfaceManager(DAManager):
                 self._logger.error('Lifecycle event queue full: %s', event)
         report('starting')
         try:
-            super()._run_with_priority(name, func, priority, affinity)
+            with python_scheduling(self._python_scheduling.get(name, {})):
+                def configured_run():
+                    report('configured', python_runtime=runtime_state())
+                    func()
+                super()._run_with_priority(name, configured_run, priority, affinity)
         except KeyboardInterrupt:
             report('interrupted')
         except BaseException as error:

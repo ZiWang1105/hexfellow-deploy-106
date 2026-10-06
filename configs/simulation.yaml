@@ -101,4 +101,11 @@ input: {}
 inference: {}
 output_components: {}
 affinities: {}
+python_scheduling:
+  hexfellow_control:
+    gil_switch_s: 0.0002
+    cyclic_gc: false
+  hexfellow_backend:
+    gil_switch_s: 0.0002
+    cyclic_gc: false
 deployment_config: configs/local/desktop.yaml

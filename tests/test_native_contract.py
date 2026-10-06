@@ -306,3 +306,92 @@ def test_native_leaf_reuses_calibrated_mit_encoding_for_complete_frame(monkeypat
     for name, (wire_packet, _) in prepared.items():
         assert endpoint.direct_gates[name].filter(wire_packet) == wire_packet
         assert endpoint.direct_gates[name].deadline == 100.1
+
+
+def test_native_fault_evidence_survives_close_buffer_clear_and_identifies_device():
+    from collections import deque
+    import json
+    import threading
+    from policy_sim.hardware.x7 import HardwareSafetyError
+    from hexfellow_deploy.backend import diagnostic_value
+    gate = ContinuousGate('right', clock=lambda: 100.)
+    gate.transition('active')
+    gate.fault = 'unexpected SDK command, automatic rearm or clear-stop blocked'
+    gate.hand_rejection = dict(packet_kind='arm_command', packet_text='clear_parking_stop',
+                               observed_s=100.01, reason=gate.fault)
+    transport = SimpleNamespace(fault=None,
+        rows=deque([dict(udp_send_started=99.95, udp_send_returned=99.951)]),
+        receive_rows=deque([dict(udp_received_at=100.)]),
+        process_rows=deque([(100., 100.001, 128)]))
+    api = SimpleNamespace(_HexDeviceApi__kcp_client=SimpleNamespace(_policy_udp=transport))
+    driver = object.__new__(NativeDriver)
+    driver.endpoint = SimpleNamespace(direct_gates={'right': gate}, apis=[api],
+        taps={'right': SimpleNamespace(frames=deque([dict(received=100., pos=np.zeros(7))]),
+            value=dict(received=100., parking_stop={'reason': 'API communication timeout'}))})
+    with pytest.raises(HardwareSafetyError, match='right downlink: unexpected SDK command'):
+        driver.check()
+    evidence = driver.diagnostics()
+    driver.endpoint.apis.clear()
+    transport.rows.clear()
+    assert evidence['devices']['right']['udp_send'][0]['udp_send_started'] == 99.95
+    assert evidence['devices']['right']['gate']['rejected_packet']['packet_text'] == 'clear_parking_stop'
+    saved = json.loads(json.dumps(evidence, allow_nan=False, default=diagnostic_value))
+    assert saved['devices']['right']['feedback'][0]['pos'] == [0.]*7
+    assert saved['devices']['right']['latest_health']['parking_stop']['reason'] == 'API communication timeout'
+    # A stuck sender cannot prevent fault capture from returning to stop.
+    locked, release = threading.Event(), threading.Event()
+    def owner():
+        with gate.lock:
+            locked.set()
+            release.wait(5)
+    worker = threading.Thread(target=owner)
+    worker.start()
+    try:
+        assert locked.wait(1)
+        blocked_evidence = driver.diagnostics()
+        assert 'busy' in blocked_evidence['devices']['right']['gate_error']
+        assert 'capture_error' in blocked_evidence['devices']['right']
+    finally:
+        release.set()
+        worker.join(1)
+
+
+@pytest.mark.parametrize('diagnostic_failure', [False, True])
+def test_backend_stops_before_writing_evidence_and_preserves_primary_fault(monkeypatch, tmp_path, diagnostic_failure):
+    import json
+    from hexfellow_deploy import backend, native
+    from hexfellow_deploy.backend import BackendComponent
+    events = []
+    class Topic:
+        def put(self, value, **kwargs):
+            if value.get('fault'):
+                component.signal_stop()
+            return True
+    topic = Topic()
+    component = BackendComponent('probe', topic, topic, topic, topic, topic, topic,
+        str(ROOT), str(tmp_path), '', '', backend='hardware', execute=True)
+    class Driver:
+        @property
+        def snapshot(self):
+            raise RuntimeError('firmware communication timeout')
+        def diagnostics(self):
+            events.append('capture')
+            if diagnostic_failure:
+                raise ValueError('capture failed')
+            return {'feedback': np.zeros(7)}
+        def close(self):
+            events.append('stop')
+            assert not (tmp_path/'native_transport.json').exists()
+            component.signal_stop()
+            raise RuntimeError('lift stop unconfirmed')
+    monkeypatch.setattr(backend, 'deployment', lambda *a, **k: ({}, None, None, None))
+    monkeypatch.setattr(native, 'NativeDriver', lambda *a, **k: Driver())
+    component.run()
+    assert events == ['capture', 'stop']
+    final = json.loads((tmp_path/'backend_final.json').read_text())
+    assert final['fault'] == 'RuntimeError: firmware communication timeout'
+    assert final['shutdown_error'] == 'RuntimeError: lift stop unconfirmed'
+    if diagnostic_failure:
+        assert final['native_diagnostic_error'] == 'ValueError: capture failed'
+    else:
+        assert json.loads((tmp_path/'native_transport.json').read_text())['feedback'] == [0.]*7

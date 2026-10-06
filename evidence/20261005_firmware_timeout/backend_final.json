@@ -1,0 +1,15 @@
+{
+  "phase": "fault",
+  "fault": "HardwareSafetyError: unexpected SDK command, automatic rearm or clear-stop blocked",
+  "receipt": {
+    "sequence": 1038,
+    "accepted_at": 257161.543904784,
+    "scope": "sdk_accepted"
+  },
+  "ticks": null,
+  "generated": null,
+  "accepted": null,
+  "pending": 1039,
+  "latest_sequence": 1039,
+  "shutdown_error": "RuntimeError: Native close: ['theta: stop not confirmed; use physical E-stop']"
+}
