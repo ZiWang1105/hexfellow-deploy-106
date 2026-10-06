@@ -1,6 +1,3 @@
 [submodule "third_party/deploy-anything"]
 	path = third_party/deploy-anything
 	url = git@github.com:HaoruXue/deploy-anything.git
-[submodule "third_party/policy-sim"]
-	path = third_party/policy-sim
-	url = git@github.com:Wzz-D/UMI_Hardware.git

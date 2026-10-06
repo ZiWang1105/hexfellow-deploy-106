@@ -12,46 +12,10 @@ def encode_mit(command):
 
 
 def decode_mit(value):
-    from .contracts import MitFrame
-    return MitFrame(**value)
-
-
-def base_reference_next(requested, previous, limits):
-    """One original deployment vector/yaw slew step under trusted limits.
-
-    This is the translation-vector and independent yaw interpolation used by
-    PoseExecutor.tick. Acceleration and cadence come from the configured guard
-    metadata. The caller retains ``previous`` only on an actual application
-    receipt and must never call again while that reference remains pending.
-    A zero request brakes using the same rule; no state, clock, or gain changes.
-    """
-    vectors = []
-    for name, value in (('requested', requested), ('previous', previous)):
-        raw = np.asarray(value, dtype=object)
-        if raw.shape != (3,) or any(isinstance(v, (bool, np.bool_)) for v in raw):
-            raise ValueError(f'{name} base reference requires three finite numbers')
-        vector = np.asarray(value, dtype=float)
-        if not np.isfinite(vector).all():
-            raise ValueError(f'{name} base reference requires three finite numbers')
-        vectors.append(vector.copy())
-    keys = ('dt_s', 'base_linear', 'base_angular', 'base_acceleration', 'base_angular_acceleration')
-    for key in keys:
-        value = limits[key]
-        if isinstance(value, (bool, np.bool_)) or not math.isfinite(value) or value <= 0:
-            raise ValueError(f'Invalid trusted base reference limit: {key}')
-    for vector in vectors:
-        if (math.hypot(*vector[:2]) > limits['base_linear']+1e-8
-                or abs(vector[2]) > limits['base_angular']+1e-8):
-            raise ValueError('Base reference exceeds configured deployment envelope')
-    requested, previous = vectors
-    change = requested-previous
-    linear_step = limits['base_acceleration']*limits['dt_s']
-    norm = math.hypot(*change[:2])
-    if norm > linear_step:
-        change[:2] *= linear_step/norm
-    angular_step = limits['base_angular_acceleration']*limits['dt_s']
-    change[2] = np.clip(change[2], -angular_step, angular_step)
-    return (previous+change).tolist()
+    from mobile_manipulator.robot.upstream import load_umi
+    load_umi()
+    from policy_sim.control.mit_command import MitCommand
+    return MitCommand(**value)
 
 
 class StreamContract:
@@ -70,17 +34,19 @@ class StreamContract:
 
     def seed(self, measured):
         """Bind initial reference history to the controller's exact startup sample."""
-        from .contracts import JOINTS, validate_sensor_packet, stationary_reference_velocity
+        from mobile_manipulator.interfaces.contract import validate_sensor_packet
+        from mobile_manipulator.robot.joints import JOINTS
+        from policy_sim.control.reference_initialization import stationary_reference_velocity
         if self.latest is not None or self.previous_position is not None:
             raise RuntimeError('Actuator reference history is already initialized')
         validate_sensor_packet(measured)
         velocity = np.array([measured['joint_velocities'][n] for n in JOINTS])
-        self.previous_velocity = stationary_reference_velocity(velocity)
+        self.previous_velocity = stationary_reference_velocity(velocity, base_dofs=0)
         self.previous_position = np.array([measured['joint_positions'][n] for n in JOINTS])
         self.previous_acceleration = np.zeros(len(JOINTS))
 
     def _validate_profile(self, frame, measured, mit, position, base):
-        from .contracts import JOINTS
+        from mobile_manipulator.robot.joints import JOINTS
         limits = self.limits
         if limits is None:
             return None, None
@@ -139,7 +105,8 @@ class StreamContract:
         return velocity, acceleration
 
     def accept(self, frame, measured):
-        from .contracts import JOINTS, LEFT, RIGHT, LIFT, validate_sensor_packet
+        from mobile_manipulator.interfaces.contract import validate_sensor_packet
+        from mobile_manipulator.robot.joints import JOINTS, LEFT, RIGHT, LIFT
         validate_sensor_packet(measured)
         now = self.clock()
         if self.fault:
@@ -153,10 +120,7 @@ class StreamContract:
             raise RuntimeError('Actual feedback is stale')
         command = frame['command']
         q = command['joint_positions']
-        lift_lower, lift_upper = ((0., .4) if self.limits is None else
-                                 (self.limits['position_lower'][0], self.limits['position_upper'][0]))
-        if (set(q) != set(JOINTS) or not np.isfinite(list(q.values())).all()
-                or not lift_lower-1e-7 <= q[LIFT] <= lift_upper+1e-7):
+        if set(q) != set(JOINTS) or not np.isfinite(list(q.values())).all() or not 0 <= q[LIFT] <= .4:
             raise ValueError('Invalid physical joint reference')
         mit = decode_mit(frame['mit'])
         if mit.joint_names != LEFT+RIGHT:
@@ -164,10 +128,8 @@ class StreamContract:
         if any(abs(q[n]-mit.position[i]) > 1e-8 for i,n in enumerate(mit.joint_names)):
             raise ValueError('MIT and position reference disagree')
         base = np.asarray(command['base_velocity_body'], dtype=float)
-        base_linear = .4 if self.limits is None else self.limits['base_linear']
-        base_angular = .25 if self.limits is None else self.limits['base_angular']
         if (base.shape != (3,) or not np.isfinite(base).all()
-                or np.linalg.norm(base[:2]) > base_linear+1e-8 or abs(base[2]) > base_angular+1e-8):
+                or np.linalg.norm(base[:2]) > .4+1e-8 or abs(base[2]) > .25+1e-8):
             raise ValueError('Base command exceeds configured deployment envelope')
         grips = command['gripper_open']
         if set(grips) != {'left','right'} or any(v not in (None,0,1) for v in grips.values()):
