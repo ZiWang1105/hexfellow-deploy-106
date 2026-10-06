@@ -145,6 +145,15 @@ def test_dashboard_serves_fault_and_registered_depth(monkeypatch):
         wrist.value['received_s'] = time.monotonic()
         with urlopen(base+'/wrist.jpg',timeout=1.) as response:
             assert response.headers['Content-Type']=='image/jpeg'
+        from test_wrist_camera import physical_builder, physical_feedback
+        stamp = time.monotonic()
+        wrist.value = physical_builder().observation(image['rgb'], stamp, physical_feedback(stamp),
+                                                     [[100.,0,16.],[0,100.,12.],[0,0,1.]])
+        with urlopen(base+'/status', timeout=1.) as response:
+            status = json.load(response)['wrist']
+            assert status['extrinsics_available'] is True
+            assert status['geometry']['calibration_status']=='candidate_requires_physical_validation'
+        assert b'candidate calibration' in page
         wrist.value['received_s'] -= 1.
         from urllib.error import HTTPError
         with pytest.raises(HTTPError) as error:

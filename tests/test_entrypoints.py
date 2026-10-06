@@ -99,6 +99,9 @@ def test_build_uses_deployment_relative_base_config_for_policy(monkeypatch, tmp_
     assert ('wrist_camera' in config.interface) == (backend=='hardware')
     if backend=='hardware':
         assert config.topics.wrist_images._target_ == 'hexfellow_deploy.topics.RGBTopic'
+        assert config.interface.wrist_camera.serial == '243222074562'
+        assert config.interface.wrist_camera.calibration.endswith('realsense_d435i_right_candidate_20261006.json')
+        assert 'feedback' in config.interface.wrist_camera
         assert 'wrist_images' in config.interface.agent and 'wrist_images' in config.interface.dashboard
 
 

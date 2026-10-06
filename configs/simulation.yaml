@@ -6,9 +6,10 @@ policy:
   model: openai/gpt-6-astra
   reasoning_effort: medium
 wrist_camera:
-  # Native RGB-only context; no fabricated simulated mount or extrinsics.
+  # Native wrist RGB and measured FK; no fabricated simulated wrist view.
   enabled: true
-  serial: null
+  serial: "243222074562"
+  calibration: third_party/hexfellow-deploy/calibration/config/camera/realsense_d435i_right_candidate_20261006.json
   width: 640
   height: 480
   fps: 30

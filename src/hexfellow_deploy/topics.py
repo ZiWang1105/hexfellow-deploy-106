@@ -27,21 +27,31 @@ class JsonTopic(ArrayCommWrapper):
 
 
 class RGBTopic(ArrayCommWrapper):
-    """Uncalibrated RGB pixels with their original host receipt timestamp."""
+    """Atomic RGB pixels, capture time and optional matched robot geometry."""
     def __init__(self, name, width=640, height=480, prefix='', *, create=True):
         self.width, self.height = width, height
-        super().__init__(prefix+name, shape=(height,width,3), dtype='uint8', create=create)
+        super().__init__(prefix+name, shape=(8192+height*width*3,), dtype='uint8', create=create)
 
     def put(self, value, *, timeout=.001):
         from mobile_manipulator.interfaces.contract import validate_rgb_camera
         validate_rgb_camera(value)
-        if value['rgb'].shape != self.shape:
+        if value['rgb'].shape != (self.height, self.width, 3):
             raise ValueError('RGB camera resolution differs from shared-memory schema')
-        return self.send(self.ArrayData(value['received_s'], value['rgb']), timeout=timeout)
+        meta = json.dumps({k:v for k,v in value.items() if k not in ('rgb', 'received_s')},
+                          allow_nan=False).encode()
+        if len(meta) >= 8192:
+            raise ValueError('Wrist metadata exceeds shared-memory capacity')
+        buf = np.zeros(self.shape, dtype=np.uint8)
+        buf[:len(meta)] = np.frombuffer(meta, dtype=np.uint8)
+        buf[8192:] = value['rgb'].reshape(-1)
+        return self.send(self.ArrayData(value['received_s'], buf), timeout=timeout)
 
     def get(self, *, timeout=.001):
         row = self.receive(timeout=timeout)
-        return None if row.timestamp <= 0 else dict(rgb=row.array, received_s=row.timestamp)
+        if row.timestamp <= 0:
+            return None
+        meta = json.loads(row.array[:8192].tobytes().split(b'\0', 1)[0])
+        return dict(meta, rgb=row.array[8192:].reshape(self.height, self.width, 3), received_s=row.timestamp)
 
 
 class RGBDTopic(ArrayCommWrapper):

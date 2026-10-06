@@ -30,7 +30,9 @@ def build(config_path, overrides=(), *, prompt=None, camera=True, execute_author
                                          width=wrist.width, height=wrist.height)
         config.interface.wrist_camera = dict(_target_='hexfellow_deploy.wrist_camera.NativeWristCamera',
             name='hexfellow_wrist_camera', images='${topic:wrist_images}', output='${output}',
-            serial=wrist.get('serial'), fps=wrist.fps)
+            serial=wrist.get('serial'), fps=wrist.fps,
+            feedback='${topic:feedback}', workspace='${workspace}',
+            deployment_config='${deployment_config}', calibration=wrist.get('calibration'))
         config.interface.dashboard.wrist_images = '${topic:wrist_images}'
     if prompt:
         if not camera:

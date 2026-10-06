@@ -31,8 +31,8 @@ figure{margin:0}img{max-width:100%;height:auto}figcaption{margin:8px 0;color:#cb
 <div class="views"><figure>
 <img id="camera" width="640" alt="Latest RGB observation"><figcaption>RGB observation</figcaption></figure><figure>
 <img id="depth" width="640" alt="Registered metric depth"><figcaption>Registered depth: 0-3 m; black = invalid</figcaption></figure>
-<figure id="wrist-view" hidden><img id="wrist" width="640" alt="Uncalibrated wrist RGB">
-<figcaption id="wrist-status">Wrist RGB only; no camera-to-base calibration</figcaption></figure></div>
+<figure id="wrist-view" hidden><img id="wrist" width="640" alt="Right wrist RGB">
+<figcaption id="wrist-status">Waiting for wrist camera metadata</figcaption></figure></div>
 <details><summary>Component health</summary><pre id="health"></pre></details>
 <details><summary>Control and actuator acceptance</summary><pre id="control"></pre></details>
 <details><summary>Agent decision / raw telemetry</summary><pre id="decision"></pre></details>
@@ -66,7 +66,7 @@ document.getElementById('decision').textContent=JSON.stringify(s.decision,null,2
 document.getElementById('camera-health').textContent=JSON.stringify(s.camera,null,2);
 document.getElementById('wrist-view').hidden=!s.wrist;
 if(s.wrist){document.getElementById('wrist-status').textContent=s.wrist.available
- ? 'Wrist RGB only; uncalibrated; age '+s.wrist.age_s.toFixed(2)+' s':'Waiting for fresh wrist RGB';
+ ? (s.wrist.extrinsics_available ? 'Right wrist RGB; candidate calibration; ' : 'Wrist RGB; uncalibrated; ')+'age '+s.wrist.age_s.toFixed(2)+' s':'Waiting for fresh wrist RGB';
  document.getElementById('wrist').style.opacity=s.wrist.available?'1':'.25';
  if(s.wrist.available)document.getElementById('wrist').src='/wrist.jpg?t='+Date.now();}
 document.getElementById('camera').src='/rgb.jpg?t='+Date.now();
@@ -129,7 +129,8 @@ class DashboardComponent(DABaseInterface):
                 frame = self.wrist_images.get()
                 age = None if frame is None else time.monotonic()-frame['received_s']
                 self._latest['wrist'] = dict(available=age is not None and 0 <= age <= .5, age_s=age,
-                                            modality='rgb_only', extrinsics_available=False)
+                                            modality='rgb_only', extrinsics_available=bool(frame and 'geometry' in frame),
+                                            geometry=None if frame is None else frame.get('geometry'))
             return dict(self._latest, observed_s=time.monotonic())
 
     def run(self):
