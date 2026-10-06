@@ -1,0 +1,59 @@
+{
+  "phase": "closed",
+  "fault": null,
+  "ticks": 2995,
+  "generated": 2995,
+  "accepted": 2995,
+  "evidence_kind": "simulation_position_actuators_not_native_MIT",
+  "overruns": 0,
+  "history_advanced_without_acceptance": 0,
+  "compute_and_submit_ms": {
+    "p50": 2.2726480092387646,
+    "p95": 2.705769095337018,
+    "p99": 3.101344559690914,
+    "max": 4.547746997559443
+  },
+  "interval_ms": {
+    "p50": 20.06455700029619,
+    "p95": 20.074126980034634,
+    "p99": 20.087584862485528,
+    "max": 20.304399979067966
+  },
+  "acceptance_ms": {
+    "p50": 1.2312189937802032,
+    "p95": 1.9002462984644808,
+    "p99": 1.9400191502063535,
+    "max": 1.9941959762945771
+  },
+  "final_diagnostic": {
+    "arrived": false,
+    "mode": "brake",
+    "needs_observation": false,
+    "ik_status": "BRAKING",
+    "navigation": {
+      "object_xy_m": [
+        0.707,
+        0.001
+      ],
+      "estimated_distance_m": 0.7070007072132247,
+      "yaw_rad": 0.0,
+      "motion": "approach",
+      "approach_distance_m": 0.55,
+      "distance_tolerance_m": 0.03,
+      "source": "policy_rgbd_estimate",
+      "requires_base": true,
+      "pulse_elapsed_s": 1.1435136829968542,
+      "commanded_velocity_body": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  },
+  "local_run": "runs/agent_01",
+  "raw_sha256": {
+    "control.jsonl": "00817de140e6955e72d2206a42aa5b098d1704dadcbec4c7675c05fdd8437f6a",
+    "control_final.json": "a7132c001d1a08201405e89f90e482196115440535524c506e72910319aa469b",
+    "config.yaml": "293b8eb3ada8cc4a1e4ba9a6c66531866170885d984c2eef5a24921503069931"
+  }
+}

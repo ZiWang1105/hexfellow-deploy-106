@@ -1,0 +1,73 @@
+workspace: ${oc.env:HEXFELLOW_WORKSPACE}
+output: ${oc.env:HEXFELLOW_OUTPUT}
+topic_prefix: ${oc.env:HEXFELLOW_TOPIC_PREFIX}
+policy:
+  agent_config: configs/agent/rgbd_full.yaml
+  model: openai/gpt-6-astra
+  reasoning_effort: medium
+timing:
+  control_period_s: 0.02
+  compute_budget_s: 0.006
+  feedback_health_timeout_s: 0.1
+topics:
+  request:
+    _target_: hexfellow_deploy.topics.JsonTopic
+    prefix: ${topic_prefix}
+  status:
+    _target_: hexfellow_deploy.topics.JsonTopic
+    prefix: ${topic_prefix}
+  measured:
+    _target_: hexfellow_deploy.topics.JsonTopic
+    prefix: ${topic_prefix}
+  plant_state:
+    _target_: hexfellow_deploy.topics.JsonTopic
+    prefix: ${topic_prefix}
+  decision:
+    _target_: hexfellow_deploy.topics.JsonTopic
+    prefix: ${topic_prefix}
+  images:
+    _target_: hexfellow_deploy.topics.RGBDTopic
+    prefix: ${topic_prefix}
+    width: 640
+    height: 360
+interface:
+  control:
+    _target_: hexfellow_deploy.components.ControlComponent
+    name: hexfellow_control
+    request: ${topic:request}
+    status: ${topic:status}
+    measured: ${topic:measured}
+    plant_state: ${topic:plant_state}
+    workspace: ${workspace}
+    output: ${output}
+    scene: configs/scenes/apple_on_table.yaml
+    controller: configs/controller/umi_pink_mobile.yaml
+    backend: simulation
+    startup_carry: false
+    period_s: ${timing.control_period_s}
+    time_budget: ${timing.compute_budget_s}
+    health_timeout_s: ${timing.feedback_health_timeout_s}
+    inject_every: 0
+    inject_delay_s: 0.0
+    submit_delay_s: 0.0
+  dashboard:
+    _target_: hexfellow_deploy.dashboard.DashboardComponent
+    name: hexfellow_dashboard
+    status: ${topic:status}
+    decision: ${topic:decision}
+    images: ${topic:images}
+    port: 8765
+  camera:
+    _target_: hexfellow_deploy.camera.SimulationCamera
+    name: hexfellow_camera
+    plant_state: ${topic:plant_state}
+    images: ${topic:images}
+    workspace: ${workspace}
+    output: ${output}
+    scene: ${interface.control.scene}
+    fps: 15
+preprocess: {}
+input: {}
+inference: {}
+output_components: {}
+affinities: {}

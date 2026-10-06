@@ -1,0 +1,52 @@
+{
+  "phase": "closed",
+  "fault": null,
+  "ticks": 1201,
+  "generated": 1201,
+  "accepted": 1201,
+  "evidence_kind": "simulation_position_actuators_not_native_MIT",
+  "overruns": 0,
+  "history_advanced_without_acceptance": 0,
+  "compute_and_submit_ms": {
+    "p50": 2.910221985075623,
+    "p95": 3.4455889835953712,
+    "p99": 3.74333601212129,
+    "max": 5.22649401682429
+  },
+  "interval_ms": {
+    "p50": 20.066461496753618,
+    "p95": 20.074353413656354,
+    "p99": 20.100365874241106,
+    "max": 20.204052998451516
+  },
+  "acceptance_ms": {
+    "p50": 0.6703794933855534,
+    "p95": 1.4863827862427568,
+    "p99": 1.7864987187203951,
+    "max": 1.9972070003859699
+  },
+  "final_diagnostic": {
+    "arrived": true,
+    "mode": "arm",
+    "needs_observation": false,
+    "ik_status": "TRACKING",
+    "arm_errors": {
+      "left": {
+        "position_m": 1.039066453056802e-10,
+        "orientation_rad": 9.883125494278396e-10
+      },
+      "right": {
+        "position_m": 1.0361184246021996e-10,
+        "orientation_rad": 9.855025920726467e-10
+      }
+    },
+    "arm_position_error_m": 1.039066453056802e-10,
+    "arm_orientation_error_rad": 9.883125494278396e-10
+  },
+  "local_run": "runs/paired_baseline",
+  "raw_sha256": {
+    "control.jsonl": "25badb801566b5bd299e529e1525f5e9ba6ce7961f8e4de3fbb78301c5c1b733",
+    "control_final.json": "1d1c9bcd85006bc0a03ddade91b29b62d897c4e97587510402e44babdd4738ed",
+    "config.yaml": "d4e1e6914e50168c1aafe05ebb47072cce7dbd20b6d3fc4ade1a35990ab92a81"
+  }
+}

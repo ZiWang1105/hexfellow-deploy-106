@@ -1,0 +1,69 @@
+{
+  "phase": "closed",
+  "fault": null,
+  "ticks": 1252,
+  "generated": 1252,
+  "accepted": 1252,
+  "evidence_kind": "simulation_position_actuators_not_native_MIT",
+  "overruns": 0,
+  "history_advanced_without_acceptance": 0,
+  "compute_and_submit_ms": {
+    "p50": 2.3051275202305987,
+    "p95": 2.7213636101805605,
+    "p99": 3.1142995879054074,
+    "max": 4.4134150084573776
+  },
+  "interval_ms": {
+    "p50": 20.06369800074026,
+    "p95": 20.074972504517063,
+    "p99": 20.091681013582274,
+    "max": 20.188597991364077
+  },
+  "acceptance_ms": {
+    "p50": 1.2521520256996155,
+    "p95": 1.896304005640559,
+    "p99": 1.933979001478292,
+    "max": 2.005430986173451
+  },
+  "provenance": {
+    "repositories": {
+      "hexfellow-deploy": {
+        "commit": null,
+        "dirty": true,
+        "implementation_sha256": "90b63e0b30388f58c920f1c6d702b9af7aa4480da09e9c3c777000eca551868e"
+      },
+      "deploy-anything": {
+        "commit": "6c2bda40ebee56ab3a50b8dd62aaf4df5814e5a8",
+        "dirty": false,
+        "implementation_sha256": "d66de033bd3063d4dc7fff3080f4bbca5d8c52bf9c78a99a9fd7e6f80e7778a4"
+      },
+      "workspace": {
+        "commit": "b8770bb1718234d17f1f413e8b56983bcaac1f1e",
+        "dirty": true,
+        "implementation_sha256": "aa517e24023ed6d9915f5b9f4084c87793b620e1bd7b15b852bd66d689ea2b3c"
+      },
+      "UMI_Hardware": {
+        "commit": "23e2cfaf97acfbdffcf40d3ae9aeeb916a815b14",
+        "dirty": false,
+        "implementation_sha256": "a950db8295655eed00725b30f752e1ea622dcb2897b15f75f17a744fec14eaaf"
+      }
+    },
+    "packages": {
+      "numpy": "1.26.4",
+      "mujoco": "3.10.0",
+      "hydra-core": "1.3.7",
+      "posix_ipc": "1.3.2",
+      "deploy-anything": "0.0.1"
+    }
+  },
+  "raw_sha256": {
+    "control.jsonl": "61e386f3d4b7275b619ce7658cfc421d357715f58e45f1e6e6fc6e1568285bf7",
+    "control_final.json": "2c0231a7997ab73d800dcc5077373badd14b37ce009bd6ba93f45c9e13d0d6d0",
+    "decisions.jsonl": "d07f5fd2ec5ed6c51020c688f5ce845ad9913f1928a147a7b4d8fa4671f5fc9e",
+    "config.yaml": "ced41eddfa294cd003250cf6a3c2ec507cd2ab4376c1f10fe7646d7372fa42d2"
+  },
+  "completed_calls": 3,
+  "submitted_calls": 4,
+  "reported_cost_usd": 0.232375,
+  "interrupted_request_cost_known": false
+}

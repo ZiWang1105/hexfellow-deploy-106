@@ -1,0 +1,17 @@
+{
+  "final_diagnostic": {
+    "arrived": false,
+    "mode": "hold",
+    "needs_observation": false,
+    "ik_status": "BRAKING"
+  },
+  "fault": "RuntimeError: Actuator acknowledgement unavailable; IK history cannot advance",
+  "generated": 1,
+  "accepted": 0,
+  "local_run": "runs/ack_timeout",
+  "raw_sha256": {
+    "control.jsonl": "bde81082dccea8c88a320092519f5a2597e9b7b4ae3e41cc93007794cf1f98c9",
+    "control_final.json": "9004a984c3cdbbc57323224702182d904a4907fdb78135455bd82a1ddbe12739",
+    "config.yaml": "3f9758c212cf459a5275e00dfa4925e9ff1e774bdb1502bd948c724e7f50f35d"
+  }
+}

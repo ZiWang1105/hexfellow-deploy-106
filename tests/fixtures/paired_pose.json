@@ -1,0 +1,5 @@
+{
+  "left": {"position_m": [0.53, 0.18, 0.95], "quaternion_xyzw": [0.7071067811865476, -0.7071067811865476, 0, 0], "gripper_open": 1},
+  "right": {"position_m": [0.53, -0.18, 0.95], "quaternion_xyzw": [0.7071067811865476, 0.7071067811865476, 0, 0], "gripper_open": 1},
+  "navigation": null
+}

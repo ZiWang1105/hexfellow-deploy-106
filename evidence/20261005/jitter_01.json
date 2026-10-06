@@ -1,0 +1,40 @@
+{
+  "phase": "closed",
+  "fault": null,
+  "ticks": 378,
+  "generated": 378,
+  "accepted": 378,
+  "evidence_kind": "simulation_position_actuators_not_native_MIT",
+  "overruns": 37,
+  "history_advanced_without_acceptance": 0,
+  "compute_and_submit_ms": {
+    "p50": 2.2183294931892306,
+    "p95": 32.280743928276934,
+    "p99": 32.47819923592033,
+    "max": 33.008918981067836
+  },
+  "interval_ms": {
+    "p50": 20.067612000275403,
+    "p95": 33.8934049999807,
+    "p99": 34.364221311407164,
+    "max": 35.06489400751889
+  },
+  "acceptance_ms": {
+    "p50": 1.2876630062237382,
+    "p95": 1.9224617921281606,
+    "p99": 1.9403031235560775,
+    "max": 1.9553259771782905
+  },
+  "final_diagnostic": {
+    "arrived": false,
+    "mode": "hold",
+    "needs_observation": false,
+    "ik_status": "HOLD"
+  },
+  "local_run": "runs/jitter_01",
+  "raw_sha256": {
+    "control.jsonl": "bc03cc160f1801c310e76df4ef332278dce31d9e53331e3fec25eef96e60fc7b",
+    "control_final.json": "2bfe3d3dd926bd6a82a9d54cc32dc12e0ffc8300f32623c324860aa86ceeb979",
+    "config.yaml": "195621a43a717c17d2739937346137171f664df1403b97a97b2cdcb4fbf732be"
+  }
+}

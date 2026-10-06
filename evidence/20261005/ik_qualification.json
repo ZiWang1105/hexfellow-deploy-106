@@ -1,0 +1,150 @@
+{
+  "evidence": "offline_solver_and_position_plant_not_native_MIT",
+  "cases": [
+    {
+      "profile": "umi_pink_mobile",
+      "mode": "ideal_reference",
+      "ticks": 1100,
+      "accepted": 1100,
+      "wall_s": 2.907175248983549,
+      "fault": null,
+      "variable_dt_rejected": true,
+      "final_errors": {
+        "reference_left": {
+          "position_m": 1.872907828593639e-09,
+          "orientation_deg": 1.0186849202514845e-06
+        },
+        "reference_right": {
+          "position_m": 1.8764800187642916e-09,
+          "orientation_deg": 1.020627825726319e-06
+        },
+        "measured_left": {
+          "position_m": 1.872907828593639e-09,
+          "orientation_deg": 1.0186849202514845e-06
+        },
+        "measured_right": {
+          "position_m": 1.8764800187642916e-09,
+          "orientation_deg": 1.020627825726319e-06
+        }
+      }
+    },
+    {
+      "profile": "umi_pink_mobile",
+      "mode": "mujoco_position",
+      "ticks": 1100,
+      "accepted": 1100,
+      "wall_s": 3.329108811012702,
+      "fault": null,
+      "variable_dt_rejected": true,
+      "final_errors": {
+        "reference_left": {
+          "position_m": 1.877652991455903e-09,
+          "orientation_deg": 1.0141925630533622e-06
+        },
+        "reference_right": {
+          "position_m": 1.8869574102309175e-09,
+          "orientation_deg": 1.0185802547716165e-06
+        },
+        "measured_left": {
+          "position_m": 2.132587848185746e-09,
+          "orientation_deg": 1.159195165003071e-06
+        },
+        "measured_right": {
+          "position_m": 2.143497227722454e-09,
+          "orientation_deg": 1.1641064094333402e-06
+        }
+      }
+    },
+    {
+      "profile": "umi_pink_real",
+      "mode": "ideal_reference",
+      "ticks": 1100,
+      "accepted": 1100,
+      "wall_s": 1.9404360770131461,
+      "fault": null,
+      "variable_dt_rejected": true,
+      "final_errors": {
+        "reference_left": {
+          "position_m": 1.7772239894833365e-16,
+          "orientation_deg": 3.9935163701733065e-14
+        },
+        "reference_right": {
+          "position_m": 1.1102230246251565e-16,
+          "orientation_deg": 5.2572758931725817e-14
+        },
+        "measured_left": {
+          "position_m": 1.7772239894833365e-16,
+          "orientation_deg": 3.9935163701733065e-14
+        },
+        "measured_right": {
+          "position_m": 1.1102230246251565e-16,
+          "orientation_deg": 5.2572758931725817e-14
+        }
+      }
+    },
+    {
+      "profile": "umi_pink_real",
+      "mode": "mujoco_position",
+      "ticks": 1100,
+      "accepted": 1100,
+      "wall_s": 2.455422361003002,
+      "fault": null,
+      "variable_dt_rejected": true,
+      "final_errors": {
+        "reference_left": {
+          "position_m": 3.0611600656235085e-08,
+          "orientation_deg": 3.822430946270136e-08
+        },
+        "reference_right": {
+          "position_m": 4.088231429798138e-08,
+          "orientation_deg": 1.1328713721362405e-05
+        },
+        "measured_left": {
+          "position_m": 2.735594399375553e-08,
+          "orientation_deg": 4.1303251143655186e-08
+        },
+        "measured_right": {
+          "position_m": 3.903384566335515e-08,
+          "orientation_deg": 1.2062181572313736e-05
+        }
+      }
+    }
+  ],
+  "revisions": {
+    "workspace": "b8770bb1718234d17f1f413e8b56983bcaac1f1e",
+    "UMI_Hardware": "23e2cfaf97acfbdffcf40d3ae9aeeb916a815b14"
+  },
+  "native_qualified": false,
+  "solver_cases_passed": true,
+  "provenance": {
+    "repositories": {
+      "hexfellow-deploy": {
+        "commit": null,
+        "dirty": true,
+        "implementation_sha256": "90b63e0b30388f58c920f1c6d702b9af7aa4480da09e9c3c777000eca551868e"
+      },
+      "deploy-anything": {
+        "commit": "6c2bda40ebee56ab3a50b8dd62aaf4df5814e5a8",
+        "dirty": false,
+        "implementation_sha256": "d66de033bd3063d4dc7fff3080f4bbca5d8c52bf9c78a99a9fd7e6f80e7778a4"
+      },
+      "workspace": {
+        "commit": "b8770bb1718234d17f1f413e8b56983bcaac1f1e",
+        "dirty": true,
+        "implementation_sha256": "aa517e24023ed6d9915f5b9f4084c87793b620e1bd7b15b852bd66d689ea2b3c"
+      },
+      "UMI_Hardware": {
+        "commit": "23e2cfaf97acfbdffcf40d3ae9aeeb916a815b14",
+        "dirty": false,
+        "implementation_sha256": "a950db8295655eed00725b30f752e1ea622dcb2897b15f75f17a744fec14eaaf"
+      }
+    },
+    "packages": {
+      "numpy": "1.26.4",
+      "mujoco": "3.10.0",
+      "hydra-core": "1.3.7",
+      "posix_ipc": "1.3.2",
+      "deploy-anything": "0.0.1"
+    }
+  }
+}
