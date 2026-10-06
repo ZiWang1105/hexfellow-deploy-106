@@ -6,8 +6,7 @@ precision. Version and exact integer checks reject incompatible layouts.
 import time
 import numpy as np
 from deploy_anything.components.comms.wrappers import ArrayCommWrapper
-from mobile_manipulator.robot.joints import JOINTS, LEFT, RIGHT
-from mobile_manipulator.interfaces.contract import validate_sensor_packet
+from .contracts import JOINTS, LEFT, RIGHT, validate_sensor_packet
 
 GROUPS = ('left', 'right', 'theta', 'base')
 SIDES = ('left', 'right')
