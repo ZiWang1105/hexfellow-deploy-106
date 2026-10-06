@@ -138,6 +138,13 @@ class ControlComponent(DABaseInterface):
                     time.sleep(self.inject_delay)
                     # Read actual new feedback after the injected delay.
                     measured = plant.read()
+                def feedback_wait(retries):
+                    nonlocal state
+                    state = dict(state, phase='waiting_for_feedback', feedback_refresh_retries=retries)
+                    if retries == 1:
+                        logger.warning('Waiting for fresh feedback before IK; reference history unchanged')
+                measured = plant.read_for_control(timeout_s=self.health_timeout,
+                    min_validity_s=self.time_budget, stopped=lambda: self.stopping, on_wait=feedback_wait)
                 plant.created_s = time.monotonic()
                 generated = owner.generate(lambda: executor.tick(measured))
                 sequence, (command, diagnostic) = generated
@@ -170,6 +177,8 @@ class ControlComponent(DABaseInterface):
                             side: dict(position_m=pos.tolist(),rotation=rot.tolist())
                             for side,(pos,rot) in executor.arm_targets.items()},
                         interval_ms=None if previous_solve_started is None else (started-previous_solve_started)*1000,
+                        feedback_refresh=plant.feedback_refresh,
+                        feedback_read=plant.feedback_read,
                         previous_acceptance_ms=accepted_latency_ms,
                         accepted_before_solve=owner.accepted))
                 except queue.Full:
@@ -181,6 +190,9 @@ class ControlComponent(DABaseInterface):
         except BaseException as error:
             owner.fail(f"{type(error).__name__}: {error}")
             state = dict(state, fault_feedback=measured)
+            if plant is not None:
+                state = dict(state, feedback_read=getattr(plant, 'feedback_read', None),
+                             feedback_refresh=getattr(plant, 'feedback_refresh', None))
             if executor is not None:
                 state = dict(state, ik_fault_info=getattr(executor.ik.core,"_fault_info",None))
                 capture = getattr(executor.ik.core,'last_qp_failure',None)

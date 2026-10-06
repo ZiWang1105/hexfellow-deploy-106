@@ -1,0 +1,1586 @@
+{
+  "run": "runs/real_20261005_211146",
+  "scope": "Host receive evidence; not a firmware-delivery guarantee",
+  "devices": {
+    "right": {
+      "max_feedback_gap_ms": 10.287248995155096,
+      "latest_health": {
+        "received": 258011.91936859,
+        "parking_stop": null,
+        "session_holder": 9,
+        "mine": 9,
+        "initialized": true
+      },
+      "feedback_at_fault_window": [
+        {
+          "sequence": 11162,
+          "received": 258011.781330334,
+          "pos": [
+            -0.004621416729128128,
+            1.5674025940387812,
+            1.5716797353736343,
+            1.5529158632361046,
+            0.000737928648547331,
+            0.003585680091682686,
+            0.00126523454438302
+          ],
+          "capture_completed": 258011.781422587,
+          "raw_timestamp": {
+            "seconds": 2423,
+            "nanoseconds": 744218573
+          },
+          "udp_received_at": 258011.781310377,
+          "api_entered": 258011.781319895,
+          "kcp_process_entered": 258011.781313052
+        },
+        {
+          "sequence": 11163,
+          "received": 258011.788359593,
+          "pos": [
+            -0.004621416729128128,
+            1.5674025940387812,
+            1.5716797353736343,
+            1.5529158632361046,
+            0.000737928648547331,
+            0.003585680091682686,
+            0.00126523454438302
+          ],
+          "capture_completed": 258011.788479006,
+          "raw_timestamp": {
+            "seconds": 2423,
+            "nanoseconds": 748143239
+          },
+          "udp_received_at": 258011.788330609,
+          "api_entered": 258011.788344575,
+          "kcp_process_entered": 258011.788334196
+        },
+        {
+          "sequence": 11164,
+          "received": 258011.788715839,
+          "pos": [
+            -0.004621416729128128,
+            1.5674025940387812,
+            1.5716797353736343,
+            1.5529158632361046,
+            0.000737928648547331,
+            0.003585680091682686,
+            0.00126523454438302
+          ],
+          "capture_completed": 258011.788839059,
+          "raw_timestamp": {
+            "seconds": 2423,
+            "nanoseconds": 751582281
+          },
+          "udp_received_at": 258011.788698647,
+          "api_entered": 258011.788707143,
+          "kcp_process_entered": 258011.788701252
+        },
+        {
+          "sequence": 11165,
+          "received": 258011.798283202,
+          "pos": [
+            -0.004621416729128128,
+            1.5674025940387812,
+            1.5716797353736343,
+            1.5529158632361046,
+            0.000737928648547331,
+            0.003585680091682686,
+            0.00126523454438302
+          ],
+          "capture_completed": 258011.798445526,
+          "raw_timestamp": {
+            "seconds": 2423,
+            "nanoseconds": 756344906
+          },
+          "udp_received_at": 258011.798258115,
+          "api_entered": 258011.798270949,
+          "kcp_process_entered": 258011.798261902
+        },
+        {
+          "sequence": 11166,
+          "received": 258011.798610173,
+          "pos": [
+            -0.004621416729128128,
+            1.5674025940387812,
+            1.5716797353736343,
+            1.5529158632361046,
+            0.000737928648547331,
+            0.003585680091682686,
+            0.00126523454438302
+          ],
+          "capture_completed": 258011.798694621,
+          "raw_timestamp": {
+            "seconds": 2423,
+            "nanoseconds": 760076489
+          },
+          "udp_received_at": 258011.79859251,
+          "api_entered": 258011.798601697,
+          "kcp_process_entered": 258011.798595636
+        },
+        {
+          "sequence": 11167,
+          "received": 258011.803309657,
+          "pos": [
+            -0.004621416729128128,
+            1.5674025940387812,
+            1.5716797353736343,
+            1.5529158632361046,
+            0.000737928648547331,
+            0.003585680091682686,
+            0.00126523454438302
+          ],
+          "capture_completed": 258011.803430393,
+          "raw_timestamp": {
+            "seconds": 2423,
+            "nanoseconds": 764652739
+          },
+          "udp_received_at": 258011.803283438,
+          "api_entered": 258011.803296623,
+          "kcp_process_entered": 258011.803286674
+        },
+        {
+          "sequence": 11168,
+          "received": 258011.805844696,
+          "pos": [
+            -0.004621416729128128,
+            1.5674025940387812,
+            1.5716797353736343,
+            1.5529158632361046,
+            0.000737928648547331,
+            0.003585680091682686,
+            0.00126523454438302
+          ],
+          "capture_completed": 258011.80595407,
+          "raw_timestamp": {
+            "seconds": 2423,
+            "nanoseconds": 767930198
+          },
+          "udp_received_at": 258011.805818847,
+          "api_entered": 258011.805831631,
+          "kcp_process_entered": 258011.805822123
+        },
+        {
+          "sequence": 11169,
+          "received": 258011.810457959,
+          "pos": [
+            -0.004621416729128128,
+            1.5674025940387812,
+            1.5716797353736343,
+            1.5529158632361046,
+            0.000737928648547331,
+            0.003585680091682686,
+            0.00126523454438302
+          ],
+          "capture_completed": 258011.810554679,
+          "raw_timestamp": {
+            "seconds": 2423,
+            "nanoseconds": 772468531
+          },
+          "udp_received_at": 258011.810374483,
+          "api_entered": 258011.810447519,
+          "kcp_process_entered": 258011.810378159
+        },
+        {
+          "sequence": 11170,
+          "received": 258011.815110725,
+          "pos": [
+            -0.004621416729128128,
+            1.5674025940387812,
+            1.5716797353736343,
+            1.5529158632361046,
+            0.000737928648547331,
+            0.003585680091682686,
+            0.00126523454438302
+          ],
+          "capture_completed": 258011.815222685,
+          "raw_timestamp": {
+            "seconds": 2423,
+            "nanoseconds": 776125739
+          },
+          "udp_received_at": 258011.815083835,
+          "api_entered": 258011.815096669,
+          "kcp_process_entered": 258011.815086851
+        },
+        {
+          "sequence": 11171,
+          "received": 258011.819428586,
+          "pos": [
+            -0.004621416729128128,
+            1.5674025940387812,
+            1.5716797353736343,
+            1.5529158632361046,
+            0.000737928648547331,
+            0.003585680091682686,
+            0.00126523454438302
+          ],
+          "capture_completed": 258011.819522402,
+          "raw_timestamp": {
+            "seconds": 2423,
+            "nanoseconds": 779594239
+          },
+          "udp_received_at": 258011.819408248,
+          "api_entered": 258011.819418127,
+          "kcp_process_entered": 258011.819411094
+        },
+        {
+          "sequence": 11172,
+          "received": 258011.821206259,
+          "pos": [
+            -0.004621416729128128,
+            1.5674025940387812,
+            1.5716797353736343,
+            1.5529158632361046,
+            0.000737928648547331,
+            0.003585680091682686,
+            0.00126523454438302
+          ],
+          "capture_completed": 258011.821315263,
+          "raw_timestamp": {
+            "seconds": 2423,
+            "nanoseconds": 783870364
+          },
+          "udp_received_at": 258011.821177846,
+          "api_entered": 258011.821192163,
+          "kcp_process_entered": 258011.821181763
+        },
+        {
+          "sequence": 11173,
+          "received": 258011.825570196,
+          "pos": [
+            -0.004621416729128128,
+            1.5674025940387812,
+            1.5716797353736343,
+            1.5529158632361046,
+            0.000737928648547331,
+            0.003585680091682686,
+            0.00126523454438302
+          ],
+          "capture_completed": 258011.825661005,
+          "raw_timestamp": {
+            "seconds": 2423,
+            "nanoseconds": 788397614
+          },
+          "udp_received_at": 258011.825548475,
+          "api_entered": 258011.825559606,
+          "kcp_process_entered": 258011.825552102
+        },
+        {
+          "sequence": 11174,
+          "received": 258011.830116854,
+          "pos": [
+            -0.004621416729128128,
+            1.5674025940387812,
+            1.5716797353736343,
+            1.5529158632361046,
+            0.000737928648547331,
+            0.003585680091682686,
+            0.00126523454438302
+          ],
+          "capture_completed": 258011.830231889,
+          "raw_timestamp": {
+            "seconds": 2423,
+            "nanoseconds": 792027114
+          },
+          "udp_received_at": 258011.830089773,
+          "api_entered": 258011.830103108,
+          "kcp_process_entered": 258011.83009334
+        },
+        {
+          "sequence": 11175,
+          "received": 258011.834751517,
+          "pos": [
+            -0.004621416729128128,
+            1.5674025940387812,
+            1.5716797353736343,
+            1.5529158632361046,
+            0.000737928648547331,
+            0.003585680091682686,
+            0.00126523454438302
+          ],
+          "capture_completed": 258011.834858637,
+          "raw_timestamp": {
+            "seconds": 2423,
+            "nanoseconds": 795616948
+          },
+          "udp_received_at": 258011.834727612,
+          "api_entered": 258011.834738723,
+          "kcp_process_entered": 258011.834730708
+        },
+        {
+          "sequence": 11176,
+          "received": 258011.839478833,
+          "pos": [
+            -0.004621416729128128,
+            1.5674025940387812,
+            1.5716797353736343,
+            1.5529158632361046,
+            0.000737928648547331,
+            0.003585680091682686,
+            0.00126523454438302
+          ],
+          "capture_completed": 258011.839597525,
+          "raw_timestamp": {
+            "seconds": 2423,
+            "nanoseconds": 800118239
+          },
+          "udp_received_at": 258011.839457543,
+          "api_entered": 258011.839467983,
+          "kcp_process_entered": 258011.839460609
+        },
+        {
+          "sequence": 11177,
+          "received": 258011.841422005,
+          "pos": [
+            -0.004621416729128128,
+            1.5674025940387812,
+            1.5716797353736343,
+            1.5529158632361046,
+            0.000737928648547331,
+            0.003585680091682686,
+            0.00126523454438302
+          ],
+          "capture_completed": 258011.841532612,
+          "raw_timestamp": {
+            "seconds": 2423,
+            "nanoseconds": 804002364
+          },
+          "udp_received_at": 258011.841393903,
+          "api_entered": 258011.841407208,
+          "kcp_process_entered": 258011.841397259
+        },
+        {
+          "sequence": 11178,
+          "received": 258011.848735074,
+          "pos": [
+            -0.004621416729128128,
+            1.5674025940387812,
+            1.5716797353736343,
+            1.5529158632361046,
+            0.000737928648547331,
+            0.003585680091682686,
+            0.00126523454438302
+          ],
+          "capture_completed": 258011.848846713,
+          "raw_timestamp": {
+            "seconds": 2423,
+            "nanoseconds": 807559239
+          },
+          "udp_received_at": 258011.848711781,
+          "api_entered": 258011.848722812,
+          "kcp_process_entered": 258011.848715247
+        }
+      ]
+    },
+    "left": {
+      "max_feedback_gap_ms": 9.567633998813108,
+      "latest_health": {
+        "received": 258011.918603009,
+        "parking_stop": null,
+        "session_holder": 9,
+        "mine": 9,
+        "initialized": true
+      },
+      "feedback_at_fault_window": [
+        {
+          "sequence": 11134,
+          "received": 258011.783711846,
+          "pos": [
+            0.008526176808915934,
+            1.5669857427491567,
+            -1.5691552013295833,
+            1.5563878643943994,
+            0.0006324674693801931,
+            0.004764628216747139,
+            0.0004982441504401995
+          ],
+          "capture_completed": 258011.78385342,
+          "raw_timestamp": {
+            "seconds": 2423,
+            "nanoseconds": 744257948
+          },
+          "udp_received_at": 258011.783684314,
+          "api_entered": 258011.783697709,
+          "kcp_process_entered": 258011.78368738
+        },
+        {
+          "sequence": 11135,
+          "received": 258011.788307215,
+          "pos": [
+            0.008526176808915934,
+            1.5669857427491567,
+            -1.5691552013295833,
+            1.5563878643943994,
+            0.0006324674693801931,
+            0.004764628216747139,
+            0.0004982441504401995
+          ],
+          "capture_completed": 258011.788629999,
+          "raw_timestamp": {
+            "seconds": 2423,
+            "nanoseconds": 748148198
+          },
+          "udp_received_at": 258011.78828318,
+          "api_entered": 258011.788295514,
+          "kcp_process_entered": 258011.788286887
+        },
+        {
+          "sequence": 11136,
+          "received": 258011.789439632,
+          "pos": [
+            0.008526176808915934,
+            1.5669857427491567,
+            -1.5691552013295833,
+            1.5563878643943994,
+            0.0006324674693801931,
+            0.004764628216747139,
+            0.0004982441504401995
+          ],
+          "capture_completed": 258011.789520263,
+          "raw_timestamp": {
+            "seconds": 2423,
+            "nanoseconds": 751562156
+          },
+          "udp_received_at": 258011.789422119,
+          "api_entered": 258011.789430796,
+          "kcp_process_entered": 258011.789424704
+        },
+        {
+          "sequence": 11137,
+          "received": 258011.79774171,
+          "pos": [
+            0.008526176808915934,
+            1.5669857427491567,
+            -1.5691552013295833,
+            1.5563878643943994,
+            0.0006324674693801931,
+            0.004764628216747139,
+            0.0004982441504401995
+          ],
+          "capture_completed": 258011.79786986,
+          "raw_timestamp": {
+            "seconds": 2423,
+            "nanoseconds": 756167281
+          },
+          "udp_received_at": 258011.797710952,
+          "api_entered": 258011.79772589,
+          "kcp_process_entered": 258011.797714519
+        },
+        {
+          "sequence": 11138,
+          "received": 258011.797948867,
+          "pos": [
+            0.008526176808915934,
+            1.5669857427491567,
+            -1.5691552013295833,
+            1.5563878643943994,
+            0.0006324674693801931,
+            0.004764628216747139,
+            0.0004982441504401995
+          ],
+          "capture_completed": 258011.798034828,
+          "raw_timestamp": {
+            "seconds": 2423,
+            "nanoseconds": 760076489
+          },
+          "udp_received_at": 258011.797932056,
+          "api_entered": 258011.797940502,
+          "kcp_process_entered": 258011.797934821
+        },
+        {
+          "sequence": 11139,
+          "received": 258011.802300681,
+          "pos": [
+            0.008526176808915934,
+            1.5669857427491567,
+            -1.5691552013295833,
+            1.5563878643943994,
+            0.0006324674693801931,
+            0.004764628216747139,
+            0.0004982441504401995
+          ],
+          "capture_completed": 258011.802451844,
+          "raw_timestamp": {
+            "seconds": 2423,
+            "nanoseconds": 764603739
+          },
+          "udp_received_at": 258011.802271537,
+          "api_entered": 258011.802285633,
+          "kcp_process_entered": 258011.802274713
+        },
+        {
+          "sequence": 11140,
+          "received": 258011.806108909,
+          "pos": [
+            0.008526176808915934,
+            1.5669857427491567,
+            -1.5691552013295833,
+            1.5563878643943994,
+            0.0006324674693801931,
+            0.004764628216747139,
+            0.0004982441504401995
+          ],
+          "capture_completed": 258011.80622696,
+          "raw_timestamp": {
+            "seconds": 2423,
+            "nanoseconds": 768009531
+          },
+          "udp_received_at": 258011.806083452,
+          "api_entered": 258011.806095805,
+          "kcp_process_entered": 258011.806086127
+        },
+        {
+          "sequence": 11141,
+          "received": 258011.809821018,
+          "pos": [
+            0.008526176808915934,
+            1.5669857427491567,
+            -1.5691552013295833,
+            1.5563878643943994,
+            0.0006324674693801931,
+            0.004764628216747139,
+            0.0004982441504401995
+          ],
+          "capture_completed": 258011.809922157,
+          "raw_timestamp": {
+            "seconds": 2423,
+            "nanoseconds": 772469114
+          },
+          "udp_received_at": 258011.809796633,
+          "api_entered": 258011.809808284,
+          "kcp_process_entered": 258011.809799368
+        },
+        {
+          "sequence": 11142,
+          "received": 258011.814312964,
+          "pos": [
+            0.008526176808915934,
+            1.5669857427491567,
+            -1.5691552013295833,
+            1.5563878643943994,
+            0.0006324674693801931,
+            0.004764628216747139,
+            0.0004982441504401995
+          ],
+          "capture_completed": 258011.814423381,
+          "raw_timestamp": {
+            "seconds": 2423,
+            "nanoseconds": 776126323
+          },
+          "udp_received_at": 258011.814278299,
+          "api_entered": 258011.814293057,
+          "kcp_process_entered": 258011.814281916
+        },
+        {
+          "sequence": 11143,
+          "received": 258011.818458573,
+          "pos": [
+            0.008526176808915934,
+            1.5669857427491567,
+            -1.5691552013295833,
+            1.5563878643943994,
+            0.0006324674693801931,
+            0.004764628216747139,
+            0.0004982441504401995
+          ],
+          "capture_completed": 258011.8185586,
+          "raw_timestamp": {
+            "seconds": 2423,
+            "nanoseconds": 779598906
+          },
+          "udp_received_at": 258011.81843539,
+          "api_entered": 258011.818446641,
+          "kcp_process_entered": 258011.818438345
+        },
+        {
+          "sequence": 11144,
+          "received": 258011.822774871,
+          "pos": [
+            0.008524528977991446,
+            1.5669857427491567,
+            -1.5691552013295833,
+            1.5563878643943994,
+            0.0006324674693801931,
+            0.004764628216747139,
+            0.0004982441504401995
+          ],
+          "capture_completed": 258011.822871311,
+          "raw_timestamp": {
+            "seconds": 2423,
+            "nanoseconds": 783874739
+          },
+          "udp_received_at": 258011.82275296,
+          "api_entered": 258011.82276349,
+          "kcp_process_entered": 258011.822755845
+        },
+        {
+          "sequence": 11145,
+          "received": 258011.829727065,
+          "pos": [
+            0.008524528977991446,
+            1.5669857427491567,
+            -1.5691552013295833,
+            1.5563878643943994,
+            0.0006324674693801931,
+            0.004764628216747139,
+            0.0004982441504401995
+          ],
+          "capture_completed": 258011.829855566,
+          "raw_timestamp": {
+            "seconds": 2423,
+            "nanoseconds": 788397614
+          },
+          "udp_received_at": 258011.829687301,
+          "api_entered": 258011.829711446,
+          "kcp_process_entered": 258011.82969721
+        },
+        {
+          "sequence": 11146,
+          "received": 258011.830364727,
+          "pos": [
+            0.008524528977991446,
+            1.5669857427491567,
+            -1.5691552013295833,
+            1.5563878643943994,
+            0.0006324674693801931,
+            0.004764628216747139,
+            0.0004982441504401995
+          ],
+          "capture_completed": 258011.830464744,
+          "raw_timestamp": {
+            "seconds": 2423,
+            "nanoseconds": 792027114
+          },
+          "udp_received_at": 258011.830345021,
+          "api_entered": 258011.830354779,
+          "kcp_process_entered": 258011.830347826
+        },
+        {
+          "sequence": 11147,
+          "received": 258011.834005643,
+          "pos": [
+            0.008524528977991446,
+            1.5669857427491567,
+            -1.5691552013295833,
+            1.5563878643943994,
+            0.0006324674693801931,
+            0.004764628216747139,
+            0.0004982441504401995
+          ],
+          "capture_completed": 258011.834141086,
+          "raw_timestamp": {
+            "seconds": 2423,
+            "nanoseconds": 795610239
+          },
+          "udp_received_at": 258011.833988351,
+          "api_entered": 258011.833996706,
+          "kcp_process_entered": 258011.833990775
+        },
+        {
+          "sequence": 11148,
+          "received": 258011.838504913,
+          "pos": [
+            0.008524528977991446,
+            1.5669857427491567,
+            -1.5691552013295833,
+            1.5563878643943994,
+            0.0006324674693801931,
+            0.004764628216747139,
+            0.0004982441504401995
+          ],
+          "capture_completed": 258011.838647269,
+          "raw_timestamp": {
+            "seconds": 2423,
+            "nanoseconds": 800118239
+          },
+          "udp_received_at": 258011.838469346,
+          "api_entered": 258011.838486218,
+          "kcp_process_entered": 258011.838473233
+        },
+        {
+          "sequence": 11149,
+          "received": 258011.842849794,
+          "pos": [
+            0.008524528977991446,
+            1.5669857427491567,
+            -1.5691552013295833,
+            1.5563878643943994,
+            0.0006324674693801931,
+            0.004764628216747139,
+            0.0004982441504401995
+          ],
+          "capture_completed": 258011.842989575,
+          "raw_timestamp": {
+            "seconds": 2423,
+            "nanoseconds": 804016656
+          },
+          "udp_received_at": 258011.842814979,
+          "api_entered": 258011.84283161,
+          "kcp_process_entered": 258011.842818666
+        },
+        {
+          "sequence": 11150,
+          "received": 258011.847420718,
+          "pos": [
+            0.008524528977991446,
+            1.5669857427491567,
+            -1.5691552013295833,
+            1.5563878643943994,
+            0.0006324674693801931,
+            0.004764628216747139,
+            0.0004982441504401995
+          ],
+          "capture_completed": 258011.847535182,
+          "raw_timestamp": {
+            "seconds": 2423,
+            "nanoseconds": 807574698
+          },
+          "udp_received_at": 258011.847391884,
+          "api_entered": 258011.84740606,
+          "kcp_process_entered": 258011.847395531
+        }
+      ]
+    },
+    "theta": {
+      "max_feedback_gap_ms": 12.502969999331981,
+      "latest_health": {
+        "received": 258011.920110176,
+        "parking_stop": null,
+        "state": "LsAlgorithmControl"
+      },
+      "feedback_at_fault_window": [
+        {
+          "sequence": 11133,
+          "received": 258011.780032238,
+          "pos": 0.12022054389942646,
+          "device_time_ns": 2424741839614,
+          "device_dt_ns": 3814708,
+          "receive_dt_s": 6.110398680903018e-05,
+          "velocity": 0.0,
+          "velocity_valid": true,
+          "capture_completed": 258011.780044932,
+          "raw_timestamp": {
+            "seconds": 2424,
+            "nanoseconds": 741839614
+          },
+          "udp_received_at": 258011.780019715,
+          "api_entered": 258011.780025756,
+          "kcp_process_entered": 258011.780022009
+        },
+        {
+          "sequence": 11134,
+          "received": 258011.780078364,
+          "pos": 0.12022054389942646,
+          "device_time_ns": 2424746284322,
+          "device_dt_ns": 4444708,
+          "receive_dt_s": 4.61260206066072e-05,
+          "velocity": 0.0,
+          "velocity_valid": true,
+          "capture_completed": 258011.780089605,
+          "raw_timestamp": {
+            "seconds": 2424,
+            "nanoseconds": 746284322
+          },
+          "udp_received_at": 258011.780066963,
+          "api_entered": 258011.780072523,
+          "kcp_process_entered": 258011.780069147
+        },
+        {
+          "sequence": 11135,
+          "received": 258011.784057903,
+          "pos": 0.12022054389942646,
+          "device_time_ns": 2424750258281,
+          "device_dt_ns": 3973959,
+          "receive_dt_s": 0.003979538974817842,
+          "velocity": 0.0,
+          "velocity_valid": true,
+          "capture_completed": 258011.78407775,
+          "raw_timestamp": {
+            "seconds": 2424,
+            "nanoseconds": 750258281
+          },
+          "udp_received_at": 258011.784039949,
+          "api_entered": 258011.784047593,
+          "kcp_process_entered": 258011.784042273
+        },
+        {
+          "sequence": 11136,
+          "received": 258011.789669051,
+          "pos": 0.12022054389942646,
+          "device_time_ns": 2424753900322,
+          "device_dt_ns": 3642041,
+          "receive_dt_s": 0.005611148022580892,
+          "velocity": 0.0,
+          "velocity_valid": true,
+          "capture_completed": 258011.789692775,
+          "raw_timestamp": {
+            "seconds": 2424,
+            "nanoseconds": 753900322
+          },
+          "udp_received_at": 258011.789643663,
+          "api_entered": 258011.789655516,
+          "kcp_process_entered": 258011.78964703
+        },
+        {
+          "sequence": 11137,
+          "received": 258011.796030261,
+          "pos": 0.12022054389942646,
+          "device_time_ns": 2424758162739,
+          "device_dt_ns": 4262417,
+          "receive_dt_s": 0.006361209991155192,
+          "velocity": 0.0,
+          "velocity_valid": true,
+          "capture_completed": 258011.796074744,
+          "raw_timestamp": {
+            "seconds": 2424,
+            "nanoseconds": 758162739
+          },
+          "udp_received_at": 258011.79597116,
+          "api_entered": 258011.795987481,
+          "kcp_process_entered": 258011.795974557
+        },
+        {
+          "sequence": 11138,
+          "received": 258011.796163099,
+          "pos": 0.12022054389942646,
+          "device_time_ns": 2424762391614,
+          "device_dt_ns": 4228875,
+          "receive_dt_s": 0.00013283800217323005,
+          "velocity": 0.0,
+          "velocity_valid": true,
+          "capture_completed": 258011.796180191,
+          "raw_timestamp": {
+            "seconds": 2424,
+            "nanoseconds": 762391614
+          },
+          "udp_received_at": 258011.796138383,
+          "api_entered": 258011.796150095,
+          "kcp_process_entered": 258011.79614218
+        },
+        {
+          "sequence": 11139,
+          "received": 258011.799733663,
+          "pos": 0.12022054389942646,
+          "device_time_ns": 2424766184739,
+          "device_dt_ns": 3793125,
+          "receive_dt_s": 0.0035705640038941056,
+          "velocity": 0.0,
+          "velocity_valid": true,
+          "capture_completed": 258011.799758129,
+          "raw_timestamp": {
+            "seconds": 2424,
+            "nanoseconds": 766184739
+          },
+          "udp_received_at": 258011.799711462,
+          "api_entered": 258011.799720969,
+          "kcp_process_entered": 258011.799713986
+        },
+        {
+          "sequence": 11140,
+          "received": 258011.804156089,
+          "pos": 0.12022054389942646,
+          "device_time_ns": 2424770114656,
+          "device_dt_ns": 3929917,
+          "receive_dt_s": 0.004422425990924239,
+          "velocity": 0.0,
+          "velocity_valid": true,
+          "capture_completed": 258011.804191195,
+          "raw_timestamp": {
+            "seconds": 2424,
+            "nanoseconds": 770114656
+          },
+          "udp_received_at": 258011.80412434,
+          "api_entered": 258011.804137825,
+          "kcp_process_entered": 258011.804128207
+        },
+        {
+          "sequence": 11141,
+          "received": 258011.815979078,
+          "pos": 0.12022054389942646,
+          "device_time_ns": 2424774202364,
+          "device_dt_ns": 4087708,
+          "receive_dt_s": 0.011822989006759599,
+          "velocity": 0.0,
+          "velocity_valid": true,
+          "capture_completed": 258011.816009295,
+          "raw_timestamp": {
+            "seconds": 2424,
+            "nanoseconds": 774202364
+          },
+          "udp_received_at": 258011.815953741,
+          "api_entered": 258011.815964691,
+          "kcp_process_entered": 258011.815956697
+        },
+        {
+          "sequence": 11142,
+          "received": 258011.81605474,
+          "pos": 0.12022054389942646,
+          "device_time_ns": 2424778497447,
+          "device_dt_ns": 4295083,
+          "receive_dt_s": 7.566198473796248e-05,
+          "velocity": 0.0,
+          "velocity_valid": true,
+          "capture_completed": 258011.816067864,
+          "raw_timestamp": {
+            "seconds": 2424,
+            "nanoseconds": 778497447
+          },
+          "udp_received_at": 258011.816040984,
+          "api_entered": 258011.816047366,
+          "kcp_process_entered": 258011.816043248
+        },
+        {
+          "sequence": 11143,
+          "received": 258011.816100726,
+          "pos": 0.12022054389942646,
+          "device_time_ns": 2424781666989,
+          "device_dt_ns": 3169542,
+          "receive_dt_s": 4.598600207827985e-05,
+          "velocity": 0.0,
+          "velocity_valid": true,
+          "capture_completed": 258011.816111506,
+          "raw_timestamp": {
+            "seconds": 2424,
+            "nanoseconds": 781666989
+          },
+          "udp_received_at": 258011.816089835,
+          "api_entered": 258011.816095025,
+          "kcp_process_entered": 258011.816091999
+        },
+        {
+          "sequence": 11144,
+          "received": 258011.820023969,
+          "pos": 0.12022054389942646,
+          "device_time_ns": 2424785544406,
+          "device_dt_ns": 3877417,
+          "receive_dt_s": 0.003923242999007925,
+          "velocity": 0.0,
+          "velocity_valid": true,
+          "capture_completed": 258011.820040831,
+          "raw_timestamp": {
+            "seconds": 2424,
+            "nanoseconds": 785544406
+          },
+          "udp_received_at": 258011.820005795,
+          "api_entered": 258011.82001382,
+          "kcp_process_entered": 258011.82000835
+        },
+        {
+          "sequence": 11145,
+          "received": 258011.825419744,
+          "pos": 0.12022054389942646,
+          "device_time_ns": 2424789884114,
+          "device_dt_ns": 4339708,
+          "receive_dt_s": 0.005395775020588189,
+          "velocity": 0.0,
+          "velocity_valid": true,
+          "capture_completed": 258011.825439762,
+          "raw_timestamp": {
+            "seconds": 2424,
+            "nanoseconds": 789884114
+          },
+          "udp_received_at": 258011.825400388,
+          "api_entered": 258011.825409355,
+          "kcp_process_entered": 258011.825403133
+        },
+        {
+          "sequence": 11146,
+          "received": 258011.830549553,
+          "pos": 0.12022054389942646,
+          "device_time_ns": 2424794388031,
+          "device_dt_ns": 4503917,
+          "receive_dt_s": 0.005129808996571228,
+          "velocity": 0.0,
+          "velocity_valid": true,
+          "capture_completed": 258011.830567076,
+          "raw_timestamp": {
+            "seconds": 2424,
+            "nanoseconds": 794388031
+          },
+          "udp_received_at": 258011.830532872,
+          "api_entered": 258011.830540406,
+          "kcp_process_entered": 258011.830535236
+        },
+        {
+          "sequence": 11147,
+          "received": 258011.836059031,
+          "pos": 0.12022054389942646,
+          "device_time_ns": 2424797821531,
+          "device_dt_ns": 3433500,
+          "receive_dt_s": 0.005509477981831878,
+          "velocity": 0.0,
+          "velocity_valid": true,
+          "capture_completed": 258011.836083336,
+          "raw_timestamp": {
+            "seconds": 2424,
+            "nanoseconds": 797821531
+          },
+          "udp_received_at": 258011.836027833,
+          "api_entered": 258011.836044654,
+          "kcp_process_entered": 258011.836033603
+        },
+        {
+          "sequence": 11148,
+          "received": 258011.836131637,
+          "pos": 0.12022054389942646,
+          "device_time_ns": 2424802148989,
+          "device_dt_ns": 4327458,
+          "receive_dt_s": 7.260602433234453e-05,
+          "velocity": 0.0,
+          "velocity_valid": true,
+          "capture_completed": 258011.836145312,
+          "raw_timestamp": {
+            "seconds": 2424,
+            "nanoseconds": 802148989
+          },
+          "udp_received_at": 258011.836118262,
+          "api_entered": 258011.836124604,
+          "kcp_process_entered": 258011.836120516
+        },
+        {
+          "sequence": 11149,
+          "received": 258011.847977288,
+          "pos": 0.12022054389942646,
+          "device_time_ns": 2424806489281,
+          "device_dt_ns": 4340292,
+          "receive_dt_s": 0.011845650995383039,
+          "velocity": 0.0,
+          "velocity_valid": true,
+          "capture_completed": 258011.847997215,
+          "raw_timestamp": {
+            "seconds": 2424,
+            "nanoseconds": 806489281
+          },
+          "udp_received_at": 258011.84795709,
+          "api_entered": 258011.847966147,
+          "kcp_process_entered": 258011.847959785
+        },
+        {
+          "sequence": 11150,
+          "received": 258011.848077916,
+          "pos": 0.12022054389942646,
+          "device_time_ns": 2424810009989,
+          "device_dt_ns": 3520708,
+          "receive_dt_s": 0.00010062797809951007,
+          "velocity": 0.0,
+          "velocity_valid": true,
+          "capture_completed": 258011.848101871,
+          "raw_timestamp": {
+            "seconds": 2424,
+            "nanoseconds": 810009989
+          },
+          "udp_received_at": 258011.848056807,
+          "api_entered": 258011.848065884,
+          "kcp_process_entered": 258011.848059512
+        },
+        {
+          "sequence": 11151,
+          "received": 258011.84814441,
+          "pos": 0.12022054389942646,
+          "device_time_ns": 2424813491614,
+          "device_dt_ns": 3481625,
+          "receive_dt_s": 6.649401620961726e-05,
+          "velocity": 0.0,
+          "velocity_valid": true,
+          "capture_completed": 258011.848158046,
+          "raw_timestamp": {
+            "seconds": 2424,
+            "nanoseconds": 813491614
+          },
+          "udp_received_at": 258011.848130585,
+          "api_entered": 258011.848137067,
+          "kcp_process_entered": 258011.848132989
+        }
+      ]
+    },
+    "base": {
+      "max_feedback_gap_ms": 6.4391359919682145,
+      "latest_health": {
+        "received": 258011.922020076,
+        "parking_stop": null,
+        "session_holder": 10,
+        "mine": 10,
+        "initialized": true,
+        "state": "BsAlgorithmControl"
+      },
+      "feedback_at_fault_window": [
+        {
+          "sequence": 11106,
+          "received": 258011.780321439,
+          "pos": [
+            2.285660136089378,
+            0.05318089683438769,
+            1.6960842076454563,
+            -0.0369782247623456,
+            4.871146404550929,
+            -0.03983556358540524,
+            3.6532998822886706,
+            0.03603896113538828
+          ],
+          "capture_completed": 258011.780393413,
+          "raw_timestamp": {
+            "seconds": 2432,
+            "nanoseconds": 478999702
+          },
+          "udp_received_at": 258011.780303746,
+          "api_entered": 258011.780313464,
+          "kcp_process_entered": 258011.780306831
+        },
+        {
+          "sequence": 11107,
+          "received": 258011.784308541,
+          "pos": [
+            2.2857080729889994,
+            0.05318089683438769,
+            1.6961321445450777,
+            -0.03698781214226989,
+            4.871155991930854,
+            -0.03986402611955547,
+            3.653338231808367,
+            0.03603896113538828
+          ],
+          "capture_completed": 258011.784374484,
+          "raw_timestamp": {
+            "seconds": 2432,
+            "nanoseconds": 482955577
+          },
+          "udp_received_at": 258011.784293042,
+          "api_entered": 258011.784301167,
+          "kcp_process_entered": 258011.784295617
+        },
+        {
+          "sequence": 11108,
+          "received": 258011.788904893,
+          "pos": [
+            2.285727247748848,
+            0.05318089683438769,
+            1.6961609066848504,
+            -0.03698781214226989,
+            4.871203928830475,
+            -0.03986402611955547,
+            3.6533669939481404,
+            0.03603896113538828
+          ],
+          "capture_completed": 258011.788998898,
+          "raw_timestamp": {
+            "seconds": 2432,
+            "nanoseconds": 487069535
+          },
+          "udp_received_at": 258011.788875458,
+          "api_entered": 258011.788890395,
+          "kcp_process_entered": 258011.788879866
+        },
+        {
+          "sequence": 11109,
+          "received": 258011.79366488,
+          "pos": [
+            2.2857751846484695,
+            0.05318089683438769,
+            1.6961893692190007,
+            -0.03698781214226989,
+            4.8712234031959465,
+            -0.03986402611955547,
+            3.653424518227686,
+            0.03603896113538828
+          ],
+          "capture_completed": 258011.793867278,
+          "raw_timestamp": {
+            "seconds": 2432,
+            "nanoseconds": 491817285
+          },
+          "udp_received_at": 258011.793613163,
+          "api_entered": 258011.793634673,
+          "kcp_process_entered": 258011.793618753
+        },
+        {
+          "sequence": 11110,
+          "received": 258011.79659676,
+          "pos": [
+            2.285823121548091,
+            0.05318089683438769,
+            1.6962280183443206,
+            -0.03698781214226989,
+            4.871271340095568,
+            -0.03986402611955547,
+            3.653453280367459,
+            0.03603896113538828
+          ],
+          "capture_completed": 258011.796704712,
+          "raw_timestamp": {
+            "seconds": 2432,
+            "nanoseconds": 495033785
+          },
+          "udp_received_at": 258011.796569739,
+          "api_entered": 258011.796582854,
+          "kcp_process_entered": 258011.796573316
+        },
+        {
+          "sequence": 11111,
+          "received": 258011.800931612,
+          "pos": [
+            2.285832708928015,
+            0.05318089683438769,
+            1.6962567804840933,
+            -0.03698781214226989,
+            4.871299802629718,
+            -0.03987391310510238,
+            3.65350121726708,
+            0.03603896113538828
+          ],
+          "capture_completed": 258011.801063479,
+          "raw_timestamp": {
+            "seconds": 2432,
+            "nanoseconds": 499574744
+          },
+          "udp_received_at": 258011.800898801,
+          "api_entered": 258011.800916544,
+          "kcp_process_entered": 258011.80090378
+        },
+        {
+          "sequence": 11112,
+          "received": 258011.80552072,
+          "pos": [
+            2.2858710584477127,
+            0.05318089683438769,
+            1.6962951300037905,
+            -0.03698781214226989,
+            4.871347739529339,
+            -0.03987391310510238,
+            3.6535203920269286,
+            0.03603896113538828
+          ],
+          "capture_completed": 258011.805627379,
+          "raw_timestamp": {
+            "seconds": 2432,
+            "nanoseconds": 503543452
+          },
+          "udp_received_at": 258011.805495523,
+          "api_entered": 258011.805507445,
+          "kcp_process_entered": 258011.805498749
+        },
+        {
+          "sequence": 11113,
+          "received": 258011.809631273,
+          "pos": [
+            2.285909108361787,
+            0.05318089683438769,
+            1.6963238921435633,
+            -0.03698781214226989,
+            4.8713672138948105,
+            -0.039902375639252606,
+            3.6535587415466257,
+            0.03603896113538828
+          ],
+          "capture_completed": 258011.809744084,
+          "raw_timestamp": {
+            "seconds": 2432,
+            "nanoseconds": 507822785
+          },
+          "udp_received_at": 258011.809599755,
+          "api_entered": 258011.809616566,
+          "kcp_process_entered": 258011.809603942
+        },
+        {
+          "sequence": 11114,
+          "received": 258011.812280716,
+          "pos": [
+            2.285918995347334,
+            0.05318089683438769,
+            1.6963622416632607,
+            -0.03699769912781681,
+            4.871405563414508,
+            -0.03991196301917689,
+            3.6535970910663234,
+            0.03603896113538828
+          ],
+          "capture_completed": 258011.812353251,
+          "raw_timestamp": {
+            "seconds": 2432,
+            "nanoseconds": 510964035
+          },
+          "udp_received_at": 258011.812257713,
+          "api_entered": 258011.812268974,
+          "kcp_process_entered": 258011.812260628
+        },
+        {
+          "sequence": 11115,
+          "received": 258011.816457342,
+          "pos": [
+            2.2859765196268795,
+            0.05318089683438769,
+            1.6963910038030334,
+            -0.03699769912781681,
+            4.8714244385687335,
+            -0.0399314373846481,
+            3.6536162658261713,
+            0.03603896113538828
+          ],
+          "capture_completed": 258011.816551398,
+          "raw_timestamp": {
+            "seconds": 2432,
+            "nanoseconds": 515101910
+          },
+          "udp_received_at": 258011.816427286,
+          "api_entered": 258011.816441493,
+          "kcp_process_entered": 258011.816430803
+        },
+        {
+          "sequence": 11116,
+          "received": 258011.820825367,
+          "pos": [
+            2.285986107006804,
+            0.05318089683438769,
+            1.6964197659428062,
+            -0.03699769912781681,
+            4.8714819628482795,
+            -0.03994072515894975,
+            3.653673790105717,
+            0.03603896113538828
+          ],
+          "capture_completed": 258011.820904214,
+          "raw_timestamp": {
+            "seconds": 2432,
+            "nanoseconds": 519466119
+          },
+          "udp_received_at": 258011.820800841,
+          "api_entered": 258011.820812683,
+          "kcp_process_entered": 258011.820804097
+        },
+        {
+          "sequence": 11117,
+          "received": 258011.825006632,
+          "pos": [
+            2.2860148691465767,
+            0.05318089683438769,
+            1.6964197659428062,
+            -0.03700728650774109,
+            4.871511024593675,
+            -0.03994072515894975,
+            3.653683377485642,
+            0.03603896113538828
+          ],
+          "capture_completed": 258011.825083526,
+          "raw_timestamp": {
+            "seconds": 2432,
+            "nanoseconds": 523000535
+          },
+          "udp_received_at": 258011.824980664,
+          "api_entered": 258011.824992536,
+          "kcp_process_entered": 258011.82498411
+        },
+        {
+          "sequence": 11118,
+          "received": 258011.828552209,
+          "pos": [
+            2.2860529190606513,
+            0.05317160906008604,
+            1.6964769906167292,
+            -0.03701657428204275,
+            4.871558961493296,
+            -0.03996978690434524,
+            3.6537121396254144,
+            0.03603896113538828
+          ],
+          "capture_completed": 258011.828636567,
+          "raw_timestamp": {
+            "seconds": 2432,
+            "nanoseconds": 527089410
+          },
+          "udp_received_at": 258011.828528215,
+          "api_entered": 258011.828540357,
+          "kcp_process_entered": 258011.828531791
+        },
+        {
+          "sequence": 11119,
+          "received": 258011.83355982,
+          "pos": [
+            2.286091568185971,
+            0.05317160906008604,
+            1.696515639742049,
+            -0.03701657428204275,
+            4.8715682492675985,
+            -0.03998866205857118,
+            3.6537792512848846,
+            0.03603896113538828
+          ],
+          "capture_completed": 258011.833644328,
+          "raw_timestamp": {
+            "seconds": 2432,
+            "nanoseconds": 532041619
+          },
+          "udp_received_at": 258011.833535725,
+          "api_entered": 258011.833547967,
+          "kcp_process_entered": 258011.833538981
+        },
+        {
+          "sequence": 11120,
+          "received": 258011.836878803,
+          "pos": [
+            2.2861107429458194,
+            0.05317160906008604,
+            1.6965348145018977,
+            -0.03701657428204275,
+            4.871587424027446,
+            -0.03998866205857118,
+            3.653798426044733,
+            0.03603896113538828
+          ],
+          "capture_completed": 258011.836969292,
+          "raw_timestamp": {
+            "seconds": 2432,
+            "nanoseconds": 535103244
+          },
+          "udp_received_at": 258011.83685029,
+          "api_entered": 258011.836864657,
+          "kcp_process_entered": 258011.836854167
+        },
+        {
+          "sequence": 11121,
+          "received": 258011.840845277,
+          "pos": [
+            2.286148792859894,
+            0.05317160906008604,
+            1.6965539892617463,
+            -0.03701657428204275,
+            4.871635360927068,
+            -0.04001772380396666,
+            3.65383677556443,
+            0.03603896113538828
+          ],
+          "capture_completed": 258011.840935616,
+          "raw_timestamp": {
+            "seconds": 2432,
+            "nanoseconds": 539083035
+          },
+          "udp_received_at": 258011.840816073,
+          "api_entered": 258011.840830049,
+          "kcp_process_entered": 258011.840819689
+        },
+        {
+          "sequence": 11122,
+          "received": 258011.844603232,
+          "pos": [
+            2.2861778546052895,
+            0.05317160906008604,
+            1.6965923387814432,
+            -0.03701657428204275,
+            4.871693184812236,
+            -0.0400365989581926,
+            3.6538655377042026,
+            0.03603896113538828
+          ],
+          "capture_completed": 258011.844687088,
+          "raw_timestamp": {
+            "seconds": 2432,
+            "nanoseconds": 543087910
+          },
+          "udp_received_at": 258011.844579467,
+          "api_entered": 258011.844591269,
+          "kcp_process_entered": 258011.844582463
+        },
+        {
+          "sequence": 11123,
+          "received": 258011.848933325,
+          "pos": [
+            2.2861967297595154,
+            0.05317160906008604,
+            1.6966306883011406,
+            -0.03701657428204275,
+            4.8717120599664625,
+            -0.0400365989581926,
+            3.653884712464052,
+            0.03603896113538828
+          ],
+          "capture_completed": 258011.849014026,
+          "raw_timestamp": {
+            "seconds": 2432,
+            "nanoseconds": 547084035
+          },
+          "udp_received_at": 258011.848911504,
+          "api_entered": 258011.848922665,
+          "kcp_process_entered": 258011.84891465
+        }
+      ]
+    }
+  },
+  "control_tail": [
+    {
+      "sequence": 2173,
+      "started_s": 258011.759272064,
+      "solved_s": 258011.761525225,
+      "submitted_s": 258011.76161334,
+      "source_received": {
+        "right": 258011.753574535,
+        "left": 258011.753071003,
+        "theta": 258011.748502554,
+        "base": 258011.752746557
+      },
+      "timing": {
+        "elapsed_ms": 2.3417870106641203,
+        "budget_overrun": false,
+        "sleep_s": 0.01765821298933588,
+        "overruns": 0
+      }
+    },
+    {
+      "sequence": 2174,
+      "started_s": 258011.779326609,
+      "solved_s": 258011.781470827,
+      "submitted_s": 258011.781554574,
+      "source_received": {
+        "right": 258011.772732694,
+        "left": 258011.772536086,
+        "theta": 258011.767987224,
+        "base": 258011.772994894
+      },
+      "timing": {
+        "elapsed_ms": 2.2285060258582234,
+        "budget_overrun": false,
+        "sleep_s": 0.017771493974141777,
+        "overruns": 0
+      }
+    },
+    {
+      "sequence": 2175,
+      "started_s": 258011.799395501,
+      "solved_s": 258011.802421878,
+      "submitted_s": 258011.802570385,
+      "source_received": {
+        "right": 258011.788715839,
+        "left": 258011.789439632,
+        "theta": 258011.789669051,
+        "base": 258011.79366488
+      },
+      "timing": {
+        "elapsed_ms": 3.1765580060891807,
+        "budget_overrun": false,
+        "sleep_s": 0.01682344199391082,
+        "overruns": 0
+      }
+    },
+    {
+      "sequence": 2176,
+      "started_s": 258011.819456158,
+      "solved_s": 258011.821908151,
+      "submitted_s": 258011.822011825,
+      "source_received": {
+        "right": 258011.788715839,
+        "left": 258011.789439632,
+        "theta": 258011.789669051,
+        "base": 258011.79366488
+      },
+      "timing": {
+        "elapsed_ms": 2.5566680124029517,
+        "budget_overrun": false,
+        "sleep_s": 0.01744333198759705,
+        "overruns": 0
+      }
+    }
+  ],
+  "ik_fault_info": [
+    "feedback_expired",
+    {
+      "exception": "FeedbackAgeError",
+      "message": "stale robot feedback, ages_ms={'base': 45.94, 'theta': 49.93, 'left': 50.16, 'right': 50.88}"
+    }
+  ]
+}

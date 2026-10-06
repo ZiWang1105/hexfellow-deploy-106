@@ -1,6 +1,8 @@
 """One DA actuator owner and IPC protocol for both physical and simulated devices."""
 from dataclasses import asdict
+from collections import deque
 import json
+import math
 from pathlib import Path
 import time
 
@@ -34,17 +36,57 @@ class BackendProxy:
             time.sleep(.01)
         raise RuntimeError('Backend metadata unavailable')
 
-    def read(self):
+    def read(self, *, timeout_s=0.):
+        started = time.monotonic()
         status = self.status.get()
         if status and status.get('fault'):
             raise RuntimeError(status['fault'])
-        row = self.feedback.get()
+        row = self.feedback.get(timeout=timeout_s)
+        self.feedback_read = dict(started_s=started, completed_s=time.monotonic(),
+                                  acquired=row is not None)
         if row is not None:
             self.selected = row
         if self.selected is None:
             raise RuntimeError('Backend feedback unavailable')
         row = self.selected
+        self.feedback_read.update(publication_sequence=row.get('publication_sequence'),
+                                  published_s=row.get('published_s'), received=row['received'])
         return row['measured']
+
+    def read_for_control(self, *, timeout_s, min_validity_s, stopped=lambda: False, on_wait=None):
+        """Refresh before entering stateful IK; never renew sensor/command clocks."""
+        from policy_sim.control.feedback_policy import (
+            validate_received, received_deadline, FeedbackSkewError)
+        if (not all(math.isfinite(x) for x in (timeout_s, min_validity_s))
+                or not 0 < min_validity_s < timeout_s):
+            raise ValueError('Feedback wait requires a finite positive solve margin below timeout')
+        started = time.monotonic()
+        deadline = min(started+timeout_s, getattr(self, 'command_deadline', float('inf')))
+        retries = 0
+        while True:
+            if stopped():
+                raise RuntimeError('Feedback refresh cancelled by stop request')
+            remaining = deadline-time.monotonic()
+            if remaining <= min_validity_s:
+                raise RuntimeError('Fresh feedback unavailable before command health deadline; IK not advanced')
+            measured = self.read(timeout_s=min(.001, remaining-min_validity_s))
+            now = time.monotonic()
+            received = self.received_for(measured)
+            self.feedback_refresh = dict(retries=retries, elapsed_ms=(now-started)*1000,
+                source_age_ms={name:1000*(now-stamp) for name,stamp in received.items()})
+            try:
+                # Invalid/future clocks still fail immediately. Age or temporary
+                # skew is retried before the core can latch a stateful fault.
+                validate_received(received, now, 'strict', check_age=False)
+                valid = received_deadline(received, 'strict')-now >= min_validity_s
+            except FeedbackSkewError:
+                valid = False
+            if valid and deadline-now > min_validity_s:
+                return measured
+            retries += 1
+            if on_wait is not None:
+                on_wait(retries)
+            time.sleep(max(0., min(.001, deadline-time.monotonic()-min_validity_s)))
 
     def wait_ready(self, stopped):
         until = time.monotonic()+30
@@ -82,6 +124,7 @@ class BackendProxy:
                 raise RuntimeError(f'Reference publication deadline expired after {retries} retries; '
                                    'IK history remains pending')
             if self.frames.put(frame, timeout=min(.001, remaining)):
+                self.command_deadline = deadline
                 return dict(retries=retries, elapsed_ms=(time.monotonic()-started)*1000)
             retries += 1
             if on_wait is not None:
@@ -126,6 +169,7 @@ class BackendComponent(DABaseInterface):
         root = activate(self.workspace)
         driver = None
         native_diagnostic = None
+        feedback_timing = deque(maxlen=512)
         pending = None
         stream = StreamContract(self.command_timeout, self.feedback_timeout)
         state = dict(phase='starting', fault=None, receipt=None, backend=self.backend)
@@ -168,12 +212,19 @@ class BackendComponent(DABaseInterface):
             pending = None
             first_until = time.monotonic()+1.
             next_render = 0.
+            feedback_sequence = 0
             while not self.stopping:
                 started = time.monotonic()
                 snapshot = driver.snapshot
                 driver.check()
                 measured = snapshot['measured']
-                self.feedback.put(dict(measured=measured, received=snapshot['received']))
+                feedback_sequence += 1
+                published_s = time.monotonic()
+                published = self.feedback.put(dict(measured=measured, received=snapshot['received'],
+                    publication_sequence=feedback_sequence, published_s=published_s), timeout=.001)
+                feedback_timing.append(dict(started_s=started, completed_s=time.monotonic(),
+                    publication_sequence=feedback_sequence, published_s=published_s,
+                    received=snapshot['received'], snapshot_timing=snapshot.get('timing'), published=published))
                 if started >= next_render:
                     self.measured.put(measured)
                     if self.backend == 'simulation':
@@ -229,6 +280,7 @@ class BackendComponent(DABaseInterface):
                     state['shutdown_error'] = f'{type(error).__name__}: {error}'
             if native_diagnostic is not None:
                 try:
+                    native_diagnostic['feedback_publications'] = list(feedback_timing)
                     # Large evidence belongs on disk after stop, never in the
                     # periodic shared-memory status or the policy observation.
                     path = output/'native_transport.json'

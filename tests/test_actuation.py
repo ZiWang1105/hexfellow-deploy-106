@@ -85,7 +85,7 @@ def test_busy_read_preserves_original_feedback_epoch():
     frame,measured=example()
     class Topic:
         def __init__(self,rows):self.rows=iter(rows)
-        def get(self):return next(self.rows)
+        def get(self, **kwargs):return next(self.rows)
     status=Topic([{'metadata':{}},{},{}])
     feedback=Topic([dict(measured=measured,received={'left':1.}),None])
     proxy=object.__new__(BackendProxy)

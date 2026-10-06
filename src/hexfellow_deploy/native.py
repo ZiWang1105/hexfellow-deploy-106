@@ -126,7 +126,8 @@ class NativeDriver:
         state = self.endpoint.state()
         hands = self.endpoint.hand_feedback()
         self.state = state
-        return dict(measured=sensor_packet(state,hands,self.endpoint.grippers),received=dict(state.received))
+        return dict(measured=sensor_packet(state,hands,self.endpoint.grippers),
+                    received=dict(state.received), timing=state.timing)
 
     def check(self):
         for name, gate in self.endpoint.direct_gates.items():
@@ -179,6 +180,8 @@ class NativeDriver:
         started = time.monotonic()
         result = dict(observed_s=started, runtime=runtime_state(), devices={})
         endpoint = self.endpoint
+        worker = getattr(endpoint, 'feedback_worker', None)
+        result['feedback_worker'] = worker.report() if worker is not None else None
         for name, gate in endpoint.direct_gates.items():
             row = result['devices'][name] = {}
             if gate.lock.acquire(blocking=False):
