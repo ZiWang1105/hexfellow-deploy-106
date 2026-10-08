@@ -100,6 +100,35 @@ limits the **whole diagnostic run after control startup**, not one model call.
 
 ## Controller diagnostics and offline analysis
 
+Open a native MuJoCo window with **draggable red TCP targets**, using the shared
+controller and simulator actuator process (run from a desktop terminal):
+
+```bash
+cd ~/projects/agentic-mobile-manipulator
+OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 .venv/bin/python scripts/run_agent.py \
+  --config configs/local/desktop.yaml --interactive-ik \
+  --output "runs/interactive_ik_$(date +%Y%m%d_%H%M%S)"
+```
+
+Double-click a red sphere to select the left or right TCP. Hold Ctrl and drag
+with the right mouse button to translate, or the left button to rotate. Space
+or R requests constrained HOLD and resets both handles to measured TCP poses;
+drag again to resume. Q or closing the window shuts down the simulation. The
+overlay shows the selected arm, measured position/orientation tracking error,
+and controller rejections. The web dashboard remains available on port 8765
+(`--viewer-port` changes the dashboard port).
+
+This mode starts at the scene's initial pose without the carrying routine and
+makes no policy/API calls. It holds the lift reference fixed and preserves the
+initial binary gripper commands. It cannot be combined with an agent prompt,
+action fixture or hardware execution. No camera capture is needed. The display
+mirrors plant snapshots; its mocap handles never apply forces or alter plant
+state. Mouse input becomes an ordinary paired base-frame TCP request through
+the same PinkIK, reference ownership, command validation and MIT simulation
+path. Only the operator renderer sees world coordinates. `interactive.jsonl`
+records submitted input; `control.jsonl` records measured/reference behavior.
+No successful grasp or hardware qualification is implied by this diagnostic.
+
 A paired-pose test with deliberate scheduling and actuator delays, without API calls:
 
 ```bash

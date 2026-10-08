@@ -20,6 +20,10 @@ def diagnostic_value(value):
     raise TypeError(f'Unsupported diagnostic value: {type(value).__name__}')
 
 
+class ControlCancelled(RuntimeError):
+    """Explicit component shutdown interrupted a wait; no command was published."""
+
+
 class BackendProxy:
     def __init__(self, frames, feedback, backend_status, timeout=30., receipts=None):
         self.frames, self.feedback, self.status = frames, feedback, backend_status
@@ -79,7 +83,7 @@ class BackendProxy:
         retries = 0
         while True:
             if stopped():
-                raise RuntimeError('Feedback refresh cancelled by stop request')
+                raise ControlCancelled('Feedback refresh cancelled by stop request')
             remaining = deadline-time.monotonic()
             if remaining <= min_validity_s:
                 raise RuntimeError('Fresh feedback unavailable before command health deadline; IK not advanced')
@@ -129,7 +133,7 @@ class BackendProxy:
         retries = 0
         while True:
             if stopped():
-                raise RuntimeError('Reference publication cancelled by stop request')
+                raise ControlCancelled('Reference publication cancelled by stop request')
             status = self._actuator_status()
             if status and status.get('fault'):
                 raise RuntimeError(status['fault'])

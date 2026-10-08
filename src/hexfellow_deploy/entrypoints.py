@@ -30,12 +30,15 @@ def main(backend, argv=None):
     parser.add_argument('--confirm-onsite-ready', action='store_true')
     parser.add_argument('--research', action='store_true')
     parser.add_argument('--hold-only', action='store_true')
+    parser.add_argument('--interactive-ik', action='store_true', help='Simulation window with draggable TCP targets; no policy API')
     parser.add_argument('--live-view', '--live-viewer', action='store_true')
     parser.add_argument('--viewer-port', type=int, default=8765)
     parser.add_argument('--diagnose-timing', action='store_true', help='Timing records are always enabled')
     parser.add_argument('--no-video', action='store_true', help='Raw trajectory always recorded; video is an offline export')
     parser.add_argument('--set', action='append', default=[])
     args = parser.parse_args(argv)
+    if args.interactive_ik and (backend != 'simulation' or args.prompt or args.instruction or args.task or args.hold_only):
+        parser.error('--interactive-ik requires simulation without a prompt, task or hold-only mode')
     if backend == 'hardware' and not (args.execute and args.confirm_onsite_ready):
         parser.error('Real actuation requires --execute --confirm-onsite-ready; passive legacy tools use --legacy-runtime')
     if backend == 'simulation' and args.execute:
@@ -49,7 +52,7 @@ def main(backend, argv=None):
     prompt = args.prompt or (Path(args.instruction).read_text() if args.instruction else None)
     if prompt is not None and not prompt.strip():
         parser.error('Task instruction must not be empty')
-    if not args.hold_only and not prompt and not args.task:
+    if not args.hold_only and not args.interactive_ik and not prompt and not args.task:
         parser.error('Provide --prompt or --instruction; use --hold-only for an actuator diagnostic')
     if args.hold_only and prompt:
         parser.error('--hold-only cannot execute a policy prompt')
@@ -66,6 +69,8 @@ def main(backend, argv=None):
             if expected is None or Path(requested).resolve() != expected:
                 parser.error(f'--{key.replace("_", "-")} must match {expected}; select it in the shared deployment YAML to keep simulator and hardware identical')
     command = ['--workspace',str(root),'--output',args.output,'--settle-s',str(args.settle_s)]
+    if args.interactive_ik:
+        command += ['--interactive-ik', '--no-camera']
     if backend == 'simulation':
         command += ['--evaluate-body',args.evaluate_body]
     if args.runtime_config:

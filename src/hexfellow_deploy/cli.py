@@ -9,12 +9,25 @@ import time
 import uuid
 
 
-def build(config_path, overrides=(), *, prompt=None, camera=True, execute_authorized=False, respect_policy_limits=False):
+def build(config_path, overrides=(), *, prompt=None, camera=True, execute_authorized=False, respect_policy_limits=False,
+          interactive_ik=False):
     from hydra.utils import instantiate
     from omegaconf import OmegaConf
     from .manager import InterfaceManager
     from deploy_anything.utils.config_utils import build_topic_registry, register_topic_resolver
     config = OmegaConf.merge(OmegaConf.load(config_path), OmegaConf.from_dotlist(list(overrides)))
+    if interactive_ik:
+        if config.interface.backend.backend != 'simulation' or config.interface.backend.execute or prompt:
+            raise ValueError('Interactive IK requires simulation without a policy or hardware execution')
+        if 'agent' in config.interface:
+            raise ValueError('Interactive IK cannot share target ownership with an agent')
+        config.interface.control.startup_carry = False
+        config.topics.viewer_status = dict(_target_='hexfellow_deploy.topics.JsonTopic', prefix='${topic_prefix}')
+        config.interface.viewer = dict(_target_='hexfellow_deploy.interactive.InteractiveIKViewer',
+            name='hexfellow_ik_viewer', plant_state='${topic:plant_state}', request='${topic:request}',
+            feedback='${topic:feedback}',
+            status='${topic:status}', decision='${topic:decision}', viewer_status='${topic:viewer_status}',
+            output='${output}', backend='${interface.backend.backend}')
     if config.interface.backend.backend == 'hardware' and not (config.interface.backend.execute and execute_authorized):
         raise ValueError('Hardware requires --execute --confirm-onsite-ready')
     if config.interface.backend.backend == 'hardware':
@@ -121,8 +134,13 @@ def main():
     parser.add_argument('--respect-policy-limits', action='store_true',
                         help='Opt in to agent YAML request, cost and wall-clock episode budgets')
     parser.add_argument('--no-camera', action='store_true', help='Controller-only simulation diagnostic')
+    parser.add_argument('--interactive-ik', action='store_true', help='Simulation mouse-drag TCP viewer; no policy calls')
     parser.add_argument('--set', action='append', default=[], help='Hydra/OmegaConf dotlist override')
     args = parser.parse_args()
+    if args.interactive_ik and (args.action or args.prompt or args.task or args.execute or args.confirm_onsite_ready):
+        parser.error('--interactive-ik is simulation-only and cannot share input with a policy or action fixture')
+    if args.interactive_ik and not os.environ.get('DISPLAY'):
+        parser.error('--interactive-ik needs a desktop DISPLAY; run from a desktop terminal')
     if args.action and args.prompt:
         parser.error('Choose an agent prompt or a controller fixture, not both')
     if args.task and (args.action or args.prompt or args.execute):
@@ -162,7 +180,7 @@ def main():
     from omegaconf import OmegaConf
     config, topics, manager = build(Path(args.config).resolve(), args.set,
                                     prompt=args.prompt, camera=not args.no_camera, execute_authorized=args.execute,
-                                    respect_policy_limits=args.respect_policy_limits)
+                                    respect_policy_limits=args.respect_policy_limits, interactive_ik=args.interactive_ik)
     if task and config.interface.backend.backend != 'simulation':
         raise ValueError('Catalog tasks require the simulation backend')
     duration_source = 'duration_s' if args.duration_s is not None else None
@@ -185,7 +203,8 @@ def main():
         overrides=args.set, prompt=args.prompt, action_file=args.action,
         duration_s=args.duration_s, duration_source=duration_source, settle_s=args.settle_s,
         task=args.task, catalog=args.benchmark if task else None, seed=args.seed if task else None,
-        respect_policy_limits=args.respect_policy_limits, camera=not args.no_camera), indent=2)+'\n')
+        respect_policy_limits=args.respect_policy_limits, camera=not args.no_camera,
+        interactive_ik=args.interactive_ik), indent=2)+'\n')
     (output/'topics.json').write_text(json.dumps({n:t.name for n,t in topics.items()}, indent=2))
     action = None if args.action is None else json.loads(Path(args.action).read_text())
     finished = mp.Event()
@@ -202,6 +221,12 @@ def main():
         while not finished.wait(.05):
             status = topics['status'].get(timeout=.001)
             health = topics['health'].get(timeout=.001)
+            if args.interactive_ik:
+                viewer = topics['viewer_status'].get(timeout=.001)
+                if viewer and viewer.get('phase') == 'closed':
+                    (output/'termination.json').write_text(json.dumps(dict(reason='viewer_closed')))
+                    os.kill(parent_pid, signal.SIGINT)
+                    return
             if health and health.get('fault'):
                 health_fault = health_fault or health['fault']
             if health_fault:
@@ -211,7 +236,7 @@ def main():
                 health_result = health_hold.update(time.monotonic(), status)
                 if health_result == 'request':
                     topics['request'].put(dict(id=-1, operation='final_hold'), timeout=.01)
-                if (args.duration_s is not None or args.respect_policy_limits) and health_result in ('completed_budget', 'final_hold_failed'):
+                if (args.duration_s is not None or args.respect_policy_limits or args.interactive_ik) and health_result in ('completed_budget', 'final_hold_failed'):
                     (output/'termination.json').write_text(json.dumps(dict(reason='component_fault', fault=health_fault)))
                     os.kill(parent_pid, signal.SIGINT)
                     return

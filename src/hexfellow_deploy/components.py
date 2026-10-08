@@ -39,7 +39,7 @@ class ControlComponent(DABaseInterface):
 
     def run(self):
         root = activate(self.workspace)
-        from .backend import BackendProxy
+        from .backend import BackendProxy, ControlCancelled
         from .actuation import encode_mit
         from mobile_manipulator.interfaces.contract import Action
         from mobile_manipulator.control.startup_pose import DEFAULT_STARTUP_POSE, load_ik_pose
@@ -189,6 +189,11 @@ class ControlComponent(DABaseInterface):
                 previous_solve_started = started
                 # Work includes validation, submission and recording enqueue.
                 time.sleep(max(0., started+self.period-time.monotonic()))
+        except ControlCancelled as error:
+            # Shutdown can arrive between solving and publishing. Preserve the
+            # unaccepted sequence in the final record; do not call it a fault or
+            # invent an actuator acknowledgement.
+            state = dict(state, cancellation=str(error))
         except BaseException as error:
             owner.fail(f"{type(error).__name__}: {error}")
             state = dict(state, fault_feedback=measured)

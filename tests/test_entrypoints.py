@@ -215,3 +215,41 @@ def test_catalog_instruction_is_only_task_input_to_policy_and_scoring_is_offline
     assert invocation['duration_source'] == 'agent.max_episode_s_wall_clock'
     assert invocation['seed'] == 7
     assert json.loads((output/'run.json').read_text())['evaluation']['accepted'] is False
+
+
+@pytest.mark.parametrize('script,flags', [
+    ('run_real_agent.py', ['--execute', '--confirm-onsite-ready']),
+    ('run_agent.py', ['--prompt', 'Pick up the apple']),
+    ('run_agent.py', ['--hold-only']),
+    ('hexfellow_deploy.cli', ['--execute', '--confirm-onsite-ready']),
+    ('hexfellow_deploy.cli', ['--action', 'unused.json']),
+])
+def test_interactive_viewer_rejects_hardware_and_competing_inputs(tmp_path, script, flags):
+    output = tmp_path/'unused'
+    result = guarded_run(script, '--interactive-ik', '--output', str(output), *flags)
+    assert result.returncode == 2
+    assert '--interactive-ik' in result.stderr
+    assert 'Native SDK import' not in result.stderr
+    assert not output.exists()
+
+
+def test_interactive_viewer_is_configured_without_policy_or_camera(monkeypatch, tmp_path):
+    import hydra.utils
+    from hexfellow_deploy import cli, manager
+    import deploy_anything.utils.config_utils as config_utils
+    monkeypatch.setenv('HEXFELLOW_WORKSPACE', str(ROOT))
+    monkeypatch.setenv('HEXFELLOW_OUTPUT', str(tmp_path))
+    monkeypatch.setenv('HEXFELLOW_TOPIC_PREFIX', 'unused_')
+    monkeypatch.setattr(config_utils, 'build_topic_registry', lambda spec: {})
+    monkeypatch.setattr(config_utils, 'register_topic_resolver', lambda topics: None)
+    monkeypatch.setattr(hydra.utils, 'instantiate', lambda spec: spec)
+    monkeypatch.setattr(manager, 'InterfaceManager', lambda **kwargs: SimpleNamespace(**kwargs))
+    path = ROOT/'third_party/hexfellow-deploy/configs/simulation.yaml'
+    config, _, _ = cli.build(path, camera=False, interactive_ik=True)
+    assert 'viewer' in config.interface and 'viewer_status' in config.topics
+    assert 'agent' not in config.interface and 'camera' not in config.interface
+    assert config.interface.control.startup_carry is False
+    assert config.interface.viewer.backend == 'simulation'
+    with pytest.raises(ValueError, match='requires simulation'):
+        cli.build(path, ['interface.backend.backend=hardware', 'interface.backend.execute=true'],
+                  execute_authorized=True, interactive_ik=True)
