@@ -31,6 +31,7 @@ class StreamContract:
         self.previous_velocity = None
         self.previous_acceleration = None
         self.previous_base = np.zeros(3)
+        self.locked_lift_position = None
 
     def seed(self, measured):
         """Bind initial reference history to the controller's exact startup sample."""
@@ -43,6 +44,12 @@ class StreamContract:
         velocity = np.array([measured['joint_velocities'][n] for n in JOINTS])
         self.previous_velocity = stationary_reference_velocity(velocity, base_dofs=0)
         self.previous_position = np.array([measured['joint_positions'][n] for n in JOINTS])
+        if self.limits is not None and JOINTS[0] in self.limits.get('locked_joints', ()):
+            # Match the solver's one-time planning-margin projection, without
+            # replacing the actual measured encoder value in the sensor packet.
+            self.locked_lift_position = float(np.clip(self.previous_position[0],
+                self.limits['position_lower'][0]+1e-9, self.limits['position_upper'][0]-1e-9))
+            self.previous_position[0] = self.locked_lift_position
         self.previous_acceleration = np.zeros(len(JOINTS))
 
     def _validate_profile(self, frame, measured, mit, position, base):
@@ -71,8 +78,11 @@ class StreamContract:
             raise ValueError('Reference exceeds configured velocity bounds')
         if not np.allclose((q[1:]-self.previous_position[1:])/dt, mit.velocity, atol=1e-6, rtol=0):
             raise ValueError('Discontinuous MIT position reference')
-        # This profile integrates lift velocity from the measured prismatic
-        # state, while the arm positions retain persistent reference history.
+        if self.locked_lift_position is not None and (
+                abs(q[0]-self.locked_lift_position) > 1e-9 or abs(velocity[0]) > 1e-9):
+            raise ValueError('Lift position or velocity changes locked startup reference')
+        # Locked lifts and persistent profiles integrate from reference history.
+        # Only an unlocked legacy lift integrates from the measured source.
         lift_origin = (self.previous_position[0] if limits['persistent_lift_reference']
                        else frame['measured']['joint_positions'][JOINTS[0]])
         if not limits['persistent_lift_reference']:
@@ -171,6 +181,7 @@ def deployment(workspace, path, *, execute=False):
     from policy_sim.control.motion_profile import controller_config_for_profile
     from mobile_manipulator.robot.joints import JOINTS
     from mobile_manipulator.control.lift_limits import LIFT_MAX_M
+    from mobile_manipulator.control.umi_ik import LOCKED_JOINTS
     controller = controller_config_for_profile(profile)
     capabilities = load_hardware_capabilities(mapping.data.get('hardware_capabilities'))
     margin = profile.arm_position_margin_rad
@@ -183,7 +194,9 @@ def deployment(workspace, path, *, execute=False):
                     profile=profile.profile_id, profile_sha256=profile.sha256)
     metadata['actuation_limits'] = dict(
         dt_s=profile.control_dt_s, kp=list(profile.mit_servo.kp), kd=list(profile.mit_servo.kd),
-        persistent_lift_reference=profile.lift_reference_max_error_m is not None,
+        locked_joints=list(LOCKED_JOINTS),
+        persistent_lift_reference=(JOINTS[0] in LOCKED_JOINTS
+                                   or profile.lift_reference_max_error_m is not None),
         position_lower=np.r_[controller.lift_position_margin, physical_lower+margin].tolist(),
         position_upper=np.r_[LIFT_MAX_M-controller.lift_position_margin, physical_upper-margin].tolist(),
         velocity=[metadata['velocity_bounds'][n] for n in JOINTS],

@@ -117,6 +117,9 @@ def test_discontinuous_reference_and_physical_overspeed_are_rejected(metadata):
 
 
 def test_nonpersistent_lift_uses_source_position_and_solved_velocity(metadata):
+    import copy
+    metadata = copy.deepcopy(metadata)
+    metadata['actuation_limits'].update(persistent_lift_reference=False, locked_joints=[])
     now = [1.001]
     contract = StreamContract(.1, .1, metadata=metadata, clock=lambda: now[0])
     contract.seed(sample())
