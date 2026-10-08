@@ -139,6 +139,7 @@ def test_dashboard_serves_fault_and_registered_depth(monkeypatch):
         with urlopen(base+'/', timeout=1.) as response:
             page = response.read()
             assert b'Component health' in page and b's.health?.fault' in page and b'/depth.jpg' in page
+            assert b'id="decision-summary"' in page and b'Agent decision summary' in page
         with urlopen(base+'/depth.jpg', timeout=1.) as response:
             assert response.headers['Content-Type'] == 'image/jpeg'
             assert response.read().startswith(b'\xff\xd8')

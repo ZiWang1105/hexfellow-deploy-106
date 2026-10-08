@@ -231,7 +231,8 @@ def test_native_leaf_reuses_calibrated_mit_encoding_for_complete_frame(monkeypat
     config, mapping, profile, metadata = deployment(ROOT, Path('configs/hardware/desktop.yaml'))
     robot = config['robot']
     for settings in robot['grippers'].values():
-        settings.update(closed_motor_rad=5.5, open_motor_rad=.02)
+        # Passive SDK recorders only; enable closure in this test configuration.
+        settings.update(closed_motor_rad=5.5, open_motor_rad=.02, closure_enabled=True)
     measured = sample()
     measured['timestamp_s'] = 100.
     measured['joint_positions'].update({LEFT[0]: 1.57, RIGHT[0]: -1.57, LEFT[1]: 1.5, RIGHT[1]: 1.5})
@@ -266,6 +267,14 @@ def test_native_leaf_reuses_calibrated_mit_encoding_for_complete_frame(monkeypat
     endpoint.gripper_servos = {s: BinaryGripperServo(g.closed, g.opened, g.closed, 1.)
                               for s, g in endpoint.grippers.items()}
     endpoint.hands = {s: SetterRecorder() for s in ('left', 'right')}
+    class PublisherRecorder:
+        def __init__(self, hand): self.hand = hand
+        def check(self): pass
+        def request(self, opened, *, expires, opening_target):
+            self.hand.motor_command('POSITION' if opened == 1 else 'BRAKE',
+                                    [opening_target] if opened == 1 else [True])
+    endpoint.gripper_publishers = {s:PublisherRecorder(h) for s,h in endpoint.hands.items()}
+
     endpoint.devices = {s: SetterRecorder() for s in ('left', 'right', 'theta', 'base')}
     endpoint.command_type = SimpleNamespace(MIT='MIT', POSITION='POSITION', BRAKE='BRAKE')
     endpoint.mit_type = SimpleNamespace
@@ -300,7 +309,7 @@ def test_native_leaf_reuses_calibrated_mit_encoding_for_complete_frame(monkeypat
         for field, sdk_field in [('position', 'position'), ('velocity', 'speed'), ('torque_ff', 'torque'),
                                  ('kp', 'kp'), ('kd', 'kd')]:
             np.testing.assert_array_equal([getattr(target, sdk_field) for target in targets], expected[field])
-        assert endpoint.hands[side].calls[-1][0] == 'POSITION'
+        assert endpoint.hands[side].calls[-1][0] == ('POSITION' if side == 'left' else 'BRAKE')
         assert endpoint.direct_gates[side].hand_deadline == 100.1
     assert endpoint.devices['theta'].calls[-1][0] == 'POSITION'
     for name, (wire_packet, _) in prepared.items():

@@ -80,10 +80,8 @@ class StreamEndpoint(MobileEndpoint):
                 self.direct_gates[side].authorize_hand(self.mobile_config['grippers'][side]['device_id'],
                                                        pulses[side],command.expires)
                 hand = self.hands[side]
-                if self.extras['grippers'][side] is None:
-                    hand.motor_command(self.command_type.BRAKE,[True])
-                else:
-                    hand.motor_command(self.command_type.POSITION,[target])
+                self.gripper_publishers[side].request(self.extras['grippers'][side],
+                    expires=command.expires, opening_target=target)
                 wake = getattr(hand,'_policy_wake',None)
                 if wake:
                     wake()
@@ -182,6 +180,17 @@ class NativeDriver:
         endpoint = self.endpoint
         worker = getattr(endpoint, 'feedback_worker', None)
         result['feedback_worker'] = worker.report() if worker is not None else None
+        result['gripper_controllers'] = {s:p.report() for s,p in getattr(endpoint, 'gripper_publishers', {}).items()}
+        result['grippers'] = {}
+        for side, tap in getattr(endpoint, 'hand_taps', {}).items():
+            if tap.lock.acquire(blocking=False):
+                try:
+                    result['grippers'][side] = (dict(error=tap.error) if tap.error else
+                                                dict(tap.value) if tap.value is not None else None)
+                finally:
+                    tap.lock.release()
+            else:
+                result['grippers'][side] = dict(error='Gripper feedback lock busy at diagnostic capture')
         for name, gate in endpoint.direct_gates.items():
             row = result['devices'][name] = {}
             if gate.lock.acquire(blocking=False):

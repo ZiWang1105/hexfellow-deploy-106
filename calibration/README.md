@@ -83,6 +83,32 @@ room geometry. The full operation and pose limitations are in
 ./scripts/calibrate_camera.sh right fit /path/to/dataset.json --output /path/to/right-extrinsics.json
 ```
 
+Live calibration now defaults to `--scheduling responsive`. It separates the
+IK process, gateway owner, SDK workers and our camera/UI/planning workers onto
+different physical CPU pools. Before ownership, it requests round-robin
+priority 10 for the gateway and each existing SDK thread, using the user's
+existing RT permission or Ubuntu RealtimeKit. Grant failure stops startup;
+no automatic stop clearing or watchdog relaxation is added. The broker's
+bounded continuous-CPU RTTIME limit persists until the worker process exits.
+Priority and CPU affinity are recorded in each audit/session `cpu_scheduling`
+report. New snapshot workers use the SDK CPU pool with ordinary priority.
+These are application CPU pools; other programs and IRQs are not excluded.
+Responsive mode also prefers feedback no older than 10 ms, waiting at most
+4.5 ms within the original cycle/completion budget for a newer real sample.
+The 40 ms validity, 20 ms skew and 8/15 ms P99 acceptance limits stay unchanged.
+
+To check the connected robot without acquiring control or moving it:
+
+```bash
+./scripts/calibrate_camera.sh right run --mode live --probe
+```
+
+The probe exits after the read-only audit, without launching a live session or
+camera worker. `--scheduling legacy` reproduces the previous scheduling for
+diagnosis. A passing probe does not prove loaded motion reliability or physical
+stop confirmation. RealtimeKit's policy is documented in its
+[upstream README](https://github.com/heftig/rtkit/blob/master/README).
+
 The UI shows pose IDs, attempts and eligibility. Start performs controlled
 preparation, attempts all 30 views, saves a fit, then returns the arms through
 checked waypoints. Pause requests HOLD. Invalid poses and poor images are

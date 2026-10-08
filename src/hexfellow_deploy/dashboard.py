@@ -27,6 +27,9 @@ figure{margin:0}img{max-width:100%;height:auto}figcaption{margin:8px 0;color:#cb
 <div><b>Base navigation</b><pre id="navigation"></pre></div>
 <div><b>Left TCP / gripper</b><pre id="left-target"></pre></div>
 <div><b>Right TCP / gripper</b><pre id="right-target"></pre></div></div>
+<h3>Agent decision summary</h3>
+<p class="muted">Model-reported estimates and intent, not verified measurements or private internal reasoning.</p>
+<pre id="decision-summary">No summary received yet.</pre>
 <details><summary>Recent agent events</summary><pre id="events"></pre></details></section>
 <div class="views"><figure>
 <img id="camera" width="640" alt="Latest RGB observation"><figcaption>RGB observation</figcaption></figure><figure>
@@ -47,14 +50,35 @@ let stage=d.mode==='startup_carry'?'Preparing carrying pose: stage '+(d.startup_
 document.getElementById('agent-phase').textContent=(a.phase||'waiting_for_control').replaceAll('_',' ');
 document.getElementById('agent-message').textContent=failure
  ? ((a.policy_calls||0)===0?'Stopped before the first model call. ':'Execution stopped. ')+failure
- : stage||(a.message||'Waiting for agent readiness; no decision received yet.');
+ : stage||((a.message||'Waiting for agent readiness; no decision received yet.')+(a.error?' '+a.error:''));
 let thinking=a.phase==='thinking'&&a.thinking_started_s?'; waiting '+Math.max(0,s.observed_s-a.thinking_started_s).toFixed(1)+' s':'';
 document.getElementById('agent-meta').textContent='Model: '+(a.model||'pending')+' / '+(a.reasoning_effort||'pending')
  +' | Calls: '+(a.policy_calls||0)+' | Cost: $'+(a.cost_usd||0).toFixed(4)+thinking;
 document.getElementById('instruction').textContent=a.prompt?'Task: '+a.prompt:'';
 document.getElementById('action-title').textContent='Latest agent decision'+(a.action_observation_id?' (observation '+a.action_observation_id+')':'');
 document.getElementById('no-action').hidden=!!a.action;
+document.getElementById('no-action').textContent=a.grounding&&!a.action
+ ? 'Point inspection or rejection: no actuator command sent.' : 'No model output yet.';
 document.getElementById('targets').hidden=!a.action;
+let report=a.decision_summary;
+const fmt=(value,unit='')=>value==null?'unknown':(Array.isArray(value)?'['+value.map(x=>Number(x).toFixed(3)).join(', ')+']':Number(value).toFixed(3))+unit;
+let reportText=report?report.summary+'\n\nEstimated object position (base): '+fmt(report.object_position_base_m,' m')
+ +'\nEstimated object top Z: '+fmt(report.object_top_z_m,' m')
+ +'\nHead pixel used: '+fmt(report.head_pixel_uv,' px')+'; optical depth: '+fmt(report.head_depth_m,' m')
+ +'\n\nClearance: '+report.clearance_reason+'\nUncertainty: '+report.uncertainty
+ :(a.action?'This response did not include a decision summary.':'No summary received yet.');
+if(report&&report.object_top_z_m!=null&&a.action){for(let side of ['left','right']){
+let target=a.action[side];if(target)reportText+='\n'+side+' target Z minus estimated object top: '
+ +((target.position_m[2]-report.object_top_z_m)*1000).toFixed(1)+' mm';}}
+if(a.grounding){let g=a.grounding;reportText+='\n\nSelected pixel grounding (observation '+g.observation_id+')'
+ +'\nStatus: '+g.status+'; phase: '+g.selection.phase+'; arm: '+g.selection.arm
+ +'\nHead pixel: '+fmt(g.selection.head_pixel_uv,' px')+'; depth: '+fmt(g.optical_depth_m,' m')
+ +'\nSurface point: '+fmt(g.surface_point_base_m,' m')
+ +'\nFinal pinch target: '+fmt(g.pinch_target_base_m,' m')
+ +'\nApproach target: '+fmt(g.approach_target_base_m,' m')
+ +'\nExecuted target: '+fmt(g.executed_target_base_m,' m')+(g.reason?'\nReason: '+g.reason:'');}
+if(a.execution_feedback)reportText+='\n\nPrevious execution: '+JSON.stringify(a.execution_feedback,null,2);
+document.getElementById('decision-summary').textContent=reportText;
 if(a.action){document.getElementById('navigation').textContent=JSON.stringify(a.action.navigation,null,2)||'No base motion';
 const vector=v=>'['+v.map(x=>Number(x).toFixed(3)).join(', ')+']';
 for(let side of ['left','right']){let t=a.action[side];document.getElementById(side+'-target').textContent=t

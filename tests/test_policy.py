@@ -30,6 +30,9 @@ def test_policy_boundary_and_decision_archive(monkeypatch, tmp_path, include_wri
     frame['robot_fk'] = kin.packet()
     action = Action.from_dict(json.loads((Path(__file__).parent/'fixtures/paired_pose.json').read_text()))
     observations = []
+    decision_summary = dict(summary='Hold and inspect the object.', object_position_base_m=None,
+                            object_top_z_m=None, head_pixel_uv=None, head_depth_m=None,
+                            clearance_reason='Range unknown.', uncertainty='Object occluded.')
     from mobile_manipulator.control.base_motion import BaseMotionConfig
     base_config = tmp_path/'selected_base.yaml'
     base_config.write_text(yaml.safe_dump(dict(BaseMotionConfig.load().to_dict(), approach_distance_m=.61)))
@@ -44,7 +47,7 @@ def test_policy_boundary_and_decision_archive(monkeypatch, tmp_path, include_wri
         def act(self, observation):
             observations.append(observation)
             self.calls += 1
-            return action, {}
+            return action, {'decision_summary': decision_summary}
     monkeypatch.setattr(policy, 'OpenRouterPolicy', Client)
     class Topic:
         name = 'stub'
@@ -62,6 +65,8 @@ def test_policy_boundary_and_decision_archive(monkeypatch, tmp_path, include_wri
                 agent.signal_stop()
             else:
                 assert set(value['observed']) == MEASURED_FIELDS
+                assert value['action'] == action.to_dict()
+                assert 'decision_summary' not in value
                 status.value = dict(phase='running', request_id=value['id'], diagnostic={'arrived': True})
             return super().put(value, **kwargs)
     decision = Topic()
@@ -81,6 +86,9 @@ def test_policy_boundary_and_decision_archive(monkeypatch, tmp_path, include_wri
     assert [row['phase'] for row in events] == ['waiting_for_control','thinking','submitted','executing','stopped']
     assert events[0]['policy_calls'] == 0 and events[0]['prompt'] == 'Diagnostic paired target'
     assert Action.from_dict(events[-1]['action']) == action
+    assert events[-1]['decision_summary'] == decision_summary
+    assert events[-1]['action_observation_id'] == 1
+    assert all('decision_summary' not in event for event in events[-1]['events'])
 
 
 @pytest.mark.parametrize('reason,calls,cost,limits', [
@@ -152,3 +160,40 @@ def test_startup_and_failure_are_visible_before_any_api_call(monkeypatch, tmp_pa
     assert events[-1]['policy_calls'] == 0
     assert 'before the first model call' in events[-1]['message']
     assert events[-1]['error'] == 'test publication failure'
+
+
+@pytest.mark.parametrize('kind',['403','inspection'])
+def test_nonmotion_result_never_dispatches_or_retries_blocked_api(monkeypatch,tmp_path,kind):
+    root=Path(__file__).resolve().parents[3]
+    monkeypatch.chdir(root)
+    from mobile_manipulator.agent import policy
+    calls=[]
+    class Client:
+        def __init__(self,*args):self.calls=0;self.cost=0.
+        def act(self,observation):
+            self.calls+=1;calls.append(observation)
+            if kind=='403':raise policy.PolicyCallError('OpenRouter HTTP 403; no command',retryable=False)
+            return None,dict(grounding=dict(status='inspected',observation_id=1))
+    monkeypatch.setattr(policy,'OpenRouterPolicy',Client)
+    class Topic:
+        name='stub'
+        def __init__(self,value=None):self.value=value
+        def get(self,**kwargs):return self.value
+        def put(self,value,**kwargs):self.value=value.copy();return True
+    class Requests(Topic):
+        def put(self,value,**kwargs):raise AssertionError('No point inspection or API error may dispatch motion')
+    class Decisions(Topic):
+        def put(self,value,**kwargs):
+            if value['phase'] in ('api_blocked','grounding'):agent.signal_stop()
+            return super().put(value,**kwargs)
+    frame=dict(measured=dict(timestamp_s=time.monotonic()),robot_fk=dict(test='unused'),
+               rgb=None,depth_m=None,intrinsics=[])
+    decisions=Decisions()
+    agent=AgentComponent('test_nonmotion',Requests(),Topic(dict(phase='running')),decisions,Topic(frame),
+        str(root),str(tmp_path),'Inspect only')
+    agent.initialize();agent.run()
+    assert len(calls)==1
+    rows=[json.loads(line) for line in (tmp_path/'decisions.jsonl').read_text().splitlines()]
+    result=next(r for r in rows if r['phase'] in ('api_blocked','grounding'))
+    if kind=='403':assert result['retryable'] is False
+    else:assert result['action'] is None

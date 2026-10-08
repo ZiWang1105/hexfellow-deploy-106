@@ -21,5 +21,6 @@ testpaths = ["tests"]
 pythonpath = ["src"]
 
 [project.optional-dependencies]
+hardware = ["hex-device==1.4.10"]
 validation = ["matplotlib>=3.8,<3.10"]
 calibration-video = ["av>=16,<17"]

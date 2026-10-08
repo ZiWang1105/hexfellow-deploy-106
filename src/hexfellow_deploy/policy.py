@@ -79,6 +79,8 @@ class AgentComponent(DABaseInterface):
         events = deque(maxlen=12)
         last_state = None
         budget_exhausted = False
+        api_blocked = False
+        failures = 0
         def stopped():
             nonlocal last_state
             state = self.status.get()
@@ -87,7 +89,11 @@ class AgentComponent(DABaseInterface):
             return self.stopping or bool(state and (state.get('final_hold') or state.get('phase') in ('fault', 'closed')))
         def publish(**changes):
             decision_state.update(changes, published_s=time.monotonic())
-            events.append(dict(changes, observed_s=decision_state['published_s']))
+            # Keep the report once in the snapshot; duplicating long summaries
+            # in every event can exhaust the fixed-size diagnostic topic.
+            events.append(dict({k: v for k, v in changes.items() if k not in
+                                ('decision_summary', 'grounding', 'execution_feedback')},
+                               observed_s=decision_state['published_s']))
             decision_state['events'] = list(events)
             self.decision.put(decision_state, timeout=.001)
             with (Path(self.output)/'decisions.jsonl').open('a') as stream:
@@ -107,6 +113,11 @@ class AgentComponent(DABaseInterface):
         # API waiting cannot block either control or the diagnostic component.
         try:
             while not stopped():
+                if api_blocked:
+                    # Preserve controller HOLD, camera and diagnostics without
+                    # repeatedly issuing a rejected provider request.
+                    time.sleep(.1)
+                    continue
                 state = self.status.get()
                 if state and state.get('final_hold'):
                     break
@@ -159,8 +170,23 @@ class AgentComponent(DABaseInterface):
                 try:
                     action, record = future.result()
                 except Exception as error:
-                    publish(phase='api_error', message='Model request failed; retrying.', error=str(error), policy_calls=client.calls)
+                    failures += 1
+                    retryable = getattr(error, 'retryable', False)
+                    api_blocked = not retryable or failures >= config.get('max_consecutive_policy_failures', 3)
+                    publish(phase='api_blocked' if api_blocked else 'api_error',
+                            message='Model requests paused; controller remains in HOLD. Resolve the API error before restarting.'
+                            if api_blocked else 'Model request failed; retrying with a fresh observation.',
+                            error=str(error), retryable=retryable, policy_calls=client.calls, cost_usd=client.cost)
                     time.sleep(.5)
+                    continue
+                failures = 0
+                if action is None:
+                    publish(phase='grounding', message='Point inspected; no motion.' if
+                            record.get('grounding', {}).get('status') == 'inspected' else
+                            'Point rejected; holding and reobserving.',
+                            grounding=record.get('grounding'), decision_summary=record.get('decision_summary'),
+                            action=None, action_observation_id=observation_id,
+                            policy_calls=client.calls, cost_usd=client.cost)
                     continue
                 proposal = dict(id=identifier, operation='target', action=action.to_dict(), observed=measured)
                 while not stopped() and not self.request.put(proposal):
@@ -168,9 +194,12 @@ class AgentComponent(DABaseInterface):
                 if stopped():
                     break
                 publish(phase='submitted', message='Decision submitted to controller.', action=action.to_dict(), observation_id=observation_id,
+                        decision_summary=record.get('decision_summary'),
+                        grounding=record.get('grounding'),
                         action_observation_id=observation_id, request_id=identifier,
                         policy_calls=client.calls, cost_usd=client.cost)
                 accepted_at = None
+                terminal_diagnostic = {}
                 until = time.monotonic()+float(config['action_horizon_s'])
                 while not stopped():
                     state = self.status.get()
@@ -187,11 +216,16 @@ class AgentComponent(DABaseInterface):
                             accepted_at = time.monotonic()
                             publish(phase='executing', message='Controller accepted the decision.')
                         diagnostic = state.get('diagnostic', {})
+                        terminal_diagnostic = diagnostic
                         if state.get('phase') == 'fault' or diagnostic.get('needs_observation') or (diagnostic.get('arrived') and time.monotonic()-accepted_at >= 1.):
                             break
                     time.sleep(.05)
                 if stopped():
                     break
+                if accepted_at is not None and hasattr(client, 'record_execution'):
+                    client.record_execution(record, terminal_diagnostic)
+                    publish(phase='action_complete', message='Execution interval ended; reobserving.',
+                            execution_feedback=record.get('execution_feedback'))
                 identifier += 1
                 while not stopped() and not self.request.put(dict(id=identifier, operation='hold')):
                     time.sleep(.001)

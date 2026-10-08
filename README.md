@@ -12,6 +12,8 @@ modeled-plant behavior, not firmware dynamics, network reliability or hardware
 stopping. See [architecture](docs/ARCHITECTURE.md) and [validation](docs/VALIDATION.md).
 The [DA alignment audit](docs/DEPLOY_ANYTHING_ALIGNMENT.md) lists implemented
 parity, deliberate robot-specific differences and unresolved recovery behavior.
+Both physical GP80 hands use this repository's [feedback gripper controller](docs/GRIPPER_CONTROL.md),
+shared by the native policy adapter and the parent keyboard console.
 Native policy observations now add an [uncalibrated wrist RGB view](docs/WRIST_RGB.md)
 to head RGB-D. Its independent capture supplies no invented camera-to-base transform.
 
@@ -67,9 +69,13 @@ The corresponding native adapter is selected by the real-robot entry point:
 OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 .venv/bin/python scripts/run_real_agent.py \
   --config configs/local/desktop.yaml \
   --execute --research --confirm-onsite-ready --live-viewer \
-  --prompt 'Pick up the orange using a top-side grasp and hold it above the table.' \
+  --prompt 'Pick up the gray cuboid using a top-down grasp with the right hand and hold it above the table.' \
   --output "runs/real_$(date +%Y%m%d_%H%M%S)"
 ```
+
+Camera use, point grounding, offset selection and reobservation are specified in
+the shared system prompt. User task prompts need only the desired outcome and
+any object, hand or grasp-style preferences.
 
 The second command opens physical devices and can move the robot. Its availability
 is not a claim of onsite validation of this revision. Both entry points route to

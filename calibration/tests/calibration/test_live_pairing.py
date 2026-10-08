@@ -147,3 +147,14 @@ def test_full_default_rejects_changed_origin_before_delegating(monkeypatch):
     with pytest.raises(ValueError,match='moved since'):
         c.command('default',dict(full_default=True,origin=origin.tolist()),state,0)
     assert not calls and not c.full_default_active
+
+
+def test_latency_message_names_only_actual_failed_metric():
+    from calibrate_robot import preflight_failure_detail
+    message=preflight_failure_detail(dict(performance_passed=False,
+        gateway_observed_feedback_clean=True,
+        performance_acceptance_limits={'cycle_to_udp_p99_ms':8.,'source_to_udp_p99_ms':15.},
+        timing_ms_p50_p95_p99_max={'cycle_to_udp_ms':[4.,5.,6.,7.],
+                                  'source_to_udp_ms':[8.,13.,16.,18.]}))
+    assert 'source_to_udp_p99_ms=16.00 ms (limit 15 ms)' in message
+    assert 'cycle_to_udp' not in message

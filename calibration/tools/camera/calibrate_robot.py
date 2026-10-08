@@ -133,8 +133,15 @@ def preflight_failure_detail(report):
                        f"maximum device skew {feedback.get('max_skew_ms','unknown')} ms")
         reasons.extend(str(e['error']) for e in feedback.get('events',[])[:3] if e.get('error'))
     if report.get('performance_passed') is False:
-        reasons.append('timing acceptance limits exceeded: '
-                       f"{report.get('performance_acceptance_limits',{})}")
+        limits=report.get('performance_acceptance_limits',{})
+        metrics=report.get('timing_ms_p50_p95_p99_max',{})
+        exceeded=[]
+        for name,limit in limits.items():
+            values=metrics.get(name.removesuffix('_p99_ms')+'_ms')
+            if isinstance(values,(list,tuple)) and len(values)>2 and values[2]>limit:
+                exceeded.append(f"{name}={values[2]:.2f} ms (limit {limit:g} ms)")
+        reasons.append('timing acceptance limits exceeded: '+(', '.join(exceeded) if exceeded
+                       else f"{limits}; measured values unavailable or other timing failures"))
     if report.get('error'):
         reasons.append(str(report['error']))
     return '; '.join(dict.fromkeys(reasons)) or 'Audit acceptance conditions were not met; inspect the saved report.'
@@ -195,6 +202,8 @@ def main():
     p.add_argument('--confirm-onsite-ready',action='store_true')
     p.add_argument('--port',type=int,default=8772)
     p.add_argument('--probe',action='store_true',help='read-only startup check; acquire no robot control')
+    p.add_argument('--scheduling',choices=['responsive','legacy'],default='responsive',
+                   help='responsive separates SDK/control/background CPUs and requests SDK thread priority before ownership')
     p.add_argument('--auto',action='store_true',help='simulation-only end-to-end test')
     p.add_argument('--run-seconds',type=float,default=3600)
     p.add_argument('--output',type=Path)
@@ -217,6 +226,10 @@ def main():
     import numpy as np
     import pinocchio as pin
     from policy_sim.hardware import session
+    if a.mode=='live' and a.scheduling=='responsive':
+        from policy_sim.hardware.responsive_scheduling import configure
+        scheduling=configure()
+        print('Calibration CPU pools: '+json.dumps(scheduling),flush=True)
     from policy_sim.hardware.verification import software_binding,device_binding
     from policy_sim.hardware.quest_trial import audit_passed
     from policy_sim.hardware.verify import timing_probe
@@ -685,6 +698,14 @@ def main():
                       file=sys.stderr,flush=True)
                 return 1
             source.binding=binding;values.demo_device_binding=device_binding(SimpleNamespace(health=audit['initial_health']))
+            if a.probe:
+                # Read-only means no live session, acquisition, camera worker or
+                # movement, even when the startup audit passes.
+                (a.output/'result.json').write_text(json.dumps(dict(
+                    session='readonly_probe',passed=True,captures=0,solution=None,
+                    motion_commands_sent=0,audit_report=str(report_path)),indent=2))
+                print(f'Read-only calibration check passed. No robot control acquired. {report_path}',flush=True)
+                return 0
         else:
             # Simulation starts from the explicit snapshot, just like the head
             # workflow. The route's historical measured_start_q is a planning
