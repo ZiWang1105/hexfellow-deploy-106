@@ -773,8 +773,8 @@
   ],
   "runtime_dependency": {
     "repository": "../UMI_Hardware",
-    "revision": "9398b61972bf983c7ab5609591b7eb4c95c6357d",
-    "note": "Controller imported from current sibling submodule; source checkout is not modified.",
+    "revision": "e4dbcc9983516e20d59363680c60066a8571c0e6",
+    "note": "Controller imported from sibling editable UMI submodule at this revision; source checkout remains unchanged.",
     "relative_symlinks": {
       "urdf": "../../UMI_Hardware/urdf",
       "assets": "../../UMI_Hardware/assets",
@@ -813,5 +813,11 @@
     "active_plan": "config/camera/realsense_d435i_right_fixed33_outside_plan.json",
     "superseded_plan": "config/camera/realsense_d435i_right_fixed33_plan.json",
     "raw_historical_evidence_preserved": true
+  },
+  "wrist_publication_20261008": {
+    "snapshot": "config/camera/camera_parameters_20261008.json",
+    "evidence": "artifacts/reference/wrist-publication-20261008/validation.json",
+    "upstream_revision": "e4dbcc9983516e20d59363680c60066a8571c0e6",
+    "original_migration_hashes_preserved": true
   }
 }

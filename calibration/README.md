@@ -6,11 +6,14 @@ solvers, measured-joint capture/eligibility logic, browser controls, robot pose
 planning, simulator checks, coarse head calibration, landmark PnP refinement,
 and full-arm real/simulation overlays. The original source worktree is retained.
 
-The saved head and right-wrist parameter snapshot, frame/TCP conventions, SDK
+The saved head and both wrist parameter snapshot, frame/TCP conventions, SDK
 intrinsics, board dimensions and physical validation evidence are documented in
 [Camera parameters](docs/camera_parameters.md). The snapshot is
-[config/camera/camera_parameters_20261006.json](config/camera/camera_parameters_20261006.json);
-the left D405 matrix remains `null` until calibrated.
+[config/camera/camera_parameters_20261008.json](config/camera/camera_parameters_20261008.json).
+Both wrist estimates are physical measured-FK candidates, with their original
+fit annotations and held-out errors preserved. See
+[the latest wrist results](docs/wrist_parameters_20261008.md). The historical
+2026-10-06 snapshot is retained unchanged.
 
 Run commands from `third_party/hexfellow-deploy`:
 
@@ -28,7 +31,7 @@ click to begin movement and the existing read-only startup audit.
 | --- | --- | --- | --- |
 | ZED 2i head | 32701991 | LEFT rectified optical → lift link | Coarse board/hand-eye fit, landmark PnP refinement, measured-arm overlays |
 | D435i right wrist | 243222074562 | color optical → right flange | Fixed 33° mount, 30 simulated board views, automatic collection/fit/guarded return |
-| D405 left wrist | 230422271628 | color optical → left flange | Camera-only board detection and shared offline eye-in-hand fit; no validated automatic left motion route yet |
+| D405 left wrist | 230422271628 | color optical → left flange | Fixed 32° mount, dedicated 30-pose simulated route, automatic collection/fit/guarded return |
 
 The source is split into `tools/camera/` (commands and web UI),
 `src/policy_sim/calibration/` (detectors and solvers), `config/camera/` (board,
@@ -61,16 +64,17 @@ launcher uses the existing workspace environment; no conda activation is needed.
 | Head measured-arm overlay | `./scripts/calibrate_camera.sh head overlay --dataset DATASET --extrinsics FIT --pose 1 --side left --whole-arm --output DIR` | Offline; repeat for captured pose IDs |
 | Right wrist planning | `./scripts/calibrate_camera.sh right plan --output calibration/runs/right-wrist-outside/planning` | Offline; corrected outside-right 33° mount, board on table |
 | Right wrist automatic collection | `./scripts/calibrate_camera.sh right run --mode live --confirm-onsite-ready` | Stationary table board; Start once at port 8772 |
+| Left wrist automatic collection | `./scripts/calibrate_camera.sh left run --mode live --confirm-onsite-ready` | Stationary table board; Start once at port 8774 |
 | Either wrist board view | `./scripts/calibrate_camera.sh right camera --directory DIR` or `left camera --directory DIR` | Camera-only RGB/detection; does not supply robot FK |
 | Either wrist extrinsic fit | `./scripts/calibrate_camera.sh right fit DATASET --output FIT` or `left fit DATASET --output FIT` | Offline synchronized stationary measured-FK/PnP pairs |
 
 For head refinement, **two sets of 2D clicks are insufficient**: the point file
 must pair real image pixels with 3D model anchors transformed using the measured
 joint angles. The [head guide](docs/camera_calibration.md) documents this procedure,
-the actual coarse/refined transforms and omitted-pose validation. The D405
-camera/PnP and fit steps are included, but a camera-only image is not a complete
-calibration observation. Its own geometry and automatic arm route still need
-validation; `left run` does not reuse the right route.
+the actual coarse/refined transforms and omitted-pose validation. A camera-only
+image is not a complete wrist calibration observation: fitting also needs
+synchronized measured-joint FK. `left run` uses its own D405 geometry, SDK
+intrinsics and left-arm route; it does not reuse right-camera targets.
 
 **Right wrist:** Keep the existing 87 × 87 mm pattern stationary on the table.
 The 33° route assumes its patterned-area center near `(0.722, 0.033, 0.725) m` in
@@ -87,8 +91,10 @@ Live calibration now defaults to `--scheduling responsive`. It separates the
 IK process, gateway owner, SDK workers and our camera/UI/planning workers onto
 different physical CPU pools. Before ownership, it requests round-robin
 priority 10 for the gateway and each existing SDK thread, using the user's
-existing RT permission or Ubuntu RealtimeKit. Grant failure stops startup;
-no automatic stop clearing or watchdog relaxation is added. The broker's
+existing RT permission or Ubuntu RealtimeKit. A denied RealtimeKit startup
+grant can trigger one 21-second cooldown and a new full read-only audit after
+verified motion-free shutdown. A persistent denial stops startup; no ordinary
+priority fallback, automatic stop clearing or watchdog relaxation is added. The broker's
 bounded continuous-CPU RTTIME limit persists until the worker process exits.
 Priority and CPU affinity are recorded in each audit/session `cpu_scheduling`
 report. New snapshot workers use the SDK CPU pool with ordinary priority.
@@ -191,8 +197,9 @@ only the calibration package is overlaid here. Relative `urdf`, `assets`, and
 implementation is introduced. The calibration runner uses the existing UMI
 session API as a dedicated operator tool. It is separate from the production DA
 policy/actuation processes: close those and other device viewers before starting
-it. The production uncalibrated-wrist RGB contract remains unchanged until a
-separate explicit calibration selection/integration is made.
+it. Production sensor selection remains separate; the right policy view already
+uses its independently configured candidate, while this export does not enable
+left geometry or switch either runtime candidate.
 
 The launcher uses the parent workspace `.venv`. It reads the current mapping
 and research-release paths from `../../configs/local/desktop.yaml`; explicit
@@ -248,3 +255,20 @@ with `BoundaryStateUnrecoverable`; the failed test is retained. A passing test a
 300 mm does not qualify that endpoint retreat or physical motion. No shared
 controller limits were relaxed. See `VALIDATION.json` for the actual migration
 checks and outcome.
+
+## Left D405 pose design and live runner (2026-10-08)
+
+`left plan` and `left preview` now provide a dedicated 30-pose fixed-32-degree
+left D405 study. It includes the actual mount mesh, approximate open left jaws,
+checked approach/return paths, rendered ChArUco detection and a simulator-truth
+solver comparison. Lift/right arm remain fixed. Actual D405 SDK intrinsics were
+verified by simultaneous D405/D435i streaming and the route revalidated.
+The dedicated left runner selects these left poses and the D405 serial, uses
+measured left-arm capture/FK and the same guarded deployment session. Start it
+with `./scripts/calibrate_camera.sh left run --mode live --confirm-onsite-ready`;
+open `http://127.0.0.1:8774` and click Start calibration. Outside-left installation
+is still a nominal simulation assumption. See [left_d405_calibration.md](docs/left_d405_calibration.md) for board
+placement, results and SDK-intrinsics regeneration. The parameter snapshot now
+contains a physical left candidate; production policy selection is unchanged.
+
+The 2026-10-08 right-wrist sensor-roll correction and revalidated pose plan are documented in [right_wrist_optical_roll_20261008.md](docs/right_wrist_optical_roll_20261008.md). The optical-axis half-turn is separate from the outside-arm CAD installation; native SDK images remain unchanged.

@@ -1,0 +1,1318 @@
+{
+  "scope": "Left D405 guarded controller, RGB capture, measured FK, solver and default return in simulation",
+  "passed": true,
+  "physical_devices_opened": false,
+  "hardware_commands_sent": 0,
+  "eligible_poses": 30,
+  "invalid_poses": 0,
+  "minimum_detected_corners": 16,
+  "serial": "230422271628",
+  "parent_frame": "maver_x4_asm_mount1",
+  "camera_frame": "realsense_230422271628_color_optical",
+  "camera_K": [
+    [
+      651.4862670898438,
+      0.0,
+      643.0418701171875
+    ],
+    [
+      0.0,
+      650.7327880859375,
+      362.6119689941406
+    ],
+    [
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "controlled_session_exit": "controlled_session_exit",
+  "controller_cycles": 25773,
+  "controller_session": {
+    "mode": "sim",
+    "latency_policy": "hold-resume",
+    "demo_authorized": false,
+    "passed": true,
+    "hardware_qualified": false,
+    "motion_commands_sent": 0,
+    "robot_model": {
+      "model_id": "maver-x4-gp80-fixed-v1",
+      "urdf": "urdf/maver_x4_gp80.urdf",
+      "tcp_offset_m": [
+        0.02348191,
+        0.0,
+        0.189
+      ],
+      "auxiliary_joints": [],
+      "fixed_auxiliary_positions": [],
+      "assets": {
+        "urdf/maver_x4_gp80.urdf": "3f6e5ee6fcf9fa7030d63cb05e96c2ccdd21b9bae1d37c8b4ef95f3ed4c756dd",
+        "urdf/meshes/hexfellow_gp80/base_link.STL": "786fdf1c124672368f5c7fef9ff0b54ce3bac188b30c2c584db7e9707cd8c6c2"
+      },
+      "descriptor_sha256": "9759718a9a6b05030dc79913125c9ef31fc26cd83cad22df596af1bf9c42e769"
+    },
+    "base_control_enabled": false,
+    "ik_variables": 15,
+    "control_group": "coupled",
+    "tracking_state": "measured",
+    "research_trial": true,
+    "self_collision_enabled": false,
+    "profile_sha256": "ee1e86a556b1b54b84a43dd8c4bb821b878da4eaba1f1d757a1dfa1245528f36",
+    "mapping_sha256": "b4ad9746aeccf7b6cef5cd823121129f90b637e046b92456a22cdb18f4bd442e",
+    "feedback_policy": "strict",
+    "feedback_groups": [
+      "base",
+      "theta",
+      "left",
+      "right"
+    ],
+    "quest_pose_rate": "auto",
+    "quest_link_policy": "strict",
+    "quest_input_limits": {
+      "name": "strict",
+      "max_age_ms": 100.0,
+      "max_clock_uncertainty_ms": 5.0,
+      "include_clock_margin": false
+    },
+    "quest_resume": "auto",
+    "quest_trial": false,
+    "replay_skipped_by_operator": false,
+    "software_binding": null,
+    "hardware_review": {
+      "checks": {
+        "mapping_checked": {
+          "passed": true,
+          "source": "operator/config evidence"
+        },
+        "same_tool_empty": {
+          "passed": true,
+          "source": "operator/config evidence"
+        },
+        "mit_units_gains_checked": {
+          "passed": true,
+          "source": "operator/config evidence"
+        },
+        "drive_protection_checked": {
+          "passed": false,
+          "source": "operator/config evidence"
+        },
+        "disconnect_stop_checked": {
+          "passed": false,
+          "source": "operator/config evidence"
+        },
+        "sdk_startup_checked": {
+          "passed": false,
+          "source": "operator/config evidence"
+        },
+        "initialization_stop_checked": {
+          "passed": false,
+          "source": "operator/config evidence"
+        },
+        "theta_stop_checked": {
+          "passed": true,
+          "source": "operator/config evidence"
+        },
+        "base_axes_checked": {
+          "passed": true,
+          "source": "operator/config evidence"
+        },
+        "hardware_effort_limits_nm": {
+          "passed": true,
+          "source": "Manufacturer ratings relayed 2026-09-12: arm continuous effort, not verified firmware clamp. Maver-X4 official data center checked 2026-09-19: 2 m/s resultant translation, 2 rad/s yaw. Use the smaller documented linear bound; preserve operator-relayed 2.9 m/s separately. Instantaneous arm software bound now uses manufacturer joint-output peak ratings; continuous ratings are thermal monitoring references, not per-cycle caps. Firmware total torque clamp remains unverified."
+        },
+        "hardware_base_velocity_limits": {
+          "passed": true,
+          "source": "Manufacturer ratings relayed 2026-09-12: arm continuous effort, not verified firmware clamp. Maver-X4 official data center checked 2026-09-19: 2 m/s resultant translation, 2 rad/s yaw. Use the smaller documented linear bound; preserve operator-relayed 2.9 m/s separately. Instantaneous arm software bound now uses manufacturer joint-output peak ratings; continuous ratings are thermal monitoring references, not per-cycle caps. Firmware total torque clamp remains unverified."
+        },
+        "evidence": {
+          "passed": true,
+          "source": "Original repository robot review retained on operator confirmation of the same unchanged robot/calibration and onsite readiness. See runs/live-preflight/operator-confirmation.json and audit-20260929T005243Z/summary.json. Stop/calibration review is inherited, not newly tested. Firmware protection, disconnect, startup, and initialization-stop remain unverified research limitations. 2026-09-30: operator reported reversed right-wrist motion and selected display hypothesis B (right J6 only). Right J6 mapping checked by operator visual comparison; no new physical sweep, zero, stop, or hardware-qualification test performed. Default pose remapped to identical SDK targets. 2026-09-30: operator also reported left J6 reversed and requested the same correction as right J6. Left J6 sign changed +1 to -1; all other joint mappings preserved. Operator-selected correction, no new physical direction sweep or hardware qualification performed."
+        }
+      },
+      "missing": [
+        "drive_protection_checked",
+        "disconnect_stop_checked",
+        "sdk_startup_checked",
+        "initialization_stop_checked"
+      ],
+      "experimental_unknowns_accepted": [],
+      "verification": null,
+      "blocking": [
+        "drive_protection_checked",
+        "disconnect_stop_checked",
+        "sdk_startup_checked",
+        "initialization_stop_checked"
+      ],
+      "hardware_qualified": false,
+      "manufacturer_ratings": {
+        "source": "manufacturer via operator, 2026-09-12",
+        "sha256": "f5672189e982a1d29a4e46316a438e83205b2391b09a7dc5429b22cb688985bf",
+        "base_linear_speed_m_s": 2.9,
+        "base_angular_speed_rad_s": null,
+        "lift_velocity_m_s": 0.24,
+        "continuous_torque_nm": [
+          20.0,
+          20.0,
+          9.0,
+          9.0,
+          3.0,
+          3.0,
+          3.0,
+          20.0,
+          20.0,
+          9.0,
+          9.0,
+          3.0,
+          3.0,
+          3.0
+        ],
+        "base_documented_limits": {
+          "url": "https://docs.hexfellow.com/hex-base/maver-x4-data-center_cn/",
+          "checked_on": "2026-09-19",
+          "official_linear_speed_m_s": 2.0,
+          "official_angular_speed_rad_s": 2.0,
+          "operator_relayed_linear_speed_m_s": 2.9,
+          "selection": "minimum; documentary ratings, not measured firmware limits"
+        }
+      }
+    },
+    "default_pose": {
+      "schema_version": 1,
+      "robot": "maver_x4",
+      "lift_m": 0.3,
+      "left_arm_rad": [
+        1.5785124698687512,
+        1.5711719323771387,
+        0.004631474917887981,
+        0.018517268176233184,
+        -0.02098677465426043,
+        0.10256579043000368,
+        -0.05389995032870908
+      ],
+      "right_arm_rad": [
+        -1.5864368388503365,
+        1.5045156734535452,
+        -0.06609799378008539,
+        0.060197261042310456,
+        0.03228040859944582,
+        0.0696427277700081,
+        -0.13406003387565812
+      ],
+      "metadata": {
+        "source": "IPv6 read-only probe 2026-09-19; operator identified arms hanging naturally",
+        "source_trace_sha256": "accb65e7ff9702ef846db7a6140794eb43616a76a9f5e0607e3980f7cd9d391f",
+        "captured_lift_m": 0.42199806301275666,
+        "height_override": "Operator requested 300 mm, not the captured upper endpoint",
+        "captured_model_q": [
+          0.0,
+          0.0,
+          9.99681651592298e-06,
+          0.42199806301275666,
+          1.5785124698687512,
+          1.5711719323771387,
+          0.004631474917887981,
+          0.018517268176233184,
+          -0.02098677465426043,
+          0.10256579043000368,
+          -0.05389995032870908,
+          -1.5864368388503365,
+          1.5045156734535452,
+          -0.06609799378008539,
+          0.060197261042310456,
+          0.03228040859944582,
+          0.0696427277700081,
+          -0.13406003387565812
+        ],
+        "capture_mapping": {
+          "arms": {
+            "left": {
+              "sdk_indices": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "sdk_joint_names": [
+                "joint_1",
+                "joint_2",
+                "joint_3",
+                "joint_4",
+                "joint_5",
+                "joint_6",
+                "joint_7"
+              ],
+              "signs": [
+                1,
+                1,
+                -1,
+                1,
+                -1,
+                -1,
+                -1
+              ],
+              "offsets_rad": [
+                1.5707963267948966,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "right": {
+              "sdk_indices": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "sdk_joint_names": [
+                "joint_1",
+                "joint_2",
+                "joint_3",
+                "joint_4",
+                "joint_5",
+                "joint_6",
+                "joint_7"
+              ],
+              "signs": [
+                1,
+                1,
+                -1,
+                1,
+                -1,
+                -1,
+                -1
+              ],
+              "offsets_rad": [
+                -1.5707963267948966,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "lift_position_mode": "range_max_minus_sdk",
+          "lift_zero_offset_m": 0
+        },
+        "migration": {
+          "source_pose_path": "/home/ziwang/projects/UMI_Hardware_camera/config/hardware/hexfellow_default_pose_right_j6.yaml",
+          "source_pose_sha256": "daaac30a6bdc04daded3595565384d5ea8591197f3ac57618b3180668fffada3",
+          "method": "Reverse left J6 model coordinates to preserve exactly the previous SDK default targets. Right J6 correction retained.",
+          "hardware_verified": false
+        },
+        "capture_mapping_sha256": "a0a8bb866bcd086217af75be705a736770d9058abcbdc233370948f110fd0b67"
+      }
+    },
+    "null_pose": {
+      "schema_version": 1,
+      "robot": "maver_x4",
+      "lift_m": 0.24794999923500388,
+      "left_arm_rad": [
+        0.5993268795825627,
+        0.8515023463674909,
+        0.46658814838390983,
+        0.8597780476241893,
+        -1.8885250000209215,
+        0.13183981109449164,
+        0.37898063756531314
+      ],
+      "right_arm_rad": [
+        -0.5993268795825627,
+        0.8515023463674909,
+        -0.46658814838390983,
+        0.8597780476241893,
+        1.8885250000209215,
+        0.13183981109449164,
+        -0.37898063756531314
+      ]
+    },
+    "theta_gap_warning_samples": 0,
+    "theta_feedback_max_age_ms": 18.000000000085947,
+    "cycles": 25773,
+    "verification_scope": "control",
+    "body_resume": null,
+    "effective_outer_frame_gain": 0.2,
+    "mit_planning_effort_fraction": 0.9,
+    "lift_reference_max_error_m": null,
+    "motion_envelope": "none",
+    "quest_active_cycles": 0,
+    "quest_release_events": 0,
+    "counterfactual_only": false,
+    "quest_delay_holds": 0,
+    "initial_q": [
+      0.0,
+      0.0,
+      0.0,
+      0.3,
+      1.5785124698687512,
+      1.5711719323771387,
+      0.004631474917887981,
+      0.018517268176233184,
+      -0.02098677465426043,
+      0.10256579043000368,
+      -0.05389995032870908,
+      -1.5864368388503365,
+      1.5045156734535452,
+      -0.06609799378008539,
+      0.060197261042310456,
+      0.03228040859944582,
+      0.0696427277700081,
+      -0.13406003387565812
+    ],
+    "effective_runtime_limits": {
+      "runtime_velocity_bounds": {
+        "mobile_base_x": 1.414213562373095,
+        "mobile_base_y": 1.414213562373095,
+        "mobile_base_yaw": 2.0,
+        "maver_x4_asm_URDF_joint_1": 0.24,
+        "maver_x4_asm_7_urdf_SLDASM_joint_1": 2.5408080208833543,
+        "maver_x4_asm_7_urdf_SLDASM_joint_2": 2.5408080208833543,
+        "maver_x4_asm_7_urdf_SLDASM_joint_3": 2.585188990822622,
+        "maver_x4_asm_7_urdf_SLDASM_joint_4": 2.585188990822622,
+        "maver_x4_asm_7_urdf_SLDASM_joint_5": 8.592099854868263,
+        "maver_x4_asm_7_urdf_SLDASM_joint_6": 8.592099854868263,
+        "maver_x4_asm_7_urdf_SLDASM_joint_7": 8.592099854868263,
+        "maver_x4_asm_7_urdf_SLDASM2_joint_1": 2.5408080208833543,
+        "maver_x4_asm_7_urdf_SLDASM2_joint_2": 2.5408080208833543,
+        "maver_x4_asm_7_urdf_SLDASM2_joint_3": 2.585188990822622,
+        "maver_x4_asm_7_urdf_SLDASM2_joint_4": 2.585188990822622,
+        "maver_x4_asm_7_urdf_SLDASM2_joint_5": 8.592099854868263,
+        "maver_x4_asm_7_urdf_SLDASM2_joint_6": 8.592099854868263,
+        "maver_x4_asm_7_urdf_SLDASM2_joint_7": 8.592099854868263
+      },
+      "runtime_effort_limits_nm": [
+        52.0,
+        52.0,
+        28.0,
+        28.0,
+        6.8,
+        6.8,
+        6.8,
+        52.0,
+        52.0,
+        28.0,
+        28.0,
+        6.8,
+        6.8,
+        6.8
+      ]
+    },
+    "velocity_limit_audit": {
+      "authority": "sdk",
+      "manufacturer": {
+        "arms": [
+          6.0,
+          6.0,
+          6.0,
+          6.0,
+          12.56,
+          12.56,
+          12.56,
+          6.0,
+          6.0,
+          6.0,
+          6.0,
+          12.56,
+          12.56,
+          12.56
+        ],
+        "lift": 0.24,
+        "base_resultant": 2.9
+      },
+      "sdk_static_arm_velocity_rad_s": [
+        3.77,
+        3.77,
+        3.77,
+        3.77,
+        12.56,
+        12.56,
+        12.56,
+        3.77,
+        3.77,
+        3.77,
+        3.77,
+        12.56,
+        12.56,
+        12.56
+      ],
+      "reported_arm_limits": {
+        "left": {
+          "joint_limits": [
+            [
+              -2.8,
+              2.8
+            ],
+            [
+              -1.2,
+              2.0
+            ],
+            [
+              -2.8,
+              2.8
+            ],
+            [
+              -1.0,
+              2.2
+            ],
+            [
+              -2.7,
+              2.7
+            ],
+            [
+              -0.85,
+              0.85
+            ],
+            [
+              -0.78,
+              0.78
+            ]
+          ],
+          "joint_limits_source": null,
+          "device_joint_limits": null
+        },
+        "right": {
+          "joint_limits": [
+            [
+              -2.8,
+              2.8
+            ],
+            [
+              -1.2,
+              2.0
+            ],
+            [
+              -2.8,
+              2.8
+            ],
+            [
+              -1.0,
+              2.2
+            ],
+            [
+              -2.7,
+              2.7
+            ],
+            [
+              -0.85,
+              0.85
+            ],
+            [
+              -0.78,
+              0.78
+            ]
+          ],
+          "joint_limits_source": null,
+          "device_joint_limits": null
+        }
+      },
+      "reported_theta_limits": {
+        "maximum_speed": null,
+        "configured_speed": null,
+        "pulse_per_meter": null
+      },
+      "base_source_discrepancy": {
+        "url": "https://docs.hexfellow.com/hex-base/maver-x4-data-center_cn/",
+        "checked_on": "2026-09-19",
+        "official_linear_speed_m_s": 2.0,
+        "official_angular_speed_rad_s": 2.0,
+        "operator_relayed_linear_speed_m_s": 2.9,
+        "selection": "minimum; documentary ratings, not measured firmware limits"
+      },
+      "software": {
+        "arms": [
+          2.5408080208833543,
+          2.5408080208833543,
+          2.585188990822622,
+          2.585188990822622,
+          8.592099854868263,
+          8.592099854868263,
+          8.592099854868263,
+          2.5408080208833543,
+          2.5408080208833543,
+          2.585188990822622,
+          2.585188990822622,
+          8.592099854868263,
+          8.592099854868263,
+          8.592099854868263
+        ],
+        "lift": 0.24,
+        "base_resultant": 2.0
+      },
+      "effective": {
+        "mobile_base_x": 1.414213562373095,
+        "mobile_base_y": 1.414213562373095,
+        "mobile_base_yaw": 2.0,
+        "maver_x4_asm_URDF_joint_1": 0.24,
+        "maver_x4_asm_7_urdf_SLDASM_joint_1": 2.5408080208833543,
+        "maver_x4_asm_7_urdf_SLDASM_joint_2": 2.5408080208833543,
+        "maver_x4_asm_7_urdf_SLDASM_joint_3": 2.585188990822622,
+        "maver_x4_asm_7_urdf_SLDASM_joint_4": 2.585188990822622,
+        "maver_x4_asm_7_urdf_SLDASM_joint_5": 8.592099854868263,
+        "maver_x4_asm_7_urdf_SLDASM_joint_6": 8.592099854868263,
+        "maver_x4_asm_7_urdf_SLDASM_joint_7": 8.592099854868263,
+        "maver_x4_asm_7_urdf_SLDASM2_joint_1": 2.5408080208833543,
+        "maver_x4_asm_7_urdf_SLDASM2_joint_2": 2.5408080208833543,
+        "maver_x4_asm_7_urdf_SLDASM2_joint_3": 2.585188990822622,
+        "maver_x4_asm_7_urdf_SLDASM2_joint_4": 2.585188990822622,
+        "maver_x4_asm_7_urdf_SLDASM2_joint_5": 8.592099854868263,
+        "maver_x4_asm_7_urdf_SLDASM2_joint_6": 8.592099854868263,
+        "maver_x4_asm_7_urdf_SLDASM2_joint_7": 8.592099854868263
+      },
+      "reference_fraction": 0.9,
+      "lift_reference_fraction": 1.0,
+      "reference": {
+        "mobile_base_x": 1.2727922061357855,
+        "mobile_base_y": 1.2727922061357855,
+        "mobile_base_yaw": 1.8,
+        "maver_x4_asm_URDF_joint_1": 0.24,
+        "maver_x4_asm_7_urdf_SLDASM_joint_1": 2.286727218795019,
+        "maver_x4_asm_7_urdf_SLDASM_joint_2": 2.286727218795019,
+        "maver_x4_asm_7_urdf_SLDASM_joint_3": 2.32667009174036,
+        "maver_x4_asm_7_urdf_SLDASM_joint_4": 2.32667009174036,
+        "maver_x4_asm_7_urdf_SLDASM_joint_5": 7.732889869381436,
+        "maver_x4_asm_7_urdf_SLDASM_joint_6": 7.732889869381436,
+        "maver_x4_asm_7_urdf_SLDASM_joint_7": 7.732889869381436,
+        "maver_x4_asm_7_urdf_SLDASM2_joint_1": 2.286727218795019,
+        "maver_x4_asm_7_urdf_SLDASM2_joint_2": 2.286727218795019,
+        "maver_x4_asm_7_urdf_SLDASM2_joint_3": 2.32667009174036,
+        "maver_x4_asm_7_urdf_SLDASM2_joint_4": 2.32667009174036,
+        "maver_x4_asm_7_urdf_SLDASM2_joint_5": 7.732889869381436,
+        "maver_x4_asm_7_urdf_SLDASM2_joint_6": 7.732889869381436,
+        "maver_x4_asm_7_urdf_SLDASM2_joint_7": 7.732889869381436
+      },
+      "base_qp": "legacy per-axis box",
+      "units": "joint output rad/s, lift and base m/s; yaw rad/s",
+      "grippers": "fixed posture model; active control requires position interface"
+    },
+    "effective_profile": {
+      "base_profile_sha256": "ee1e86a556b1b54b84a43dd8c4bb821b878da4eaba1f1d757a1dfa1245528f36",
+      "motion_envelope": "none",
+      "effective_limits": {
+        "arm_velocity_rad_s": [
+          2.5408080208833543,
+          2.5408080208833543,
+          2.585188990822622,
+          2.585188990822622,
+          8.592099854868263,
+          8.592099854868263,
+          8.592099854868263,
+          2.5408080208833543,
+          2.5408080208833543,
+          2.585188990822622,
+          2.585188990822622,
+          8.592099854868263,
+          8.592099854868263,
+          8.592099854868263
+        ],
+        "arm_acceleration_rad_s2": [
+          21.036660935881976,
+          21.036660935881976,
+          18.90984601764992,
+          18.90984601764992,
+          30.435710390121304,
+          30.435710390121304,
+          30.435710390121304,
+          21.036660935881976,
+          21.036660935881976,
+          18.90984601764992,
+          18.90984601764992,
+          30.435710390121304,
+          30.435710390121304,
+          30.435710390121304
+        ],
+        "arm_jerk_rad_s3": [
+          471.8207072602341,
+          471.8207072602341,
+          918.9581929573874,
+          918.9581929573874,
+          3097.8991485993497,
+          3097.8991485993497,
+          3097.8991485993497,
+          471.8207072602341,
+          471.8207072602341,
+          918.9581929573874,
+          918.9581929573874,
+          3097.8991485993497,
+          3097.8991485993497,
+          3097.8991485993497
+        ],
+        "base_linear_velocity_m_s": 2.0,
+        "base_angular_velocity_rad_s": 2.0,
+        "base_linear_acceleration_m_s2": 1.2,
+        "base_angular_acceleration_rad_s2": 2.4,
+        "base_linear_jerk_m_s3": 200.0,
+        "base_angular_jerk_rad_s3": 400.0,
+        "lift_velocity_m_s": 0.24,
+        "lift_acceleration_m_s2": 0.5,
+        "lift_jerk_m_s3": 40.0
+      },
+      "posture_policy_preserved": true,
+      "source": "experimental software limits, not hardware ratings",
+      "effective_limits_sha256": "0ca442a5416135b62eea8a59c57886c2b5b7de9bf2d20dc66af197990b505c14"
+    },
+    "simulation_recovery_settle": {
+      "settled": true,
+      "elapsed_s": 0.22000000000000017,
+      "measured_velocity": [
+        -8.269429399532853e-13,
+        -3.782297378052031e-12,
+        -4.68046137061151e-12,
+        1.2885104540614277e-07,
+        1.7544197272399494e-10,
+        -9.69402259036195e-10,
+        -5.903623070372572e-12,
+        -6.100263259724867e-10,
+        -5.26556055475092e-12,
+        3.9705816764892345e-10,
+        -1.5190567444947993e-10,
+        -2.098866297639648e-10,
+        -1.7942950711630638e-09,
+        -1.4116272296534705e-11,
+        -2.796923546289572e-10,
+        -4.569075947463432e-12,
+        2.284108898714878e-10,
+        -3.5703606595145776e-10
+      ]
+    },
+    "initial_reference": {
+      "q": [
+        8.867184240549845e-14,
+        2.1234923812735024e-13,
+        3.267446166490327e-13,
+        0.30000002348519406,
+        1.5785124700519306,
+        1.5711719327150044,
+        0.004631474916423422,
+        0.01851726848409235,
+        -0.020986774653431572,
+        0.10256579023647926,
+        -0.05389995042382428,
+        -1.5864368389764676,
+        1.5045156729298446,
+        -0.06609799378201921,
+        0.060197261194040716,
+        0.03228040860155226,
+        0.06964272756533649,
+        -0.13406003406587602
+      ],
+      "v": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "a": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "measured_v": [
+        -8.269429399532853e-13,
+        -3.782297378052031e-12,
+        -4.68046137061151e-12,
+        1.2885104540614277e-07,
+        4.311608752279151e-10,
+        1.2081141540017454e-10,
+        -3.6247005885788802e-12,
+        2.1932774812262017e-12,
+        -1.9630667664525895e-13,
+        1.8054246880118487e-10,
+        -2.0998084522073594e-10,
+        -3.507696924929659e-10,
+        -2.0728122260172025e-09,
+        -1.4530842779956466e-11,
+        -2.073735999071864e-10,
+        -5.638516841945633e-12,
+        9.869520251454928e-11,
+        -4.4849204551838657e-10
+      ]
+    },
+    "simulation_publisher_checked": true,
+    "simulation_base_limits_are_mock": false,
+    "finish_reason": "controlled_session_exit",
+    "simulation_endpoint": {
+      "sdk_dispatch_delay_s": 0.006,
+      "actuator_delay_s": 0.0,
+      "velocity_feedback_tau_s": 0.06,
+      "feedback_delay_s": 0.0,
+      "feedback_periods_s": {
+        "left": 0.004,
+        "right": 0.004,
+        "theta": 0.02,
+        "base": 0.02
+      },
+      "expired_packets": 1,
+      "applied_packets": 51536,
+      "hardware_commands_sent": 0,
+      "firmware_emulated": false,
+      "brake_model": "stationary local PD with nominal gravity; not firmware brake qualification"
+    },
+    "physical_effort": {
+      "actual_load": {
+        "observed_duration_s": 517.2280000015928,
+        "rms_nm": [
+          6.671630260608731,
+          0.8629512413840116,
+          1.4075793549321498,
+          1.3473462164780576,
+          0.15800312772130765,
+          0.16882053010890133,
+          0.13939750679930796,
+          0.06962598014129436,
+          0.41938389087119377,
+          0.002262629866723693,
+          0.0526723767021669,
+          0.0007555578163935224,
+          0.03534074654911676,
+          0.0544524105005779
+        ],
+        "above_continuous_s": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "continuous_nm": [
+          20.0,
+          20.0,
+          9.0,
+          9.0,
+          3.0,
+          3.0,
+          3.0,
+          20.0,
+          20.0,
+          9.0,
+          9.0,
+          3.0,
+          3.0,
+          3.0
+        ],
+        "scope": "sampled load indicator; not a thermal model or overload-duration authorization"
+      },
+      "peak_requested_nm": [
+        8.338079325460313,
+        3.645350656708293,
+        2.702708335016591,
+        2.3230850065855075,
+        0.4062405420161038,
+        0.3112556170982115,
+        0.3431004980414162,
+        0.07164135254839332,
+        0.42049856954187265,
+        0.00247633994428544,
+        0.05332870441792943,
+        0.0008034466830938355,
+        0.035585711605550754,
+        0.05484454946799147
+      ],
+      "peak_actual_nm": [
+        8.365884559946709,
+        3.6938555894760157,
+        2.8500617744690615,
+        2.323133485158536,
+        0.653345853766055,
+        0.34462993557546895,
+        0.44128196648360074,
+        0.071641056373835,
+        0.4204985676766455,
+        0.0024763399442857548,
+        0.05332870441792892,
+        0.0008034466830935116,
+        0.03558571160554891,
+        0.05484454946799033
+      ],
+      "saturated_substeps": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "maximum_saturation_streak_s": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "physical_substep_s": 0.002,
+      "interpretation": "sampled simulation PD+FF and finite motor; not firmware clamp evidence"
+    },
+    "session_completed": true,
+    "target_planner_failures": 0,
+    "last_target_planner_error": null,
+    "tracking_passed": null,
+    "body_peaks": null,
+    "phases": [
+      {
+        "phase": "default",
+        "at": 0.22000000000000017
+      },
+      {
+        "phase": "hold",
+        "at": 8.241999999999415
+      },
+      {
+        "phase": "calibration",
+        "at": 10.222000000000083
+      },
+      {
+        "phase": "stopping",
+        "at": 10.342000000000123
+      },
+      {
+        "phase": "hold",
+        "at": 10.562000000000197
+      },
+      {
+        "phase": "calibration",
+        "at": 13.222000000001085
+      },
+      {
+        "phase": "calibration",
+        "at": 31.761999999993286
+      },
+      {
+        "phase": "hold",
+        "at": 47.22200000001175
+      },
+      {
+        "phase": "calibration",
+        "at": 49.382000000014386
+      },
+      {
+        "phase": "hold",
+        "at": 59.6220000000269
+      },
+      {
+        "phase": "calibration",
+        "at": 61.262000000028905
+      },
+      {
+        "phase": "hold",
+        "at": 70.2820000000176
+      },
+      {
+        "phase": "calibration",
+        "at": 71.92200000001378
+      },
+      {
+        "phase": "hold",
+        "at": 80.94199999999276
+      },
+      {
+        "phase": "calibration",
+        "at": 82.72199999998861
+      },
+      {
+        "phase": "hold",
+        "at": 91.74199999996759
+      },
+      {
+        "phase": "calibration",
+        "at": 93.42199999996367
+      },
+      {
+        "phase": "hold",
+        "at": 102.44199999994265
+      },
+      {
+        "phase": "calibration",
+        "at": 104.2219999999385
+      },
+      {
+        "phase": "hold",
+        "at": 113.24199999991748
+      },
+      {
+        "phase": "calibration",
+        "at": 114.8219999999138
+      },
+      {
+        "phase": "hold",
+        "at": 123.84199999989278
+      },
+      {
+        "phase": "calibration",
+        "at": 125.58199999988872
+      },
+      {
+        "phase": "hold",
+        "at": 134.5819999999145
+      },
+      {
+        "phase": "calibration",
+        "at": 136.16199999992205
+      },
+      {
+        "phase": "calibration",
+        "at": 144.18199999996025
+      },
+      {
+        "phase": "hold",
+        "at": 153.1820000000033
+      },
+      {
+        "phase": "calibration",
+        "at": 154.94200000001172
+      },
+      {
+        "phase": "calibration",
+        "at": 162.96200000004993
+      },
+      {
+        "phase": "hold",
+        "at": 171.96200000009298
+      },
+      {
+        "phase": "hold",
+        "at": 174.3080000001042
+      },
+      {
+        "phase": "hold",
+        "at": 180.49600000013373
+      },
+      {
+        "phase": "hold",
+        "at": 181.04400000013635
+      },
+      {
+        "phase": "calibration",
+        "at": 226.626000000354
+      },
+      {
+        "phase": "hold",
+        "at": 235.62600000039697
+      },
+      {
+        "phase": "calibration",
+        "at": 235.9460000003985
+      },
+      {
+        "phase": "hold",
+        "at": 244.94600000044147
+      },
+      {
+        "phase": "calibration",
+        "at": 246.6260000004495
+      },
+      {
+        "phase": "hold",
+        "at": 255.62600000049247
+      },
+      {
+        "phase": "calibration",
+        "at": 257.54600000050164
+      },
+      {
+        "phase": "hold",
+        "at": 268.94600000055607
+      },
+      {
+        "phase": "calibration",
+        "at": 271.24600000056705
+      },
+      {
+        "phase": "hold",
+        "at": 285.2460000006339
+      },
+      {
+        "phase": "calibration",
+        "at": 287.566000000645
+      },
+      {
+        "phase": "hold",
+        "at": 303.0460000007189
+      },
+      {
+        "phase": "calibration",
+        "at": 304.7060000007268
+      },
+      {
+        "phase": "hold",
+        "at": 313.7060000007698
+      },
+      {
+        "phase": "calibration",
+        "at": 315.30600000077743
+      },
+      {
+        "phase": "hold",
+        "at": 324.3060000008204
+      },
+      {
+        "phase": "calibration",
+        "at": 325.82600000082766
+      },
+      {
+        "phase": "hold",
+        "at": 334.82600000087064
+      },
+      {
+        "phase": "calibration",
+        "at": 336.366000000878
+      },
+      {
+        "phase": "hold",
+        "at": 345.36600000092096
+      },
+      {
+        "phase": "calibration",
+        "at": 347.12600000092937
+      },
+      {
+        "phase": "hold",
+        "at": 356.12600000097234
+      },
+      {
+        "phase": "calibration",
+        "at": 357.72600000098
+      },
+      {
+        "phase": "hold",
+        "at": 366.72600000102295
+      },
+      {
+        "phase": "calibration",
+        "at": 368.3660000010308
+      },
+      {
+        "phase": "hold",
+        "at": 377.36600000107376
+      },
+      {
+        "phase": "calibration",
+        "at": 378.9460000010813
+      },
+      {
+        "phase": "hold",
+        "at": 387.9460000011243
+      },
+      {
+        "phase": "calibration",
+        "at": 389.5460000011319
+      },
+      {
+        "phase": "hold",
+        "at": 398.5460000011749
+      },
+      {
+        "phase": "calibration",
+        "at": 400.14600000118253
+      },
+      {
+        "phase": "hold",
+        "at": 409.1460000012255
+      },
+      {
+        "phase": "calibration",
+        "at": 410.76600000123324
+      },
+      {
+        "phase": "hold",
+        "at": 419.7660000012762
+      },
+      {
+        "phase": "calibration",
+        "at": 421.5060000012845
+      },
+      {
+        "phase": "hold",
+        "at": 430.5060000013275
+      },
+      {
+        "phase": "calibration",
+        "at": 432.1260000013352
+      },
+      {
+        "phase": "hold",
+        "at": 441.1260000013782
+      },
+      {
+        "phase": "calibration",
+        "at": 442.7860000013861
+      },
+      {
+        "phase": "hold",
+        "at": 451.7860000014291
+      },
+      {
+        "phase": "calibration",
+        "at": 465.36600000149394
+      },
+      {
+        "phase": "calibration",
+        "at": 483.7860000015818
+      },
+      {
+        "phase": "calibration",
+        "at": 498.2660000016509
+      },
+      {
+        "phase": "hold",
+        "at": 516.7860000016034
+      },
+      {
+        "phase": "stopping",
+        "at": 516.9860000015987
+      },
+      {
+        "phase": "hold",
+        "at": 517.226000001593
+      }
+    ],
+    "arrival_details": {},
+    "drag": {
+      "calibration": true,
+      "arrived_pose": -1,
+      "operator_started": true,
+      "failure_detail": null,
+      "pose_settling": null,
+      "pending_invalid": null
+    },
+    "metrics": {
+      "drag_input_age_ms": {
+        "p50": 51.24996596714482,
+        "p95": 95.81747603369877,
+        "p99": 99.59427896654233,
+        "max": 250.06568396929651,
+        "samples": 25773
+      },
+      "control_cycle_ms": {
+        "p50": 3.4053660347126424,
+        "p95": 4.289203183725476,
+        "p99": 6.13800365710631,
+        "max": 15.595528995618224,
+        "samples": 25773
+      },
+      "ik_ms": {
+        "p50": 2.22677004057914,
+        "p95": 2.688883198425173,
+        "p99": 3.6581047880463258,
+        "max": 14.04721598373726,
+        "samples": 25773
+      },
+      "drag_left_position_error_mm": {
+        "p50": 133.48607231111268,
+        "p95": 757.257077936916,
+        "p99": 758.4726040065829,
+        "max": 758.5219930747705,
+        "samples": 19341
+      },
+      "drag_right_position_error_mm": {
+        "p50": 0.1110476098130627,
+        "p95": 0.4059116235672686,
+        "p99": 0.4717775602493113,
+        "max": 0.5201553441965018,
+        "samples": 19341
+      }
+    },
+    "metrics_window": "last 100000 observations per metric; complete trace retained",
+    "trace_dropped_rows": 0,
+    "trace_complete": true
+  },
+  "camera_ground_truth_error": {
+    "translation_mm": 0.43047093935333464,
+    "rotation_deg": 0.12461389817567102
+  },
+  "board_ground_truth_error": {
+    "translation_mm": 0.3182448144788022,
+    "rotation_deg": 0.16164510186224795
+  },
+  "held_out_reprojection_rms_px": 0.1548794455037753,
+  "recorded_measured_fk_passed": true,
+  "solver_receives_ground_truth": false,
+  "physical_calibration_validated": false,
+  "tests": {
+    "calibration": 202,
+    "deployment": 261,
+    "failures": 0,
+    "run_separately": true
+  },
+  "rehearsal_interruption": "One scheduler-delay HOLD after pose 11; explicitly resumed through the existing path checks after expanding only simulation CPU affinity from CPU20 to CPUs20-23. No limits weakened.",
+  "preliminary_run": "sequence stopped deliberately after 6 views to align simulated open jaws with the planner; retained separately and not reported as a complete rehearsal.",
+  "command": "OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 MUJOCO_GL=egl taskset -c 20-23 nice -n 10 ./scripts/calibrate_camera.sh left run --mode sim --auto --snapshot calibration/runs/left-d405-live-runner-20261008/start.json --output FRESH_OUTPUT_DIRECTORY --run-seconds 1800",
+  "source_hashes": {
+    "src/hexfellow_deploy/calibration.py": "6c4b1bb6f3e039970f7eca5948735c089178dee8ff5fa93aeac2333c161f6501",
+    "calibration/tools/camera/calibrate_robot.py": "097ff9d92ccd49cef8b24ba96eafe639575d2bb73971e10aac7ef4096dba4248",
+    "calibration/tools/camera/wrist_camera_worker.py": "0a01abbb92049ab676d0e18d638ed47109e0e59788acac71f98b7b277b274d3e",
+    "calibration/tools/camera/wrist_calibration_live.html": "37a9d055760a38b7897eda53dd4e89559a029c74875632c4667858b9114aaecc",
+    "calibration/config/camera/realsense_d405_left_fixed32_plan.json": "2bd9f75be2f16526a02398093cf83e3724ef751bbc4e3444e5543c7781b7c003"
+  },
+  "artifacts": {
+    "dataset": "calibration/runs/left-d405-live-runner-20261008/open-jaw-sequence/dataset.json",
+    "result": "calibration/runs/left-d405-live-runner-20261008/open-jaw-sequence/result.json",
+    "simulated_extrinsics": "/home/ziwang/projects/agentic-mobile-manipulator/third_party/hexfellow-deploy/calibration/runs/left-d405-live-runner-20261008/open-jaw-sequence/extrinsics-1791513288845523332.json",
+    "ground_truth": "calibration/runs/left-d405-live-runner-20261008/ground-truth.json",
+    "session_trace": "calibration/runs/left-d405-live-runner-20261008/open-jaw-sequence/session/trace.jsonl"
+  }
+}

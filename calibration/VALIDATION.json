@@ -233,5 +233,253 @@
     "left_automatic_route_validated": false,
     "sdk_or_robot_devices_opened": false,
     "motion_commands_sent": 0
+  },
+  "left_wrist_pose_design_20261008": {
+    "scope": "Nominal kinematic planning and rendered-image solver verification, not physical/controller qualification",
+    "report": "artifacts/reference/left-d405-planning-20261008/validation.json",
+    "calibration_tests_passed": 195,
+    "physical_devices_opened": false,
+    "hardware_commands_sent": 0,
+    "live_route_enabled": false
+  },
+  "wrist_stream_verification_20261008": {
+    "report": "artifacts/reference/wrist-stream-verification-20261008/stream-verification.json",
+    "simultaneous_rgb_streams": 2,
+    "image_width": 1280,
+    "image_height": 720,
+    "fps": 30,
+    "robot_commands_sent": 0,
+    "calibration_tests_passed": 196,
+    "left_sdk_pose_report": "artifacts/reference/left-d405-sdk-planning-20261008/validation.json",
+    "left_extrinsics_measured": false
+  },
+  "lift_retreat_fix_20261008": {
+    "source_run": "runs/wrist-calibration/20261008T234924.788901Z",
+    "fault": "lift_measured_upper: signed inward-reference tracking lag incorrectly consumed outward clearance",
+    "measured_clearance_m": 7.490283230326966e-07,
+    "old_false_outward_reserve_m": 8.963670656894158e-07,
+    "recorded_failed_cycle_replay_executable": true,
+    "reference_history_preserved": true,
+    "limits_relaxed": false,
+    "controller_tests_passed": 52,
+    "calibration_tests_passed": 196,
+    "hardware_commands_sent": 0,
+    "physical_devices_opened": false,
+    "real_robot_rerun_performed": false,
+    "report": "artifacts/reference/lift-retreat-fix-20261008/recorded-cycle-replay.json",
+    "documentation": "docs/lift_retreat_failure_20261008.md"
+  },
+  "right_wrist_optical_roll_20261008": {
+    "report": "artifacts/reference/right-wrist-optical-roll-20261008/summary.json",
+    "source_run": "runs/wrist-calibration/20261008T235836.028874Z",
+    "status": "nominal_simulator_orientation_correction; physical calibration not accepted",
+    "diagnostic_fit_converged": false,
+    "eligible_snapshot_count": 12,
+    "diagnostic_relative_optical_rotation_deg": 179.48596773966835,
+    "applied_optical_axis_roll_deg": 180.0,
+    "left_camera_changed": false,
+    "sdk_images_rotated": false,
+    "existing_candidate_extrinsics_overwritten": false,
+    "active_robot_session_targets_changed": false,
+    "hardware_commands_sent_by_this_check": 0,
+    "validation": {
+      "passed": true,
+      "poses_accepted": 30,
+      "rendered_charuco_detections": 30,
+      "minimum_detection_corners": 12,
+      "path_sample_count": 12737,
+      "minimum_path_clearance_m": 0.015003696913006744,
+      "target_joint_limit_reserve_rad": 0.15,
+      "collision_pair_count": 478,
+      "method": "Retargeted the 30-pose route for optical-axis roll +180 degrees; fresh rendered detections and all collision-path checks",
+      "limitation": "Geometric trajectory validation only. Motor dynamics, payload torque, cable routing, actual table and physical mounting are not qualified.",
+      "camera_translation_span_m": [
+        0.2154353665519792,
+        0.3228275734613305,
+        0.17576001601898317
+      ],
+      "rotation_excitation_singular_values_rad": [
+        6.170049748434472,
+        1.4876736716383778,
+        0.651770721065934
+      ],
+      "source_previous_plan_sha256": "b95404258127824e0bdac960af620ca300ffe8bec10c18874eb374361bc56dde",
+      "physical_execution_validated": false,
+      "camera_roll_changed_without_display_flip": true,
+      "minimum_image_margin_px": 47.76577428263647,
+      "maximum_joint_retargeting_deg": 6.937976416020217,
+      "target_image_center_px": [
+        640.0,
+        518.4
+      ]
+    },
+    "tests_passed": 198,
+    "comparison_publication_id": "pub_a9d849ccfc3047fe88cce92939846fb1",
+    "comparison_artifact_id": "art_b02d672cc5fe41b0"
+  },
+  "left_d405_live_runner_20261008": {
+    "passed": true,
+    "eligible_poses": 30,
+    "invalid_poses": 0,
+    "camera_error": {
+      "translation_mm": 0.43047093935333464,
+      "rotation_deg": 0.12461389817567102
+    },
+    "held_out_reprojection_rms_px": 0.1548794455037753,
+    "calibration_tests_passed": 202,
+    "deployment_tests_passed": 261,
+    "physical_devices_opened": false,
+    "hardware_commands_sent": 0,
+    "physical_calibration_validated": false,
+    "report": "calibration/artifacts/reference/left-d405-live-runner-20261008/validation.json",
+    "scheduler_hold_resumed": true
+  },
+  "left_default_clearance_20261008": {
+    "passed": true,
+    "calibration_tests_passed": 208,
+    "poses_checked": 30,
+    "default_checked": true,
+    "return_checked": true,
+    "path_samples": 15434,
+    "minimum_clearance_m": 0.015000178180801287,
+    "required_clearance_m": 0.015,
+    "hardware_commands_sent": 0,
+    "physical_execution_validated": false,
+    "report": "calibration/artifacts/reference/left-default-clearance-20261008/validation.json"
+  },
+  "rtkit_startup_burst_20261008": {
+    "passed": true,
+    "calibration_tests_passed": 220,
+    "read_only_probe_cycles": 1500,
+    "motion_commands_sent": 0,
+    "report": "calibration/artifacts/reference/rtkit-startup-20261008/validation.json"
+  },
+  "physical_wrist_candidates_20261008": {
+    "scope": "Offline export of existing physical acquisitions, no new device access or motion",
+    "hardware_commands_sent_by_export": 0,
+    "production_camera_configuration_changed": false,
+    "independent_physical_validation_performed": false,
+    "left": {
+      "source_run": "20261009T033555.843603Z",
+      "session": "controlled_session_exit",
+      "session_passed": true,
+      "fault": null,
+      "eligible_observations": 26,
+      "total_observations": 30,
+      "excluded_poses": [
+        {
+          "pose_id": 21,
+          "reason": "6 corners (need 12); Need at least 8 ChArUco corners"
+        },
+        {
+          "pose_id": 22,
+          "reason": "7 corners (need 12); Need at least 8 ChArUco corners"
+        },
+        {
+          "pose_id": 23,
+          "reason": "6 corners (need 12); Need at least 8 ChArUco corners"
+        },
+        {
+          "pose_id": 27,
+          "reason": "5 corners (need 12); Need at least 8 ChArUco corners"
+        }
+      ],
+      "solver_converged": true,
+      "calibration_status": "candidate_requires_physical_validation",
+      "independent_physical_validation_performed": false,
+      "quality": {
+        "training_count": 21,
+        "heldout_count": 5,
+        "heldout_pose_ids": [
+          5,
+          10,
+          15,
+          20,
+          29
+        ],
+        "heldout_reprojection_rms_px": 7.921881469344646,
+        "heldout_reprojection_max_px": 12.109242349841066,
+        "heldout_closure_position_rms_mm": 3.6359085104617206,
+        "heldout_closure_angle_rms_deg": 0.6116540280160516
+      },
+      "source_dataset_sha256": "751a3ae44f61b0a29eefda5dee401202a5d9ec3524216084e89939f6158a75eb",
+      "original_fit_input_sha256": "751a3ae44f61b0a29eefda5dee401202a5d9ec3524216084e89939f6158a75eb",
+      "portable_dataset_sha256": "43aac5e6e764f73ad93af7edf1daa0f6ee803775bebb7e2e149ae47ed89958c5",
+      "candidate_sha256": "57f3987afd166e0c240c9fc0b701778bc4ad49de940fad906542dc0e30084853",
+      "source_fit_copied_byte_for_byte": true,
+      "production_camera_configuration_changed": false,
+      "hardware_commands_sent_by_export": 0
+    },
+    "right": {
+      "source_run": "20261009T003232.406454Z",
+      "session": "HardwareSafetyError: calibration: right arm arrival timed out after 10 seconds. right J1 position error -1.532 deg (allowed +/-1.146; target 14.101, measured 12.569). The arm is stationary, but outside the position tolerance. Calibration stopped; no capture accepted for this pose.",
+      "session_passed": false,
+      "fault": "HardwareSafetyError: calibration: right arm arrival timed out after 10 seconds. right J1 position error -1.532 deg (allowed +/-1.146; target 14.101, measured 12.569). The arm is stationary, but outside the position tolerance. Calibration stopped; no capture accepted for this pose.",
+      "eligible_observations": 26,
+      "total_observations": 30,
+      "excluded_poses": [
+        {
+          "pose_id": 1,
+          "reason": "Calibration measured-pose settling timed out: reference still settling; maximum right-arm target offset 0.640 deg"
+        },
+        {
+          "pose_id": 2,
+          "reason": "Calibration measured-pose settling timed out: reference still settling; maximum right-arm target offset 0.532 deg"
+        },
+        {
+          "pose_id": 3,
+          "reason": "Calibration measured-pose settling timed out: reference still settling; maximum right-arm target offset 0.518 deg"
+        },
+        {
+          "pose_id": 4,
+          "reason": "Calibration measured-pose settling timed out: reference still settling; maximum right-arm target offset 0.613 deg"
+        }
+      ],
+      "solver_converged": true,
+      "calibration_status": "candidate_requires_physical_validation",
+      "independent_physical_validation_performed": false,
+      "quality": {
+        "training_count": 21,
+        "heldout_count": 5,
+        "heldout_pose_ids": [
+          9,
+          14,
+          19,
+          24,
+          29
+        ],
+        "heldout_reprojection_rms_px": 13.623685792294532,
+        "heldout_reprojection_max_px": 25.56034149948258,
+        "heldout_closure_position_rms_mm": 6.717138045792728,
+        "heldout_closure_angle_rms_deg": 2.1400617661746995
+      },
+      "source_dataset_sha256": "a2f874870806367d21f1d7983992c7069cc3b1e2d1a7503f0ea830c0e2433818",
+      "original_fit_input_sha256": "a2f874870806367d21f1d7983992c7069cc3b1e2d1a7503f0ea830c0e2433818",
+      "portable_dataset_sha256": "2bfae01244427e6db3bb593a4a060ba190b7fb2d9fd0cb8c52d315d8c907b8ae",
+      "candidate_sha256": "3a5af6b843047fc7974f93bba813c9003b5e0875dc0ebaa75dda6a3bcfba65e2",
+      "source_fit_copied_byte_for_byte": true,
+      "production_camera_configuration_changed": false,
+      "hardware_commands_sent_by_export": 0
+    },
+    "parameter_snapshot": "config/camera/camera_parameters_20261008.json"
+  },
+  "wrist_publication_20261008": {
+    "date": "2026-10-08",
+    "scope": "Offline publication verification of the two recorded physical wrist candidates",
+    "calibration_tests_passed": 225,
+    "deployment_tests_passed": 261,
+    "upstream_tests_passed": 33,
+    "total_tests_passed": 519,
+    "both_portable_refits_match_saved_matrices_atol": 1e-12,
+    "heldout_reprojection_rms_px": {
+      "left": 7.921881469344646,
+      "right": 13.623685792294532
+    },
+    "upstream_revision": "e4dbcc9983516e20d59363680c60066a8571c0e6",
+    "upstream_branch": "zi/dev_camera",
+    "hardware_commands_sent": 0,
+    "physical_devices_opened": false,
+    "production_sensor_selection_changed": false,
+    "independent_physical_validation_performed": false
   }
 }

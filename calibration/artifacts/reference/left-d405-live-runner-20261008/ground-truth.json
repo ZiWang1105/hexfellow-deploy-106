@@ -1,0 +1,2140 @@
+{
+  "simulation_only": true,
+  "physical_calibration_validated": false,
+  "hardware_commands_sent": 0,
+  "eligible_poses": 30,
+  "scoring_truth": "MuJoCo actual camera/world body poses at recorded measured joints, converted to RGB optical axes",
+  "solver_receives_ground_truth": false,
+  "fit_observations": "image detected corners -> PnP, synchronized measured joint q -> Pinocchio wrist FK",
+  "stationary_pairing_limitation": "Camera renders request q, while FK uses the stationary time-paired measured q; finite permitted drift is included in the residual",
+  "base_frame": "maver_x4_asm_maver_x4_base_link",
+  "parent_frame": "maver_x4_asm_mount1",
+  "camera_frame": "realsense_230422271628_color_optical",
+  "truth": {
+    "T_wrist_from_camera": [
+      [
+        2.6832802906890594e-17,
+        0.8480480961564254,
+        0.5299192642332046,
+        -0.05794986789881634
+      ],
+      [
+        -0.9999999999999996,
+        2.1866109722518875e-17,
+        1.565680144353105e-17,
+        1.1102230246251565e-16
+      ],
+      [
+        -6.179808882684379e-17,
+        -0.5299192642332045,
+        0.8480480961564256,
+        0.05428252344620338
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "T_base_from_board": [
+      [
+        0.9999999999999999,
+        1.8825560559030778e-08,
+        0.0,
+        0.6364999942315711
+      ],
+      [
+        1.8825560559030778e-08,
+        -0.9999999999999999,
+        0.0,
+        0.16350001130536332
+      ],
+      [
+        0.0,
+        0.0,
+        -1.0,
+        0.72
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ]
+  },
+  "truth_constancy_max_matrix_difference": {
+    "camera_mount": 1.1102230246251565e-15,
+    "board_base": 5.866884284976375e-09
+  },
+  "truth_constancy": {
+    "camera_mount": {
+      "translation_mm": 2.4256992613794506e-13,
+      "rotation_deg": 2.178495719086663e-14
+    },
+    "board_base": {
+      "translation_mm": 4.110045068154525e-06,
+      "rotation_deg": 3.361477084207742e-07
+    }
+  },
+  "nominal_vs_actual_camera": {
+    "translation_mm": 1.495186733574855e-13,
+    "rotation_deg": 4.74230231451089e-15
+  },
+  "nominal_vs_actual_board": {
+    "translation_mm": 1.2691966518472547e-05,
+    "rotation_deg": 1.0786251670004062e-06
+  },
+  "per_pose": [
+    {
+      "pose_id": 1,
+      "corners": 16,
+      "recorded_vs_recomputed_fk": {
+        "translation_mm": 0.0,
+        "rotation_deg": 0.0
+      },
+      "pinocchio_vs_mujoco_fk": {
+        "translation_mm": 1.3492751909297141e-05,
+        "rotation_deg": 1.8363888962706878e-07
+      },
+      "pnp_vs_geometry": {
+        "translation_mm": 0.4972690111584428,
+        "rotation_deg": 0.04624114080012271
+      },
+      "geometry_corner_rms_px": 0.8322849966117819,
+      "geometry_corner_max_px": 0.9505543037937608,
+      "stored_pnp_reprojection_rms_px": 0.0673602819442749,
+      "image_joint_skew_s": 0.0029416659963317215,
+      "maximum_capture_target_offset_deg": 0.0030291633378201096
+    },
+    {
+      "pose_id": 2,
+      "corners": 16,
+      "recorded_vs_recomputed_fk": {
+        "translation_mm": 0.0,
+        "rotation_deg": 0.0
+      },
+      "pinocchio_vs_mujoco_fk": {
+        "translation_mm": 7.91919743793851e-06,
+        "rotation_deg": 1.836388988904284e-07
+      },
+      "pnp_vs_geometry": {
+        "translation_mm": 0.42790192025733015,
+        "rotation_deg": 0.08724934123203291
+      },
+      "geometry_corner_rms_px": 0.6691881095619814,
+      "geometry_corner_max_px": 0.8141900637282433,
+      "stored_pnp_reprojection_rms_px": 0.07783902436494827,
+      "image_joint_skew_s": 0.003773348988033831,
+      "maximum_capture_target_offset_deg": 0.005626874314247669
+    },
+    {
+      "pose_id": 3,
+      "corners": 16,
+      "recorded_vs_recomputed_fk": {
+        "translation_mm": 0.0,
+        "rotation_deg": 0.0
+      },
+      "pinocchio_vs_mujoco_fk": {
+        "translation_mm": 7.85434581883387e-06,
+        "rotation_deg": 1.8363889511510146e-07
+      },
+      "pnp_vs_geometry": {
+        "translation_mm": 0.29904864989079544,
+        "rotation_deg": 0.021672111573348696
+      },
+      "geometry_corner_rms_px": 0.6857186795925416,
+      "geometry_corner_max_px": 0.8321415079284306,
+      "stored_pnp_reprojection_rms_px": 0.08175384253263474,
+      "image_joint_skew_s": 0.0035915409680455923,
+      "maximum_capture_target_offset_deg": 0.001167392355613439
+    },
+    {
+      "pose_id": 4,
+      "corners": 16,
+      "recorded_vs_recomputed_fk": {
+        "translation_mm": 0.0,
+        "rotation_deg": 0.0
+      },
+      "pinocchio_vs_mujoco_fk": {
+        "translation_mm": 7.3185342519274445e-06,
+        "rotation_deg": 1.836388959466861e-07
+      },
+      "pnp_vs_geometry": {
+        "translation_mm": 0.31252730905305987,
+        "rotation_deg": 0.07328663180208521
+      },
+      "geometry_corner_rms_px": 0.5981300088293895,
+      "geometry_corner_max_px": 0.7014384370864281,
+      "stored_pnp_reprojection_rms_px": 0.0809912458062172,
+      "image_joint_skew_s": 0.002977584023028612,
+      "maximum_capture_target_offset_deg": 0.0012882222985821925
+    },
+    {
+      "pose_id": 5,
+      "corners": 16,
+      "recorded_vs_recomputed_fk": {
+        "translation_mm": 0.0,
+        "rotation_deg": 0.0
+      },
+      "pinocchio_vs_mujoco_fk": {
+        "translation_mm": 8.250388695632424e-06,
+        "rotation_deg": 1.8363890001138743e-07
+      },
+      "pnp_vs_geometry": {
+        "translation_mm": 0.3660817861175823,
+        "rotation_deg": 0.1322958986232811
+      },
+      "geometry_corner_rms_px": 0.6879507471259393,
+      "geometry_corner_max_px": 0.8312483308169236,
+      "stored_pnp_reprojection_rms_px": 0.10808707028627396,
+      "image_joint_skew_s": 0.006740222976077348,
+      "maximum_capture_target_offset_deg": 0.002096249521581019
+    },
+    {
+      "pose_id": 6,
+      "corners": 16,
+      "recorded_vs_recomputed_fk": {
+        "translation_mm": 0.0,
+        "rotation_deg": 0.0
+      },
+      "pinocchio_vs_mujoco_fk": {
+        "translation_mm": 9.266603516999834e-06,
+        "rotation_deg": 1.8363888932028774e-07
+      },
+      "pnp_vs_geometry": {
+        "translation_mm": 0.34913950415164,
+        "rotation_deg": 0.02587056773447206
+      },
+      "geometry_corner_rms_px": 0.7156382737666263,
+      "geometry_corner_max_px": 0.8622880929025605,
+      "stored_pnp_reprojection_rms_px": 0.07657622545957565,
+      "image_joint_skew_s": 0.007303145015612245,
+      "maximum_capture_target_offset_deg": 0.0019856451839383314
+    },
+    {
+      "pose_id": 7,
+      "corners": 16,
+      "recorded_vs_recomputed_fk": {
+        "translation_mm": 0.0,
+        "rotation_deg": 0.0
+      },
+      "pinocchio_vs_mujoco_fk": {
+        "translation_mm": 7.538596672280001e-06,
+        "rotation_deg": 1.836388896962745e-07
+      },
+      "pnp_vs_geometry": {
+        "translation_mm": 0.2643314713670263,
+        "rotation_deg": 0.10398197045668911
+      },
+      "geometry_corner_rms_px": 0.6159649922147074,
+      "geometry_corner_max_px": 0.7526691869959318,
+      "stored_pnp_reprojection_rms_px": 0.11186587065458298,
+      "image_joint_skew_s": 0.003865231992676854,
+      "maximum_capture_target_offset_deg": 0.0022837129743013833
+    },
+    {
+      "pose_id": 8,
+      "corners": 16,
+      "recorded_vs_recomputed_fk": {
+        "translation_mm": 0.0,
+        "rotation_deg": 0.0
+      },
+      "pinocchio_vs_mujoco_fk": {
+        "translation_mm": 7.814500838783708e-06,
+        "rotation_deg": 1.836388834506795e-07
+      },
+      "pnp_vs_geometry": {
+        "translation_mm": 0.24373268575351167,
+        "rotation_deg": 0.024098924341180654
+      },
+      "geometry_corner_rms_px": 0.6596166985995838,
+      "geometry_corner_max_px": 0.7475454581446602,
+      "stored_pnp_reprojection_rms_px": 0.07714425772428513,
+      "image_joint_skew_s": 0.0036255039740353823,
+      "maximum_capture_target_offset_deg": 0.001060548786039703
+    },
+    {
+      "pose_id": 9,
+      "corners": 16,
+      "recorded_vs_recomputed_fk": {
+        "translation_mm": 0.0,
+        "rotation_deg": 0.0
+      },
+      "pinocchio_vs_mujoco_fk": {
+        "translation_mm": 7.273061557150206e-06,
+        "rotation_deg": 1.8363888685141275e-07
+      },
+      "pnp_vs_geometry": {
+        "translation_mm": 0.3060603603777241,
+        "rotation_deg": 0.09086821465461016
+      },
+      "geometry_corner_rms_px": 0.6418361327597354,
+      "geometry_corner_max_px": 0.73257012551512,
+      "stored_pnp_reprojection_rms_px": 0.07686907798051834,
+      "image_joint_skew_s": 0.00852201203815639,
+      "maximum_capture_target_offset_deg": 0.0031964970259709038
+    },
+    {
+      "pose_id": 10,
+      "corners": 16,
+      "recorded_vs_recomputed_fk": {
+        "translation_mm": 0.0,
+        "rotation_deg": 0.0
+      },
+      "pinocchio_vs_mujoco_fk": {
+        "translation_mm": 7.1374119726578925e-06,
+        "rotation_deg": 1.8363890035600784e-07
+      },
+      "pnp_vs_geometry": {
+        "translation_mm": 0.3190404552971929,
+        "rotation_deg": 0.031517389839645166
+      },
+      "geometry_corner_rms_px": 0.6020182019375654,
+      "geometry_corner_max_px": 0.7005152671117474,
+      "stored_pnp_reprojection_rms_px": 0.08593367785215378,
+      "image_joint_skew_s": 0.005577130010351539,
+      "maximum_capture_target_offset_deg": 0.0006629342381142446
+    },
+    {
+      "pose_id": 11,
+      "corners": 16,
+      "recorded_vs_recomputed_fk": {
+        "translation_mm": 0.0,
+        "rotation_deg": 0.0
+      },
+      "pinocchio_vs_mujoco_fk": {
+        "translation_mm": 9.879762910359684e-06,
+        "rotation_deg": 1.836389076796494e-07
+      },
+      "pnp_vs_geometry": {
+        "translation_mm": 0.7616391829182073,
+        "rotation_deg": 0.12365365454004511
+      },
+      "geometry_corner_rms_px": 0.7273328550187684,
+      "geometry_corner_max_px": 0.8709847074666933,
+      "stored_pnp_reprojection_rms_px": 0.08587846159934998,
+      "image_joint_skew_s": 0.002390887006185949,
+      "maximum_capture_target_offset_deg": 0.0058276835315944665
+    },
+    {
+      "pose_id": 12,
+      "corners": 16,
+      "recorded_vs_recomputed_fk": {
+        "translation_mm": 0.0,
+        "rotation_deg": 0.0
+      },
+      "pinocchio_vs_mujoco_fk": {
+        "translation_mm": 8.511754791816309e-06,
+        "rotation_deg": 1.836388687269786e-07
+      },
+      "pnp_vs_geometry": {
+        "translation_mm": 0.5517365329087278,
+        "rotation_deg": 0.1780661301624878
+      },
+      "geometry_corner_rms_px": 0.6961192003324457,
+      "geometry_corner_max_px": 0.8054250402725995,
+      "stored_pnp_reprojection_rms_px": 0.12933814525604248,
+      "image_joint_skew_s": 0.007624483958352357,
+      "maximum_capture_target_offset_deg": 0.003903290567244847
+    },
+    {
+      "pose_id": 13,
+      "corners": 16,
+      "recorded_vs_recomputed_fk": {
+        "translation_mm": 0.0,
+        "rotation_deg": 0.0
+      },
+      "pinocchio_vs_mujoco_fk": {
+        "translation_mm": 7.133444202813965e-06,
+        "rotation_deg": 1.8363886983546343e-07
+      },
+      "pnp_vs_geometry": {
+        "translation_mm": 0.28529558420510576,
+        "rotation_deg": 0.17800088390264548
+      },
+      "geometry_corner_rms_px": 0.6218863466500681,
+      "geometry_corner_max_px": 0.7968167955579356,
+      "stored_pnp_reprojection_rms_px": 0.13813215494155884,
+      "image_joint_skew_s": 0.008475408016238362,
+      "maximum_capture_target_offset_deg": 0.0035571502001299766
+    },
+    {
+      "pose_id": 14,
+      "corners": 16,
+      "recorded_vs_recomputed_fk": {
+        "translation_mm": 0.0,
+        "rotation_deg": 0.0
+      },
+      "pinocchio_vs_mujoco_fk": {
+        "translation_mm": 5.1316368969791855e-06,
+        "rotation_deg": 1.8363890401806996e-07
+      },
+      "pnp_vs_geometry": {
+        "translation_mm": 0.2592163936879955,
+        "rotation_deg": 0.11233957080964976
+      },
+      "geometry_corner_rms_px": 0.5848983482412264,
+      "geometry_corner_max_px": 0.7129317159076695,
+      "stored_pnp_reprojection_rms_px": 0.06672028452157974,
+      "image_joint_skew_s": 0.009865406027529389,
+      "maximum_capture_target_offset_deg": 0.004849675014782013
+    },
+    {
+      "pose_id": 15,
+      "corners": 16,
+      "recorded_vs_recomputed_fk": {
+        "translation_mm": 0.0,
+        "rotation_deg": 0.0
+      },
+      "pinocchio_vs_mujoco_fk": {
+        "translation_mm": 1.0058718607016378e-05,
+        "rotation_deg": 1.8363887867549745e-07
+      },
+      "pnp_vs_geometry": {
+        "translation_mm": 0.440288205983045,
+        "rotation_deg": 0.19264064271679965
+      },
+      "geometry_corner_rms_px": 0.6827829224037385,
+      "geometry_corner_max_px": 0.7931641273043327,
+      "stored_pnp_reprojection_rms_px": 0.07764393836259842,
+      "image_joint_skew_s": 0.0032889909925870597,
+      "maximum_capture_target_offset_deg": 0.00355106788559543
+    },
+    {
+      "pose_id": 16,
+      "corners": 16,
+      "recorded_vs_recomputed_fk": {
+        "translation_mm": 0.0,
+        "rotation_deg": 0.0
+      },
+      "pinocchio_vs_mujoco_fk": {
+        "translation_mm": 1.3758545296756375e-05,
+        "rotation_deg": 1.8363890447397427e-07
+      },
+      "pnp_vs_geometry": {
+        "translation_mm": 0.399698957056559,
+        "rotation_deg": 0.09911475762870499
+      },
+      "geometry_corner_rms_px": 0.7918535433663527,
+      "geometry_corner_max_px": 0.8984846628934082,
+      "stored_pnp_reprojection_rms_px": 0.07523456960916519,
+      "image_joint_skew_s": 0.009149298013653606,
+      "maximum_capture_target_offset_deg": 0.0030086727407404546
+    },
+    {
+      "pose_id": 17,
+      "corners": 16,
+      "recorded_vs_recomputed_fk": {
+        "translation_mm": 0.0,
+        "rotation_deg": 0.0
+      },
+      "pinocchio_vs_mujoco_fk": {
+        "translation_mm": 1.3400336441969623e-05,
+        "rotation_deg": 1.8363890321441507e-07
+      },
+      "pnp_vs_geometry": {
+        "translation_mm": 0.31408331637114173,
+        "rotation_deg": 0.10381258859010885
+      },
+      "geometry_corner_rms_px": 0.7948578219628242,
+      "geometry_corner_max_px": 0.8680472282894487,
+      "stored_pnp_reprojection_rms_px": 0.10720241814851761,
+      "image_joint_skew_s": 0.009704011026769876,
+      "maximum_capture_target_offset_deg": 0.0016903470487588904
+    },
+    {
+      "pose_id": 18,
+      "corners": 16,
+      "recorded_vs_recomputed_fk": {
+        "translation_mm": 0.0,
+        "rotation_deg": 0.0
+      },
+      "pinocchio_vs_mujoco_fk": {
+        "translation_mm": 1.2794672388941817e-05,
+        "rotation_deg": 1.8363887273066455e-07
+      },
+      "pnp_vs_geometry": {
+        "translation_mm": 0.3619821299150743,
+        "rotation_deg": 0.12930874513407978
+      },
+      "geometry_corner_rms_px": 0.7783948899623349,
+      "geometry_corner_max_px": 0.9450016641643991,
+      "stored_pnp_reprojection_rms_px": 0.08619218319654465,
+      "image_joint_skew_s": 0.006244151969440281,
+      "maximum_capture_target_offset_deg": 0.0015756709025214549
+    },
+    {
+      "pose_id": 19,
+      "corners": 16,
+      "recorded_vs_recomputed_fk": {
+        "translation_mm": 0.0,
+        "rotation_deg": 0.0
+      },
+      "pinocchio_vs_mujoco_fk": {
+        "translation_mm": 1.2901330041237982e-05,
+        "rotation_deg": 1.836388823897333e-07
+      },
+      "pnp_vs_geometry": {
+        "translation_mm": 0.36295864438678016,
+        "rotation_deg": 0.10439228581390372
+      },
+      "geometry_corner_rms_px": 0.7471182987823399,
+      "geometry_corner_max_px": 0.9136539056218785,
+      "stored_pnp_reprojection_rms_px": 0.08335871249437332,
+      "image_joint_skew_s": 0.00976240198360756,
+      "maximum_capture_target_offset_deg": 0.0006984375781932493
+    },
+    {
+      "pose_id": 20,
+      "corners": 16,
+      "recorded_vs_recomputed_fk": {
+        "translation_mm": 0.0,
+        "rotation_deg": 0.0
+      },
+      "pinocchio_vs_mujoco_fk": {
+        "translation_mm": 1.302267642746882e-05,
+        "rotation_deg": 1.8363890040917163e-07
+      },
+      "pnp_vs_geometry": {
+        "translation_mm": 0.3658429426084437,
+        "rotation_deg": 0.33447736911063425
+      },
+      "geometry_corner_rms_px": 0.8010639531726006,
+      "geometry_corner_max_px": 0.9192444767217892,
+      "stored_pnp_reprojection_rms_px": 0.10037162899971008,
+      "image_joint_skew_s": 0.008907581970561296,
+      "maximum_capture_target_offset_deg": 0.0008034002613225504
+    },
+    {
+      "pose_id": 21,
+      "corners": 16,
+      "recorded_vs_recomputed_fk": {
+        "translation_mm": 0.0,
+        "rotation_deg": 0.0
+      },
+      "pinocchio_vs_mujoco_fk": {
+        "translation_mm": 1.5107966339353554e-05,
+        "rotation_deg": 1.836389005703907e-07
+      },
+      "pnp_vs_geometry": {
+        "translation_mm": 0.4640796966509671,
+        "rotation_deg": 0.0639882881133985
+      },
+      "geometry_corner_rms_px": 0.8437431551016814,
+      "geometry_corner_max_px": 0.9800471494295682,
+      "stored_pnp_reprojection_rms_px": 0.09944777935743332,
+      "image_joint_skew_s": 0.008213641005568206,
+      "maximum_capture_target_offset_deg": 0.0032773173420503374
+    },
+    {
+      "pose_id": 22,
+      "corners": 16,
+      "recorded_vs_recomputed_fk": {
+        "translation_mm": 0.0,
+        "rotation_deg": 0.0
+      },
+      "pinocchio_vs_mujoco_fk": {
+        "translation_mm": 1.4913139927577649e-05,
+        "rotation_deg": 1.8363890258464584e-07
+      },
+      "pnp_vs_geometry": {
+        "translation_mm": 0.3281892309048073,
+        "rotation_deg": 0.14906264151083368
+      },
+      "geometry_corner_rms_px": 0.8252106395531003,
+      "geometry_corner_max_px": 0.94549200937048,
+      "stored_pnp_reprojection_rms_px": 0.07373933494091034,
+      "image_joint_skew_s": 0.0005974029772914946,
+      "maximum_capture_target_offset_deg": 0.001113886712169173
+    },
+    {
+      "pose_id": 23,
+      "corners": 16,
+      "recorded_vs_recomputed_fk": {
+        "translation_mm": 0.0,
+        "rotation_deg": 0.0
+      },
+      "pinocchio_vs_mujoco_fk": {
+        "translation_mm": 1.4654784261137048e-05,
+        "rotation_deg": 1.8363889882394637e-07
+      },
+      "pnp_vs_geometry": {
+        "translation_mm": 0.3815727899032205,
+        "rotation_deg": 0.08683106858884303
+      },
+      "geometry_corner_rms_px": 0.8090771444514302,
+      "geometry_corner_max_px": 0.9725723877165829,
+      "stored_pnp_reprojection_rms_px": 0.08299979567527771,
+      "image_joint_skew_s": 0.007017375959549099,
+      "maximum_capture_target_offset_deg": 0.001448631784320019
+    },
+    {
+      "pose_id": 24,
+      "corners": 16,
+      "recorded_vs_recomputed_fk": {
+        "translation_mm": 0.0,
+        "rotation_deg": 0.0
+      },
+      "pinocchio_vs_mujoco_fk": {
+        "translation_mm": 1.5199326040906626e-05,
+        "rotation_deg": 1.8363888253503926e-07
+      },
+      "pnp_vs_geometry": {
+        "translation_mm": 0.3491532086514145,
+        "rotation_deg": 0.10435159391681516
+      },
+      "geometry_corner_rms_px": 0.8300026408936048,
+      "geometry_corner_max_px": 0.9124020513644922,
+      "stored_pnp_reprojection_rms_px": 0.06304726749658585,
+      "image_joint_skew_s": 0.009211611992213875,
+      "maximum_capture_target_offset_deg": 0.0008459797665697596
+    },
+    {
+      "pose_id": 25,
+      "corners": 16,
+      "recorded_vs_recomputed_fk": {
+        "translation_mm": 0.0,
+        "rotation_deg": 0.0
+      },
+      "pinocchio_vs_mujoco_fk": {
+        "translation_mm": 1.5041157583734568e-05,
+        "rotation_deg": 1.836389097117079e-07
+      },
+      "pnp_vs_geometry": {
+        "translation_mm": 0.37940875929374634,
+        "rotation_deg": 0.13233772641243946
+      },
+      "geometry_corner_rms_px": 0.8375461886809631,
+      "geometry_corner_max_px": 0.9196789135214714,
+      "stored_pnp_reprojection_rms_px": 0.08618553727865219,
+      "image_joint_skew_s": 0.002755912020802498,
+      "maximum_capture_target_offset_deg": 0.0016802109547819188
+    },
+    {
+      "pose_id": 26,
+      "corners": 16,
+      "recorded_vs_recomputed_fk": {
+        "translation_mm": 0.0,
+        "rotation_deg": 0.0
+      },
+      "pinocchio_vs_mujoco_fk": {
+        "translation_mm": 1.5203670231118799e-05,
+        "rotation_deg": 1.836388580488192e-07
+      },
+      "pnp_vs_geometry": {
+        "translation_mm": 0.36215076961796666,
+        "rotation_deg": 0.03400820416553744
+      },
+      "geometry_corner_rms_px": 0.8095463120325326,
+      "geometry_corner_max_px": 0.8791825233446612,
+      "stored_pnp_reprojection_rms_px": 0.058474913239479065,
+      "image_joint_skew_s": 0.002537434978876263,
+      "maximum_capture_target_offset_deg": 0.0010880007601544147
+    },
+    {
+      "pose_id": 27,
+      "corners": 16,
+      "recorded_vs_recomputed_fk": {
+        "translation_mm": 0.0,
+        "rotation_deg": 0.0
+      },
+      "pinocchio_vs_mujoco_fk": {
+        "translation_mm": 1.4431048106615806e-05,
+        "rotation_deg": 1.8363889297162228e-07
+      },
+      "pnp_vs_geometry": {
+        "translation_mm": 0.40808865739457223,
+        "rotation_deg": 0.17937113344143885
+      },
+      "geometry_corner_rms_px": 0.8624251484833436,
+      "geometry_corner_max_px": 1.0064317777130778,
+      "stored_pnp_reprojection_rms_px": 0.10396024584770203,
+      "image_joint_skew_s": 0.009138758992776275,
+      "maximum_capture_target_offset_deg": 0.0014264907174220218
+    },
+    {
+      "pose_id": 28,
+      "corners": 16,
+      "recorded_vs_recomputed_fk": {
+        "translation_mm": 0.0,
+        "rotation_deg": 0.0
+      },
+      "pinocchio_vs_mujoco_fk": {
+        "translation_mm": 1.4941924263511749e-05,
+        "rotation_deg": 1.836388789412477e-07
+      },
+      "pnp_vs_geometry": {
+        "translation_mm": 0.37866653528741345,
+        "rotation_deg": 0.06636479130422673
+      },
+      "geometry_corner_rms_px": 0.8331706256502026,
+      "geometry_corner_max_px": 0.9555692326851037,
+      "stored_pnp_reprojection_rms_px": 0.08326877653598785,
+      "image_joint_skew_s": 0.005528256006073207,
+      "maximum_capture_target_offset_deg": 0.0028137761177481524
+    },
+    {
+      "pose_id": 29,
+      "corners": 16,
+      "recorded_vs_recomputed_fk": {
+        "translation_mm": 0.0,
+        "rotation_deg": 0.0
+      },
+      "pinocchio_vs_mujoco_fk": {
+        "translation_mm": 1.4616775599440638e-05,
+        "rotation_deg": 1.8363887967667859e-07
+      },
+      "pnp_vs_geometry": {
+        "translation_mm": 0.3264165701609223,
+        "rotation_deg": 0.1468765322848329
+      },
+      "geometry_corner_rms_px": 0.7948878208568526,
+      "geometry_corner_max_px": 0.8833927977207882,
+      "stored_pnp_reprojection_rms_px": 0.08628919720649719,
+      "image_joint_skew_s": 0.0005440129898488522,
+      "maximum_capture_target_offset_deg": 0.0015724684493138984
+    },
+    {
+      "pose_id": 30,
+      "corners": 16,
+      "recorded_vs_recomputed_fk": {
+        "translation_mm": 0.0,
+        "rotation_deg": 0.0
+      },
+      "pinocchio_vs_mujoco_fk": {
+        "translation_mm": 1.4767748800598556e-05,
+        "rotation_deg": 1.8363889875676046e-07
+      },
+      "pnp_vs_geometry": {
+        "translation_mm": 0.31858535083881695,
+        "rotation_deg": 0.11635430268992206
+      },
+      "geometry_corner_rms_px": 0.7836183768236911,
+      "geometry_corner_max_px": 0.8976182442917712,
+      "stored_pnp_reprojection_rms_px": 0.08772595226764679,
+      "image_joint_skew_s": 0.007259172038175166,
+      "maximum_capture_target_offset_deg": 0.0017673638299751811
+    }
+  ],
+  "thresholds": {
+    "exact": {
+      "translation_mm": 1e-05,
+      "rotation_deg": 1e-05
+    },
+    "rendered": {
+      "translation_mm": 1.0,
+      "rotation_deg": 0.2
+    },
+    "recorded_fk_max_translation_mm": 1e-05,
+    "recorded_fk_max_rotation_deg": 1e-05,
+    "pinocchio_mujoco_fk_max_translation_mm": 0.001,
+    "pinocchio_mujoco_fk_max_rotation_deg": 0.0001,
+    "truth_constancy_translation_mm": 0.001,
+    "truth_constancy_rotation_deg": 0.0001,
+    "held_out_corner_rms_px": 1.0
+  },
+  "inputs_sha256": {
+    "calibration/runs/left-d405-live-runner-20261008/open-jaw-sequence/dataset.json": "e0c17c435239176667d0f039e14c433dd6cc2a40975eb42556c944b9bbad2564",
+    "calibration/runs/left-d405-live-runner-20261008/open-jaw-sequence/wrist-plan.json": "24599a9790f7b1e45fe011e26f8a99a42a59bb1128dd1cbca2d5121b1e02fe3e",
+    "calibration/runs/left-d405-live-runner-20261008/open-jaw-sequence/geometry/scene.xml": "491a4d17f5da7d59daeed46d4fe53812a04d1f541fe90ec4142dece7a0381e4a",
+    "/home/ziwang/projects/agentic-mobile-manipulator/third_party/hexfellow-deploy/calibration/urdf/maver_x4_gp80_zed_40deg.urdf": "c2809fcb7d81e5b098678050d2fe3bc34f241d8626423579d0c7c7db6be45943",
+    "/home/ziwang/projects/agentic-mobile-manipulator/third_party/hexfellow-deploy/calibration/src/policy_sim/calibration/wrist_handeye.py": "39d3ef67149a249fd86792cda1fa8d5a122c50aa9236b58be07bf0cbdd21866c",
+    "/home/ziwang/projects/agentic-mobile-manipulator/third_party/hexfellow-deploy/calibration/src/policy_sim/calibration/handeye.py": "5fdd1302a2ead1dedd07b277cb138586ab97f8125fde1c51925def7bc44eb294",
+    "/home/ziwang/projects/agentic-mobile-manipulator/third_party/hexfellow-deploy/calibration/tools/camera/verify_wrist_ground_truth.py": "3a591d3b389a6fe78e4e1135f15b10aced646bb3461294db541c38ce7fa420a3"
+  },
+  "exact": {
+    "method": "Park seed + joint pseudo-Huber gradient descent with Armijo search",
+    "converged": true,
+    "termination": "objective_tolerance",
+    "iterations": 1,
+    "initial_loss": 1.2014389483283594e-11,
+    "final_loss": 1.0390799332071765e-11,
+    "jacobian_singular_values": [
+      3499.364553996292,
+      3414.186964409856,
+      3367.1817117756887,
+      944.1236967408909,
+      895.6568926941238,
+      684.667921281975,
+      659.1613882306626,
+      657.9007744194845,
+      335.09835455756235,
+      188.48511114155374,
+      180.35137139642723,
+      74.6056776873144
+    ],
+    "training": {
+      "count": 24,
+      "closure": "T_base_from_wrist @ T_wrist_from_camera @ T_camera_from_board = T_base_from_board",
+      "position_mm": [
+        1.774079034123069e-06,
+        2.2898246408355837e-06,
+        2.253909552089921e-06,
+        2.125300699848046e-06,
+        1.943883696940486e-06,
+        2.3828787625221127e-06,
+        2.381196566858153e-06,
+        2.6276459255456727e-06,
+        1.683587742447739e-06,
+        8.579797322139472e-07,
+        1.568568510067655e-06,
+        2.0433132556230676e-06,
+        1.5523808729143064e-06,
+        1.3881184362674742e-06,
+        1.6316870983966045e-06,
+        1.8286886424869396e-06,
+        1.823219010888007e-06,
+        1.5023697931022305e-06,
+        1.5232485275373694e-06,
+        1.4938490315011986e-06,
+        1.377058918842967e-06,
+        1.7387448670707054e-06,
+        1.333544387689627e-06,
+        1.2040223868639615e-06
+      ],
+      "angle_deg": [
+        1.6319258289740916e-07,
+        1.3763547283221693e-07,
+        1.3518205475243973e-07,
+        1.362222462441299e-07,
+        1.5604014248101482e-07,
+        1.625289128140571e-07,
+        1.5494870755451506e-07,
+        2.016938648328706e-07,
+        1.6504131487559437e-07,
+        1.0565083870777955e-07,
+        1.5185360440305226e-07,
+        2.724654762106886e-07,
+        4.131714645850827e-08,
+        4.648812558930031e-08,
+        5.517990115515847e-08,
+        5.6833549963716735e-08,
+        4.498141449899638e-08,
+        2.5629890455765748e-08,
+        4.375766777836211e-08,
+        4.81419919827925e-08,
+        4.247546505001047e-08,
+        4.1373635678561525e-08,
+        7.025684476050235e-08,
+        9.24451174069236e-08
+      ],
+      "position_rms_mm": 1.8125617942448195e-06,
+      "position_max_mm": 2.6276459255456727e-06,
+      "angle_rms_deg": 1.237624079008915e-07,
+      "angle_max_deg": 2.724654762106886e-07
+    },
+    "position_sigma_m": 0.002,
+    "angle_sigma_rad": 0.01,
+    "hardware_qualified": false,
+    "calibration_type": "eye_in_hand",
+    "parent_frame": "maver_x4_asm_mount1",
+    "wrist_frame": "maver_x4_asm_mount1",
+    "base_frame": "maver_x4_asm_maver_x4_base_link",
+    "camera_frame": "realsense_230422271628_color_optical",
+    "camera_serial": "230422271628",
+    "optical_axes": "x right, y down, z forward",
+    "translation_units": "metres",
+    "transform_convention": "T_destination_from_source maps homogeneous source points into destination coordinates",
+    "equation": "G_i @ X @ C_i = Y",
+    "variables": {
+      "G_i": "T_base_from_wrist from synchronized measured-joint FK",
+      "C_i": "T_camera_from_board from the same camera color image PnP",
+      "X": "T_wrist_from_camera (constant)",
+      "Y": "T_base_from_board (constant during acquisition)"
+    },
+    "optimizer_substitution": "existing X @ C_i = g_i @ Y solver receives g_i = inverse(G_i)",
+    "T_parent_from_optical": [
+      [
+        3.2076913607100514e-09,
+        0.848048096467347,
+        0.5299192637356284,
+        -0.05794986692826234
+      ],
+      [
+        -1.0,
+        9.03225854632793e-10,
+        4.6077058124091265e-09,
+        -4.755427721208752e-11
+      ],
+      [
+        3.428920148805744e-09,
+        -0.529919263735627,
+        0.8480480964673465,
+        0.054282524323137044
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "T_wrist_from_camera": [
+      [
+        3.2076913607100514e-09,
+        0.848048096467347,
+        0.5299192637356284,
+        -0.05794986692826234
+      ],
+      [
+        -1.0,
+        9.03225854632793e-10,
+        4.6077058124091265e-09,
+        -4.755427721208752e-11
+      ],
+      [
+        3.428920148805744e-09,
+        -0.529919263735627,
+        0.8480480964673465,
+        0.054282524323137044
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "T_base_from_board": [
+      [
+        0.9999999999999999,
+        1.9312199989382464e-08,
+        -6.327350670347676e-10,
+        0.6364999938573606
+      ],
+      [
+        1.9312199991388913e-08,
+        -0.9999999999999999,
+        3.17107794716616e-09,
+        0.16350001269504946
+      ],
+      [
+        -6.327350057942758e-10,
+        -3.1710779593856656e-09,
+        -1.0,
+        0.7199999988334528
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "runtime_camera_base": "T_base_from_camera(q_measured) = FK(base_from_parent, q_measured) @ T_parent_from_optical",
+    "final_robust_weights": {
+      "formula": "1 / sqrt(1 + (scaled_residual / 2)^2)",
+      "order": [
+        "translation_x",
+        "translation_y",
+        "translation_z",
+        "rotation_x",
+        "rotation_y",
+        "rotation_z"
+      ],
+      "values": [
+        [
+          0.9999999999999103,
+          0.9999999999999951,
+          0.9999999999999962,
+          0.9999999999999998,
+          0.9999999999999956,
+          0.9999999999999949
+        ],
+        [
+          1.0,
+          0.999999999999875,
+          0.9999999999999614,
+          0.9999999999999973,
+          1.0,
+          0.9999999999999958
+        ],
+        [
+          1.0,
+          0.9999999999998694,
+          0.9999999999999718,
+          0.9999999999999973,
+          1.0,
+          0.9999999999999958
+        ],
+        [
+          0.9999999999999958,
+          0.9999999999998923,
+          0.9999999999999711,
+          0.9999999999999971,
+          0.9999999999999998,
+          0.999999999999996
+        ],
+        [
+          0.9999999999999931,
+          0.9999999999998985,
+          0.9999999999999905,
+          0.9999999999999978,
+          0.9999999999999991,
+          0.9999999999999938
+        ],
+        [
+          0.9999999999999984,
+          0.9999999999998379,
+          0.9999999999999865,
+          0.9999999999999973,
+          1.0,
+          0.9999999999999927
+        ],
+        [
+          1.0,
+          0.9999999999998339,
+          0.9999999999999891,
+          0.9999999999999976,
+          0.9999999999999998,
+          0.9999999999999936
+        ],
+        [
+          0.999999999999984,
+          0.999999999999821,
+          0.9999999999999793,
+          0.9999999999999971,
+          0.9999999999999998,
+          0.9999999999999878
+        ],
+        [
+          0.999999999999982,
+          0.9999999999999298,
+          0.9999999999999998,
+          0.9999999999999978,
+          0.9999999999999993,
+          0.9999999999999927
+        ],
+        [
+          0.9999999999999929,
+          0.9999999999999876,
+          0.9999999999999967,
+          0.9999999999999976,
+          0.9999999999999998,
+          0.9999999999999987
+        ],
+        [
+          0.9999999999999887,
+          0.9999999999999409,
+          0.9999999999999936,
+          0.9999999999999971,
+          0.9999999999999984,
+          0.9999999999999958
+        ],
+        [
+          0.9999999999999993,
+          0.9999999999998759,
+          0.9999999999999944,
+          0.9999999999999998,
+          0.9999999999999858,
+          0.9999999999999862
+        ],
+        [
+          1.0,
+          0.999999999999934,
+          0.9999999999999909,
+          0.9999999999999993,
+          1.0,
+          1.0
+        ],
+        [
+          0.9999999999999996,
+          0.9999999999999476,
+          0.9999999999999929,
+          0.9999999999999993,
+          1.0,
+          1.0
+        ],
+        [
+          0.9999999999999998,
+          0.9999999999999227,
+          0.9999999999999942,
+          0.9999999999999991,
+          1.0,
+          1.0
+        ],
+        [
+          1.0,
+          0.9999999999999027,
+          0.9999999999999929,
+          0.9999999999999991,
+          1.0,
+          0.9999999999999998
+        ],
+        [
+          0.9999999999999991,
+          0.999999999999925,
+          0.9999999999999722,
+          1.0,
+          1.0,
+          0.9999999999999993
+        ],
+        [
+          1.0,
+          0.999999999999946,
+          0.9999999999999836,
+          1.0,
+          1.0,
+          1.0
+        ],
+        [
+          0.9999999999999998,
+          0.999999999999942,
+          0.9999999999999858,
+          1.0,
+          0.9999999999999993,
+          1.0
+        ],
+        [
+          0.9999999999999993,
+          0.9999999999999492,
+          0.9999999999999818,
+          1.0,
+          0.9999999999999991,
+          1.0
+        ],
+        [
+          1.0,
+          0.9999999999999565,
+          0.9999999999999842,
+          1.0,
+          0.9999999999999993,
+          1.0
+        ],
+        [
+          0.9999999999999998,
+          0.9999999999999201,
+          0.9999999999999858,
+          1.0,
+          0.9999999999999996,
+          1.0
+        ],
+        [
+          1.0,
+          0.9999999999999565,
+          0.9999999999999882,
+          1.0,
+          0.9999999999999982,
+          1.0
+        ],
+        [
+          0.9999999999999998,
+          0.9999999999999643,
+          0.9999999999999907,
+          1.0,
+          0.9999999999999969,
+          1.0
+        ]
+      ],
+      "minimum": 0.999999999999821
+    },
+    "head_extrinsics_used_for_fit": false,
+    "evidence": "paired measured wrist FK and camera board PnP; camera intrinsics are supplied separately",
+    "calibration_status": "candidate_requires_independent_physical_validation",
+    "independent_physical_validation_performed": false,
+    "validation": {
+      "count": 6,
+      "closure": "T_base_from_wrist @ T_wrist_from_camera @ T_camera_from_board = T_base_from_board",
+      "position_mm": [
+        1.7552706729581555e-06,
+        2.7122097293076636e-06,
+        3.784727712930119e-06,
+        1.7590752425410838e-06,
+        1.4422083587694026e-06,
+        1.5434955697479274e-06
+      ],
+      "angle_deg": [
+        1.3993190010611655e-07,
+        2.0440035930760704e-07,
+        2.7800643226676933e-07,
+        5.138199597264344e-08,
+        5.272886063967857e-08,
+        9.119832957849585e-08
+      ],
+      "position_rms_mm": 2.3208443091892284e-06,
+      "position_max_mm": 3.784727712930119e-06,
+      "angle_rms_deg": 1.5936624355368999e-07,
+      "angle_max_deg": 2.7800643226676933e-07
+    },
+    "camera_ground_truth_error": {
+      "translation_mm": 1.3089114335922884e-06,
+      "rotation_deg": 2.7111881104530513e-07
+    },
+    "board_ground_truth_error": {
+      "translation_mm": 1.8525909920819456e-06,
+      "rotation_deg": 1.873572598797908e-07
+    },
+    "passed_ground_truth_recovery": true
+  },
+  "rendered": {
+    "method": "Park seed + joint pseudo-Huber gradient descent with Armijo search",
+    "converged": true,
+    "termination": "objective_tolerance",
+    "iterations": 430,
+    "initial_loss": 0.308592262399511,
+    "final_loss": 0.27241903222509123,
+    "jacobian_singular_values": [
+      3499.290801151416,
+      3414.1148573836913,
+      3367.1322984885396,
+      944.1092531405427,
+      895.6567552394162,
+      684.6670437175821,
+      659.1662081331299,
+      657.9105834292725,
+      335.0907209535876,
+      188.48401176584252,
+      180.33775056517104,
+      74.60741309750881
+    ],
+    "training": {
+      "count": 24,
+      "closure": "T_base_from_wrist @ T_wrist_from_camera @ T_camera_from_board = T_base_from_board",
+      "position_mm": [
+        0.10496940167517713,
+        0.149790983247367,
+        0.06895923195146886,
+        0.08665958841940716,
+        0.03786927723326289,
+        0.062135288434555846,
+        0.11994158928633523,
+        0.05257206117801403,
+        0.4547930442503437,
+        0.2627045570724219,
+        0.14624572928287397,
+        0.10767658243275981,
+        0.04022310962068107,
+        0.14941613159065775,
+        0.04900291600436403,
+        0.012466366381367154,
+        0.14587747590630504,
+        0.08533241355949464,
+        0.059081474067485464,
+        0.08755460460114635,
+        0.06234428242738985,
+        0.23614977690775163,
+        0.13988524991407691,
+        0.06417548621921391
+      ],
+      "angle_deg": [
+        0.04235824340122309,
+        0.06903914329940758,
+        0.07001935815862183,
+        0.029216492855419045,
+        0.05383766956341331,
+        0.04712529424633302,
+        0.08111534542789775,
+        0.0383893656433958,
+        0.12181313169653997,
+        0.11062099320183921,
+        0.09773017612524504,
+        0.03256799082904725,
+        0.09234583337027315,
+        0.05227728125392743,
+        0.055100072432536756,
+        0.05574207161140714,
+        0.08432586739170045,
+        0.0759975199483419,
+        0.1374274361806022,
+        0.04380343809283237,
+        0.04332722256437151,
+        0.10851197429773146,
+        0.01011183092723517,
+        0.08843478355974123
+      ],
+      "position_rms_mm": 0.1481210484302611,
+      "position_max_mm": 0.4547930442503437,
+      "angle_rms_deg": 0.07523502345281897,
+      "angle_max_deg": 0.1374274361806022
+    },
+    "position_sigma_m": 0.002,
+    "angle_sigma_rad": 0.01,
+    "hardware_qualified": false,
+    "calibration_type": "eye_in_hand",
+    "parent_frame": "maver_x4_asm_mount1",
+    "wrist_frame": "maver_x4_asm_mount1",
+    "base_frame": "maver_x4_asm_maver_x4_base_link",
+    "camera_frame": "realsense_230422271628_color_optical",
+    "camera_serial": "230422271628",
+    "optical_axes": "x right, y down, z forward",
+    "translation_units": "metres",
+    "transform_convention": "T_destination_from_source maps homogeneous source points into destination coordinates",
+    "equation": "G_i @ X @ C_i = Y",
+    "variables": {
+      "G_i": "T_base_from_wrist from synchronized measured-joint FK",
+      "C_i": "T_camera_from_board from the same camera color image PnP",
+      "X": "T_wrist_from_camera (constant)",
+      "Y": "T_base_from_board (constant during acquisition)"
+    },
+    "optimizer_substitution": "existing X @ C_i = g_i @ Y solver receives g_i = inverse(G_i)",
+    "T_parent_from_optical": [
+      [
+        -0.0017729290594151,
+        0.8476221210103441,
+        0.5305973960513544,
+        -0.05833308367408023
+      ],
+      [
+        -0.9999979548235519,
+        -0.0020191417434526223,
+        -0.00011582459076138692,
+        0.00019144164302815886
+      ],
+      [
+        0.0009731758660482614,
+        -0.5305965162348384,
+        0.8476239672686129,
+        0.0543249615956843
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "T_wrist_from_camera": [
+      [
+        -0.0017729290594151,
+        0.8476221210103441,
+        0.5305973960513544,
+        -0.05833308367408023
+      ],
+      [
+        -0.9999979548235519,
+        -0.0020191417434526223,
+        -0.00011582459076138692,
+        0.00019144164302815886
+      ],
+      [
+        0.0009731758660482614,
+        -0.5305965162348384,
+        0.8476239672686129,
+        0.0543249615956843
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "T_base_from_board": [
+      [
+        0.9999975651357784,
+        0.001388730612105581,
+        -0.0017149780758351993,
+        0.6362821956252386
+      ],
+      [
+        0.0013857139514604434,
+        -0.9999974929505554,
+        -0.0017589455495980292,
+        0.16351230768283953
+      ],
+      [
+        -0.0017174164778301225,
+        0.0017565647977583136,
+        -0.9999969824758236,
+        0.7202317160506378
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "runtime_camera_base": "T_base_from_camera(q_measured) = FK(base_from_parent, q_measured) @ T_parent_from_optical",
+    "final_robust_weights": {
+      "formula": "1 / sqrt(1 + (scaled_residual / 2)^2)",
+      "order": [
+        "translation_x",
+        "translation_y",
+        "translation_z",
+        "rotation_x",
+        "rotation_y",
+        "rotation_z"
+      ],
+      "values": [
+        [
+          0.9999997466204227,
+          0.9999780731257649,
+          0.9996780060842783,
+          0.9999748281231027,
+          0.9998928603039033,
+          0.9994495958628763
+        ],
+        [
+          0.9997407517253051,
+          0.9999703878462232,
+          0.9995880504535427,
+          0.9993486838288215,
+          0.9988415240235295,
+          0.9999975333963481
+        ],
+        [
+          0.9999833699285825,
+          0.9999888868088979,
+          0.9998791602797825,
+          0.998445613285142,
+          0.9997700629437938,
+          0.9999212303282621
+        ],
+        [
+          0.9998343728329537,
+          0.999934185240804,
+          0.9999968057138365,
+          0.9998493280756066,
+          0.9998411829066182,
+          0.9999845331764273
+        ],
+        [
+          0.999961873927249,
+          0.9999955176475673,
+          0.9999977955756743,
+          0.9997978756707983,
+          0.9991213751405615,
+          0.9999783055657673
+        ],
+        [
+          0.9999999398827463,
+          0.9999706920162781,
+          0.9999087320710899,
+          0.9991994155003306,
+          0.9999561445527243,
+          0.999999789834549
+        ],
+        [
+          0.999997814119184,
+          0.9999895181632298,
+          0.9995633919696992,
+          0.9993309483703856,
+          0.9981855604136828,
+          0.9999837501513427
+        ],
+        [
+          0.9999307559199574,
+          0.9999980377319821,
+          0.9999848444656404,
+          0.9997697625864141,
+          0.9997039123915666,
+          0.9999653780243558
+        ],
+        [
+          0.9998657396654301,
+          0.9999195882480515,
+          0.9938090319499856,
+          0.9977102410962192,
+          0.9966722246338189,
+          0.9999920493103961
+        ],
+        [
+          0.9999896077772972,
+          0.9999909137681462,
+          0.997869628220634,
+          0.9971448180999635,
+          0.998280338599033,
+          0.9999320653009456
+        ],
+        [
+          0.9996817142824761,
+          0.9999722221072884,
+          0.9996780032139266,
+          0.9970470381228753,
+          0.9994101850333851,
+          0.9999196178872932
+        ],
+        [
+          0.9999659475086516,
+          0.9997483419913985,
+          0.9999234958489889,
+          0.9999628432827239,
+          0.9996436623052488,
+          0.9999898124625679
+        ],
+        [
+          0.9999889260559008,
+          0.9999986537685244,
+          0.9999618632143654,
+          0.9993379706060828,
+          0.997664406764574,
+          0.9997594478881099
+        ],
+        [
+          0.9999943727502724,
+          0.9999998580939694,
+          0.9993088245626084,
+          0.9999751208282108,
+          0.9991438599680547,
+          0.9998415419581537
+        ],
+        [
+          0.9999585944192549,
+          0.9999798576885316,
+          0.9999865111649728,
+          0.9998878116367912,
+          0.9995128360126649,
+          0.9994441612807804
+        ],
+        [
+          0.9999999868663336,
+          0.9999978259525673,
+          0.999997330627291,
+          0.9999741048658408,
+          0.9992710401746681,
+          0.9995728018278924
+        ],
+        [
+          0.9999776966173594,
+          0.9999971541140948,
+          0.9993607560621718,
+          0.9979955177011107,
+          0.9995301477803205,
+          0.9997731744359524
+        ],
+        [
+          0.9999436231537823,
+          0.9999999380677137,
+          0.9998289368002113,
+          0.9984619711199014,
+          0.9994453243968093,
+          0.9998975434258484
+        ],
+        [
+          0.9999468334215443,
+          0.9999592232912803,
+          0.9999848684721389,
+          0.9952946448302337,
+          0.997710331617232,
+          0.9998449976358457
+        ],
+        [
+          0.9999999801701223,
+          0.999987961222426,
+          0.9997725799036464,
+          0.9995131386290548,
+          0.9998450013149308,
+          0.9999116611016148
+        ],
+        [
+          0.99999471682993,
+          0.9999708517840431,
+          0.9999129812636006,
+          0.9994534338858697,
+          0.9999223750406676,
+          0.9999098575968544
+        ],
+        [
+          0.999704440920733,
+          0.999930842751099,
+          0.9986249858809765,
+          0.9970294279106515,
+          0.9987272298958649,
+          0.9997756108715314
+        ],
+        [
+          0.9998382874713605,
+          0.9999527566313252,
+          0.9995977449759653,
+          0.9999999997815592,
+          0.9999717149571181,
+          0.999989353050795
+        ],
+        [
+          0.9999996417663573,
+          0.9999892534841296,
+          0.9998824227555702,
+          0.997623308800802,
+          0.9995047090077984,
+          0.9999029584680057
+        ]
+      ],
+      "minimum": 0.9938090319499856
+    },
+    "head_extrinsics_used_for_fit": false,
+    "evidence": "paired measured wrist FK and camera board PnP; camera intrinsics are supplied separately",
+    "calibration_status": "candidate_requires_independent_physical_validation",
+    "independent_physical_validation_performed": false,
+    "validation": {
+      "count": 6,
+      "closure": "T_base_from_wrist @ T_wrist_from_camera @ T_camera_from_board = T_base_from_board",
+      "position_mm": [
+        0.059049064593550644,
+        0.05242357685845246,
+        0.21719006645305206,
+        0.05940280365809625,
+        0.11295864831615776,
+        0.15094489771399913
+      ],
+      "angle_deg": [
+        0.06780353645885018,
+        0.11401294613677138,
+        0.1617821618636327,
+        0.252533771445779,
+        0.06878743588486366,
+        0.10093347828121622
+      ],
+      "position_rms_mm": 0.12414994956612882,
+      "position_max_mm": 0.21719006645305206,
+      "angle_rms_deg": 0.1428649265533541,
+      "angle_max_deg": 0.252533771445779
+    },
+    "camera": {
+      "backend": "mujoco",
+      "serial": "230422271628",
+      "width": 1280,
+      "height": 720,
+      "fps": 30,
+      "simulated_gripper_positions_m": {
+        "calibration_left_jaw_positive": 0.04,
+        "calibration_left_jaw_negative": 0.04
+      },
+      "K": [
+        [
+          651.4862670898438,
+          0.0,
+          643.0418701171875
+        ],
+        [
+          0.0,
+          650.7327880859375,
+          362.6119689941406
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "distortion": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "distortion_model": "none",
+      "frame": "realsense_230422271628_color_optical",
+      "view": "simulated RGB colour optical",
+      "optical_axes": "x right, y down, z forward",
+      "simulation_only": true,
+      "camera_name": "wrist_calibration_view",
+      "expanded_render_size": [
+        1400,
+        800
+      ],
+      "principal_point_mapping": "pixel-centre remap",
+      "mode": "sim",
+      "board": {
+        "type": "ChArUco",
+        "squares_x": 5,
+        "squares_y": 5,
+        "square_length_m": 0.0174,
+        "marker_length_m": 0.0116,
+        "dictionary": "DICT_4X4_50",
+        "marker_ids": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        "marker_border_bits": 1,
+        "legacy_pattern": false,
+        "pattern_size_mm": [
+          87,
+          87
+        ],
+        "mounting_board_size_mm": [
+          100,
+          100
+        ],
+        "white_margin_mm": 4.833333333333333,
+        "opencv_generator_version": "5.0.0",
+        "nominal_pattern_size_mm": [
+          90,
+          90
+        ],
+        "measured_print_scale": 0.9666666666666667,
+        "measurement_note": "User measured the printed patterned area (excluding white border) as 87 x 87 mm. Square size is 87/5 mm; marker size and white margin are inferred from uniform scaling of the original 90 mm pattern. The rigid backing remains 100 x 100 mm. Measurement uncertainty has not been quantified."
+      },
+      "board_config": "/home/ziwang/projects/agentic-mobile-manipulator/third_party/hexfellow-deploy/calibration/config/camera/charuco_87mm.json",
+      "ipc_image_name": "left.png (native colour, historical IPC name)",
+      "timing_policy": {
+        "max_uncertainty_s": 0.005,
+        "max_frame_age_s": 0.15,
+        "sdk_clock_mapping_allowance_s": 0.002,
+        "hardware_trigger_synchronized": false
+      },
+      "camera_frame": "realsense_230422271628_color_optical"
+    },
+    "metadata": {
+      "mount_frame": "maver_x4_asm_mount1",
+      "hand_frame": "maver_x4_asm_mount1",
+      "camera_frame": "realsense_230422271628_color_optical",
+      "board": {
+        "type": "ChArUco",
+        "squares_x": 5,
+        "squares_y": 5,
+        "square_length_m": 0.0174,
+        "marker_length_m": 0.0116,
+        "dictionary": "DICT_4X4_50",
+        "marker_ids": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        "marker_border_bits": 1,
+        "legacy_pattern": false,
+        "pattern_size_mm": [
+          87,
+          87
+        ],
+        "mounting_board_size_mm": [
+          100,
+          100
+        ],
+        "white_margin_mm": 4.833333333333333,
+        "opencv_generator_version": "5.0.0",
+        "nominal_pattern_size_mm": [
+          90,
+          90
+        ],
+        "measured_print_scale": 0.9666666666666667,
+        "measurement_note": "User measured the printed patterned area (excluding white border) as 87 x 87 mm. Square size is 87/5 mm; marker size and white margin are inferred from uniform scaling of the original 90 mm pattern. The rigid backing remains 100 x 100 mm. Measurement uncertainty has not been quantified."
+      },
+      "camera": {
+        "backend": "mujoco",
+        "serial": "230422271628",
+        "width": 1280,
+        "height": 720,
+        "fps": 30,
+        "simulated_gripper_positions_m": {
+          "calibration_left_jaw_positive": 0.04,
+          "calibration_left_jaw_negative": 0.04
+        },
+        "K": [
+          [
+            651.4862670898438,
+            0.0,
+            643.0418701171875
+          ],
+          [
+            0.0,
+            650.7327880859375,
+            362.6119689941406
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "distortion": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "distortion_model": "none",
+        "frame": "realsense_230422271628_color_optical",
+        "view": "simulated RGB colour optical",
+        "optical_axes": "x right, y down, z forward",
+        "simulation_only": true,
+        "camera_name": "wrist_calibration_view",
+        "expanded_render_size": [
+          1400,
+          800
+        ],
+        "principal_point_mapping": "pixel-centre remap",
+        "mode": "sim",
+        "board": {
+          "type": "ChArUco",
+          "squares_x": 5,
+          "squares_y": 5,
+          "square_length_m": 0.0174,
+          "marker_length_m": 0.0116,
+          "dictionary": "DICT_4X4_50",
+          "marker_ids": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "marker_border_bits": 1,
+          "legacy_pattern": false,
+          "pattern_size_mm": [
+            87,
+            87
+          ],
+          "mounting_board_size_mm": [
+            100,
+            100
+          ],
+          "white_margin_mm": 4.833333333333333,
+          "opencv_generator_version": "5.0.0",
+          "nominal_pattern_size_mm": [
+            90,
+            90
+          ],
+          "measured_print_scale": 0.9666666666666667,
+          "measurement_note": "User measured the printed patterned area (excluding white border) as 87 x 87 mm. Square size is 87/5 mm; marker size and white margin are inferred from uniform scaling of the original 90 mm pattern. The rigid backing remains 100 x 100 mm. Measurement uncertainty has not been quantified."
+        },
+        "board_config": "/home/ziwang/projects/agentic-mobile-manipulator/third_party/hexfellow-deploy/calibration/config/camera/charuco_87mm.json",
+        "ipc_image_name": "left.png (native colour, historical IPC name)",
+        "timing_policy": {
+          "max_uncertainty_s": 0.005,
+          "max_frame_age_s": 0.15,
+          "sdk_clock_mapping_allowance_s": 0.002,
+          "hardware_trigger_synchronized": false
+        }
+      },
+      "board_attachment_assumption": {
+        "stationary_on_table": true,
+        "not_attached_to_hand": true
+      },
+      "simulation_only": true,
+      "ineligible": [],
+      "purpose": "left_wrist_eye_in_hand",
+      "capture_side": "left",
+      "parent_frame": "maver_x4_asm_mount1",
+      "base_frame": "maver_x4_asm_maver_x4_base_link",
+      "intrinsics": {
+        "matrix": [
+          [
+            651.4862670898438,
+            0.0,
+            643.0418701171875
+          ],
+          [
+            0.0,
+            650.7327880859375,
+            362.6119689941406
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "distortion": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "mapping_sha256": "b4ad9746aeccf7b6cef5cd823121129f90b637e046b92456a22cdb18f4bd442e",
+      "equation": "T_base_from_wrist_i @ T_wrist_from_camera @ T_camera_from_board_i = T_base_from_board"
+    },
+    "training_pose_ids": [
+      1,
+      2,
+      3,
+      4,
+      6,
+      7,
+      8,
+      9,
+      11,
+      12,
+      13,
+      14,
+      16,
+      17,
+      18,
+      19,
+      21,
+      22,
+      23,
+      24,
+      26,
+      27,
+      28,
+      29
+    ],
+    "validation_pose_ids": [
+      5,
+      10,
+      15,
+      20,
+      25,
+      30
+    ],
+    "excluded_poses": [],
+    "eligible_observation_count": 30,
+    "total_observation_count": 30,
+    "holdout_policy": "every fifth eligible observation, never used to fit either matrix",
+    "training_reprojection": {
+      "available": true,
+      "count": 384,
+      "per_pose": [
+        {
+          "pose_id": 1,
+          "available": true,
+          "count": 16,
+          "rms_px": 0.18273377231493093,
+          "max_px": 0.30336638326268506
+        },
+        {
+          "pose_id": 2,
+          "available": true,
+          "count": 16,
+          "rms_px": 0.1593480211569044,
+          "max_px": 0.24417622957116114
+        },
+        {
+          "pose_id": 3,
+          "available": true,
+          "count": 16,
+          "rms_px": 0.16641348199433806,
+          "max_px": 0.2700114980186927
+        },
+        {
+          "pose_id": 4,
+          "available": true,
+          "count": 16,
+          "rms_px": 0.1884006457601076,
+          "max_px": 0.33656751462095785
+        },
+        {
+          "pose_id": 6,
+          "available": true,
+          "count": 16,
+          "rms_px": 0.08983020531721914,
+          "max_px": 0.17664502536328616
+        },
+        {
+          "pose_id": 7,
+          "available": true,
+          "count": 16,
+          "rms_px": 0.16473039806746356,
+          "max_px": 0.40225809336416735
+        },
+        {
+          "pose_id": 8,
+          "available": true,
+          "count": 16,
+          "rms_px": 0.15844172996227981,
+          "max_px": 0.2505647412307835
+        },
+        {
+          "pose_id": 9,
+          "available": true,
+          "count": 16,
+          "rms_px": 0.09622287703595456,
+          "max_px": 0.13850579795079382
+        },
+        {
+          "pose_id": 11,
+          "available": true,
+          "count": 16,
+          "rms_px": 0.23243816702696093,
+          "max_px": 0.3819339263546311
+        },
+        {
+          "pose_id": 12,
+          "available": true,
+          "count": 16,
+          "rms_px": 0.2123564230905387,
+          "max_px": 0.3426537661433945
+        },
+        {
+          "pose_id": 13,
+          "available": true,
+          "count": 16,
+          "rms_px": 0.18675590891981134,
+          "max_px": 0.30049206473820267
+        },
+        {
+          "pose_id": 14,
+          "available": true,
+          "count": 16,
+          "rms_px": 0.21154252926228537,
+          "max_px": 0.2841861475368565
+        },
+        {
+          "pose_id": 16,
+          "available": true,
+          "count": 16,
+          "rms_px": 0.08427336678112814,
+          "max_px": 0.1573251542828003
+        },
+        {
+          "pose_id": 17,
+          "available": true,
+          "count": 16,
+          "rms_px": 0.20301868844595147,
+          "max_px": 0.3682199896151841
+        },
+        {
+          "pose_id": 18,
+          "available": true,
+          "count": 16,
+          "rms_px": 0.1763768529688377,
+          "max_px": 0.27171741340809535
+        },
+        {
+          "pose_id": 19,
+          "available": true,
+          "count": 16,
+          "rms_px": 0.10548841489484183,
+          "max_px": 0.1862406343921975
+        },
+        {
+          "pose_id": 21,
+          "available": true,
+          "count": 16,
+          "rms_px": 0.1139646309043902,
+          "max_px": 0.2251528471510355
+        },
+        {
+          "pose_id": 22,
+          "available": true,
+          "count": 16,
+          "rms_px": 0.1168088271351296,
+          "max_px": 0.19362002468654763
+        },
+        {
+          "pose_id": 23,
+          "available": true,
+          "count": 16,
+          "rms_px": 0.12661293517995315,
+          "max_px": 0.20003041613184358
+        },
+        {
+          "pose_id": 24,
+          "available": true,
+          "count": 16,
+          "rms_px": 0.07810806131999558,
+          "max_px": 0.14905621784196948
+        },
+        {
+          "pose_id": 26,
+          "available": true,
+          "count": 16,
+          "rms_px": 0.0960418470395182,
+          "max_px": 0.16543671401730287
+        },
+        {
+          "pose_id": 27,
+          "available": true,
+          "count": 16,
+          "rms_px": 0.1976451615547373,
+          "max_px": 0.3089558848947962
+        },
+        {
+          "pose_id": 28,
+          "available": true,
+          "count": 16,
+          "rms_px": 0.13421923351046414,
+          "max_px": 0.24426471364080904
+        },
+        {
+          "pose_id": 29,
+          "available": true,
+          "count": 16,
+          "rms_px": 0.10458369934157985,
+          "max_px": 0.17672729253706207
+        }
+      ],
+      "rms_px": 0.15637161421040593,
+      "max_px": 0.40225809336416735,
+      "uses_stored_pnp_transform_for_projection": false
+    },
+    "validation_reprojection": {
+      "available": true,
+      "count": 96,
+      "per_pose": [
+        {
+          "pose_id": 5,
+          "available": true,
+          "count": 16,
+          "rms_px": 0.14454915860716888,
+          "max_px": 0.21311551110192897
+        },
+        {
+          "pose_id": 10,
+          "available": true,
+          "count": 16,
+          "rms_px": 0.10109758343267052,
+          "max_px": 0.1689849105181715
+        },
+        {
+          "pose_id": 15,
+          "available": true,
+          "count": 16,
+          "rms_px": 0.24098218238637997,
+          "max_px": 0.3582813375590987
+        },
+        {
+          "pose_id": 20,
+          "available": true,
+          "count": 16,
+          "rms_px": 0.1432274870222018,
+          "max_px": 0.23958731346381157
+        },
+        {
+          "pose_id": 25,
+          "available": true,
+          "count": 16,
+          "rms_px": 0.12542414791101156,
+          "max_px": 0.21839843304508558
+        },
+        {
+          "pose_id": 30,
+          "available": true,
+          "count": 16,
+          "rms_px": 0.135988724024363,
+          "max_px": 0.21904602494904696
+        }
+      ],
+      "rms_px": 0.1548794455037753,
+      "max_px": 0.3582813375590987,
+      "uses_stored_pnp_transform_for_projection": false
+    },
+    "hardware_commands_sent": 0,
+    "active_configuration_changed": false,
+    "camera_ground_truth_error": {
+      "translation_mm": 0.43047093935333464,
+      "rotation_deg": 0.12461389817567102
+    },
+    "board_ground_truth_error": {
+      "translation_mm": 0.3182448144788022,
+      "rotation_deg": 0.16164510186224795
+    },
+    "passed_ground_truth_recovery": true
+  },
+  "passed": true,
+  "recorded_measured_fk_passed": true,
+  "independent_fk_crosscheck_passed": true
+}

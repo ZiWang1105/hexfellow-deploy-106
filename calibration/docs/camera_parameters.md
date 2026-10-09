@@ -1,10 +1,15 @@
 # Saved robot camera parameters
 
-The versioned parameter snapshot is
-[`camera_parameters_20261006.json`](../config/camera/camera_parameters_20261006.json).
-It records the head and right-wrist estimates, SDK intrinsics, physical board
+The current parameter snapshot is
+[`camera_parameters_20261008.json`](../config/camera/camera_parameters_20261008.json).
+It records the head and both wrist estimates, SDK intrinsics, physical board
 scale, frame identities, measured-joint mapping, provenance and validation
 numbers. [`cameras.json`](../config/camera/cameras.json) points to this snapshot.
+The [latest wrist results](wrist_parameters_20261008.md) document both measured
+fits, their numerical reproduction and their remaining errors. The detailed
+2026-10-06 results below describe the retained
+[`camera_parameters_20261006.json`](../config/camera/camera_parameters_20261006.json)
+snapshot; its left-camera `null` entries are historical, not the current export.
 All paths inside the snapshot are relative to the repository's `calibration/`
 directory. The original fit reports retain their original local provenance paths;
 those paths are not required to load the matrices.
@@ -12,15 +17,16 @@ those paths are not required to load the matrices.
 | Camera | Serial | Fixed transform: source → destination | Saved estimate |
 | --- | --- | --- | --- |
 | Head ZED 2i, short 40° mount | `32701991` | Rectified LEFT optical → moving lift `maver_x4_asm_URDF_link_1` | [Head landmark fit](../config/camera/zed_landmark_candidate_20260930.json); [coarse board fit](../config/camera/zed_candidate_20260930.json) retained separately |
-| Right D435i, outside 33° mount | `243222074562` | Native RGB color optical → wrist/flange `maver_x4_asm_mount2` | [Right wrist fit](../config/camera/realsense_d435i_right_candidate_20261006.json) |
-| Left D405 | `230422271628` | Color optical → wrist/flange `maver_x4_asm_mount1` | Uncalibrated: matrix and intrinsics are explicitly `null` |
+| Right D435i, outside 33° mount | `243222074562` | Native RGB color optical → wrist/flange `maver_x4_asm_mount2` | [Latest right wrist fit](../config/camera/realsense_d435i_right_candidate_20261008.json) |
+| Left D405, outside 32° mount | `230422271628` | Color optical → wrist/flange `maver_x4_asm_mount1` | [Left wrist fit](../config/camera/realsense_d405_left_candidate_20261008.json) |
 
 The head estimate remains provisional; the right fit is a candidate. Saving
 parameters does not change the production camera selection, convert validation
 annotations into runtime interlocks, or label CAD geometry as a physical fit.
-The production wrist observation currently remains uncalibrated RGB. No left
-D405 fit was found, and neither its mount nor its intrinsics can be inferred from
-the right D435i.
+The production right-wrist observation separately selects its configured candidate;
+this parameter export does not switch that runtime configuration. Both new wrist
+fits remain candidates. Neither the left mount nor its intrinsics are inferred
+from the right D435i.
 
 ## Transform direction, units and TCP
 
@@ -218,8 +224,8 @@ from pathlib import Path
 import numpy as np
 
 root = Path('calibration')
-parameters = json.loads((root / 'config/camera/camera_parameters_20261006.json').read_text())
-camera = parameters['cameras']['right']  # 'head' also has a saved estimate
+parameters = json.loads((root / 'config/camera/camera_parameters_20261008.json').read_text())
+camera = parameters['cameras']['right']  # 'head' and 'left' also have saved estimates
 T_wrist_from_camera = np.asarray(camera['T_parent_from_optical'])
 K = np.asarray(camera['intrinsics']['K'])
 # Use your measured-joint URDF FK; this is not a constant world/base pose:

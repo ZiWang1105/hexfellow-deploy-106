@@ -140,9 +140,29 @@ def preflight_failure_detail(report):
             values=metrics.get(name.removesuffix('_p99_ms')+'_ms')
             if isinstance(values,(list,tuple)) and len(values)>2 and values[2]>limit:
                 exceeded.append(f"{name}={values[2]:.2f} ms (limit {limit:g} ms)")
-        reasons.append('timing acceptance limits exceeded: '+(', '.join(exceeded) if exceeded
-                       else f"{limits}; measured values unavailable or other timing failures"))
-    if report.get('error'):
+        if exceeded:
+            reasons.append('timing acceptance limits exceeded: '+', '.join(exceeded))
+        else:
+            failures=report.get('audit_cycle_failures',[])
+            if failures:
+                reasons.append(f"{report.get('failed_cycles',len(failures))}/{report.get('attempted_cycles','unknown')} audit cycles failed")
+                for failure in failures[:3]:
+                    reason=f"cycle {failure['sequence']}: {failure['error']}"
+                    if failure.get('lift_height_mm') is not None:
+                        reason+=f"; measured lift {failure['lift_height_mm']:.6f} mm, speed {failure['lift_speed_mm_s']:.6f} mm/s"
+                    reasons.append(reason)
+            else:
+                reasons.append(f"Audit incomplete: {report.get('cycles','unknown')}/{report.get('attempted_cycles','unknown')} cycles completed, "
+                    f"{report.get('failed_cycles','unknown')} failed, {report.get('skipped_slots','unknown')} skipped; "
+                    'full latency coverage is required')
+            observed=[]
+            for name,limit in limits.items():
+                values=metrics.get(name.removesuffix('_p99_ms')+'_ms')
+                if isinstance(values,(list,tuple)) and len(values)>2:
+                    observed.append(f"{name}={values[2]:.2f} ms (limit {limit:g} ms)")
+            if observed:reasons.append('Available latency percentiles: '+', '.join(observed))
+    if report.get('error') and not (report.get('audit_cycle_failures') and
+            report['error']=='audit performance/deadline targets not met; inspect all-cycle trace'):
         reasons.append(str(report['error']))
     return '; '.join(dict.fromkeys(reasons)) or 'Audit acceptance conditions were not met; inspect the saved report.'
 
@@ -176,21 +196,93 @@ def retryable_feedback_audit(report):
                                     and e.get('recovered_at') is not None for e in events))
 
 
+def retryable_scheduling_audit(report):
+    """A denied startup grant may retry once after the broker burst window.
+
+    This is a new read-only qualification after verified shutdown, not a
+    fallback to ordinary priority or a retry of an actuating session. D-Bus
+    access-denied alone does not establish the denial's cause; a persistent
+    permission denial still blocks startup after the single retry.
+    """
+    gateway=report.get('gateway',{})
+    fault=str(gateway.get('fault') or '')
+    return (report.get('mode')=='audit' and report.get('motion_commands_sent')==0
+            and report.get('cycles')==0 and report.get('attempted_cycles')==0
+            and report.get('failed_cycles')==0
+            and gateway.get('kind')=='closed' and gateway.get('motion_commands_sent')==0
+            and not gateway.get('stop_failures') and not report.get('close_error')
+            and 'RealtimeKit priority denied:' in fault
+            and 'Access denied' in fault)
+
+
+def audit_cycle_failures(directory):
+    """Summarize the closed all-cycle trace; never change its acceptance verdict."""
+    failures=[]
+    trace=Path(directory)/'trace.jsonl'
+    if not trace.is_file():return failures
+    for line in trace.open():
+        row=json.loads(line)
+        timing=row.get('timing',{})
+        if row.get('kind')!='timing' or timing.get('passed') is not False:continue
+        state=row.get('state',{});q=state.get('q',[]);v=state.get('v',[])
+        failures.append(dict(sequence=timing.get('sequence'),error=timing.get('error','unknown audit failure'),
+            lift_height_mm=1000*q[3] if len(q)>3 else None,
+            lift_speed_mm_s=1000*v[3] if len(v)>3 else None,
+            compute_ms=timing.get('compute_ms'),slot_remaining_ms=timing.get('slot_remaining_ms')))
+    return failures
+
+
 def startup_audit(run,accepted,output,attempts=3):
     """Keep every failed audit; acquisition still requires a wholly passing audit."""
-    history=[]
+    history=[];scheduling_retried=False
     for attempt in range(1,attempts+1):
         directory=output/('audit' if attempt==1 else f'audit-retry-{attempt}')
         print(f'Read-only startup audit {attempt}/{attempts} (30 seconds; no motion).',flush=True)
         report=run(directory)
+        failures=audit_cycle_failures(directory)
+        if failures:
+            (directory/'cycle-failures.json').write_text(json.dumps(failures,indent=2)+'\n')
+            report=dict(report,audit_cycle_failures=failures)
         passed=accepted(report)
         history.append(dict(attempt=attempt,passed=passed,report=str(directory/'summary.json'),
                             reason=None if passed else preflight_failure_detail(report)))
         (output/'startup-audits.json').write_text(json.dumps(history,indent=2))
-        if passed or not retryable_feedback_audit(report) or attempt==attempts:
+        scheduling_retry=(not scheduling_retried and retryable_scheduling_audit(report))
+        if passed or attempt==attempts or not (scheduling_retry or retryable_feedback_audit(report)):
             return report,directory/'summary.json'
+        if scheduling_retry:
+            scheduling_retried=True
+            # Ubuntu's RealtimeKit defaults to 25 actions per 20-second burst.
+            # A fresh full window also covers prior manual restarts. No robot
+            # ownership exists here and no control deadline is extended.
+            history[-1]['retry_reason']='RealtimeKit startup grant denied; bounded cooldown'
+            history[-1]['cooldown_s']=21.
+            (output/'startup-audits.json').write_text(json.dumps(history,indent=2))
+            print('RealtimeKit denied a startup priority request. Waiting 21 seconds for its burst '
+                  'window, then retrying the full read-only audit once; no robot control acquired.',flush=True)
+            time.sleep(21.)
+            continue
         print('Feedback timing interrupted this attempt. Repeating the full audit with unchanged limits; '
               'robot control remains unacquired.',flush=True)
+
+
+def validate_wrist_camera_profile(plan, metadata):
+    """Check the actual profile before starting the robot session.
+
+    Live K still comes from the SDK. The half-pixel allowance detects changed
+    stream geometry without treating float serialization as a new calibration.
+    """
+    import numpy as np
+    if str(metadata['serial']) != str(plan['serial']):
+        raise ValueError('Connected RealSense serial differs from the wrist plan')
+    if metadata['frame'] != plan['camera_frame']:
+        raise ValueError('Connected camera optical frame differs from the wrist plan')
+    if (metadata['width'],metadata['height'],metadata['fps']) != (plan['width'],plan['height'],plan.get('fps',30)):
+        raise ValueError('Connected camera resolution/FPS differs from the wrist plan; revalidate the plan')
+    actual=np.asarray(metadata['K'],dtype=float)
+    expected=np.asarray(plan['K'],dtype=float)
+    if actual.shape != (3,3) or not np.isfinite(actual).all() or not np.allclose(actual,expected,rtol=0,atol=.5):
+        raise ValueError('Connected camera intrinsics differ from the wrist plan; revalidate the plan')
 
 
 def main():
@@ -211,7 +303,7 @@ def main():
     p.add_argument('--attachment',type=Path,default=ROOT/'config/camera/board_right_centered.json')
     p.add_argument('--candidates',type=Path,default=ROOT/'config/camera/right_centered_candidates.json',help='Previously simulated candidate pool for this attachment')
     p.add_argument('--validation-plan',type=Path,help='Run three left-hand RGB/extrinsic validation poses instead of board calibration')
-    p.add_argument('--wrist-plan',type=Path,help='Simulated stationary-board, right-wrist RealSense eye-in-hand route')
+    p.add_argument('--wrist-plan',type=Path,help='Simulated stationary-board, left/right wrist RealSense eye-in-hand route')
     a=p.parse_args()
     if a.wrist_plan and a.validation_plan:p.error('Select wrist calibration or head-camera validation')
     if a.output is None:
@@ -274,7 +366,7 @@ def main():
         if not np.allclose(session.pose_vector(default_pose,np.zeros(3)),validation['initial_q'],rtol=0,atol=1e-10):
             raise ValueError('Default pose differs from the simulated validation start')
     pose_count=len(wrist['poses']) if wrist else 3 if validation else 30
-    capture_side='left' if validation else 'right'
+    capture_side=wrist.get('capture_side','right') if wrist else 'left' if validation else 'right'
     a.output.mkdir(parents=True,exist_ok=False)
     if wrist:checker=WristPathChecker(a.output/'geometry',a.wrist_plan.resolve())
     elif validation:checker=LeftPathChecker(a.output/'geometry',a.validation_plan.resolve())
@@ -298,6 +390,7 @@ def main():
         (a.output/'wrist-plan.json').write_text(json.dumps(wrist,indent=2))
         (a.output/'wrist-code.json').write_text(json.dumps({str(f.relative_to(ROOT)):hashlib.sha256(f.read_bytes()).hexdigest()
             for f in [Path(__file__),ROOT/'tools/camera/wrist_calibration_geometry.py',
+                      ROOT/'tools/camera/convex_clearance.py',
                       ROOT/'tools/camera/wrist_camera_worker.py',ROOT/'tools/camera/solve_wrist_calibration.py',
                       ROOT/'src/policy_sim/calibration/wrist_handeye.py']},indent=2))
     robot_lock=None;camproc=None;server=None;log=None
@@ -313,7 +406,9 @@ def main():
     def status():
         row=source.last_display
         lift=lift_preparation_status(row['q'][3]) if row else None
-        return dict(lift=lift,mode=a.mode,task='wrist_calibration' if wrist else 'left_hand_validation' if validation else 'calibration',pose_count=pose_count,
+        return dict(lift=lift,mode=a.mode,capture_side=capture_side,
+            camera_model=('RealSense D405' if capture_side=='left' else 'RealSense D435i') if wrist else 'ZED 2i',
+            camera_serial=wrist['serial'] if wrist else None,task='wrist_calibration' if wrist else 'left_hand_validation' if validation else 'calibration',pose_count=pose_count,
             phase=(source.last_display or {}).get('phase','starting'),
             pose=source.arrived_pose,target_pose=source.target_pose,captured=sorted(captured),ineligible=ineligible,attempted=sorted(set(captured)|set(ineligible)),
             message=fault or source.message,revision=revision,busy=busy or source.pending_command is not None,
@@ -337,7 +432,7 @@ def main():
                 extrinsics_file=str(resolve(validation['extrinsics_file'])),extrinsics_sha256=validation['extrinsics_sha256'],
                 board_attachment_assumption={'source':'fitted candidate','not_used_for_rgb_eligibility':True})
         if wrist:
-            value.update(purpose='right_wrist_eye_in_hand',mount_frame=wrist['parent_frame'],
+            value.update(purpose=f'{capture_side}_wrist_eye_in_hand',capture_side=capture_side,mount_frame=wrist['parent_frame'],
                 parent_frame=wrist['parent_frame'],hand_frame=wrist['parent_frame'],
                 camera_frame=meta['frame'],base_frame=BASE_FRAME,
                 board_attachment_assumption={'stationary_on_table':True,'not_attached_to_hand':True},
@@ -724,7 +819,9 @@ def main():
         env['MUJOCO_GL']='egl'
         log=(a.output/'camera.log').open('w')
         camera_command=[str(python),str(Path(__file__).parent/('wrist_camera_worker.py' if wrist else 'calibration_camera_worker.py')),'--mode',a.mode,'--directory',str(camera_dir),'--scene',str(checker.study.scene)]
-        if wrist:camera_command.extend(['--serial',str(wrist['serial'])])
+        if wrist:
+            camera_command.extend(['--serial',str(wrist['serial'])])
+            if a.mode=='sim':camera_command.extend(['--simulation-intrinsics',str(a.wrist_plan.resolve())])
         if validation:camera_command.extend(['--validation-plan',str(a.validation_plan.resolve())])
         camproc=subprocess.Popen(camera_command,env=env,stdout=log,stderr=subprocess.STDOUT)
         deadline=time.monotonic()+30
@@ -733,8 +830,7 @@ def main():
             time.sleep(.1)
         if validation and json.loads((camera_dir/'ready.json').read_text())['serial']!=validation['intrinsics']['serial']:
             raise RuntimeError('Connected camera serial differs from the calibrated camera')
-        if wrist and str(json.loads((camera_dir/'ready.json').read_text())['serial'])!=str(wrist['serial']):
-            raise RuntimeError('Connected RealSense serial differs from the wrist plan')
+        if wrist:validate_wrist_camera_profile(wrist,json.loads((camera_dir/'ready.json').read_text()))
         server=ThreadingHTTPServer(('127.0.0.1',a.port),Handler)
         threading.Thread(target=server.serve_forever,daemon=True).start()
         threading.Thread(target=worker,daemon=True).start()

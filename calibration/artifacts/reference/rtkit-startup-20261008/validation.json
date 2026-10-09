@@ -1,0 +1,94 @@
+{
+  "passed": true,
+  "cause": "Daemon log explicitly reported Reached burst limit for user 1000 at 2026-10-08 20:18:37",
+  "failed_audit": "calibration/runs/wrist-calibration/20261009T031835.850384Z/audit/summary.json",
+  "broker_default_actions_per_burst": 25,
+  "broker_default_burst_s": 20,
+  "startup_cooldown_s": 21,
+  "maximum_scheduling_retries": 1,
+  "calibration_tests_passed": 220,
+  "read_only_probe": {
+    "passed": true,
+    "cycles": 1500,
+    "attempted_cycles": 1500,
+    "failed_cycles": 0,
+    "skipped_slots": 0,
+    "motion_commands_sent": 0,
+    "performance_passed": true,
+    "gateway_observed_feedback_clean": true,
+    "timing_ms_p50_p95_p99_max": {
+      "compute_ms": [
+        2.9157220269553363,
+        2.9838000773452222,
+        3.172208602190949,
+        4.360696009825915
+      ],
+      "cycle_to_udp_ms": [
+        4.268263524863869,
+        4.442992643453181,
+        5.9087696560891345,
+        6.463453988544643
+      ],
+      "feedback_wait_ms": [
+        0.07652802742086351,
+        0.08278458844870329,
+        1.522409922326913,
+        2.2190960007719696
+      ],
+      "mailbox_read_ms": [
+        0.04864600487053394,
+        0.054522507707588375,
+        0.05773173936177045,
+        0.07056200411170721
+      ],
+      "preparation_ms": [
+        0.7251340139191598,
+        0.7587385218357667,
+        0.8477640367345884,
+        1.0322779999114573
+      ],
+      "remaining_budget_ms": [
+        19.190175516996533,
+        19.214721067692153,
+        19.21808627259452,
+        19.2242200137116
+      ],
+      "slot_remaining_ms": [
+        16.222698497585952,
+        16.262404833105393,
+        16.275184850092046,
+        16.284843033645302
+      ],
+      "source_age_ms": [
+        3.4247974981553853,
+        5.791973543819025,
+        9.268420968437567,
+        9.974522981792688
+      ],
+      "source_to_udp_ms": [
+        6.842246511951089,
+        9.236450379830769,
+        12.662918408750556,
+        13.3707569912076
+      ],
+      "theta_age_ms": [
+        2.3789789993315935,
+        3.7964536430081353,
+        3.9700731734046704,
+        5.775347992312163
+      ]
+    },
+    "performance_acceptance_limits": {
+      "cycle_to_udp_p99_ms": 8.0,
+      "source_to_udp_p99_ms": 15.0
+    }
+  },
+  "probe_report": "calibration/runs/rtkit-startup-20261008/readonly-probe/audit/summary.json",
+  "physical_motion_validated": false,
+  "upstream_controller_changed": false,
+  "system_configuration_changed": false,
+  "code_sha256": {
+    "calibration/tools/camera/calibrate_robot.py": "f8ca8b66b4d6071995741ad6007b98bfa98c2dad0f67851a8fceab61aa04f20c",
+    "calibration/tests/calibration/test_startup_retry.py": "e63d8314d6b0b8e334d25a38237befe17a38ca437307adbf443c188e7986d6a6"
+  }
+}

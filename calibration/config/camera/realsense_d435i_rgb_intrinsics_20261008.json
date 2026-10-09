@@ -1,0 +1,58 @@
+{
+  "backend": "realsense",
+  "serial": "243222074562",
+  "device": "RealSense D435I",
+  "firmware": "5.13.0.55",
+  "usb": "3.2",
+  "width": 1280,
+  "height": 720,
+  "fps": 30,
+  "K": [
+    [
+      909.8963623046875,
+      0.0,
+      643.9840698242188
+    ],
+    [
+      0.0,
+      909.7846069335938,
+      373.11004638671875
+    ],
+    [
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "distortion": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "distortion_model": "none",
+  "native_distortion": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "native_distortion_model": "distortion.inverse_brown_conrady",
+  "corner_processing": "native zero-distortion pixels",
+  "frame": "realsense_243222074562_color_optical",
+  "view": "native RGB colour optical",
+  "pixel_format": "BGR8",
+  "optical_axes": "x right, y down, z forward",
+  "processing": "native SDK RGB; no image smoothing, depth filters, or alignment",
+  "sensor_options": [
+    {
+      "sensor": "RGB Camera",
+      "global_time_enabled": 1.0,
+      "frames_queue_size": 1.0
+    }
+  ],
+  "started_utc": "2026-10-08T23:40:42.422906+00:00",
+  "mode": "live"
+}

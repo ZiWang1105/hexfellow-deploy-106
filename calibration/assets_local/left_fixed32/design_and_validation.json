@@ -1,0 +1,285 @@
+{
+  "revision": "D405_LEFT_V1_FIXED32",
+  "units": "mm",
+  "parent_link": "robot_base",
+  "same_GP80_interface_not_mirrored": true,
+  "camera_transform_mm": [
+    [
+      0.848048096156426,
+      0.0,
+      -0.5299192642332049,
+      68.12431777209397
+    ],
+    [
+      0.0,
+      1.0,
+      0.0,
+      9.0
+    ],
+    [
+      0.5299192642332049,
+      0.0,
+      0.848048096156426,
+      38.0
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "camera_frame": "X up, Y right viewed from behind, Z forward; rear face center origin",
+  "fixed_pitch_deg": 32.0,
+  "camera_size_mm": [
+    42,
+    42,
+    23
+  ],
+  "camera_holes_local_mm": [
+    [
+      0,
+      -10,
+      0
+    ],
+    [
+      0,
+      10,
+      0
+    ]
+  ],
+  "camera_plate_thickness_mm": 5,
+  "camera_maximum_vendor_insertion_mm": 4,
+  "camera_nominal_screw_insertion_mm": 2.5,
+  "hardware": {
+    "M3x25_anchors": 2,
+    "M3x8_camera": 2,
+    "OD7_ID3p2_thickness0p5_washers": 4
+  },
+  "anchor_holes_mm": [
+    [
+      26.5,
+      -7,
+      8
+    ],
+    [
+      26.5,
+      7,
+      8
+    ]
+  ],
+  "anchor_under_head_X_mm": 43.5,
+  "anchor_nominal_insertion_mm": 8,
+  "factory_screw_access": {
+    "diameter_mm": 6.8,
+    "type": "through scallops/open edge notches",
+    "axes": [
+      {
+        "part": "part_06",
+        "group": "corner",
+        "center_XY_mm": [
+          -18.03122329711914,
+          18.03122329711914
+        ],
+        "head_back_Z_mm": 6.0,
+        "head_diameter_mm": 5.5,
+        "head_height_mm": 3.0,
+        "shaft_diameter_mm": 3.0,
+        "full_length_mm": 9.0,
+        "approach_direction": [
+          0,
+          0,
+          1
+        ]
+      },
+      {
+        "part": "part_07",
+        "group": "corner",
+        "center_XY_mm": [
+          -18.031222820281982,
+          -18.031222820281982
+        ],
+        "head_back_Z_mm": 6.0,
+        "head_diameter_mm": 5.5,
+        "head_height_mm": 3.0,
+        "shaft_diameter_mm": 3.0,
+        "full_length_mm": 9.0,
+        "approach_direction": [
+          0,
+          0,
+          1
+        ]
+      },
+      {
+        "part": "part_08",
+        "group": "corner",
+        "center_XY_mm": [
+          18.031222820281982,
+          18.031222820281982
+        ],
+        "head_back_Z_mm": 6.0,
+        "head_diameter_mm": 5.5,
+        "head_height_mm": 3.0,
+        "shaft_diameter_mm": 3.0,
+        "full_length_mm": 9.0,
+        "approach_direction": [
+          0,
+          0,
+          1
+        ]
+      },
+      {
+        "part": "part_09",
+        "group": "corner",
+        "center_XY_mm": [
+          18.031222820281982,
+          -18.031222820281982
+        ],
+        "head_back_Z_mm": 6.0,
+        "head_diameter_mm": 5.5,
+        "head_height_mm": 3.0,
+        "shaft_diameter_mm": 3.0,
+        "full_length_mm": 9.0,
+        "approach_direction": [
+          0,
+          0,
+          1
+        ]
+      },
+      {
+        "part": "part_10",
+        "group": "lateral_center",
+        "center_XY_mm": [
+          0.0,
+          25.5
+        ],
+        "head_back_Z_mm": 5.0,
+        "head_diameter_mm": 5.5,
+        "head_height_mm": 3.0,
+        "shaft_diameter_mm": 3.0,
+        "full_length_mm": 9.0,
+        "approach_direction": [
+          0,
+          0,
+          1
+        ]
+      },
+      {
+        "part": "part_11",
+        "group": "lateral_center",
+        "center_XY_mm": [
+          0.0,
+          -25.5
+        ],
+        "head_back_Z_mm": 5.0,
+        "head_diameter_mm": 5.5,
+        "head_height_mm": 3.0,
+        "shaft_diameter_mm": 3.0,
+        "full_length_mm": 9.0,
+        "approach_direction": [
+          0,
+          0,
+          1
+        ]
+      }
+    ],
+    "original_fasteners_reused": true,
+    "added_screw_count": 0,
+    "original_metal_seats_unchanged": true,
+    "minimum_nominal_radial_ligament_to_neck_mm": 4.400000000000002,
+    "scope": "Clear head insertion and straight driver from rear -Z while wrist side is accessible. Does not assert access through an already attached robot wrist or certify handle clearance."
+  },
+  "base_revision": "D435i_V14",
+  "printed_parts": 1,
+  "camera_reference_file": "/home/ziwang/artifacts/d405_left_wrist_v1/reference/d405_official_camera_frame_mm.stl",
+  "optics": {
+    "target_tip_mm": [
+      0.0,
+      0.0,
+      147.02169799804688
+    ],
+    "depth_origin_mm": [
+      57.94986789881644,
+      0.0,
+      54.28252344620338
+    ],
+    "optical_target_vector_camera_Xup_Yright_Zforward_mm": [
+      -1.4210854715202004e-14,
+      0.0,
+      109.35603177716156
+    ],
+    "nominal_normalized_uv": [
+      0.5,
+      0.5000000000000001
+    ],
+    "forward_depth_mm": 109.35603177716156,
+    "distance_mm": 109.35603177716156
+  },
+  "fov_datasheet_deg": [
+    84,
+    58
+  ],
+  "fov_product_page_deg": [
+    87,
+    58
+  ],
+  "print_transform_xyz_mm": [
+    -31.340961456298828,
+    -2.243117332458496,
+    -2.5999999046325684
+  ],
+  "print_sha256": "e9078ec5779ab61cd8f49bedde50e84a9a5aacafdd021dac2f9ceb276c48885e",
+  "checks": {
+    "native_valid": true,
+    "solid_count": 1,
+    "volume_mm3": 33173.73699000825,
+    "watertight": true,
+    "winding_consistent": true,
+    "mesh_body_count": 1,
+    "camera_box_overlap_mm3": 0,
+    "camera_minimum_housing_X_gap_mm": 11.627164675445314,
+    "provisional_USB_plug_keepout_overlap_mm3": 0,
+    "green_groove_overlap_mm3": 0,
+    "V14_ring_symmetric_difference_mm3": 0,
+    "hardware": {
+      "anchor_-7": {
+        "overlap_mm3": 0,
+        "missing_bearing_mm3": 0,
+        "driver_overlap_mm3": 0
+      },
+      "anchor_7": {
+        "overlap_mm3": 0,
+        "missing_bearing_mm3": 0,
+        "driver_overlap_mm3": 0
+      },
+      "camera_-10": {
+        "overlap_mm3": 0,
+        "missing_bearing_mm3": 0,
+        "driver_overlap_mm3": 0
+      },
+      "camera_10": {
+        "overlap_mm3": 0,
+        "missing_bearing_mm3": 0,
+        "driver_overlap_mm3": 0
+      }
+    },
+    "factory_access_overlap_mm3": {
+      "part_06": 0,
+      "part_07": 0,
+      "part_08": 0,
+      "part_09": 0,
+      "part_10": 0,
+      "part_11": 0
+    },
+    "tip_on_nominal_optical_axis": true,
+    "tip_within_nominal_70_to500mm_range": true,
+    "passed": true,
+    "failures": []
+  },
+  "limitations": [
+    "Fixed nominal aim; calibrated camera intrinsics and physical fit can move actual image center.",
+    "USB keepout is provisional, not a measurement of the user cable.",
+    "V14 ring service openings and D405 mount have not been physically trialed; no new structural/FEA/vibration claim.",
+    "Detached-gripper installation; factory screw access assumes rear wrist face is accessible."
+  ]
+}

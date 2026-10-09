@@ -159,3 +159,21 @@ def test_simulation_worker_cli_first_capture_and_rejected_vision_continue(tmp_pa
             process.communicate()
             raise
     assert process.returncode == 0, output
+
+
+def test_simulated_left_open_jaws_match_geometry_checker(tmp_path):
+    scene,_=camera_scene(tmp_path)
+    tree=ET.parse(scene);world=tree.getroot().find('worldbody')
+    for side in ('positive','negative'):
+        body=ET.SubElement(world,'body',name=f'jaw_{side}',pos='10 0 0')
+        ET.SubElement(body,'joint',name=f'calibration_left_jaw_{side}',type='slide',axis='0 1 0')
+        ET.SubElement(body,'inertial',mass='1',pos='0 0 0',diaginertia='1 1 1')
+    tree.write(scene)
+    camera=SimulationRGB(scene,'230422271628',np.array([[651.,0,643.],[0,650.,362.],[0,0,1]]))
+    try:
+        camera.render(np.zeros(18))
+        for side in ('positive','negative'):
+            name=f'calibration_left_jaw_{side}'
+            assert camera.data.qpos[camera.model.joint(name).qposadr[0]]==pytest.approx(.04)
+            assert camera.metadata['simulated_gripper_positions_m'][name]==pytest.approx(.04)
+    finally:camera.close()

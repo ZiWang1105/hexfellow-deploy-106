@@ -1,0 +1,209 @@
+{
+  "units": "mm",
+  "frame": {
+    "origin": "Center of camera rear mounting plane",
+    "x": "Camera up",
+    "y": "Camera right viewed from behind looking along optical axis",
+    "z": "Forward into scene",
+    "handedness": "right",
+    "raw_ros_stl_to_frame_transform": [
+      [
+        0.0,
+        1.0,
+        0.0,
+        0.0
+      ],
+      [
+        -1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0,
+        23.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ]
+  },
+  "official_sources": {
+    "cad_landing": "https://dev.realsenseai.com/docs/stereo-depth-camera-d400/",
+    "solidworks_zip": "https://dev.realsenseai.com/download/41950",
+    "latest_datasheet": "https://www.realsenseai.com/wp-content/uploads/2026/03/RealSense-D400-Series-Datasheet-Mar-2026.pdf",
+    "old_datasheet": "https://realsenseai.com/wp-content/uploads/2025/09/Intel-RealSense-D400-Series-Datasheet-October-2025.pdf",
+    "ros_mesh": "https://raw.githubusercontent.com/realsenseai/realsense-ros/ros2-master/realsense2_description/meshes/d405.stl",
+    "ros_urdf": "https://raw.githubusercontent.com/realsenseai/realsense-ros/ros2-master/realsense2_description/urdf/_d405.urdf.xacro",
+    "product_page": "https://www.realsenseai.com/product-family/d405-series/"
+  },
+  "body": {
+    "nominal_xyz": [
+      42,
+      42,
+      23
+    ],
+    "nominal_bounds": [
+      [
+        -21,
+        -21,
+        0
+      ],
+      [
+        21,
+        21,
+        23
+      ]
+    ],
+    "max_external_dimensions_xyz": [
+      42.15,
+      42.15,
+      23.15
+    ],
+    "actual_ros_mesh_bounds": [
+      [
+        -21.0,
+        -21.0,
+        0.0
+      ],
+      [
+        21.0,
+        21.09000015258789,
+        23.0
+      ]
+    ],
+    "actual_ros_mesh_faces": 3892,
+    "mesh_watertight": true
+  },
+  "rear_mounting": {
+    "thread": "M3x0.5",
+    "entry_centers": [
+      [
+        0,
+        -10,
+        0
+      ],
+      [
+        0,
+        10,
+        0
+      ]
+    ],
+    "screw_insertion_axis": [
+      0,
+      0,
+      1
+    ],
+    "spacing": 20,
+    "max_screw_insertion": 4,
+    "evidence": "Official drawing MD0603901 rev02; mesh circular-hole boundary centers agree. Mesh bores are simplified radius1.25 and extend5.5; max insertion is governed by drawing4.0."
+  },
+  "optics": {
+    "left_imager_depth_and_rgb_origin": [
+      0,
+      -9,
+      19.2
+    ],
+    "right_imager_origin": [
+      0,
+      9,
+      19.2
+    ],
+    "optical_axis": [
+      0,
+      0,
+      1
+    ],
+    "baseline": 18,
+    "front_aluminum_plane_z": 23,
+    "front_glass_z": 22.9,
+    "zero_depth_behind_glass": 3.7,
+    "evidence": "Mar2026 datasheet Table4-17 p89 says D405 -3.7 from glass; current official ROS assumes glass inset0.1 and coincident left-imager RGB/depth. These are nominal; use device calibrated extrinsics for metrology."
+  },
+  "usb": {
+    "type": "USB 3 Micro-B",
+    "outward_direction": [
+      0,
+      -1,
+      0
+    ],
+    "nominal_center": [
+      0,
+      -21,
+      6.82
+    ],
+    "mesh_port_opening_bounds": [
+      [
+        -7.125,
+        -21,
+        4.8
+      ],
+      [
+        7.125,
+        -21,
+        8.83
+      ]
+    ],
+    "retention_threads": "2x M2x0.4",
+    "retention_max_insertion": 3,
+    "retention_centers": [
+      [
+        -9,
+        -21,
+        6.815
+      ],
+      [
+        9,
+        -21,
+        6.815
+      ]
+    ],
+    "keepout_note": "No official universal plug/cable keepout found. Reserve the aperture envelope and cable-specific protrusion/bend volume outward along -Y. Dimensions of retention screws do not specify plug-body clearance."
+  },
+  "fov_and_range": {
+    "datasheet_horizontal_vertical_deg": [
+      84,
+      58
+    ],
+    "product_page_horizontal_vertical_deg": [
+      87,
+      58
+    ],
+    "ideal_range_mm": [
+      70,
+      500
+    ],
+    "engineering_use": "Use87x58 to clear optics; use84x58 for conservative nominal coverage; final calibrated intrinsics govern actual visibility."
+  },
+  "provenance_files": {
+    "D400_Datasheet_Mar_2026.pdf": {
+      "sha256": "96cb5706bd879479bab36648bd3ec67f6338b4616d696dda55007f898182454f",
+      "bytes": 5417349
+    },
+    "D400_Depth_Cameras_CAD.zip": {
+      "sha256": "31d176bd773f0e25c76c0af2d68c0575fdb550bceb60ffe9da72f92f2a53ca73",
+      "bytes": 15041868
+    },
+    "D405_Solid.SLDPRT": {
+      "sha256": "745aaeaf2d2396726631c57a9cccb4a67f29d5b77f2e15bd47dde23117389d76",
+      "bytes": 394098
+    },
+    "d405_official_ros.stl": {
+      "sha256": "a248f41149d12b28311829feecbe7a80cf1481fd05e0f5df2c4c7ecd556edd48",
+      "bytes": 194684
+    },
+    "_d405.urdf.xacro": {
+      "sha256": "81118e87388c06e4cf1b3dc8b114096de21c1b235bd283dafad84d2bd97aebb1",
+      "bytes": 7282
+    },
+    "d405_official_camera_frame_mm.stl": {
+      "sha256": "4f41b3b0150b2dc6d7010036e2395559fb23688b271c07d8a99f89e55fefacd2",
+      "bytes": 194684
+    }
+  }
+}

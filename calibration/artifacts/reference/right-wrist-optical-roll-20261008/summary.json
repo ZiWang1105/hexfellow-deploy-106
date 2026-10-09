@@ -1,0 +1,47 @@
+{
+  "source_run": "runs/wrist-calibration/20261008T235836.028874Z",
+  "status": "nominal_simulator_orientation_correction; physical calibration not accepted",
+  "diagnostic_fit_converged": false,
+  "eligible_snapshot_count": 12,
+  "diagnostic_relative_optical_rotation_deg": 179.48596773966835,
+  "applied_optical_axis_roll_deg": 180.0,
+  "left_camera_changed": false,
+  "sdk_images_rotated": false,
+  "existing_candidate_extrinsics_overwritten": false,
+  "active_robot_session_targets_changed": false,
+  "hardware_commands_sent_by_this_check": 0,
+  "validation": {
+    "passed": true,
+    "poses_accepted": 30,
+    "rendered_charuco_detections": 30,
+    "minimum_detection_corners": 12,
+    "path_sample_count": 12737,
+    "minimum_path_clearance_m": 0.015003696913006744,
+    "target_joint_limit_reserve_rad": 0.15,
+    "collision_pair_count": 478,
+    "method": "Retargeted the 30-pose route for optical-axis roll +180 degrees; fresh rendered detections and all collision-path checks",
+    "limitation": "Geometric trajectory validation only. Motor dynamics, payload torque, cable routing, actual table and physical mounting are not qualified.",
+    "camera_translation_span_m": [
+      0.2154353665519792,
+      0.3228275734613305,
+      0.17576001601898317
+    ],
+    "rotation_excitation_singular_values_rad": [
+      6.170049748434472,
+      1.4876736716383778,
+      0.651770721065934
+    ],
+    "source_previous_plan_sha256": "b95404258127824e0bdac960af620ca300ffe8bec10c18874eb374361bc56dde",
+    "physical_execution_validated": false,
+    "camera_roll_changed_without_display_flip": true,
+    "minimum_image_margin_px": 47.76577428263647,
+    "maximum_joint_retargeting_deg": 6.937976416020217,
+    "target_image_center_px": [
+      640.0,
+      518.4
+    ]
+  },
+  "tests_passed": 198,
+  "comparison_publication_id": "pub_a9d849ccfc3047fe88cce92939846fb1",
+  "comparison_artifact_id": "art_b02d672cc5fe41b0"
+}

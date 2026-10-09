@@ -99,7 +99,8 @@ def test_complete_mount_rotates_to_outside_at_default_and_preserves_fixed_pitch(
     original[:3,3]*=.001
     np.testing.assert_allclose(housing,transform@original,atol=1e-12,rtol=0)
     local=np.eye(4);local[:3,:3]=[[0,-1,0],[1,0,0],[0,0,1]];local[:3,3]=[0,-.0325,.0207547]
-    np.testing.assert_allclose(optical,housing@local,atol=1e-12,rtol=0)
+    from wrist_calibration_geometry import optical_roll
+    np.testing.assert_allclose(optical,optical_roll(housing@local, installation.get('optical_axis_roll_deg',0.)),atol=1e-12,rtol=0)
     plan=load_plan(DEFAULT_PLAN)
     model=pin.buildModelFromUrdf(str(ROOT/'urdf/maver_x4_gp80_zed_40deg.urdf'));data=model.createData()
     q=pin.neutral(model)
@@ -116,3 +117,29 @@ def test_mount_edit_cannot_silently_reuse_validated_poses(tmp_path):
     plan['mount_installation']['T_parent_from_design'][0][0]=1
     path=tmp_path/'wrong-side.json';path.write_text(json.dumps(plan))
     with pytest.raises(ValueError,match='installation or optical transform changed'):load_plan(path)
+
+
+def test_optical_roll_preserves_pupil_and_forward_axis_but_rotates_projected_pixels():
+    from wrist_calibration_geometry import optical_roll
+    pose=np.eye(4);pose[:3,:3]=pin.rpy.rpyToMatrix(.2,-.4,.3);pose[:3,3]=[.1,-.2,.8]
+    rolled=optical_roll(pose,180.)
+    np.testing.assert_array_equal(rolled[:3,3],pose[:3,3])
+    np.testing.assert_array_equal(rolled[:3,2],pose[:3,2])
+    np.testing.assert_allclose(rolled[:3,:2],-pose[:3,:2],atol=1e-14)
+    point=pose@np.array([.04,-.03,.4,1.])
+    k=np.array([[900.,0.,644.],[0.,910.,373.],[0.,0.,1.]])
+    def project(t):
+        p=k@(np.linalg.inv(t)@point)[:3]
+        return p[:2]/p[2]
+    np.testing.assert_allclose(project(rolled),2*k[:2,2]-project(pose),atol=1e-12)
+    np.testing.assert_allclose(optical_roll(pose,0.),pose,atol=0.)
+
+
+def test_right_planning_ray_avoids_gripper_after_sensor_roll():
+    from plan_wrist_calibration import image_target_center
+    plan=dict(capture_side='right',width=1280,height=720,mount_installation={})
+    np.testing.assert_allclose(image_target_center(plan),[640,170])
+    plan['mount_installation']['optical_axis_roll_deg']=180.
+    np.testing.assert_allclose(image_target_center(plan),[640,518.4])
+    plan['capture_side']='left'
+    np.testing.assert_allclose(image_target_center(plan),[640,180])

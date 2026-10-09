@@ -1,0 +1,25 @@
+{
+  "source_run": "/home/ziwang/projects/agentic-mobile-manipulator/third_party/hexfellow-deploy/calibration/runs/wrist-calibration/20261008T234924.788901Z",
+  "scope": "Offline replay of recorded failed cycle and command histories",
+  "hardware_commands_sent": 0,
+  "physical_devices_opened": false,
+  "measured_lift_m": 0.4219995610694027,
+  "physical_upper_m": 0.4220003100977257,
+  "physical_clearance_m": 7.490283230326966e-07,
+  "measured_velocity_m_s": -0.0,
+  "previous_velocity_m_s": -1.978781328327739e-05,
+  "reaction_s": 0.04529894500505179,
+  "original_false_outward_reserve_m": 8.963670656894158e-07,
+  "original_available_distance_m": -1.4733874265671913e-07,
+  "corrected_outward_reserve_m": 0.0,
+  "command_executable": true,
+  "new_lift_command_m": 0.42199905981751357,
+  "new_lift_velocity_m_s": -2.5062594454705406e-05,
+  "arms_held": true,
+  "raw_measured_state_preserved": true,
+  "limits_relaxed": false,
+  "real_robot_rerun_performed": false,
+  "source_sha256": {
+    "src/policy_sim/control/command_limits.py": "d1a217f25ebadf3cc0023a0f9ff3883b429b58011d5ec3a80697d79813186d4f"
+  }
+}

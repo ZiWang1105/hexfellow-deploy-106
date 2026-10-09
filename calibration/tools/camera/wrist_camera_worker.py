@@ -313,6 +313,13 @@ class SimulationRGB:
         self.mujoco = mujoco
         self.model = mujoco.MjModel.from_xml_path(str(scene))
         self.data = mujoco.MjData(self.model)
+        self.gripper_positions={}
+        for side in ('positive','negative'):
+            name=f'calibration_left_jaw_{side}'
+            jid=mujoco.mj_name2id(self.model,mujoco.mjtObj.mjOBJ_JOINT,name)
+            if jid>=0:
+                self.data.qpos[self.model.jnt_qposadr[jid]]=.04
+                self.gripper_positions[name]=.04
         self.indices = [self.model.joint(name).qposadr[0] for name in CONTROLLED_JOINTS]
         self.k = np.asarray(k, dtype=float)
         self.distortion = np.zeros(5)
@@ -340,7 +347,7 @@ class SimulationRGB:
                 or self.mapy.min() < 0 or self.mapy.max() >= offheight):
             raise ValueError('Expanded simulation render does not cover the specified intrinsics')
         self.metadata = dict(backend='mujoco', serial=str(serial), width=WIDTH, height=HEIGHT,
-                             fps=FPS, K=self.k.tolist(), distortion=[0.]*5,
+                             fps=FPS, simulated_gripper_positions_m=self.gripper_positions, K=self.k.tolist(), distortion=[0.]*5,
                              distortion_model='none', frame=f'realsense_{serial}_color_optical',
                              view='simulated RGB colour optical', optical_axes='x right, y down, z forward',
                              simulation_only=True, camera_name=self.camera_name,
@@ -378,17 +385,38 @@ def read_request(directory):
     return request
 
 
+def simulation_intrinsics(path, serial):
+    """Use this camera's recorded SDK pinhole profile, never another serial's K."""
+    if path is None:
+        if str(serial) != DEFAULT_SERIAL:
+            raise ValueError('Non-default simulated camera requires --simulation-intrinsics')
+        return DEFAULT_K.copy()
+    profile=json.loads(Path(path).read_text())
+    if str(profile['serial']) != str(serial):
+        raise ValueError('Simulation intrinsics serial differs from requested camera')
+    if (profile['width'],profile['height'],profile.get('fps',FPS)) != (WIDTH,HEIGHT,FPS):
+        raise ValueError('Simulation profile must be 1280x720 at 30 fps')
+    k=np.asarray(profile['K'],dtype=float)
+    if (k.shape != (3,3) or not np.isfinite(k).all() or k[0,0]<=0 or k[1,1]<=0
+            or not np.allclose(k[2],[0,0,1])):
+        raise ValueError('Invalid simulation pinhole intrinsics')
+    return k
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--mode', choices=['live', 'sim'], required=True)
     parser.add_argument('--directory', type=Path, required=True)
     parser.add_argument('--scene', type=Path)
     parser.add_argument('--serial', default=DEFAULT_SERIAL)
+    parser.add_argument('--simulation-intrinsics', type=Path, help='Recorded SDK profile or validated pose plan; simulation only')
     parser.add_argument('--width', type=int, default=WIDTH)
     parser.add_argument('--height', type=int, default=HEIGHT)
     parser.add_argument('--fps', type=int, default=FPS)
     parser.add_argument('--board-config', type=Path, default=ROOT/'config/camera/charuco_87mm.json')
     args = parser.parse_args()
+    if args.mode=='live' and args.simulation_intrinsics:
+        parser.error('--simulation-intrinsics is simulation only; live intrinsics come from the SDK')
     args.directory.mkdir(parents=True, exist_ok=True)
     cfg = json.loads(args.board_config.read_text())
     stopping = threading.Event()
@@ -400,10 +428,10 @@ def main():
             camera = RealSenseRGB(args.serial, args.width, args.height, args.fps)
         else:
             if (args.width, args.height, args.fps) != (WIDTH, HEIGHT, FPS):
-                parser.error('Simulated fixed-33 plan uses 1280x720 at 30 fps')
+                parser.error('Simulated wrist plan uses 1280x720 at 30 fps')
             if args.scene is None:
                 raise ValueError('--scene is required for simulation')
-            camera = SimulationRGB(args.scene, args.serial)
+            camera = SimulationRGB(args.scene, args.serial, simulation_intrinsics(args.simulation_intrinsics,args.serial))
         atomic(args.directory/'ready.json', dict(camera.metadata, mode=args.mode, board=cfg,
              board_config=str(args.board_config), ipc_image_name='left.png (native colour, historical IPC name)',
              timing_policy=dict(max_uncertainty_s=MAX_UNCERTAINTY_S, max_frame_age_s=MAX_FRAME_AGE_S,

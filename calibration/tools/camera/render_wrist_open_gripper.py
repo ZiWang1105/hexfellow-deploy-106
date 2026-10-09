@@ -35,7 +35,7 @@ def sha(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
 
-def prepare_scene(source, output):
+def prepare_scene(source, output, side='right'):
     """Separate the three disconnected vendor CAD components; add two slides.
 
     Same +/-Y, 40-mm-per-jaw abstraction as the parent's derived GP80 assembly.
@@ -63,22 +63,24 @@ def prepare_scene(source, output):
         mesh.export(path)
         ET.SubElement(asset, 'mesh', name=f'calibration_gp80_{name}', file=str(path.resolve()))
         files[name] = {'path': str(path), 'sha256': sha(path)}
-    palm = root.find(".//body[@name='robot2_base']")
+    if side not in ('left', 'right'):
+        raise ValueError('Expected left or right gripper')
+    palm = root.find(f".//body[@name='{'robot_base' if side == 'left' else 'robot2_base'}']")
     original = [g for g in palm.findall('geom') if g.get('mesh') == 'base_link']
     if len(original) != 1:
         raise ValueError('Expected one rigid right GP80 mesh')
     properties = dict(original[0].attrib)
     palm.remove(original[0])
-    properties.update(name='calibration_right_palm', mesh='calibration_gp80_palm')
+    properties.update(name=f'calibration_{side}_palm', mesh='calibration_gp80_palm')
     ET.SubElement(palm, 'geom', **properties)
     palm.find('inertial').set('mass', '.41')
     for name, sign in [('positive', 1), ('negative', -1)]:
-        body = ET.SubElement(palm, 'body', name=f'calibration_right_jaw_{name}', gravcomp='1')
+        body = ET.SubElement(palm, 'body', name=f'calibration_{side}_jaw_{name}', gravcomp='1')
         center = components[name].center_mass
         ET.SubElement(body, 'inertial', pos=' '.join(map(str, center)), mass='.06', diaginertia='.00003 .00003 .000015')
-        ET.SubElement(body, 'joint', name=f'calibration_right_jaw_{name}', type='slide',
+        ET.SubElement(body, 'joint', name=f'calibration_{side}_jaw_{name}', type='slide',
                       axis=f'0 {sign} 0', range=f'0 {OPENING_M/2}', damping='2')
-        properties.update(name=f'calibration_right_jaw_{name}', mesh=f'calibration_gp80_{name}')
+        properties.update(name=f'calibration_{side}_jaw_{name}', mesh=f'calibration_gp80_{name}')
         ET.SubElement(body, 'geom', **properties)
     # The right jaw joints follow the existing 18 joints in this scene. Preserve
     # the original keyframe values and actuator controls, adding only jaw zeros.

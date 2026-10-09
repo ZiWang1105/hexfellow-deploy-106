@@ -1,0 +1,58 @@
+{
+  "backend": "realsense",
+  "serial": "230422271628",
+  "device": "RealSense D405",
+  "firmware": "5.12.14.100",
+  "usb": "3.2",
+  "width": 1280,
+  "height": 720,
+  "fps": 30,
+  "K": [
+    [
+      651.4862670898438,
+      0.0,
+      643.0418701171875
+    ],
+    [
+      0.0,
+      650.7327880859375,
+      362.6119689941406
+    ],
+    [
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "distortion": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "distortion_model": "none",
+  "native_distortion": [
+    -0.05051824077963829,
+    0.06193859130144119,
+    -9.105065691983327e-05,
+    0.0008188839419744909,
+    -0.02104456163942814
+  ],
+  "native_distortion_model": "distortion.inverse_brown_conrady",
+  "corner_processing": "SDK-deprojected pinhole pixels",
+  "frame": "realsense_230422271628_color_optical",
+  "view": "native RGB colour optical",
+  "pixel_format": "BGR8",
+  "optical_axes": "x right, y down, z forward",
+  "processing": "native SDK RGB; no image smoothing, depth filters, or alignment",
+  "sensor_options": [
+    {
+      "sensor": "Stereo Module",
+      "global_time_enabled": 1.0,
+      "frames_queue_size": 1.0
+    }
+  ],
+  "started_utc": "2026-10-08T23:40:42.376081+00:00",
+  "mode": "live"
+}

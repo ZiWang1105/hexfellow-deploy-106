@@ -1,0 +1,57 @@
+{
+  "passed": true,
+  "scope": "Nominal kinematic geometry + rendered PnP; not physical calibration",
+  "poses": 30,
+  "minimum_detected_corners": 14,
+  "path_samples": 7872,
+  "minimum_path_clearance_m": 0.015000178180801287,
+  "lift_and_right_fixed": true,
+  "plan_sha256": "2bd9f75be2f16526a02398093cf83e3724ef751bbc4e3444e5543c7781b7c003",
+  "intrinsics_provenance": {
+    "status": "SDK_active_profile",
+    "measured": true,
+    "source_sha256": "63df3baeb4b76aacd2f8a7fecc873afe3dd5f678a3e59472a04670a2a2d31ec4",
+    "native_distortion_model": "distortion.inverse_brown_conrady",
+    "native_distortion": [
+      -0.05051824077963829,
+      0.06193859130144119,
+      -9.105065691983327e-05,
+      0.0008188839419744909,
+      -0.02104456163942814
+    ],
+    "corner_processing": "SDK-deprojected pinhole pixels"
+  },
+  "held_out_pose_ids": [
+    6,
+    12,
+    18,
+    24,
+    30
+  ],
+  "solver_vs_nominal_ground_truth": {
+    "camera_mount": {
+      "translation_mm": 0.24119585952109,
+      "rotation_deg": 0.08640964534252141
+    },
+    "stationary_board": {
+      "translation_mm": 0.10108492104170855,
+      "rotation_deg": 0.04331058990437025
+    }
+  },
+  "physical_devices_opened": false,
+  "hardware_commands_sent": 0,
+  "controller_replay_performed": false,
+  "video": {
+    "codec": "h264",
+    "width": 1280,
+    "height": 720,
+    "fps": "30",
+    "duration_s": 60.0,
+    "path": "calibration/runs/left-wrist-sdk-preview/left-d405-30-poses.mp4",
+    "frames": 1800,
+    "bytes": 1655590,
+    "sha256": "167aaac7bb9da88e1a19c5fbb96cd313bb99454bfe263da2bf95a2956917c085",
+    "full_decode_passed": true
+  },
+  "calibration_regression_tests_passed": 196
+}

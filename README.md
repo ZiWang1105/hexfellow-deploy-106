@@ -21,12 +21,15 @@ Camera calibration code for the ZED 2i head and both RealSense wrists is now
 [consolidated here](calibration/README.md), with a common
 `./scripts/calibrate_camera.sh` launcher for collection, fitting, head landmark
 PnP refinement, measured-arm overlays and simulation checks. `list` shows the
-actions supported for each device; the D405 motion route remains unvalidated.
+actions supported for each device. Both wrists have dedicated 30-pose routes,
+with measured-joint capture, simulation validation and automatic fitting.
 
-Saved head/right-wrist extrinsics, SDK intrinsics, board scale and validation
+Saved head and both wrist extrinsics, SDK intrinsics, board scale and validation
 evidence are versioned in the [camera parameter guide](calibration/docs/camera_parameters.md)
-and [parameter snapshot](calibration/config/camera/camera_parameters_20261006.json).
-The left D405 remains explicitly uncalibrated.
+and [current parameter snapshot](calibration/config/camera/camera_parameters_20261008.json).
+The [latest wrist results](calibration/docs/wrist_parameters_20261008.md) preserve
+their candidate status: held-out RMS is 7.92 px for the left D405 and 13.62 px
+for the right D435i. These exports do not change production sensor selection.
 
 DA is pinned to `6c2bda40ebee56ab3a50b8dd62aaf4df5814e5a8`. Robot assets,
 active calibration configuration, sensor contracts, policy client and PinkIK are imported from the

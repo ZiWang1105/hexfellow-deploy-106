@@ -1,0 +1,53 @@
+{
+  "passed": true,
+  "scope": "Nominal kinematic geometry + rendered PnP; not physical calibration",
+  "poses": 30,
+  "minimum_detected_corners": 16,
+  "path_samples": 7872,
+  "minimum_path_clearance_m": 0.015000178180801287,
+  "lift_and_right_fixed": true,
+  "plan_sha256": "c5819600855bb93db427c8386725327cb2908733e39d44011818943c8b04892b",
+  "intrinsics_provenance": {
+    "status": "nominal_FOV_only",
+    "measured": false,
+    "horizontal_vertical_fov_deg": [
+      84,
+      58
+    ],
+    "source": "D405 official geometry reference",
+    "warning": "Regenerate with active-profile SDK intrinsics before live use; native distortion must be rectified by existing camera worker."
+  },
+  "held_out_pose_ids": [
+    6,
+    12,
+    18,
+    24,
+    30
+  ],
+  "solver_vs_nominal_ground_truth": {
+    "camera_mount": {
+      "translation_mm": 0.3061265476428706,
+      "rotation_deg": 0.11330959684026605
+    },
+    "stationary_board": {
+      "translation_mm": 0.11435073051597602,
+      "rotation_deg": 0.06718481074159655
+    }
+  },
+  "physical_devices_opened": false,
+  "hardware_commands_sent": 0,
+  "controller_replay_performed": false,
+  "video": {
+    "codec": "h264",
+    "width": 1280,
+    "height": 720,
+    "fps": "30",
+    "duration_s": 60.0,
+    "path": "/home/ziwang/projects/agentic-mobile-manipulator/third_party/hexfellow-deploy/calibration/runs/left-wrist-calibration-preview/left-d405-30-poses.mp4",
+    "frames": 1800,
+    "bytes": 1647784,
+    "sha256": "25dccc5168f9f8eb95c24213860f1dda7abf767ca96739e828bbfb4124fc9d19",
+    "full_decode_passed": true
+  },
+  "calibration_regression_tests_passed": 195
+}

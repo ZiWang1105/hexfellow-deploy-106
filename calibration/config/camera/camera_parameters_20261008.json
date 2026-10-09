@@ -1,0 +1,673 @@
+{
+  "schema_version": 1,
+  "recorded_date": "2026-10-08",
+  "transform_convention": "T_destination_from_source maps homogeneous source points into destination coordinates",
+  "translation_units": "metres",
+  "optical_axes": "x right, y down, z forward",
+  "intrinsics_units": "pixels at the recorded image resolution",
+  "base_frame": "maver_x4_asm_maver_x4_base_link",
+  "board_config": "config/camera/charuco_87mm.json",
+  "board": {
+    "type": "ChArUco",
+    "squares_x": 5,
+    "squares_y": 5,
+    "square_length_m": 0.0174,
+    "marker_length_m": 0.0116,
+    "dictionary": "DICT_4X4_50",
+    "marker_ids": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "marker_border_bits": 1,
+    "legacy_pattern": false,
+    "pattern_size_mm": [
+      87,
+      87
+    ],
+    "mounting_board_size_mm": [
+      100,
+      100
+    ],
+    "white_margin_mm": 4.833333333333333,
+    "opencv_generator_version": "5.0.0",
+    "nominal_pattern_size_mm": [
+      90,
+      90
+    ],
+    "measured_print_scale": 0.9666666666666667,
+    "measurement_note": "User measured the printed patterned area (excluding white border) as 87 x 87 mm. Square size is 87/5 mm; marker size and white margin are inferred from uniform scaling of the original 90 mm pattern. The rigid backing remains 100 x 100 mm. Measurement uncertainty has not been quantified."
+  },
+  "robot_reference": {
+    "mapping_config": "config/hardware/hexfellow_gp80_highspeed_both_j6.json",
+    "capture_mapping_sha256": "b4ad9746aeccf7b6cef5cd823121129f90b637e046b92456a22cdb18f4bd442e",
+    "sdk_to_model": "q_model = signs * q_sdk[sdk_indices] + offsets_rad",
+    "arms": {
+      "left": {
+        "sdk_indices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "sdk_joint_names": [
+          "joint_1",
+          "joint_2",
+          "joint_3",
+          "joint_4",
+          "joint_5",
+          "joint_6",
+          "joint_7"
+        ],
+        "signs": [
+          1,
+          1,
+          -1,
+          1,
+          -1,
+          -1,
+          -1
+        ],
+        "offsets_rad": [
+          1.5707963267948966,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "right": {
+        "sdk_indices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "sdk_joint_names": [
+          "joint_1",
+          "joint_2",
+          "joint_3",
+          "joint_4",
+          "joint_5",
+          "joint_6",
+          "joint_7"
+        ],
+        "signs": [
+          1,
+          1,
+          -1,
+          1,
+          -1,
+          -1,
+          -1
+        ],
+        "offsets_rad": [
+          -1.5707963267948966,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "lift_position_mode": "range_max_minus_sdk",
+    "lift_zero_offset_m": 0,
+    "q_layout": [
+      "base_x",
+      "base_y",
+      "base_yaw",
+      "lift_m",
+      "left_J1_rad",
+      "left_J2_rad",
+      "left_J3_rad",
+      "left_J4_rad",
+      "left_J5_rad",
+      "left_J6_rad",
+      "left_J7_rad",
+      "right_J1_rad",
+      "right_J2_rad",
+      "right_J3_rad",
+      "right_J4_rad",
+      "right_J5_rad",
+      "right_J6_rad",
+      "right_J7_rad"
+    ],
+    "note": "Base X/Y/yaw are legacy model coordinates, not physical joint encoders or measured world localization. Use measured lift and arm encoders for camera FK. TCP is a separately configured tool frame and was not calibrated here."
+  },
+  "cameras": {
+    "head": {
+      "model": "ZED 2i",
+      "serial": "32701991",
+      "parent_frame": "maver_x4_asm_URDF_link_1",
+      "camera_frame": "zed_left_camera_frame_optical",
+      "calibration_type": "eye_to_hand_relative_to_moving_lift",
+      "mount": "short 40-degree supporter",
+      "T_parent_from_optical": [
+        [
+          0.03286887515108732,
+          -0.6582920059073717,
+          0.7520447273964169,
+          4.625040707960471e-05
+        ],
+        [
+          -0.9985207394208218,
+          0.010979465416036512,
+          0.05325208245386404,
+          0.044946487632226396
+        ],
+        [
+          -0.04331246925306048,
+          -0.7526825933271122,
+          -0.6569573378154595,
+          0.14750687943496776
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "legacy_matrix_key": "T_mount_from_camera",
+      "intrinsics": {
+        "width": 1920,
+        "height": 1080,
+        "K": [
+          [
+            1055.28076171875,
+            0.0,
+            980.4390869140625
+          ],
+          [
+            0.0,
+            1055.28076171875,
+            559.5460815429688
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "distortion": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "distortion_model": "none",
+        "view": "SDK rectified LEFT",
+        "source": "Recorded per-session ZED SDK calibration; intrinsics were fixed during extrinsic fitting."
+      },
+      "candidate": {
+        "path": "config/camera/zed_landmark_candidate_20260930.json",
+        "sha256": "65e235c13d7a64657838d311b66ab64918ad86f533edbf3b479c297bcfd9c6fd"
+      },
+      "coarse_candidate": {
+        "path": "config/camera/zed_candidate_20260930.json",
+        "sha256": "779af49f88ae316a67027dbd056d34a633eb0266ccbd09e81eacd83504ce9d90"
+      },
+      "intrinsics_evidence": {
+        "path": "artifacts/reference/camera-calibration/left-measured-captures.json",
+        "sha256": "86bee9bc2970ca709836e912db93af9c932087754bc0c2cd7c34caf8d834eefa"
+      },
+      "status": "provisional_landmark_fit",
+      "calibration_accepted": false,
+      "quality": {
+        "all_point_rms_px": 11.932156102275737,
+        "inlier_rms_px": 3.24756891258271,
+        "inlier_count": 9,
+        "usable_pair_count": 21,
+        "heldout_pose_rms_px": [
+          15.795653450846872,
+          16.791154549610233,
+          14.935600554664074
+        ]
+      },
+      "runtime": "T_base_from_camera(q) = FK_base_from_lift(q) @ T_parent_from_optical",
+      "stereo_extrinsics": {
+        "available": false,
+        "note": "This fit references LEFT rectified optical only. No recorded numeric LEFT/RIGHT factory stereo transform is included; query the matching ZED SDK profile before composing RIGHT geometry."
+      },
+      "limitation": "Approximate arm/CAD feature matches; held-out-pose RMS remains 14.9\u201316.8 pixels. Fixed arm/model errors can be absorbed by this camera fit. Intrinsics and robot kinematics were held fixed."
+    },
+    "right": {
+      "model": "RealSense D435i",
+      "serial": "243222074562",
+      "parent_frame": "maver_x4_asm_mount2",
+      "camera_frame": "realsense_243222074562_color_optical",
+      "calibration_type": "eye_in_hand",
+      "mount": "fixed 33 degrees; outside right arm at default",
+      "T_parent_from_optical": [
+        [
+          0.005984739752969704,
+          -0.8229698674342898,
+          0.5680535011645246,
+          -0.05279060014753584
+        ],
+        [
+          0.9995809446218669,
+          0.02101218342579557,
+          0.01991038162718174,
+          0.004574916062427359
+        ],
+        [
+          -0.02832168849042241,
+          0.5676962968373707,
+          0.8227507499347456,
+          0.0664691570687748
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "legacy_matrix_key": "T_wrist_from_camera",
+      "T_base_from_board": [
+        [
+          0.9953165270090727,
+          0.07008299168965364,
+          0.06658367171030836,
+          0.6399874530126891
+        ],
+        [
+          0.07029855087344596,
+          -0.9975255931411958,
+          -0.0008970916331814277,
+          0.048420805759959364
+        ],
+        [
+          0.06635604575087072,
+          0.005573625761814958,
+          -0.997780441724619,
+          0.7486564830479947
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "intrinsics": {
+        "backend": "realsense",
+        "serial": "243222074562",
+        "device": "RealSense D435I",
+        "firmware": "5.13.0.55",
+        "usb": "3.2",
+        "width": 1280,
+        "height": 720,
+        "fps": 30,
+        "K": [
+          [
+            909.8963623046875,
+            0.0,
+            643.9840698242188
+          ],
+          [
+            0.0,
+            909.7846069335938,
+            373.11004638671875
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "distortion": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "distortion_model": "none",
+        "native_distortion": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "native_distortion_model": "distortion.inverse_brown_conrady",
+        "corner_processing": "native zero-distortion pixels",
+        "frame": "realsense_243222074562_color_optical",
+        "view": "native RGB colour optical",
+        "pixel_format": "BGR8",
+        "optical_axes": "x right, y down, z forward",
+        "processing": "native SDK RGB; no image smoothing, depth filters, or alignment",
+        "sensor_options": [
+          {
+            "sensor": "RGB Camera",
+            "global_time_enabled": 1.0,
+            "frames_queue_size": 1.0
+          }
+        ],
+        "started_utc": "2026-10-09T00:33:10.140225+00:00",
+        "mode": "live",
+        "board": {
+          "type": "ChArUco",
+          "squares_x": 5,
+          "squares_y": 5,
+          "square_length_m": 0.0174,
+          "marker_length_m": 0.0116,
+          "dictionary": "DICT_4X4_50",
+          "marker_ids": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "marker_border_bits": 1,
+          "legacy_pattern": false,
+          "pattern_size_mm": [
+            87,
+            87
+          ],
+          "mounting_board_size_mm": [
+            100,
+            100
+          ],
+          "white_margin_mm": 4.833333333333333,
+          "opencv_generator_version": "5.0.0",
+          "nominal_pattern_size_mm": [
+            90,
+            90
+          ],
+          "measured_print_scale": 0.9666666666666667,
+          "measurement_note": "User measured the printed patterned area (excluding white border) as 87 x 87 mm. Square size is 87/5 mm; marker size and white margin are inferred from uniform scaling of the original 90 mm pattern. The rigid backing remains 100 x 100 mm. Measurement uncertainty has not been quantified."
+        },
+        "board_config": "/home/ziwang/projects/agentic-mobile-manipulator/third_party/hexfellow-deploy/calibration/config/camera/charuco_87mm.json",
+        "ipc_image_name": "left.png (native colour, historical IPC name)",
+        "timing_policy": {
+          "max_uncertainty_s": 0.005,
+          "max_frame_age_s": 0.15,
+          "sdk_clock_mapping_allowance_s": 0.002,
+          "hardware_trigger_synchronized": false
+        }
+      },
+      "candidate": {
+        "path": "config/camera/realsense_d435i_right_candidate_20261008.json",
+        "sha256": "3a5af6b843047fc7974f93bba813c9003b5e0875dc0ebaa75dda6a3bcfba65e2"
+      },
+      "evidence": {
+        "path": "artifacts/reference/right-wrist-calibration-20261008/dataset.json",
+        "sha256": "2bfae01244427e6db3bb593a4a060ba190b7fb2d9fd0cb8c52d315d8c907b8ae"
+      },
+      "capture_summary": {
+        "path": "artifacts/reference/right-wrist-calibration-20261008/capture-summary.json",
+        "sha256": "1b5ef2d5d8a2f9e2fc4507e6c114c6479db1465475cedc02f1ab4c87c4e9c9ba"
+      },
+      "status": "candidate_requires_physical_validation",
+      "independent_physical_validation_performed": false,
+      "quality": {
+        "training_count": 21,
+        "heldout_count": 5,
+        "heldout_pose_ids": [
+          9,
+          14,
+          19,
+          24,
+          29
+        ],
+        "heldout_reprojection_rms_px": 13.623685792294532,
+        "heldout_reprojection_max_px": 25.56034149948258,
+        "heldout_closure_position_rms_mm": 6.717138045792728,
+        "heldout_closure_angle_rms_deg": 2.1400617661746995
+      },
+      "runtime": "T_base_from_camera(q_measured) = FK(base_from_parent, q_measured) @ T_parent_from_optical",
+      "depth_to_color_extrinsics": {
+        "available": false,
+        "note": "This export fits color optical pose. No numeric depth profile or factory depth-to-color transform was saved by these runs."
+      },
+      "source_run": "20261009T003232.406454Z",
+      "source_fit_sha256": "3a5af6b843047fc7974f93bba813c9003b5e0875dc0ebaa75dda6a3bcfba65e2",
+      "source_dataset_sha256": "a2f874870806367d21f1d7983992c7069cc3b1e2d1a7503f0ea830c0e2433818",
+      "original_fit_input_sha256": "a2f874870806367d21f1d7983992c7069cc3b1e2d1a7503f0ea830c0e2433818",
+      "holdout_policy": "every fifth eligible observation, never used to fit either matrix",
+      "session_passed": false,
+      "limitation": "Held-out reprojection remains visibly nonzero. Candidate consistency does not establish absolute camera accuracy or fine-positioning acceptance."
+    },
+    "left": {
+      "model": "RealSense D405",
+      "serial": "230422271628",
+      "parent_frame": "maver_x4_asm_mount1",
+      "camera_frame": "realsense_230422271628_color_optical",
+      "calibration_type": "eye_in_hand",
+      "mount": "fixed 32 degrees; outside left arm at default",
+      "T_parent_from_optical": [
+        [
+          -0.01076844670527258,
+          -0.8527858010087008,
+          0.5221498043219952,
+          -0.05779081630491808
+        ],
+        [
+          0.9997868209562978,
+          -0.018381984076018834,
+          -0.009402941216592466,
+          0.0017699004203048621
+        ],
+        [
+          0.017616844145576172,
+          0.5219372378546814,
+          0.8528019503630232,
+          0.05022575488526658
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "legacy_matrix_key": "T_wrist_from_camera",
+      "T_base_from_board": [
+        [
+          0.997557971752227,
+          0.06570330516040819,
+          0.023688999231106518,
+          0.6244248072260306
+        ],
+        [
+          0.06466359228918697,
+          -0.9970115754960123,
+          0.042267459815041306,
+          0.13051692817375526
+        ],
+        [
+          0.02639531825591231,
+          -0.04063242569619245,
+          -0.998825456802244,
+          0.7359789572756101
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "intrinsics": {
+        "backend": "realsense",
+        "serial": "230422271628",
+        "device": "RealSense D405",
+        "firmware": "5.12.14.100",
+        "usb": "3.2",
+        "width": 1280,
+        "height": 720,
+        "fps": 30,
+        "K": [
+          [
+            651.4862670898438,
+            0.0,
+            643.0418701171875
+          ],
+          [
+            0.0,
+            650.7327880859375,
+            362.6119689941406
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "distortion": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "distortion_model": "none",
+        "native_distortion": [
+          -0.05051824077963829,
+          0.06193859130144119,
+          -9.105065691983327e-05,
+          0.0008188839419744909,
+          -0.02104456163942814
+        ],
+        "native_distortion_model": "distortion.inverse_brown_conrady",
+        "corner_processing": "SDK-deprojected pinhole pixels",
+        "frame": "realsense_230422271628_color_optical",
+        "view": "native RGB colour optical",
+        "pixel_format": "BGR8",
+        "optical_axes": "x right, y down, z forward",
+        "processing": "native SDK RGB; no image smoothing, depth filters, or alignment",
+        "sensor_options": [
+          {
+            "sensor": "Stereo Module",
+            "global_time_enabled": 1.0,
+            "frames_queue_size": 1.0
+          }
+        ],
+        "started_utc": "2026-10-09T03:36:33.811166+00:00",
+        "mode": "live",
+        "board": {
+          "type": "ChArUco",
+          "squares_x": 5,
+          "squares_y": 5,
+          "square_length_m": 0.0174,
+          "marker_length_m": 0.0116,
+          "dictionary": "DICT_4X4_50",
+          "marker_ids": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "marker_border_bits": 1,
+          "legacy_pattern": false,
+          "pattern_size_mm": [
+            87,
+            87
+          ],
+          "mounting_board_size_mm": [
+            100,
+            100
+          ],
+          "white_margin_mm": 4.833333333333333,
+          "opencv_generator_version": "5.0.0",
+          "nominal_pattern_size_mm": [
+            90,
+            90
+          ],
+          "measured_print_scale": 0.9666666666666667,
+          "measurement_note": "User measured the printed patterned area (excluding white border) as 87 x 87 mm. Square size is 87/5 mm; marker size and white margin are inferred from uniform scaling of the original 90 mm pattern. The rigid backing remains 100 x 100 mm. Measurement uncertainty has not been quantified."
+        },
+        "board_config": "/home/ziwang/projects/agentic-mobile-manipulator/third_party/hexfellow-deploy/calibration/config/camera/charuco_87mm.json",
+        "ipc_image_name": "left.png (native colour, historical IPC name)",
+        "timing_policy": {
+          "max_uncertainty_s": 0.005,
+          "max_frame_age_s": 0.15,
+          "sdk_clock_mapping_allowance_s": 0.002,
+          "hardware_trigger_synchronized": false
+        }
+      },
+      "candidate": {
+        "path": "config/camera/realsense_d405_left_candidate_20261008.json",
+        "sha256": "57f3987afd166e0c240c9fc0b701778bc4ad49de940fad906542dc0e30084853"
+      },
+      "evidence": {
+        "path": "artifacts/reference/left-wrist-calibration-20261008/dataset.json",
+        "sha256": "43aac5e6e764f73ad93af7edf1daa0f6ee803775bebb7e2e149ae47ed89958c5"
+      },
+      "capture_summary": {
+        "path": "artifacts/reference/left-wrist-calibration-20261008/capture-summary.json",
+        "sha256": "5d1b4317e85711228027fe00017f75241e05af0e1ef331de46397d98cfc5e781"
+      },
+      "status": "candidate_requires_physical_validation",
+      "independent_physical_validation_performed": false,
+      "quality": {
+        "training_count": 21,
+        "heldout_count": 5,
+        "heldout_pose_ids": [
+          5,
+          10,
+          15,
+          20,
+          29
+        ],
+        "heldout_reprojection_rms_px": 7.921881469344646,
+        "heldout_reprojection_max_px": 12.109242349841066,
+        "heldout_closure_position_rms_mm": 3.6359085104617206,
+        "heldout_closure_angle_rms_deg": 0.6116540280160516
+      },
+      "runtime": "T_base_from_camera(q_measured) = FK(base_from_parent, q_measured) @ T_parent_from_optical",
+      "depth_to_color_extrinsics": {
+        "available": false,
+        "note": "This export fits color optical pose. No numeric depth profile or factory depth-to-color transform was saved by these runs."
+      },
+      "source_run": "20261009T033555.843603Z",
+      "source_fit_sha256": "57f3987afd166e0c240c9fc0b701778bc4ad49de940fad906542dc0e30084853",
+      "source_dataset_sha256": "751a3ae44f61b0a29eefda5dee401202a5d9ec3524216084e89939f6158a75eb",
+      "original_fit_input_sha256": "751a3ae44f61b0a29eefda5dee401202a5d9ec3524216084e89939f6158a75eb",
+      "holdout_policy": "every fifth eligible observation, never used to fit either matrix",
+      "session_passed": true,
+      "limitation": "Held-out reprojection remains visibly nonzero. Candidate consistency does not establish absolute camera accuracy or fine-positioning acceptance."
+    }
+  },
+  "previous_snapshot": "config/camera/camera_parameters_20261006.json",
+  "publication_scope": "Recorded physical wrist candidates and SDK profiles; head estimate retained. No production sensor configuration or robot control is changed by this export."
+}

@@ -1,0 +1,51 @@
+{
+  "source_run": "20261009T033555.843603Z",
+  "session": "controlled_session_exit",
+  "session_passed": true,
+  "fault": null,
+  "eligible_observations": 26,
+  "total_observations": 30,
+  "excluded_poses": [
+    {
+      "pose_id": 21,
+      "reason": "6 corners (need 12); Need at least 8 ChArUco corners"
+    },
+    {
+      "pose_id": 22,
+      "reason": "7 corners (need 12); Need at least 8 ChArUco corners"
+    },
+    {
+      "pose_id": 23,
+      "reason": "6 corners (need 12); Need at least 8 ChArUco corners"
+    },
+    {
+      "pose_id": 27,
+      "reason": "5 corners (need 12); Need at least 8 ChArUco corners"
+    }
+  ],
+  "solver_converged": true,
+  "calibration_status": "candidate_requires_physical_validation",
+  "independent_physical_validation_performed": false,
+  "quality": {
+    "training_count": 21,
+    "heldout_count": 5,
+    "heldout_pose_ids": [
+      5,
+      10,
+      15,
+      20,
+      29
+    ],
+    "heldout_reprojection_rms_px": 7.921881469344646,
+    "heldout_reprojection_max_px": 12.109242349841066,
+    "heldout_closure_position_rms_mm": 3.6359085104617206,
+    "heldout_closure_angle_rms_deg": 0.6116540280160516
+  },
+  "source_dataset_sha256": "751a3ae44f61b0a29eefda5dee401202a5d9ec3524216084e89939f6158a75eb",
+  "original_fit_input_sha256": "751a3ae44f61b0a29eefda5dee401202a5d9ec3524216084e89939f6158a75eb",
+  "portable_dataset_sha256": "43aac5e6e764f73ad93af7edf1daa0f6ee803775bebb7e2e149ae47ed89958c5",
+  "candidate_sha256": "57f3987afd166e0c240c9fc0b701778bc4ad49de940fad906542dc0e30084853",
+  "source_fit_copied_byte_for_byte": true,
+  "production_camera_configuration_changed": false,
+  "hardware_commands_sent_by_export": 0
+}

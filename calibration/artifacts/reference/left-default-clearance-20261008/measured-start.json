@@ -1,0 +1,640 @@
+{
+  "q": [
+    0.0,
+    0.0,
+    -4.152208566665302e-05,
+    0.3404715732515993,
+    1.573205705277848,
+    1.5624077688353106,
+    1.5671964939042782,
+    0.004722854632791325,
+    -0.002463657034918677,
+    -0.0029145634969827182,
+    -0.002607467733782956,
+    -1.5665333382589794,
+    1.565141670141845,
+    -1.5721797914247446,
+    0.005845805040292058,
+    -0.0012748219243073054,
+    -0.002051699303797045,
+    -0.0017350161606729977
+  ],
+  "v": [
+    0.0,
+    0.0,
+    0.0,
+    -0.0,
+    0.0,
+    0.0,
+    -0.0,
+    0.0,
+    -0.0,
+    -0.0,
+    -0.0,
+    0.0,
+    0.0,
+    -0.0,
+    0.0,
+    -0.0,
+    -0.0,
+    -0.0
+  ],
+  "received": {
+    "right": 512383.8933247,
+    "left": 512383.893647262,
+    "theta": 512383.892925545,
+    "base": 512383.891213609
+  },
+  "sequences": {
+    "right": 100,
+    "left": 72,
+    "theta": 45,
+    "base": 16
+  },
+  "health": {
+    "right": {
+      "parking_stop": null,
+      "pos": [
+        0.004262988535917088,
+        1.565141670141845,
+        1.5721797914247446,
+        0.005845805040292058,
+        0.0012748219243073054,
+        0.002051699303797045,
+        0.0017350161606729977
+      ],
+      "vel": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "motor_states": [
+        "normal",
+        "normal",
+        "normal",
+        "normal",
+        "normal",
+        "normal",
+        "normal"
+      ],
+      "session_holder": 0,
+      "mine": 10,
+      "initialized": false,
+      "temperature_freshness": "unknown_cached_sdk_value",
+      "motor_temperature_c": [
+        29.600000381469727,
+        29.899999618530273,
+        31.899999618530273,
+        33.60000228881836,
+        36.10000228881836,
+        37.900001525878906,
+        33.60000228881836
+      ],
+      "driver_temperature_c": [
+        37.70000076293945,
+        37.70000076293945,
+        44.10000228881836,
+        48.0,
+        47.900001525878906,
+        51.29999923706055,
+        39.0
+      ],
+      "effort_device_timestamp": {
+        "s": 512383,
+        "ns": 894303129
+      },
+      "effort_sdk_nm": [
+        -0.04679999923706055,
+        0.0,
+        0.3948750257492065,
+        0.0,
+        0.06926400756835938,
+        0.0,
+        0.017316001892089844
+      ],
+      "calibrated": true,
+      "protocol_version": [
+        1,
+        6
+      ],
+      "joint_names": [
+        "joint_1",
+        "joint_2",
+        "joint_3",
+        "joint_4",
+        "joint_5",
+        "joint_6",
+        "joint_7"
+      ],
+      "joint_limits": [
+        [
+          -2.8,
+          2.8,
+          -3.77,
+          3.77,
+          -0.0,
+          0.0
+        ],
+        [
+          -1.2,
+          2.0,
+          -3.77,
+          3.77,
+          -0.0,
+          0.0
+        ],
+        [
+          -2.8,
+          2.8,
+          -3.77,
+          3.77,
+          -0.0,
+          0.0
+        ],
+        [
+          -1.0,
+          2.2,
+          -3.77,
+          3.77,
+          -0.0,
+          0.0
+        ],
+        [
+          -2.7,
+          2.7,
+          -12.56,
+          12.56,
+          -0.0,
+          0.0
+        ],
+        [
+          -0.85,
+          0.85,
+          -12.56,
+          12.56,
+          -0.0,
+          0.0
+        ],
+        [
+          -0.78,
+          0.78,
+          -12.56,
+          12.56,
+          -0.0,
+          0.0
+        ]
+      ],
+      "joint_limits_source": "sdk_static",
+      "series": 29,
+      "received": 512383.8933247,
+      "timestamp": {
+        "s": 512383,
+        "ns": 894303129
+      },
+      "capture_completed": 512383.893413425,
+      "sdk_message_entered": 512383.893316525,
+      "udp_received_at": 512383.893308469,
+      "kcp_process_entered": 512383.893310423,
+      "udp_ingress": {
+        "udp_received_at": 512383.893308469,
+        "bytes": 428,
+        "clock": "host_monotonic_after_recvfrom",
+        "kernel_timestamp_available": true,
+        "kcp_segments_conv_cmd_sn_una_ts_fragment": [
+          [
+            10,
+            81,
+            205,
+            2,
+            498,
+            0
+          ]
+        ],
+        "kernel_realtime_ns": 1791514323906367471,
+        "kernel_monotonic_estimate": 512383.892792311,
+        "clock_sampling_uncertainty_ns": 55,
+        "clock_adjustments_bounded": false
+      },
+      "sequence": 100,
+      "duplicate_frames": 0,
+      "firmware": {
+        "backend_git": "5125461",
+        "build_time": "2026-09-11T09:53:26.656401872+08:00",
+        "source": "server_greeting"
+      },
+      "effort_model_nm": [
+        -0.04679999923706055,
+        0.0,
+        -0.3948750257492065,
+        0.0,
+        -0.06926400756835938,
+        -0.0,
+        -0.017316001892089844
+      ]
+    },
+    "left": {
+      "parking_stop": null,
+      "pos": [
+        0.0024093784829514998,
+        1.5624077688353106,
+        -1.5671964939042782,
+        0.004722854632791325,
+        0.002463657034918677,
+        0.0029145634969827182,
+        0.002607467733782956
+      ],
+      "vel": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "motor_states": [
+        "normal",
+        "normal",
+        "normal",
+        "normal",
+        "normal",
+        "normal",
+        "normal"
+      ],
+      "session_holder": 0,
+      "mine": 10,
+      "initialized": false,
+      "temperature_freshness": "unknown_cached_sdk_value",
+      "motor_temperature_c": [
+        30.100000381469727,
+        30.399999618530273,
+        32.0,
+        32.900001525878906,
+        33.400001525878906,
+        36.20000076293945,
+        34.70000076293945
+      ],
+      "driver_temperature_c": [
+        39.20000076293945,
+        37.79999923706055,
+        43.400001525878906,
+        44.400001525878906,
+        40.400001525878906,
+        47.79999923706055,
+        41.70000076293945
+      ],
+      "effort_device_timestamp": {
+        "s": 512383,
+        "ns": 894110460
+      },
+      "effort_sdk_nm": [
+        0.32759999465942385,
+        0.32759999465942385,
+        0.039487502574920647,
+        0.15795001029968259,
+        0.0,
+        -0.06926400756835938,
+        -0.03463200378417969
+      ],
+      "calibrated": true,
+      "protocol_version": [
+        1,
+        6
+      ],
+      "joint_names": [
+        "joint_1",
+        "joint_2",
+        "joint_3",
+        "joint_4",
+        "joint_5",
+        "joint_6",
+        "joint_7"
+      ],
+      "joint_limits": [
+        [
+          -2.8,
+          2.8,
+          -3.77,
+          3.77,
+          -0.0,
+          0.0
+        ],
+        [
+          -1.2,
+          2.0,
+          -3.77,
+          3.77,
+          -0.0,
+          0.0
+        ],
+        [
+          -2.8,
+          2.8,
+          -3.77,
+          3.77,
+          -0.0,
+          0.0
+        ],
+        [
+          -1.0,
+          2.2,
+          -3.77,
+          3.77,
+          -0.0,
+          0.0
+        ],
+        [
+          -2.7,
+          2.7,
+          -12.56,
+          12.56,
+          -0.0,
+          0.0
+        ],
+        [
+          -0.85,
+          0.85,
+          -12.56,
+          12.56,
+          -0.0,
+          0.0
+        ],
+        [
+          -0.78,
+          0.78,
+          -12.56,
+          12.56,
+          -0.0,
+          0.0
+        ]
+      ],
+      "joint_limits_source": "sdk_static",
+      "series": 29,
+      "received": 512383.893647262,
+      "timestamp": {
+        "s": 512383,
+        "ns": 894110460
+      },
+      "capture_completed": 512383.893744944,
+      "sdk_message_entered": 512383.893637945,
+      "udp_received_at": 512383.893628757,
+      "kcp_process_entered": 512383.893631182,
+      "udp_ingress": {
+        "udp_received_at": 512383.893628757,
+        "bytes": 473,
+        "clock": "host_monotonic_after_recvfrom",
+        "kernel_timestamp_available": true,
+        "kcp_segments_conv_cmd_sn_una_ts_fragment": [
+          [
+            10,
+            81,
+            149,
+            2,
+            391,
+            0
+          ]
+        ],
+        "kernel_realtime_ns": 1791514323906846746,
+        "kernel_monotonic_estimate": 512383.893271581,
+        "clock_sampling_uncertainty_ns": 50,
+        "clock_adjustments_bounded": false
+      },
+      "sequence": 72,
+      "duplicate_frames": 0,
+      "firmware": {
+        "backend_git": "5125461",
+        "build_time": "2026-09-11T09:53:26.656401872+08:00",
+        "source": "server_greeting"
+      },
+      "effort_model_nm": [
+        0.32759999465942385,
+        0.32759999465942385,
+        -0.039487502574920647,
+        0.15795001029968259,
+        -0.0,
+        0.06926400756835938,
+        0.03463200378417969
+      ]
+    },
+    "theta": {
+      "parking_stop": null,
+      "pos": 0.08152873684612637,
+      "range": [
+        0,
+        0.4220003100977257
+      ],
+      "pulse_per_meter": 1335063.0,
+      "configured_speed": 33377.0,
+      "maximum_speed": 330000.0,
+      "state": "LsAlgorithmControl",
+      "calibrated": true,
+      "received": 512383.892925545,
+      "timestamp": {
+        "s": 512383,
+        "ns": 893628995
+      },
+      "device_time_ns": 729566713514,
+      "raw_timestamp": {
+        "seconds": 729,
+        "nanoseconds": 566713514
+      },
+      "capture_completed": 512383.89294439,
+      "sdk_message_entered": 512383.892916368,
+      "udp_received_at": 512383.89290696,
+      "kcp_process_entered": 512383.892909655,
+      "udp_ingress": {
+        "udp_received_at": 512383.89290696,
+        "bytes": 119,
+        "clock": "host_monotonic_after_recvfrom",
+        "kernel_timestamp_available": true,
+        "kcp_segments_conv_cmd_sn_una_ts_fragment": [
+          [
+            10,
+            81,
+            95,
+            2,
+            281,
+            0
+          ]
+        ],
+        "kernel_realtime_ns": 1791514323906239422,
+        "kernel_monotonic_estimate": 512383.892664232,
+        "clock_sampling_uncertainty_ns": 95,
+        "clock_adjustments_bounded": false
+      },
+      "device_dt_ns": 3972500,
+      "receive_dt_s": 0.0002818159991875291,
+      "velocity_valid": true,
+      "velocity": 0.0,
+      "sequence": 45,
+      "duplicate_frames": 0,
+      "firmware": {
+        "backend_git": "d165185",
+        "build_time": "2026-09-23T09:06:29.053271666+08:00",
+        "source": "server_greeting"
+      }
+    },
+    "base": {
+      "parking_stop": null,
+      "pos": [
+        2.2535996380169454,
+        0.0546669407226519,
+        0.7144419645778131,
+        1.108617502784877,
+        1.5516599164660232,
+        1.4665335701182944,
+        -2.478702030864862,
+        -0.2346795861810319
+      ],
+      "vel": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "motor_states": [
+        "normal",
+        "normal",
+        "normal",
+        "normal",
+        "normal",
+        "normal",
+        "normal",
+        "normal"
+      ],
+      "session_holder": 0,
+      "mine": 11,
+      "initialized": false,
+      "odom": [
+        0.0011271844097130589,
+        0.002066522998066252,
+        -0.02091390499845147
+      ],
+      "body_velocity": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "state": "BsParked",
+      "warning": null,
+      "battery": {
+        "voltage": 51.130001068115234,
+        "thousandth": 700,
+        "charging": false
+      },
+      "received": 512383.891213609,
+      "timestamp": {
+        "s": 512383,
+        "ns": 891748007
+      },
+      "capture_completed": 512383.891296895,
+      "sdk_message_entered": 512383.891202238,
+      "udp_received_at": 512383.891191768,
+      "kcp_process_entered": 512383.891194273,
+      "udp_ingress": {
+        "udp_received_at": 512383.891191768,
+        "bytes": 618,
+        "clock": "host_monotonic_after_recvfrom",
+        "kernel_timestamp_available": true,
+        "kcp_segments_conv_cmd_sn_una_ts_fragment": [
+          [
+            11,
+            81,
+            39,
+            2,
+            168,
+            0
+          ]
+        ],
+        "kernel_realtime_ns": 1791514323904759690,
+        "kernel_monotonic_estimate": 512383.891184535,
+        "clock_sampling_uncertainty_ns": 60,
+        "clock_adjustments_bounded": false
+      },
+      "sequence": 16,
+      "duplicate_frames": 0,
+      "firmware": {
+        "backend_git": "75e9f7e",
+        "build_time": "2026-06-12T14:44:05.966210424+08:00",
+        "source": "server_greeting"
+      }
+    }
+  },
+  "device_timestamps": {
+    "right": {
+      "s": 512383,
+      "ns": 894303129
+    },
+    "left": {
+      "s": 512383,
+      "ns": 894110460
+    },
+    "theta": {
+      "s": 512383,
+      "ns": 893628995
+    },
+    "base": {
+      "s": 512383,
+      "ns": 891748007
+    }
+  },
+  "dispatch": {
+    "wire": {
+      "right": null,
+      "left": null,
+      "theta": null,
+      "base": null
+    },
+    "wire_first": {
+      "right": null,
+      "left": null,
+      "theta": null,
+      "base": null
+    }
+  },
+  "timing": {
+    "snapshot_started": 512383.893805347,
+    "snapshot_completed": 512383.89385494,
+    "feedback_observations": {
+      "ages_ms": {
+        "left": 0.22070197155699134,
+        "right": 0.5432639736682177,
+        "base": 2.6543549611233175,
+        "theta": 0.9424189920537174
+      },
+      "skew_ms": 2.433652989566326,
+      "all_device_skew_ms": 2.433652989566326,
+      "pairwise_ms": {
+        "left-right": 0.3225620021112263,
+        "left-base": 2.433652989566326,
+        "left-theta": 0.721717020496726,
+        "right-base": 2.1110909874551,
+        "right-theta": 0.3991550183854997,
+        "base-theta": 1.7119359690696
+      },
+      "samples": 11,
+      "invalid_samples": 0,
+      "event_count": 0,
+      "error": null,
+      "max_skew_ms": 6.541601032949984,
+      "last_second_max_skew_ms": 6.541601032949984,
+      "max_sample_gap_ms": 2.4788769660517573
+    },
+    "offered_at": 512383.893914521,
+    "cache_reused": false,
+    "publication_sequence": 11,
+    "mailbox_read_ms": 0.09369500912725925,
+    "consumed_at": 512383.894170398
+  },
+  "feedback_policy": "strict",
+  "latency_policy": "hold-resume",
+  "source_run": "calibration/runs/wrist-calibration/20261009T025124.986613Z"
+}

@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "parent_frame": "maver_x4_asm_mount1",
+  "mount_side_at_default": "outside_left_arm",
+  "T_parent_from_design": [
+    [
+      -1,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      -1,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      1,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      1
+    ]
+  ],
+  "fixed_camera_pitch_deg": 32,
+  "source": "D405_LEFT_V1_FIXED32 CAD; outward flange-Z orientation is a planning assumption pending operator confirmation.",
+  "nominal_geometry_only": true,
+  "measured_extrinsic": false
+}

@@ -5,6 +5,8 @@ import numpy as np
 import pytest
 from policy_sim.calibration.charuco import detect, make_board
 from wrist_camera_worker import SDKCornerRectifier
+from pathlib import Path
+import json
 
 CONFIG={'dictionary':'DICT_4X4_50','squares_x':5,'squares_y':5,
         'square_length_m':.0174,'marker_length_m':.0116,'marker_ids':list(range(12))}
@@ -36,6 +38,19 @@ def test_sdk_rectifier_uses_sdk_rays_not_opencv_inverse_coefficients():
     points=np.array([[550.,280.],[770.,470.]])
     np.testing.assert_allclose(rectifier(points),points+[2.7,-1.76])
     assert len(calls)==2 and all(c[0] is intrinsics and c[2]==1 for c in calls)
+
+def test_actual_d405_snapshot_corrects_nonzero_native_distortion():
+    rs=pytest.importorskip('pyrealsense2')
+    metadata=json.loads((Path(__file__).resolve().parents[2]/'config/camera/realsense_d405_rgb_intrinsics_20261008.json').read_text())
+    intrinsics=rs.intrinsics();k=np.asarray(metadata['K'])
+    intrinsics.width=metadata['width'];intrinsics.height=metadata['height']
+    intrinsics.fx=k[0,0];intrinsics.fy=k[1,1];intrinsics.ppx=k[0,2];intrinsics.ppy=k[1,2]
+    intrinsics.model=rs.distortion.inverse_brown_conrady;intrinsics.coeffs=metadata['native_distortion']
+    rays=np.array([[-.45,-.25,1.],[.4,.22,1.],[0.,0.,1.]])
+    native=np.array([rs.rs2_project_point_to_pixel(intrinsics,p.tolist()) for p in rays])
+    ideal=(rays@k.T)[:,:2]
+    np.testing.assert_allclose(SDKCornerRectifier(rs,intrinsics)(native),ideal,atol=.001)
+    assert np.max(abs(native-ideal))>1
 
 def test_detector_preserves_raw_corners_but_fits_pinhole_pixels():
     image=make_board(CONFIG).generateImage((600,600),marginSize=50)

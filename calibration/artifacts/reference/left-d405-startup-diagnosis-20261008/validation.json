@@ -1,0 +1,37 @@
+{
+  "scope": "Recorded failed startup diagnosis and fresh read-only robot check; no robot actuation",
+  "original_report": "calibration/runs/wrist-calibration/20261009T024041.597628Z/audit/summary.json",
+  "original_cycle_failures": [
+    {
+      "sequence": 1203,
+      "error": "timing IK/deadline failure: BoundaryStateUnrecoverable: finite base state is outside the braking envelope",
+      "lift_height_mm": 421.9988120410797,
+      "lift_speed_mm_s": 0.1960828687142576,
+      "compute_ms": 1.4772950089536607,
+      "slot_remaining_ms": 17.644395004026592
+    }
+  ],
+  "corrected_message": "1/1500 audit cycles failed; cycle 1203: timing IK/deadline failure: BoundaryStateUnrecoverable: finite base state is outside the braking envelope; measured lift 421.998812 mm, speed 0.196083 mm/s; Available latency percentiles: cycle_to_udp_p99_ms=4.94 ms (limit 8 ms), source_to_udp_p99_ms=12.60 ms (limit 15 ms)",
+  "original_latency_p99_ms": {
+    "cycle_to_udp_ms": 4.935720069333908,
+    "source_to_udp_ms": 12.597420780221
+  },
+  "recheck_report": "calibration/runs/left-d405-live-runner-20261008/readonly-recheck/audit/summary.json",
+  "recheck": {
+    "passed": true,
+    "cycles": 1500,
+    "attempted_cycles": 1500,
+    "failed_cycles": 0,
+    "skipped_slots": 0,
+    "motion_commands_sent": 0,
+    "gateway_observed_feedback_clean": true,
+    "performance_passed": true
+  },
+  "recheck_latency_p99_ms": {
+    "cycle_to_udp_ms": 4.699587713112123,
+    "source_to_udp_ms": 11.9111344817793
+  },
+  "tests_passed": 203,
+  "acceptance_limits_changed": false,
+  "failed_audit_accepted": false
+}

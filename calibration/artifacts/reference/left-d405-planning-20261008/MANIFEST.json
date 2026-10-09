@@ -1,0 +1,6 @@
+{
+  "config/camera/realsense_d405_left_fixed32_plan.json": "c5819600855bb93db427c8386725327cb2908733e39d44011818943c8b04892b",
+  "artifacts/reference/left-d405-planning-20261008/validation.json": "74b3b3a3eb48e4e082a56d770c074a09242cb0bfa10d353ea3aa005584eb6987",
+  "assets_local/left_fixed32/assembly_mm/01_D405_LEFT_fixed32_wrist_mount.stl": "559d2d2e66cefdf599544533f1bb15e425aef1fad0cacefd556c3dca623d12f8",
+  "assets_local/left_fixed32/reference/d405_official_camera_frame_mm.stl": "4f41b3b0150b2dc6d7010036e2395559fb23688b271c07d8a99f89e55fefacd2"
+}

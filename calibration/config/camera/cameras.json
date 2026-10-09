@@ -22,8 +22,10 @@
       "mount": "fixed 33 degrees; outside right arm at default",
       "pose_plan": "config/camera/realsense_d435i_right_fixed33_outside_plan.json",
       "worker": "wrist_camera_worker.py",
-      "candidate": "config/camera/realsense_d435i_right_candidate_20261006.json",
-      "calibration_status": "candidate_requires_physical_validation"
+      "candidate": "config/camera/realsense_d435i_right_candidate_20261008.json",
+      "calibration_status": "candidate_requires_physical_validation",
+      "intrinsics": "config/camera/realsense_d435i_rgb_intrinsics_20261008.json",
+      "status": "Physical measured-FK fit saved; candidate requires independent validation"
     },
     "left": {
       "model": "RealSense D405",
@@ -31,11 +33,14 @@
       "parent_frame": "maver_x4_asm_mount1",
       "camera_frame": "realsense_230422271628_color_optical",
       "kind": "eye_in_hand",
-      "pose_plan": null,
+      "pose_plan": "config/camera/realsense_d405_left_fixed32_plan.json",
       "worker": "wrist_camera_worker.py",
-      "status": "Shared camera/PnP and offline solver available; left mount geometry and motion route not yet validated",
-      "calibration_status": "uncalibrated"
+      "status": "Physical measured-FK fit saved; candidate requires independent validation",
+      "calibration_status": "candidate_requires_physical_validation",
+      "nominal_pose_plan": "config/camera/realsense_d405_left_fixed32_plan.json",
+      "intrinsics": "config/camera/realsense_d405_rgb_intrinsics_20261008.json",
+      "candidate": "config/camera/realsense_d405_left_candidate_20261008.json"
     }
   },
-  "parameter_snapshot": "config/camera/camera_parameters_20261006.json"
+  "parameter_snapshot": "config/camera/camera_parameters_20261008.json"
 }

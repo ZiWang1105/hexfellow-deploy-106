@@ -1,0 +1,10 @@
+{
+  "release": "/home/ziwang/projects/agentic-mobile-manipulator/configs/local/desktop_umi_research.json",
+  "changed_source": "src/policy_sim/control/command_limits.py",
+  "previous_sha256": "8bcbbb544c243e9b00811be15e5380e66bd1975a5da71513e23382c250939b12",
+  "current_sha256": "d1a217f25ebadf3cc0023a0f9ff3883b429b58011d5ec3a80697d79813186d4f",
+  "review_flags_unchanged": true,
+  "profile_and_mapping_unchanged": true,
+  "configuration_validation_passed": true,
+  "hardware_commands_sent": 0
+}

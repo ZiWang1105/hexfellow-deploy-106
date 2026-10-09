@@ -1,0 +1,6 @@
+{
+  "config/camera/realsense_d405_left_fixed32_plan.json": "2bd9f75be2f16526a02398093cf83e3724ef751bbc4e3444e5543c7781b7c003",
+  "config/camera/realsense_d405_rgb_intrinsics_20261008.json": "63df3baeb4b76aacd2f8a7fecc873afe3dd5f678a3e59472a04670a2a2d31ec4",
+  "config/camera/realsense_d435i_rgb_intrinsics_20261008.json": "b5658ad7a25407ee5f97efc447f0c30d547eeb450b95315596b2af2fbf42687a",
+  "artifacts/reference/left-d405-sdk-planning-20261008/validation.json": "fc6bdf4c6185a7127c8028bc7670cc9713acbb756c849ca2dc51f1ce5412f405"
+}

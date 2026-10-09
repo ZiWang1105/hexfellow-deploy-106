@@ -21,7 +21,7 @@ OFFLINE_TOOLS = {
         'preview': 'render_wrist_open_gripper.py',
         'verify': 'verify_wrist_ground_truth.py',
     },
-    'left': {},
+    'left': {'plan': 'plan_left_wrist_calibration.py', 'preview': 'preview_left_wrist_calibration.py', 'verify': 'verify_wrist_ground_truth.py'},
 }
 
 def cameras():
@@ -29,8 +29,7 @@ def cameras():
 
 def supported_actions(camera):
     actions = ['camera', 'fit', *OFFLINE_TOOLS[camera]]
-    if camera != 'left':
-        actions.insert(0, 'run')
+    actions.insert(0, 'run')
     if camera == 'head':
         actions.append('validate')
     return actions
@@ -43,11 +42,11 @@ def build_command(camera, action, arguments):
         environment[variable] = '1'
     environment.setdefault('MUJOCO_GL', 'egl')
     if action == 'run':
-        if camera == 'left':
-            raise ValueError('Left D405 needs a separately validated mount and pose plan. Use left camera / left fit; no right-arm route is reused.')
         command = [python, str(TOOLS/'calibrate_robot.py')]
-        if camera == 'right':
+        if camera in ('left', 'right'):
             command += ['--wrist-plan', str(ROOT/selected['pose_plan'])]
+        if camera == 'left':
+            command += ['--port', '8774']
     elif action == 'fit':
         if arguments == ['--help']:
             data = None

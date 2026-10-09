@@ -3,15 +3,45 @@
   "parent_frame": "maver_x4_asm_mount2",
   "mount_side_at_default": "outside_right_arm",
   "T_parent_from_design": [
-    [-1.0, 0.0, 0.0, 0.0],
-    [0.0, -1.0, 0.0, 0.0],
-    [0.0, 0.0, 1.0, 0.0],
-    [0.0, 0.0, 0.0, 1.0]
+    [
+      -1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      -1.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      1.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
   ],
   "fixed_camera_pitch_deg": 33,
   "source": "User correction on 2026-10-06: camera is on the outside of the right arm at default pose; consistent with supplied IMG_5426/IMG_5427 mounting photos.",
   "interpretation": "Rotate the complete design 180 degrees about the wrist/flange Z axis. Apply to mount mesh, camera housing and RGB optical transform together.",
   "outside_check": "In the URDF base frame at default, the camera center has a more negative Y coordinate than the right wrist. Base +Y is robot left.",
   "nominal_geometry_only": true,
-  "measured_extrinsic": false
+  "measured_extrinsic": false,
+  "optical_axis_roll_deg": 180.0,
+  "optical_roll_provenance": {
+    "status": "nominal_orientation_correction_pending_full_calibration",
+    "source": "User real-image rotation correction, 2026-10-08; diagnostic fit of current measured-joint/PnP pairs",
+    "diagnostic_orientation_difference_deg": 179.48596773966835,
+    "axis": "color optical +Z; changes X/Y basis and preserves nominal pupil/forward ray",
+    "housing_geometry_changed": false,
+    "measured_pupil_translation": false,
+    "note": "Keep the outside-right CAD attachment and fixed 33-degree pitch. This roll correction is independent of the 180-degree flange-Z installation. Do not rotate SDK images or reuse the earlier candidate as a newly accepted extrinsic."
+  }
 }

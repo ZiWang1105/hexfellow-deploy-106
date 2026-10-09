@@ -1,0 +1,192 @@
+{
+  "simultaneously_streamed": true,
+  "robot_commands_sent": 0,
+  "cameras_closed_after_check": true,
+  "results": {
+    "left": {
+      "device": "RealSense D405",
+      "serial": "230422271628",
+      "usb": "3.2",
+      "profile": {
+        "width": 1280,
+        "height": 720,
+        "fps": 30
+      },
+      "image_shape": [
+        720,
+        1280,
+        3
+      ],
+      "K": [
+        [
+          651.4862670898438,
+          0.0,
+          643.0418701171875
+        ],
+        [
+          0.0,
+          650.7327880859375,
+          362.6119689941406
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "native_distortion_model": "distortion.inverse_brown_conrady",
+      "native_distortion": [
+        -0.05051824077963829,
+        0.06193859130144119,
+        -9.105065691983327e-05,
+        0.0008188839419744909,
+        -0.02104456163942814
+      ],
+      "pnp_distortion": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "corner_processing": "SDK-deprojected pinhole pixels",
+      "frames": 347,
+      "duration_s": 11.532222909969278,
+      "received_fps": 30.002888662591918,
+      "sensor_timestamp_fps": 29.999414073943868,
+      "host_frame_interval_p99_ms": 33.48140933085233,
+      "frame_number_gaps": 0,
+      "last_frame_timing": {
+        "image_time": 500914.3916387558,
+        "image_timestamp_ns": 1791502854421202944,
+        "timestamp_domain": "timestamp_domain.global_time",
+        "host_receipt_monotonic_s": 500914.422757427,
+        "host_clock_bridge": {
+          "realtime_s": 1791502854.436333,
+          "monotonic_s": 500914.422757928,
+          "uncertainty_s": 1.6999547369778156e-07
+        },
+        "synchronization": "stationary host-time pairing; no hardware exposure trigger",
+        "timestamp_semantics": "SDK GLOBAL_TIME readout plus device exposure-midpoint metadata correction",
+        "clock_mapping_uncertainty_s": 0.00200853170492414,
+        "timing_accepted": true,
+        "sdk_clock_mapping_allowance_s": 0.002,
+        "uncertainty_is_estimate": true,
+        "exposure_midpoint_timestamp_ns": 1791502854405213952,
+        "exposure_midpoint_from_readout_s": -0.015989,
+        "frame_age_at_receipt_s": 0.031118671176955104,
+        "sdk_mapping_window_residual_s": 6.884872292238763e-06,
+        "sdk_mapping_drift_s_per_s": -0.0001196825149498648,
+        "host_bridge_window_variation_s": 4.76837158203125e-07,
+        "clock_mapping_samples": 90,
+        "timing_reason": "Exposure clock mapping passed the stationary host-time checks",
+        "rgb_timestamp_ms": 1791502854421.203,
+        "rgb_frame_number": 346,
+        "rgb_timestamp_domain": "timestamp_domain.global_time",
+        "sensor_metadata": {
+          "frame_counter": 346,
+          "frame_timestamp": 1171857314,
+          "sensor_timestamp": 1171841325,
+          "actual_exposure": 31979,
+          "gain_level": 0,
+          "auto_exposure": 1,
+          "time_of_arrival": 1791502854435,
+          "backend_timestamp": 1791502854421,
+          "actual_fps": 29999
+        }
+      }
+    },
+    "right": {
+      "device": "RealSense D435I",
+      "serial": "243222074562",
+      "usb": "3.2",
+      "profile": {
+        "width": 1280,
+        "height": 720,
+        "fps": 30
+      },
+      "image_shape": [
+        720,
+        1280,
+        3
+      ],
+      "K": [
+        [
+          909.8963623046875,
+          0.0,
+          643.9840698242188
+        ],
+        [
+          0.0,
+          909.7846069335938,
+          373.11004638671875
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "native_distortion_model": "distortion.inverse_brown_conrady",
+      "native_distortion": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pnp_distortion": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "corner_processing": "native zero-distortion pixels",
+      "frames": 348,
+      "duration_s": 11.572514641971793,
+      "received_fps": 29.98484000542825,
+      "sensor_timestamp_fps": 29.979652481958045,
+      "host_frame_interval_p99_ms": 33.48612837377004,
+      "frame_number_gaps": 0,
+      "last_frame_timing": {
+        "image_time": 500914.3978357315,
+        "image_timestamp_ns": 1791502854411493888,
+        "timestamp_domain": "timestamp_domain.global_time",
+        "host_receipt_monotonic_s": 500914.430517976,
+        "host_clock_bridge": {
+          "realtime_s": 1791502854.4440935,
+          "monotonic_s": 500914.4305183415,
+          "uncertainty_s": 1.0550138540565968e-07
+        },
+        "synchronization": "stationary host-time pairing; no hardware exposure trigger",
+        "timestamp_semantics": "SDK GLOBAL_TIME readout plus device exposure-midpoint metadata correction",
+        "clock_mapping_uncertainty_s": 0.0020036503689101594,
+        "timing_accepted": true,
+        "sdk_clock_mapping_allowance_s": 0.002,
+        "uncertainty_is_estimate": true,
+        "exposure_midpoint_timestamp_ns": 1791502854411410688,
+        "exposure_midpoint_from_readout_s": -8.3e-05,
+        "frame_age_at_receipt_s": 0.03268224449129775,
+        "sdk_mapping_window_residual_s": 1.829611787449082e-06,
+        "sdk_mapping_drift_s_per_s": -0.0001233194549413842,
+        "host_bridge_window_variation_s": 7.152557373046875e-07,
+        "clock_mapping_samples": 90,
+        "timing_reason": "Exposure clock mapping passed the stationary host-time checks",
+        "rgb_timestamp_ms": 1791502854411.494,
+        "rgb_frame_number": 347,
+        "rgb_timestamp_domain": "timestamp_domain.global_time",
+        "sensor_metadata": {
+          "frame_counter": 347,
+          "frame_timestamp": 4288629662,
+          "sensor_timestamp": 4288629579,
+          "auto_exposure": 1,
+          "time_of_arrival": 1791502854443,
+          "backend_timestamp": 1791502854411,
+          "actual_fps": 29979
+        }
+      }
+    }
+  },
+  "failures": {}
+}

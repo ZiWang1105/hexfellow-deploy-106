@@ -91,3 +91,75 @@ def test_skew_retry_requires_verified_readonly_clean_shutdown(condition):
     if condition=='readiness':r['motion_readiness_passed']=False
     if condition=='missing_motion_count':del r['gateway']['motion_commands_sent']
     assert not retryable_feedback_audit(r)
+
+
+def test_boundary_rejection_is_not_misreported_as_exceeded_latency(tmp_path):
+    import json
+    from calibrate_robot import audit_cycle_failures,preflight_failure_detail
+    row=dict(kind='timing',state=dict(q=[0,0,0,.4219988120410797],v=[0,0,0,.0001960828687142576]),
+        timing=dict(sequence=1203,passed=False,compute_ms=1.4772950089536607,
+        slot_remaining_ms=17.644395004026592,
+        error='timing IK/deadline failure: BoundaryStateUnrecoverable: finite base state is outside the braking envelope'))
+    (tmp_path/'trace.jsonl').write_text(json.dumps(row)+'\n')
+    report=dict(performance_passed=False,gateway_observed_feedback_clean=True,cycles=1499,
+        attempted_cycles=1500,failed_cycles=1,skipped_slots=0,
+        performance_acceptance_limits={'cycle_to_udp_p99_ms':8.,'source_to_udp_p99_ms':15.},
+        timing_ms_p50_p95_p99_max={'cycle_to_udp_ms':[3.84,4.17,4.9357200693,6.7],
+            'source_to_udp_ms':[8.54,9.3,12.5974207802,13.38]},
+        error='audit performance/deadline targets not met; inspect all-cycle trace',
+        audit_cycle_failures=audit_cycle_failures(tmp_path))
+    msg=preflight_failure_detail(report)
+    assert '1/1500 audit cycles failed' in msg
+    assert 'cycle 1203' in msg and 'BoundaryStateUnrecoverable' in msg
+    assert '421.998812 mm' in msg and '0.196083 mm/s' in msg
+    assert '4.94 ms (limit 8 ms)' in msg and '12.60 ms (limit 15 ms)' in msg
+    assert 'timing acceptance limits exceeded' not in msg and 'unavailable' not in msg
+    assert report['performance_passed'] is False
+    assert not retryable_feedback_audit(report)
+
+
+def scheduling_denied():
+    return dict(mode='audit',passed=False,cycles=0,attempted_cycles=0,failed_cycles=0,
+        motion_commands_sent=0,gateway=dict(kind='closed',motion_commands_sent=0,stop_failures=[],
+        fault='RuntimeError: RealtimeKit priority denied: Call failed: Access denied'))
+
+
+def test_scheduling_denial_cools_down_then_requires_new_full_pass(tmp_path,monkeypatch):
+    import calibrate_robot
+    sleeps=[];monkeypatch.setattr(calibrate_robot.time,'sleep',sleeps.append)
+    bad=scheduling_denied();good=dict(transient(),passed=True,gateway_observed_feedback_clean=True)
+    reports=iter([bad,good]);seen=[]
+    def run(path):seen.append(path);return next(reports)
+    final,path=startup_audit(run,lambda r:r['passed'],tmp_path)
+    assert sleeps==[21.] and len(seen)==2 and final is good and not bad['passed']
+    assert path.parent.name=='audit-retry-2'
+    import json
+    history=json.loads((tmp_path/'startup-audits.json').read_text())
+    assert history[0]['cooldown_s']==21. and history[0]['passed'] is False
+
+
+def test_persistent_scheduling_denial_remains_blocked_after_one_retry(tmp_path,monkeypatch):
+    import calibrate_robot
+    sleeps=[];monkeypatch.setattr(calibrate_robot.time,'sleep',sleeps.append)
+    seen=[]
+    def run(path):seen.append(path);return scheduling_denied()
+    final,_=startup_audit(run,lambda r:r['passed'],tmp_path)
+    assert len(seen)==2 and sleeps==[21.] and final['passed'] is False
+
+
+@pytest.mark.parametrize('condition',['motion','gateway_motion','unclosed','stop_failure',
+    'close_error','live','qualified_cycles','attempted_cycles','missing_motion_count','other_fault'])
+def test_scheduling_retry_never_resumes_motion_or_unconfirmed_shutdown(condition):
+    from calibrate_robot import retryable_scheduling_audit
+    r=scheduling_denied()
+    if condition=='motion':r['motion_commands_sent']=1
+    if condition=='gateway_motion':r['gateway']['motion_commands_sent']=1
+    if condition=='unclosed':r['gateway']['kind']='running'
+    if condition=='stop_failure':r['gateway']['stop_failures']=['unconfirmed']
+    if condition=='close_error':r['close_error']='close failed'
+    if condition=='live':r['mode']='live'
+    if condition=='qualified_cycles':r['cycles']=1
+    if condition=='attempted_cycles':r['attempted_cycles']=1
+    if condition=='missing_motion_count':del r['gateway']['motion_commands_sent']
+    if condition=='other_fault':r['gateway']['fault']='HardwareSafetyError: Network is unreachable'
+    assert not retryable_scheduling_audit(r)

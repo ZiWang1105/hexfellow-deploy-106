@@ -1,0 +1,19 @@
+{
+  "date": "2026-10-08",
+  "scope": "Offline publication verification of the two recorded physical wrist candidates",
+  "calibration_tests_passed": 225,
+  "deployment_tests_passed": 261,
+  "upstream_tests_passed": 33,
+  "total_tests_passed": 519,
+  "both_portable_refits_match_saved_matrices_atol": 1e-12,
+  "heldout_reprojection_rms_px": {
+    "left": 7.921881469344646,
+    "right": 13.623685792294532
+  },
+  "upstream_revision": "e4dbcc9983516e20d59363680c60066a8571c0e6",
+  "upstream_branch": "zi/dev_camera",
+  "hardware_commands_sent": 0,
+  "physical_devices_opened": false,
+  "production_sensor_selection_changed": false,
+  "independent_physical_validation_performed": false
+}

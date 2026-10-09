@@ -39,39 +39,69 @@ def sha(path):
 def geometry_payload_hash(plan):
     keys=("initial_q","measured_start_q","parent_frame","camera_frame","serial","width","height","K",
           "T_parent_from_optical_nominal","T_base_from_board_nominal","bounds","table_assumption","poses","mount_installation")
-    return hashlib.sha256(json.dumps({k:plan[k] for k in keys},sort_keys=True,separators=(",",":"),allow_nan=False).encode()).hexdigest()
+    payload={k:plan[k] for k in keys}
+    if plan.get('capture_side')=='left':
+        for k in ('capture_side','mount_mesh','camera_mesh','T_parent_from_housing_nominal','approach_waypoints','gripper','intrinsics_provenance'):
+            payload[k]=plan[k]
+    return hashlib.sha256(json.dumps(payload,sort_keys=True,separators=(",",":"),allow_nan=False).encode()).hexdigest()
 
 
-def installed_camera_transforms():
+def installed_camera_transforms(side='right'):
     """One installation transform applies to the CAD, housing and optical pupil."""
-    installation = json.loads(INSTALLATION.read_text())
+    if side not in ('left','right'):
+        raise ValueError('Expected left or right mount')
+    installation_path=ROOT/'config/camera/left_fixed32_installation.json' if side=='left' else INSTALLATION
+    design_dir=ROOT/'assets_local/left_fixed32' if side=='left' else DESIGN
+    installation = json.loads(installation_path.read_text())
     transform = np.asarray(installation['T_parent_from_design'], float)
     if (transform.shape != (4, 4) or not np.isfinite(transform).all()
             or not np.allclose(transform[3], [0, 0, 0, 1])
             or not np.allclose(transform[:3, :3].T @ transform[:3, :3], np.eye(3))
             or not np.isclose(np.linalg.det(transform[:3, :3]), 1)):
         raise ValueError('Invalid right-wrist installation transform')
-    data = json.loads((DESIGN / 'design_and_validation.json').read_text())
+    data = json.loads((design_dir / 'design_and_validation.json').read_text())
     body = np.asarray(data['camera_transform_mm'], float)
     body[:3, 3] *= .001
     local = np.eye(4)
     local[:3, :3] = [[0, -1, 0], [1, 0, 0], [0, 0, 1]]
-    local[:3, 3] = [0, -.0325, .0207547]
-    return installation, transform @ body, transform @ body @ local
+    local[:3, 3] = [0, -.009, .0192] if side=='left' else [0, -.0325, .0207547]
+    optical = optical_roll(transform @ body @ local, installation.get('optical_axis_roll_deg', 0.))
+    return installation, transform @ body, optical
+
+
+def optical_roll(transform, degrees):
+    """Rotate sensor X/Y about its own forward axis, retaining the pupil.
+
+    This sensor orientation is independent of flange-side installation. Apply
+    it before rendering/projection/PnP simulation, never as a display flip.
+    Housing geometry and the nominal pupil position are unchanged assumptions.
+    """
+    result = np.asarray(transform, float).copy()
+    if result.shape != (4, 4) or not np.isfinite(result).all() or not np.isfinite(degrees):
+        raise ValueError('Invalid optical-axis roll')
+    a = math.radians(float(degrees))
+    rotation = np.array([[math.cos(a), -math.sin(a), 0.],
+                         [math.sin(a), math.cos(a), 0.], [0., 0., 1.]])
+    result[:3, :3] = result[:3, :3] @ rotation
+    return result
 
 
 def load_plan(path):
     path = Path(path)
     plan = json.loads(path.read_text())
+    side=plan.get('capture_side')
     installation = plan.get('mount_installation')
-    if not installation or installation.get('mount_side_at_default') != 'outside_right_arm':
+    expected_side='outside_left_arm' if side=='left' else 'outside_right_arm'
+    if not installation or installation.get('mount_side_at_default') != expected_side:
         raise ValueError('The old inner-side wrist plan is superseded; use the regenerated outside-right-arm plan')
-    current, _, optical = installed_camera_transforms()
+    current, _, optical = installed_camera_transforms('left' if side=='left' else 'right')
     if (installation != current
             or not np.allclose(plan['T_parent_from_optical_nominal'], optical, atol=1e-12, rtol=0)):
         raise ValueError('Wrist installation or optical transform changed; regenerate the outside mount plan')
-    if plan.get("schema_version") != 1 or plan.get("capture_side") != "right":
-        raise ValueError("Expected right-wrist eye-in-hand plan version 1")
+    if plan.get("schema_version") != 1 or side not in ('left','right'):
+        raise ValueError("Expected left/right eye-in-hand plan version 1")
+    if side=='left' and (plan.get('parent_frame')!='maver_x4_asm_mount1' or plan.get('serial')!='230422271628'):
+        raise ValueError('Left plan must identify mount1 and D405 serial 230422271628')
     if plan.get("pose_count") != 30 or len(plan.get("poses", [])) != 30:
         raise ValueError("Expected 30 validated wrist poses")
     for i, row in enumerate(plan["poses"], 1):
@@ -116,7 +146,9 @@ class WristStudy:
         self.pm, self.pd, self.pi, self.ai = original.pm, original.pd, original.pi, original.ai
         self.q0 = original.q0.copy()
         self.hand = self.pm.getFrameId(plan["parent_frame"])
-        self.lower, self.upper = np.asarray(plan["bounds"][0])[-7:] + .15, np.asarray(plan["bounds"][1])[-7:] - .15
+        self.side = plan.get('capture_side', 'right')
+        self.arm_slice = slice(4, 11) if self.side == 'left' else slice(11, 18)
+        self.lower, self.upper = np.asarray(plan["bounds"][0])[self.arm_slice] + .15, np.asarray(plan["bounds"][1])[self.arm_slice] - .15
         tree = ET.parse(original.scene)
         root = tree.getroot()
         for body in root.findall(".//body"):
@@ -140,26 +172,40 @@ class WristStudy:
                         ET.SubElement(board,"geom",type="box",pos=fmt(p),size=fmt([.0116/12,.0116/12,.0001]),rgba="0 0 0 1",group="4",contype="0",conaffinity="0")
         table = plan["table_assumption"]
         ET.SubElement(world,"geom",name="rough_table",type="box",pos=fmt(table["center_m"]),size=fmt(table["half_extents_m"]),rgba=".55 .40 .25 1",group="3",contype="0",conaffinity="0")
-        mount = root.find(".//body[@name='robot2_base']")
+        side_number = 1 if self.side == 'left' else 2
+        flange_body = 'robot_base' if self.side == 'left' else 'robot2_base'
+        mount = root.find(f".//body[@name='{flange_body}']")
         if mount is None:
             raise ValueError("GP80 wrist flange is absent from robot scene")
         asset = root.find("asset")
-        mesh = DESIGN / "assembly_mm/01_onepiece_ring_camera_33deg.stl"
-        ET.SubElement(asset,"mesh",name="d435i_fixed33_visual",file=str(mesh),scale=".001 .001 .001")
-        ET.SubElement(mount,"geom",name="d435i_fixed33_mount",type="mesh",mesh="d435i_fixed33_visual",
+        mesh = ROOT / plan['mount_mesh'] if self.side == 'left' else DESIGN / "assembly_mm/01_onepiece_ring_camera_33deg.stl"
+        mount_geom_name='d405_fixed32_mount' if self.side=='left' else 'd435i_fixed33_mount'
+        mount_mesh_name='d405_fixed32_visual' if self.side=='left' else 'd435i_fixed33_visual'
+        ET.SubElement(asset,"mesh",name=mount_mesh_name,file=str(mesh),scale=".001 .001 .001")
+        ET.SubElement(mount,"geom",name=mount_geom_name,type="mesh",mesh=mount_mesh_name,
                       pos=fmt(self.installation[:3,3]),quat=quat(self.installation[:3,:3]),
                       rgba=".08 .12 .15 1",group="3",contype="0",conaffinity="0")
-        data = json.loads((DESIGN / "design_and_validation.json").read_text())
+        design_dir = ROOT / 'assets_local/left_fixed32' if self.side == 'left' else DESIGN
+        data = json.loads((design_dir / "design_and_validation.json").read_text())
         body_t = np.asarray(data["camera_transform_mm"],float);body_t[:3,3]*=.001
         body_t = self.installation @ body_t
         camera = ET.SubElement(mount,"body",name="d435i_camera_housing",pos=fmt(body_t[:3,3]),quat=quat(body_t[:3,:3]))
-        ET.SubElement(camera,"geom",name="d435i_camera_box",type="box",pos="0 0 .0125275",size=".0125 .045 .0125275",rgba=".35 .4 .43 1",group="5",contype="0",conaffinity="0")
+        if self.side == 'left':
+            camera.set('name', 'd405_camera_housing')
+            ET.SubElement(asset, 'mesh', name='d405_body_visual', file=str(ROOT / plan['camera_mesh']), scale='.001 .001 .001')
+            ET.SubElement(camera, 'geom', name='d405_body_visual', type='mesh', mesh='d405_body_visual', rgba='.35 .4 .43 1', group='4', contype='0', conaffinity='0')
+            ET.SubElement(camera, 'geom', name='d405_camera_box', type='box', pos='0 0 .011575', size='.021075 .021075 .011575', rgba='.35 .4 .43 0', group='5', contype='0', conaffinity='0')
+        else:
+            ET.SubElement(camera,"geom",name="d435i_camera_box",type="box",pos="0 0 .0125275",size=".0125 .045 .0125275",rgba=".35 .4 .43 1",group="5",contype="0",conaffinity="0")
         optical = ET.SubElement(mount,"body",name=plan["camera_frame"],pos=fmt(self.x[:3,3]),quat=quat(self.x[:3,:3]))
         ET.SubElement(optical,"camera",name="wrist_calibration_view",quat="0 1 0 0",fovy=str(math.degrees(2*math.atan(800/(2*self.k[1,1])))))
         root.find("visual/global").set("offwidth","1400")
         root.find("visual/global").set("offheight","800")
         self.scene = self.out / "scene.xml"
         tree.write(self.scene)
+        if self.side == 'left':
+            from render_wrist_open_gripper import prepare_scene
+            self.scene, self.jaw_geometry = prepare_scene(self.scene, self.out / 'open-gripper', side='left')
         self.m = mujoco.MjModel.from_xml_path(str(self.scene))
         self.d = mujoco.MjData(self.m)
         self.mi = [self.m.joint(n).qposadr[0] for n in CONTROLLED_JOINTS]
@@ -186,7 +232,11 @@ class WristStudy:
                 if frozenset(names) in seams:continue
                 # Attachment contacts are intentional at the final flange. The
                 # camera box itself remains tested against forearm/torso/table.
-                if "d435i_fixed33_mount" in [self.m.geom(g).name for g in (g1,g2)] and any(n in ("maver_x4_asm_7_urdf_SLDASM2_link_7","robot2_base","maver_x4_asm_mount2") for n in names):
+                wrist_link = 'maver_x4_asm_7_urdf_SLDASM_link_7' if self.side == 'left' else 'maver_x4_asm_7_urdf_SLDASM2_link_7'
+                if mount_geom_name in [self.m.geom(g).name for g in (g1,g2)] and any(n in (wrist_link,flange_body,f"maver_x4_asm_mount{side_number}") for n in names):
+                    self.exclusions.append(names);continue
+                if self.side == 'left' and any(n.startswith('calibration_left_jaw_') for n in names) and any(n.startswith(('robot_base', 'maver_x4_asm_mount1', 'maver_x4_asm_7_urdf_SLDASM_link_6', 'maver_x4_asm_7_urdf_SLDASM_link_7')) for n in names if not n.startswith('calibration_left_jaw_')):
+                    # Existing near-neighbor gripper seams, preserved after jaw separation.
                     self.exclusions.append(names);continue
                 arm_housings=any(all((f"SLDASM{side}_" in n or n.startswith(f"robot{side}_")) for n in names) for side in (1,2))
                 if arm_housings:
@@ -197,20 +247,32 @@ class WristStudy:
                     while cur and cur not in chain:
                         steps+=1;cur=int(self.m.body_weldid[self.m.body_parentid[cur]])
                     if cur in chain and steps+chain.index(cur)<=2:continue
-                protected=any(n.startswith(("zed_","d435i_","stationary_")) for n in names) or any(self.m.geom(g).name=="rough_table" for g in (g1,g2))
+                protected=any(n.startswith(("zed_","d435i_","d405_","stationary_")) for n in names) or any(self.m.geom(g).name=="rough_table" for g in (g1,g2))
                 if not protected:
                     pw1=int(self.m.body_weldid[self.m.body_parentid[w1]]);pw2=int(self.m.body_weldid[self.m.body_parentid[w2]])
                     if w1==pw2 or w2==pw1:continue
                 self.pairs.append((g1,g2))
         self.pair_indices=np.asarray(self.pairs,int)
-        self.distance = Study.distance.__get__(self)
+        self._distance = Study.distance.__get__(self)
+        from convex_clearance import ConvexSeparation
+        self.separation = ConvexSeparation(self.m)
         self._clearance = Study.clearance.__get__(self)
+
+    def distance(self, data, first, second, limit=.1):
+        distance = self._distance(data, first, second, limit)
+        if distance < .015:
+            certificate = self.separation.certificate(data, first, second)
+            distance = max(distance, min(limit, certificate))
+        return distance
 
     def update(self, q):
         import mujoco
         q=np.asarray(q,float)
         self.d.qpos[:]=0
         self.d.qpos[self.mi]=q[3:]
+        if self.side == 'left':
+            for name in ('positive', 'negative'):
+                self.d.qpos[self.m.joint(f'calibration_left_jaw_{name}').qposadr[0]] = .04
         mujoco.mj_forward(self.m,self.d)
 
     def clearance(self,q):
@@ -278,6 +340,9 @@ class LocalWristChecker:
 
     def plan(self,q,pose_id,bounds=None,default_target=None,reference_origin=None):
         q=np.asarray(q,float)
+        arm=slice(4,11) if self.route.get('capture_side')=='left' else slice(11,18)
+        def retain_fixed(target):
+            result=q.copy();result[arm]=target[arm];return result
         # A bad measured state is a current-state failure, never just an
         # unreachable target that automatic calibration may skip.
         self.check_pose(q,bounds,allow_upper_retreat=pose_id==-2)
@@ -290,7 +355,7 @@ class LocalWristChecker:
             points.append(target)
         elif 1<=pose_id<=len(self.route["poses"]):
             target=np.asarray(self.route["poses"][pose_id-1]["q"],float).copy()
-            target[:11]=q[:11]
+            target=retain_fixed(target)
             points=[target]
         else:raise ValueError("Unknown wrist pose ID")
         # A returning arm can dip toward the tabletop under a straight joint
@@ -301,10 +366,11 @@ class LocalWristChecker:
                 self.edge(q,points[0],bounds)
                 if reference_origin is not None:self.edge(reference_origin,points[0],bounds)
             except ValueError:
-                bridges=sorted(self.route["poses"],key=lambda r:np.linalg.norm(np.asarray(r["q"])[-7:]-q[-7:]))
+                route_nodes=[{'q':p} for p in self.route.get('approach_waypoints', [])]+self.route["poses"]
+                bridges=sorted(route_nodes,key=lambda r:np.linalg.norm(np.asarray(r["q"])[arm]-q[arm]))
                 found=None
                 for row in bridges:
-                    bridge=np.asarray(row["q"],float).copy();bridge[:11]=q[:11]
+                    bridge=retain_fixed(np.asarray(row["q"],float))
                     try:
                         self.edge(q,bridge,bounds);self.edge(bridge,target,bounds)
                         if reference_origin is not None:self.edge(reference_origin,bridge,bounds)
@@ -316,8 +382,8 @@ class LocalWristChecker:
                     # any nodes whose direct shortcut is independently clear.
                     # This preserves a return even when no single bridge can
                     # keep the gripper above the tabletop throughout the turn.
-                    reverse=[np.asarray(r['q'],float).copy() for r in self.route['poses']]
-                    for node in reverse:node[:11]=q[:11]
+                    reverse=[np.asarray(r['q'],float).copy() for r in route_nodes]
+                    reverse=[retain_fixed(node) for node in reverse]
                     reverse.insert(0,target)
                     route=[];origin=q.copy();last=len(reverse)
                     while last:

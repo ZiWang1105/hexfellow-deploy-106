@@ -46,8 +46,15 @@ def test_left_fit_rejects_right_camera_dataset(tmp_path):
         CLI.build_command('left','fit',[str(data),'--output',str(tmp_path/'fit.json')])
 
 def test_left_run_does_not_reuse_right_pose_route():
-    with pytest.raises(ValueError, match='separately validated'):
-        CLI.build_command('left','run',['--mode','live'])
+    left,_=CLI.build_command('left','run',['--mode','live'])
+    right,_=CLI.build_command('right','run',['--mode','live'])
+    path=Path(left[left.index('--wrist-plan')+1])
+    plan=json.loads(path.read_text())
+    assert plan['capture_side']=='left'
+    assert plan['serial']=='230422271628'
+    assert plan['parent_frame']=='maver_x4_asm_mount1'
+    assert left[left.index('--wrist-plan')+1]!=right[right.index('--wrist-plan')+1]
+    assert left[left.index('--port')+1]=='8774'
 
 def test_camera_workers_use_distinct_serials():
     for side, serial in [('left','230422271628'),('right','243222074562')]:
@@ -69,6 +76,9 @@ def test_launcher_forwards_help_without_opening_devices():
     ('right','plan','wrist_calibration_geometry.py'),
     ('right','preview','render_wrist_open_gripper.py'),
     ('right','verify','verify_wrist_ground_truth.py'),
+    ('left','plan','plan_left_wrist_calibration.py'),
+    ('left','preview','preview_left_wrist_calibration.py'),
+    ('left','verify','verify_wrist_ground_truth.py'),
 ])
 def test_offline_steps_select_owned_tools_without_robot_runner(camera,action,expected):
     command,_=CLI.build_command(camera,action,['--help'])
@@ -81,7 +91,7 @@ def test_head_validation_targets_head_camera_with_three_left_arm_poses():
     assert command[command.index('--port')+1]=='8773'
     assert '--wrist-plan' not in command
 
-@pytest.mark.parametrize('camera,action',[('right','refine'),('left','validate'),('left','plan'),('left','preview')])
+@pytest.mark.parametrize('camera,action',[('right','refine'),('left','validate')])
 def test_camera_specific_actions_do_not_borrow_another_camera_workflow(camera,action):
     with pytest.raises(ValueError,match='is not available'):
         CLI.build_command(camera,action,['--help'])
@@ -96,4 +106,4 @@ def test_list_explains_available_and_missing_motion_workflows():
     registry=json.loads(result.stdout)
     assert {'refine','validate','overlay'}<=set(registry['head']['supported_actions'])
     assert 'plan' in registry['right']['supported_actions']
-    assert registry['left']['supported_actions']==['camera','fit']
+    assert registry['left']['supported_actions']==['run','camera','fit','plan','preview','verify']
