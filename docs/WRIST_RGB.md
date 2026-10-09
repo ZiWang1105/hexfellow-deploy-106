@@ -1,92 +1,91 @@
-# Right-wrist RGB and measured calibration geometry
+# Both wrist RGB views and measured calibration geometry
 
-The default native agent launch now supplies three images per observation:
-head RGB, registered head depth visualization, and separately labeled wrist RGB.
-Head intrinsics, head optical-to-base FK, measured left/right TCP poses and
-physical proprioception remain. The action schema is unchanged: paired TCP
-poses, binary grippers, and navigation XY/yaw.
+The default native policy observation contains four image blocks, in this order:
+head RGB, registered head depth visualization, `left_wrist` RGB, and `right_wrist`
+RGB. Metric head depth samples, head calibration and measured proprioception
+remain unchanged. Both wrists are RGB-only. The action schema is unchanged.
 
-The right D435i now uses the published candidate extrinsics at the user's request
-(2026-10-06). The message includes `modality=rgb_only`,
-`extrinsics_available=true`, original host receipt time, head time offset, and
-allowlisted `geometry`. Geometry supplies active-profile K, fixed
-`T_parent_from_optical`, dynamic `camera_T_base_from_optical`, and both TCP poses
-at the matched wrist encoder time. The optical-to-base transform is
-`FK_base_from_maver_x4_asm_mount2(q_measured) @ T_parent_from_optical`.
-The fixed wrist frame is not a TCP frame. Translations are meters.
-`geometry.right_tcp_T_from_wrist_optical` additionally maps camera optical points
-into the configured right TCP frame. It includes the actual URDF/assembly tool
-offset and is constant across arm/lift motion. The prompt uses it for gripper-relative
-alignment while retaining base-frame output targets. Its composition with the
-matched right TCP pose must equal the dynamic camera-to-base transform. This
-adds a convenient coordinate representation, not new calibration accuracy or depth.
+## Selected physical cameras
 
-The candidate status, source SHA-256, and held-out RMS (11.3824 pixels at
-1280 x 720) remain visible. This is not independently validated physical accuracy.
-The policy prompt uses small wrist-guided alignment corrections and reobserves;
-RGB alone cannot determine depth along a pixel ray. Head depth remains the range
-source, never a depth map for wrist pixels. No wrist depth or contact truth is
-invented. Board pose, calibration corners and datasets are excluded from inputs.
+| View | Device / serial | Candidate | Held-out RMS at 1280 × 720 |
+| --- | --- | --- | --- |
+| left_wrist | D405 / 230422271628 | realsense_d405_left_candidate_20261008.json | 7.9218814693 px |
+| right_wrist | D435i / 243222074562 | realsense_d435i_right_candidate_20261008.json | 13.6236857923 px |
 
-## Configuration and lifecycle
+Candidates are under `calibration/config/camera/`. The right selection supersedes
+its October 6 extrinsics for new runs. Historical records remain unchanged.
+Both retain `candidate_requires_physical_validation`; neither published fit is
+independent physical accuracy certification. See
+[measured parameters](../calibration/docs/wrist_parameters_20261008.md).
 
-`configs/simulation.yaml` is the shared runtime configuration. Its
-`wrist_camera` block is activated only for the native backend:
+Every wrist observation includes its serial/frame identity, calibration SHA-256,
+quality metadata, active-profile K, encoder timestamp and matched physical joints.
+`camera_T_base_from_optical` maps optical points into the robot base using measured
+FK through the corresponding flange (`mount1` left, `mount2` right).
+`left_tcp_T_from_wrist_optical` or `right_tcp_T_from_wrist_optical` maps that
+camera's optical points into its corresponding configured TCP. This fixed
+transform includes the actual tool offset. Its composition with the matched TCP
+pose equals the camera-to-base transform. Translations are meters.
+Board poses, calibration corners and dataset landmarks are never policy inputs.
 
-```yaml
-wrist_camera:
-  enabled: true
-  serial: "243222074562"
-  calibration: third_party/hexfellow-deploy/calibration/config/camera/realsense_d435i_right_candidate_20261006.json
-  width: 640
-  height: 480
-  fps: 30
-```
+## Image geometry
 
-The explicit serial prevents accidentally selecting the uncalibrated left D405.
-Calibration paths resolve relative to the parent workspace. The stream queries
-its own SDK K at 640 x 480; it does not scale the 1280 x 720 calibration K across
-aspect ratios. Nonzero distortion is rejected pending explicit rectification.
-RGB and matched encoder/FK metadata publish atomically in DA shared memory.
-A separate feedback sampler reads the existing encoder topic; camera work does
-not block the controller. Frames without a match within the configured encoder
-skew (at most 80 ms) are dropped. The source calibration file is archived at the
-run root as `wrist_calibration.json`; `wrist_camera_health.json` records the active
-K, identity, calibration provenance, unmatched frames and publication counts.
-Install the parent `realsense` extra or its pinned `pyrealsense2==2.58.4.10922`
-package in the runner environment; it was installed on this desktop for the
-preceding camera preview.
+Each component requests 640 × 480 RGB at 30 FPS by default and reads its own
+active SDK intrinsics. It does not scale the saved 1280 × 720 K across aspect
+ratios. The D405 has nonzero inverse Brown-Conrady distortion: at startup, SDK
+projection constructs a destination-pinhole to source-native pixel map. RGB is
+remapped into the supplied pinhole K without changing optical orientation.
+Inverse coefficients are not passed to OpenCV as forward Brown coefficients.
+Black remap borders contain no observation; images have no annotations.
 
-The existing real-agent command activates this input automatically. The
-dashboard at port 8765 includes a labeled wrist preview and candidate-calibration status. It returns HTTP 503
-and marks the view stale when no recent wrist image is available. Policy waits
-for a wrist frame at most 0.5 seconds old and no more than 0.15 seconds from the
-head observation's timestamp. It does not silently drop a configured wrist view.
-Those bounds limit host receipt skew; the cameras are not hardware synchronized.
-Controller timing and output contracts are unchanged.
+Metadata identifies `sdk_rectified_pinhole` or `native_pinhole`. The right D435i's
+zero-distortion stream passes through unchanged. Health records preserve native
+SDK K, model and coefficients separately from the processed image geometry.
+RGB does not provide metric depth along a wrist pixel ray; head depth cannot be
+indexed with wrist pixels. Candidate extrinsics do not remove range uncertainty.
 
-`--set wrist_camera.enabled=false` explicitly selects the older head-only input.
-The legacy viewer's disabled `cameras.wrist` configuration is separate; enabling
-this RGB-only policy component does not claim a secondary RGB-D camera.
-`--set wrist_camera.calibration=null` explicitly selects uncalibrated RGB context;
-only that mode permits serial auto-selection with exactly one connected device. The primary head remains the configured ZED.
+## Runtime and recordings
 
-Simulation does not open this physical camera and does not invent wrist mounting
-geometry. Its head-only runs remain labeled accordingly. The common policy
-serializer accepts the same optional RGB-only observation schema on either
-backend when that sensor is available.
+The shared runtime YAML now uses `wrist_cameras.left_wrist` and
+`wrist_cameras.right_wrist`. Each block selects enabled, serial, calibration,
+width, height and fps. Native capture has a separate process, RGB shared-memory
+topic and feedback sampler per camera. Simulation does not open these devices
+or fabricate wrist imagery. An explicitly selected historical `wrist_camera`
+configuration remains readable.
 
-## Calibrated integration validation
+Frames without measured encoder feedback within the configured bound (at most
+80 ms) are dropped. Policy requests require all enabled wrists to be at most
+0.5 s old and within 0.15 s of the head observation timestamp. Missing or stale
+views cause a named waiting status, never silent removal. These are bounded
+host receipt-time matches, not hardware exposure synchronization.
 
-Offline tests cover real URDF FK under right-arm/lift motion, projection direction,
-strict metadata filtering, source identity, active-profile K, encoder matching,
-atomic RGB/geometry publication, and the actual model-request JSON with a stub API.
-The request auditor verifies the archived calibration hash and recomputes wrist
-camera/TCP FK from the matched physical joints. A deliberately corrupted dynamic
-transform is rejected even when both request and turn records are changed.
-A fake SDK capture verifies unmatched frames are dropped and resources close.
-These checks do not establish live fine-adjustment or grasp success. No hardware
-or remote model call was used for this integration validation.
+Each run writes:
+
+- `cameras/left_wrist/wrist_calibration.json` and `wrist_camera_health.json`.
+- `cameras/right_wrist/wrist_calibration.json` and `wrist_camera_health.json`.
+- `policy/left_wrist_rgb_NNN.png` and `policy/right_wrist_rgb_NNN.png`.
+- Exact image bytes and side-specific geometry in the saved API requests.
+
+The dashboard at port 8765 shows head RGB/depth and both labeled wrist views.
+`/left_wrist.jpg` and `/right_wrist.jpg` return HTTP 503 for unavailable/stale
+images. `/status` lists each view under `wrists`. Legacy `/wrist.jpg` remains
+available when a legacy single-view configuration is explicitly used.
+The offline request auditor checks both calibration hashes and measured FK.
+
+To intentionally omit a physical view, use `--set
+wrist_cameras.left_wrist.enabled=false` or the corresponding right key. This
+changes the input set and must not be described as a four-image run. The normal
+real-agent command requires no new flags. Camera settings do not alter robot
+ownership, IK, MIT actuation or gripper execution.
+
+## Validation scope
+
+Offline tests cover both physical candidates, FK/optical-to-TCP composition,
+serial binding, missing-view waiting, four-image API serialization, image archives,
+calibration auditing, independent dashboard endpoints and SDK rectification.
+The installed SDK deprojection agrees with sampled D405 remap rays to less than
+0.001 pixel. This checks numerical geometry, not physical calibration accuracy.
+No live robot command or remote model call was made for this integration.
 
 ## Historical uncalibrated validation (2026-10-05)
 

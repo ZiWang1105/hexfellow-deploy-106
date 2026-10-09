@@ -95,14 +95,20 @@ def test_build_uses_deployment_relative_base_config_for_policy(monkeypatch, tmp_
         f'interface.backend.backend={backend}',f'interface.backend.execute={str(backend=="hardware").lower()}'],
         prompt='Diagnostic', execute_authorized=backend=='hardware')
     assert selected.interface['agent'].base_config == str(tmp_path/'controls/base.yaml')
-    assert ('wrist_images' in config.topics) == (backend=='hardware')
-    assert ('wrist_camera' in config.interface) == (backend=='hardware')
-    if backend=='hardware':
-        assert config.topics.wrist_images._target_ == 'hexfellow_deploy.topics.RGBTopic'
-        assert config.interface.wrist_camera.serial == '243222074562'
-        assert config.interface.wrist_camera.calibration.endswith('realsense_d435i_right_candidate_20261006.json')
-        assert 'feedback' in config.interface.wrist_camera
-        assert 'wrist_images' in config.interface.agent and 'wrist_images' in config.interface.dashboard
+    for name, serial, candidate in (
+        ('left_wrist', '230422271628', 'realsense_d405_left_candidate_20261008.json'),
+        ('right_wrist', '243222074562', 'realsense_d435i_right_candidate_20261008.json')):
+        assert (name+'_images' in config.topics) == (backend=='hardware')
+        assert (name+'_camera' in config.interface) == (backend=='hardware')
+        if backend=='hardware':
+            assert config.topics[name+'_images']._target_ == 'hexfellow_deploy.topics.RGBTopic'
+            capture = config.interface[name+'_camera']
+            assert capture.serial == serial and capture.calibration.endswith(candidate)
+            assert 'feedback' in capture
+            assert str(capture.output).endswith('/cameras/'+name)
+            assert name in config.interface.agent.wrist_topics
+            assert name in config.interface.dashboard.wrist_topics
+
 
 
 @pytest.mark.parametrize('missing', ['control', 'backend', 'both'])

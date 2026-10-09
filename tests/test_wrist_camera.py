@@ -39,12 +39,17 @@ def test_missing_wrist_does_not_silently_become_head_only():
     assert wrist_context(Topic(),10.,10.) is None
 
 
-def physical_builder():
+def physical_builder(side=None):
     from pathlib import Path
     from mobile_manipulator.hardware.wrist_observation import WristGeometry
     root=Path(__file__).resolve().parents[3]
-    return WristGeometry(root/'third_party/hexfellow-deploy/calibration/config/camera/realsense_d435i_right_candidate_20261006.json',
-        '243222074562',root/'third_party/UMI_Hardware/urdf/maver_x4_gp80_zed_40deg.urdf',
+    candidate, serial = {
+        None: ('realsense_d435i_right_candidate_20261006.json', '243222074562'),
+        'left': ('realsense_d405_left_candidate_20261008.json', '230422271628'),
+        'right': ('realsense_d435i_right_candidate_20261008.json', '243222074562'),
+    }[side]
+    return WristGeometry(root/'third_party/hexfellow-deploy/calibration/config/camera'/candidate,
+        serial,root/'third_party/UMI_Hardware/urdf/maver_x4_gp80_zed_40deg.urdf',
         root/'configs/robot/maver_gp80.yaml')
 
 
@@ -71,7 +76,8 @@ def test_calibrated_rgb_topic_atomically_roundtrips_image_and_geometry():
         reader.clean_up();topic.clean_up()
 
 
-def test_native_capture_binds_serial_matches_encoders_and_uses_active_intrinsics(monkeypatch,tmp_path):
+@pytest.mark.parametrize('side', ['left', 'right'])
+def test_native_capture_binds_serial_matches_encoders_and_uses_active_intrinsics(monkeypatch,tmp_path,side):
     import json
     import time
     import sys
@@ -81,7 +87,9 @@ def test_native_capture_binds_serial_matches_encoders_and_uses_active_intrinsics
     from hexfellow_deploy import camera_sync
     from mobile_manipulator.hardware import config as deployment
     root=Path(__file__).resolve().parents[3]
-    builder=physical_builder()
+    builder=physical_builder(side)
+    serial=builder.metadata['camera_serial']
+    filename=f"realsense_{'d405' if side=='left' else 'd435i'}_{side}_candidate_20261008.json"
     monkeypatch.setattr(deployment,'load_deployment',lambda *a,**kw:dict(robot=dict(
         urdf=root/'third_party/UMI_Hardware/urdf/maver_x4_gp80_zed_40deg.urdf',
         assembly=root/'configs/robot/maver_gp80.yaml',camera_encoder_max_skew_s=.08,camera_max_age_s=.25)))
@@ -95,11 +103,11 @@ def test_native_capture_binds_serial_matches_encoders_and_uses_active_intrinsics
     class Images:
         width=8; height=6
         def put(self,value):captured.append(value);return True
-    camera=NativeWristCamera('test_wrist',Images(),tmp_path,serial='243222074562',
+    camera=NativeWristCamera('test_wrist',Images(),tmp_path,serial=serial,
         workspace=str(root),deployment_config='unused',feedback=object(),
-        calibration='third_party/hexfellow-deploy/calibration/config/camera/realsense_d435i_right_candidate_20261006.json')
+        calibration='third_party/hexfellow-deploy/calibration/config/camera/'+filename)
     intr=SimpleNamespace(fx=120.,fy=121.,ppx=4.,ppy=3.,coeffs=[0.]*5)
-    device=SimpleNamespace(get_info=lambda field:'243222074562' if field=='serial' else 'test device',query_sensors=lambda:[])
+    device=SimpleNamespace(get_info=lambda field:serial if field=='serial' else 'test device',query_sensors=lambda:[])
     profile=SimpleNamespace(get_device=lambda:device,get_stream=lambda stream:SimpleNamespace(
         as_video_stream_profile=lambda:SimpleNamespace(get_intrinsics=lambda:intr)))
     class Pipeline:
@@ -120,7 +128,8 @@ def test_native_capture_binds_serial_matches_encoders_and_uses_active_intrinsics
         camera_info=SimpleNamespace(serial_number='serial',name='name'),option=SimpleNamespace(frames_queue_size='queue')))
     camera.run()
     assert state['sampler_closed'] and state['pipeline_stopped']
-    assert state['serial']=='243222074562'
+    assert state['serial']==serial
+    assert captured[0]['geometry']['arm']==side
     assert len(captured)==1
     g=captured[0]['geometry']
     assert g['fixed_camera_intrinsics']==[[120.,0,4.],[0,121.,3.],[0,0,1.]]

@@ -47,7 +47,7 @@ class NativeWristCamera(DABaseInterface):
                 from .camera_sync import EncoderHistory, FeedbackSampler
                 root = activate(self.workspace)
                 from mobile_manipulator.hardware.config import load_deployment
-                from mobile_manipulator.hardware.wrist_observation import WristGeometry, color_intrinsics
+                from mobile_manipulator.hardware.wrist_observation import WristGeometry
                 cfg = load_deployment(root/self.deployment_config, execute=True, mock=False, research=True)
                 geometry = WristGeometry(root/self.calibration, serial, cfg['robot']['urdf'],
                                          cfg['robot']['assembly'], cfg['robot']['camera_encoder_max_skew_s'])
@@ -69,9 +69,12 @@ class NativeWristCamera(DABaseInterface):
             started = True
             if profile.get_device().get_info(rs.camera_info.serial_number) != str(serial):
                 raise ValueError('Active wrist device does not match requested serial')
-            if geometry:
-                intrinsics = color_intrinsics(profile.get_stream(rs.stream.color))
-                health['fixed_camera_intrinsics'] = intrinsics
+            from .wrist_rectification import WristRectifier
+            rectifier = WristRectifier(rs, profile.get_stream(rs.stream.color),
+                                       self.images.width, self.images.height)
+            intrinsics = rectifier.k
+            health.update(fixed_camera_intrinsics=intrinsics, native_profile=rectifier.native,
+                          image_processing=rectifier.processing)
             # Keep the latest frame instead of accumulating a capture backlog.
             for sensor in profile.get_device().query_sensors():
                 if sensor.supports(rs.option.frames_queue_size):
@@ -85,7 +88,7 @@ class NativeWristCamera(DABaseInterface):
                 if not color:
                     continue
                 received = time.monotonic()
-                value = dict(rgb=np.asanyarray(color.get_data()).copy(), received_s=received)
+                value = dict(rgb=rectifier.apply(np.asanyarray(color.get_data()).copy()), received_s=received)
                 health.update(frames=health['frames']+1, received_s=received)
                 if geometry:
                     if sampler.error:
@@ -97,7 +100,7 @@ class NativeWristCamera(DABaseInterface):
                             report()
                             next_report = received+1.
                         continue
-                    value = geometry.observation(value['rgb'], received, row['measured'], intrinsics)
+                    value = geometry.observation(value['rgb'], received, row['measured'], intrinsics, rectifier.processing)
                 if self.images.put(value):
                     health['publications'] += 1
                     health['published_s'] = time.monotonic()

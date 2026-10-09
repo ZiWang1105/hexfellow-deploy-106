@@ -5,14 +5,22 @@ policy:
   agent_config: configs/agent/rgbd_full.yaml
   model: openai/gpt-6-astra
   reasoning_effort: medium
-wrist_camera:
-  # Native wrist RGB and measured FK; no fabricated simulated wrist view.
-  enabled: true
-  serial: "243222074562"
-  calibration: third_party/hexfellow-deploy/calibration/config/camera/realsense_d435i_right_candidate_20261006.json
-  width: 640
-  height: 480
-  fps: 30
+wrist_cameras:
+  # Physical RGB-only streams; simulation does not fabricate wrist views.
+  left_wrist:
+    enabled: true
+    serial: "230422271628"
+    calibration: third_party/hexfellow-deploy/calibration/config/camera/realsense_d405_left_candidate_20261008.json
+    width: 640
+    height: 480
+    fps: 30
+  right_wrist:
+    enabled: true
+    serial: "243222074562"
+    calibration: third_party/hexfellow-deploy/calibration/config/camera/realsense_d435i_right_candidate_20261008.json
+    width: 640
+    height: 480
+    fps: 30
 timing:
   control_period_s: 0.02
   compute_budget_s: 0.006

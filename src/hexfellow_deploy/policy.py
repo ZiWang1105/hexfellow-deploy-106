@@ -23,7 +23,7 @@ def request_async(callback, observation):
     return future
 
 
-def wrist_context(topic, head_timestamp, now, max_age=.5, max_skew=.15):
+def wrist_context(topic, head_timestamp, now, max_age=.5, max_skew=.15, name="wrist"):
     """Do not send stale context or pretend the two cameras are synchronized."""
     from mobile_manipulator.interfaces.contract import validate_rgb_camera
     frame = topic.get()
@@ -35,16 +35,19 @@ def wrist_context(topic, head_timestamp, now, max_age=.5, max_skew=.15):
     age = now-frame['received_s']
     if not 0 <= age <= max_age or abs(frame['received_s']-head_timestamp) > max_skew:
         return None
-    return {'wrist':frame}
+    return {name:frame}
 
 
 class AgentComponent(DABaseInterface):
     def __init__(self, name, request, status, decision, images, workspace, output,
                  prompt, agent_config='configs/agent/rgbd_full.yaml', time_budget=.1,
                  model='openai/gpt-6-astra', reasoning_effort='medium', respect_limits=False, base_config=None,
-                 wrist_images=None):
+                 wrist_images=None, wrist_topics=None):
+        self.wrist_topics = dict(wrist_topics or {})
+        if wrist_images is not None:
+            self.wrist_topics['wrist'] = wrist_images
         super().__init__(name, [request, status, decision, images]
-                         +([wrist_images] if wrist_images is not None else []), time_budget)
+                         +list(self.wrist_topics.values()), time_budget)
         self.wrist_images = wrist_images
         self.request, self.status, self.decision, self.images = request, status, decision, images
         self.workspace, self.output, self.prompt, self.agent_config = workspace, output, prompt, agent_config
@@ -137,12 +140,19 @@ class AgentComponent(DABaseInterface):
                     time.sleep(.05)
                     continue
                 rgb_cameras = {}
-                if self.wrist_images is not None:
-                    rgb_cameras = wrist_context(self.wrist_images, frame['measured']['timestamp_s'], time.monotonic())
-                    if rgb_cameras is None:
-                        waiting('waiting_for_wrist_camera', 'Waiting for fresh wrist RGB near the head observation time.')
-                        time.sleep(.05)
-                        continue
+                missing = []
+                now = time.monotonic()
+                for name, topic in self.wrist_topics.items():
+                    context = wrist_context(topic, frame['measured']['timestamp_s'], now, name=name)
+                    if context is None:
+                        missing.append(name)
+                    else:
+                        rgb_cameras.update(context)
+                if missing:
+                    waiting('waiting_for_wrist_camera',
+                            'Waiting for fresh RGB near the head observation time: ' + ', '.join(missing))
+                    time.sleep(.05)
+                    continue
                 identifier += 1
                 measured = frame['measured']
                 if not frame.get('robot_fk'):

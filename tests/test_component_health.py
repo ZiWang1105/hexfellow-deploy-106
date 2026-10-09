@@ -185,3 +185,42 @@ def test_dashboard_keeps_decision_on_busy_read_and_restores_durable_failure(tmp_
     result = dashboard.snapshot()
     assert result['decision']['phase'] == 'stopped' and result['decision']['action'] == action
     assert result['control']['fault'] == 'original control fault'
+
+
+def test_dashboard_serves_both_wrists_independently(monkeypatch, tmp_path):
+    import cv2
+    import hexfellow_deploy.dashboard as module
+    from urllib.error import HTTPError
+    servers=[]
+    original=module.ThreadingHTTPServer
+    def server(*args,**kwargs):
+        value=original(*args,**kwargs);servers.append(value);return value
+    monkeypatch.setattr(module,'ThreadingHTTPServer',server)
+    class Topic:
+        name='test'
+        def __init__(self,value):self.value=value
+        def get(self,**kwargs):return self.value
+    wrists={side+'_wrist':Topic(dict(rgb=np.full((24,32,3),level,np.uint8),received_s=time.monotonic()))
+            for side,level in [('left',35),('right',210)]}
+    dashboard=DashboardComponent('dashboard',Topic({}),Topic({}),Topic(None),port=0,wrist_topics=wrists)
+    thread=threading.Thread(target=dashboard.run)
+    thread.start()
+    try:
+        until=time.monotonic()+2.
+        while not dashboard.ready and time.monotonic()<until:time.sleep(.005)
+        assert dashboard.ready
+        base=f'http://127.0.0.1:{servers[0].server_port}'
+        with urlopen(base+'/status',timeout=1.) as response:
+            assert set(json.load(response)['wrists'])==set(wrists)
+        for side,level in [('left',35),('right',210)]:
+            wrists[side+'_wrist'].value['received_s']=time.monotonic()
+            with urlopen(base+f'/{side}_wrist.jpg',timeout=1.) as response:
+                image=cv2.imdecode(np.frombuffer(response.read(),np.uint8),cv2.IMREAD_COLOR)
+                assert abs(float(image.mean())-level)<2
+        wrists['left_wrist'].value['received_s']-=1.
+        with pytest.raises(HTTPError) as error:urlopen(base+'/left_wrist.jpg',timeout=1.)
+        assert error.value.code==503
+        with urlopen(base+'/right_wrist.jpg',timeout=1.) as response:assert response.status==200
+    finally:
+        dashboard.signal_stop();thread.join(2.);dashboard.clean_up()
+    assert not thread.is_alive()

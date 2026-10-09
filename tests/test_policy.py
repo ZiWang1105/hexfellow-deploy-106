@@ -10,7 +10,7 @@ from hexfellow_deploy.policy import AgentComponent
 from hexfellow_deploy.workspace import activate
 
 
-@pytest.mark.parametrize('include_wrist', [False, True])
+@pytest.mark.parametrize('include_wrist', [False, True, 'both'])
 def test_policy_boundary_and_decision_archive(monkeypatch, tmp_path, include_wrist):
     """Exercise the component contract with a stub API; no model/hardware claim."""
     root = Path(__file__).resolve().parents[3]
@@ -72,16 +72,19 @@ def test_policy_boundary_and_decision_archive(monkeypatch, tmp_path, include_wri
     decision = Topic()
     agent = AgentComponent('test_agent', Requests(), status, decision, Topic(frame), str(root), str(tmp_path),
                            'Diagnostic paired target', base_config=str(base_config),
-                           wrist_images=Topic(dict(rgb=frame['rgb'],received_s=measured['timestamp_s'])) if include_wrist else None)
+                           wrist_images=Topic(dict(rgb=frame['rgb'],received_s=measured['timestamp_s'])) if include_wrist is True else None,
+                           wrist_topics={name:Topic(dict(rgb=frame['rgb'],received_s=measured['timestamp_s']))
+                                         for name in ('left_wrist', 'right_wrist')} if include_wrist == 'both' else None)
     agent.initialize()
     agent.run()
     assert len(observations) == 1
     assert set(observations[0].proprioception) == policy.PROPRIOCEPTION_FIELDS
     assert observations[0].timestamp_s == measured['timestamp_s']
     assert observations[0].cameras == {}
-    assert set(observations[0].rgb_cameras) == ({'wrist'} if include_wrist else set())
-    if include_wrist:
-        assert set(observations[0].rgb_cameras['wrist']) == {'rgb','received_s'}
+    expected = {'left_wrist', 'right_wrist'} if include_wrist == 'both' else ({'wrist'} if include_wrist else set())
+    assert set(observations[0].rgb_cameras) == expected
+    for camera in observations[0].rgb_cameras.values():
+        assert set(camera) == {'rgb','received_s'}
     events = [json.loads(line) for line in (tmp_path/'decisions.jsonl').read_text().splitlines()]
     assert [row['phase'] for row in events] == ['waiting_for_control','thinking','submitted','executing','stopped']
     assert events[0]['policy_calls'] == 0 and events[0]['prompt'] == 'Diagnostic paired target'
@@ -197,3 +200,31 @@ def test_nonmotion_result_never_dispatches_or_retries_blocked_api(monkeypatch,tm
     result=next(r for r in rows if r['phase'] in ('api_blocked','grounding'))
     if kind=='403':assert result['retryable'] is False
     else:assert result['action'] is None
+
+
+def test_both_wrists_required_before_api_call(monkeypatch, tmp_path):
+    """Missing left RGB must not silently submit only head and right views."""
+    import types
+    root=Path(__file__).resolve().parents[3]
+    monkeypatch.chdir(root)
+    from mobile_manipulator.agent import policy
+    def forbidden(*args, **kwargs):
+        raise AssertionError('API must not be constructed for an incomplete observation')
+    monkeypatch.setattr(policy, 'OpenRouterPolicy', forbidden)
+    class Topic:
+        name='stub'
+        def __init__(self,value=None):self.value=value
+        def get(self,**kwargs):return self.value
+        def put(self,value,**kwargs):return True
+    class Decisions(Topic):
+        def put(self,value,**kwargs):
+            if value.get('phase')=='waiting_for_wrist_camera':
+                assert 'left_wrist' in value['message']
+                agent.signal_stop()
+            return True
+    now=time.monotonic()
+    agent=AgentComponent('test_agent',Topic(),Topic(dict(phase='running',diagnostic={'mode':'hold'})),
+        Decisions(),Topic(dict(measured={'timestamp_s':now})),str(root),str(tmp_path),'Test',
+        wrist_topics={'left_wrist':Topic(), 'right_wrist':Topic(dict(rgb=np.zeros((2,3,3),np.uint8),received_s=now))})
+    agent.run()
+    assert agent.stopping

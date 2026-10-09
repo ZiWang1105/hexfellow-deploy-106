@@ -36,17 +36,36 @@ def build(config_path, overrides=(), *, prompt=None, camera=True, execute_author
             workspace='${workspace}', deployment_config='${deployment_config}', output='${output}', fps=15)
     if not camera:
         del config.interface.camera
-    wrist = config.get('wrist_camera', {})
-    use_wrist = camera and config.interface.backend.backend == 'hardware' and wrist.get('enabled', False)
-    if use_wrist:
-        config.topics.wrist_images = dict(_target_='hexfellow_deploy.topics.RGBTopic', prefix='${topic_prefix}',
-                                         width=wrist.width, height=wrist.height)
-        config.interface.wrist_camera = dict(_target_='hexfellow_deploy.wrist_camera.NativeWristCamera',
-            name='hexfellow_wrist_camera', images='${topic:wrist_images}', output='${output}',
-            serial=wrist.get('serial'), fps=wrist.fps,
-            feedback='${topic:feedback}', workspace='${workspace}',
-            deployment_config='${deployment_config}', calibration=wrist.get('calibration'))
-        config.interface.dashboard.wrist_images = '${topic:wrist_images}'
+    wrist_topics = {}
+    wrists = config.get('wrist_cameras', {})
+    # Support an explicitly selected historical one-wrist runtime configuration.
+    if not wrists and config.get('wrist_camera'):
+        wrists = {'wrist': config.wrist_camera}
+    if camera and config.interface.backend.backend == 'hardware':
+        selected_serials = set()
+        for name, wrist in wrists.items():
+            if not wrist.get('enabled', False):
+                continue
+            if name not in ('wrist', 'left_wrist', 'right_wrist'):
+                raise ValueError('Unsupported wrist camera name')
+            serial = wrist.get('serial')
+            if not serial or str(serial) in selected_serials:
+                raise ValueError('Wrist cameras require distinct explicit serials')
+            expected = {'left_wrist': '230422271628', 'right_wrist': '243222074562'}
+            if name in expected and str(serial) != expected[name]:
+                raise ValueError('Wrist camera name and serial disagree')
+            selected_serials.add(str(serial))
+            topic = f'{name}_images'
+            config.topics[topic] = dict(_target_='hexfellow_deploy.topics.RGBTopic',
+                prefix='${topic_prefix}', width=wrist.width, height=wrist.height)
+            wrist_topics[name] = '${topic:' + topic + '}'
+            config.interface[f'{name}_camera'] = dict(
+                _target_='hexfellow_deploy.wrist_camera.NativeWristCamera',
+                name=f'hexfellow_{name}_camera', images=wrist_topics[name],
+                output='${output}/cameras/' + name, serial=serial, fps=wrist.fps,
+                feedback='${topic:feedback}', workspace='${workspace}',
+                deployment_config='${deployment_config}', calibration=wrist.get('calibration'))
+        config.interface.dashboard.wrist_topics = wrist_topics
     if prompt:
         if not camera:
             raise ValueError('Policy requires registered RGB-D camera')
@@ -61,8 +80,8 @@ def build(config_path, overrides=(), *, prompt=None, camera=True, execute_author
             output='${output}', prompt=prompt, agent_config='${policy.agent_config}',
             model='${policy.model}', reasoning_effort='${policy.reasoning_effort}',
             respect_limits=respect_policy_limits, base_config=base_config)
-        if use_wrist:
-            config.interface.agent.wrist_images = '${topic:wrist_images}'
+        if wrist_topics:
+            config.interface.agent.wrist_topics = wrist_topics
     topics = build_topic_registry(config.topics)
     register_topic_resolver(topics)
     groups = {key: {name: instantiate(spec) for name, spec in config[key].items()}

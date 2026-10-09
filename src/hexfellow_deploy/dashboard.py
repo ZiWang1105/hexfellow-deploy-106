@@ -34,8 +34,7 @@ figure{margin:0}img{max-width:100%;height:auto}figcaption{margin:8px 0;color:#cb
 <div class="views"><figure>
 <img id="camera" width="640" alt="Latest RGB observation"><figcaption>RGB observation</figcaption></figure><figure>
 <img id="depth" width="640" alt="Registered metric depth"><figcaption>Registered depth: 0-3 m; black = invalid</figcaption></figure>
-<figure id="wrist-view" hidden><img id="wrist" width="640" alt="Right wrist RGB">
-<figcaption id="wrist-status">Waiting for wrist camera metadata</figcaption></figure></div>
+<div id="wrist-views" class="views"></div></div>
 <details><summary>Component health</summary><pre id="health"></pre></details>
 <details><summary>Control and actuator acceptance</summary><pre id="control"></pre></details>
 <details><summary>Agent decision / raw telemetry</summary><pre id="decision"></pre></details>
@@ -88,11 +87,18 @@ document.getElementById('health').textContent=JSON.stringify(s.health,null,2);
 document.getElementById('control').textContent=JSON.stringify(s.control,null,2);
 document.getElementById('decision').textContent=JSON.stringify(s.decision,null,2);
 document.getElementById('camera-health').textContent=JSON.stringify(s.camera,null,2);
-document.getElementById('wrist-view').hidden=!s.wrist;
-if(s.wrist){document.getElementById('wrist-status').textContent=s.wrist.available
- ? (s.wrist.extrinsics_available ? 'Right wrist RGB; candidate calibration; ' : 'Wrist RGB; uncalibrated; ')+'age '+s.wrist.age_s.toFixed(2)+' s':'Waiting for fresh wrist RGB';
- document.getElementById('wrist').style.opacity=s.wrist.available?'1':'.25';
- if(s.wrist.available)document.getElementById('wrist').src='/wrist.jpg?t='+Date.now();}
+for(let [name,w] of Object.entries(s.wrists||{})){
+ let figure=document.getElementById(name+'-view');
+ if(!figure){figure=document.createElement('figure');figure.id=name+'-view';
+  let image=document.createElement('img');image.id=name+'-image';image.width=640;image.alt=name+' RGB';
+  let caption=document.createElement('figcaption');caption.id=name+'-status';
+  figure.append(image,caption);document.getElementById('wrist-views').append(figure);}
+ document.getElementById(name+'-status').textContent=name.replaceAll('_',' ')+' RGB: '+(w.available
+  ? (w.extrinsics_available?'candidate calibration; ':'uncalibrated; ')+'age '+w.age_s.toFixed(2)+' s'
+  : 'waiting for fresh image');
+ document.getElementById(name+'-image').style.opacity=w.available?'1':'.25';
+ if(w.available)document.getElementById(name+'-image').src='/'+name+'.jpg?t='+Date.now();
+}
 document.getElementById('camera').src='/rgb.jpg?t='+Date.now();
 document.getElementById('depth').src='/depth.jpg?t='+Date.now();
 }catch(e){document.getElementById('phase').textContent='Diagnostic connection unavailable'}
@@ -101,8 +107,13 @@ setTimeout(refresh,500)}refresh();</script></html>'''
 
 class DashboardComponent(DABaseInterface):
     def __init__(self, name, status, decision, images, port=8765, time_budget=.01, health=None,
-                 backend_status=None, output=None, wrist_images=None):
-        super().__init__(name, [status, decision, images]+[t for t in (health,backend_status,wrist_images) if t is not None], time_budget)
+                 backend_status=None, output=None, wrist_images=None, wrist_topics=None):
+        self.wrist_topics = dict(wrist_topics or {})
+        if wrist_images is not None:
+            self.wrist_topics['wrist'] = wrist_images
+        super().__init__(name, [status, decision, images]
+                         +[t for t in (health, backend_status) if t is not None]
+                         +list(self.wrist_topics.values()), time_budget)
         self.wrist_images = wrist_images
         self.status, self.decision, self.images, self.port = status, decision, images, port
         self.health = health
@@ -149,12 +160,16 @@ class DashboardComponent(DABaseInterface):
                         break
                 except OSError:
                     pass
-            if self.wrist_images is not None:
-                frame = self.wrist_images.get()
+            wrists = {}
+            for name, topic in self.wrist_topics.items():
+                frame = topic.get()
                 age = None if frame is None else time.monotonic()-frame['received_s']
-                self._latest['wrist'] = dict(available=age is not None and 0 <= age <= .5, age_s=age,
+                wrists[name] = dict(available=age is not None and 0 <= age <= .5, age_s=age,
                                             modality='rgb_only', extrinsics_available=bool(frame and 'geometry' in frame),
                                             geometry=None if frame is None else frame.get('geometry'))
+            self._latest['wrists'] = wrists
+            if 'wrist' in wrists:
+                self._latest['wrist'] = wrists['wrist']
             return dict(self._latest, observed_s=time.monotonic())
 
     def run(self):
@@ -166,9 +181,10 @@ class DashboardComponent(DABaseInterface):
                 elif self.path == '/status':
                     body = json.dumps(owner.snapshot()).encode()
                     content_type = 'application/json'
-                elif self.path.startswith('/wrist.jpg'):
+                elif self.path.split('?', 1)[0] in {f'/{name}.jpg' for name in owner.wrist_topics}:
                     import cv2
-                    frame = None if owner.wrist_images is None else owner.wrist_images.get()
+                    name = self.path.split('?', 1)[0][1:-4]
+                    frame = owner.wrist_topics[name].get()
                     if frame is None or not 0 <= time.monotonic()-frame['received_s'] <= .5:
                         self.send_error(503, 'Waiting for fresh wrist RGB')
                         return

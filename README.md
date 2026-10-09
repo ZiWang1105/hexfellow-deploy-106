@@ -14,8 +14,9 @@ The [DA alignment audit](docs/DEPLOY_ANYTHING_ALIGNMENT.md) lists implemented
 parity, deliberate robot-specific differences and unresolved recovery behavior.
 Both physical GP80 hands use this repository's [feedback gripper controller](docs/GRIPPER_CONTROL.md),
 shared by the native policy adapter and the parent keyboard console.
-Native policy observations now add an [uncalibrated wrist RGB view](docs/WRIST_RGB.md)
-to head RGB-D. Its independent capture supplies no invented camera-to-base transform.
+Native policy observations include [both calibrated wrist RGB views](docs/WRIST_RGB.md)
+alongside head RGB-D: four images per observation. Each wrist uses its own
+October 8 candidate extrinsics, active-profile intrinsics and matched encoder FK.
 
 Camera calibration code for the ZED 2i head and both RealSense wrists is now
 [consolidated here](calibration/README.md), with a common
