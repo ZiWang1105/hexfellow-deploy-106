@@ -190,7 +190,7 @@ model/controller results; no physical robot or camera was opened for this
 rehearsal and no physical left extrinsics have been accepted or applied.
 
 Evidence: `artifacts/reference/left-d405-live-runner-20261008/validation.json`
-and `ground-truth.json`. Full raw session: 
+and `ground-truth.json`. Full raw session:
 `runs/left-d405-live-runner-20261008/open-jaw-sequence/`.
 
 ## Startup failure diagnosis
