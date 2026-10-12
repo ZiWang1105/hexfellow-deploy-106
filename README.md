@@ -32,60 +32,65 @@ The [latest wrist results](calibration/docs/wrist_parameters_20261008.md) preser
 their candidate status: held-out RMS is 7.92 px for the left D405 and 13.62 px
 for the right D435i. These exports do not change production sensor selection.
 
-DA is pinned to `6c2bda40ebee56ab3a50b8dd62aaf4df5814e5a8`. Robot assets,
-active calibration configuration, sensor contracts, policy client and PinkIK are imported from the
-parent `agentic-mobile-manipulator` workspace. This repository is not yet a
-standalone robot distribution. The sibling source checkouts are not modified.
+## Standalone installation
 
-## Install in the existing workspace
+Clone this repository with its pinned submodules. The controller, robot contracts,
+hardware adapters, MuJoCo scene builder/assets, skill executor and draggable TCP
+viewer are owned here. No agent application checkout or API key is needed for IK.
 
-Use the parent Python 3.10 environment with MuJoCo, Pinocchio and the UMI native
-extension already installed. From this repository:
+On Ubuntu, install `build-essential` and `libeigen3-dev`, plus `uv`, then:
 
 ```bash
-git submodule update --init --recursive
-uv pip install --python ../../.venv/bin/python \
-  'hydra-core==1.3.7' 'posix_ipc==1.3.2' 'rich==15.0.0' log-throttling
-uv pip install --python ../../.venv/bin/python --no-deps -e third_party/deploy-anything -e .
-uv pip install --python ../../.venv/bin/python 'matplotlib>=3.8,<3.10' 'numpy<2'
+git clone --recurse-submodules git@github.com:ZiWang1105/hexfellow-deploy.git
+cd hexfellow-deploy
+./scripts/setup_sim.sh
 ```
 
-The tested environment uses NumPy 1.26.4 because the parent Pinocchio environment
-requires NumPy below 2. DA's package metadata requests NumPy 2; `--no-deps` is an
-intentional compatibility exception for its tested manager/shared-memory subset.
-Do not upgrade the robot environment to NumPy 2 to satisfy that metadata. ROS,
-YAM, CAN and DA's optional learning backends are not used here.
+The script creates a Python 3.10 `.venv`, installs the simulation dependencies,
+builds the pinned controller extension, and installs Deploy Anything's runtime.
+Private submodule access is required. NumPy stays below 2 for Pinocchio; DA is
+installed with `--no-deps` deliberately for its tested manager/topics subset.
+For native wire-format tests, also install the optional SDK (this opens no devices):
+
+```bash
+uv pip install --python .venv/bin/python -e '.[hardware]'
+OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 .venv/bin/python -m pytest tests -q
+```
+
+See [standalone ownership and migration](docs/STANDALONE.md). Calibration candidates
+retain their recorded qualification status; this extraction changes no IK gains,
+actuator limits, feedback checks, ownership rules, or hardware authorization.
 
 ## Run
 
-From `agentic-mobile-manipulator`, the simulator entry point is:
+From this repository in a desktop terminal, open the interactive simulator:
 
 ```bash
-OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 .venv/bin/python scripts/run_agent.py \
-  --config configs/local/desktop.yaml \
-  --prompt 'Pick up the apple and hold it above the table.' \
-  --output "runs/sim_$(date +%Y%m%d_%H%M%S)"
+OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 .venv/bin/hexfellow-deploy \
+  --interactive-ik --no-camera \
+  --output "runs/interactive_ik_$(date +%Y%m%d_%H%M%S)"
 ```
 
-The corresponding native adapter is selected by the real-robot entry point:
+No `--workspace` is required. Defaults resolve this checkout's
+`configs/hardware/desktop.yaml`, controller profile, and example scene.
+That uncommissioned template is for simulation, not physical execution.
+
+For a headless MIT control diagnostic with a paired TCP target:
 
 ```bash
-OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 .venv/bin/python scripts/run_real_agent.py \
-  --config configs/local/desktop.yaml \
-  --execute --research --confirm-onsite-ready --live-viewer \
-  --prompt 'Pick up the gray cuboid using a top-down grasp with the right hand and hold it above the table.' \
-  --output "runs/real_$(date +%Y%m%d_%H%M%S)"
+OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 .venv/bin/hexfellow-deploy \
+  --no-camera --duration-s 8 \
+  --action tests/fixtures/paired_pose.json \
+  --set interface.control.startup_carry=false \
+  --output "runs/ik_$(date +%Y%m%d_%H%M%S)"
 ```
 
-Camera use, point grounding, offset selection and reobservation are specified in
-the shared system prompt. User task prompts need only the desired outcome and
-any object, hand or grasp-style preferences.
-
-The second command opens physical devices and can move the robot. Its availability
-is not a claim of onsite validation of this revision. Both entry points route to
-this same DA implementation; historical runners require `--legacy-runtime`.
-The default preparation bends both elbows before the first policy observation.
-A `--hold-only` diagnostic keeps the measured initial posture instead.
+An agent application can supply its installed component via `policy.component`,
+or an explicit `--agent-plugin` module with `AGENT_COMPONENT` and optional task
+catalog/evaluation hooks. Agent requests and task scoring are not runtime dependencies.
+Existing application launchers pass their configuration workspace and plugin explicitly.
+Physical operation still requires a locally configured deployment file and both
+`--execute --confirm-onsite-ready`; the default command above never opens hardware.
 
 The terminal prints the clickable dashboard URL, normally
 <http://127.0.0.1:8765/>. It displays RGB, control state, actuator acceptance,
@@ -108,9 +113,9 @@ Open a native MuJoCo window with **draggable red TCP targets**, using the shared
 controller and simulator actuator process (run from a desktop terminal):
 
 ```bash
-cd ~/projects/agentic-mobile-manipulator
-OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 .venv/bin/python scripts/run_agent.py \
-  --config configs/local/desktop.yaml --interactive-ik \
+cd ~/projects/hexfellow-deploy
+OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 .venv/bin/hexfellow-deploy \
+  --interactive-ik --no-camera \
   --output "runs/interactive_ik_$(date +%Y%m%d_%H%M%S)"
 ```
 
@@ -120,7 +125,7 @@ or R requests constrained HOLD and resets both handles to measured TCP poses;
 drag again to resume. Q or closing the window shuts down the simulation. The
 overlay shows the selected arm, measured position/orientation tracking error,
 and controller rejections. The web dashboard remains available on port 8765
-(`--viewer-port` changes the dashboard port).
+(`--set interface.dashboard.port=8875` changes the dashboard port).
 
 This mode starts at the scene's initial pose without the carrying routine and
 makes no policy/API calls. It holds the lift reference fixed and preserves the
@@ -138,7 +143,7 @@ A paired-pose test with deliberate scheduling and actuator delays, without API c
 ```bash
 OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 .venv/bin/python -m hexfellow_deploy.cli \
   --workspace . --duration-s 28 --no-camera \
-  --action third_party/hexfellow-deploy/tests/fixtures/paired_pose.json \
+  --action tests/fixtures/paired_pose.json \
   --set interface.control.startup_carry=false \
   --set interface.control.inject_every=10 \
   --set interface.control.inject_delay_s=0.03 \
@@ -152,9 +157,9 @@ Overrides use OmegaConf YAML syntax; topics resolve through the actual DA regist
 From this repository:
 
 ```bash
-OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 ../../.venv/bin/python -m pytest tests -q
-../../.venv/bin/python scripts/analyze_mit_run.py ../../runs/COMPLETED_RUN
-MUJOCO_GL=egl ../../.venv/bin/python scripts/analyze_mit_run.py ../../runs/COMPLETED_RUN --video
+OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 .venv/bin/python -m pytest tests -q
+.venv/bin/python scripts/analyze_mit_run.py runs/COMPLETED_RUN
+MUJOCO_GL=egl .venv/bin/python scripts/analyze_mit_run.py runs/COMPLETED_RUN --video
 ```
 
 The analyzer requires both owner final records before reading evaluation data.

@@ -8,7 +8,7 @@ import pytest
 
 from hexfellow_deploy.workspace import activate
 
-ROOT = activate(Path(__file__).resolve().parents[3])
+ROOT = activate(Path(__file__).resolve().parents[1])
 from hexfellow_deploy.camera_sync import EncoderHistory, FeedbackSampler
 
 
@@ -133,8 +133,8 @@ def test_sampler_exposes_reader_exception_and_closes():
 @pytest.mark.parametrize('case', ['recovered_after_gap', 'publication_retry', 'unchanged_frame'])
 def test_native_camera_recovers_and_retries_without_duplicate_frames(monkeypatch, case):
     from hexfellow_deploy import camera, camera_sync
-    from mobile_manipulator.hardware import camera_stream, config, observations
-    from mobile_manipulator.robot import assembly
+    from hexfellow_deploy.hardware import camera_stream, config, observations
+    from hexfellow_deploy.robot import assembly
     class Clock:
         now = 100.
         calls = 0

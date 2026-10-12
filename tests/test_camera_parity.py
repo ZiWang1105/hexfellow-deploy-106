@@ -8,10 +8,10 @@ import pytest
 
 from hexfellow_deploy.workspace import activate
 
-ROOT = activate(Path(__file__).resolve().parents[3])
+ROOT = activate(Path(__file__).resolve().parents[1])
 from hexfellow_deploy.camera import CameraAvailability, NativeCamera, resize_registered_rgbd, simulation_kinematics
-from mobile_manipulator.hardware.camera_stream import CameraFrame
-from mobile_manipulator.sim.scene_config import SceneConfig, load_scene
+from hexfellow_deploy.hardware.camera_stream import CameraFrame
+from hexfellow_deploy.sim.scene_config import SceneConfig, load_scene
 
 
 def test_native_resize_preserves_metric_depth_and_pixel_center_projection():
@@ -57,8 +57,8 @@ def test_camera_health_allows_encoder_startup_then_reports_missing_publication()
 
 @pytest.mark.parametrize('mode,reason', [('no_frames','no captured frame'), ('blocked','RGB-D capture expired')])
 def test_native_camera_surfaces_missing_and_blocked_capture_without_devices(monkeypatch, mode, reason):
-    from mobile_manipulator.hardware import camera_stream, config, observations
-    from mobile_manipulator.robot import assembly
+    from hexfellow_deploy.hardware import camera_stream, config, observations
+    from hexfellow_deploy.robot import assembly
     class Source:
         def __init__(self):
             self.reads = 0
@@ -117,8 +117,8 @@ def test_native_camera_surfaces_missing_and_blocked_capture_without_devices(monk
 @pytest.mark.parametrize('pose_source', ['robot_optical_frame', 'calibration'])
 def test_simulated_fk_matches_camera_and_excludes_world_pose(tmp_path, pose_source):
     import mujoco
-    from mobile_manipulator.robot.joints import BASE
-    from mobile_manipulator.sim.scene import build_scene
+    from hexfellow_deploy.robot.joints import BASE
+    from hexfellow_deploy.sim.scene import build_scene
     original = load_scene(ROOT/'configs/scenes/apple_on_table.yaml')
     data = copy.deepcopy(original.data)
     data['camera']['pose_source'] = pose_source

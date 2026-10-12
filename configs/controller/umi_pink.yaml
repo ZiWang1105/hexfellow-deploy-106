@@ -1,0 +1,7 @@
+# Loaded directly from third_party/UMI_Hardware; upstream profile is unmodified.
+motion_profile: x7-gp80-highspeed-fixed-base-v1
+# V1's reference tracking path still closes its joint-feedback loop every tick.
+measured_pose_tracking: false
+# Runtime bounds narrow (never enlarge) the profile's joint velocity limits.
+arm_velocity_limit_rad_s: 0.45
+lift_velocity_limit_m_s: 0.04

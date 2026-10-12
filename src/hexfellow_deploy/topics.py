@@ -33,7 +33,7 @@ class RGBTopic(ArrayCommWrapper):
         super().__init__(prefix+name, shape=(8192+height*width*3,), dtype='uint8', create=create)
 
     def put(self, value, *, timeout=.001):
-        from mobile_manipulator.interfaces.contract import validate_rgb_camera
+        from hexfellow_deploy.interfaces.contract import validate_rgb_camera
         validate_rgb_camera(value)
         if value['rgb'].shape != (self.height, self.width, 3):
             raise ValueError('RGB camera resolution differs from shared-memory schema')
@@ -61,7 +61,7 @@ class RGBDTopic(ArrayCommWrapper):
         super().__init__(prefix+name, shape=(8192+width*height*7,), dtype="uint8", create=create)
 
     def put(self, measured, rgb, depth_m, intrinsics, robot_fk=None):
-        from mobile_manipulator.interfaces.contract import validate_sensor_packet
+        from hexfellow_deploy.interfaces.contract import validate_sensor_packet
         validate_sensor_packet(dict(measured, rgb=rgb, depth_m=depth_m), image=True)
         if rgb.shape != (self.height, self.width, 3):
             raise ValueError("Camera resolution differs from shared-memory schema")

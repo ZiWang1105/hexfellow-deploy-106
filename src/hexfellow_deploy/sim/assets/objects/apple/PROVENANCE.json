@@ -1,0 +1,17 @@
+{
+  "attribution": "Food Kit 2.0 by Kenney",
+  "license": "CC0-1.0",
+  "source_checkout": "UMI_Hardware_camera",
+  "source_commit": "32d373cb584783046349f53f0343f518cad56d6c",
+  "source_directory": "assets/objects/kenney_food_kit/apple",
+  "source_url": "https://kenney.nl/assets/food-kit",
+  "sha256": {
+    "model.xml": "3c00275290dc7c734ebb7431030fe7f53f2b70ea337a18288bddcea5f210345c",
+    "model.obj": "2e9572c14ca75c8fc0847bd9cf3fc972558760077ec5580ad2f14468898540cb",
+    "model_collision_0.obj": "2e9572c14ca75c8fc0847bd9cf3fc972558760077ec5580ad2f14468898540cb",
+    "model.mtl": "5d57408584639037f17f225a28f5653c72fcafcc3076b2f23cf333809cb746f4",
+    "texture.png": "75baf74d9483a0fc56ac21ceba346fbe16fc24a2a1bf0524c53e6bbe802e1153",
+    "LICENSE.txt": "aaa7823342af1565f4fb23230dcf27ae36f3a3335416dc4f870382c78d3ed0df"
+  },
+  "modifications": "None; runtime geometry and mass scaling are configured by scene YAML."
+}

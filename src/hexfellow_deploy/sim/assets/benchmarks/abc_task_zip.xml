@@ -1,0 +1,16 @@
+<mujoco model="abc_task_zip_objects">
+  <asset />
+  <worldbody>
+    <body name="pouch" pos="0.52 0.0 0.762">
+      <freejoint name="pouch_joint" />
+      <geom name="pouch_body" type="box" size="0.075 0.105 0.010" rgba="0.35 0.45 0.70 1" density="180" friction="0.9 0.02 0.003" condim="6" />
+      <geom name="pouch_rail_a" type="box" size="0.006 0.105 0.006" pos="0.014 0 0.014" rgba="0.75 0.75 0.78 1" density="300" />
+      <geom name="pouch_rail_b" type="box" size="0.006 0.105 0.006" pos="-0.014 0 0.014" rgba="0.75 0.75 0.78 1" density="300" />
+      <body name="zip_slider" pos="0 -0.090 0.020">
+        <joint name="zip_slide" type="slide" axis="0 1 0" range="0 0.180" frictionloss="0.35" damping="0.6" armature="0.01" />
+        <geom name="slider_body" type="box" size="0.013 0.011 0.007" rgba="0.95 0.75 0.10 1" density="700" friction="0.9 0.02 0.003" condim="6" />
+        <geom name="slider_tab" type="box" size="0.006 0.003 0.017" pos="0 0 0.022" rgba="0.95 0.75 0.10 1" density="500" friction="0.9 0.02 0.003" condim="6" />
+      </body>
+    </body>
+  </worldbody>
+</mujoco>

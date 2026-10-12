@@ -1,0 +1,35 @@
+schema_version: 1
+robot: maver_x4
+lift_m: 0.3
+# MODEL coordinates, radians. J3 rotates each elbow's bending plane forward;
+# J4 is the elbow hinge. Both J4 targets are +90 degrees in this model/mapping.
+# Upper arms hang down; forearms extend forward; jaw-opening axes are horizontal.
+left_arm_rad:
+  - 1.5707963267948966   # J1: +90 degrees (SDK zero after offset)
+  - 1.5707963267948966   # J2: upper arm down
+  - 1.5707963267948966   # J3: left bending plane forward
+  - 1.5707963267948966   # J4: elbow +90 degrees
+  - 0.0
+  - 0.0
+  - 0.0
+right_arm_rad:
+  - -1.5707963267948966  # J1: -90 degrees (SDK zero after offset)
+  - 1.5707963267948966
+  - -1.5707963267948966  # J3: mirrored right bending plane forward
+  - 1.5707963267948966   # J4: elbow +90 degrees
+  - 0.0
+  - 0.0
+  - 0.0
+# Align the bending planes with elbows straight before bending forward. A
+# simultaneous J3/J4 transition from the old resting pose crossed the torso in
+# the model. These intermediate targets are part of the operator-selected I run.
+approach_waypoints:
+  - lift_m: 0.3
+    left_arm_rad: [1.5707963267948966, 1.5707963267948966, 1.5707963267948966, 0.0, 0.0, 0.0, 0.0]
+    right_arm_rad: [-1.5707963267948966, 1.5707963267948966, -1.5707963267948966, 0.0, 0.0, 0.0, 0.0]
+metadata:
+  source: Operator requested a two-handed bottle-carrying initial posture.
+  coordinate_frame: UMI both_j6 model joint coordinates
+  elbow_joint: 4
+  elbow_bend_deg: 90
+  gripper_command: unchanged

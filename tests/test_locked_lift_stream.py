@@ -8,9 +8,9 @@ import pytest
 
 from hexfellow_deploy.workspace import activate, build_shared_executor
 
-ROOT = activate(Path(__file__).resolve().parents[3])
+ROOT = activate(Path(__file__).resolve().parents[1])
 from hexfellow_deploy.actuation import StreamContract, deployment, encode_mit
-from mobile_manipulator.robot.joints import JOINTS, LIFT
+from hexfellow_deploy.robot.joints import JOINTS, LIFT
 
 
 def test_recorded_fixed_lift_frame_reproduces_old_rejection_and_passes_current_contract():
@@ -48,13 +48,14 @@ def test_recorded_fixed_lift_frame_reproduces_old_rejection_and_passes_current_c
                 contract.accept(frame, frame['measured'])
 
 
-def test_actual_solver_commands_pass_stream_with_changing_lift_feedback():
+@pytest.mark.parametrize('height', [.3, .421, .4219988120410797, .422, 563397/1335063])
+def test_actual_solver_commands_pass_stream_with_changing_lift_feedback(height):
     metadata = deployment(ROOT, Path('configs/hardware/desktop.yaml'))[3]
     executor = build_shared_executor(metadata, .02)
     now = [1.]
     executor.ik.control_clock = lambda: now[0]
     positions = {n: float(executor.ik.core.home_q[i]) for n, i in executor.ik.indices.items()}
-    positions[LIFT] = .3
+    positions[LIFT] = height
     seed = dict(timestamp_s=now[0], joint_positions=positions,
                 joint_velocities=dict.fromkeys(JOINTS, 0.), gripper_state=dict(left='open', right='open'))
     executor.ik.initialize_reference(seed, stationary_reference=True)
@@ -64,7 +65,8 @@ def test_actual_solver_commands_pass_stream_with_changing_lift_feedback():
         now[0] += .02
         measured = copy.deepcopy(seed)
         measured['timestamp_s'] = now[0]
-        measured['joint_positions'][LIFT] += .00003*np.sin(sequence)
+        measured['joint_positions'][LIFT] -= (.00003*abs(np.sin(sequence)) if height <= .422
+                                              else (sequence % 4)/1335063)
         command, _ = executor.tick(measured)
         result = executor.ik.last_result
         frame = dict(sequence=sequence, created_s=now[0], measured=measured,
@@ -72,5 +74,5 @@ def test_actual_solver_commands_pass_stream_with_changing_lift_feedback():
                      command=command, mit=encode_mit(result.mit),
                      reference_velocity={n:float(result.velocity[i]) for n,i in executor.ik.indices.items()})
         contract.accept(frame, measured)
-        assert command['joint_positions'][LIFT] == pytest.approx(.3, abs=1e-10)
+        assert command['joint_positions'][LIFT] == pytest.approx(min(height, .422-1e-9), abs=1e-10)
         assert executor.ik.last_source['joint_positions'][LIFT] == measured['joint_positions'][LIFT]

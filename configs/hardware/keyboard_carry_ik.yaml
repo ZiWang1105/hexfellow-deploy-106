@@ -1,0 +1,21 @@
+# Cartesian operator preset. No joint-angle targets or joint-space seed.
+# Positions use the robot base frame, meters; quaternions are XYZW.
+# TCP is this project's pad-center TCP (UMI's tip is 17 mm farther along tool Z).
+schema_version: 1
+frame: robot_base
+lift_m: 0.3
+motion_profile: x7-gp80-highspeed-fixed-base-v1
+stages:
+  # Align the elbow/hand frames while the forearms point down, then bend forward.
+  - left:
+      tcp: {position_m: [0.06938191, 0.2453, 0.44188961], quaternion_xyzw: [1, 0, 0, 0]}
+      elbow: {position_m: [0.0694, 0.2453, 0.87838961], quaternion_xyzw: [1, 0, 0, 0]}
+    right:
+      tcp: {position_m: [0.06938191, -0.2453, 0.44188961], quaternion_xyzw: [1, 0, 0, 0]}
+      elbow: {position_m: [0.0694, -0.2453, 0.87838961], quaternion_xyzw: [1, 0, 0, 0]}
+  - left:
+      tcp: {position_m: [0.5059, 0.2453, 0.87837152], quaternion_xyzw: [0.7071067811865476, 0, 0.7071067811865476, 0]}
+      elbow: {position_m: [0.0694, 0.2453, 0.87838961], quaternion_xyzw: [0.7071067811865476, 0, 0.7071067811865476, 0]}
+    right:
+      tcp: {position_m: [0.5059, -0.2453, 0.87837152], quaternion_xyzw: [0.7071067811865476, 0, 0.7071067811865476, 0]}
+      elbow: {position_m: [0.0694, -0.2453, 0.87838961], quaternion_xyzw: [0.7071067811865476, 0, 0.7071067811865476, 0]}

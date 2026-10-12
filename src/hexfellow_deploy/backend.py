@@ -164,7 +164,7 @@ class BackendComponent(DABaseInterface):
     def __init__(self, name, frames, feedback, backend_status, control_status, measured,
                  plant_state, workspace, output, deployment_config, scene, backend='simulation',
                  execute=False, period_s=.004, command_timeout_s=.1, feedback_timeout_s=.1,
-                 submit_delay_s=0., time_budget=.003, receipts=None):
+                 submit_delay_s=0., time_budget=.003, receipts=None, startup_lift_m=None):
         super().__init__(name, [frames,feedback,backend_status,control_status,measured,plant_state]
                          +([receipts] if receipts is not None else []), time_budget)
         self.receipts = receipts
@@ -173,6 +173,8 @@ class BackendComponent(DABaseInterface):
         self.workspace, self.output, self.config, self.scene = workspace, output, deployment_config, scene
         self.backend, self.execute, self.period = backend, execute, period_s
         self.command_timeout, self.feedback_timeout, self.submit_delay = command_timeout_s, feedback_timeout_s, submit_delay_s
+        from .startup_lift import validate_target
+        self.startup_lift_m = validate_target(startup_lift_m)
 
     def initialize(self):
         if self.backend not in ('simulation','hardware') or (self.backend == 'hardware' and not self.execute):
@@ -204,7 +206,8 @@ class BackendComponent(DABaseInterface):
                                          lift_speed_limit_m_s=metadata['velocity_bounds']['maver_x4_asm_URDF_joint_1'])
             else:
                 from .native import NativeDriver
-                driver = NativeDriver(mapping,profile,config,timeout_s=self.command_timeout)
+                driver = NativeDriver(mapping,profile,config,timeout_s=self.command_timeout,
+                                      startup_lift_m=self.startup_lift_m)
             state.update(metadata=metadata, phase='prepared')
             self.status.put(state, timeout=.01)
             # Controller construction happens before native acquisition/streaming.
@@ -220,7 +223,23 @@ class BackendComponent(DABaseInterface):
                 time.sleep(.004)
             if self.stopping:
                 return
-            driver.acquire()
+            def startup_progress(report):
+                # Continue measured-time camera pairing while IK waits for its
+                # final stationary seed. No policy action runs during this phase.
+                snapshot = driver.snapshot
+                self.feedback.put(dict(measured=snapshot['measured'], received=snapshot['received']), timeout=.001)
+                self.measured.put(snapshot['measured'])
+                if self.backend == 'simulation':
+                    self.plant_state.put(snapshot)
+                state.update(phase='startup_lift', startup_lift=report)
+                self.status.put(state, timeout=.001)
+            if self.startup_lift_m is not None:
+                print(f'Startup lift: positioning to {self.startup_lift_m:.3f} m before arm preparation.', flush=True)
+            driver.acquire(startup_lift_m=self.startup_lift_m,
+                           progress=startup_progress, stopped=lambda: self.stopping)
+            state['startup_lift'] = getattr(driver, 'startup_lift_report', None)
+            if self.startup_lift_m is not None:
+                print('Startup lift complete; locking lift for the policy session.', flush=True)
             seed = driver.snapshot
             stream.seed(seed['measured'])
             self.feedback.put(dict(measured=seed['measured'],received=seed['received']),timeout=.01)

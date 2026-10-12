@@ -1,0 +1,16 @@
+<mujoco model="handover_objects">
+  <asset />
+  <worldbody>
+    <body name="rod" pos="0.50 0.38 0.775">
+      <freejoint name="rod_joint" />
+      <geom type="cylinder" size="0.016 0.06" euler="0 1.5708 0" rgba="0.9 0.6 0.1 1" density="500" friction="1.5 0.02 0.003" condim="6" />
+    </body>
+    <body name="goal_tray" pos="0.50 -0.38 0.755">
+      <geom type="box" size="0.09 0.07 0.005" rgba="0.25 0.55 0.3 1" density="400" />
+      <geom type="box" size="0.09 0.005 0.018" pos="0 0.065 0.018" rgba="0.25 0.55 0.3 1" />
+      <geom type="box" size="0.09 0.005 0.018" pos="0 -0.065 0.018" rgba="0.25 0.55 0.3 1" />
+      <geom type="box" size="0.005 0.07 0.018" pos="0.085 0 0.018" rgba="0.25 0.55 0.3 1" />
+      <geom type="box" size="0.005 0.07 0.018" pos="-0.085 0 0.018" rgba="0.25 0.55 0.3 1" />
+    </body>
+  </worldbody>
+</mujoco>

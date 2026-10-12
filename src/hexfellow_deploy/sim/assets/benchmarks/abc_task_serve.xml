@@ -1,0 +1,21 @@
+<mujoco model="abc_task_serve_objects">
+  <asset />
+  <worldbody>
+    <body name="plate_w" pos="0.60 -0.18 0.77">
+      <freejoint name="plate_w_joint" />
+      <geom type="cylinder" size="0.055 0.005" rgba="0.95 0.93 0.85 1" density="500" friction="0.9 0.02 0.003" condim="6" />
+      <geom type="box" size="0.016 0.009 0.002" pos="0.052 0 0.006" euler="0 -0.45 0" rgba="0.75 0.3 0.25 1" density="500" />
+      <geom type="box" size="0.016 0.009 0.002" pos="-0.052 0 0.006" euler="0 0.45 0" rgba="0.75 0.3 0.25 1" density="500" />
+      <geom type="box" size="0.009 0.016 0.002" pos="0 0.052 0.006" euler="0.45 0 0" rgba="0.75 0.3 0.25 1" density="500" />
+      <geom type="box" size="0.009 0.016 0.002" pos="0 -0.052 0.006" euler="-0.45 0 0" rgba="0.75 0.3 0.25 1" density="500" />
+    </body>
+    <body name="cup_c" pos="0.48 0.20 0.79">
+      <freejoint name="cup_c_joint" />
+      <geom type="cylinder" size="0.024 0.004" pos="0 0 -0.028" rgba="0.2 0.6 0.75 1" density="400" friction="0.9 0.02 0.003" condim="6" />
+      <geom type="box" size="0.004 0.014 0.03" pos="0.022 0 0" rgba="0.2 0.6 0.75 1" density="400" />
+      <geom type="box" size="0.004 0.014 0.03" pos="-0.022 0 0" rgba="0.2 0.6 0.75 1" density="400" />
+      <geom type="box" size="0.014 0.004 0.03" pos="0 0.022 0" rgba="0.2 0.6 0.75 1" density="400" />
+      <geom type="box" size="0.014 0.004 0.03" pos="0 -0.022 0" rgba="0.2 0.6 0.75 1" density="400" />
+    </body>
+  </worldbody>
+</mujoco>

@@ -4,12 +4,13 @@ from pathlib import Path
 import sys
 
 
-def main(backend, argv=None):
+def main(backend, argv=None, *, workspace=None, agent_plugin=None):
     parser = argparse.ArgumentParser(description='Shared DA/PinkIK/MIT deployment')
     if backend not in ('simulation', 'hardware'):
         parser.error('Backend must be simulation or hardware')
     parser.add_argument('--config', '--deployment-config', default='configs/local/desktop.yaml',
                         help='Shared hardware calibration and actuator profile YAML')
+    parser.add_argument('--agent-plugin', default=agent_plugin, help='Optional installed application integration module')
     parser.add_argument('--runtime-config', help='DA runtime YAML, default configs/simulation.yaml')
     parser.add_argument('--evaluate-body', default='entity_apple_body', help='Offline scoring only')
     parser.add_argument('--scene', help='Physical scene YAML; selected from catalog when --task is used')
@@ -30,6 +31,10 @@ def main(backend, argv=None):
     parser.add_argument('--confirm-onsite-ready', action='store_true')
     parser.add_argument('--research', action='store_true')
     parser.add_argument('--hold-only', action='store_true')
+    parser.add_argument('--startup-lift-m', type=float, default=.30,
+                        help='Position lift before arm preparation, then lock it (default: 0.30 m)')
+    parser.add_argument('--keep-lift-height', action='store_true',
+                        help='Lock the measured starting lift height without startup positioning')
     parser.add_argument('--interactive-ik', action='store_true', help='Simulation window with draggable TCP targets; no policy API')
     parser.add_argument('--live-view', '--live-viewer', action='store_true')
     parser.add_argument('--viewer-port', type=int, default=8765)
@@ -37,6 +42,11 @@ def main(backend, argv=None):
     parser.add_argument('--no-video', action='store_true', help='Raw trajectory always recorded; video is an offline export')
     parser.add_argument('--set', action='append', default=[])
     args = parser.parse_args(argv)
+    from .startup_lift import validate_target
+    try:
+        validate_target(args.startup_lift_m)
+    except ValueError as error:
+        parser.error(str(error))
     if args.interactive_ik and (backend != 'simulation' or args.prompt or args.instruction or args.task or args.hold_only):
         parser.error('--interactive-ik requires simulation without a prompt, task or hold-only mode')
     if backend == 'hardware' and not (args.execute and args.confirm_onsite_ready):
@@ -56,7 +66,7 @@ def main(backend, argv=None):
         parser.error('Provide --prompt or --instruction; use --hold-only for an actuator diagnostic')
     if args.hold_only and prompt:
         parser.error('--hold-only cannot execute a policy prompt')
-    root = Path(__file__).resolve().parents[4]
+    root = Path(workspace).resolve() if workspace is not None else Path(__file__).resolve().parents[2]
     if args.controller or args.base_motion:
         import yaml
         deployment_path = Path(args.config).resolve()
@@ -69,6 +79,8 @@ def main(backend, argv=None):
             if expected is None or Path(requested).resolve() != expected:
                 parser.error(f'--{key.replace("_", "-")} must match {expected}; select it in the shared deployment YAML to keep simulator and hardware identical')
     command = ['--workspace',str(root),'--output',args.output,'--settle-s',str(args.settle_s)]
+    if args.agent_plugin:
+        command += ['--agent-plugin', args.agent_plugin]
     if args.interactive_ik:
         command += ['--interactive-ik', '--no-camera']
     if backend == 'simulation':
@@ -89,6 +101,7 @@ def main(backend, argv=None):
                  f'policy.agent_config={str(Path(args.agent).resolve())}',
                  f'interface.backend.scene={str(Path(args.scene or "configs/scenes/apple_on_table.yaml").resolve())}',
                  f'interface.dashboard.port={args.viewer_port}',
+                 f'interface.backend.startup_lift_m={"null" if args.hold_only or args.interactive_ik or args.keep_lift_height else args.startup_lift_m}',
                  f'interface.control.startup_carry={str(not args.hold_only).lower()}']
     for value in overrides+args.set:
         command += ['--set',value]

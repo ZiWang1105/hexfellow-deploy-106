@@ -7,10 +7,10 @@ import pytest
 
 from hexfellow_deploy.workspace import activate
 
-ROOT = activate(Path(__file__).resolve().parents[3])
+ROOT = activate(Path(__file__).resolve().parents[1])
 from hexfellow_deploy.actuation import StreamContract, deployment, encode_mit
 from hexfellow_deploy.native import ContinuousGate, NativeDriver, StreamEndpoint
-from mobile_manipulator.robot.joints import JOINTS, LEFT, RIGHT
+from hexfellow_deploy.robot.joints import JOINTS, LEFT, RIGHT
 from policy_sim.control.mit_command import MitCommand
 from policy_sim.hardware.mit_wire import authorize_group
 from hex_device.generated.public_api_down_pb2 import APIDown
@@ -58,7 +58,7 @@ def test_shared_profile_accepts_original_frame_and_prevents_history_reset(metada
 def test_shared_executor_uses_selected_deployment_base_motion(metadata, tmp_path):
     import yaml
     from hexfellow_deploy.workspace import build_shared_executor
-    from mobile_manipulator.control.base_motion import BaseMotionConfig
+    from hexfellow_deploy.control.base_motion import BaseMotionConfig
     selected = tmp_path/'base.yaml'
     values = dict(BaseMotionConfig.load(metadata['base_motion']).to_dict(), approach_distance_m=.61)
     selected.write_text(yaml.safe_dump(values))
@@ -196,7 +196,8 @@ def test_group_authorization_is_atomic_when_one_device_has_not_dispatched():
 def test_native_receipt_requires_matching_first_dispatch_for_every_primary_device():
     gates = {n: ContinuousGate(n) for n in ('left', 'right', 'theta', 'base')}
     driver = object.__new__(NativeDriver)
-    driver.endpoint = SimpleNamespace(direct_gates=gates)
+    driver.endpoint = SimpleNamespace(direct_gates=gates, check_fixed_lift=lambda state: None)
+    driver.state = object()
     for gate in gates.values():
         gate.first_dispatch = dict(sequence=4, sdk_send_returned=2.)
     gates['base'].first_dispatch = dict(sequence=3, sdk_send_returned=3.)
@@ -223,11 +224,12 @@ def test_native_preserves_ik_source_positions_with_newer_endpoint_feedback(metad
 
 
 @pytest.mark.parametrize('invalid_hand_pulses', [False, True])
-def test_native_leaf_reuses_calibrated_mit_encoding_for_complete_frame(monkeypatch, invalid_hand_pulses):
+@pytest.mark.parametrize('lift_height', [.3, .4219988120410797, .422])
+def test_native_leaf_reuses_calibrated_mit_encoding_for_complete_frame(monkeypatch, invalid_hand_pulses, lift_height):
     """Exercise production packet preparation with passive SDK setter recorders."""
-    from mobile_manipulator.control.gripper import BinaryGripperServo
-    from mobile_manipulator.hardware.device import BinaryMotorTargets
-    from mobile_manipulator.hardware.umi_device import native_packet
+    from hexfellow_deploy.control.gripper import BinaryGripperServo
+    from hexfellow_deploy.hardware.device import BinaryMotorTargets
+    from hexfellow_deploy.hardware.umi_device import native_packet
     from policy_sim.hardware.whole_body import WholeBodyState
 
     monkeypatch.setattr('time.monotonic', lambda: 100.)
@@ -238,6 +240,7 @@ def test_native_leaf_reuses_calibrated_mit_encoding_for_complete_frame(monkeypat
         settings.update(closed_motor_rad=5.5, open_motor_rad=.02, closure_enabled=True)
     measured = sample()
     measured['timestamp_s'] = 100.
+    measured['joint_positions'][JOINTS[0]] = lift_height
     measured['joint_positions'].update({LEFT[0]: 1.57, RIGHT[0]: -1.57, LEFT[1]: 1.5, RIGHT[1]: 1.5})
     q = np.array(list(measured['joint_positions'].values()))
     health = {s: dict(joint_limits=np.column_stack((profile.sdk_position_lower_rad[i:i+7],
@@ -266,6 +269,10 @@ def test_native_leaf_reuses_calibrated_mit_encoding_for_complete_frame(monkeypat
     endpoint = object.__new__(StreamEndpoint)
     endpoint.mobile_config, endpoint.mapping = robot, mapping
     endpoint.last_base = np.zeros(3)
+    endpoint.fixed_lift_reference = q[0]
+    endpoint.fixed_lift_confirmation = {'acceptance': 'observed_stationary_after_brake_receipt'}
+    endpoint.fixed_lift_brake_evidence = lambda: dict(brake_received=True)
+    state.health['theta']['state'] = 'LsBrake'
     endpoint.grippers = {s: BinaryMotorTargets(robot['grippers'][s]) for s in ('left', 'right')}
     endpoint.gripper_servos = {s: BinaryGripperServo(g.closed, g.opened, g.closed, 1.)
                               for s, g in endpoint.grippers.items()}
@@ -304,7 +311,7 @@ def test_native_leaf_reuses_calibrated_mit_encoding_for_complete_frame(monkeypat
         return
     prepared = endpoint._prepare_dispatch(command, 'whole-body', state)
     endpoint.publish_frame(command, state)
-    assert endpoint.write_count == 4
+    assert endpoint.write_count == 3
     for side in ('left', 'right'):
         kind, targets = endpoint.devices[side].calls[-1]
         assert kind == 'MIT'
@@ -314,7 +321,7 @@ def test_native_leaf_reuses_calibrated_mit_encoding_for_complete_frame(monkeypat
             np.testing.assert_array_equal([getattr(target, sdk_field) for target in targets], expected[field])
         assert endpoint.hands[side].calls[-1][0] == ('POSITION' if side == 'left' else 'BRAKE')
         assert endpoint.direct_gates[side].hand_deadline == 100.1
-    assert endpoint.devices['theta'].calls[-1][0] == 'POSITION'
+    assert endpoint.devices['theta'].calls == []  # fixed lift stays braked
     for name, (wire_packet, _) in prepared.items():
         assert endpoint.direct_gates[name].filter(wire_packet) == wire_packet
         assert endpoint.direct_gates[name].deadline == 100.1

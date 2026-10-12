@@ -1,0 +1,40 @@
+<mujoco model="abc_gauntlet_3_objects">
+  <asset />
+  <worldbody>
+    <body name="real_spoon" pos="0.44 0.24 0.80">
+      <freejoint name="real_spoon_joint" />
+      <geom type="ellipsoid" size="0.022 0.014 0.004" pos="0.045 0 0" rgba="0.72 0.74 0.77 1" density="600" friction="0.9 0.02 0.003" condim="6" />
+      <geom type="box" size="0.038 0.005 0.002" pos="-0.025 0.004 0" euler="0 0 0.12" rgba="0.72 0.74 0.77 1" density="600" />
+    </body>
+    <body name="real_fork" pos="0.58 0.28 0.80">
+      <freejoint name="real_fork_joint" />
+      <geom type="box" size="0.016 0.0018 0.002" pos="0.047 0.009 0" rgba="0.72 0.74 0.77 1" density="600" />
+      <geom type="box" size="0.016 0.0018 0.002" pos="0.047 0.003 0" rgba="0.72 0.74 0.77 1" density="600" />
+      <geom type="box" size="0.016 0.0018 0.002" pos="0.047 -0.003 0" rgba="0.72 0.74 0.77 1" density="600" />
+      <geom type="box" size="0.016 0.0018 0.002" pos="0.047 -0.009 0" rgba="0.72 0.74 0.77 1" density="600" />
+      <geom type="box" size="0.008 0.011 0.002" pos="0.024 0 0" rgba="0.72 0.74 0.77 1" density="600" />
+      <geom type="box" size="0.04 0.005 0.002" pos="-0.02 0 0" rgba="0.72 0.74 0.77 1" density="600" />
+    </body>
+    <body name="croissant" pos="0.66 0.1 0.80">
+      <freejoint name="croissant_joint" />
+      <geom type="ellipsoid" size="0.05 0.02 0.018" pos="0 0 0" rgba="0.85 0.65 0.3 1" density="120" friction="0.9 0.02 0.003" condim="6" />
+      <geom type="ellipsoid" size="0.035 0.016 0.015" pos="0.045 0.03 0" euler="0 0 0.8" rgba="0.85 0.65 0.3 1" density="120" friction="0.9 0.02 0.003" condim="6" />
+      <geom type="ellipsoid" size="0.035 0.016 0.015" pos="-0.045 0.03 0" euler="0 0 -0.8" rgba="0.85 0.65 0.3 1" density="120" friction="0.9 0.02 0.003" condim="6" />
+    </body>
+    <body name="ladle" pos="0.46 -0.2 0.80">
+      <freejoint name="ladle_joint" />
+      <geom type="ellipsoid" size="0.028 0.028 0.012" pos="0.06 0 0" rgba="0.12 0.12 0.14 1" density="400" friction="0.9 0.02 0.003" condim="6" />
+      <geom type="box" size="0.05 0.007 0.003" pos="-0.03 0 0.01" euler="0 -0.15 0" rgba="0.12 0.12 0.14 1" density="400" />
+    </body>
+    <body name="banana_bent" pos="0.58 -0.3 0.80">
+      <freejoint name="banana_bent_joint" />
+      <geom type="ellipsoid" size="0.045 0.016 0.016" pos="0 0 0" rgba="0.92 0.85 0.2 1" density="250" friction="0.9 0.02 0.003" condim="6" />
+      <geom type="ellipsoid" size="0.035 0.015 0.015" pos="0.055 0.02 0" euler="0 0 0.7" rgba="0.92 0.85 0.2 1" density="250" friction="0.9 0.02 0.003" condim="6" />
+      <geom type="ellipsoid" size="0.035 0.015 0.015" pos="-0.055 0.02 0" euler="0 0 -0.7" rgba="0.92 0.85 0.2 1" density="250" friction="0.9 0.02 0.003" condim="6" />
+    </body>
+    <body name="chopstick" pos="0.68 -0.12 0.80">
+      <freejoint name="chopstick_joint" />
+      <geom type="box" size="0.11 0.004 0.003" rgba="0.55 0.35 0.18 1" density="400" />
+    </body>
+  </worldbody>
+</mujoco>

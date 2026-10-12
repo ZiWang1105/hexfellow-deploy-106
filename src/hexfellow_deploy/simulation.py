@@ -74,12 +74,12 @@ class SimulationPlant:
     def __init__(self, scene_path, output, *, submit_delay_s=0., effort_limits=None, profile=None,
                  lift_speed_limit_m_s=.025):
         import mujoco
-        from mobile_manipulator.sim.scene import build_scene
-        from mobile_manipulator.sim.scene_config import load_scene
-        from mobile_manipulator.sim.sensors import EncoderReader
-        from mobile_manipulator.robot.assembly import JOINTS, BASE_JOINTS
-        from mobile_manipulator.robot.joints import LEFT, RIGHT
-        from mobile_manipulator.control.gripper import BinaryGripperServo
+        from hexfellow_deploy.sim.scene import build_scene
+        from hexfellow_deploy.sim.scene_config import load_scene
+        from hexfellow_deploy.sim.sensors import EncoderReader
+        from hexfellow_deploy.robot.assembly import JOINTS, BASE_JOINTS
+        from hexfellow_deploy.robot.joints import LEFT, RIGHT
+        from hexfellow_deploy.control.gripper import BinaryGripperServo
         self.mj = mujoco
         Path(output).mkdir(parents=True, exist_ok=True)
         self.scene = build_scene(load_scene(scene_path), Path(output) / "plant.xml")
@@ -137,7 +137,7 @@ class SimulationPlant:
         mujoco.mj_saveModel(self.model, str(Path(output)/'plant.mjb'))
         self.enabled = False
         self.have_reference = False
-        from mobile_manipulator.sim.recording import SceneRecorder
+        from hexfellow_deploy.sim.recording import SceneRecorder
         self.recorder = SceneRecorder(self.scene, output, video=False, sensors=False)
         from .physics_audit import PhysicsAudit
         self.physics_audit = PhysicsAudit(self.model, self.data)
@@ -176,7 +176,7 @@ class SimulationPlant:
                     self.model.actuator_biasprm[self.arm_ids,1] = -selected.kp
                     self.model.actuator_biasprm[self.arm_ids,2] = -selected.kd
                     self.data.ctrl[self.arm_ids] = selected.motor_input()
-                    from mobile_manipulator.robot.joints import LIFT
+                    from hexfellow_deploy.robot.joints import LIFT
                     self.lift_servo.target = command['joint_positions'][LIFT]
                     self.have_reference = True
                     self.base_request = np.asarray(command["base_velocity_body"])
@@ -198,7 +198,7 @@ class SimulationPlant:
                 self.lift_servo.step(self.data, self.model.opt.timestep)
                 self.mj.mj_step(self.model, self.data)
                 self.mj.mj_forward(self.model, self.data)
-                from mobile_manipulator.sim.transport import check_numerics
+                from hexfellow_deploy.sim.transport import check_numerics
                 check_numerics(self.data)
                 self.physics_audit.step(self.data)
                 self.max_torque = np.maximum(self.max_torque, np.abs(self.data.actuator_force[self.arm_ids]))
@@ -209,8 +209,31 @@ class SimulationPlant:
         except BaseException as error:
             self.error = f"{type(error).__name__}: {error}"
 
-    def acquire(self):
+    def acquire(self, *, startup_lift_m=None, progress=lambda report: None, stopped=lambda: False):
+        from .startup_lift import LiftArrival, validate_target
+        from hexfellow_deploy.robot.joints import LIFT
+        validate_target(startup_lift_m)
         self.enabled = True
+        self.startup_lift_report = None
+        if startup_lift_m is None:
+            return
+        arrival = LiftArrival(startup_lift_m, time.monotonic())
+        arrival.report['initial_height_m'] = self.snapshot['measured']['joint_positions'][LIFT]
+        self.startup_lift_report = arrival.report
+        # Same bounded lift servo as normal actuation; arms retain the initial
+        # measured-pose motor hold. Never teleport simulated joints.
+        self.lift_servo.target = startup_lift_m
+        self.have_reference = True
+        while True:
+            self.check()
+            measured = self.snapshot['measured']
+            if arrival.update(measured['joint_positions'][LIFT], measured['joint_velocities'][LIFT],
+                              measured['timestamp_s'], time.monotonic(), stopped=stopped()):
+                self.lift_servo.target = measured['joint_positions'][LIFT]
+                arrival.report.update(phase='complete', locked_height_m=self.lift_servo.target)
+                return
+            progress(dict(arrival.report))
+            time.sleep(.004)
 
     def check(self):
         if self.error:

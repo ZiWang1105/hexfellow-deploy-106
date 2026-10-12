@@ -1,0 +1,190 @@
+schema_version: 1
+physics:
+  timestep_s: 0.002
+  gravity_m_s2:
+  - 0.0
+  - 0.0
+  - -9.81
+robot:
+  assembly: ../../robot/maver_gp80.yaml
+  source_checkout: ../../../third_party/UMI_Hardware
+  source_commit: gitlink
+  urdf: urdf/maver_x4_gp80_zed_40deg.urdf
+  urdf_sha256: c2809fcb7d81e5b098678050d2fe3bc34f241d8626423579d0c7c7db6be45943
+  initial_base_xyyaw:
+  - 0.0
+  - 0.0
+  - 0.0
+  base_actuation:
+    linear_velocity_limit_m_s: 0.5
+    angular_velocity_limit_rad_s: 0.25
+  base_bounds:
+    x_m:
+    - -1.0
+    - 9.0
+    y_m:
+    - -4.0
+    - 4.0
+    yaw_rad:
+    - -3.141592653589793
+    - 3.141592653589793
+  initial_joints:
+    maver_x4_asm_URDF_joint_1: 0.3
+    maver_x4_asm_7_urdf_SLDASM_joint_1: 1.5785124698687512
+    maver_x4_asm_7_urdf_SLDASM_joint_2: 1.5711719323771387
+    maver_x4_asm_7_urdf_SLDASM_joint_3: 0.004631474917887981
+    maver_x4_asm_7_urdf_SLDASM_joint_4: 0.018517268176233184
+    maver_x4_asm_7_urdf_SLDASM_joint_5: -0.02098677465426043
+    maver_x4_asm_7_urdf_SLDASM_joint_6: 0.10256579043000368
+    maver_x4_asm_7_urdf_SLDASM_joint_7: -0.05389995032870908
+    maver_x4_asm_7_urdf_SLDASM2_joint_1: -1.5864368388503365
+    maver_x4_asm_7_urdf_SLDASM2_joint_2: 1.5045156734535452
+    maver_x4_asm_7_urdf_SLDASM2_joint_3: -0.06609799378008539
+    maver_x4_asm_7_urdf_SLDASM2_joint_4: 0.060197261042310456
+    maver_x4_asm_7_urdf_SLDASM2_joint_5: 0.03228040859944582
+    maver_x4_asm_7_urdf_SLDASM2_joint_6: 0.0696427277700081
+    maver_x4_asm_7_urdf_SLDASM2_joint_7: -0.13406003387565812
+camera:
+  pose_source: robot_optical_frame
+  calibration: ../../../third_party/UMI_Hardware/config/camera/zed_landmark_candidate_20260930.json
+  calibration_sha256: 65e235c13d7a64657838d311b66ab64918ad86f533edbf3b479c297bcfd9c6fd
+  calibration_resolution_wh:
+  - 1920
+  - 1080
+  image_resolution_wh:
+  - 640
+  - 360
+floor:
+  half_size_m:
+  - 10.0
+  - 6.0
+  - 0.1
+  rgba:
+  - 0.3
+  - 0.33
+  - 0.35
+  - 1.0
+lights:
+- position_m:
+  - 2.5
+  - -2.0
+  - 6.0
+  direction:
+  - 0.0
+  - 0.0
+  - -1.0
+  diffuse:
+  - 0.8
+  - 0.8
+  - 0.8
+  directional: true
+- position_m:
+  - 4.0
+  - 3.0
+  - 4.0
+  direction:
+  - 0.0
+  - -0.5
+  - -1.0
+  diffuse:
+  - 0.35
+  - 0.35
+  - 0.35
+  directional: true
+entities:
+- name: table
+  static: true
+  position_m:
+  - 2.6
+  - 0.0
+  - 0.0
+  quaternion_xyzw:
+  - 0.0
+  - 0.0
+  - 0.0
+  - 1.0
+  boxes:
+  - name: top
+    position_m:
+    - 0.0
+    - 0.0
+    - 0.725
+    size_m:
+    - 1.2
+    - 1.4
+    - 0.05
+    rgba:
+    - 0.64
+    - 0.42
+    - 0.23
+    - 1.0
+  - name: leg_front_left
+    position_m:
+    - -0.52
+    - 0.62
+    - 0.35
+    size_m:
+    - 0.08
+    - 0.08
+    - 0.7
+    rgba:
+    - 0.38
+    - 0.25
+    - 0.14
+    - 1.0
+  - name: leg_front_right
+    position_m:
+    - -0.52
+    - -0.62
+    - 0.35
+    size_m:
+    - 0.08
+    - 0.08
+    - 0.7
+    rgba:
+    - 0.38
+    - 0.25
+    - 0.14
+    - 1.0
+  - name: leg_back_left
+    position_m:
+    - 0.52
+    - 0.62
+    - 0.35
+    size_m:
+    - 0.08
+    - 0.08
+    - 0.7
+    rgba:
+    - 0.38
+    - 0.25
+    - 0.14
+    - 1.0
+  - name: leg_back_right
+    position_m:
+    - 0.52
+    - -0.62
+    - 0.35
+    size_m:
+    - 0.08
+    - 0.08
+    - 0.7
+    rgba:
+    - 0.38
+    - 0.25
+    - 0.14
+    - 1.0
+assemblies:
+- name: props
+  mjcf: ../../../src/hexfellow_deploy/sim/assets/benchmarks/put_bottle.xml
+  sha256: 8751480d07b19394892f190f3091af0365738a4ee55d55c2b3e0d737e3875b2f
+  position_m:
+  - 1.7
+  - 0.0
+  - 0.0
+  quaternion_xyzw:
+  - 0.0
+  - 0.0
+  - 0.0
+  - 1.0
+  initial_joints: {}

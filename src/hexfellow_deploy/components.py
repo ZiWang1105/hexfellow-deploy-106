@@ -41,8 +41,8 @@ class ControlComponent(DABaseInterface):
         root = activate(self.workspace)
         from .backend import BackendProxy, ControlCancelled
         from .actuation import encode_mit
-        from mobile_manipulator.interfaces.contract import Action
-        from mobile_manipulator.control.startup_pose import DEFAULT_STARTUP_POSE, load_ik_pose
+        from hexfellow_deploy.interfaces.contract import Action
+        from hexfellow_deploy.control.startup_pose import DEFAULT_STARTUP_POSE, load_ik_pose
         logger = logging.getLogger(self.name)
         output = Path(self.output)
         output.mkdir(parents=True, exist_ok=True)
@@ -120,13 +120,15 @@ class ControlComponent(DABaseInterface):
                             executor.hold(measured)
                             final_hold = True
                             state = dict(state, final_hold=True)
+                        elif request["operation"] == "observation_hold":
+                            executor.observation_hold(measured)
                         elif request["operation"] == "hold":
                             executor.hold(measured)
                         elif request["operation"] == "target":
                             observed = request["observed"]
                             if started-observed["timestamp_s"] > 90:
                                 raise ValueError("Observation expired; reobserve")
-                            from mobile_manipulator.robot.joints import LIFT
+                            from hexfellow_deploy.robot.joints import LIFT
                             if any(abs(measured["joint_positions"][n]-q) > (.01 if n == LIFT else .05)
                                    for n, q in observed["joint_positions"].items()):
                                 raise ValueError("Posture changed during inference; reobserve")

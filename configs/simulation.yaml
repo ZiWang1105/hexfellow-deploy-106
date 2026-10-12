@@ -2,6 +2,7 @@ workspace: ${oc.env:HEXFELLOW_WORKSPACE}
 output: ${oc.env:HEXFELLOW_OUTPUT}
 topic_prefix: ${oc.env:HEXFELLOW_TOPIC_PREFIX}
 policy:
+  component: null # Optional application component; IK has no agent dependency.
   agent_config: configs/agent/rgbd_full.yaml
   model: openai/gpt-6-astra
   reasoning_effort: medium
@@ -10,14 +11,14 @@ wrist_cameras:
   left_wrist:
     enabled: true
     serial: "230422271628"
-    calibration: third_party/hexfellow-deploy/calibration/config/camera/realsense_d405_left_candidate_20261008.json
+    calibration: calibration/config/camera/realsense_d405_left_candidate_20261008.json
     width: 640
     height: 480
     fps: 30
   right_wrist:
     enabled: true
     serial: "243222074562"
-    calibration: third_party/hexfellow-deploy/calibration/config/camera/realsense_d435i_right_candidate_20261008.json
+    calibration: calibration/config/camera/realsense_d435i_right_candidate_20261008.json
     width: 640
     height: 480
     fps: 30
@@ -107,6 +108,8 @@ interface:
     scene: configs/scenes/apple_on_table.yaml
     backend: simulation
     execute: false
+    # Public task launchers select 0.30 m; low-level HOLD tools preserve height.
+    startup_lift_m: null
     submit_delay_s: 0.0
     command_timeout_s: 0.1
     feedback_timeout_s: ${timing.feedback_health_timeout_s}
@@ -129,4 +132,4 @@ python_scheduling:
   hexfellow_backend:
     gil_switch_s: 0.0002
     cyclic_gc: false
-deployment_config: configs/local/desktop.yaml
+deployment_config: configs/hardware/desktop.yaml

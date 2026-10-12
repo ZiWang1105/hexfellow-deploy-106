@@ -6,7 +6,7 @@ import numpy as np
 import pytest
 
 from hexfellow_deploy.workspace import activate, build_shared_executor
-ROOT = activate(Path(__file__).resolve().parents[3])
+ROOT = activate(Path(__file__).resolve().parents[1])
 from hexfellow_deploy.actuation import deployment, StreamContract, encode_mit
 from hexfellow_deploy.interactive import (
     make_display_model, apply_snapshot, tcp_targets, write_handles, read_drag, paired_action, changed)
@@ -51,8 +51,8 @@ def test_targets_are_noncolliding_and_only_selected_mocap_can_change(display):
 def test_world_to_base_conversion_and_shared_ik_stream(display):
     import mujoco
     from scipy.spatial.transform import Rotation
-    from mobile_manipulator.robot.joints import JOINTS, LIFT
-    from mobile_manipulator.interfaces.contract import Action
+    from hexfellow_deploy.robot.joints import JOINTS, LIFT
+    from hexfellow_deploy.interfaces.contract import Action
     plant, model, data, metadata = display
     # Nonzero rendered base translation/yaw must never leak into TCP commands.
     for name, value in zip(plant.base_joints, (.4, -.2, .7)):

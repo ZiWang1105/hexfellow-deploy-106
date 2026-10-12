@@ -14,7 +14,7 @@ from hexfellow_deploy.topics import JsonTopic
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--workspace', type=Path, required=True)
+    parser.add_argument('--workspace', type=Path, default=Path(__file__).resolve().parents[1])
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--channel', choices=['feedback','frames','receipts'], required=True)
     parser.add_argument('--hold-ms', type=float, required=True)
@@ -27,7 +27,7 @@ def main():
         parser.error('Use a new output directory')
     output.parent.mkdir(parents=True, exist_ok=True)
     command = [sys.executable, '-m', 'hexfellow_deploy.cli', '--workspace', str(root),
-        '--duration-s','15', '--action','third_party/hexfellow-deploy/tests/fixtures/paired_pose.json',
+        '--duration-s','15', '--action',str(Path(__file__).resolve().parents[1]/'tests/fixtures/paired_pose.json'),
         '--set','interface.control.startup_carry=false', '--set',f'interface.dashboard.port={args.port}',
         '--output',str(output)]
     attached, injections = [], []

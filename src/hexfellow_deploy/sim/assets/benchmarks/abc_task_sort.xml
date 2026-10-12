@@ -1,0 +1,37 @@
+<mujoco model="abc_task_sort_objects">
+  <asset />
+  <worldbody>
+    <body name="blk_red_0" pos="0.52 0.06 0.78">
+      <freejoint name="blk_red_0_joint" />
+      <geom type="box" size="0.014 0.014 0.014" rgba="0.85 0.12 0.12 1" density="400" />
+    </body>
+    <body name="blk_red_1" pos="0.64 -0.06 0.78">
+      <freejoint name="blk_red_1_joint" />
+      <geom type="box" size="0.014 0.014 0.014" rgba="0.85 0.12 0.12 1" density="400" />
+    </body>
+    <body name="blk_grn_0" pos="0.46 -0.14 0.78">
+      <freejoint name="blk_grn_0_joint" />
+      <geom type="box" size="0.014 0.014 0.014" rgba="0.1 0.6 0.15 1" density="400" />
+    </body>
+    <body name="blk_grn_1" pos="0.58 0.20 0.78">
+      <freejoint name="blk_grn_1_joint" />
+      <geom type="box" size="0.014 0.014 0.014" rgba="0.1 0.6 0.15 1" density="400" />
+    </body>
+    <body name="ctr_red" pos="0.45 0.30 0.775">
+      <freejoint name="ctr_red_joint" />
+      <geom type="box" size="0.055 0.055 0.003" pos="0 0 -0.02" rgba="0.7 0.1 0.1 1" density="800" />
+      <geom type="box" size="0.003 0.055 0.023" pos="0.055 0 0" rgba="0.7 0.1 0.1 1" density="800" />
+      <geom type="box" size="0.003 0.055 0.023" pos="-0.055 0 0" rgba="0.7 0.1 0.1 1" density="800" />
+      <geom type="box" size="0.055 0.003 0.023" pos="0 0.055 0" rgba="0.7 0.1 0.1 1" density="800" />
+      <geom type="box" size="0.055 0.003 0.023" pos="0 -0.055 0" rgba="0.7 0.1 0.1 1" density="800" />
+    </body>
+    <body name="ctr_grn" pos="0.45 -0.30 0.775">
+      <freejoint name="ctr_grn_joint" />
+      <geom type="box" size="0.055 0.055 0.003" pos="0 0 -0.02" rgba="0.1 0.5 0.12 1" density="800" />
+      <geom type="box" size="0.003 0.055 0.023" pos="0.055 0 0" rgba="0.1 0.5 0.12 1" density="800" />
+      <geom type="box" size="0.003 0.055 0.023" pos="-0.055 0 0" rgba="0.1 0.5 0.12 1" density="800" />
+      <geom type="box" size="0.055 0.003 0.023" pos="0 0.055 0" rgba="0.1 0.5 0.12 1" density="800" />
+      <geom type="box" size="0.055 0.003 0.023" pos="0 -0.055 0" rgba="0.1 0.5 0.12 1" density="800" />
+    </body>
+  </worldbody>
+</mujoco>

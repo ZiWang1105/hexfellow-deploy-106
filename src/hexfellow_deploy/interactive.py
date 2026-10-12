@@ -85,7 +85,7 @@ def read_drag(model, data, targets, selected, active, *, reset=False):
 
 def paired_action(model, data, targets, grippers):
     from scipy.spatial.transform import Rotation
-    from mobile_manipulator.interfaces.contract import Action
+    from hexfellow_deploy.interfaces.contract import Action
     base = data.body(ROOT_BODY)
     rotation = base.xmat.reshape(3, 3)
     action = {}

@@ -9,8 +9,8 @@
   available through the `hardware` installation extra.
 - `src/hexfellow_deploy/gripper_contract.py`: binary request validation.
 
-The parent workspace supplies device connections, timestamped feedback taps,
-configuration and policy/keyboard requests. Both native deployment and keyboard
+The deployment package supplies device connections, timestamped feedback taps
+and configuration. Optional applications supply policy/keyboard requests. Both native deployment and keyboard
 control use `GP80FeedbackPublisher`; there is no separate production closing
 algorithm in the parent. Its historical import paths are compatibility aliases.
 Bench workflows remain in the parent and use the same law and closing profile.

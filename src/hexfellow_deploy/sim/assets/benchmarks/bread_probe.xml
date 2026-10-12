@@ -1,0 +1,9 @@
+<mujoco model="bread_probe_objects">
+  <asset />
+  <worldbody>
+    <body name="bread" pos="0.52 0.18 0.79">
+      <freejoint name="bread_joint" />
+      <geom type="ellipsoid" size="0.09 0.04 0.035" euler="0 0 0.4" rgba="0.8 0.6 0.35 1" density="180" friction="1.4 0.01 0.001" />
+    </body>
+  </worldbody>
+</mujoco>

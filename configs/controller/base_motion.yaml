@@ -1,0 +1,10 @@
+# Shared controller settings, tested in simulation; hardware is uncommissioned.
+# Stop and obtain a fresh RGB/proprioception observation after each pulse.
+max_speed_m_s: 0.4
+pulse_s: 1.0
+ramp_s: 0.2
+settle_s: 0.5
+approach_distance_m: 0.45
+distance_tolerance_m: 0.03
+max_yaw_rate_rad_s: 0.25
+yaw_tolerance_rad: 0.02

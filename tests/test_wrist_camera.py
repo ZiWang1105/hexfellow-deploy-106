@@ -3,7 +3,7 @@ import uuid
 import numpy as np
 import pytest
 from hexfellow_deploy.topics import RGBTopic
-from hexfellow_deploy.policy import wrist_context
+from hexfellow_deploy.observation_context import wrist_context
 
 
 def test_rgb_topic_roundtrip_and_contention_preserve_capture_time():
@@ -41,20 +41,20 @@ def test_missing_wrist_does_not_silently_become_head_only():
 
 def physical_builder(side=None):
     from pathlib import Path
-    from mobile_manipulator.hardware.wrist_observation import WristGeometry
-    root=Path(__file__).resolve().parents[3]
+    from hexfellow_deploy.hardware.wrist_observation import WristGeometry
+    root=Path(__file__).resolve().parents[1]
     candidate, serial = {
         None: ('realsense_d435i_right_candidate_20261006.json', '243222074562'),
         'left': ('realsense_d405_left_candidate_20261008.json', '230422271628'),
         'right': ('realsense_d435i_right_candidate_20261008.json', '243222074562'),
     }[side]
-    return WristGeometry(root/'third_party/hexfellow-deploy/calibration/config/camera'/candidate,
+    return WristGeometry(root/'calibration/config/camera'/candidate,
         serial,root/'third_party/UMI_Hardware/urdf/maver_x4_gp80_zed_40deg.urdf',
         root/'configs/robot/maver_gp80.yaml')
 
 
 def physical_feedback(stamp):
-    from mobile_manipulator.robot.joints import JOINTS
+    from hexfellow_deploy.robot.joints import JOINTS
     return dict(timestamp_s=stamp,joint_positions={n:.1 for n in JOINTS},
                 joint_velocities={n:0. for n in JOINTS},gripper_state=dict(left='open',right='closed'))
 
@@ -85,8 +85,8 @@ def test_native_capture_binds_serial_matches_encoders_and_uses_active_intrinsics
     from types import SimpleNamespace
     from hexfellow_deploy.wrist_camera import NativeWristCamera
     from hexfellow_deploy import camera_sync
-    from mobile_manipulator.hardware import config as deployment
-    root=Path(__file__).resolve().parents[3]
+    from hexfellow_deploy.hardware import config as deployment
+    root=Path(__file__).resolve().parents[1]
     builder=physical_builder(side)
     serial=builder.metadata['camera_serial']
     filename=f"realsense_{'d405' if side=='left' else 'd435i'}_{side}_candidate_20261008.json"
@@ -105,7 +105,7 @@ def test_native_capture_binds_serial_matches_encoders_and_uses_active_intrinsics
         def put(self,value):captured.append(value);return True
     camera=NativeWristCamera('test_wrist',Images(),tmp_path,serial=serial,
         workspace=str(root),deployment_config='unused',feedback=object(),
-        calibration='third_party/hexfellow-deploy/calibration/config/camera/'+filename)
+        calibration='calibration/config/camera/'+filename)
     intr=SimpleNamespace(fx=120.,fy=121.,ppx=4.,ppy=3.,coeffs=[0.]*5)
     device=SimpleNamespace(get_info=lambda field:serial if field=='serial' else 'test device',query_sensors=lambda:[])
     profile=SimpleNamespace(get_device=lambda:device,get_stream=lambda stream:SimpleNamespace(

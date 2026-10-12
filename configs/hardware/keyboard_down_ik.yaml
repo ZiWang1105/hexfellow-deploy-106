@@ -1,0 +1,49 @@
+# Arms-down operator preset, robot-base Cartesian TCP/elbow poses only.
+# Unbend forward to straight, leaving both arms beside the torso.
+schema_version: 1
+frame: robot_base
+lift_m: 0.3
+motion_profile: x7-gp80-highspeed-fixed-base-v1
+stages:
+- left:
+    tcp:
+      position_m:
+      - 0.06938191
+      - 0.2453
+      - 0.44188961
+      quaternion_xyzw:
+      - 1
+      - 0
+      - 0
+      - 0
+    elbow:
+      position_m:
+      - 0.0694
+      - 0.2453
+      - 0.87838961
+      quaternion_xyzw:
+      - 1
+      - 0
+      - 0
+      - 0
+  right:
+    tcp:
+      position_m:
+      - 0.06938191
+      - -0.2453
+      - 0.44188961
+      quaternion_xyzw:
+      - 1
+      - 0
+      - 0
+      - 0
+    elbow:
+      position_m:
+      - 0.0694
+      - -0.2453
+      - 0.87838961
+      quaternion_xyzw:
+      - 1
+      - 0
+      - 0
+      - 0

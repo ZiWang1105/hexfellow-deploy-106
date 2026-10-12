@@ -1,0 +1,351 @@
+# Derived UMI settings. The retained profile_id preserves upstream guard dispatch.
+arm_limits:
+  acceleration_rad_s2:
+  - 21.036660935881976
+  - 21.036660935881976
+  - 18.90984601764992
+  - 18.90984601764992
+  - 30.435710390121304
+  - 30.435710390121304
+  - 30.435710390121304
+  - 21.036660935881976
+  - 21.036660935881976
+  - 18.90984601764992
+  - 18.90984601764992
+  - 30.435710390121304
+  - 30.435710390121304
+  - 30.435710390121304
+  jerk_rad_s3:
+  - 471.8207072602341
+  - 471.8207072602341
+  - 918.9581929573874
+  - 918.9581929573874
+  - 3097.8991485993497
+  - 3097.8991485993497
+  - 3097.8991485993497
+  - 471.8207072602341
+  - 471.8207072602341
+  - 918.9581929573874
+  - 918.9581929573874
+  - 3097.8991485993497
+  - 3097.8991485993497
+  - 3097.8991485993497
+  position_margin_rad: 0.012
+  velocity_rad_s:
+  - 2.5408080208833543
+  - 2.5408080208833543
+  - 2.585188990822622
+  - 2.585188990822622
+  - 8.592099854868263
+  - 8.592099854868263
+  - 8.592099854868263
+  - 2.5408080208833543
+  - 2.5408080208833543
+  - 2.585188990822622
+  - 2.585188990822622
+  - 8.592099854868263
+  - 8.592099854868263
+  - 8.592099854868263
+arm_model: archer_x7
+base_control_enabled: false
+base_workspace:
+  governor: finite_base_v1
+  mode: unbounded
+body_limits:
+  base_angular_acceleration_rad_s2: 2.4
+  base_angular_jerk_rad_s3: 400.0
+  base_angular_velocity_rad_s: 2.0
+  base_linear_acceleration_m_s2: 1.2
+  base_linear_jerk_m_s3: 200.0
+  base_linear_velocity_m_s: 2.0
+  lift_acceleration_m_s2: 0.5
+  lift_jerk_m_s3: 40.0
+  lift_velocity_m_s: 0.24
+control_dt_s: 0.02
+controller_tuning:
+  arm_manipulability_activation_ramp_s: 0.16
+  arm_manipulability_cost: 0.19599646734498727
+  arm_manipulability_exit_fraction: 0.72
+  arm_manipulability_floor_fraction: 0.65
+  arm_manipulability_rate: 0.012
+  arm_posture_cost: 0.9252333517190965
+  arm_posture_min_fraction: 0.35
+  base_anchor_gain: 0.08
+  effort_regularization_cost: 0.0
+  frame_gain: 0.2
+  frame_lm_damping: 0.001
+  lift_velocity_damping_scale: 9.0
+  low_acceleration_cost: 20.0
+  orientation_cost: 40.26585988727874
+  position_cost: 208.22475538687803
+  qp_primal_tolerance: 1.0e-10
+  qp_regularization: 1.0e-09
+  settled_arm_damping_cost: 6.0
+  settled_low_acceleration_cost: 0.0
+  settling_angular_velocity_rad_s: 0.05
+  settling_blend_s: 0.2
+  settling_linear_velocity_m_s: 0.01
+  settling_orientation_error_rad: 0.2
+  settling_position_error_m: 0.02
+  simulation_arm_servo_kv: 0.0
+  stationary_cost_blend_s: 0.2
+  target_feedforward_gain: 0.9979087191885891
+  target_tracking_bandwidth_s_inv: 16
+  target_velocity_feedback_gain: 0.35983655493002015
+hardware_capabilities:
+  path: config/hardware/hexfellow_capabilities.yaml
+  sha256: f5672189e982a1d29a4e46316a438e83205b2391b09a7dc5429b22cb688985bf
+lift_reference_velocity_fraction: 1.0
+mit:
+  asset_conversion: unfused_urdf_v1
+  boundary_gain_s_inv: 1.0
+  boundary_policy: jerk_stoppable_directional_v2
+  collision_activation_policy: causal_reachable_v3
+  collision_sweep_max_intervals: 8
+  collision_sweep_max_joint_step_rad: 0.04
+  gravity: nominal_pinocchio
+  kd:
+  - 9.75
+  - 9.75
+  - 4.875
+  - 4.875
+  - 2.4375
+  - 2.4375
+  - 2.4375
+  - 9.75
+  - 9.75
+  - 4.875
+  - 4.875
+  - 2.4375
+  - 2.4375
+  - 2.4375
+  kp:
+  - 250.0
+  - 250.0
+  - 200.0
+  - 200.0
+  - 150.0
+  - 150.0
+  - 150.0
+  - 250.0
+  - 250.0
+  - 200.0
+  - 200.0
+  - 150.0
+  - 150.0
+  - 150.0
+  maximum_command_delay_s: 0.02
+  maximum_feedback_age_s: 0.04
+  measured_collision_method: reference_endpoint_v2
+  payloads:
+  - com_m:
+    - 0.0
+    - 0.0
+    - 0.0
+    frame: left_tcp
+    mass_kg: 0.0
+  - com_m:
+    - 0.0
+    - 0.0
+    - 0.0
+    frame: right_tcp
+    mass_kg: 0.0
+  torque_limit_nm:
+  - 52.0
+  - 52.0
+  - 28.0
+  - 28.0
+  - 6.8
+  - 6.8
+  - 6.8
+  - 52.0
+  - 52.0
+  - 28.0
+  - 28.0
+  - 6.8
+  - 6.8
+  - 6.8
+  urdf_sha256: 3f6e5ee6fcf9fa7030d63cb05e96c2ccdd21b9bae1d37c8b4ef95f3ed4c756dd
+mit_effort_preview: jerk_prefix_v1
+mit_planning_effort_fraction: 0.9
+posture_policy:
+  blend_s: 2.0
+  mode: human_blend
+  reference:
+    path: config/control/human_null_pose.yaml
+    sha256: a4298a7e58872caa37dccc01ddc9316fb249979bcbb24b6609ada041a58766bc
+preparation_limits:
+  lift_velocity_m_s: 0.05
+profile_id: x7-gp80-highspeed-fixed-base-v1
+provenance:
+  basis: Derived from pinned upstream v1; Cartesian target speed, acceleration and
+    jerk scaled by 0.5 after robot-only tracking checks.
+  upstream_commit: 32d373cb584783046349f53f0343f518cad56d6c
+  upstream_profile_sha256: 46b5858e9f13e6e9aa87f1e386553330140b2ce39155db4dc73e9a77afccdcc2
+  profile_id_note: Retain upstream profile_id because FollowingErrorGovernor dispatches
+    on that identifier. This explicit file and its hash distinguish the derived settings
+    from the stock profile.
+  scope: Simulation candidate; not hardware qualified. Upstream solver, following
+    governor, joint/effort constraints and latched faults remain unchanged.
+qualification:
+  hardware: uncommissioned
+  simulation: candidate
+reference_velocity_fraction: 0.9
+robot: maver_x4
+robot_model:
+  path: config/control/robot_models/maver-x4-gp80-fixed-v1.json
+  sha256: 9759718a9a6b05030dc79913125c9ef31fc26cd83cad22df596af1bf9c42e769
+schema_version: 23
+self_collision:
+  enabled: false
+stationary_redundancy_hold: true
+target_limits:
+  angular_acceleration_rad_s2: 7.0
+  angular_jerk_rad_s3: 80.0
+  angular_velocity_rad_s: 1.5
+  limit_check_runtime: native_full_so3_v1
+  linear_acceleration_m_s2: 2.0
+  linear_jerk_m_s3: 20.0
+  linear_velocity_m_s: 0.4
+  orientation_deadband_rad: 0.006923753029199214
+  planner: c2_tracking_v4
+  stationary_dwell_s: 0.06
+  translation_deadband_m: 0.0005842806360688274
+vendor_hard_limits:
+  sdk_position_lower_rad:
+  - -2.8
+  - -1.2
+  - -2.8
+  - -1.0
+  - -2.7
+  - -0.85
+  - -0.78
+  - -2.8
+  - -1.2
+  - -2.8
+  - -1.0
+  - -2.7
+  - -0.85
+  - -0.78
+  sdk_position_upper_rad:
+  - 2.8
+  - 2.0
+  - 2.8
+  - 2.2
+  - 2.7
+  - 0.85
+  - 0.78
+  - 2.8
+  - 2.0
+  - 2.8
+  - 2.2
+  - 2.7
+  - 0.85
+  - 0.78
+  sdk_source:
+    arm_series: 29
+    config_sha256: 767a47dd56d1b64e9563018d9eb3764b03eec3f74d34c067d7e16efe56766e9c
+    git_commit: 2d672c7161464ce855ac23a7e2e993b688aa5db6
+    package_version: 1.4.10
+  sdk_velocity_rad_s:
+  - 3.77
+  - 3.77
+  - 3.77
+  - 3.77
+  - 12.56
+  - 12.56
+  - 12.56
+  - 3.77
+  - 3.77
+  - 3.77
+  - 3.77
+  - 12.56
+  - 12.56
+  - 12.56
+  urdf_position_lower_rad:
+  - -2.7925
+  - -1.2217
+  - -2.7925
+  - -1.0472
+  - -2.7925
+  - -0.87266
+  - -0.7854
+  - -2.7925
+  - -1.2217
+  - -2.7925
+  - -1.0472
+  - -2.7925
+  - -0.87266
+  - -0.7854
+  urdf_position_upper_rad:
+  - 2.7925
+  - 2.1817
+  - 2.7925
+  - 2.1817
+  - 2.7925
+  - 0.87266
+  - 0.7854
+  - 2.7925
+  - 2.1817
+  - 2.7925
+  - 2.1817
+  - 2.7925
+  - 0.87266
+  - 0.7854
+  urdf_velocity_rad_s:
+  - 6.0
+  - 6.0
+  - 6.0
+  - 6.0
+  - 12.56
+  - 12.56
+  - 12.56
+  - 6.0
+  - 6.0
+  - 6.0
+  - 6.0
+  - 12.56
+  - 12.56
+  - 12.56
+  velocity_limit_authority: sdk
+whole_body_allocator:
+  activation_attack_s: 0.22
+  activation_release_s: 0.9
+  activation_steepness: 6.0
+  arm_limit_cost: 2.4
+  base_activation_distances_m:
+  - 0.08
+  - 0.01
+  base_active_cost: 4.515886296762765
+  base_anchor_follow_angular_rad_s: 0.6
+  base_anchor_follow_linear_m_s: 0.3
+  base_common_translation_share: 0.2184239047175891
+  base_common_yaw_share: 0.125
+  base_enter_distance_m: 0.07
+  base_exit_distance_m: 0.03
+  base_inactive_cost: 120.0
+  common_yaw_enter_rad: 0.25
+  common_yaw_exit_rad: 0.1
+  dominance_epsilon_m: 0.001
+  engage_dwell_s: 0.12
+  filter_direction_width: 0.02
+  lift_activation_distances_m:
+  - 0.04
+  - 0.005
+  lift_active_cost: 0.5658259259345223
+  lift_anchor_follow_m_s: 0.1
+  lift_common_translation_share: 0.17273680693468282
+  lift_enter_distance_m: 0.035
+  lift_exit_distance_m: 0.015
+  lift_inactive_cost: 35.0
+  lift_reference_error_gain: 18.8
+  mode: predictive_body_share_v4
+  posture_assist_enter_rad: 0.2330235527792353
+  posture_assist_exit_rad: 0.11651177638961766
+  pressure_enter: 0.65
+  pressure_exit: 0.48
+  pressure_midpoint_fraction: 0.10850723719433061
+  pressure_width_fraction: 0.03
+  rebase_position_error_m: 0.001
+  release_dwell_s: 0.24
+  soft_assist_activation: 0.4

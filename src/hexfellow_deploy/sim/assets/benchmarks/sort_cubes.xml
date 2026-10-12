@@ -1,0 +1,35 @@
+<mujoco model="sort_cubes_objects">
+  <asset />
+  <worldbody>
+    <body name="tray_red" pos="0.45 0.38 0.755">
+      <geom type="box" size="0.07 0.07 0.005" rgba="0.75 0.2 0.2 1" density="400" />
+      <geom type="box" size="0.07 0.005 0.02" pos="0 0.065 0.02" rgba="0.75 0.2 0.2 1" />
+      <geom type="box" size="0.07 0.005 0.02" pos="0 -0.065 0.02" rgba="0.75 0.2 0.2 1" />
+      <geom type="box" size="0.005 0.07 0.02" pos="0.065 0 0.02" rgba="0.75 0.2 0.2 1" />
+      <geom type="box" size="0.005 0.07 0.02" pos="-0.065 0 0.02" rgba="0.75 0.2 0.2 1" />
+    </body>
+    <body name="tray_blue" pos="0.45 -0.38 0.755">
+      <geom type="box" size="0.07 0.07 0.005" rgba="0.2 0.3 0.75 1" density="400" />
+      <geom type="box" size="0.07 0.005 0.02" pos="0 0.065 0.02" rgba="0.2 0.3 0.75 1" />
+      <geom type="box" size="0.07 0.005 0.02" pos="0 -0.065 0.02" rgba="0.2 0.3 0.75 1" />
+      <geom type="box" size="0.005 0.07 0.02" pos="0.065 0 0.02" rgba="0.2 0.3 0.75 1" />
+      <geom type="box" size="0.005 0.07 0.02" pos="-0.065 0 0.02" rgba="0.2 0.3 0.75 1" />
+    </body>
+    <body name="cube_red_0" pos="0.55 0.12 0.78">
+      <freejoint name="cube_red_0_joint" />
+      <geom type="box" size="0.015 0.015 0.015" rgba="0.85 0.15 0.15 1" density="600" friction="1.0 0.01 0.001" />
+    </body>
+    <body name="cube_red_1" pos="0.68 -0.05 0.78">
+      <freejoint name="cube_red_1_joint" />
+      <geom type="box" size="0.015 0.015 0.015" rgba="0.85 0.15 0.15 1" density="600" friction="1.0 0.01 0.001" />
+    </body>
+    <body name="cube_blue_0" pos="0.60 0.03 0.78">
+      <freejoint name="cube_blue_0_joint" />
+      <geom type="box" size="0.015 0.015 0.015" rgba="0.15 0.25 0.85 1" density="600" friction="1.0 0.01 0.001" />
+    </body>
+    <body name="cube_blue_1" pos="0.50 -0.14 0.78">
+      <freejoint name="cube_blue_1_joint" />
+      <geom type="box" size="0.015 0.015 0.015" rgba="0.15 0.25 0.85 1" density="600" friction="1.0 0.01 0.001" />
+    </body>
+  </worldbody>
+</mujoco>

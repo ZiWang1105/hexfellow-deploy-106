@@ -1,0 +1,19 @@
+# Device SDKs are imported only when this explicitly launched viewer opens a camera.
+# Set serials when multiple cameras of the same type are connected.
+cameras:
+  head:
+    enabled: true
+    type: zed
+    # Reuse the existing desktop ZED installation, as UMI zi/dev_camera does.
+    # On Thor, set these to its camera Python/SDK paths (null uses runner Python).
+    python: ~/projects/ZED_camera/.venv/bin/python
+    sdk_root: ~/projects/ZED_camera/sdk
+    serial: null
+    resolution: HD720
+    fps: 15
+  wrist:
+    enabled: false
+    type: realsense
+    serial: null
+    size_wh: [640, 480]
+    fps: 15

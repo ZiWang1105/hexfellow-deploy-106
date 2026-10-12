@@ -10,9 +10,9 @@ from .workspace import activate
 
 def simulation_kinematics(config):
     """Reconstruct camera/TCP poses from static robot files and encoders only."""
-    from mobile_manipulator.hardware.observations import HardwareKinematics
-    from mobile_manipulator.robot.assembly import load_assembly
-    from mobile_manipulator.robot.kinematics import Kinematics
+    from hexfellow_deploy.hardware.observations import HardwareKinematics
+    from hexfellow_deploy.robot.assembly import load_assembly
+    from hexfellow_deploy.robot.kinematics import Kinematics
     robot, camera = config.data['robot'], config.data['camera']
     urdf = config.resolve(robot['source_checkout']) / robot['urdf']
     assembly = load_assembly(config.resolve(robot['assembly']))
@@ -28,7 +28,7 @@ def resize_registered_rgbd(frame, width, height):
     """Resize registered sensor pixels without interpolating metric depth edges."""
     import cv2
     import numpy as np
-    from mobile_manipulator.hardware.observations import camera_intrinsics
+    from hexfellow_deploy.hardware.observations import camera_intrinsics
     old_height, old_width = frame.rgb.shape[:2]
     if frame.depth_m.shape != (old_height, old_width):
         raise ValueError('Depth must be registered to the RGB pixel grid')
@@ -109,9 +109,9 @@ class SimulationCamera(DABaseInterface):
         activate(self.workspace)
         import cv2
         import mujoco
-        from mobile_manipulator.sim.scene import (build_scene, policy_renderer, policy_camera_maps,
+        from hexfellow_deploy.sim.scene import (build_scene, policy_renderer, policy_camera_maps,
                                                    update_policy_camera, read_policy_depth)
-        from mobile_manipulator.sim.scene_config import load_scene
+        from hexfellow_deploy.sim.scene_config import load_scene
         output = Path(self.output)/'camera'
         output.mkdir(parents=True, exist_ok=True)
         scene = build_scene(load_scene(self.scene), output/'scene.xml')
@@ -165,10 +165,10 @@ class NativeCamera(DABaseInterface):
 
     def run(self):
         root = activate(self.workspace)
-        from mobile_manipulator.hardware.config import load_deployment
-        from mobile_manipulator.hardware.camera_stream import CameraStream,make_source
-        from mobile_manipulator.hardware.observations import HardwareKinematics
-        from mobile_manipulator.robot.assembly import load_assembly
+        from hexfellow_deploy.hardware.config import load_deployment
+        from hexfellow_deploy.hardware.camera_stream import CameraStream,make_source
+        from hexfellow_deploy.hardware.observations import HardwareKinematics
+        from hexfellow_deploy.robot.assembly import load_assembly
         from .camera_sync import EncoderHistory, FeedbackSampler
         config = load_deployment(root/self.config,execute=True,mock=False,research=True)
         primary = config['robot']['policy_camera']

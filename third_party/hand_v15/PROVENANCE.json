@@ -1,0 +1,318 @@
+{
+  "repository": "https://github.com/wangyenjen/agentic-robotics-20260908",
+  "branch": "yenjen-old-code-dev",
+  "commit": "facc274ff998d1545dc75f6ebe107e6da666dacd",
+  "library_id": "hand_v15",
+  "version": "3.11.0",
+  "sha256": {
+    "libraries/hand_v15/skills/bimanual.py": "b3a8786f046ff29b93928cd25caa70e335a377e37b8cf7767f62cce0494c5936",
+    "libraries/hand_v15/skills/cloth_fold.py": "4481c8a7d3695db986d270d8cb37339345830da715d22f7b8287c4aa22b2a94e",
+    "libraries/hand_v15/skills/contact_container.py": "5f288b98cb8670f751dfa4fb9cbcbe5a5c243d9455c3fbe846385d216a020694",
+    "libraries/hand_v15/skills/manipulation.py": "09a92abe22a27014335847b4c408fb436fad546653b20328805369b0bf18c250",
+    "libraries/hand_v15/skills/manipulation_gv.py": "e9a3307c3a2abd39e85bbeeda11bfcb252e480610698af3a05cf2266c8074cbc",
+    "libraries/hand_v15/skills/perception_geometry.py": "e9f79a40641655dd31f47f5acf29399e329d6929c2ff16a8585918eb2490da1a",
+    "libraries/hand_v15/skills/reach.py": "3b39da255a511f5878a57c3ae85f56fad01bc151d643c25ad82ebea4af08f2e5",
+    "libraries/hand_v15/skills/rim_and_peg.py": "1acb6793d4754e18bbc2012a46ada1bf818279e8859ca26c273217e923ab025f",
+    "libraries/hand_v15/skills/tall_objects.py": "fbc815569a321574ebd647bee9a3400e8add4ce5ce1d60633b948b3b5199dbe1",
+    "libraries/hand_v15/skills/transfer_between_arms.py": "9e4aefc9f1cda99fccee6490b24cefbff32dfc981d61bd724ad83104c2113b38",
+    "physapi/skills/primitives.py": "149a2ad953e7b08c21fc0b2ef7b8af1147efb251086bb705fe1173b2987fe8ba",
+    "physapi/skills/model_api.py": "b57b91f4a9ad63ae8a654a3bf7c488fa8b81f5d3a4c587e23d30f7e899bc8840",
+    "libraries/hand_v15/library.yaml": "d81f0b742823e7e942e5177d5c4ffc1fbc1113b98ffdb0de383498c9f3a4cc6a"
+  },
+  "enabled_upstream_skills": [
+    {
+      "target": "physapi.skills.primitives:GetState",
+      "name": "get_state",
+      "version": "1.0.0",
+      "description": "Read proprioception: joint positions (rad), fingertip grasp-point positions (m, world frame), gripper apertures (0 closed .. 1 open) and the calibrated gripper width rule (opening_width_m, grasp_state held_by_width | ambiguous | empty with the thresholds held_width_min_m / empty_close_max_m) for both arms.",
+      "integration_status": "existing_interface_only"
+    },
+    {
+      "target": "physapi.skills.primitives:SetGripper",
+      "name": "set_gripper",
+      "version": "1.1.0",
+      "description": "Command one gripper to a physical opening (`opening_width_m`, distance between finger pads, 0..0.096 m) or a normalised `aperture` (0 closed .. 1 open), then wait `duration` seconds. Returns the calibrated measured opening and its width rule: grasp_state held_by_width (opening >= held_width_min_m: something is between the pads), empty (<= empty_close_max_m: closed on nothing) or ambiguous, from this gripper's calibration. When closing, `blocked=true` means the fingers stopped clearly before the commanded width - evidence, not proof, of a grasp.",
+      "integration_status": "adapted_callable",
+      "adaptation_note": "Typed Hexfellow recipe with policy-supplied base-frame geometry; not the original physapi implementation. See adaptation guide."
+    },
+    {
+      "target": "physapi.skills.primitives:Wait",
+      "name": "wait",
+      "version": "1.0.0",
+      "description": "Hold the current command for `seconds` (lets objects settle).",
+      "integration_status": "adapted_callable",
+      "adaptation_note": "Typed Hexfellow recipe with policy-supplied base-frame geometry; not the original physapi implementation. See adaptation guide."
+    },
+    {
+      "target": "physapi.skills.primitives:CaptureImage",
+      "name": "capture_image",
+      "version": "1.0.0",
+      "description": "Capture an RGB image from a camera (top, left_wrist, right_wrist). The image is returned to the caller as an observation.",
+      "integration_status": "existing_interface_only"
+    },
+    {
+      "target": "physapi.skills.primitives:RunSequence",
+      "name": "run_sequence",
+      "version": "1.0.0",
+      "description": "Execute a short plan: a list of skill calls [{skill, params}, ...] run in order, stopping at the first call whose status is not success (or at the first error). Use it to commit a multi-step plan in one turn (e.g. pick then place then reset_arms). Each step is executed and recorded exactly like a direct call and counts against the same budgets; nothing is skipped or simulated.",
+      "integration_status": "adapted_callable",
+      "adaptation_note": "Typed Hexfellow recipe with policy-supplied base-frame geometry; not the original physapi implementation. See adaptation guide."
+    },
+    {
+      "target": "physapi.skills.model_api:AskRuntimeModel",
+      "name": "ask_runtime_model",
+      "version": "1.0.0",
+      "description": "Ask the runtime vision-language model a question about the current scene using the latest deployable observations (top RGB + colourised depth, wrist RGBs, gripper readings). Use for checks the geometric tools cannot answer (e.g. 'is the red block inside the red container?'). Answers are model judgements, not ground truth.",
+      "integration_status": "existing_interface_only"
+    },
+    {
+      "target": "physapi.skills.model_api:VerifyGrasp",
+      "name": "verify_grasp",
+      "version": "1.0.0",
+      "description": "Model-backed grasp verification for one gripper: the calibrated reading (opening width, blocked, width rule held_by_width / ambiguous / empty), wrist view, top RGB + depth and optional before-frames decide status held / not_held / uncertain and whether the held object is the target. Model verdict x width rule (outputs.decision): held needs both; model held on an empty-close width -> not_held; model not_held against a held-by-width opening -> not_held + width_conflict (the test lift decides); model unavailable -> uncertain + proprio_fallback held_proprio_only. Not proof. Call after closing, after a small lift, before transport, on suspected slip.",
+      "integration_status": "existing_interface_only"
+    },
+    {
+      "target": "skills/reach.py:SolveIKMargin",
+      "name": "solve_ik",
+      "version": "1.2.0",
+      "description": "Check whether a fingertip target with a top-down wrist (optional yaw) - or a wrist pitched `pitch_deg` about the closing axis (as move_to / pick_tall_object use) - is reachable for one arm, with the joint-limit margin and manipulability of the solution (low margin = reach edge = poor accuracy). `full_column=true` also checks that the heights `column_heights` above the target (default 0, +3, +10 cm: grasp, test lift, approach/lift) are reachable on ONE wrist branch and reports the reach ceiling above the point. Does not move the robot.",
+      "integration_status": "not_enabled"
+    },
+    {
+      "target": "skills/reach.py:MoveToPrecise",
+      "name": "move_to",
+      "version": "1.3.0",
+      "description": "Move one arm so its fingertip grasp point reaches a world position, wrist top-down (no collision avoidance; reach ceiling ~z 0.90 m) or pitched by `pitch_deg` about the closing axis (60 deg reaches z ~1.05 m). Duration scales with distance unless given; `cartesian=true` = straight line. FK measures the error after the move; `correction_passes` re-solve the residual (> 1 cm left at low margin = reach edge: pull_toward_base).",
+      "integration_status": "adapted_callable",
+      "adaptation_note": "Typed Hexfellow recipe with policy-supplied base-frame geometry; not the original physapi implementation. See adaptation guide."
+    },
+    {
+      "target": "skills/reach.py:PullTowardBase",
+      "name": "pull_toward_base",
+      "version": "1.1.0",
+      "description": "Rake an object at the reach edge toward the arm base: gripper open, fingertip on the base side of the object at contact height so the FAR finger pad (4.75 cm beyond the tip) sits behind it, then dragged `distance` (shortened to what is reachable) toward the base or `direction_xy`, then lifted. The drag is PLANNED before any motion: an infeasible drag fails at once with 0 s (metrics.preflight) - then pick with a LOW column (approach_height 0.04, lift_height 0.05) if solve_ik allows, or use the other arm / transfer. Object <= 7 cm tall, <= 8 cm along the pull; re-localise afterwards.",
+      "integration_status": "adapted_callable",
+      "adaptation_note": "Typed Hexfellow recipe with policy-supplied base-frame geometry; not the original physapi implementation. See adaptation guide."
+    },
+    {
+      "target": "skills/reach.py:ResetArmsScaled",
+      "name": "reset_arms",
+      "version": "1.1.0",
+      "description": "Move both arms back to the home configuration (grippers open). `duration` is a minimum: it is raised to the shortest time the joint rate clamp allows for the largest joint displacement (~1.05 s per rad), and the arms settle (<= 0.3 s) before the home joint error is measured - a short duration from a far pose is executed at the rate floor instead of failing.",
+      "integration_status": "not_enabled"
+    },
+    {
+      "target": "skills/manipulation_gv.py:PickVerified",
+      "version": "1.8.0",
+      "description": "Top-down pick; refused while the arm already holds something. Evidence: calibrated opening, 3 cm test lift, lift, verify_grasp (not_held against an object-sized opening: the test lift decides). `exclusive_of` (the container it stands in): only-the-target check, held-but-not-target = wrong_object (released). Empty pads -> one re-grasp at a fresh estimate. Pads never below the table or `pad_floor_z` (a rim; measured: pad_gate).",
+      "name": "pick",
+      "integration_status": "adapted_callable",
+      "adaptation_note": "Typed Hexfellow recipe with policy-supplied base-frame geometry; not the original physapi implementation. See adaptation guide."
+    },
+    {
+      "target": "skills/manipulation_gv.py:PlaceVerified",
+      "version": "1.6.0",
+      "name": "place",
+      "integration_status": "adapted_callable",
+      "adaptation_note": "Typed Hexfellow recipe with policy-supplied base-frame geometry; not the original physapi implementation. See adaptation guide."
+    },
+    {
+      "target": "skills/manipulation_gv.py:PickAndPlaceVerified",
+      "version": "1.4.0",
+      "description": "Pick at pick_xyz and place at place_xyz. side='auto' takes the arm whose approach and release columns are both reachable (larger joint-limit margin wins); when no single arm reaches both - or the given arm cannot reach the release column - and allow_transfer is true, the object is picked by the arm that reaches it, handed over with transfer_between_arms and placed by the other arm: one call for a cross-side relay. The route is decided by IK before any motion (a route-less call moves nothing).",
+      "name": "pick_and_place",
+      "integration_status": "adapted_callable",
+      "adaptation_note": "Typed Hexfellow recipe with policy-supplied base-frame geometry; not the original physapi implementation. See adaptation guide."
+    },
+    {
+      "target": "skills/manipulation.py:MoveAbove",
+      "name": "move_above",
+      "version": "1.2.0",
+      "description": "Move an arm's fingertip to a point `height` above a world xy location (safe transit / inspection pose). Duration scales with the distance. A height above the reach ceiling at that xy is clamped to the highest reachable one (>= 3 cm) instead of failing (metrics.clamped, height_used).",
+      "integration_status": "adapted_callable",
+      "adaptation_note": "Typed Hexfellow recipe with policy-supplied base-frame geometry; not the original physapi implementation. See adaptation guide."
+    },
+    {
+      "target": "skills/bimanual.py:MoveBoth",
+      "name": "move_both",
+      "version": "1.2.0",
+      "description": "Move BOTH fingertip grasp points to two world targets (>= 12 cm apart) in one synchronised motion. With `cartesian=true` (default) both tips follow straight lines, so the tip-to-tip distance is held by construction (drift < 1 cm); a path leaving the top-down reach (e.g. from home) falls back to joint space plus a short Cartesian finish (metrics.path). `keep_relation` aborts on tip-to-tip distance / height drift (co-held object). No collision avoidance.",
+      "integration_status": "adapted_callable",
+      "adaptation_note": "Typed Hexfellow recipe with policy-supplied base-frame geometry; not the original physapi implementation. See adaptation guide."
+    },
+    {
+      "target": "skills/bimanual.py:PinchCloth",
+      "name": "pinch_cloth",
+      "version": "1.1.1",
+      "description": "Pinch flat cloth (towel corner / edge) at a table-plane point with one arm: open, approach, descend so the finger pads touch the table at the point (the tip height comes from the table - do NOT aim the tip at the cloth), close, verify the opening after closing and after a 2 cm test lift (one layer ~1 cm; empty = the calibrated empty-close width; > 2.5 cm = bunched layers that slip; a drop of more than half at the test lift = slipping). A failed first pinch is retried `slide_m` further onto the cloth along `slide_direction_xy`. Ends holding the pinch 2 cm up.",
+      "integration_status": "adapted_callable",
+      "adaptation_note": "Typed Hexfellow recipe with policy-supplied base-frame geometry; not the original physapi implementation. See adaptation guide."
+    },
+    {
+      "target": "skills/bimanual.py:BimanualLift",
+      "name": "bimanual_lift",
+      "version": "1.2.0",
+      "description": "Grasp ONE object at two points (left arm at `left_xyz`, right arm at `right_xyz`), verify both grasps, then lift both synchronously by AT LEAST `lift_height` keeping the object level. Wrist branches keep the wrist cameras clear of each other (same grasp; a camera may then face away from the object). The lift is MEASURED: targets = tips measured after closing + lift_height + 1.5 cm (up to the reach ceiling), the per-side rise is read back by FK, a shortfall is re-commanded once and the achieved rise is reported (metrics.rise_m). Verified by calibrated openings after closing and a 2 cm test lift.",
+      "integration_status": "adapted_callable",
+      "adaptation_note": "Typed Hexfellow recipe with policy-supplied base-frame geometry; not the original physapi implementation. See adaptation guide."
+    },
+    {
+      "target": "skills/cloth_fold.py:FoldCloth",
+      "name": "fold_cloth",
+      "version": "1.2.1",
+      "description": "Folds a flat cloth edge onto the opposite edge with both arms from its four footprint corners (segment_objects corners_xy), then MEASURES both moved corners (top depth camera, +-5 mm) against `corner_tolerance_m`; `nudge` = align_corner on off-tolerance corners. Lost pinch, short release, corners off or unmeasurable = PARTIAL (next_actions).",
+      "integration_status": "adapted_callable",
+      "adaptation_note": "Typed Hexfellow recipe with policy-supplied base-frame geometry; not the original physapi implementation. See adaptation guide."
+    },
+    {
+      "target": "skills/cloth_fold.py:RepairCorner",
+      "name": "repair_corner",
+      "version": "1.0.2",
+      "description": "Move ONE cloth corner onto its target with one arm - the repair after a PARTIAL fold_cloth (use its outputs.next_action as is): the corner at `corner_xy` is pinched 12 mm inside / 20 mm along the edge, pads just above the fixed layer (`on_layer`, 12 mm) or the table, one layer only (opening from the calibrated held threshold up to 16 mm; a crumpled corner is released untouched), on ONE continuous path (lift 3, carry 6, release 4 cm up) to 1 cm short of `target_xy`. Re-observe once afterwards.",
+      "integration_status": "adapted_callable",
+      "adaptation_note": "Typed Hexfellow recipe with policy-supplied base-frame geometry; not the original physapi implementation. See adaptation guide."
+    },
+    {
+      "target": "skills/cloth_fold.py:BimanualFold",
+      "name": "bimanual_fold",
+      "version": "2.1.2",
+      "description": "Two-point cloth fold, the 1.2.0 contract on the fold_cloth 1.1 mechanics: the left arm pinches the corner at `left_xyz`, the right at `right_xyz` (x, y only; pads 3 mm above the table, 12 mm inside the corner, 20 mm along the edge, ramped close, one re-pinch per side) and both are carried on ONE continuous path (carry 8 cm, release 5 cm up) onto `left_target_xy` / `right_target_xy`. Prefer fold_cloth (four footprint corners).",
+      "integration_status": "adapted_callable",
+      "adaptation_note": "Typed Hexfellow recipe with policy-supplied base-frame geometry; not the original physapi implementation. See adaptation guide."
+    },
+    {
+      "target": "skills/bimanual.py:HoldAndPush",
+      "name": "hold_and_push",
+      "version": "1.1.0",
+      "description": "Fixture-and-operate: `hold_side` presses closed fingertips onto `hold_xyz` (holding a container / base in place) while `push_side` pushes from behind `start_xyz` toward `goal_xy` at `contact_height` (fingertip height above the table) in four Cartesian segments. The holder's fingertip drift is checked between segments; more than `hold_tolerance_m` aborts the push. Durations scale with distance.",
+      "integration_status": "adapted_callable",
+      "adaptation_note": "Typed Hexfellow recipe with policy-supplied base-frame geometry; not the original physapi implementation. See adaptation guide."
+    },
+    {
+      "target": "skills/transfer_between_arms.py:TransferBetweenArms",
+      "name": "transfer_between_arms",
+      "version": "1.5.0",
+      "description": "Move a held object from one arm to the other via the table: picks a shared staging point both arms reach top-down with joint-limit margin (or `staging_xy`), clamps transit / release / approach heights to each arm's reach ceiling, places the object with the giver, retreats the giver to its own side, and regrasps with the receiver's verified pick (optionally re-localised by `relocate_color`).",
+      "integration_status": "adapted_callable",
+      "adaptation_note": "Typed Hexfellow recipe with policy-supplied base-frame geometry; not the original physapi implementation. See adaptation guide."
+    },
+    {
+      "target": "skills/perception_geometry.py:SegmentObjectsGeo",
+      "name": "segment_objects",
+      "version": "2.0.0",
+      "integration_status": "not_enabled"
+    },
+    {
+      "target": "skills/perception_geometry.py:LocateObjectsGeo",
+      "name": "locate_objects",
+      "version": "2.0.0",
+      "integration_status": "not_enabled"
+    },
+    {
+      "target": "skills/perception_geometry.py:PixelToWorldBatch",
+      "name": "pixel_to_world",
+      "version": "2.0.0",
+      "description": "Top-camera pixels -> world positions: a single (u, v) or a BATCH points=[[u, v], ...] (<= 16) in ONE call (one query unit). Without height_m the depth image gives the surface point (source 'depth'); with height_m the ray meets z = table + height_m (source 'plane_given_height'); no valid depth -> table plane, flagged (source 'plane_table_fallback_no_depth'). Prefer segment_objects / locate_objects geometry (corners, faces) over probing edges pixel by pixel.",
+      "integration_status": "existing_interface_only"
+    },
+    {
+      "target": "skills/contact_container.py:ExtractFromContainer",
+      "name": "extract_from_container",
+      "version": "1.3.0",
+      "description": "Take an object protruding >= 3 cm from a container out (refused while the arm holds something): verified `pick` `grasp_below_top_m` below the object top (pads kept above the rim by a measured gate), lift to the reach ceiling, DECISIVE target-only check (top depth rim ring, SAM3 `container_prompt`; a container-sized or mixed grasp is released back and re-grasped ONCE higher), then move `clearance_m` sideways once the object bottom clears the rim. Heights = table z + estimated_height_m.",
+      "integration_status": "adapted_callable",
+      "adaptation_note": "Typed Hexfellow recipe with policy-supplied base-frame geometry; not the original physapi implementation. See adaptation guide."
+    },
+    {
+      "target": "skills/contact_container.py:InsertIntoContainer",
+      "name": "insert_into_container",
+      "version": "1.1.2",
+      "description": "Put the object the arm ALREADY HOLDS INTO a container - also the call to re-align a held object: carry over the opening, re-centre on the rim ring (top depth), descend in 1 cm steps to contact or `max_descent_m` (pads above the rim), guided release, retreat, confirm (depth); a stall at rim height is retried on `search_offsets` offsets. A reach-edge carry pose fails BEFORE moving, object still held: never call pick / extract_from_container then (they open the gripper) - transfer_between_arms, or place and re-pick lower.",
+      "integration_status": "adapted_callable",
+      "adaptation_note": "Typed Hexfellow recipe with policy-supplied base-frame geometry; not the original physapi implementation. See adaptation guide."
+    },
+    {
+      "target": "skills/contact_container.py:SweepArea",
+      "name": "sweep_area",
+      "version": "1.0.1",
+      "description": "Wipe an axis-aligned table patch with the closed fingers: parallel Cartesian strokes along `direction_xy` keeping the finger tips `contact_height` above the table (no bowing). The low part of the closed fingers is a ~1.2 cm column, so each stroke clears ~1.2 cm + the debris size; passes are spaced by that band up to `max_passes` (a 15 cm patch needs ~8 passes, ~45 s). Strokes start `run_in` before the patch and end `overshoot` beyond it. Default direction: along y away from the table centre-line.",
+      "integration_status": "adapted_callable",
+      "adaptation_note": "Typed Hexfellow recipe with policy-supplied base-frame geometry; not the original physapi implementation. See adaptation guide."
+    },
+    {
+      "target": "skills/contact_container.py:PushUntilStop",
+      "name": "push_until_stop",
+      "version": "1.0.1",
+      "description": "Push with the closed fingers along `direction_xy` against the object face at `contact_xyz` (fingertip height; pads kept >= 2 mm above the table; calibrated pad offset and 1-3 cm finger-link lead on tall faces accounted for) in `step_m` Cartesian steps at constant height until the tip stalls (end-stop, obstacle), the reach limit, or `max_travel`. A stall with travel >= `min_travel` is SUCCESS: what closing a drawer looks like.",
+      "integration_status": "adapted_callable",
+      "adaptation_note": "Typed Hexfellow recipe with policy-supplied base-frame geometry; not the original physapi implementation. See adaptation guide."
+    },
+    {
+      "target": "skills/contact_container.py:Push",
+      "name": "push",
+      "version": "1.1.1",
+      "description": "Push an object on the table: closed fingertips placed `standoff` behind the object (opposite the push direction), then a Cartesian stroke at constant height to the goal. `contact_height` is the height of the closed-finger PAD BOTTOMS above the table (the fingertip point sits the calibrated pad offset higher: 0.017 m in sim). The stroke stops when the fingertip stalls; a stall after at least half of the requested distance counts as success with metrics.stalled=true (end-stop reached). For drawers/lids prefer `push_until_stop`.",
+      "integration_status": "adapted_callable",
+      "adaptation_note": "Typed Hexfellow recipe with policy-supplied base-frame geometry; not the original physapi implementation. See adaptation guide."
+    },
+    {
+      "target": "skills/cloth_fold.py:AlignCorner",
+      "name": "align_corner",
+      "version": "1.0.1",
+      "description": "Nudge ONE landed cloth corner by a measured offset with one arm (fold_cloth's finishing move; a remaining call is in its outputs.next_actions): pinch the top-layer flap just inside `corner_xy` (ONE layer only - wider = crumpled, released untouched), lift, carry so the corner stops `stop_short_m` before `target_xy` (offsets 3-80 mm), lower, open IN PLACE. Offsets > 6 cm: repair_corner. Re-measure afterwards.",
+      "integration_status": "adapted_callable",
+      "adaptation_note": "Typed Hexfellow recipe with policy-supplied base-frame geometry; not the original physapi implementation. See adaptation guide."
+    },
+    {
+      "target": "skills/tall_objects.py:PickTallObject",
+      "name": "pick_tall_object",
+      "version": "1.1.0",
+      "description": "Pick a TALL standing object (bottle, can) with a PITCHED wrist: approach tilted pitch_deg from vertical toward +x, fingers closing across the object grasp_height_m above the table (default 60 % of its height); reaches where a top-down wrist cannot. Top and footprint centre are re-measured from the top depth camera first. Swings in above all object tops, then down and forward from the robots' side: give the other objects as obstacles_xy, nearest object first. Lying objects (top < 10 cm): use pick.",
+      "integration_status": "adapted_callable",
+      "adaptation_note": "Typed Hexfellow recipe with policy-supplied base-frame geometry; not the original physapi implementation. See adaptation guide."
+    },
+    {
+      "target": "skills/tall_objects.py:PlaceIntoBin",
+      "name": "place_into_bin",
+      "version": "1.2.0",
+      "description": "Drop the held object INTO an open container (bin; rim above the top-down reach), wrist pitched. The rim ring is found in the top depth image within 25 cm of container_xyz (an off centre is corrected; no ring = refused). Lifts straight up (verified), carries over a free spot inside the opening, lowers until the pads are just above the rim, releases. Never releases on or above the rim (object kept).",
+      "integration_status": "adapted_callable",
+      "adaptation_note": "Typed Hexfellow recipe with policy-supplied base-frame geometry; not the original physapi implementation. See adaptation guide."
+    },
+    {
+      "target": "skills/tall_objects.py:PickAndPlaceTallObject",
+      "name": "pick_and_place_tall_object",
+      "version": "1.2.0",
+      "description": "Bin one tall object (bottle, can): standing (top >= 10 cm) -> pick_tall_object (pitched wrist); LYING (top < 10 cm, depth-checked) -> top-down pick across its axis; then place_into_bin (carry over the rim, free spot inside; geometry from depth). side='auto' = arm by reach. Neighbours: obstacles_xy; nearest first.",
+      "integration_status": "adapted_callable",
+      "adaptation_note": "Typed Hexfellow recipe with policy-supplied base-frame geometry; not the original physapi implementation. See adaptation guide."
+    },
+    {
+      "target": "skills/rim_and_peg.py:PickRim",
+      "name": "pick_rim",
+      "version": "1.1.0",
+      "description": "Grasp a wide / flared round object (bowl, plate) by its RIM: grasp point on the rim nearest the arm base (or along `grasp_direction_xy`), radial pinch across the wall, pads 2 cm below the rim. Use instead of pick for anything wider than ~8 cm (a body grasp hooks the flared rim on release). A rim-held bowl hangs tilted ~20 deg (far side down): on a NARROW support (rack) grasp along its long axis. Runs the verified pick; after a miss the rim point is re-planned once from a fresh detection.",
+      "integration_status": "adapted_callable",
+      "adaptation_note": "Typed Hexfellow recipe with policy-supplied base-frame geometry; not the original physapi implementation. See adaptation guide."
+    },
+    {
+      "target": "skills/rim_and_peg.py:SetDown",
+      "name": "set_down",
+      "version": "1.2.0",
+      "description": "Set the held object down onto a support (table, rack, tray) with its centre at `object_xy`: carry over the point (bottom 3 cm above), descend to touchdown (stall) or `support_z`, release, retreat, confirm from depth that it rests there (metrics.settled, landing_offset_m). Offsets from pick_rim: centre_offset_xy (tip -> object centre), object_bottom_offset_m (tip above the bottom); centred pick: [0, 0], grasp height. A raised support's TOP (rails above a base plate) is re-measured from depth (metrics.support_measured); on a RAISED narrow support a rim-held object is turned so its tilt lies along the rails (metrics.alignment).",
+      "integration_status": "adapted_callable",
+      "adaptation_note": "Typed Hexfellow recipe with policy-supplied base-frame geometry; not the original physapi implementation. See adaptation guide."
+    },
+    {
+      "target": "skills/rim_and_peg.py:InsertOntoPeg",
+      "name": "insert_onto_peg",
+      "version": "1.1.0",
+      "description": "Lower a held object with a hole (nut, ring) onto a peg until it rests: peg re-localised from depth, hover 1.5 cm above the peg, re-centre the hole on it (depth), descend past the peg top in 1 cm steps (retries on measured / blind offsets), seat it, CHECK the seat before letting go (a jammed nut is lifted back, not released), release, verify. hole_xy_at_grasp = hole centre when grasped (segment_objects: the ring part's centre); grasp_xy / grasp_z / yaw = the pick's grasp (else pass the pick's yaw as grasp_yaw).",
+      "integration_status": "adapted_callable",
+      "adaptation_note": "Typed Hexfellow recipe with policy-supplied base-frame geometry; not the original physapi implementation. See adaptation guide."
+    }
+  ],
+  "license": "No root LICENSE found at the pinned commit; no additional license is asserted.",
+  "adaptation_guide": "docs/HAND_V15_SKILLS.md"
+}

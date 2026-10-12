@@ -46,8 +46,8 @@ class NativeWristCamera(DABaseInterface):
                 from .workspace import activate
                 from .camera_sync import EncoderHistory, FeedbackSampler
                 root = activate(self.workspace)
-                from mobile_manipulator.hardware.config import load_deployment
-                from mobile_manipulator.hardware.wrist_observation import WristGeometry
+                from hexfellow_deploy.hardware.config import load_deployment
+                from hexfellow_deploy.hardware.wrist_observation import WristGeometry
                 cfg = load_deployment(root/self.deployment_config, execute=True, mock=False, research=True)
                 geometry = WristGeometry(root/self.calibration, serial, cfg['robot']['urdf'],
                                          cfg['robot']['assembly'], cfg['robot']['camera_encoder_max_skew_s'])

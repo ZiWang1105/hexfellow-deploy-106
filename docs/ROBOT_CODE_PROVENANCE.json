@@ -1,0 +1,202 @@
+{
+  "source_repository": "https://github.com/ZiWang1105/agentic-mobile-manipulator",
+  "source_commit": "cce0f30f4d960c3bacd8de058280263dcfc021d0",
+  "source_state": "working tree including existing uncommitted changes; hashes below are exact pre-migration contents",
+  "files": [
+    {
+      "source": "src/mobile_manipulator/control/base_motion.py",
+      "destination": "src/hexfellow_deploy/control/base_motion.py",
+      "source_sha256": "1d34de8f1e86e2a73b08d0f93ed2148361de4affcbad39dab1d8cbdc416d6e04"
+    },
+    {
+      "source": "src/mobile_manipulator/control/executor.py",
+      "destination": "src/hexfellow_deploy/control/executor.py",
+      "source_sha256": "215bcfc207873787169a91aae2d3c6ed9542ba034a848194701ec0d523c32147"
+    },
+    {
+      "source": "src/mobile_manipulator/control/gripper.py",
+      "destination": "src/hexfellow_deploy/control/gripper.py",
+      "source_sha256": "8674528bdab37b6ac423865d18b14ba03f189c8d0321fdba6b4b59f45f836659"
+    },
+    {
+      "source": "src/mobile_manipulator/control/lift_limits.py",
+      "destination": "src/hexfellow_deploy/control/lift_limits.py",
+      "source_sha256": "cf2dd3b94c2b34d3935d3740b278779f76a67a034195f7215ef0f9cbf5e7956b"
+    },
+    {
+      "source": "src/mobile_manipulator/control/startup_pose.py",
+      "destination": "src/hexfellow_deploy/control/startup_pose.py",
+      "source_sha256": "f66f61a64a7780f1de825d243902f1d2d66700d0d6b93eaf40b92c997bf67d9f"
+    },
+    {
+      "source": "src/mobile_manipulator/control/umi_ik.py",
+      "destination": "src/hexfellow_deploy/control/umi_ik.py",
+      "source_sha256": "a9b3cc0c67c457ad4a52325ff29a7fe3d994687139efb7ca6f2c6f6548f7f9db"
+    },
+    {
+      "source": "src/mobile_manipulator/control/velocity_limits.py",
+      "destination": "src/hexfellow_deploy/control/velocity_limits.py",
+      "source_sha256": "952632dab836ea67578491f51008e5909c86b3c538f811a42a745402e6022dc0"
+    },
+    {
+      "source": "src/mobile_manipulator/hardware/camera_process.py",
+      "destination": "src/hexfellow_deploy/hardware/camera_process.py",
+      "source_sha256": "f720fde320c80da734330a1aa5d81ab625921bde98346b7bcca1ebf686876a8e"
+    },
+    {
+      "source": "src/mobile_manipulator/hardware/camera_stream.py",
+      "destination": "src/hexfellow_deploy/hardware/camera_stream.py",
+      "source_sha256": "f38af9df3f6c3844ff3c7448a4e33e4c413b64d040ce8046cdf10f33ab584ac7"
+    },
+    {
+      "source": "src/mobile_manipulator/hardware/config.py",
+      "destination": "src/hexfellow_deploy/hardware/config.py",
+      "source_sha256": "786d2d464f2f2495067bce2e25bdf69e4d6832a174b8760c88962e9d621e8a9c"
+    },
+    {
+      "source": "src/mobile_manipulator/hardware/device.py",
+      "destination": "src/hexfellow_deploy/hardware/device.py",
+      "source_sha256": "d6c2668675e1c24591ab44e3704ce0b048ce3c875a7aecfc3f54555b49dcdba2"
+    },
+    {
+      "source": "src/mobile_manipulator/hardware/keyboard_ik.py",
+      "destination": "src/hexfellow_deploy/hardware/keyboard_ik.py",
+      "source_sha256": "9776d9dd1a75d97b61d512e17a8cf1ba8eb9977aa976826d363fae9161ea5337"
+    },
+    {
+      "source": "src/mobile_manipulator/hardware/observations.py",
+      "destination": "src/hexfellow_deploy/hardware/observations.py",
+      "source_sha256": "60ff96438f9a275912ef3cfc2e6b01ee259952effe65ff83dea758b3df03a8b7"
+    },
+    {
+      "source": "src/mobile_manipulator/hardware/scheduling.py",
+      "destination": "src/hexfellow_deploy/hardware/scheduling.py",
+      "source_sha256": "92553901874059cf6dd8eeaa62983a66fb0949801d21b9f794879e7c1d87218b"
+    },
+    {
+      "source": "src/mobile_manipulator/hardware/timing_diagnostics.py",
+      "destination": "src/hexfellow_deploy/hardware/timing_diagnostics.py",
+      "source_sha256": "2de0bb771387ca5e5c93cbb58816ba48d1e2874a1bc8ec96f9301fae5db235fb"
+    },
+    {
+      "source": "src/mobile_manipulator/hardware/umi_device.py",
+      "destination": "src/hexfellow_deploy/hardware/umi_device.py",
+      "source_sha256": "b84bd54921e8cb7eb4cef1f46d546dc82ec2b4de001636ce1f8a6f4d68af1c95"
+    },
+    {
+      "source": "src/mobile_manipulator/hardware/umi_endpoint.py",
+      "destination": "src/hexfellow_deploy/hardware/umi_endpoint.py",
+      "source_sha256": "67d982b9b895e2eb9f81f6783a7ca28cb495f676634e29f482307ee3e5c663a9"
+    },
+    {
+      "source": "src/mobile_manipulator/hardware/wrist_observation.py",
+      "destination": "src/hexfellow_deploy/hardware/wrist_observation.py",
+      "source_sha256": "3f025a9fa0aa10097c93f6105cd259f5d7eb6e93deb1a61062faa9e903fdc8af"
+    },
+    {
+      "source": "src/mobile_manipulator/interfaces/contract.py",
+      "destination": "src/hexfellow_deploy/interfaces/contract.py",
+      "source_sha256": "e2f8819bbf392843bc5cc7d1eab060e73fa28e28d14c6577d31059a7cd37848a"
+    },
+    {
+      "source": "src/mobile_manipulator/interfaces/depth.py",
+      "destination": "src/hexfellow_deploy/interfaces/depth.py",
+      "source_sha256": "a7f07c9efb84b0e033c01bf1f42bc7e64967103109a132e832f70d6d4676bf30"
+    },
+    {
+      "source": "src/mobile_manipulator/interfaces/mailbox.py",
+      "destination": "src/hexfellow_deploy/interfaces/mailbox.py",
+      "source_sha256": "82e0b1fc2a16685f41e7f8deea7a90745d8f2702466d5ce6ab2c480c35a16501"
+    },
+    {
+      "source": "src/mobile_manipulator/interfaces/wrist_geometry.py",
+      "destination": "src/hexfellow_deploy/interfaces/wrist_geometry.py",
+      "source_sha256": "5267ff4fde6ca7514d732d910427e35b8d99a4541cb3c1010779c2c3b7b6787a"
+    },
+    {
+      "source": "src/mobile_manipulator/robot/assembly.py",
+      "destination": "src/hexfellow_deploy/robot/assembly.py",
+      "source_sha256": "fbae3ee7767485c93537c18fb94543d2058eb7f5b1f8368dd8a6cbc53a96cfe9"
+    },
+    {
+      "source": "src/mobile_manipulator/robot/joints.py",
+      "destination": "src/hexfellow_deploy/robot/joints.py",
+      "source_sha256": "24c96200439cde096f10cbfe516c97724987ddcbf22b0b57bb6e745f39bcbb7c"
+    },
+    {
+      "source": "src/mobile_manipulator/robot/kinematics.py",
+      "destination": "src/hexfellow_deploy/robot/kinematics.py",
+      "source_sha256": "53013b36e58918f1dd4fbf18c9296a130d86025f2689b95df7eeaf5fc8bf7e1e"
+    },
+    {
+      "source": "src/mobile_manipulator/robot/upstream.py",
+      "destination": "src/hexfellow_deploy/robot/upstream.py",
+      "source_sha256": "9b16691dee2e6922571d06afb791e58f001df0e511cfa9f6f3a7094b10a1388d"
+    },
+    {
+      "source": "src/mobile_manipulator/sim/assemblies.py",
+      "destination": "src/hexfellow_deploy/sim/assemblies.py",
+      "source_sha256": "557f50356a07bdb8ead5fcbaff98551596caddfbd74f549f90c2ef3a0fc07c7b"
+    },
+    {
+      "source": "src/mobile_manipulator/sim/contacts.py",
+      "destination": "src/hexfellow_deploy/sim/contacts.py",
+      "source_sha256": "96105beb3d5cd15e7c9e55b49540cd93bf55e5867fe88eaa6b4c6ccd5bb3da20"
+    },
+    {
+      "source": "src/mobile_manipulator/sim/recording.py",
+      "destination": "src/hexfellow_deploy/sim/recording.py",
+      "source_sha256": "f08e8a638ba8119f865e2d4e010472a2245adeaab9f15cee9810f63fea6c68db"
+    },
+    {
+      "source": "src/mobile_manipulator/sim/scene.py",
+      "destination": "src/hexfellow_deploy/sim/scene.py",
+      "source_sha256": "10c8db8c3540ed4ec119b4405f59070e156e584c968aaa7d21f74f33a8dbdd2f"
+    },
+    {
+      "source": "src/mobile_manipulator/sim/scene_config.py",
+      "destination": "src/hexfellow_deploy/sim/scene_config.py",
+      "source_sha256": "594d0a7e3ab774310595b26adc550ce09814e5ab9479bda03f7ce5bd6e7f281d"
+    },
+    {
+      "source": "src/mobile_manipulator/sim/sensors.py",
+      "destination": "src/hexfellow_deploy/sim/sensors.py",
+      "source_sha256": "b7109aac8764bb2063363270e23e1c5f3d08c5a76ce751a6cbdf1e104ef82ae2"
+    },
+    {
+      "source": "src/mobile_manipulator/sim/streaming.py",
+      "destination": "src/hexfellow_deploy/sim/streaming.py",
+      "source_sha256": "b7f18fcead7cc3f74781ab00214bf358d670ae95ae6147c61ca155af1394fa93"
+    },
+    {
+      "source": "src/mobile_manipulator/sim/transport.py",
+      "destination": "src/hexfellow_deploy/sim/transport.py",
+      "source_sha256": "04330225a721ecc0eff6d230b37d55cf96a3a0b52fcd799a90cbbaa7b2da7cf1"
+    },
+    {
+      "source": "src/mobile_manipulator/skills/executor.py",
+      "destination": "src/hexfellow_deploy/skills/executor.py",
+      "source_sha256": "b710e8d01c81be34e758660c94eae6b8e34f95854230cf88f66ed28f8831aa1c"
+    },
+    {
+      "source": "src/mobile_manipulator/skills/geometry.py",
+      "destination": "src/hexfellow_deploy/skills/geometry.py",
+      "source_sha256": "9183d3ffaf9910b8378c23901161ea38dc31e9f4fc611fcf58945ca0354cf4f7"
+    },
+    {
+      "source": "src/mobile_manipulator/skills/hand_v15.py",
+      "destination": "src/hexfellow_deploy/skills/hand_v15.py",
+      "source_sha256": "313cccff92a744e126c471345b5a110323795eeb09cf97ad8a1db664ee2ecdf7"
+    },
+    {
+      "source": "src/mobile_manipulator/skills/workflows.py",
+      "destination": "src/hexfellow_deploy/skills/workflows.py",
+      "source_sha256": "c2a48bb941577a833165d9d9865bafe76b5dc1ea7f28c3a494d764603fd66fc6"
+    },
+    {
+      "source": "src/mobile_manipulator/hardware/camera_worker.py",
+      "destination": "src/hexfellow_deploy/hardware/camera_worker.py",
+      "source_sha256": "489fbc3130cea28f98676ed85d7d8eb24b3e5e12cc1cb2dae781148d7c0d2d1a"
+    }
+  ]
+}

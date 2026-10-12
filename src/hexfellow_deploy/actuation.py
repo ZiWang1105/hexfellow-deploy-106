@@ -12,7 +12,7 @@ def encode_mit(command):
 
 
 def decode_mit(value):
-    from mobile_manipulator.robot.upstream import load_umi
+    from hexfellow_deploy.robot.upstream import load_umi
     load_umi()
     from policy_sim.control.mit_command import MitCommand
     return MitCommand(**value)
@@ -35,8 +35,8 @@ class StreamContract:
 
     def seed(self, measured):
         """Bind initial reference history to the controller's exact startup sample."""
-        from mobile_manipulator.interfaces.contract import validate_sensor_packet
-        from mobile_manipulator.robot.joints import JOINTS
+        from hexfellow_deploy.interfaces.contract import validate_sensor_packet
+        from hexfellow_deploy.robot.joints import JOINTS
         from policy_sim.control.reference_initialization import stationary_reference_velocity
         if self.latest is not None or self.previous_position is not None:
             raise RuntimeError('Actuator reference history is already initialized')
@@ -53,7 +53,7 @@ class StreamContract:
         self.previous_acceleration = np.zeros(len(JOINTS))
 
     def _validate_profile(self, frame, measured, mit, position, base):
-        from mobile_manipulator.robot.joints import JOINTS
+        from hexfellow_deploy.robot.joints import JOINTS
         limits = self.limits
         if limits is None:
             return None, None
@@ -115,8 +115,8 @@ class StreamContract:
         return velocity, acceleration
 
     def accept(self, frame, measured):
-        from mobile_manipulator.interfaces.contract import validate_sensor_packet
-        from mobile_manipulator.robot.joints import JOINTS, LEFT, RIGHT, LIFT
+        from hexfellow_deploy.interfaces.contract import validate_sensor_packet
+        from hexfellow_deploy.robot.joints import JOINTS, LEFT, RIGHT, LIFT
         validate_sensor_packet(measured)
         now = self.clock()
         if self.fault:
@@ -129,8 +129,9 @@ class StreamContract:
         if not 0 <= now-measured['timestamp_s'] < self.feedback_timeout:
             raise RuntimeError('Actual feedback is stale')
         command = frame['command']
+        from hexfellow_deploy.control.lift_limits import FIXED_LIFT_MAX_M
         q = command['joint_positions']
-        if set(q) != set(JOINTS) or not np.isfinite(list(q.values())).all() or not 0 <= q[LIFT] <= .4:
+        if set(q) != set(JOINTS) or not np.isfinite(list(q.values())).all() or not 0 <= q[LIFT] <= FIXED_LIFT_MAX_M:
             raise ValueError('Invalid physical joint reference')
         mit = decode_mit(frame['mit'])
         if mit.joint_names != LEFT+RIGHT:
@@ -172,16 +173,16 @@ class StreamContract:
 
 def deployment(workspace, path, *, execute=False):
     """The simulator uses the same robot profile and configured device ceilings."""
-    from mobile_manipulator.hardware.config import load_deployment
-    from mobile_manipulator.hardware.umi_device import native_configuration
+    from hexfellow_deploy.hardware.config import load_deployment
+    from hexfellow_deploy.hardware.umi_device import native_configuration
     config = load_deployment(workspace/path, execute=execute, mock=not execute, research=execute)
     mapping, profile, effort = native_configuration(config['robot'], execute=execute)
     limits = mapping.runtime_limits(profile)
     from policy_sim.control.hardware_capabilities import load_hardware_capabilities
     from policy_sim.control.motion_profile import controller_config_for_profile
-    from mobile_manipulator.robot.joints import JOINTS
-    from mobile_manipulator.control.lift_limits import LIFT_MAX_M
-    from mobile_manipulator.control.umi_ik import LOCKED_JOINTS
+    from hexfellow_deploy.robot.joints import JOINTS
+    from hexfellow_deploy.control.lift_limits import FIXED_LIFT_MAX_M
+    from hexfellow_deploy.control.umi_ik import LOCKED_JOINTS
     controller = controller_config_for_profile(profile)
     capabilities = load_hardware_capabilities(mapping.data.get('hardware_capabilities'))
     margin = profile.arm_position_margin_rad
@@ -197,8 +198,8 @@ def deployment(workspace, path, *, execute=False):
         locked_joints=list(LOCKED_JOINTS),
         persistent_lift_reference=(JOINTS[0] in LOCKED_JOINTS
                                    or profile.lift_reference_max_error_m is not None),
-        position_lower=np.r_[controller.lift_position_margin, physical_lower+margin].tolist(),
-        position_upper=np.r_[LIFT_MAX_M-controller.lift_position_margin, physical_upper-margin].tolist(),
+        position_lower=np.r_[0., physical_lower+margin].tolist(),
+        position_upper=np.r_[FIXED_LIFT_MAX_M, physical_upper-margin].tolist(),
         velocity=[metadata['velocity_bounds'][n] for n in JOINTS],
         acceleration=np.r_[controller.lift_acceleration_limit, controller.resolved_arm_limits('acceleration')].tolist(),
         jerk=np.r_[controller.lift_jerk_limit, controller.resolved_arm_limits('jerk')].tolist(),

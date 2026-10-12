@@ -1,3 +1,5 @@
+> Current ownership (2026-10-11): robot modules and assets now belong to this repository. See [dependency direction](ARCHITECTURE_OWNERSHIP.md) and [standalone setup](STANDALONE.md). Historical parent-import descriptions below are superseded.
+
 # Shared DA control and actuation
 
 ```mermaid

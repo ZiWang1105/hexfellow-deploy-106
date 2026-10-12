@@ -1,0 +1,45 @@
+<mujoco model="dishes_probe_objects">
+  <asset />
+  <worldbody>
+    <body name="plate" pos="0.5 0.15 0.77">
+      <freejoint name="plate_joint" />
+      <geom type="cylinder" size="0.055 0.005" rgba="0.9 0.9 0.85 1" density="400" friction="0.8 0.01 0.001" />
+      <geom type="box" size="0.022 0.012 0.0025" pos="0.0750 0.0000 0.012" euler="0 -0.5 0.0000" rgba="0.9 0.9 0.85 1" density="400" friction="0.8 0.01 0.001" />
+      <geom type="box" size="0.022 0.012 0.0025" pos="0.0650 0.0375 0.012" euler="0 -0.5 0.5236" rgba="0.9 0.9 0.85 1" density="400" friction="0.8 0.01 0.001" />
+      <geom type="box" size="0.022 0.012 0.0025" pos="0.0375 0.0650 0.012" euler="0 -0.5 1.0472" rgba="0.9 0.9 0.85 1" density="400" friction="0.8 0.01 0.001" />
+      <geom type="box" size="0.022 0.012 0.0025" pos="0.0000 0.0750 0.012" euler="0 -0.5 1.5708" rgba="0.9 0.9 0.85 1" density="400" friction="0.8 0.01 0.001" />
+      <geom type="box" size="0.022 0.012 0.0025" pos="-0.0375 0.0650 0.012" euler="0 -0.5 2.0944" rgba="0.9 0.9 0.85 1" density="400" friction="0.8 0.01 0.001" />
+      <geom type="box" size="0.022 0.012 0.0025" pos="-0.0650 0.0375 0.012" euler="0 -0.5 2.6180" rgba="0.9 0.9 0.85 1" density="400" friction="0.8 0.01 0.001" />
+      <geom type="box" size="0.022 0.012 0.0025" pos="-0.0750 0.0000 0.012" euler="0 -0.5 3.1416" rgba="0.9 0.9 0.85 1" density="400" friction="0.8 0.01 0.001" />
+      <geom type="box" size="0.022 0.012 0.0025" pos="-0.0650 -0.0375 0.012" euler="0 -0.5 3.6652" rgba="0.9 0.9 0.85 1" density="400" friction="0.8 0.01 0.001" />
+      <geom type="box" size="0.022 0.012 0.0025" pos="-0.0375 -0.0650 0.012" euler="0 -0.5 4.1888" rgba="0.9 0.9 0.85 1" density="400" friction="0.8 0.01 0.001" />
+      <geom type="box" size="0.022 0.012 0.0025" pos="-0.0000 -0.0750 0.012" euler="0 -0.5 4.7124" rgba="0.9 0.9 0.85 1" density="400" friction="0.8 0.01 0.001" />
+      <geom type="box" size="0.022 0.012 0.0025" pos="0.0375 -0.0650 0.012" euler="0 -0.5 5.2360" rgba="0.9 0.9 0.85 1" density="400" friction="0.8 0.01 0.001" />
+      <geom type="box" size="0.022 0.012 0.0025" pos="0.0650 -0.0375 0.012" euler="0 -0.5 5.7596" rgba="0.9 0.9 0.85 1" density="400" friction="0.8 0.01 0.001" />
+    </body>
+    <body name="bowl" pos="0.55 -0.15 0.79">
+      <freejoint name="bowl_joint" />
+      <geom type="cylinder" size="0.055 0.008" pos="0 0 -0.025" rgba="0.85 0.85 0.95 1" density="300" />
+      <geom type="cylinder" size="0.004 0.03" pos="0.055 0 0" rgba="0.85 0.85 0.95 1" density="300" />
+      <geom type="cylinder" size="0.004 0.03" pos="-0.055 0 0" rgba="0.85 0.85 0.95 1" density="300" />
+      <geom type="cylinder" size="0.004 0.03" pos="0 0.055 0" rgba="0.85 0.85 0.95 1" density="300" />
+      <geom type="cylinder" size="0.004 0.03" pos="0 -0.055 0" rgba="0.85 0.85 0.95 1" density="300" />
+    </body>
+    <body name="thin_plate" pos="0.42 -0.32 0.77">
+      <freejoint name="thin_plate_joint" />
+      <geom type="cylinder" size="0.048 0.004" rgba="0.55 0.75 0.6 1" density="500" friction="0.9 0.02 0.003" condim="6" />
+      <geom type="box" size="0.018 0.010 0.0005" pos="0.0620 0.0000 0.006" euler="0 -0.45 0.0000" rgba="0.55 0.75 0.6 1" density="500" friction="0.9 0.02 0.003" condim="6" />
+      <geom type="box" size="0.018 0.010 0.0005" pos="0.0537 0.0310 0.006" euler="0 -0.45 0.5236" rgba="0.55 0.75 0.6 1" density="500" friction="0.9 0.02 0.003" condim="6" />
+      <geom type="box" size="0.018 0.010 0.0005" pos="0.0310 0.0537 0.006" euler="0 -0.45 1.0472" rgba="0.55 0.75 0.6 1" density="500" friction="0.9 0.02 0.003" condim="6" />
+      <geom type="box" size="0.018 0.010 0.0005" pos="0.0000 0.0620 0.006" euler="0 -0.45 1.5708" rgba="0.55 0.75 0.6 1" density="500" friction="0.9 0.02 0.003" condim="6" />
+      <geom type="box" size="0.018 0.010 0.0005" pos="-0.0310 0.0537 0.006" euler="0 -0.45 2.0944" rgba="0.55 0.75 0.6 1" density="500" friction="0.9 0.02 0.003" condim="6" />
+      <geom type="box" size="0.018 0.010 0.0005" pos="-0.0537 0.0310 0.006" euler="0 -0.45 2.6180" rgba="0.55 0.75 0.6 1" density="500" friction="0.9 0.02 0.003" condim="6" />
+      <geom type="box" size="0.018 0.010 0.0005" pos="-0.0620 0.0000 0.006" euler="0 -0.45 3.1416" rgba="0.55 0.75 0.6 1" density="500" friction="0.9 0.02 0.003" condim="6" />
+      <geom type="box" size="0.018 0.010 0.0005" pos="-0.0537 -0.0310 0.006" euler="0 -0.45 3.6652" rgba="0.55 0.75 0.6 1" density="500" friction="0.9 0.02 0.003" condim="6" />
+      <geom type="box" size="0.018 0.010 0.0005" pos="-0.0310 -0.0537 0.006" euler="0 -0.45 4.1888" rgba="0.55 0.75 0.6 1" density="500" friction="0.9 0.02 0.003" condim="6" />
+      <geom type="box" size="0.018 0.010 0.0005" pos="-0.0000 -0.0620 0.006" euler="0 -0.45 4.7124" rgba="0.55 0.75 0.6 1" density="500" friction="0.9 0.02 0.003" condim="6" />
+      <geom type="box" size="0.018 0.010 0.0005" pos="0.0310 -0.0537 0.006" euler="0 -0.45 5.2360" rgba="0.55 0.75 0.6 1" density="500" friction="0.9 0.02 0.003" condim="6" />
+      <geom type="box" size="0.018 0.010 0.0005" pos="0.0537 -0.0310 0.006" euler="0 -0.45 5.7596" rgba="0.55 0.75 0.6 1" density="500" friction="0.9 0.02 0.003" condim="6" />
+    </body>
+  </worldbody>
+</mujoco>

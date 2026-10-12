@@ -15,7 +15,7 @@ def test_calibration_overlay_uses_current_upstream_control():
     import policy_sim.calibration.wrist_handeye as calibration
     import policy_sim.hardware.session as control
     assert Path(calibration.__file__).is_relative_to(ROOT/'src')
-    assert Path(control.__file__).is_relative_to(ROOT.parent.parent/'UMI_Hardware/src')
+    assert Path(control.__file__).is_relative_to(ROOT.parent/'third_party/UMI_Hardware/src')
 
 def test_relocated_right_plan_payload_and_source_hashes():
     from wrist_calibration_geometry import DEFAULT_PLAN, load_plan

@@ -1,0 +1,31 @@
+# Derived simulation assembly; the pinned upstream files remain unchanged.
+# Dimensions measured from the source STL meshes, in the moving head frame.
+camera_mount:
+  body: zed_mount
+  position_m: [-0.028, 0.0, 0.071]
+  head_front_x_m: 0.00450000074
+  foot_front_x_m: 0.0325
+  head_top_z_m: 0.07100000232
+camera:
+  optical_frame: zed_left_camera_frame_optical
+  # Source optical frame is at the CAD housing origin. The lens face is
+  # 25.143 mm forward in housing X (optical Z).
+  lens_forward_offset_m: 0.02515
+gripper:
+  opening_m: 0.08
+  tcp_in_tool_m: [0.0, 0.0, 0.130]
+  mass_kg: 0.53
+  jaw_mass_kg: 0.06
+  jaw_force_limit_n: 15.0
+  pad_friction: 1.0
+  pad_half_size_m: [0.012, 0.004, 0.017]
+actuation:
+  arm_kp: 350.0
+  arm_kv: 35.0
+  arm_force_limit_nm: 70.0
+  lift_kp: 8000.0
+  lift_kv: 500.0
+  lift_force_limit_n: 1800.0
+  # Ideal robot gravity compensation and planar chassis are explicit
+  # simulation abstractions. Objects retain full gravity and contact dynamics.
+  gravity_compensation: true

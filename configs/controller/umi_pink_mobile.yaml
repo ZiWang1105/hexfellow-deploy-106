@@ -1,0 +1,5 @@
+# Lower reference dynamics plus bounded persistent lift position during loaded HOLD.
+motion_profile: configs/controller/profiles/x7-gp80-mobile-precision-v2.yaml
+measured_pose_tracking: false
+arm_velocity_limit_rad_s: 0.2
+lift_velocity_limit_m_s: 0.025

@@ -1,0 +1,6 @@
+# Same upstream UMI profile and reference-tracking path, narrower runtime speeds.
+# Task-independent experiment for reducing near-target tracking overshoot.
+motion_profile: x7-gp80-highspeed-fixed-base-v1
+measured_pose_tracking: false
+arm_velocity_limit_rad_s: 0.20
+lift_velocity_limit_m_s: 0.025

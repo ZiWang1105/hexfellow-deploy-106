@@ -48,7 +48,7 @@ def main():
     capture = args.capture.resolve()
     output = None if args.output is None else args.output.resolve()
     activate(args.workspace)
-    from mobile_manipulator.robot.upstream import load_umi
+    from hexfellow_deploy.robot.upstream import load_umi
     load_umi()
     result = analyze(capture)
     encoded = json.dumps(result, indent=2, allow_nan=False)+"\n"

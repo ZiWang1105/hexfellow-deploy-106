@@ -1,0 +1,75 @@
+{
+  "date": "2026-10-11",
+  "scope": "Standalone repository ownership and simulator integration; no control retuning",
+  "status": "local changes, not committed or pushed",
+  "isolation": {
+    "checkout": "/tmp/hexfellow-standalone-20261011",
+    "fresh_python": "3.10.21",
+    "independent_dependency_clones": true,
+    "native_extension_built_in_checkout": true,
+    "application_imports_actively_blocked": true
+  },
+  "tests": {
+    "isolated_deployment": {
+      "passed": 297,
+      "skipped": 1
+    },
+    "additional_standalone_guards": {
+      "passed": 2
+    },
+    "application_integration": {
+      "passed": 33
+    },
+    "calibration": {
+      "passed": 221,
+      "skipped": 4
+    },
+    "application_full": {
+      "passed": 923,
+      "failed": 3,
+      "failures_reproduced_with_pre_migration_executor": true
+    },
+    "final_deployment": {
+      "passed": 299,
+      "skipped": 1,
+      "duration_s": 17.4
+    }
+  },
+  "preexisting_application_failures": [
+    "test_base_pulse_uses_clock_then_requires_image_without_claiming_arrival[1.8-0.4]",
+    "test_base_pulse_uses_clock_then_requires_image_without_claiming_arrival[0.74-0.11875]",
+    "test_navigation_uses_horizontal_object_distance_not_tcp_distance[xy1-False]"
+  ],
+  "headless": {
+    "duration_s": 8,
+    "generated": 402,
+    "accepted": 402,
+    "fault": null,
+    "policy_calls": 0
+  },
+  "interactive": {
+    "real_mujoco_window": true,
+    "input": "XTest mouse translation, rotation, HOLD, close on isolated Xvfb display",
+    "generated": 685,
+    "accepted": 685,
+    "target_requests": 9,
+    "hold_requests": 2,
+    "left_target_z_range_m": 0.0591754615806388,
+    "right_target_rotation_change_rad": 0.18857686648619368,
+    "fault": null,
+    "shutdown": "viewer_closed"
+  },
+  "hardware_devices_opened": false,
+  "physical_motion": false,
+  "api_calls": 0,
+  "limits": [
+    "Does not establish hardware reliability or physical force limits.",
+    "Paired pose and viewer tests are not a successful pickup.",
+    "Three existing navigation test failures remain; migration does not change navigation tuning."
+  ],
+  "dependencies": {
+    "UMI_Hardware": "e4dbcc9983516e20d59363680c60066a8571c0e6",
+    "deploy-anything": "6c2bda40ebee56ab3a50b8dd62aaf4df5814e5a8"
+  },
+  "local_evidence": "/home/ziwang/projects/agentic-mobile-manipulator/experiments/standalone_deploy_20261011"
+}

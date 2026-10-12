@@ -10,7 +10,7 @@ import uuid
 
 
 def build(config_path, overrides=(), *, prompt=None, camera=True, execute_authorized=False, respect_policy_limits=False,
-          interactive_ik=False):
+          interactive_ik=False, agent_component=None):
     from hydra.utils import instantiate
     from omegaconf import OmegaConf
     from .manager import InterfaceManager
@@ -22,6 +22,7 @@ def build(config_path, overrides=(), *, prompt=None, camera=True, execute_author
         if 'agent' in config.interface:
             raise ValueError('Interactive IK cannot share target ownership with an agent')
         config.interface.control.startup_carry = False
+        config.interface.backend.startup_lift_m = None
         config.topics.viewer_status = dict(_target_='hexfellow_deploy.topics.JsonTopic', prefix='${topic_prefix}')
         config.interface.viewer = dict(_target_='hexfellow_deploy.interactive.InteractiveIKViewer',
             name='hexfellow_ik_viewer', plant_state='${topic:plant_state}', request='${topic:request}',
@@ -74,7 +75,10 @@ def build(config_path, overrides=(), *, prompt=None, camera=True, execute_author
             deployment_path = Path(config.workspace)/deployment_path
         deployment_config = OmegaConf.load(deployment_path)
         base_config = str((deployment_path.parent/deployment_config.base_motion).resolve())
-        config.interface.agent = dict(_target_='hexfellow_deploy.policy.AgentComponent',
+        component = agent_component or config.policy.get('component')
+        if not component:
+            raise ValueError('Policy execution requires --agent-plugin or policy.component from an installed application')
+        config.interface.agent = dict(_target_=component,
             name='hexfellow_agent', request='${topic:request}', status='${topic:status}',
             decision='${topic:decision}', images='${topic:images}', workspace='${workspace}',
             output='${output}', prompt=prompt, agent_config='${policy.agent_config}',
@@ -138,7 +142,9 @@ def read_final_reports(output, selected_backend):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--config', default=str(Path(__file__).resolve().parents[2]/'configs/simulation.yaml'))
-    parser.add_argument('--workspace', required=True)
+    parser.add_argument('--workspace', default=str(Path(__file__).resolve().parents[2]),
+                        help='Configuration/assets root; defaults to this deployment checkout')
+    parser.add_argument('--agent-plugin', help='Optional installed application integration module')
     parser.add_argument('--output', required=True)
     parser.add_argument('--duration-s', type=float, default=None, help='Optional diagnostic duration; unset means unlimited')
     parser.add_argument('--execute', action='store_true')
@@ -174,12 +180,17 @@ def main():
         parser.error('Hardware execution requires both --execute and --confirm-onsite-ready')
     if args.execute:
         args.set += ['interface.backend.backend=hardware', 'interface.backend.execute=true']
+    plugin = None
+    if args.agent_plugin:
+        from importlib import import_module
+        plugin = import_module(args.agent_plugin)
+    if args.task and plugin is None:
+        parser.error('--task requires an installed --agent-plugin providing the task catalog')
     task = None
     if args.task:
         from .workspace import activate
         activate(args.workspace)
-        from mobile_manipulator.eval.benchmark import load_catalog
-        tasks, _ = load_catalog(args.benchmark)
+        tasks, _ = plugin.load_catalog(args.benchmark)
         if args.task not in tasks:
             parser.error(f'Unknown task: {args.task}')
         task = tasks[args.task]
@@ -187,8 +198,7 @@ def main():
     output = Path(args.output).resolve()
     output.mkdir(parents=True, exist_ok=False)
     if task:
-        from mobile_manipulator.eval.benchmark import materialize_scene
-        scene = materialize_scene(task, args.seed, output/'scene.yaml')
+        scene = plugin.materialize_scene(task, args.seed, output/'scene.yaml')
         args.set += [f'interface.backend.scene={scene}']
     os.environ.setdefault('MUJOCO_GL', 'egl')
     os.environ['HEXFELLOW_WORKSPACE'] = str(Path(args.workspace).expanduser().resolve())
@@ -199,7 +209,8 @@ def main():
     from omegaconf import OmegaConf
     config, topics, manager = build(Path(args.config).resolve(), args.set,
                                     prompt=args.prompt, camera=not args.no_camera, execute_authorized=args.execute,
-                                    respect_policy_limits=args.respect_policy_limits, interactive_ik=args.interactive_ik)
+                                    respect_policy_limits=args.respect_policy_limits, interactive_ik=args.interactive_ik,
+                                    agent_component=plugin.AGENT_COMPONENT if plugin else None)
     if task and config.interface.backend.backend != 'simulation':
         raise ValueError('Catalog tasks require the simulation backend')
     duration_source = 'duration_s' if args.duration_s is not None else None
@@ -323,9 +334,8 @@ def main():
     (output/'run.json').write_text(json.dumps(report,indent=2)+'\n')
     # Only closed simulator runs may read scoring records; never feed them back.
     if task and backend['backend'] == 'simulation':
-        from mobile_manipulator.eval.scoring import evaluate_run
         try:
-            evaluation = evaluate_run(output, task, model_filename='plant.xml')
+            evaluation = plugin.evaluate_run(output, task, model_filename='plant.xml')
         except Exception as error:
             fault = fault or f'Offline evaluation failed: {type(error).__name__}: {error}'
             report.update(status='error', fault=fault, evaluation_error=str(error))

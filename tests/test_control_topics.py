@@ -7,10 +7,10 @@ import uuid
 import numpy as np
 import pytest
 from hexfellow_deploy.workspace import activate
-activate(Path(__file__).resolve().parents[3])
+activate(Path(__file__).resolve().parents[1])
 from hexfellow_deploy.control_topics import FeedbackTopic, MeasuredTopic, ReferenceTopic, ReceiptTopic
 from hexfellow_deploy.backend import BackendProxy
-from mobile_manipulator.robot.joints import JOINTS, LEFT, RIGHT
+from hexfellow_deploy.robot.joints import JOINTS, LEFT, RIGHT
 
 
 def sensor():

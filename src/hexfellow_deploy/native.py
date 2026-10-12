@@ -4,10 +4,10 @@ import math
 import time
 import numpy as np
 
-from mobile_manipulator.hardware.umi_endpoint import MobileEndpoint, GP80WireGate
-from mobile_manipulator.hardware.umi_device import sensor_packet, native_packet
-from mobile_manipulator.robot.joints import JOINTS
-from policy_sim.hardware.mit_wire import authorize_group
+from hexfellow_deploy.hardware.umi_endpoint import MobileEndpoint, GP80WireGate
+from hexfellow_deploy.hardware.umi_device import sensor_packet, native_packet
+from hexfellow_deploy.robot.joints import JOINTS
+from policy_sim.hardware.mit_wire import authorize_group, motion_payload
 from policy_sim.hardware.hexfellow_endpoint import HexWholeBodyEndpoint
 from policy_sim.hardware.x7 import HardwareSafetyError
 from .reference import Receipt
@@ -19,17 +19,81 @@ class ContinuousGate(GP80WireGate):
     Packet matching, checked KCP and stop filtering remain upstream. Only the
     previous fixed admission/source lease is replaced by the shared DA timeout.
     """
-    def __init__(self, name, clock=time.monotonic, timeout_s=.1):
+    def __init__(self, name, clock=time.monotonic, timeout_s=.1, defer_activation=False,
+                 startup_lift=False):
         if not math.isfinite(timeout_s) or timeout_s <= 0:
             raise ValueError("Command timeout must be finite and positive")
         super().__init__(name, clock)
         self.stream_timeout = timeout_s
+        self.defer_activation = defer_activation
+        self.fixed_lift = defer_activation and name == 'theta'
+        self.startup_lift = startup_lift
+        self.startup_lift_payload = None
 
     def transition(self, phase):
         with self.lock:
+            if phase == 'active' and self.fixed_lift and not self.startup_lift:
+                if self.phase != 'initializing':
+                    raise HardwareSafetyError('Fixed lift cannot resume a motion stream')
+                # Use the existing checked-KCP hold receipt, without enabling
+                # motion or consuming the terminal shutdown stop token.
+                self.hold_resume = True
+                self.recovery_epoch += 1
+                super().transition('holding')
+                return
+            if phase == 'active' and self.defer_activation:
+                super().transition('ready')
+                if self.startup_lift:
+                    self.deadline = self.clock()+30.
+                return  # Keep the finite initialization deadline during setup.
             super().transition(phase)
             if phase == 'active':
                 self.deadline = self.clock()+1.
+
+    def begin_lift_startup(self):
+        with self.lock:
+            if not self.fixed_lift or not self.startup_lift or self.phase != 'ready' or self.clock() >= self.deadline:
+                raise HardwareSafetyError('Lift startup is not authorized in this phase')
+            super().transition('active')
+            self.deadline = self.clock()+self.stream_timeout
+
+    def finish_lift_startup(self):
+        with self.lock:
+            if (not self.fixed_lift or not self.startup_lift or self.phase != 'active'
+                    or self.fault or self.clock() >= self.deadline):
+                raise HardwareSafetyError('Lift startup cannot enter fixed hold')
+            self.startup_lift_payload = self.sources[-1][2] if self.sources else None
+            self.startup_lift = False
+            self.hold_resume = True
+            self.recovery_epoch += 1
+            self.sources.clear()
+            super().transition('holding')
+
+    def finish_startup(self):
+        with self.lock:
+            if self.fixed_lift:
+                raise HardwareSafetyError('Fixed lift must remain in brake-only hold')
+            if self.phase != 'ready' or self.clock() >= self.deadline:
+                raise HardwareSafetyError('Native startup did not complete before its deadline')
+            self.defer_activation = False
+            self.transition('active')
+
+    def resume_delay(self, epoch):
+        if self.fixed_lift:
+            raise HardwareSafetyError('Fixed lift must remain in brake-only hold')
+        return super().resume_delay(epoch)
+
+    def filter(self, data):
+        with self.lock:
+            if self.phase == 'ready' and self.clock() >= self.deadline:
+                self.fault = self.fault or 'Native startup deadline expired before stream activation'
+                self.transition('stopping')
+            if self.fixed_lift and self.phase == 'holding' and motion_payload(self.name, data) is not None:
+                if motion_payload(self.name, data) != self.startup_lift_payload:
+                    return self.reject()
+                # The SDK may have copied the final startup target before BRAKE.
+                # Upstream replaces that known in-flight target with BRAKE.
+            return super().filter(data)
 
     def _validate_authorization(self, sequence, created, expires, payload, source_expires, now):
         if self.fault:
@@ -53,13 +117,164 @@ class ContinuousGate(GP80WireGate):
 
 
 class StreamEndpoint(MobileEndpoint):
+    """Agent arm/base stream with the fixed lift physically braked."""
+
+    def validate_lift_start(self, state):
+        from hexfellow_deploy.control.lift_limits import FIXED_LIFT_MAX_M, FIXED_LIFT_RANGE_ROUNDING_MAX_M
+        low, high = state.health['theta']['range']
+        height = float(state.q[3])
+        sdk_height = self.mapping.lift_command(height, (low, high))
+        pulses = state.health['theta'].get('pulse_per_meter')
+        rounding = (min(.5 / pulses, FIXED_LIFT_RANGE_ROUNDING_MAX_M)
+                    if isinstance(pulses, (int, float)) and math.isfinite(pulses) and pulses > 0 else 0.)
+        if (not np.isfinite([low, high, height, sdk_height]).all() or high <= low
+                or not -rounding <= height <= FIXED_LIFT_MAX_M + rounding
+                or not low <= sdk_height <= high):
+            self.fixed_lift_range_failure = dict(height_m=height, sdk_height_m=sdk_height,
+                sdk_range_m=[low, high], model_range_m=[0., FIXED_LIFT_MAX_M],
+                nominal_rounding_tolerance_m=rounding, pulse_per_meter=pulses)
+            raise HardwareSafetyError('Fixed lift feedback outside physical device/model range: '
+                                      f'{self.fixed_lift_range_failure}')
+
+    def acquire(self, stage, profile):
+        from policy_sim.hardware.shutdown import ThetaObservedStop
+        state = super().acquire(stage, profile)
+        if getattr(self, 'startup_lift_m', None) is not None:
+            state = self.position_startup_lift(state, stage)
+        # BRAKE is a stop command, never an endpoint POSITION or auto-retreat.
+        brake_requested = time.monotonic()
+        self.devices['theta'].motor_command(self.command_type.BRAKE, True)
+        self.fixed_lift_reference = float(state.q[3])
+        observer = ThetaObservedStop()
+        deadline = time.monotonic()+self.timeout
+        while True:
+            state = self.state()
+            self.check_transport()
+            self.check_health(state, stage)
+            self.validate_lift_start(state)
+            progress = getattr(self, 'startup_progress', None)
+            if progress is not None:
+                progress(dict(getattr(self, 'startup_lift_report', {}), phase='confirming_brake'))
+            if abs(state.q[3]-self.fixed_lift_reference) > .002:
+                raise HardwareSafetyError('Fixed lift moved during brake acquisition')
+            evidence = self.fixed_lift_brake_evidence()
+            if observer.update(state, time.monotonic(), brake_requested, evidence, healthy=True):
+                self.fixed_lift_confirmation = dict(observer.details)
+                if getattr(self, 'startup_lift_m', None) is not None:
+                    if abs(state.q[3]-self.startup_lift_m) > .001:
+                        raise HardwareSafetyError('Startup lift left its target tolerance during braking')
+                    self.startup_lift_report.update(phase='complete', locked_height_m=float(state.q[3]))
+                for name in ('left', 'right', 'base'):
+                    self.direct_gates[name].finish_startup()
+                return state
+            if getattr(self, 'cancel_requested', lambda: False)() or time.monotonic() >= deadline:
+                raise HardwareSafetyError('Fixed lift brake was not confirmed')
+            time.sleep(.004)
+
+    def position_startup_lift(self, initial, stage):
+        from .startup_lift import LiftArrival
+        from hex_device.generated.public_api_down_pb2 import APIDown
+        target = self.startup_lift_m
+        arrival = LiftArrival(target, time.monotonic())
+        self.startup_lift_report = arrival.report
+        self.startup_lift_report['initial_height_m'] = float(initial.q[3])
+        low, high = initial.health['theta']['range']
+        sdk_target = float(self.mapping.lift_command(target, (low, high)))
+        if not low+.002 <= sdk_target <= high-.002:
+            raise HardwareSafetyError('Startup lift target outside calibrated device interior')
+        device = self.devices['theta']
+        expected = APIDown()
+        pulses = device.convert_rad_to_positions(np.array([sdk_target]), device._pulse_per_rotation)
+        expected.linear_lift_command.target_pos = int(np.sign(device._max_pos)*pulses[0])
+        gate = self.direct_gates['theta']
+        gate.begin_lift_startup()
+        sequence = 0
+        next_send = next_progress = 0.
+        while True:
+            state = self.state()
+            now = time.monotonic()
+            self.check_transport()
+            self.check_health(state, stage)
+            if now >= gate.deadline:
+                raise HardwareSafetyError('Startup lift command lease expired')
+            self.validate_lift_start(state)
+            if abs(state.v[3]) > getattr(self, 'feedback_lift_speed', .025)+.002:
+                raise HardwareSafetyError('Startup lift exceeds configured measured speed')
+            if (np.max(np.abs(state.q[4:]-initial.q[4:])) > .01
+                    or np.max(np.abs(state.v[4:])) > .01
+                    or np.max(np.abs(state.v[:3])) > .002):
+                raise HardwareSafetyError('Arms or base moved during startup lift positioning')
+            done = arrival.update(float(state.q[3]), float(state.v[3]), state.received['theta'], now,
+                                  stopped=getattr(self, 'cancel_requested', lambda: False)())
+            if done:
+                gate.finish_lift_startup()
+                # Clear an unsent SDK target; any already copied target is
+                # replaced with BRAKE by the permanent hold filter.
+                with device._status_lock:
+                    device._target_pos = None
+                return state
+            if now >= next_send:
+                with gate.lock:
+                    dispatched = gate.sequence < 0 or gate.sequence in gate._recorded_dispatches
+                if dispatched:
+                    gate.authorize(sequence, now, now+gate.stream_timeout, expected,
+                                   source_received=state.received['theta'])
+                    device.motor_command(self.command_type.POSITION, sdk_target)
+                    wake = getattr(device, '_policy_wake', None)
+                    if wake:
+                        wake()
+                    sequence += 1
+                    next_send = now+.02
+                elif now >= gate.deadline:
+                    raise HardwareSafetyError('Startup lift SDK dispatch deadline expired')
+            if now >= next_progress:
+                self.startup_progress(dict(arrival.report))
+                next_progress = now+.02
+            time.sleep(.004)
+
+    def fixed_lift_brake_evidence(self):
+        """Transport receipt plus a drained stream; not a firmware brake-state ACK."""
+        gate = self.direct_gates['theta']
+        for api in self.apis:
+            client = getattr(api, '_HexDeviceApi__kcp_client', None)
+            transport = getattr(client, '_policy_udp', None)
+            if transport is None or transport.gate is not gate:
+                continue
+            valid = (gate.phase == 'holding' and not gate.fault and not transport.fault
+                     and transport.identity == (client.server_address, client.server_port,
+                                                client._sock, getattr(client, '_kcp', None))
+                     and transport.hold_confirmed(gate.recovery_epoch) and transport.motion_drained())
+            if valid and not hasattr(self, 'fixed_lift_receipt_observed_at'):
+                self.fixed_lift_receipt_observed_at = time.monotonic()
+            return dict(brake_received=bool(valid), no_pending_motion=bool(valid),
+                        acknowledged_at=getattr(self, 'fixed_lift_receipt_observed_at', float('inf')))
+        return dict(brake_received=False, no_pending_motion=False)
+
+    def check_fixed_lift(self, state):
+        self.validate_lift_start(state)
+        now = time.monotonic()
+        if (not getattr(self, 'fixed_lift_confirmation', None)
+                or not self.fixed_lift_brake_evidence()['brake_received']
+                or not 0 <= now-state.received['theta'] <= .04
+                or state.health['theta']['state'] not in {'LsBrake', 'LsAlgorithmControl'}
+                or abs(state.v[3]) > .002
+                or abs(state.q[3]-self.fixed_lift_reference) > .002):
+            raise HardwareSafetyError('Fixed lift brake lost or measured lift moved')
+
+    def validate_lift_command(self, command):
+        if (not np.isfinite([command.positions[3], command.velocity[3]]).all()
+                or abs(command.positions[3]-self.fixed_lift_reference) > .002
+                or abs(command.velocity[3]) > 1e-9):
+            raise HardwareSafetyError('Agent requested motion of the braked fixed lift')
+
     def _prepare_dispatch(self, command, stage, state):
         # Reuse calibrated arm/lift encoding and device joint bounds.
+        self.check_fixed_lift(state)
         base,hands,rows = self.validate_extras(command)
         limits = self.mobile_config['limits']
         if np.linalg.norm(state.v[:2]) > limits['base_linear_m_s']+1e-5 or abs(state.v[2]) > limits['base_angular_rad_s']+1e-5:
             raise HardwareSafetyError('Measured base speed exceeds deployment bounds')
-        dispatch = HexWholeBodyEndpoint._prepare_dispatch(self,command,'arms-lift',state)
+        dispatch = HexWholeBodyEndpoint._prepare_dispatch(self,command,'dual-arm',state)
         from hex_device.generated.public_api_down_pb2 import APIDown
         expected = APIDown()
         xy = self.mapping.rotation().T @ base[:2]
@@ -110,12 +325,15 @@ class StreamEndpoint(MobileEndpoint):
 
 
 class NativeDriver:
-    def __init__(self,mapping,profile,config,*,timeout_s):
+    def __init__(self,mapping,profile,config,*,timeout_s,startup_lift_m=None):
         from functools import partial
         self.profile,self.timeout = profile,timeout_s
         robot = dict(config['robot'],gripper_travel_time_s=1.)
         self.endpoint = StreamEndpoint(mapping,robot,execute=True,
-            downlink_gate_factory=partial(ContinuousGate,timeout_s=timeout_s))
+            downlink_gate_factory=partial(ContinuousGate,timeout_s=timeout_s,defer_activation=True,
+                                         startup_lift=startup_lift_m is not None))
+        from .startup_lift import validate_target
+        self.endpoint.startup_lift_m = validate_target(startup_lift_m)
         self.acquired = False
         self.pending = None
 
@@ -134,9 +352,15 @@ class NativeDriver:
         self.endpoint.check_transport()
         if self.acquired:
             self.endpoint.check_health(self.state,'whole-body',check_timing=False)
+            self.endpoint.check_fixed_lift(self.state)
 
-    def acquire(self):
+    def acquire(self, *, startup_lift_m=None, progress=lambda report: None, stopped=lambda: False):
+        if startup_lift_m != self.endpoint.startup_lift_m:
+            raise ValueError('Startup lift target must match the preconfigured wire gates')
+        self.endpoint.startup_progress = progress
+        self.endpoint.cancel_requested = stopped
         state = self.endpoint.acquire('whole-body',self.profile)
+        self.startup_lift_report = getattr(self.endpoint, 'startup_lift_report', None)
         self.acquired = True
         self.endpoint.start_feedback_worker(state)
 
@@ -152,7 +376,10 @@ class NativeDriver:
 
     def acknowledgement(self,sequence):
         gates = self.endpoint.direct_gates
-        names = ('left', 'right', 'theta', 'base')
+        # Theta receives no POSITION frames. Its independently fresh feedback
+        # must confirm the physical brake; receipts cover actual motion sends.
+        self.endpoint.check_fixed_lift(self.state)
+        names = ('left', 'right', 'base')
         # Each receipt refers to this frame's first SDK dispatch, not a newer
         # periodic resend or a merely installed gate authorization.
         with ExitStack() as locks:
@@ -180,6 +407,9 @@ class NativeDriver:
         endpoint = self.endpoint
         worker = getattr(endpoint, 'feedback_worker', None)
         result['feedback_worker'] = worker.report() if worker is not None else None
+        result['fixed_lift_confirmation'] = getattr(endpoint, 'fixed_lift_confirmation', None)
+        result['startup_lift'] = getattr(endpoint, 'startup_lift_report', None)
+        result['fixed_lift_range_failure'] = getattr(endpoint, 'fixed_lift_range_failure', None)
         result['gripper_controllers'] = {s:p.report() for s,p in getattr(endpoint, 'gripper_publishers', {}).items()}
         result['grippers'] = {}
         for side, tap in getattr(endpoint, 'hand_taps', {}).items():

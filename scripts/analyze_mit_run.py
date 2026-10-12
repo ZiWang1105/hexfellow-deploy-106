@@ -190,8 +190,8 @@ def analyze(directory, output):
     final, backend = completed_run(directory)
     invocation = read_json(directory/'invocation.json')
     workspace = activate(invocation['workspace'])
-    from mobile_manipulator.robot.kinematics import Kinematics
-    from mobile_manipulator.robot.assembly import load_assembly
+    from hexfellow_deploy.robot.kinematics import Kinematics
+    from hexfellow_deploy.robot.assembly import load_assembly
     backend_metadata = backend.get('metadata') or read_json(directory/'backend_metadata.json')
     metadata = backend_metadata['robot']
     kin = Kinematics(Path(metadata['urdf']), load_assembly(metadata['assembly']))
@@ -328,9 +328,9 @@ def replay(directory, output, *, video=False):
     completed_run(directory)
     import hashlib
     import mujoco
-    from mobile_manipulator.sim.scene import BuiltScene
-    from mobile_manipulator.sim.scene_config import load_scene
-    from mobile_manipulator.sim.recording import SceneRecorder
+    from hexfellow_deploy.sim.scene import BuiltScene
+    from hexfellow_deploy.sim.scene_config import load_scene
+    from hexfellow_deploy.sim.recording import SceneRecorder
     config = yaml.safe_load((directory/'config.yaml').read_text())
     workspace = Path(read_json(directory/'invocation.json')['workspace'])
     scene_config = load_scene(workspace/config['interface']['backend']['scene'])

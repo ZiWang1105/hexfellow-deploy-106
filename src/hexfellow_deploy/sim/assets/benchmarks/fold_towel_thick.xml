@@ -1,0 +1,9 @@
+<mujoco model="fold_towel_thick_objects">
+  <asset />
+  <worldbody>
+    <flexcomp name="towel" type="grid" count="11 11 1" spacing="0.035 0.035 0.04" pos="0.55 0.0 0.780" dim="2" mass="0.32" radius="0.015" rgba="0.35 0.45 0.85 1">
+      <contact selfcollide="sap" internal="false" solimp="0.99 0.999 0.0001" solref="0.005 1" />
+      <edge equality="true" damping="0.02" />
+    </flexcomp>
+  </worldbody>
+</mujoco>

@@ -7,9 +7,9 @@ import numpy as np
 
 from hexfellow_deploy.workspace import activate
 
-WORKSPACE = activate(Path(__file__).resolve().parents[3])
+WORKSPACE = activate(Path(__file__).resolve().parents[1])
 from hexfellow_deploy.simulation import SimulationPlant
-from mobile_manipulator.control.umi_ik import load_umi
+from hexfellow_deploy.control.umi_ik import load_umi
 load_umi()
 from policy_sim.control.mit_command import MitCommand, mit_torque
 

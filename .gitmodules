@@ -1,3 +1,6 @@
 [submodule "third_party/deploy-anything"]
 	path = third_party/deploy-anything
 	url = git@github.com:HaoruXue/deploy-anything.git
+[submodule "third_party/UMI_Hardware"]
+	path = third_party/UMI_Hardware
+	url = git@github.com:Wzz-D/UMI_Hardware.git

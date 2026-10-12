@@ -8,8 +8,8 @@ import mujoco
 from hexfellow_deploy.physics_audit import PhysicsAudit, pickup_evaluation
 from hexfellow_deploy.workspace import activate
 
-ROOT = activate(Path(__file__).resolve().parents[3])
-from mobile_manipulator.sim.recording import SceneRecorder
+ROOT = activate(Path(__file__).resolve().parents[1])
+from hexfellow_deploy.sim.recording import SceneRecorder
 
 
 def fixture(tmp_path):

@@ -6,12 +6,12 @@ import uuid
 import pytest
 from hexfellow_deploy.workspace import activate
 from pathlib import Path
-activate(Path(__file__).resolve().parents[3])
+activate(Path(__file__).resolve().parents[1])
 from policy_sim.control.feedback_policy import FeedbackAgeError, validate_received
 from hexfellow_deploy.backend import BackendProxy
 from hexfellow_deploy.reference import ReferenceOwner
 from hexfellow_deploy.control_topics import FeedbackTopic
-from mobile_manipulator.robot.joints import JOINTS
+from hexfellow_deploy.robot.joints import JOINTS
 
 
 def row(stamp):

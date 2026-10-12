@@ -1,0 +1,45 @@
+# Standalone manual controls; offline UMI IK for I carrying / K arms-down.
+base_speed_m_s: 0.15
+turn_speed_rad_s: 0.25
+base_acceleration_m_s2: 0.5
+turn_acceleration_rad_s2: 1.0
+lift_speed_m_s: 0.025
+arm_speed_rad_s: 0.17453292519943295  # 10 deg/s, native joint-console maximum
+# Separate paired I/K pose stream: 10 s total goal including IK/acquisition and
+# settling. Longer paths automatically take longer to respect the limits below.
+# These are explicit manual-pose caps; the agent/joint-test limits stay unchanged.
+pose_motion:
+  duration_s: 10.0
+  velocity_rad_s: 1.0
+  acceleration_rad_s2: 2.0
+  jerk_rad_s3: 20.0
+# Manual pose completion, separate from trajectory/tracking safety limits.
+# Intermediate alignment remains precise before the elbow-bending stage.
+pose_completion:
+  alignment_joint_tolerance_rad: 0.01
+  final_joint_tolerance_rad: 0.03490658503988659  # 2 degrees
+  tcp_position_tolerance_m: 0.025
+  tcp_orientation_tolerance_rad: 0.05235987755982989  # 3 degrees
+initial_pose: keyboard_carry_pose.yaml
+ik_initial_pose: keyboard_carry_ik.yaml
+ik_down_pose: keyboard_down_ik.yaml
+# I/K start once per press; Space cancels. Only 1/2/3 tests use held Enter.
+# Relative tests use SDK joint numbering and radians are converted from degrees.
+sequences:
+  initial:
+    - {pose: initial}
+  ik_initial:
+    - {ik_pose: initial}
+  ik_down:
+    - {ik_pose: down}
+  left_test:
+    - {arm: left, joint: 3, delta_deg: 5}
+    - {arm: left, joint: 3, delta_deg: -5}
+  right_test:
+    - {arm: right, joint: 3, delta_deg: 5}
+    - {arm: right, joint: 3, delta_deg: -5}
+  both_test:
+    - {arm: left, joint: 3, delta_deg: 5}
+    - {arm: left, joint: 3, delta_deg: -5}
+    - {arm: right, joint: 3, delta_deg: 5}
+    - {arm: right, joint: 3, delta_deg: -5}

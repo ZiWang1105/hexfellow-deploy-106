@@ -9,7 +9,7 @@ import pytest
 from hexfellow_deploy.backend import BackendProxy
 from hexfellow_deploy.reference import ReferenceOwner, Receipt
 from hexfellow_deploy.control_topics import ReferenceTopic
-from mobile_manipulator.robot.joints import JOINTS
+from hexfellow_deploy.robot.joints import JOINTS
 from hexfellow_deploy.actuation import decode_mit
 from test_actuation import example
 

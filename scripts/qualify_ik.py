@@ -14,17 +14,17 @@ from hexfellow_deploy.reference import ReferenceOwner, Receipt
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--workspace', required=True)
+    parser.add_argument('--workspace', default=str(Path(__file__).resolve().parents[1]))
     parser.add_argument('--output', required=True)
     args = parser.parse_args()
     output = Path(args.output).resolve()
     output.mkdir(parents=True, exist_ok=False)
     root = activate(args.workspace)
     import mujoco
-    from mobile_manipulator.sim.scene import build_scene
-    from mobile_manipulator.sim.scene_config import load_scene
-    from mobile_manipulator.sim.sensors import EncoderReader
-    from mobile_manipulator.interfaces.contract import Action, ArmTarget
+    from hexfellow_deploy.sim.scene import build_scene
+    from hexfellow_deploy.sim.scene_config import load_scene
+    from hexfellow_deploy.sim.sensors import EncoderReader
+    from hexfellow_deploy.interfaces.contract import Action, ArmTarget
     config = load_scene(root/'configs/scenes/apple_on_table.yaml')
     scene = build_scene(config, output/'plant.xml')
     sensor = EncoderReader(scene.model)

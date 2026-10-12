@@ -8,7 +8,7 @@ import numpy as np
 class PhysicsAudit:
     """Audit contacts and generic 10 cm pickup retention without selecting a task."""
     def __init__(self, model, data):
-        from mobile_manipulator.sim.contacts import is_static_body
+        from hexfellow_deploy.sim.contacts import is_static_body
         self.model = model
         self.dt = float(model.opt.timestep)
         self.names = [model.body(body).name or 'world' for body in range(model.nbody)]
