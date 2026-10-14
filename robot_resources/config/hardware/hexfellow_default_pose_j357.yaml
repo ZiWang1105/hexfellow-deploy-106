@@ -1,0 +1,120 @@
+schema_version: 1
+robot: maver_x4
+lift_m: 0.3
+left_arm_rad:
+- 1.5785124698687512
+- 1.5711719323771387
+- 0.004631474917887981
+- 0.018517268176233184
+- -0.02098677465426043
+- -0.10256579043000368
+- -0.05389995032870908
+right_arm_rad:
+- -1.5864368388503365
+- 1.5045156734535452
+- -0.06609799378008539
+- 0.060197261042310456
+- 0.03228040859944582
+- -0.0696427277700081
+- -0.13406003387565812
+metadata:
+  source: IPv6 read-only probe 2026-09-19; operator identified arms hanging naturally
+  source_trace_sha256: accb65e7ff9702ef846db7a6140794eb43616a76a9f5e0607e3980f7cd9d391f
+  captured_lift_m: 0.42199806301275666
+  height_override: Operator requested 300 mm, not the captured upper endpoint
+  captured_model_q:
+  - 0.0
+  - 0.0
+  - 9.99681651592298e-06
+  - 0.42199806301275666
+  - 1.5785124698687512
+  - 1.5711719323771387
+  - 0.004631474917887981
+  - 0.018517268176233184
+  - -0.02098677465426043
+  - -0.10256579043000368
+  - -0.05389995032870908
+  - -1.5864368388503365
+  - 1.5045156734535452
+  - -0.06609799378008539
+  - 0.060197261042310456
+  - 0.03228040859944582
+  - -0.0696427277700081
+  - -0.13406003387565812
+  capture_mapping:
+    arms:
+      left:
+        sdk_indices:
+        - 0
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        sdk_joint_names:
+        - joint_1
+        - joint_2
+        - joint_3
+        - joint_4
+        - joint_5
+        - joint_6
+        - joint_7
+        signs:
+        - 1
+        - 1
+        - -1
+        - 1
+        - -1
+        - 1
+        - -1
+        offsets_rad:
+        - 1.5707963267948966
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
+      right:
+        sdk_indices:
+        - 0
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        sdk_joint_names:
+        - joint_1
+        - joint_2
+        - joint_3
+        - joint_4
+        - joint_5
+        - joint_6
+        - joint_7
+        signs:
+        - 1
+        - 1
+        - -1
+        - 1
+        - -1
+        - 1
+        - -1
+        offsets_rad:
+        - -1.5707963267948966
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
+    lift_position_mode: range_max_minus_sdk
+    lift_zero_offset_m: 0
+  migration:
+    source_pose_path: config/hardware/hexfellow_default_pose_j35.yaml
+    source_pose_sha256: 4482f73cb065ad1bc7887e98563738c3d20371b2036c0202e2232c36287dec66
+    method: Invert J3/J5 capture mapping to SDK positions then apply operator-confirmed
+      J3/J5/J7 mapping; same physical captured pose.
+    hardware_verified: false
+  capture_mapping_sha256: eb9e74fe9ab578f63f50a2b2e957561fc3014a5d5ea5683a7072d49dc5b670c9

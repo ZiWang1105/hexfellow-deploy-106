@@ -4,7 +4,7 @@ from collections import Counter, deque
 import json
 import math
 import time
-from deploy_anything.components.interface.base_interface import DABaseInterface
+from hexfellow_deploy.runtime.components.interface.base_interface import DABaseInterface
 from .workspace import activate
 
 

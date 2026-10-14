@@ -19,8 +19,8 @@ ROOT=Path(__file__).resolve().parents[2]
 
 
 def worker(output,port,inject_invalid=False):
-    sys.path.insert(0,str(ROOT/'src'))
-    from policy_sim.hardware.mit_ik_replay import SimulationPlant
+    sys.path.insert(0,str(ROOT.parent/'src'))
+    from hexfellow_deploy.robotics.hardware.mit_ik_replay import SimulationPlant
     import numpy as np
     original=SimulationPlant.__init__
     def initialize(plant,*args,**kwargs):

@@ -9,7 +9,7 @@ from hexfellow_deploy.actuation import StreamContract,encode_mit,decode_mit
 from hexfellow_deploy.native import ContinuousGate
 from hexfellow_deploy.backend import BackendProxy
 from hexfellow_deploy.robot.joints import JOINTS,LEFT,RIGHT
-from policy_sim.control.mit_command import MitCommand,mit_torque
+from hexfellow_deploy.robotics.control.mit_command import MitCommand,mit_torque
 from hex_device.generated.public_api_down_pb2 import APIDown
 
 

@@ -136,7 +136,7 @@ class GatewayTiming:
         self.stack_file.close()
 
     def save(self, endpoint, supervisor):
-        from policy_sim.hardware.ik_runner import jsonable
+        from hexfellow_deploy.robotics.hardware.ik_runner import jsonable
         window = (getattr(supervisor, 'fault_window', None)
                   or getattr(endpoint, 'stop_window', None))
         if window is None and endpoint is not None:

@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "source": "genrobot_sample/domestic_services/living_room/organization/organize_rigid_objects/026acebb48ae473d8e5e61c85a72b9dc.mcap",
+  "native_resolution": [1600, 1300],
+  "policy_resolution": [224, 224],
+  "resize_filter": "swscale_bilinear",
+  "streams": {
+    "robot0_camera0": {
+      "side": "left",
+      "frame_id": "das_center_optical_frame",
+      "inherits": "robot1_camera0",
+      "provisional": true,
+      "notes": "The robot0 camera_info message in the reference MCAP contains no numeric calibration."
+    },
+    "robot1_camera0": {
+      "side": "right",
+      "frame_id": "das_center_optical_frame",
+      "distortion_model": "equidistant",
+      "calibration_resolution": [640, 480],
+      "K": [
+        249.2316915366049,
+        0.0,
+        324.49312518634304,
+        0.0,
+        230.01526162783233,
+        261.7763957403114,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "D": [
+        -0.02435173280750664,
+        0.0015765634338631462,
+        -0.0006464413534064604,
+        -0.000430775500240803
+      ],
+      "T_das_base_from_optical": {
+        "translation_m": [0.052, 0.0, 0.0],
+        "quaternion_xyzw": [0.5, -0.5, 0.5, -0.5]
+      },
+      "native_mapping": {
+        "scale_xy": [2.5, 2.7083333333333335],
+        "offset_xy": [0.0, 0.0]
+      },
+      "provisional": true,
+      "reference_TBC": [0.00559444, 0.0236697, -0.00763868, 0.0, 0.0, 1.0, -1.615545e-15],
+      "notes": "The URDF base frame does not share the dataset's body-frame convention. This provisional URDF-to-optical seed places the lens at the V3 center-camera panel and matches the sample viewing direction; reference_TBC is retained for traceability. Intrinsics are 640x480 while H264 decodes to 1600x1300, so native_mapping still requires calibration refinement."
+    }
+  }
+}

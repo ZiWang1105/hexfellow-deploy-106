@@ -49,7 +49,7 @@ def physical_builder(side=None):
         'right': ('realsense_d435i_right_candidate_20261008.json', '243222074562'),
     }[side]
     return WristGeometry(root/'calibration/config/camera'/candidate,
-        serial,root/'third_party/UMI_Hardware/urdf/maver_x4_gp80_zed_40deg.urdf',
+        serial,root/'robot_resources/urdf/maver_x4_gp80_zed_40deg.urdf',
         root/'configs/robot/maver_gp80.yaml')
 
 
@@ -91,7 +91,7 @@ def test_native_capture_binds_serial_matches_encoders_and_uses_active_intrinsics
     serial=builder.metadata['camera_serial']
     filename=f"realsense_{'d405' if side=='left' else 'd435i'}_{side}_candidate_20261008.json"
     monkeypatch.setattr(deployment,'load_deployment',lambda *a,**kw:dict(robot=dict(
-        urdf=root/'third_party/UMI_Hardware/urdf/maver_x4_gp80_zed_40deg.urdf',
+        urdf=root/'robot_resources/urdf/maver_x4_gp80_zed_40deg.urdf',
         assembly=root/'configs/robot/maver_gp80.yaml',camera_encoder_max_skew_s=.08,camera_max_age_s=.25)))
     state={};captured=[]
     class Sampler:

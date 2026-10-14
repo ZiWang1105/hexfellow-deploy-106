@@ -29,16 +29,16 @@ class UMIPinkIK:
                  runtime_velocity_bounds=None):
         upstream = load_umi()
         try:
-            import _policy_sim_collision_kernel as native
+            import _hexfellow_collision_kernel as native
         except ImportError as error:
             raise RuntimeError(
-                "Build UMI's native extension: python -m pip install --no-deps -e ./third_party/UMI_Hardware"
+                "Build the owned native extension with ./scripts/setup_sim.sh"
             ) from error
-        if Path(native.__file__).resolve().parent != upstream / "src":
-            raise RuntimeError("The UMI native extension must come from the editable submodule install")
+        if Path(native.__file__).resolve().parent != PROJECT_ROOT / "src":
+            raise RuntimeError("The native extension must come from this hexfellow-deploy installation")
         # Preserve the upstream shared-library import order (qpsolvers first).
-        from policy_sim.control.ik_core import PinkIKCore
-        from policy_sim.control.motion_profile import controller_config_for_profile, load_motion_profile
+        from hexfellow_deploy.robotics.control.ik_core import PinkIKCore
+        from hexfellow_deploy.robotics.control.motion_profile import controller_config_for_profile, load_motion_profile
         import pinocchio as pin
 
         self.pin = pin
@@ -91,7 +91,7 @@ class UMIPinkIK:
         self.tracking_requested = False
         self.targets = None
         self.report = {
-            "implementation": "policy_sim.control.ik_core.PinkIKCore",
+            "implementation": "hexfellow_deploy.robotics.control.ik_core.PinkIKCore",
             "upstream_commit": umi_revision(), "motion_profile": settings["motion_profile"],
             "motion_profile_sha256": config.motion_profile_sha256,
             "base_mode": "fixed", "state_coordinates": list(JOINTS),

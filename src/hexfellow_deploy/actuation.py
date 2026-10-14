@@ -14,7 +14,7 @@ def encode_mit(command):
 def decode_mit(value):
     from hexfellow_deploy.robot.upstream import load_umi
     load_umi()
-    from policy_sim.control.mit_command import MitCommand
+    from hexfellow_deploy.robotics.control.mit_command import MitCommand
     return MitCommand(**value)
 
 
@@ -37,7 +37,7 @@ class StreamContract:
         """Bind initial reference history to the controller's exact startup sample."""
         from hexfellow_deploy.interfaces.contract import validate_sensor_packet
         from hexfellow_deploy.robot.joints import JOINTS
-        from policy_sim.control.reference_initialization import stationary_reference_velocity
+        from hexfellow_deploy.robotics.control.reference_initialization import stationary_reference_velocity
         if self.latest is not None or self.previous_position is not None:
             raise RuntimeError('Actuator reference history is already initialized')
         validate_sensor_packet(measured)
@@ -178,8 +178,8 @@ def deployment(workspace, path, *, execute=False):
     config = load_deployment(workspace/path, execute=execute, mock=not execute, research=execute)
     mapping, profile, effort = native_configuration(config['robot'], execute=execute)
     limits = mapping.runtime_limits(profile)
-    from policy_sim.control.hardware_capabilities import load_hardware_capabilities
-    from policy_sim.control.motion_profile import controller_config_for_profile
+    from hexfellow_deploy.robotics.control.hardware_capabilities import load_hardware_capabilities
+    from hexfellow_deploy.robotics.control.motion_profile import controller_config_for_profile
     from hexfellow_deploy.robot.joints import JOINTS
     from hexfellow_deploy.control.lift_limits import FIXED_LIFT_MAX_M
     from hexfellow_deploy.control.umi_ik import LOCKED_JOINTS

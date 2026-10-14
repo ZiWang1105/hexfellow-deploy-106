@@ -6,7 +6,7 @@ import numpy as np,cv2,mujoco
 from PIL import Image,ImageDraw
 from calibration_path import LocalChecker,ROOT
 sys.path.insert(0,str(ROOT/"src"))
-from policy_sim.calibration.charuco import detect
+from hexfellow_deploy.robotics.calibration.charuco import detect
 parser=argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--output',type=Path,default=ROOT/'runs/centered-calibration')
 parser.add_argument('--snapshot',type=Path,default=ROOT/'runs/live-calibration/20260930T044638.695810Z/camera/request.json')

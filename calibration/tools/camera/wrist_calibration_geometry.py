@@ -18,7 +18,7 @@ from pathlib import Path
 import numpy as np
 
 ROOT = Path(__file__).resolve().parents[2]
-sys.path.insert(0, str(ROOT / "src"))
+sys.path.insert(0, str(ROOT.parent / "src"))
 from calibration_outcomes import InvalidCalibrationPose
 
 DEFAULT_PLAN = ROOT / "config/camera/realsense_d435i_right_fixed33_outside_plan.json"
@@ -127,7 +127,7 @@ class WristStudy:
         import pinocchio as pin
         import yaml
         from scipy.spatial.transform import Rotation
-        from policy_sim.control.robot import CONTROLLED_JOINTS, RIGHT_ARM_JOINTS
+        from hexfellow_deploy.robotics.control.robot import CONTROLLED_JOINTS, RIGHT_ARM_JOINTS
         from validate_calibration_poses import Study, T, fmt, quat
 
         self.out = Path(output)

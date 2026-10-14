@@ -107,7 +107,7 @@ def revalidate(output,plan_path,current):
     New geometry/FOV still must pass actual clearance and rendered detections.
     """
     import cv2,mujoco
-    from policy_sim.calibration.charuco import detect
+    from hexfellow_deploy.robotics.calibration.charuco import detect
     previous=load_plan(plan_path)
     np.testing.assert_array_equal(previous['initial_q'],current['initial_q'])
     output=Path(output);output.mkdir(parents=True,exist_ok=True)

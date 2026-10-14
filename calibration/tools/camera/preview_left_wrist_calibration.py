@@ -13,8 +13,8 @@ from scipy.spatial.transform import Rotation
 from plan_left_wrist_calibration import PLAN
 from wrist_calibration_geometry import ROOT, load_plan, LocalWristChecker, sha
 from render_wrist_open_gripper import Video, panel, label
-from policy_sim.calibration.charuco import detect
-from policy_sim.calibration.wrist_handeye import solve
+from hexfellow_deploy.robotics.calibration.charuco import detect
+from hexfellow_deploy.robotics.calibration.wrist_handeye import solve
 
 
 def pose_error(estimate, truth):

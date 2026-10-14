@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 import threading
 import time
-from deploy_anything.components.interface.base_interface import DABaseInterface
+from hexfellow_deploy.runtime.components.interface.base_interface import DABaseInterface
 
 PAGE = br'''<!doctype html><html><meta charset="utf-8"><title>Hexfellow Deploy</title>
 <style>body{font:16px system-ui;background:#111827;color:#e5e7eb;margin:32px}

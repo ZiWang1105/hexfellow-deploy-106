@@ -5,8 +5,8 @@ import json
 from pathlib import Path
 import sys
 import numpy as np
-ROOT=Path(__file__).resolve().parents[2];sys.path.insert(0,str(ROOT/'src'))
-from policy_sim.calibration.handeye import solve, summarize, validate
+ROOT=Path(__file__).resolve().parents[2];sys.path.insert(0,str(ROOT.parent/'src'))
+from hexfellow_deploy.robotics.calibration.handeye import solve, summarize, validate
 
 
 def main():

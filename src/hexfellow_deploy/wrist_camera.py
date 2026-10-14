@@ -3,7 +3,7 @@ import json
 from pathlib import Path
 import time
 
-from deploy_anything.components.interface.base_interface import DABaseInterface
+from hexfellow_deploy.runtime.components.interface.base_interface import DABaseInterface
 
 
 class NativeWristCamera(DABaseInterface):

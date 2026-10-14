@@ -7,12 +7,12 @@ import argparse
 import json
 from pathlib import Path
 import sys
-ROOT=Path(__file__).resolve().parents[2];sys.path.insert(0,str(ROOT/'src'))
+ROOT=Path(__file__).resolve().parents[2];sys.path.insert(0,str(ROOT.parent/'src'))
 import numpy as np
 import pinocchio as pin
 from scipy.optimize import least_squares
 from scipy.spatial.transform import Rotation
-from policy_sim.control.robot import CONTROLLED_JOINTS, RIGHT_ARM_JOINTS
+from hexfellow_deploy.robotics.control.robot import CONTROLLED_JOINTS, RIGHT_ARM_JOINTS
 
 
 def main():

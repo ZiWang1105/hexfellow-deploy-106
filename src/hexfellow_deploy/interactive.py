@@ -12,7 +12,7 @@ import time
 import xml.etree.ElementTree as ET
 
 import numpy as np
-from deploy_anything.components.interface.base_interface import DABaseInterface
+from hexfellow_deploy.runtime.components.interface.base_interface import DABaseInterface
 
 SIDES = ('left', 'right')
 ROOT_BODY = 'maver_x4_asm_maver_x4_base_link'

@@ -2,10 +2,10 @@
 """Require real ChArUco detection on rendered images before route selection."""
 import json,sys
 from pathlib import Path
-ROOT=Path(__file__).resolve().parents[2];sys.path.insert(0,str(ROOT/'src'))
+ROOT=Path(__file__).resolve().parents[2];sys.path.insert(0,str(ROOT.parent/'src'))
 import cv2,mujoco,numpy as np
-from policy_sim.calibration.charuco import detect
-from policy_sim.control.robot import CONTROLLED_JOINTS
+from hexfellow_deploy.robotics.calibration.charuco import detect
+from hexfellow_deploy.robotics.control.robot import CONTROLLED_JOINTS
 p=ROOT/'runs/camera-calibration-40deg/sample'
 r=json.loads((p/'candidates.json').read_text());m=mujoco.MjModel.from_xml_path(str(p/'scene.xml'));d=mujoco.MjData(m)
 q=np.array(json.loads((ROOT/'runs/camera-calibration/robot-snapshot.json').read_text())['q'][3:]);mi=[m.joint(n).qposadr[0] for n in CONTROLLED_JOINTS]

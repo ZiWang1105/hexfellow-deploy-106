@@ -3,7 +3,7 @@ from types import SimpleNamespace
 import cv2
 import numpy as np
 import pytest
-from policy_sim.calibration.charuco import detect, make_board
+from hexfellow_deploy.robotics.calibration.charuco import detect, make_board
 from wrist_camera_worker import SDKCornerRectifier
 from pathlib import Path
 import json

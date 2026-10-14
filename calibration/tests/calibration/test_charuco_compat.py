@@ -5,7 +5,7 @@ from unittest.mock import patch
 import cv2
 import numpy as np
 sys.path.insert(0,str(Path(__file__).resolve().parents[2]/'src'))
-from policy_sim.calibration.charuco import make_board,detect
+from hexfellow_deploy.robotics.calibration.charuco import make_board,detect
 
 
 class CharucoCompatibility(unittest.TestCase):

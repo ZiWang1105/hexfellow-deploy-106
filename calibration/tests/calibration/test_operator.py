@@ -1,5 +1,5 @@
 import pytest
-from policy_sim.calibration.operator import Rehearsal
+from hexfellow_deploy.robotics.calibration.operator import Rehearsal
 
 
 def machine():

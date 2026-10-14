@@ -9,7 +9,7 @@ from urllib.request import urlopen
 
 import numpy as np
 import pytest
-from deploy_anything.components.interface.base_interface import DABaseInterface
+from hexfellow_deploy.runtime.components.interface.base_interface import DABaseInterface
 
 from hexfellow_deploy.dashboard import DashboardComponent
 from hexfellow_deploy.manager import InterfaceManager
@@ -50,7 +50,7 @@ class Probe(DABaseInterface):
 
 
 def start_manager(monkeypatch, tmp_path, behavior):
-    import deploy_anything.manager as da_manager
+    import hexfellow_deploy.runtime.manager as da_manager
     monkeypatch.setattr(da_manager, 'set_rt', lambda **kwargs: None)
     monkeypatch.setattr(da_manager, 'set_affinity', lambda affinity: None)
     monkeypatch.setenv('HEXFELLOW_OUTPUT', str(tmp_path))

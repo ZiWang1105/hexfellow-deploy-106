@@ -16,7 +16,7 @@ from wrist_camera_worker import ExposureClock, SimulationRGB, signed_counter_del
 
 
 def camera_scene(tmp_path):
-    from policy_sim.control.robot import CONTROLLED_JOINTS
+    from hexfellow_deploy.robotics.control.robot import CONTROLLED_JOINTS
     root = ET.fromstring('<mujoco><visual><global offwidth="1400" offheight="800"/></visual><worldbody/></mujoco>')
     world = root.find('worldbody')
     ET.SubElement(world, 'camera', name='wrist_calibration_view', quat='0 1 0 0')

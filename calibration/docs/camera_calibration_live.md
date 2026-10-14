@@ -4,9 +4,9 @@ See [the complete calibration procedure](camera_calibration.md) for both the
 coarse board fit and later landmark PnP refinement, current matrices and numerical
 reproduction. This page describes the live operator controls and startup checks.
 
-This launcher uses the current deployment at `../UMI_Hardware` without modifying
-its working files. It imports that checkout's session, controller, gateway and
-research checks. Camera/calibration additions stay on `zi/dev_camera`.
+This launcher uses this repository's owned session, controller, transport and
+research checks in `src/hexfellow_deploy/robotics`. No separate robot repository
+or package is required. Existing physical qualification records remain local.
 
 ## Start
 

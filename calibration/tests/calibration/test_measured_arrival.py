@@ -10,7 +10,7 @@ sys.path.insert(0,str(Path(__file__).resolve().parents[2]/'tools/camera'))
 import calibration_runtime as runtime
 from calibration_path import LocalChecker
 from calibration_outcomes import InvalidCalibrationPose
-from policy_sim.hardware.x7 import HardwareSafetyError
+from hexfellow_deploy.robotics.hardware.x7 import HardwareSafetyError
 
 
 def state_at(t,offset=-.02231):

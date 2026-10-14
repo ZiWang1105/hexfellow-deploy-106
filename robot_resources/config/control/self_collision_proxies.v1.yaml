@@ -1,0 +1,105 @@
+schema_version: 1
+robot: maver_x4
+status: candidate
+generated_at: '2026-08-30T04:19:08.620090+00:00'
+thresholds:
+  maximum_overhang_m: 0.01
+  maximum_undercoverage_area_fraction: 0.005
+  maximum_undercoverage_depth_m: 0.003
+  surface_sampling_resolution_m: 0.0005
+links:
+- name: left_7
+  frame: maver_x4_asm_7_urdf_SLDASM_link_7
+  source_stl: urdf/meshes/maver_x4_asm_7_urdf_sldasm_link_7.stl
+  source_stl_sha256: b671481c9555c286bea63e59f2ddce34d3535196a539ee4bb4068e6d57193d7a
+  primitives:
+  - type: capsule
+    start_m:
+    - -0.0045
+    - -0.011
+    - -0.01
+    end_m:
+    - -0.0045
+    - -0.011
+    - 0.034
+    radius_m: 0.00925
+  - type: capsule
+    start_m:
+    - -0.0045
+    - -0.003666666666666666
+    - -0.01
+    end_m:
+    - -0.0045
+    - -0.003666666666666666
+    - 0.034
+    radius_m: 0.00925
+  - type: capsule
+    start_m:
+    - -0.0045
+    - 0.003666666666666667
+    - -0.01
+    end_m:
+    - -0.0045
+    - 0.003666666666666667
+    - 0.034
+    radius_m: 0.00925
+  - type: capsule
+    start_m:
+    - -0.0045
+    - 0.011
+    - -0.01
+    end_m:
+    - -0.0045
+    - 0.011
+    - 0.034
+    radius_m: 0.00925
+  - type: capsule
+    start_m:
+    - -0.003
+    - -0.011
+    - 0.0375
+    end_m:
+    - 0.033
+    - -0.011
+    - 0.0375
+    radius_m: 0.00925
+  - type: capsule
+    start_m:
+    - -0.003
+    - 0.0
+    - 0.0375
+    end_m:
+    - 0.033
+    - 0.0
+    - 0.0375
+    radius_m: 0.00925
+  - type: capsule
+    start_m:
+    - -0.003
+    - 0.011
+    - 0.0375
+    end_m:
+    - 0.033
+    - 0.011
+    - 0.0375
+    radius_m: 0.00925
+  metrics:
+    undercoverage_area_fraction: 0.00268
+    undercoverage_over_3mm_area_fraction: 0.0
+    maximum_undercoverage_depth_m: 0.0013518917305909706
+    mean_undercoverage_depth_m: 3.619178366122912e-06
+    maximum_overhang_m: 0.009749300320200688
+    mean_overhang_m: 0.0027051358293451603
+    p95_overhang_m: 0.006249220155229322
+    p99_overhang_m: 0.007913469353207098
+    primitive_count: 7
+    repair_delta_m: 0.0
+pairs: []
+excluded_pairs: []
+approval_blockers:
+- 'partial fit: missing required links: left_1, left_2, left_3, left_4, left_5, left_6,
+  right_1, right_2, right_3, right_4, right_5, right_6, right_7, lift_carriage, lift_column,
+  base'
+- left/right gripper 0-105 mm swept-volume references are not yet present
+approval: null
+geometry_payload_sha256: 4effd72677af80ea58c04f6361e8f232dc9997d2e44c4534bbb09188eae96608

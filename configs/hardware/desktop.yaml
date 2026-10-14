@@ -2,9 +2,9 @@
 # Fill local measured calibrations in an ignored configs/local/*.yaml copy.
 schema_version: 1
 robot:
-  urdf: ../../third_party/UMI_Hardware/urdf/maver_x4_gp80_zed_40deg.urdf
+  urdf: ../../robot_resources/urdf/maver_x4_gp80_zed_40deg.urdf
   assembly: ../robot/maver_gp80.yaml
-  mapping: ../../third_party/UMI_Hardware/config/hardware/hexfellow_gp80_highspeed_both_j6.json
+  mapping: ../../robot_resources/config/hardware/hexfellow_gp80_highspeed_both_j6.json
   research_release: null # existing local UMI research binding, not regenerated approval
   network:
     interface: eth0
@@ -53,7 +53,7 @@ cameras: cameras.yaml
 # The selected pinned candidate remains provisional.
 # Head camera parent must move with the lift; wrist parent moves with the relevant arm.
 camera_calibration:
-  head: ../../third_party/UMI_Hardware/config/camera/zed_landmark_candidate_20260930.json
+  head: ../../robot_resources/config/camera/zed_landmark_candidate_20260930.json
   wrist: null
 controller: ../controller/umi_pink_real.yaml
 base_motion: ../controller/base_motion.yaml

@@ -7,9 +7,9 @@ import numpy as np
 from hexfellow_deploy.hardware.umi_endpoint import MobileEndpoint, GP80WireGate
 from hexfellow_deploy.hardware.umi_device import sensor_packet, native_packet
 from hexfellow_deploy.robot.joints import JOINTS
-from policy_sim.hardware.mit_wire import authorize_group, motion_payload
-from policy_sim.hardware.hexfellow_endpoint import HexWholeBodyEndpoint
-from policy_sim.hardware.x7 import HardwareSafetyError
+from hexfellow_deploy.robotics.hardware.mit_wire import authorize_group, motion_payload
+from hexfellow_deploy.robotics.hardware.hexfellow_endpoint import HexWholeBodyEndpoint
+from hexfellow_deploy.robotics.hardware.x7 import HardwareSafetyError
 from .reference import Receipt
 
 
@@ -137,7 +137,7 @@ class StreamEndpoint(MobileEndpoint):
                                       f'{self.fixed_lift_range_failure}')
 
     def acquire(self, stage, profile):
-        from policy_sim.hardware.shutdown import ThetaObservedStop
+        from hexfellow_deploy.robotics.hardware.shutdown import ThetaObservedStop
         state = super().acquire(stage, profile)
         if getattr(self, 'startup_lift_m', None) is not None:
             state = self.position_startup_lift(state, stage)

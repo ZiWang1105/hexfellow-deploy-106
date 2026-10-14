@@ -5,14 +5,14 @@ Board attachment is a photo-derived planning assumption, not a calibration.
 """
 import argparse,hashlib,json,math,sys,xml.etree.ElementTree as ET
 from pathlib import Path
-ROOT=Path(__file__).resolve().parents[2];sys.path.insert(0,str(ROOT/'src'))
+ROOT=Path(__file__).resolve().parents[2];sys.path.insert(0,str(ROOT.parent/'src'))
 import cv2,mujoco,numpy as np,pinocchio as pin
 import yaml
 from scipy.spatial.transform import Rotation
-from policy_sim.control.robot import CONTROLLED_JOINTS,RIGHT_ARM_JOINTS
-from policy_sim.control.robot_model import load_robot_model
-from policy_sim.scene.builder import build_tabletop_scene
-from policy_sim.calibration.charuco import make_board,detect
+from hexfellow_deploy.robotics.control.robot import CONTROLLED_JOINTS,RIGHT_ARM_JOINTS
+from hexfellow_deploy.robotics.control.robot_model import load_robot_model
+from hexfellow_deploy.robotics.scene.builder import build_tabletop_scene
+from hexfellow_deploy.robotics.calibration.charuco import make_board,detect
 
 def fmt(v):return ' '.join(map(str,np.asarray(v).ravel()))
 def quat(r):

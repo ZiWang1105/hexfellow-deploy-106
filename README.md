@@ -1,6 +1,6 @@
 # Hexfellow Deploy
 
-One Deploy Anything (DA) runtime for the RGB-D agent, PinkIK controller and MIT
+One owned deployment runtime for the RGB-D agent, PinkIK controller and MIT
 actuator stream. MuJoCo and the real robot select different device adapters;
 they use the same controller, reference ownership, serialized commands, feedback
 contract and command-health checks.
@@ -10,8 +10,9 @@ RGB-D/encoder matcher has passed a read-only connected-device test; the full
 physical agent task remains unqualified. Simulator results establish software and
 modeled-plant behavior, not firmware dynamics, network reliability or hardware
 stopping. See [architecture](docs/ARCHITECTURE.md) and [validation](docs/VALIDATION.md).
-The [DA alignment audit](docs/DEPLOY_ANYTHING_ALIGNMENT.md) lists implemented
-parity, deliberate robot-specific differences and unresolved recovery behavior.
+The [historical alignment audit](docs/DEPLOY_ANYTHING_ALIGNMENT.md) records the
+original design comparison. The current implementation owns its process/topic
+runtime and PinkIK/native code; no external deployment or solver repository is required.
 Both physical GP80 hands use this repository's [feedback gripper controller](docs/GRIPPER_CONTROL.md),
 shared by the native policy adapter and the parent keyboard console.
 Native policy observations include [both calibrated wrist RGB views](docs/WRIST_RGB.md)
@@ -34,22 +35,22 @@ for the right D435i. These exports do not change production sensor selection.
 
 ## Standalone installation
 
-Clone this repository with its pinned submodules. The controller, robot contracts,
+Clone this repository normally; it has no Git submodules. The controller, robot contracts,
 hardware adapters, MuJoCo scene builder/assets, skill executor and draggable TCP
 viewer are owned here. No agent application checkout or API key is needed for IK.
 
 On Ubuntu, install `build-essential` and `libeigen3-dev`, plus `uv`, then:
 
 ```bash
-git clone --recurse-submodules git@github.com:ZiWang1105/hexfellow-deploy.git
+git clone git@github.com:ZiWang1105/hexfellow-deploy.git
 cd hexfellow-deploy
 ./scripts/setup_sim.sh
 ```
 
 The script creates a Python 3.10 `.venv`, installs the simulation dependencies,
-builds the pinned controller extension, and installs Deploy Anything's runtime.
-Private submodule access is required. NumPy stays below 2 for Pinocchio; DA is
-installed with `--no-deps` deliberately for its tested manager/topics subset.
+builds the owned native controller extension, and installs the owned process/topic
+runtime. No additional repository access is required. NumPy stays below 2 for Pinocchio.
+Source lineage and preserved license terms are recorded in [NOTICE.md](NOTICE.md).
 For native wire-format tests, also install the optional SDK (this opens no devices):
 
 ```bash
@@ -176,3 +177,5 @@ Outputs also include source/dependency provenance, command/control records,
 backend metadata, termination reason and separate shutdown errors. Simulator
 base/object state is recorded for rendering and offline scoring only; it never
 enters policy/control observations.
+
+Solver/runtime source attribution and dependency-removal details are in [NOTICE.md](NOTICE.md) and [standalone setup](docs/STANDALONE.md).

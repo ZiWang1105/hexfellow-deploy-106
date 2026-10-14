@@ -12,10 +12,10 @@ SPEC=importlib.util.spec_from_file_location('calibration_cli', ROOT.parent/'src/
 CLI=importlib.util.module_from_spec(SPEC); SPEC.loader.exec_module(CLI)
 
 def test_calibration_overlay_uses_current_upstream_control():
-    import policy_sim.calibration.wrist_handeye as calibration
-    import policy_sim.hardware.session as control
-    assert Path(calibration.__file__).is_relative_to(ROOT/'src')
-    assert Path(control.__file__).is_relative_to(ROOT.parent/'third_party/UMI_Hardware/src')
+    import hexfellow_deploy.robotics.calibration.wrist_handeye as calibration
+    import hexfellow_deploy.robotics.hardware.session as control
+    assert Path(calibration.__file__).is_relative_to(ROOT.parent/'src/hexfellow_deploy/robotics')
+    assert Path(control.__file__).is_relative_to(ROOT.parent/'src/hexfellow_deploy/robotics')
 
 def test_relocated_right_plan_payload_and_source_hashes():
     from wrist_calibration_geometry import DEFAULT_PLAN, load_plan

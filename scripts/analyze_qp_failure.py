@@ -10,7 +10,7 @@ from hexfellow_deploy.workspace import activate
 
 def analyze(path):
     """Return interval contradictions in original joint velocity units."""
-    from policy_sim.control.qp_diagnostics import QPFailureSnapshot
+    from hexfellow_deploy.robotics.control.qp_diagnostics import QPFailureSnapshot
 
     with np.load(path, allow_pickle=False) as archive:
         arrays = {key: archive[key] for key in archive.files}

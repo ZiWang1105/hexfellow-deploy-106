@@ -16,9 +16,9 @@ from ..control.gripper import BinaryGripperServo, validate_gripper
 from hexfellow_deploy.gripper_sdk import require_closure_enabled, GP80FeedbackPublisher
 
 load_umi()
-from policy_sim.hardware.hexfellow_endpoint import HexWholeBodyEndpoint
-from policy_sim.hardware.mit_wire import MitWireGate
-from policy_sim.hardware.x7 import HardwareSafetyError
+from hexfellow_deploy.robotics.hardware.hexfellow_endpoint import HexWholeBodyEndpoint
+from hexfellow_deploy.robotics.hardware.mit_wire import MitWireGate
+from hexfellow_deploy.robotics.hardware.x7 import HardwareSafetyError
 
 
 def validate_startup_lift(state, mapping):
@@ -242,8 +242,8 @@ class MobileEndpoint(HexWholeBodyEndpoint):
         # bounded body pulse is admitted here, with the SAME source deadline.
         dispatch = super()._prepare_dispatch(command, 'arms-lift', state)
         from hex_device.generated.public_api_down_pb2 import APIDown
-        from policy_sim.hardware.control_timing import feedback_deadline
-        from policy_sim.control.feedback_policy import received_deadline
+        from hexfellow_deploy.robotics.hardware.control_timing import feedback_deadline
+        from hexfellow_deploy.robotics.control.feedback_policy import received_deadline
         expected = APIDown()
         xy = self.mapping.rotation().T @ base[:2]
         speed = expected.base_command.simple_move_command.xyz_speed

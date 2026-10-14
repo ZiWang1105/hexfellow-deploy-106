@@ -5,3 +5,7 @@ __pycache__/
 .venv/
 runs/
 configs/local/
+
+# Locally built native extension and build intermediates.
+*.so
+build/

@@ -1,7 +1,7 @@
 import numpy as np
 import pytest
 from scipy.spatial.transform import Rotation
-from policy_sim.calibration.handeye import transform, inverse, solve, residual, jacobian, retract
+from hexfellow_deploy.robotics.calibration.handeye import transform, inverse, solve, residual, jacobian, retract
 
 
 def fixture(noise=0):

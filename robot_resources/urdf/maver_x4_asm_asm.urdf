@@ -1,0 +1,841 @@
+<?xml version="1.0"?>
+<robot name="maver_x4_asm_asm">
+  <link name="maver_x4_asm_maver_x4_base_link">
+    <inertial>
+      <origin xyz="-0.00051929 0.022743 0.12782" rpy="0 0 0"/>
+      <mass value="3.464"/>
+      <inertia ixx="0.6655" ixy="-0.00054813" ixz="-0.0016176" iyy="0.46727" iyz="-0.0021138" izz="1.1037"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/maver_x4_asm_maver_x4_base_link.stl"/></geometry>
+      <material name="maver_x4_asm_maver_x4_base_link_color"><color rgba="0.75 0.75 0.75 1"/></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/maver_x4_asm_maver_x4_base_link.stl"/></geometry>
+    </collision>
+  </link>
+  <link name="maver_x4_asm_maver_x4_link_yaw1">
+    <inertial>
+      <origin xyz="-0.010257 -0.0011369 -0.064839" rpy="0 0 0"/>
+      <mass value="0.8259"/>
+      <inertia ixx="0.00060151" ixy="0.0000129" ixz="-0.00009069" iyy="0.00078014" iyz="0.00001444" izz="0.0006025"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/maver_x4_asm_maver_x4_link_yaw.stl"/></geometry>
+      <material name="maver_x4_asm_maver_x4_link_yaw1_color"><color rgba="0.64705882 0.61960784 0.58823529 1"/></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/maver_x4_asm_maver_x4_link_yaw.stl"/></geometry>
+    </collision>
+  </link>
+  <link name="maver_x4_asm_maver_x4_link_wheel1">
+    <inertial>
+      <origin xyz="5e-7 0.0023009 -8.8e-7" rpy="0 0 0"/>
+      <mass value="0.36495"/>
+      <inertia ixx="0.00041642" ixy="0" ixz="0" iyy="0.00075667" iyz="0" izz="0.00041642"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/maver_x4_asm_maver_x4_link_wheel.stl"/></geometry>
+      <material name="maver_x4_asm_maver_x4_link_wheel1_color"><color rgba="0.1 0.1 0.1 1"/></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/maver_x4_asm_maver_x4_link_wheel.stl"/></geometry>
+    </collision>
+  </link>
+  <link name="maver_x4_asm_maver_x4_link_yaw2">
+    <inertial>
+      <origin xyz="-0.010257 -0.0011369 -0.064839" rpy="0 0 0"/>
+      <mass value="0.8259"/>
+      <inertia ixx="0.00060151" ixy="0.0000129" ixz="-0.00009069" iyy="0.00078014" iyz="0.00001444" izz="0.0006025"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/maver_x4_asm_maver_x4_link_yaw.stl"/></geometry>
+      <material name="maver_x4_asm_maver_x4_link_yaw2_color"><color rgba="0.64705882 0.61960784 0.58823529 1"/></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/maver_x4_asm_maver_x4_link_yaw.stl"/></geometry>
+    </collision>
+  </link>
+  <link name="maver_x4_asm_maver_x4_link_wheel2">
+    <inertial>
+      <origin xyz="5e-7 0.0023009 -8.8e-7" rpy="0 0 0"/>
+      <mass value="0.36495"/>
+      <inertia ixx="0.00041642" ixy="0" ixz="0" iyy="0.00075667" iyz="0" izz="0.00041642"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/maver_x4_asm_maver_x4_link_wheel.stl"/></geometry>
+      <material name="maver_x4_asm_maver_x4_link_wheel2_color"><color rgba="0.1 0.1 0.1 1"/></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/maver_x4_asm_maver_x4_link_wheel.stl"/></geometry>
+    </collision>
+  </link>
+  <link name="maver_x4_asm_maver_x4_link_yaw3">
+    <inertial>
+      <origin xyz="-0.010257 -0.0011369 -0.064839" rpy="0 0 0"/>
+      <mass value="0.8259"/>
+      <inertia ixx="0.00060151" ixy="0.0000129" ixz="-0.00009069" iyy="0.00078014" iyz="0.00001444" izz="0.0006025"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/maver_x4_asm_maver_x4_link_yaw.stl"/></geometry>
+      <material name="maver_x4_asm_maver_x4_link_yaw3_color"><color rgba="0.64705882 0.61960784 0.58823529 1"/></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/maver_x4_asm_maver_x4_link_yaw.stl"/></geometry>
+    </collision>
+  </link>
+  <link name="maver_x4_asm_maver_x4_link_wheel3">
+    <inertial>
+      <origin xyz="5e-7 0.0023009 -8.8e-7" rpy="0 0 0"/>
+      <mass value="0.36495"/>
+      <inertia ixx="0.00041642" ixy="0" ixz="0" iyy="0.00075667" iyz="0" izz="0.00041642"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/maver_x4_asm_maver_x4_link_wheel.stl"/></geometry>
+      <material name="maver_x4_asm_maver_x4_link_wheel3_color"><color rgba="0.1 0.1 0.1 1"/></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/maver_x4_asm_maver_x4_link_wheel.stl"/></geometry>
+    </collision>
+  </link>
+  <link name="maver_x4_asm_maver_x4_link_yaw4">
+    <inertial>
+      <origin xyz="-0.010257 -0.0011369 -0.064839" rpy="0 0 0"/>
+      <mass value="0.8259"/>
+      <inertia ixx="0.00060151" ixy="0.0000129" ixz="-0.00009069" iyy="0.00078014" iyz="0.00001444" izz="0.0006025"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/maver_x4_asm_maver_x4_link_yaw.stl"/></geometry>
+      <material name="maver_x4_asm_maver_x4_link_yaw4_color"><color rgba="0.64705882 0.61960784 0.58823529 1"/></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/maver_x4_asm_maver_x4_link_yaw.stl"/></geometry>
+    </collision>
+  </link>
+  <link name="maver_x4_asm_maver_x4_link_wheel4">
+    <inertial>
+      <origin xyz="5e-7 0.0023009 -8.8e-7" rpy="0 0 0"/>
+      <mass value="0.36495"/>
+      <inertia ixx="0.00041642" ixy="0" ixz="0" iyy="0.00075667" iyz="0" izz="0.00041642"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/maver_x4_asm_maver_x4_link_wheel.stl"/></geometry>
+      <material name="maver_x4_asm_maver_x4_link_wheel4_color"><color rgba="0.1 0.1 0.1 1"/></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/maver_x4_asm_maver_x4_link_wheel.stl"/></geometry>
+    </collision>
+  </link>
+  <link name="maver_x4_asm_robot_base">
+    <inertial>
+      <origin xyz="-0.03712188 0 0.00498396" rpy="0 0 0"/>
+      <mass value="1.22820216"/>
+      <inertia ixx="0.01302521" ixy="0" ixz="1.2e-7" iyy="0.01105491" iyz="0" izz="0.02405997"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/maver_x4_asm_robot_base_visual.stl"/></geometry>
+      <material name="maver_x4_asm_robot_base_color"><color rgba="0.08235294 0.08235294 0.08235294 1"/></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/maver_x4_asm_robot_base_visual.stl"/></geometry>
+    </collision>
+  </link>
+  <link name="maver_x4_asm_robot_link1">
+    <inertial>
+      <origin xyz="-0.03712188 0 -0.05701604" rpy="0 0 0"/>
+      <mass value="1.22820216"/>
+      <inertia ixx="0.01302521" ixy="0" ixz="1.2e-7" iyy="0.01105491" iyz="0" izz="0.02405997"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/maver_x4_asm_robot_link1_visual.stl"/></geometry>
+      <material name="maver_x4_asm_robot_link1_color"><color rgba="0.08235294 0.08235294 0.08235294 1"/></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/maver_x4_asm_robot_link1_visual.stl"/></geometry>
+    </collision>
+  </link>
+  <link name="maver_x4_asm_URDF_base_link">
+    <inertial>
+      <origin xyz="-0.16613237 0.00016547 0.2421699" rpy="0 0 0"/>
+      <mass value="43.19144813"/>
+      <inertia ixx="0.9827343" ixy="0.00009723" ixz="-0.03340276" iyy="0.96853995" iyz="-0.00002687" izz="0.17700405"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/maver_x4_asm_urdf_base_link.stl"/></geometry>
+      <material name="maver_x4_asm_URDF_base_link_color"><color rgba="0.79215686 0.81960784 0.93333333 1"/></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/maver_x4_asm_urdf_base_link.stl"/></geometry>
+    </collision>
+  </link>
+  <link name="maver_x4_asm_URDF_link_1">
+    <inertial>
+      <origin xyz="-0.06511779 0.00006635 -0.2479597" rpy="0 0 0"/>
+      <mass value="9.51599029"/>
+      <inertia ixx="0.26929279" ixy="0.00006376" ixz="0.00550648" iyy="0.26931256" iyz="-0.00014987" izz="0.02653023"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/maver_x4_asm_urdf_link_1.stl"/></geometry>
+      <material name="maver_x4_asm_URDF_link_1_color"><color rgba="0.79215686 0.81960784 0.93333333 1"/></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/maver_x4_asm_urdf_link_1.stl"/></geometry>
+    </collision>
+  </link>
+  <link name="maver_x4_asm_7_urdf_SLDASM_base_link">
+    <inertial>
+      <origin xyz="-0.00321383 4e-8 0.03750248" rpy="0 0 0"/>
+      <mass value="0.54734478"/>
+      <inertia ixx="0.00062055" ixy="0" ixz="-0.00001859" iyy="0.00068363" iyz="0" izz="0.00061151"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/maver_x4_asm_7_urdf_sldasm_base_link.stl"/></geometry>
+      <material name="maver_x4_asm_7_urdf_SLDASM_base_link_color"><color rgba="1 1 1 1"/></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/maver_x4_asm_7_urdf_sldasm_base_link.stl"/></geometry>
+    </collision>
+  </link>
+  <link name="maver_x4_asm_7_urdf_SLDASM_link_1">
+    <inertial>
+      <origin xyz="0.00777809 0.00006419 0.04626724" rpy="0 0 0"/>
+      <mass value="0.29457446"/>
+      <inertia ixx="0.00030682" ixy="-1.1e-7" ixz="0.00004205" iyy="0.00028949" iyz="-5.1e-7" izz="0.00026538"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/maver_x4_asm_7_urdf_sldasm_link_1.stl"/></geometry>
+      <material name="maver_x4_asm_7_urdf_SLDASM_link_1_color"><color rgba="1 1 1 1"/></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/maver_x4_asm_7_urdf_sldasm_link_1.stl"/></geometry>
+    </collision>
+  </link>
+  <link name="maver_x4_asm_7_urdf_SLDASM_link_2">
+    <inertial>
+      <origin xyz="-0.0001219 0.00011417 0.07500411" rpy="0 0 0"/>
+      <mass value="0.40410289"/>
+      <inertia ixx="0.00068162" ixy="-1e-8" ixz="-8e-8" iyy="0.00054334" iyz="-0.00000124" izz="0.00034899"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/maver_x4_asm_7_urdf_sldasm_link_2.stl"/></geometry>
+      <material name="maver_x4_asm_7_urdf_SLDASM_link_2_color"><color rgba="1 1 1 1"/></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/maver_x4_asm_7_urdf_sldasm_link_2.stl"/></geometry>
+    </collision>
+  </link>
+  <link name="maver_x4_asm_7_urdf_SLDASM_link_3">
+    <inertial>
+      <origin xyz="0.00002627 0.00003282 0.07470664" rpy="0 0 0"/>
+      <mass value="0.38898141"/>
+      <inertia ixx="0.00116524" ixy="0" ixz="7.7e-7" iyy="0.00100528" iyz="0.00000124" izz="0.00027962"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/maver_x4_asm_7_urdf_sldasm_link_3.stl"/></geometry>
+      <material name="maver_x4_asm_7_urdf_SLDASM_link_3_color"><color rgba="1 1 1 1"/></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/maver_x4_asm_7_urdf_sldasm_link_3.stl"/></geometry>
+    </collision>
+  </link>
+  <link name="maver_x4_asm_7_urdf_SLDASM_link_4">
+    <inertial>
+      <origin xyz="-0.00025892 0.00007443 0.0147825" rpy="0 0 0"/>
+      <mass value="0.26710115"/>
+      <inertia ixx="0.00024335" ixy="-8e-8" ixz="-0.00000103" iyy="0.00020189" iyz="-2e-8" izz="0.00015122"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/maver_x4_asm_7_urdf_sldasm_link_4.stl"/></geometry>
+      <material name="maver_x4_asm_7_urdf_SLDASM_link_4_color"><color rgba="1 1 1 1"/></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/maver_x4_asm_7_urdf_sldasm_link_4.stl"/></geometry>
+    </collision>
+  </link>
+  <link name="maver_x4_asm_7_urdf_SLDASM_link_5">
+    <inertial>
+      <origin xyz="-0.00003644 -0.00028155 0.07684261" rpy="0 0 0"/>
+      <mass value="0.57404104"/>
+      <inertia ixx="0.00162309" ixy="-0.00000176" ixz="-0.00000926" iyy="0.00147489" iyz="-0.00001961" izz="0.00038522"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/maver_x4_asm_7_urdf_sldasm_link_5.stl"/></geometry>
+      <material name="maver_x4_asm_7_urdf_SLDASM_link_5_color"><color rgba="1 1 1 1"/></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/maver_x4_asm_7_urdf_sldasm_link_5.stl"/></geometry>
+    </collision>
+  </link>
+  <link name="maver_x4_asm_7_urdf_SLDASM_link_6">
+    <inertial>
+      <origin xyz="0.00189458 -0.00020118 -0.00013597" rpy="0 0 0"/>
+      <mass value="0.14481036"/>
+      <inertia ixx="0.00006143" ixy="-5.4e-7" ixz="3e-8" iyy="0.00006689" iyz="1e-8" izz="0.00007129"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/maver_x4_asm_7_urdf_sldasm_link_6.stl"/></geometry>
+      <material name="maver_x4_asm_7_urdf_SLDASM_link_6_color"><color rgba="1 1 1 1"/></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/maver_x4_asm_7_urdf_sldasm_link_6.stl"/></geometry>
+    </collision>
+  </link>
+  <link name="maver_x4_asm_7_urdf_SLDASM_link_7">
+    <inertial>
+      <origin xyz="0.00056041 0 0.01560222" rpy="0 0 0"/>
+      <mass value="0.02018925"/>
+      <inertia ixx="0.00000939" ixy="0" ixz="0.00000281" iyy="0.00001104" iyz="0" izz="0.00000498"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/maver_x4_asm_7_urdf_sldasm_link_7.stl"/></geometry>
+      <material name="maver_x4_asm_7_urdf_SLDASM_link_7_color"><color rgba="1 1 1 1"/></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/maver_x4_asm_7_urdf_sldasm_link_7.stl"/></geometry>
+    </collision>
+  </link>
+  <link name="maver_x4_asm_7_urdf_SLDASM2_base_link">
+    <inertial>
+      <origin xyz="-0.00321383 4e-8 0.03750248" rpy="0 0 0"/>
+      <mass value="0.54734478"/>
+      <inertia ixx="0.00062055" ixy="0" ixz="-0.00001859" iyy="0.00068363" iyz="0" izz="0.00061151"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/maver_x4_asm_7_urdf_sldasm2_base_link.stl"/></geometry>
+      <material name="maver_x4_asm_7_urdf_SLDASM2_base_link_color"><color rgba="1 1 1 1"/></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/maver_x4_asm_7_urdf_sldasm2_base_link.stl"/></geometry>
+    </collision>
+  </link>
+  <link name="maver_x4_asm_7_urdf_SLDASM2_link_1">
+    <inertial>
+      <origin xyz="0.00777809 0.00006419 0.04626724" rpy="0 0 0"/>
+      <mass value="0.29457446"/>
+      <inertia ixx="0.00030682" ixy="-1.1e-7" ixz="0.00004205" iyy="0.00028949" iyz="-5.1e-7" izz="0.00026538"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/maver_x4_asm_7_urdf_sldasm2_link_1.stl"/></geometry>
+      <material name="maver_x4_asm_7_urdf_SLDASM2_link_1_color"><color rgba="1 1 1 1"/></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/maver_x4_asm_7_urdf_sldasm2_link_1.stl"/></geometry>
+    </collision>
+  </link>
+  <link name="maver_x4_asm_7_urdf_SLDASM2_link_2">
+    <inertial>
+      <origin xyz="-0.0001219 0.00011417 0.07500411" rpy="0 0 0"/>
+      <mass value="0.40410289"/>
+      <inertia ixx="0.00068162" ixy="-1e-8" ixz="-8e-8" iyy="0.00054334" iyz="-0.00000124" izz="0.00034899"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/maver_x4_asm_7_urdf_sldasm2_link_2.stl"/></geometry>
+      <material name="maver_x4_asm_7_urdf_SLDASM2_link_2_color"><color rgba="1 1 1 1"/></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/maver_x4_asm_7_urdf_sldasm2_link_2.stl"/></geometry>
+    </collision>
+  </link>
+  <link name="maver_x4_asm_7_urdf_SLDASM2_link_3">
+    <inertial>
+      <origin xyz="0.00002627 0.00003282 0.07470664" rpy="0 0 0"/>
+      <mass value="0.38898141"/>
+      <inertia ixx="0.00116524" ixy="0" ixz="7.7e-7" iyy="0.00100528" iyz="0.00000124" izz="0.00027962"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/maver_x4_asm_7_urdf_sldasm2_link_3.stl"/></geometry>
+      <material name="maver_x4_asm_7_urdf_SLDASM2_link_3_color"><color rgba="1 1 1 1"/></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/maver_x4_asm_7_urdf_sldasm2_link_3.stl"/></geometry>
+    </collision>
+  </link>
+  <link name="maver_x4_asm_7_urdf_SLDASM2_link_4">
+    <inertial>
+      <origin xyz="-0.00025892 0.00007443 0.0147825" rpy="0 0 0"/>
+      <mass value="0.26710115"/>
+      <inertia ixx="0.00024335" ixy="-8e-8" ixz="-0.00000103" iyy="0.00020189" iyz="-2e-8" izz="0.00015122"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/maver_x4_asm_7_urdf_sldasm2_link_4.stl"/></geometry>
+      <material name="maver_x4_asm_7_urdf_SLDASM2_link_4_color"><color rgba="1 1 1 1"/></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/maver_x4_asm_7_urdf_sldasm2_link_4.stl"/></geometry>
+    </collision>
+  </link>
+  <link name="maver_x4_asm_7_urdf_SLDASM2_link_5">
+    <inertial>
+      <origin xyz="-0.00003644 -0.00028155 0.07684261" rpy="0 0 0"/>
+      <mass value="0.57404104"/>
+      <inertia ixx="0.00162309" ixy="-0.00000176" ixz="-0.00000926" iyy="0.00147489" iyz="-0.00001961" izz="0.00038522"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/maver_x4_asm_7_urdf_sldasm2_link_5.stl"/></geometry>
+      <material name="maver_x4_asm_7_urdf_SLDASM2_link_5_color"><color rgba="1 1 1 1"/></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/maver_x4_asm_7_urdf_sldasm2_link_5.stl"/></geometry>
+    </collision>
+  </link>
+  <link name="maver_x4_asm_7_urdf_SLDASM2_link_6">
+    <inertial>
+      <origin xyz="0.00189458 -0.00020118 -0.00013597" rpy="0 0 0"/>
+      <mass value="0.14481036"/>
+      <inertia ixx="0.00006143" ixy="-5.4e-7" ixz="3e-8" iyy="0.00006689" iyz="1e-8" izz="0.00007129"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/maver_x4_asm_7_urdf_sldasm2_link_6.stl"/></geometry>
+      <material name="maver_x4_asm_7_urdf_SLDASM2_link_6_color"><color rgba="1 1 1 1"/></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/maver_x4_asm_7_urdf_sldasm2_link_6.stl"/></geometry>
+    </collision>
+  </link>
+  <link name="maver_x4_asm_7_urdf_SLDASM2_link_7">
+    <inertial>
+      <origin xyz="0.00056041 0 0.01560222" rpy="0 0 0"/>
+      <mass value="0.02018925"/>
+      <inertia ixx="0.00000939" ixy="0" ixz="0.00000281" iyy="0.00001104" iyz="0" izz="0.00000498"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/maver_x4_asm_7_urdf_sldasm2_link_7.stl"/></geometry>
+      <material name="maver_x4_asm_7_urdf_SLDASM2_link_7_color"><color rgba="1 1 1 1"/></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="meshes/maver_x4_asm_7_urdf_sldasm2_link_7.stl"/></geometry>
+    </collision>
+  </link>
+  <link name="maver_x4_asm_maver_x4_mount1">
+  </link>
+  <link name="maver_x4_asm_robot_mount1">
+  </link>
+  <link name="maver_x4_asm_URDF_mount1">
+  </link>
+  <link name="maver_x4_asm_URDF_mount2">
+  </link>
+  <!-- DAS Controller V3 grippers. Both flange faces are mounted to the existing wrist frames. -->
+  <link name="robot_base">
+    <inertial><origin xyz="-0.00473369666263078 0.000235956784116321 -0.0608228433401642" rpy="0 0 0"/><mass value="0.149856577681617"/><inertia ixx="0.00018830674510593" ixy="-6.78422090666385E-08" ixz="-1.96182253543102E-05" iyy="0.000106763841779269" iyz="1.81634805776435E-07" izz="0.000171533715802352"/></inertial>
+    <visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="meshes/das_controller_v3/base_link.STL"/></geometry><material name="robot_base_color"><color rgba="1 1 1 1"/></material></visual>
+    <collision><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="meshes/das_controller_v3/base_link.STL"/></geometry></collision>
+  </link>
+  <link name="robot_link1">
+    <inertial><origin xyz="0.0115012193603452 0.0137058307430064 -0.00861235542549358" rpy="0 0 0"/><mass value="0.02093495331508"/><inertia ixx="6.73989068995237E-06" ixy="-3.95839022559359E-06" ixz="2.01490719917717E-07" iyy="5.2567343731997E-06" iyz="3.13955918088435E-07" izz="1.15095149501083E-05"/></inertial>
+    <visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="meshes/das_controller_v3/link1.STL"/></geometry><material name="robot_link1_color"><color rgba="1 1 1 1"/></material></visual>
+    <collision><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="meshes/das_controller_v3/link1.STL"/></geometry></collision>
+  </link>
+  <link name="robot_link2">
+    <inertial><origin xyz="0.0105744231181954 -0.0122453518603421 -0.0114433659540572" rpy="0 0 0"/><mass value="0.0316631540861347"/><inertia ixx="1.05927284042654E-05" ixy="6.10689347695809E-06" ixz="1.97264023531489E-07" iyy="8.10377382222261E-06" iyz="-3.18047314667756E-07" izz="1.8172684743536E-05"/></inertial>
+    <visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="meshes/das_controller_v3/link2.STL"/></geometry><material name="robot_link2_color"><color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1"/></material></visual>
+    <collision><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="meshes/das_controller_v3/link2.STL"/></geometry></collision>
+  </link>
+  <link name="robot_link3">
+    <inertial><origin xyz="0.0281972854196237 -0.0278445505366139 -0.00938621959400143" rpy="0 0 0"/><mass value="0.0203237501202117"/><inertia ixx="8.44286661949908E-07" ixy="4.18698059122221E-07" ixz="2.15036107726852E-12" iyy="4.90959334176647E-06" iyz="2.50859869970747E-14" izz="4.88890712917801E-06"/></inertial>
+    <visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="meshes/das_controller_v3/link3.STL"/></geometry><material name="robot_link3_color"><color rgba="0.498039215686275 0.498039215686275 0.498039215686275 1"/></material></visual>
+    <collision><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="meshes/das_controller_v3/link3.STL"/></geometry></collision>
+  </link>
+  <link name="robot_link4">
+    <inertial><origin xyz="0.0281972854196394 0.0278445505366352 -0.00938623119932044" rpy="0 0 0"/><mass value="0.0203237501202117"/><inertia ixx="8.44286661950155E-07" ixy="-4.1869805912325E-07" ixz="-2.15036110100873E-12" iyy="4.90959334176622E-06" iyz="2.50859839891789E-14" izz="4.88890712917801E-06"/></inertial>
+    <visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="meshes/das_controller_v3/link4.STL"/></geometry><material name="robot_link4_color"><color rgba="0.498039215686275 0.498039215686275 0.498039215686275 1"/></material></visual>
+    <collision><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="meshes/das_controller_v3/link4.STL"/></geometry></collision>
+  </link>
+  <link name="robot_link5">
+    <inertial><origin xyz="0.0171977063474686 0.0220137207199803 -0.00935146125962831" rpy="0 0 0"/><mass value="0.00905477894016241"/><inertia ixx="1.76482236516288E-06" ixy="-1.09908418746098E-06" ixz="-5.25688530562007E-15" iyy="1.33793246136844E-06" iyz="-2.51436712790506E-17" izz="2.38165348606961E-06"/></inertial>
+    <visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="meshes/das_controller_v3/link5.STL"/></geometry><material name="robot_link5_color"><color rgba="0.796078431372549 0.823529411764706 0.937254901960784 1"/></material></visual>
+    <collision><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="meshes/das_controller_v3/link5.STL"/></geometry></collision>
+  </link>
+  <link name="robot_link6">
+    <inertial><origin xyz="0.0171977063705079 -0.0220137207558635 -0.00935146123890655" rpy="0 0 0"/><mass value="0.00905477890179401"/><inertia ixx="1.76482235928743E-06" ixy="1.09908418412139E-06" ixz="6.77470977871522E-15" iyy="1.33793245801761E-06" iyz="-2.13943787240014E-15" izz="2.38165347850042E-06"/></inertial>
+    <visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="meshes/das_controller_v3/link6.STL"/></geometry><material name="robot_link6_color"><color rgba="0.796078431372549 0.823529411764706 0.937254901960784 1"/></material></visual>
+    <collision><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="meshes/das_controller_v3/link6.STL"/></geometry></collision>
+  </link>
+  <link name="robot_link_Flange">
+    <inertial><origin xyz="0.00904036460093721 -9.03917189348789E-11 0.000393441133830726" rpy="0 0 0"/><mass value="0.0139886523044545"/><inertia ixx="3.33382539864384E-06" ixy="-2.60843892609458E-15" ixz="-2.1563018545546E-08" iyy="1.89789021267794E-06" iyz="2.55399656626754E-14" izz="1.97123755230916E-06"/></inertial>
+    <visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="meshes/das_controller_v3/link_Flange.STL"/></geometry><material name="robot_link_Flange_color"><color rgba="0.898039215686275 0.917647058823529 0.929411764705882 1"/></material></visual>
+    <collision><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="meshes/das_controller_v3/link_Flange.STL"/></geometry></collision>
+  </link>
+
+  <link name="robot2_base">
+    <inertial><origin xyz="-0.00473369666263078 0.000235956784116321 -0.0608228433401642" rpy="0 0 0"/><mass value="0.149856577681617"/><inertia ixx="0.00018830674510593" ixy="-6.78422090666385E-08" ixz="-1.96182253543102E-05" iyy="0.000106763841779269" iyz="1.81634805776435E-07" izz="0.000171533715802352"/></inertial>
+    <visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="meshes/das_controller_v3/base_link.STL"/></geometry><material name="robot2_base_color"><color rgba="1 1 1 1"/></material></visual>
+    <collision><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="meshes/das_controller_v3/base_link.STL"/></geometry></collision>
+  </link>
+  <link name="robot2_link1">
+    <inertial><origin xyz="0.0115012193603452 0.0137058307430064 -0.00861235542549358" rpy="0 0 0"/><mass value="0.02093495331508"/><inertia ixx="6.73989068995237E-06" ixy="-3.95839022559359E-06" ixz="2.01490719917717E-07" iyy="5.2567343731997E-06" iyz="3.13955918088435E-07" izz="1.15095149501083E-05"/></inertial>
+    <visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="meshes/das_controller_v3/link1.STL"/></geometry><material name="robot2_link1_color"><color rgba="1 1 1 1"/></material></visual>
+    <collision><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="meshes/das_controller_v3/link1.STL"/></geometry></collision>
+  </link>
+  <link name="robot2_link2">
+    <inertial><origin xyz="0.0105744231181954 -0.0122453518603421 -0.0114433659540572" rpy="0 0 0"/><mass value="0.0316631540861347"/><inertia ixx="1.05927284042654E-05" ixy="6.10689347695809E-06" ixz="1.97264023531489E-07" iyy="8.10377382222261E-06" iyz="-3.18047314667756E-07" izz="1.8172684743536E-05"/></inertial>
+    <visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="meshes/das_controller_v3/link2.STL"/></geometry><material name="robot2_link2_color"><color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1"/></material></visual>
+    <collision><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="meshes/das_controller_v3/link2.STL"/></geometry></collision>
+  </link>
+  <link name="robot2_link3">
+    <inertial><origin xyz="0.0281972854196237 -0.0278445505366139 -0.00938621959400143" rpy="0 0 0"/><mass value="0.0203237501202117"/><inertia ixx="8.44286661949908E-07" ixy="4.18698059122221E-07" ixz="2.15036107726852E-12" iyy="4.90959334176647E-06" iyz="2.50859869970747E-14" izz="4.88890712917801E-06"/></inertial>
+    <visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="meshes/das_controller_v3/link3.STL"/></geometry><material name="robot2_link3_color"><color rgba="0.498039215686275 0.498039215686275 0.498039215686275 1"/></material></visual>
+    <collision><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="meshes/das_controller_v3/link3.STL"/></geometry></collision>
+  </link>
+  <link name="robot2_link4">
+    <inertial><origin xyz="0.0281972854196394 0.0278445505366352 -0.00938623119932044" rpy="0 0 0"/><mass value="0.0203237501202117"/><inertia ixx="8.44286661950155E-07" ixy="-4.1869805912325E-07" ixz="-2.15036110100873E-12" iyy="4.90959334176622E-06" iyz="2.50859839891789E-14" izz="4.88890712917801E-06"/></inertial>
+    <visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="meshes/das_controller_v3/link4.STL"/></geometry><material name="robot2_link4_color"><color rgba="0.498039215686275 0.498039215686275 0.498039215686275 1"/></material></visual>
+    <collision><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="meshes/das_controller_v3/link4.STL"/></geometry></collision>
+  </link>
+  <link name="robot2_link5">
+    <inertial><origin xyz="0.0171977063474686 0.0220137207199803 -0.00935146125962831" rpy="0 0 0"/><mass value="0.00905477894016241"/><inertia ixx="1.76482236516288E-06" ixy="-1.09908418746098E-06" ixz="-5.25688530562007E-15" iyy="1.33793246136844E-06" iyz="-2.51436712790506E-17" izz="2.38165348606961E-06"/></inertial>
+    <visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="meshes/das_controller_v3/link5.STL"/></geometry><material name="robot2_link5_color"><color rgba="0.796078431372549 0.823529411764706 0.937254901960784 1"/></material></visual>
+    <collision><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="meshes/das_controller_v3/link5.STL"/></geometry></collision>
+  </link>
+  <link name="robot2_link6">
+    <inertial><origin xyz="0.0171977063705079 -0.0220137207558635 -0.00935146123890655" rpy="0 0 0"/><mass value="0.00905477890179401"/><inertia ixx="1.76482235928743E-06" ixy="1.09908418412139E-06" ixz="6.77470977871522E-15" iyy="1.33793245801761E-06" iyz="-2.13943787240014E-15" izz="2.38165347850042E-06"/></inertial>
+    <visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="meshes/das_controller_v3/link6.STL"/></geometry><material name="robot2_link6_color"><color rgba="0.796078431372549 0.823529411764706 0.937254901960784 1"/></material></visual>
+    <collision><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="meshes/das_controller_v3/link6.STL"/></geometry></collision>
+  </link>
+  <link name="robot2_link_Flange">
+    <inertial><origin xyz="0.00904036460093721 -9.03917189348789E-11 0.000393441133830726" rpy="0 0 0"/><mass value="0.0139886523044545"/><inertia ixx="3.33382539864384E-06" ixy="-2.60843892609458E-15" ixz="-2.1563018545546E-08" iyy="1.89789021267794E-06" iyz="2.55399656626754E-14" izz="1.97123755230916E-06"/></inertial>
+    <visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="meshes/das_controller_v3/link_Flange.STL"/></geometry><material name="robot2_link_Flange_color"><color rgba="0.898039215686275 0.917647058823529 0.929411764705882 1"/></material></visual>
+    <collision><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="meshes/das_controller_v3/link_Flange.STL"/></geometry></collision>
+  </link>
+  <link name="maver_x4_asm_mount1">
+  </link>
+  <link name="maver_x4_asm_mount2">
+  </link>
+  <joint name="maver_x4_asm_maver_x4_joint_yaw1" type="fixed">
+    <parent link="maver_x4_asm_maver_x4_base_link"/>
+    <child link="maver_x4_asm_maver_x4_link_yaw1"/>
+    <origin xyz="0.212 0.14 0.1625" rpy="0 0 0"/>
+  </joint>
+  <joint name="maver_x4_asm_maver_x4_joint_wheel1" type="fixed">
+    <parent link="maver_x4_asm_maver_x4_link_yaw1"/>
+    <child link="maver_x4_asm_maver_x4_link_wheel1"/>
+    <origin xyz="-0.02 0 -0.1" rpy="0 0 0"/>
+  </joint>
+  <joint name="maver_x4_asm_maver_x4_joint_yaw2" type="fixed">
+    <parent link="maver_x4_asm_maver_x4_base_link"/>
+    <child link="maver_x4_asm_maver_x4_link_yaw2"/>
+    <origin xyz="-0.212 0.14 0.1625" rpy="0 0 0"/>
+  </joint>
+  <joint name="maver_x4_asm_maver_x4_joint_wheel2" type="fixed">
+    <parent link="maver_x4_asm_maver_x4_link_yaw2"/>
+    <child link="maver_x4_asm_maver_x4_link_wheel2"/>
+    <origin xyz="-0.02 0 -0.1" rpy="0 0 0"/>
+  </joint>
+  <joint name="maver_x4_asm_maver_x4_joint_yaw3" type="fixed">
+    <parent link="maver_x4_asm_maver_x4_base_link"/>
+    <child link="maver_x4_asm_maver_x4_link_yaw3"/>
+    <origin xyz="-0.212 -0.14 0.1625" rpy="0 0 0"/>
+  </joint>
+  <joint name="maver_x4_asm_maver_x4_joint_wheel3" type="fixed">
+    <parent link="maver_x4_asm_maver_x4_link_yaw3"/>
+    <child link="maver_x4_asm_maver_x4_link_wheel3"/>
+    <origin xyz="-0.02 0 -0.1" rpy="0 0 0"/>
+  </joint>
+  <joint name="maver_x4_asm_maver_x4_joint_yaw4" type="fixed">
+    <parent link="maver_x4_asm_maver_x4_base_link"/>
+    <child link="maver_x4_asm_maver_x4_link_yaw4"/>
+    <origin xyz="0.212 -0.14 0.1625" rpy="0 0 0"/>
+  </joint>
+  <joint name="maver_x4_asm_maver_x4_joint_wheel4" type="fixed">
+    <parent link="maver_x4_asm_maver_x4_link_yaw4"/>
+    <child link="maver_x4_asm_maver_x4_link_wheel4"/>
+    <origin xyz="-0.02 0 -0.1" rpy="0 0 0"/>
+  </joint>
+  <joint name="maver_x4_asm_robot_joint1" type="fixed">
+    <parent link="maver_x4_asm_robot_base"/>
+    <child link="maver_x4_asm_robot_link1"/>
+    <origin xyz="0 0 0.062" rpy="0 0 0"/>
+  </joint>
+  <joint name="maver_x4_asm_URDF_joint_1" type="prismatic">
+    <parent link="maver_x4_asm_URDF_base_link"/>
+    <child link="maver_x4_asm_URDF_link_1"/>
+    <origin xyz="-0.0381 0 0.625" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="0" upper="0.435" effort="10" velocity="0.24"/>
+  </joint>
+  <joint name="maver_x4_asm_7_urdf_SLDASM_joint_1" type="revolute">
+    <parent link="maver_x4_asm_7_urdf_SLDASM_base_link"/>
+    <child link="maver_x4_asm_7_urdf_SLDASM_link_1"/>
+    <origin xyz="0 0 0.0853" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-2.7925" upper="2.7925" effort="52.0" velocity="6.0"/>
+  </joint>
+  <joint name="maver_x4_asm_7_urdf_SLDASM_joint_2" type="revolute">
+    <parent link="maver_x4_asm_7_urdf_SLDASM_link_1"/>
+    <child link="maver_x4_asm_7_urdf_SLDASM_link_2"/>
+    <origin xyz="0.015 0 0.06" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-1.2217" upper="2.1817" effort="52.0" velocity="6.0"/>
+  </joint>
+  <joint name="maver_x4_asm_7_urdf_SLDASM_joint_3" type="revolute">
+    <parent link="maver_x4_asm_7_urdf_SLDASM_link_2"/>
+    <child link="maver_x4_asm_7_urdf_SLDASM_link_3"/>
+    <origin xyz="0 0 0.124" rpy="0 0 0"/>
+    <axis xyz="0 0 -1"/>
+    <limit lower="-2.7925" upper="2.7925" effort="28.0" velocity="6.0"/>
+  </joint>
+  <joint name="maver_x4_asm_7_urdf_SLDASM_joint_4" type="revolute">
+    <parent link="maver_x4_asm_7_urdf_SLDASM_link_3"/>
+    <child link="maver_x4_asm_7_urdf_SLDASM_link_4"/>
+    <origin xyz="0 0 0.1715" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-1.0472" upper="2.1817" effort="28.0" velocity="6.0"/>
+  </joint>
+  <joint name="maver_x4_asm_7_urdf_SLDASM_joint_5" type="revolute">
+    <parent link="maver_x4_asm_7_urdf_SLDASM_link_4"/>
+    <child link="maver_x4_asm_7_urdf_SLDASM_link_5"/>
+    <origin xyz="0 0 0.059" rpy="0 0 0"/>
+    <axis xyz="0 0 -1"/>
+    <limit lower="-2.7925" upper="2.7925" effort="6.8" velocity="12.56"/>
+  </joint>
+  <joint name="maver_x4_asm_7_urdf_SLDASM_joint_6" type="revolute">
+    <parent link="maver_x4_asm_7_urdf_SLDASM_link_5"/>
+    <child link="maver_x4_asm_7_urdf_SLDASM_link_6"/>
+    <origin xyz="0 0 0.2055" rpy="0 0 0"/>
+    <axis xyz="0 -1 0"/>
+    <limit lower="-0.87266" upper="0.87266" effort="6.8" velocity="12.56"/>
+  </joint>
+  <joint name="maver_x4_asm_7_urdf_SLDASM_joint_7" type="revolute">
+    <parent link="maver_x4_asm_7_urdf_SLDASM_link_6"/>
+    <child link="maver_x4_asm_7_urdf_SLDASM_link_7"/>
+    <origin xyz="-0.0235 0 0" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <limit lower="-0.7854" upper="0.7854" effort="6.8" velocity="12.56"/>
+  </joint>
+  <joint name="maver_x4_asm_7_urdf_SLDASM2_joint_1" type="revolute">
+    <parent link="maver_x4_asm_7_urdf_SLDASM2_base_link"/>
+    <child link="maver_x4_asm_7_urdf_SLDASM2_link_1"/>
+    <origin xyz="0 0 0.0853" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-2.7925" upper="2.7925" effort="52.0" velocity="6.0"/>
+  </joint>
+  <joint name="maver_x4_asm_7_urdf_SLDASM2_joint_2" type="revolute">
+    <parent link="maver_x4_asm_7_urdf_SLDASM2_link_1"/>
+    <child link="maver_x4_asm_7_urdf_SLDASM2_link_2"/>
+    <origin xyz="0.015 0 0.06" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-1.2217" upper="2.1817" effort="52.0" velocity="6.0"/>
+  </joint>
+  <joint name="maver_x4_asm_7_urdf_SLDASM2_joint_3" type="revolute">
+    <parent link="maver_x4_asm_7_urdf_SLDASM2_link_2"/>
+    <child link="maver_x4_asm_7_urdf_SLDASM2_link_3"/>
+    <origin xyz="0 0 0.124" rpy="0 0 0"/>
+    <axis xyz="0 0 -1"/>
+    <limit lower="-2.7925" upper="2.7925" effort="28.0" velocity="6.0"/>
+  </joint>
+  <joint name="maver_x4_asm_7_urdf_SLDASM2_joint_4" type="revolute">
+    <parent link="maver_x4_asm_7_urdf_SLDASM2_link_3"/>
+    <child link="maver_x4_asm_7_urdf_SLDASM2_link_4"/>
+    <origin xyz="0 0 0.1715" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-1.0472" upper="2.1817" effort="28.0" velocity="6.0"/>
+  </joint>
+  <joint name="maver_x4_asm_7_urdf_SLDASM2_joint_5" type="revolute">
+    <parent link="maver_x4_asm_7_urdf_SLDASM2_link_4"/>
+    <child link="maver_x4_asm_7_urdf_SLDASM2_link_5"/>
+    <origin xyz="0 0 0.059" rpy="0 0 0"/>
+    <axis xyz="0 0 -1"/>
+    <limit lower="-2.7925" upper="2.7925" effort="6.8" velocity="12.56"/>
+  </joint>
+  <joint name="maver_x4_asm_7_urdf_SLDASM2_joint_6" type="revolute">
+    <parent link="maver_x4_asm_7_urdf_SLDASM2_link_5"/>
+    <child link="maver_x4_asm_7_urdf_SLDASM2_link_6"/>
+    <origin xyz="0 0 0.2055" rpy="0 0 0"/>
+    <axis xyz="0 -1 0"/>
+    <limit lower="-0.87266" upper="0.87266" effort="6.8" velocity="12.56"/>
+  </joint>
+  <joint name="maver_x4_asm_7_urdf_SLDASM2_joint_7" type="revolute">
+    <parent link="maver_x4_asm_7_urdf_SLDASM2_link_6"/>
+    <child link="maver_x4_asm_7_urdf_SLDASM2_link_7"/>
+    <origin xyz="-0.0235 0 0" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <limit lower="-0.7854" upper="0.7854" effort="6.8" velocity="12.56"/>
+  </joint>
+  <joint name="maver_x4_asm_maver_x4_mount1_frame" type="fixed">
+    <parent link="maver_x4_asm_maver_x4_base_link"/>
+    <child link="maver_x4_asm_maver_x4_mount1"/>
+    <origin xyz="0.035 0 0.23750001" rpy="0 0 0"/>
+  </joint>
+  <joint name="maver_x4_asm_robot_mount1_frame" type="fixed">
+    <parent link="maver_x4_asm_robot_base"/>
+    <child link="maver_x4_asm_robot_mount1"/>
+    <origin xyz="0 0 0.01" rpy="0 0 0"/>
+  </joint>
+  <joint name="maver_x4_asm_URDF_mount1_frame" type="fixed">
+    <parent link="maver_x4_asm_URDF_link_1"/>
+    <child link="maver_x4_asm_URDF_mount1"/>
+    <origin xyz="-0.0455 0.1 0.0163896" rpy="-1.57079633 0 0"/>
+  </joint>
+  <joint name="maver_x4_asm_URDF_mount2_frame" type="fixed">
+    <parent link="maver_x4_asm_URDF_link_1"/>
+    <child link="maver_x4_asm_URDF_mount2"/>
+    <origin xyz="-0.0455 -0.1 0.0163896" rpy="1.57079633 0 0"/>
+  </joint>
+  <joint name="maver_x4_asm_attach_robot_root" type="fixed">
+    <parent link="maver_x4_asm_maver_x4_mount1"/>
+    <child link="maver_x4_asm_robot_base"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+  <joint name="maver_x4_asm_attach_URDF_root" type="fixed">
+    <parent link="maver_x4_asm_robot_mount1"/>
+    <child link="maver_x4_asm_URDF_base_link"/>
+    <origin xyz="0.118 0 0" rpy="0 0 0"/>
+  </joint>
+  <joint name="maver_x4_asm_attach_7_urdf_SLDASM_root" type="fixed">
+    <parent link="maver_x4_asm_URDF_mount1"/>
+    <child link="maver_x4_asm_7_urdf_SLDASM_base_link"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+  <joint name="maver_x4_asm_attach_7_urdf_SLDASM2_root" type="fixed">
+    <parent link="maver_x4_asm_URDF_mount2"/>
+    <child link="maver_x4_asm_7_urdf_SLDASM2_base_link"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+  <joint name="robot_joint1" type="revolute">
+    <parent link="robot_base"/><child link="robot_link1"/>
+    <origin xyz="0.022786 0.042961 -0.059233" rpy="0 -0.2618 0"/><axis xyz="0 0 -1"/>
+    <limit lower="0" upper="0.925" effort="100" velocity="1"/>
+  </joint>
+  <joint name="robot_joint3" type="revolute">
+    <parent link="robot_link1"/><child link="robot_link3"/>
+    <origin xyz="0.043182 0.04579 0" rpy="0 0 0"/><axis xyz="0 0 -1"/>
+    <limit lower="-0.925" upper="0" effort="100" velocity="1"/><mimic joint="robot_joint1" multiplier="-1" offset="0"/>
+  </joint>
+  <joint name="robot_joint2" type="revolute">
+    <parent link="robot_base"/><child link="robot_link2"/>
+    <origin xyz="0.022786 -0.043039 -0.059233" rpy="0 -0.2618 0"/><axis xyz="0 0 -1"/>
+    <limit lower="-0.925" upper="0" effort="100" velocity="1"/><mimic joint="robot_joint1" multiplier="-1" offset="0"/>
+  </joint>
+  <joint name="robot_joint4" type="revolute">
+    <parent link="robot_link2"/><child link="robot_link4"/>
+    <origin xyz="0.043182 -0.04579 0" rpy="0 0 0"/><axis xyz="0 0 -1"/>
+    <limit lower="0" upper="0.925" effort="100" velocity="1"/><mimic joint="robot_joint2" multiplier="-1" offset="0"/>
+  </joint>
+  <joint name="robot_joint5" type="revolute">
+    <parent link="robot_base"/><child link="robot_link5"/>
+    <origin xyz="0.037516 0.019478 -0.055286" rpy="0 -0.2618 0"/><axis xyz="0 0 -1"/>
+    <limit lower="0" upper="0.925" effort="100" velocity="1"/><mimic joint="robot_joint1" multiplier="1" offset="0"/>
+  </joint>
+  <joint name="robot_joint6" type="revolute">
+    <parent link="robot_base"/><child link="robot_link6"/>
+    <origin xyz="0.037516 -0.019556 -0.055286" rpy="0 -0.2618 0"/><axis xyz="0 0 -1"/>
+    <limit lower="-0.925" upper="0" effort="100" velocity="1"/><mimic joint="robot_joint2" multiplier="1" offset="0"/>
+  </joint>
+  <joint name="robot_joint_Flange" type="fixed">
+    <parent link="robot_base"/><child link="robot_link_Flange"/>
+    <origin xyz="-0.067889 -3.8794E-05 -0.097619" rpy="0 -0.2618 0"/>
+  </joint>
+
+  <joint name="robot2_joint1" type="revolute">
+    <parent link="robot2_base"/><child link="robot2_link1"/>
+    <origin xyz="0.022786 0.042961 -0.059233" rpy="0 -0.2618 0"/><axis xyz="0 0 -1"/>
+    <limit lower="0" upper="0.925" effort="100" velocity="1"/>
+  </joint>
+  <joint name="robot2_joint3" type="revolute">
+    <parent link="robot2_link1"/><child link="robot2_link3"/>
+    <origin xyz="0.043182 0.04579 0" rpy="0 0 0"/><axis xyz="0 0 -1"/>
+    <limit lower="-0.925" upper="0" effort="100" velocity="1"/><mimic joint="robot2_joint1" multiplier="-1" offset="0"/>
+  </joint>
+  <joint name="robot2_joint2" type="revolute">
+    <parent link="robot2_base"/><child link="robot2_link2"/>
+    <origin xyz="0.022786 -0.043039 -0.059233" rpy="0 -0.2618 0"/><axis xyz="0 0 -1"/>
+    <limit lower="-0.925" upper="0" effort="100" velocity="1"/><mimic joint="robot2_joint1" multiplier="-1" offset="0"/>
+  </joint>
+  <joint name="robot2_joint4" type="revolute">
+    <parent link="robot2_link2"/><child link="robot2_link4"/>
+    <origin xyz="0.043182 -0.04579 0" rpy="0 0 0"/><axis xyz="0 0 -1"/>
+    <limit lower="0" upper="0.925" effort="100" velocity="1"/><mimic joint="robot2_joint2" multiplier="-1" offset="0"/>
+  </joint>
+  <joint name="robot2_joint5" type="revolute">
+    <parent link="robot2_base"/><child link="robot2_link5"/>
+    <origin xyz="0.037516 0.019478 -0.055286" rpy="0 -0.2618 0"/><axis xyz="0 0 -1"/>
+    <limit lower="0" upper="0.925" effort="100" velocity="1"/><mimic joint="robot2_joint1" multiplier="1" offset="0"/>
+  </joint>
+  <joint name="robot2_joint6" type="revolute">
+    <parent link="robot2_base"/><child link="robot2_link6"/>
+    <origin xyz="0.037516 -0.019556 -0.055286" rpy="0 -0.2618 0"/><axis xyz="0 0 -1"/>
+    <limit lower="-0.925" upper="0" effort="100" velocity="1"/><mimic joint="robot2_joint2" multiplier="1" offset="0"/>
+  </joint>
+  <joint name="robot2_joint_Flange" type="fixed">
+    <parent link="robot2_base"/><child link="robot2_link_Flange"/>
+    <origin xyz="-0.067889 -3.8794E-05 -0.097619" rpy="0 -0.2618 0"/>
+  </joint>
+  <joint name="maver_x4_asm_mount1_frame" type="fixed">
+    <parent link="maver_x4_asm_7_urdf_SLDASM_link_7"/>
+    <child link="maver_x4_asm_mount1"/>
+    <origin xyz="0.02348191 0 0.042" rpy="0 0 0"/>
+  </joint>
+  <joint name="maver_x4_asm_mount2_frame" type="fixed">
+    <parent link="maver_x4_asm_7_urdf_SLDASM2_link_7"/>
+    <child link="maver_x4_asm_mount2"/>
+    <origin xyz="0.02348191 0 0.042" rpy="0 0 0"/>
+  </joint>
+  <joint name="attach_robot_root" type="fixed">
+    <parent link="maver_x4_asm_mount1"/>
+    <child link="robot_base"/>
+    <!-- Inverse V3 flange transform, then +X(tool) to +Z(wrist). -->
+    <origin xyz="-0.0767216914704 0.000038794 0.0908414417539" rpy="0 -1.30899633 0"/>
+  </joint>
+  <joint name="attach_robot2_root" type="fixed">
+    <parent link="maver_x4_asm_mount2"/>
+    <child link="robot2_base"/>
+    <origin xyz="-0.0767216914704 0.000038794 0.0908414417539" rpy="0 -1.30899633 0"/>
+  </joint>
+</robot>

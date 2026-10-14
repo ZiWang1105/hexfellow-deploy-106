@@ -1,0 +1,19 @@
+schema_version: 3
+envelope_id: x7-mit-manufacturer-v1
+profile_id: x7-mit-manufacturer-v1
+profile_sha256: d9ed20ab0cef3188eda303d93318b45255b43b8c5b4e9f15576c7c88dfa5cdf5
+geometry_payload_sha256: 0f73d28614fe4e979e7edc683e8e7b3d7815f0f3ddeec1a8f00c06e3dab18ee9
+reference_dt_s: 0.02
+maximum_relative_step_scale: 4.7
+stopping_distance:
+  method: activation_only_jerk_v1
+  worst_case_m: 0.0
+  applied_m: 0.0
+guard_distance_m: 0.002
+provenance:
+  status: candidate_pending_physical_stopping_validation
+  review: docs/hexfellow_collision_v10.md
+  note: Manufacturer-speed candidate. Acceleration, jerk and clearance unchanged;
+    pending physical validation.
+clearance_basis: reviewed_proxy_v1
+reviewed_proxy_clearance_m: 0.01

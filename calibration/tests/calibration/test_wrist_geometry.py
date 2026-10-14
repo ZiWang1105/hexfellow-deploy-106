@@ -11,7 +11,7 @@ import pytest
 ROOT=Path(__file__).resolve().parents[2]
 sys.path.insert(0,str(ROOT/'tools/camera'))
 from wrist_calibration_geometry import LocalWristChecker, load_plan, DEFAULT_PLAN, geometry_payload_hash
-from policy_sim.control.robot import CONTROLLED_JOINTS, BASE_FRAME
+from hexfellow_deploy.robotics.control.robot import CONTROLLED_JOINTS, BASE_FRAME
 
 
 def checker():

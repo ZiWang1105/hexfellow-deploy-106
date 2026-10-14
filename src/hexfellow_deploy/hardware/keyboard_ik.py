@@ -52,8 +52,8 @@ class KeyboardIKPlanner:
     def __init__(self, preset, arm_speed):
         load_umi()
         # Preserve UMI's qpsolvers/Pinocchio import order.
-        from policy_sim.control.ik_core import PinkIKCore
-        from policy_sim.control.motion_profile import load_motion_profile, controller_config_for_profile
+        from hexfellow_deploy.robotics.control.ik_core import PinkIKCore
+        from hexfellow_deploy.robotics.control.motion_profile import load_motion_profile, controller_config_for_profile
         from pink.tasks import FrameTask
         import pinocchio as pin
         self.pin, self.preset = pin, preset
@@ -113,7 +113,7 @@ class KeyboardIKPlanner:
             return self._plan_from_seed(seed, cancelled, seed_name='model_home')
 
     def _plan_from_seed(self, seed_joints, cancelled, *, seed_name):
-        from policy_sim.hardware.hexfellow_control_console import MotionCancelled
+        from hexfellow_deploy.robotics.hardware.hexfellow_control_console import MotionCancelled
         if cancelled():
             raise MotionCancelled('Keyboard released during IK planning')
         q = np.empty(self.core.model.nq)

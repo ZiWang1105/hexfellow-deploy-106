@@ -131,7 +131,7 @@ def test_mid_audit_network_loss_is_not_reported_as_latency_failure(code):
 
 
 def test_full_default_delegates_to_deployment_retreat_and_default(monkeypatch):
-    from policy_sim.hardware import session
+    from hexfellow_deploy.robotics.hardware import session
     c,s,state=controller();calls=[]
     monkeypatch.setattr(session.SessionController,'command',lambda self,name,payload,state,now:calls.append((name,payload)))
     c.command('default',dict(full_default=True,origin=state.q.tolist()),state,0)
@@ -140,7 +140,7 @@ def test_full_default_delegates_to_deployment_retreat_and_default(monkeypatch):
 
 
 def test_full_default_rejects_changed_origin_before_delegating(monkeypatch):
-    from policy_sim.hardware import session
+    from hexfellow_deploy.robotics.hardware import session
     c,s,state=controller();calls=[]
     monkeypatch.setattr(session.SessionController,'command',lambda *args:calls.append(args))
     origin=state.q.copy();origin[-1]=.02

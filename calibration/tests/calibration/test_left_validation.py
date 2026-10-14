@@ -12,7 +12,7 @@ from calibration_runtime import MeasuredPoseArrival,capture_position_check
 from calibration_outcomes import InvalidCalibrationPose
 from calibration_sequence import Sequence
 from left_hand_validation import LeftLocalChecker,load_plan
-from policy_sim.hardware.x7 import HardwareSafetyError
+from hexfellow_deploy.robotics.hardware.x7 import HardwareSafetyError
 
 
 def test_left_capture_uses_five_degrees_without_relaxing_other_arm_or_lift():

@@ -15,10 +15,10 @@ fit annotations and held-out errors preserved. See
 [the latest wrist results](docs/wrist_parameters_20261008.md). The historical
 2026-10-06 snapshot is retained unchanged.
 
-Run commands from `third_party/hexfellow-deploy`:
+Run commands from your `hexfellow-deploy` checkout:
 
 ```bash
-cd ~/projects/agentic-mobile-manipulator/third_party/hexfellow-deploy
+cd /path/to/hexfellow-deploy
 ./scripts/calibrate_camera.sh list
 ./scripts/calibrate_camera.sh right run --mode sim --auto
 ```
@@ -34,7 +34,7 @@ click to begin movement and the existing read-only startup audit.
 | D405 left wrist | 230422271628 | color optical → left flange | Fixed 32° mount, dedicated 30-pose simulated route, automatic collection/fit/guarded return |
 
 The source is split into `tools/camera/` (commands and web UI),
-`src/policy_sim/calibration/` (detectors and solvers), `config/camera/` (board,
+`../src/hexfellow_deploy/robotics/calibration/` (detectors and solvers), `config/camera/` (board,
 camera registry, candidate transforms and pose plans), `tests/calibration/`,
 `docs/` and compact `artifacts/reference/` inputs. `assets_local/right_fixed33/`
 contains the right camera mount used for the route study. `SOURCE_MANIFEST.json`
@@ -49,7 +49,7 @@ that route. See the right-wrist guide for current evidence and limitations.
 
 ## Commands
 
-All commands below run from `third_party/hexfellow-deploy`. Use `list` to see
+All commands below run from the repository root. Use `list` to see
 each camera's available actions and `<camera> <action> --help` for its options.
 `--dry-run` prints the selected command without opening a device. The source
 launcher uses the existing workspace environment; no conda activation is needed.
@@ -191,27 +191,25 @@ The lift height is part of FK; a camera-to-base matrix copied from one capture
 is not constant while the lift or wrist moves. The two wrist serials and parent
 frames are checked before fitting through the unified launcher.
 
-Control/model imports come from the current sibling `../UMI_Hardware` submodule;
-only the calibration package is overlaid here. Relative `urdf`, `assets`, and
-`config/control` symlinks reuse its robot assets. No controller copy or old IK
-implementation is introduced. The calibration runner uses the existing UMI
-session API as a dedicated operator tool. It is separate from the production DA
-policy/actuation processes: close those and other device viewers before starting
-it. Production sensor selection remains separate; the right policy view already
-uses its independently configured candidate, while this export does not enable
-left geometry or switch either runtime candidate.
+Control, model and calibration imports come from this repository's owned
+`src/hexfellow_deploy/robotics` package. Relative `urdf`, `assets`, and
+`config/control` symlinks resolve to `robot_resources` in this same repository.
+No external solver checkout or Python namespace overlay is used. The calibration
+runner uses the owned session API as a dedicated operator tool. It is separate
+from production policy/actuation processes; close those and other device viewers
+before starting it. Calibration output does not automatically switch production
+sensor selection.
 
-The launcher uses the parent workspace `.venv`. It reads the current mapping
-and research-release paths from `../../configs/local/desktop.yaml`; explicit
-`--robot-config` and `--research-release` override them. Public mappings under
-`config/hardware/` are historical test fixtures, not live defaults. Robot/source
-bindings and startup guards are preserved, not automatically regenerated.
+The launcher uses this repository's `.venv`. It reads mapping and research-release
+paths from `configs/local/desktop.yaml`; explicit `--robot-config` and
+`--research-release` override them. Public mappings under `calibration/config/hardware/`
+are historical test fixtures, not live defaults. Robot/source bindings and startup
+guards are preserved, not automatically regenerated.
 Camera workers use their existing SDK environments, without copying proprietary
 SDK binaries. Optional location overrides:
 
 ```text
 HEXFELLOW_CALIBRATION_PYTHON     controller/solver interpreter
-HEXFELLOW_CALIBRATION_UMI        shared UMI_Hardware checkout
 HEXFELLOW_CALIBRATION_DESKTOP    desktop configuration YAML
 HEXFELLOW_ZED_PYTHON             interpreter with pyzed.sl
 HEXFELLOW_REALSENSE_PYTHON       interpreter with pyrealsense2
@@ -226,13 +224,13 @@ videos, trace histories and raw device-health dumps are not duplicated.
 
 ```bash
 OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 MUJOCO_GL=egl \
-  ../../.venv/bin/python -m pytest -q calibration/tests/calibration -c calibration/pytest.ini
-../../.venv/bin/python calibration/tools/camera/refit_coarse_reference.py \
+  .venv/bin/python -m pytest -q calibration/tests/calibration -c calibration/pytest.ini
+.venv/bin/python calibration/tools/camera/refit_coarse_reference.py \
   --output calibration/runs/head-coarse.json
-../../.venv/bin/python calibration/tools/camera/fit_landmark_extrinsics.py \
+.venv/bin/python calibration/tools/camera/fit_landmark_extrinsics.py \
   --points calibration/artifacts/reference/camera-calibration/landmark-points.json \
   --refine-all --output calibration/runs/head-pnp.json
-../../.venv/bin/python calibration/tools/camera/verify_wrist_ground_truth.py \
+.venv/bin/python calibration/tools/camera/verify_wrist_ground_truth.py \
   calibration/runs/<simulated-session> --output calibration/runs/wrist-ground-truth.json
 ```
 

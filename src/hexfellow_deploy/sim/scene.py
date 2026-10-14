@@ -106,11 +106,11 @@ def build_scene(config: SceneConfig, output: str | Path) -> BuiltScene:
     urdf = source / robot["urdf"]
     _check_hash(urdf, robot["urdf_sha256"])
     if source != UMI_ROOT:
-        raise ValueError("Robot source must be the third_party/UMI_Hardware submodule")
+        raise ValueError("Robot source must be the deployment-owned resource directory")
     load_umi()
-    from policy_sim.control import robot as robot_source
-    if Path(robot_source.__file__).resolve() != source / "src/policy_sim/control/robot.py":
-        raise ValueError("A different policy_sim checkout is already imported")
+    from hexfellow_deploy.robotics.control import robot as robot_source
+    if Path(robot_source.__file__).resolve() != Path(__file__).resolve().parents[1] / "robotics/control/robot.py":
+        raise ValueError("A different hexfellow_deploy.robotics checkout is already imported")
 
     bounds = robot["base_bounds"]
     base_config = robot_source.PlanarBaseConfig(

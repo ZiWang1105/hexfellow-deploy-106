@@ -1,23 +1,23 @@
-> Current ownership (2026-10-11): robot modules and assets now belong to this repository. See [dependency direction](ARCHITECTURE_OWNERSHIP.md) and [standalone setup](STANDALONE.md). Historical parent-import descriptions below are superseded.
+> Current ownership (2026-10-14): controller, device transport, process/topic runtime and robot resources are owned by this repository. Neither former solver/runtime repository is required. See [ownership](ARCHITECTURE_OWNERSHIP.md) and [standalone setup](STANDALONE.md).
 
-# Shared DA control and actuation
+# Shared control and actuation
 
 ```mermaid
 flowchart LR
-  A[Agent process / Astra] -->|paired TCPs, binary grippers, navigation| R[(DA request topic)]
+  A[Agent process / Astra] -->|paired TCPs, binary grippers, navigation| R[(request topic)]
   R --> C[Control process / PinkIK and reference owner]
-  C -->|one pending MIT frame| F[(DA frame topic)]
+  C -->|one pending MIT frame| F[(frame topic)]
   F --> B[Backend process / common stream contract]
   B --> S[MuJoCo MIT motor and SDK servo models]
   B --> H[Native SDK adapter / MIT packets]
-  S --> O[(DA physical feedback topic)]
+  S --> O[(physical feedback topic)]
   H --> O
   O --> C
   B -->|explicit receipt| C
   S --> V[Private render state]
   V --> K[Simulation camera process]
   H --> L[Physical camera process]
-  K --> I[(DA atomic RGB-D topic)]
+  K --> I[(atomic RGB-D topic)]
   L --> I
   I --> A
   C --> D[Read-only dashboard]
@@ -28,7 +28,7 @@ flowchart LR
 ## Shared implementation
 
 Both backends run the same `ControlComponent`, `BackendComponent`,
-`StreamContract`, `ReferenceOwner`, paired-pose executor and upstream
+`StreamContract`, `ReferenceOwner`, paired-pose executor and owned
 `PinkIKCore`. The shared deployment YAML supplies robot geometry, MIT gains and
 effort assumptions, per-joint velocity limits, lift speed and calibration.
 Control receives robot-only metadata, never the scene configuration or root pose.
@@ -58,11 +58,12 @@ groups, not just one arm. A receipt means command publication/application at the
 reported scope, not physical target arrival. A last pending frame can be canceled
 at shutdown; generated and accepted counts are deliberately reported separately.
 
-## DA scheduling and shared memory
+## Scheduling and shared memory
 
-The implementation reuses `DAManager`, `DABaseInterface`,
-`ArrayCommWrapper`/`DASHMComm`, Hydra construction and DA's YAML topic registry.
-Topics are named shared-memory arrays with DA semaphores and coherent latest-value
+The owned `hexfellow_deploy.runtime` package provides `DAManager`, `DABaseInterface`,
+`ArrayCommWrapper`/`DASHMComm`, Hydra construction and the YAML topic registry.
+The historical class prefixes retain source lineage; there is no external package import.
+Topics are named shared-memory arrays with semaphores and coherent latest-value
 snapshots. There is no unbounded command FIFO. RGB-D uses one binary publication
 with the corresponding physical encoder metadata.
 

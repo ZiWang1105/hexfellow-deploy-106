@@ -4,9 +4,9 @@ from pathlib import Path
 from types import SimpleNamespace
 import numpy as np
 import yaml
-from policy_sim.hardware.whole_body import RobotMapping
-from policy_sim.control.mit_command import MitCommand
-from policy_sim.control.robot import LEFT_ARM_JOINTS,RIGHT_ARM_JOINTS
+from hexfellow_deploy.robotics.hardware.whole_body import RobotMapping
+from hexfellow_deploy.robotics.control.mit_command import MitCommand
+from hexfellow_deploy.robotics.control.robot import LEFT_ARM_JOINTS,RIGHT_ARM_JOINTS
 
 ROOT=Path(__file__).resolve().parents[2]
 OLD=ROOT/'config/hardware/hexfellow_gp80_highspeed_j357.json'

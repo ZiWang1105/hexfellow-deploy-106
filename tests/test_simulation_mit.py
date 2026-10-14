@@ -11,7 +11,7 @@ WORKSPACE = activate(Path(__file__).resolve().parents[1])
 from hexfellow_deploy.simulation import SimulationPlant
 from hexfellow_deploy.control.umi_ik import load_umi
 load_umi()
-from policy_sim.control.mit_command import MitCommand, mit_torque
+from hexfellow_deploy.robotics.control.mit_command import MitCommand, mit_torque
 
 
 def test_saved_plant_xml_preserves_mit_torque_and_lift_actuator_configuration(tmp_path):

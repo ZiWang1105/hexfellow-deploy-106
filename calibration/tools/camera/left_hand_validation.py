@@ -147,7 +147,7 @@ class LeftPathChecker(PathChecker):
 
 
 if __name__=='__main__':
-    sys.path.insert(0,str(ROOT/'src'))
+    sys.path.insert(0,str(ROOT.parent/'src'))
     checker=LeftLocalChecker(Path(sys.argv[1]),Path(sys.argv[2]))
     print('READY '+str(checker.study.scene),flush=True)
     for line in sys.stdin:

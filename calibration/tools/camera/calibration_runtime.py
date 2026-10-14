@@ -7,9 +7,9 @@ from collections import deque
 import queue
 import time
 import numpy as np
-from policy_sim.hardware import session
-from policy_sim.control.target_replay import tcp_poses
-from policy_sim.hardware.x7 import HardwareSafetyError
+from hexfellow_deploy.robotics.hardware import session
+from hexfellow_deploy.robotics.control.target_replay import tcp_poses
+from hexfellow_deploy.robotics.hardware.x7 import HardwareSafetyError
 from calibration_outcomes import InvalidCalibrationPose
 
 # Capture acceptance only: unrelated to controller/publisher torque and motion limits.
@@ -411,7 +411,7 @@ class CalibrationSource:
         if mapping.feedback_policy != 'strict' or mapping.latency_policy != 'hold-resume':
             raise HardwareSafetyError('Calibration requires strict feedback with guarded hold/resume')
         if self.live:
-            from policy_sim.hardware.verification import software_binding
+            from hexfellow_deploy.robotics.hardware.verification import software_binding
             if self.binding is None or software_binding(mapping) != self.binding:
                 raise HardwareSafetyError('Deployment changed since preflight')
 

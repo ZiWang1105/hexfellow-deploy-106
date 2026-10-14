@@ -21,10 +21,10 @@ import pinocchio as pin
 from scipy.spatial.transform import Rotation
 
 ROOT = Path(__file__).resolve().parents[2]
-sys.path.insert(0, str(ROOT/'src'))
-from policy_sim.calibration.handeye import inverse, transform
-from policy_sim.calibration.wrist_handeye import solve
-from policy_sim.control.robot import BASE_FRAME, BASE_JOINTS, CONTROLLED_JOINTS
+sys.path.insert(0, str(ROOT.parent/'src'))
+from hexfellow_deploy.robotics.calibration.handeye import inverse, transform
+from hexfellow_deploy.robotics.calibration.wrist_handeye import solve
+from hexfellow_deploy.robotics.control.robot import BASE_FRAME, BASE_JOINTS, CONTROLLED_JOINTS
 from solve_wrist_calibration import fit_dataset
 
 
@@ -148,8 +148,8 @@ def evaluate(directory, *, minimum_poses=30):
                        'held_out_corner_rms_px': 1.},
         'inputs_sha256': {str(path): hashlib.sha256(dataset_bytes if path == dataset_file else path.read_bytes()).hexdigest()
                           for path in (dataset_file, plan_file, scene_file, urdf_file,
-                                       ROOT/'src/policy_sim/calibration/wrist_handeye.py',
-                                       ROOT/'src/policy_sim/calibration/handeye.py', Path(__file__))},
+                                       ROOT.parent / 'src/hexfellow_deploy/robotics/calibration/wrist_handeye.py',
+                                       ROOT.parent / 'src/hexfellow_deploy/robotics/calibration/handeye.py', Path(__file__))},
     }
     for label, fit in (('exact', exact), ('rendered', rendered)):
         fit['camera_ground_truth_error'] = error(fit['T_wrist_from_camera'], x_truth)

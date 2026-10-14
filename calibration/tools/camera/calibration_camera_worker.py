@@ -8,8 +8,8 @@ import time
 import cv2
 import numpy as np
 ROOT=Path(__file__).resolve().parents[2]
-sys.path.insert(0,str(ROOT/'src'))
-from policy_sim.calibration.charuco import detect
+sys.path.insert(0,str(ROOT.parent/'src'))
+from hexfellow_deploy.robotics.calibration.charuco import detect
 
 
 def atomic(path, value):
@@ -49,7 +49,7 @@ def main():
                 board_transform=fit['T_hand_from_board'])
         else:
             import mujoco
-            from policy_sim.control.robot import CONTROLLED_JOINTS
+            from hexfellow_deploy.robotics.control.robot import CONTROLLED_JOINTS
             m=mujoco.MjModel.from_xml_path(str(a.scene));d=mujoco.MjData(m)
             indices=[m.joint(n).qposadr[0] for n in CONTROLLED_JOINTS]
             renderer=mujoco.Renderer(m,height=1160,width=2000)

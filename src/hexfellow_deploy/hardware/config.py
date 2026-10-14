@@ -76,7 +76,7 @@ def load_deployment(path, *, execute=False, mock=False, research=False):
             raise ValueError(f'Invalid hardware limit: {name}')
     controller = yaml.safe_load(Path(data['controller']).read_text())
     load_umi()
-    from policy_sim.control.motion_profile import load_motion_profile
+    from hexfellow_deploy.robotics.control.motion_profile import load_motion_profile
     profile = load_motion_profile(controller['motion_profile'])
     hardware_bounds = arm_velocity_bounds(arm_setting, profile)
     controller_bounds = arm_velocity_bounds(controller['arm_velocity_limit_rad_s'], profile)

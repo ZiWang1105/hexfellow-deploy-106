@@ -1,0 +1,167 @@
+{
+  "schema_version": 1,
+  "feedback_policy": "strict",
+  "latency_policy": "hold-resume",
+  "interface": "eth0",
+  "arm_controller_ip": "fe80::1",
+  "theta_controller_ip": "fe80::2",
+  "base_controller_ip": "fe80::3",
+  "lift_position_mode": "range_max_minus_sdk",
+  "lift_direction_evidence": "Model convention only; verify lift direction and zero on the local robot.",
+  "lift_zero_offset_m": 0,
+  "base_sdk_to_model_yaw_rad": 0,
+  "arms": {
+    "left": {
+      "sdk_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "sdk_joint_names": [
+        "joint_1",
+        "joint_2",
+        "joint_3",
+        "joint_4",
+        "joint_5",
+        "joint_6",
+        "joint_7"
+      ],
+      "signs": [
+        1,
+        1,
+        -1,
+        1,
+        -1,
+        1,
+        1
+      ],
+      "offsets_rad": [
+        1.5707963267948966,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "right": {
+      "sdk_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "sdk_joint_names": [
+        "joint_1",
+        "joint_2",
+        "joint_3",
+        "joint_4",
+        "joint_5",
+        "joint_6",
+        "joint_7"
+      ],
+      "signs": [
+        1,
+        1,
+        -1,
+        1,
+        -1,
+        1,
+        1
+      ],
+      "offsets_rad": [
+        -1.5707963267948966,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "fixed_gripper_positions": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "hardware_effort_limits_nm": [
+    20.0,
+    20.0,
+    9.0,
+    9.0,
+    3.0,
+    3.0,
+    3.0,
+    20.0,
+    20.0,
+    9.0,
+    9.0,
+    3.0,
+    3.0,
+    3.0
+  ],
+  "hardware_base_velocity_limits": [
+    2.0,
+    2.0,
+    2.0
+  ],
+  "review": {
+    "mapping_checked": true,
+    "same_tool_empty": true,
+    "mit_units_gains_checked": true,
+    "drive_protection_checked": false,
+    "disconnect_stop_checked": false,
+    "theta_stop_checked": true,
+    "base_axes_checked": true,
+    "sdk_startup_checked": false,
+    "initialization_stop_checked": false,
+    "evidence": "Example mapping for simulation and review; historical operator evidence is not transferable to another robot."
+  },
+  "commissioning": {
+    "sequence": "hardware-session-v1",
+    "allowed_live_stages": [
+      "whole-body"
+    ],
+    "motion_profile": "x7-mit-highspeed-v10-base-drag-v1",
+    "profile_sha256": "42c1d08d937b9a43a5d8e36a5451e318d17c0d76d317b713f7975a036b00bc95"
+  },
+  "hardware_capabilities": {
+    "path": "config/hardware/hexfellow_capabilities.yaml",
+    "sha256": "f5672189e982a1d29a4e46316a438e83205b2391b09a7dc5429b22cb688985bf"
+  },
+  "hardware_base_linear_speed_limit_m_s": 2.0,
+  "hardware_lift_velocity_limit_m_s": 0.24,
+  "hardware_limits_source": "Manufacturer ratings relayed 2026-09-12: arm continuous effort, not verified firmware clamp. Maver-X4 official data center checked 2026-09-19: 2 m/s resultant translation, 2 rad/s yaw. Use the smaller documented linear bound; preserve operator-relayed 2.9 m/s separately.",
+  "base_documented_limits": {
+    "url": "https://docs.hexfellow.com/hex-base/maver-x4-data-center_cn/",
+    "checked_on": "2026-09-19",
+    "official_linear_speed_m_s": 2.0,
+    "official_angular_speed_rad_s": 2.0,
+    "operator_relayed_linear_speed_m_s": 2.9,
+    "selection": "minimum; documentary ratings, not measured firmware limits"
+  },
+  "default_pose": {
+    "path": "hexfellow_default_pose_j35.yaml",
+    "sha256": "4482f73cb065ad1bc7887e98563738c3d20371b2036c0202e2232c36287dec66"
+  },
+  "read_only_candidate": true,
+  "configuration_note": "Simulation/read-only template. Copy to config/local, configure your devices, review calibration and commission before live use."
+}

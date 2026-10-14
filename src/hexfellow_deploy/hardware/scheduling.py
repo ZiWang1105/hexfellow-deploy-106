@@ -9,7 +9,7 @@ from ..robot.upstream import load_umi
 def control_memory():
     """Avoid cyclic-GC pauses across control/SDK threads; restore on exit."""
     load_umi()
-    from policy_sim.hardware.realtime import sdk_thread_fairness
+    from hexfellow_deploy.robotics.hardware.realtime import sdk_thread_fairness
     enabled = gc.isenabled()
     gc.collect()  # Caller must enter BEFORE acquiring physical devices.
     gc.disable()
@@ -25,7 +25,7 @@ def control_memory():
 def control_scheduling(role):
     """Select separate compute/gateway cores using upstream's scoped helpers."""
     load_umi()
-    from policy_sim.hardware.realtime import control_cpu, control_priority
+    from hexfellow_deploy.robotics.hardware.realtime import control_cpu, control_priority
     import os
     selector = runtime_cpu if os.environ.get("MOBILE_RUNTIME_CPU_POOLS") else control_cpu
     with selector(role) as cpu, control_priority() as priority:

@@ -12,13 +12,13 @@ import sys
 import xml.etree.ElementTree as ET
 
 ROOT=Path(__file__).resolve().parents[2]
-sys.path.insert(0,str(ROOT/'src'))
+sys.path.insert(0,str(ROOT.parent/'src'))
 import cv2
 import mujoco
 import numpy as np
 from scipy.spatial.transform import Rotation
-from policy_sim.control.robot import PLANAR_CONTROLLED_COORDINATES
-from policy_sim.calibration.handeye import validate
+from hexfellow_deploy.robotics.control.robot import PLANAR_CONTROLLED_COORDINATES
+from hexfellow_deploy.robotics.calibration.handeye import validate
 
 MOUNT='maver_x4_asm_URDF_link_1'
 CAMERA='extrinsic_validation'

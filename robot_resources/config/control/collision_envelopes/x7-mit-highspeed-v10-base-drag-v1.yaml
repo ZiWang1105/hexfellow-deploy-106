@@ -1,0 +1,19 @@
+schema_version: 3
+envelope_id: x7-mit-highspeed-v10-base-drag-v1
+profile_id: x7-mit-highspeed-v10-base-drag-v1
+profile_sha256: 42c1d08d937b9a43a5d8e36a5451e318d17c0d76d317b713f7975a036b00bc95
+geometry_payload_sha256: 0f73d28614fe4e979e7edc683e8e7b3d7815f0f3ddeec1a8f00c06e3dab18ee9
+reference_dt_s: 0.02
+maximum_relative_step_scale: 4.7
+stopping_distance:
+  method: activation_only_jerk_v1
+  worst_case_m: 0.0
+  applied_m: 0.0
+guard_distance_m: 0.002
+provenance:
+  status: candidate_pending_physical_stopping_validation
+  review: docs/hexfellow_collision_v10.md
+  note: Derived base-workspace candidate; geometry and motion limits unchanged. Physical
+    stopping remains unvalidated.
+clearance_basis: reviewed_proxy_v1
+reviewed_proxy_clearance_m: 0.01

@@ -22,7 +22,6 @@ def code_identity(root):
 def collect(workspace):
     root = Path(__file__).resolve().parents[2]
     return dict(repositories={name:code_identity(path) for name,path in (
-        ('hexfellow-deploy',root), ('deploy-anything',root/'third_party/deploy-anything'),
-        ('workspace',Path(workspace)), ('UMI_Hardware',root/'third_party/UMI_Hardware'))},
+        ('hexfellow-deploy',root), ('workspace',Path(workspace)))},
         packages={name:importlib.metadata.version(name) for name in
-                  ('numpy','mujoco','hydra-core','posix_ipc','deploy-anything')})
+                  ('numpy','mujoco','hydra-core','posix_ipc','hexfellow-deploy')})

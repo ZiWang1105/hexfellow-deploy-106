@@ -1,0 +1,126 @@
+[
+  {
+    "angle_deg": 32,
+    "shelf_midplane_mm": 65.0,
+    "base_size_mm": [
+      65,
+      60,
+      6
+    ],
+    "base_grid_mm": [
+      25,
+      25
+    ],
+    "rib_centres_y_mm": [
+      -6.5,
+      6.5
+    ],
+    "rib_thickness_mm": 4,
+    "extents_mm": [
+      65.0,
+      60.0,
+      84.76651763916016
+    ],
+    "watertight": true,
+    "single_solid": true,
+    "screw_clearance_checks_passed": true,
+    "camera_mount_xyz_m": [
+      0.0015897577926996147,
+      0,
+      0.06754414428846928
+    ]
+  },
+  {
+    "angle_deg": 40,
+    "shelf_midplane_mm": 65.0,
+    "base_size_mm": [
+      65,
+      60,
+      6
+    ],
+    "base_grid_mm": [
+      25,
+      25
+    ],
+    "rib_centres_y_mm": [
+      -6.5,
+      6.5
+    ],
+    "rib_thickness_mm": 4,
+    "extents_mm": [
+      65.0,
+      60.0,
+      88.18872833251953
+    ],
+    "watertight": true,
+    "single_solid": true,
+    "screw_clearance_checks_passed": true,
+    "camera_mount_xyz_m": [
+      0.0019283628290596177,
+      0,
+      0.06729813332935694
+    ]
+  },
+  {
+    "angle_deg": 42,
+    "shelf_midplane_mm": 65.0,
+    "base_size_mm": [
+      65,
+      60,
+      6
+    ],
+    "base_grid_mm": [
+      25,
+      25
+    ],
+    "rib_centres_y_mm": [
+      -6.5,
+      6.5
+    ],
+    "rib_thickness_mm": 4,
+    "extents_mm": [
+      65.0,
+      60.0,
+      88.97618103027344
+    ],
+    "watertight": true,
+    "single_solid": true,
+    "screw_clearance_checks_passed": true,
+    "camera_mount_xyz_m": [
+      0.0020073918190765747,
+      0,
+      0.06722943447643219
+    ]
+  },
+  {
+    "angle_deg": 55,
+    "shelf_midplane_mm": 65.0,
+    "base_size_mm": [
+      65,
+      60,
+      6
+    ],
+    "base_grid_mm": [
+      25,
+      25
+    ],
+    "rib_centres_y_mm": [
+      -6.5,
+      6.5
+    ],
+    "rib_thickness_mm": 4,
+    "extents_mm": [
+      65.0,
+      60.0,
+      102.13185119628906
+    ],
+    "watertight": true,
+    "single_solid": true,
+    "screw_clearance_checks_passed": true,
+    "camera_mount_xyz_m": [
+      0.0024574561328669755,
+      0,
+      0.06672072930905314
+    ]
+  }
+]

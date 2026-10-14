@@ -12,7 +12,7 @@ import math
 from pathlib import Path
 import sys
 import xml.etree.ElementTree as ET
-ROOT=Path(__file__).resolve().parents[2];sys.path.insert(0,str(ROOT/'src'))
+ROOT=Path(__file__).resolve().parents[2];sys.path.insert(0,str(ROOT.parent/'src'))
 import cv2
 import mujoco
 import numpy as np
@@ -20,9 +20,9 @@ import pinocchio as pin
 from PIL import Image, ImageDraw, ImageFont
 from scipy.optimize import least_squares
 from scipy.spatial.transform import Rotation
-from policy_sim.control.robot import CONTROLLED_JOINTS, RIGHT_ARM_JOINTS
-from policy_sim.control.robot_model import load_robot_model
-from policy_sim.scene.builder import build_tabletop_scene
+from hexfellow_deploy.robotics.control.robot import CONTROLLED_JOINTS, RIGHT_ARM_JOINTS
+from hexfellow_deploy.robotics.control.robot_model import load_robot_model
+from hexfellow_deploy.robotics.scene.builder import build_tabletop_scene
 
 FONTPATH='/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf'
 font=ImageFont.truetype(FONTPATH,20);small=ImageFont.truetype(FONTPATH,16)

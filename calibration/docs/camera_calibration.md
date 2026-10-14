@@ -192,7 +192,7 @@ $X=T_{mount\_from\_camera}$ and $Y=T_{hand\_from\_board}$ from:
 
 $$X C_i = G_i Y.$$
 
-[handeye.py](../src/policy_sim/calibration/handeye.py) uses OpenCV Park initialization
+[handeye.py](../../src/hexfellow_deploy/robotics/calibration/handeye.py) uses OpenCV Park initialization
 and joint preconditioned gradient descent with pseudo-Huber loss and Armijo line
 search. Translation/rotation residual scales are 2 mm and 0.01 rad. Rotations stay
 in SO(3): this is a 12-degree-of-freedom fit, not unconstrained matrix entries.

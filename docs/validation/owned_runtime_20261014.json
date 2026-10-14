@@ -1,0 +1,112 @@
+{
+  "date": "2026-10-14",
+  "scope": "Remove external robot and process-runtime dependencies",
+  "isolated_checkout": "/tmp/hexfellow-owned-20261014",
+  "install_script": "scripts/setup_sim.sh",
+  "forbidden_imports": [
+    "mobile_manipulator",
+    "policy_sim",
+    "deploy_anything",
+    "_policy_sim_collision_kernel"
+  ],
+  "fresh_deployment_tests": {
+    "passed": 414,
+    "skipped": 1
+  },
+  "fresh_calibration_tests": {
+    "passed": 221,
+    "skipped": 4
+  },
+  "final_boundary_tests": {
+    "passed": 6,
+    "note": "Includes three previously exercised tests and three additional checks."
+  },
+  "solver_regressions": {
+    "passed": 114,
+    "included_in_deployment_suite": true
+  },
+  "viewer": {
+    "report": {
+      "status": "viewer_closed",
+      "fault": null,
+      "backend": "simulation",
+      "policy_calls": 0,
+      "cost_usd": 0,
+      "request_interrupted": false,
+      "ticks": 743,
+      "termination": {
+        "reason": "viewer_closed"
+      },
+      "native_qualified": false,
+      "report_errors": [],
+      "shutdown_reports_present": true,
+      "evaluation": {
+        "retained_pickup": false,
+        "robot_static_contact_steps": 0,
+        "final_hold_verified": false,
+        "evaluated_body": null,
+        "sampling": "every_physics_step",
+        "timestep_s": 0.002,
+        "samples": 6848,
+        "complete": true,
+        "first_robot_static_contact": null,
+        "accepted": false
+      }
+    },
+    "target_requests": 7,
+    "hold_requests": 2
+  },
+  "headless": {
+    "status": "completed_budget",
+    "fault": null,
+    "backend": "simulation",
+    "policy_calls": 0,
+    "cost_usd": 0,
+    "request_interrupted": false,
+    "ticks": 404,
+    "termination": {
+      "reason": "completed_budget",
+      "budget_reason": "duration_s",
+      "elapsed_wall_s": 8.047392551030498,
+      "settle_s": 0.0,
+      "final_hold_requested_s": null,
+      "stationary_since_s": null
+    },
+    "native_qualified": false,
+    "report_errors": [],
+    "shutdown_reports_present": true,
+    "evaluation": {
+      "retained_pickup": false,
+      "robot_static_contact_steps": 0,
+      "final_hold_verified": false,
+      "evaluated_body": null,
+      "sampling": "every_physics_step",
+      "timestep_s": 0.002,
+      "samples": 3915,
+      "complete": true,
+      "first_robot_static_contact": null,
+      "accepted": false
+    }
+  },
+  "resources": "Source byte hashes checked against OWNED_RUNTIME_PROVENANCE.json",
+  "parent_baseline": {
+    "failures": 3,
+    "tests": "tests/test_contract.py",
+    "note": "The same three navigation assertions fail in the previous independent stack."
+  },
+  "hardware_motion": false,
+  "live_api_calls": 0,
+  "hardware_bindings_regenerated": false,
+  "artifacts": "runs/owned_runtime_20261014 (ignored local evidence)",
+  "parent_integration": {
+    "passed": 168,
+    "seconds": 140.38,
+    "scope": "Keyboard, native packet/authorization, simulator gateway and shared IK tests; removed packages blocked."
+  },
+  "parent_full_initial": {
+    "passed": 888,
+    "failed": 22,
+    "errors": 16,
+    "note": "Migration fixture/path errors were corrected and covered by the 168 passing integration tests; three navigation assertions also fail on the previous stack."
+  }
+}

@@ -17,8 +17,8 @@ from ..robot.upstream import load_umi
 from ..control.velocity_limits import arm_velocity_bounds
 
 load_umi()
-from policy_sim.hardware.whole_body import RobotMapping
-from policy_sim.hardware.state_mailbox import MailboxBusy
+from hexfellow_deploy.robotics.hardware.whole_body import RobotMapping
+from hexfellow_deploy.robotics.hardware.state_mailbox import MailboxBusy
 
 
 @dataclass(frozen=True)
@@ -38,7 +38,7 @@ class DeploymentMapping(RobotMapping):
 
 def native_configuration(config, *, execute=False):
     load_umi()
-    from policy_sim.hardware.session import load_configuration
+    from hexfellow_deploy.robotics.hardware.session import load_configuration
     research = config.get('umi_research', False)
     if research and not config.get('research_release'):
         raise ValueError('UMI research execution requires the existing research_release binding')
@@ -49,12 +49,12 @@ def native_configuration(config, *, execute=False):
     if config['network'] != {k: mapping.data[k] for k in config['network']}:
         raise ValueError('Network differs from the native UMI mapping; select the actual local mapping')
     settings = yaml.safe_load(open(config['controller']))
-    from policy_sim.control.motion_profile import load_motion_profile
+    from hexfellow_deploy.robotics.control.motion_profile import load_motion_profile
     selected = load_motion_profile(settings['motion_profile'])
     if selected.sha256 != profile.sha256:
         raise ValueError('Hardware IK profile must match the reviewed UMI mapping profile exactly')
     if research:
-        from policy_sim.hardware.highspeed_trial import require_research_release
+        from hexfellow_deploy.robotics.hardware.highspeed_trial import require_research_release
         require_research_release(profile, config['research_release'], config['mapping'])
     mapping = DeploymentMapping(**{f.name: getattr(mapping, f.name) for f in fields(mapping)},
         deployment_arm_speed=settings['arm_velocity_limit_rad_s'],
@@ -85,7 +85,7 @@ def feedback_key(measured):
 
 
 def native_packet(bundle, state):
-    from policy_sim.hardware.whole_body import WholeBodyCommand
+    from hexfellow_deploy.robotics.hardware.whole_body import WholeBodyCommand
     # Only the SDK publisher sees base odometry. IK solves exactly 15 encoders.
     source = np.r_[state.q[:3], bundle['source_q']]
     positions = np.r_[state.q[:3], bundle['positions']]
@@ -98,8 +98,8 @@ def native_packet(bundle, state):
 def publisher_main(config, execute, states, commands, statuses, activate, stop, endpoint_factory=None,
                    configuration_factory=None):
     load_umi()
-    from policy_sim.hardware.gateway import GatewaySupervisor, GatewayShutdownRequested
-    from policy_sim.hardware.whole_body import CommandGuard
+    from hexfellow_deploy.robotics.hardware.gateway import GatewaySupervisor, GatewayShutdownRequested
+    from hexfellow_deploy.robotics.hardware.whole_body import CommandGuard
     from .umi_endpoint import MobileEndpoint
     endpoint, supervisor = None, None
     phase, fault_reported = 'startup', False
@@ -285,7 +285,7 @@ def publisher_main(config, execute, states, commands, statuses, activate, stop, 
 class UMIHardwareDevice:
     def __init__(self, config, ik, *, execute=False):
         load_umi()
-        from policy_sim.hardware.state_mailbox import LatestStateMailbox, CommandMailbox
+        from hexfellow_deploy.robotics.hardware.state_mailbox import LatestStateMailbox, CommandMailbox
         self.config, self.ik, self.execute = config, ik, execute
         self.ctx = mp.get_context('spawn')
         self.states, self.commands = LatestStateMailbox(self.ctx), CommandMailbox(self.ctx)
@@ -412,8 +412,8 @@ class UMIHardwareDevice:
         if not np.array_equal(positions, [command['joint_positions'][n] for n in JOINTS]):
             raise RuntimeError('Actuator command differs from native UMI result')
         created = result.mit.timestamp_s
-        from policy_sim.hardware.whole_body import COMMAND_TTL
-        from policy_sim.control.feedback_policy import received_deadline
+        from hexfellow_deploy.robotics.hardware.whole_body import COMMAND_TTL
+        from hexfellow_deploy.robotics.control.feedback_policy import received_deadline
         expires = min(created + COMMAND_TTL, received_deadline(received, 'strict'))
         if not created <= time.monotonic() < expires:
             raise RuntimeError('Native MIT result expired before submission')

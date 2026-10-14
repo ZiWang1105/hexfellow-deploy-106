@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "model_id": "maver-x4-gp80-fixed-v1",
+  "urdf": "urdf/maver_x4_gp80.urdf",
+  "tcp_offset_m": [
+    0.02348191,
+    0.0,
+    0.189
+  ],
+  "auxiliary_joints": [],
+  "fixed_auxiliary_positions": [],
+  "assets": {
+    "urdf/maver_x4_gp80.urdf": "3f6e5ee6fcf9fa7030d63cb05e96c2ccdd21b9bae1d37c8b4ef95f3ed4c756dd",
+    "urdf/meshes/hexfellow_gp80/base_link.STL": "786fdf1c124672368f5c7fef9ff0b54ce3bac188b30c2c584db7e9707cd8c6c2"
+  },
+  "provenance": {
+    "source_url": "https://docs.hexfellow.com/hex-hand/assets/xpkg_urdf_gp80.zip",
+    "archive_sha256": "ed9ae784d066442758e3a5ec876cd75b4bbece93fdf7eb4416faa54c55c1463b",
+    "tool_mass_kg": 0.53,
+    "mount": "Identity at each existing wrist flange, no adapter or additional load.",
+    "tcp": "Closed fingertip centre, 147 mm along the manufacturer flange +Z; not physically calibrated.",
+    "gripper": "Manufacturer single rigid closed link; no opening commands or measured aperture."
+  }
+}

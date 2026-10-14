@@ -1,0 +1,137 @@
+{
+  "schema_version": 1,
+  "interface": "eth0",
+  "arm_controller_ip": "fe80::1",
+  "theta_controller_ip": "fe80::2",
+  "base_controller_ip": "fe80::3",
+  "arms": {
+    "left": {
+      "sdk_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "sdk_joint_names": [
+        "joint_1",
+        "joint_2",
+        "joint_3",
+        "joint_4",
+        "joint_5",
+        "joint_6",
+        "joint_7"
+      ],
+      "signs": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "offsets_rad": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "right": {
+      "sdk_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "sdk_joint_names": [
+        "joint_1",
+        "joint_2",
+        "joint_3",
+        "joint_4",
+        "joint_5",
+        "joint_6",
+        "joint_7"
+      ],
+      "signs": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "offsets_rad": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "lift_zero_offset_m": 0,
+  "base_sdk_to_model_yaw_rad": 0,
+  "fixed_gripper_positions": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "hardware_effort_limits_nm": [
+    20.0,
+    20.0,
+    9.0,
+    9.0,
+    3.0,
+    3.0,
+    3.0,
+    20.0,
+    20.0,
+    9.0,
+    9.0,
+    3.0,
+    3.0,
+    3.0
+  ],
+  "hardware_base_velocity_limits": null,
+  "review": {
+    "mapping_checked": false,
+    "same_tool_empty": false,
+    "mit_units_gains_checked": false,
+    "drive_protection_checked": false,
+    "disconnect_stop_checked": false,
+    "theta_stop_checked": false,
+    "base_axes_checked": false,
+    "evidence": "Example mapping for simulation and review; historical operator evidence is not transferable to another robot."
+  },
+  "hardware_capabilities": {
+    "path": "config/hardware/hexfellow_capabilities.yaml",
+    "sha256": "f5672189e982a1d29a4e46316a438e83205b2391b09a7dc5429b22cb688985bf"
+  },
+  "hardware_base_linear_speed_limit_m_s": 2.9,
+  "hardware_lift_velocity_limit_m_s": 0.24,
+  "hardware_limits_source": "Manufacturer ratings relayed 2026-09-12; effort field is continuous operating reject bound, not verified firmware clamp. Base angular rating remains unknown.",
+  "read_only_candidate": true,
+  "configuration_note": "Simulation/read-only template. Copy to config/local, configure your devices, review calibration and commission before live use."
+}

@@ -312,24 +312,23 @@ def main():
     if a.mode=='live' and (a.auto or (not a.confirm_onsite_ready and not a.probe)):
         p.error('live requires --confirm-onsite-ready and never allows --auto')
     os.environ['HEXFELLOW_CALIBRATION_UMI']=str(a.deployment.resolve())
-    sys.path.insert(0,str(ROOT/'src'))
-    import policy_sim
-    policy_sim.__path__.insert(0,str(ROOT/'src/policy_sim'))
+    sys.path.insert(0,str(ROOT.parent/'src'))
+    import hexfellow_deploy.robotics
     import numpy as np
     import pinocchio as pin
-    from policy_sim.hardware import session
+    from hexfellow_deploy.robotics.hardware import session
     if a.mode=='live' and a.scheduling=='responsive':
-        from policy_sim.hardware.responsive_scheduling import configure
+        from hexfellow_deploy.robotics.hardware.responsive_scheduling import configure
         scheduling=configure()
         print('Calibration CPU pools: '+json.dumps(scheduling),flush=True)
-    from policy_sim.hardware.verification import software_binding,device_binding
-    from policy_sim.hardware.quest_trial import audit_passed
-    from policy_sim.hardware.verify import timing_probe
-    from policy_sim.hardware.highspeed_trial import require_research_release
-    from policy_sim.control.motion_profile import controller_config_for_profile
-    from policy_sim.hardware.mit_ik_replay import SimulationPlant
-    from policy_sim.calibration.handeye import solve,summarize
-    from policy_sim.control.robot import CONTROLLED_JOINTS,BASE_FRAME
+    from hexfellow_deploy.robotics.hardware.verification import software_binding,device_binding
+    from hexfellow_deploy.robotics.hardware.quest_trial import audit_passed
+    from hexfellow_deploy.robotics.hardware.verify import timing_probe
+    from hexfellow_deploy.robotics.hardware.highspeed_trial import require_research_release
+    from hexfellow_deploy.robotics.control.motion_profile import controller_config_for_profile
+    from hexfellow_deploy.robotics.hardware.mit_ik_replay import SimulationPlant
+    from hexfellow_deploy.robotics.calibration.handeye import solve,summarize
+    from hexfellow_deploy.robotics.control.robot import CONTROLLED_JOINTS,BASE_FRAME
     from calibration_runtime import CalibrationSource,stationary_pair,capture_position_check
     from calibration_path import PathChecker
     from calibration_outcomes import InvalidCalibrationPose
@@ -392,7 +391,7 @@ def main():
             for f in [Path(__file__),ROOT/'tools/camera/wrist_calibration_geometry.py',
                       ROOT/'tools/camera/convex_clearance.py',
                       ROOT/'tools/camera/wrist_camera_worker.py',ROOT/'tools/camera/solve_wrist_calibration.py',
-                      ROOT/'src/policy_sim/calibration/wrist_handeye.py']},indent=2))
+                      ROOT.parent / 'src/hexfellow_deploy/robotics/calibration/wrist_handeye.py']},indent=2))
     robot_lock=None;camproc=None;server=None;log=None
     source_error=None
     stop_workers=threading.Event()

@@ -18,8 +18,8 @@ ROOT = Path(__file__).resolve().parents[2]
 def worker(plan_path, output):
     import time
     import numpy as np
-    sys.path.insert(0, str(ROOT/'src'))
-    from policy_sim.hardware import session
+    sys.path.insert(0, str(ROOT.parent/'src'))
+    from hexfellow_deploy.robotics.hardware import session
     from calibration_runtime import CalibrationSource
     plan = json.loads(plan_path.read_text())
     parser = argparse.ArgumentParser()

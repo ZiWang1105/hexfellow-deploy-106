@@ -5,7 +5,7 @@ precision. Version and exact integer checks reject incompatible layouts.
 """
 import time
 import numpy as np
-from deploy_anything.components.comms.wrappers import ArrayCommWrapper
+from hexfellow_deploy.runtime.components.comms.wrappers import ArrayCommWrapper
 from hexfellow_deploy.robot.joints import JOINTS, LEFT, RIGHT
 from hexfellow_deploy.interfaces.contract import validate_sensor_packet
 

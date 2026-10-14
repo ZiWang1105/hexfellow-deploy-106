@@ -14,7 +14,7 @@ def build(config_path, overrides=(), *, prompt=None, camera=True, execute_author
     from hydra.utils import instantiate
     from omegaconf import OmegaConf
     from .manager import InterfaceManager
-    from deploy_anything.utils.config_utils import build_topic_registry, register_topic_resolver
+    from hexfellow_deploy.runtime.utils.config_utils import build_topic_registry, register_topic_resolver
     config = OmegaConf.merge(OmegaConf.load(config_path), OmegaConf.from_dotlist(list(overrides)))
     if interactive_ik:
         if config.interface.backend.backend != 'simulation' or config.interface.backend.execute or prompt:

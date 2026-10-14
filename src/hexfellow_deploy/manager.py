@@ -6,7 +6,7 @@ from pathlib import Path
 import queue
 import time
 import traceback
-from deploy_anything.manager import DAManager
+from hexfellow_deploy.runtime.manager import DAManager
 from .scheduling import python_scheduling, runtime_state, validate_settings
 
 

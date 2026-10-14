@@ -1,0 +1,15 @@
+<mujoco model="kenney_orange">
+  <asset>
+    <texture name="texture" type="2d" file="texture.png"/>
+    <material name="material" texture="texture" roughness="0.72"/>
+    <mesh name="visual" file="model.obj"/>
+    <mesh name="collision" file="model_collision_0.obj"/>
+  </asset>
+  <worldbody>
+    <body name="model">
+      <inertial pos="0 0 0.04" mass="1" diaginertia="0.00106667 0.00106667 0.00106667"/>
+      <geom type="mesh" mesh="visual" material="material" group="2" contype="0" conaffinity="0"/>
+      <geom type="mesh" mesh="collision" group="3" rgba="0.15 0.8 0.25 0.38"/>
+    </body>
+  </worldbody>
+</mujoco>

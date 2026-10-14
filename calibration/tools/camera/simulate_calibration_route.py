@@ -5,12 +5,12 @@ from pathlib import Path
 import numpy as np,mujoco
 from types import SimpleNamespace
 from validate_calibration_poses import Study,ROOT
-from policy_sim.control.self_collision import MuJoCoSelfCollisionOracle
+from hexfellow_deploy.robotics.control.self_collision import MuJoCoSelfCollisionOracle
 OUT=ROOT/'runs/camera-calibration-40deg/route'
 r=json.loads((OUT/'route.json').read_text())
 s=Study(json.loads((ROOT/'runs/camera-calibration/robot-snapshot.json').read_text()),OUT)
 m=s.m;d=s.d;s.update(s.q0[s.ai]);d.qvel[:]=0
-from policy_sim.control.robot import CONTROLLED_JOINTS
+from hexfellow_deploy.robotics.control.robot import CONTROLLED_JOINTS
 certificate=SimpleNamespace(model=m,_convex_meshes={});ambiguous=[]
 act=[m.actuator('position_'+n).id for n in CONTROLLED_JOINTS]
 # All nonmoving coordinates keep their recorded references throughout.

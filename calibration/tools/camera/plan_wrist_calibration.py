@@ -64,7 +64,7 @@ def run(output,plan_path,configuration_factory=configuration):
     import cv2,mujoco
     from scipy.optimize import least_squares
     from scipy.spatial.transform import Rotation
-    from policy_sim.calibration.charuco import detect
+    from hexfellow_deploy.robotics.calibration.charuco import detect
     from validate_calibration_poses import quat
     output=Path(output);output.mkdir(parents=True,exist_ok=True)
     plan=configuration_factory();checker=LocalWristChecker(output/"geometry",plan);s=checker.study

@@ -18,9 +18,9 @@ from scipy.spatial.transform import Rotation
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / 'src'))
-from policy_sim.calibration.charuco import detect
-from policy_sim.calibration.handeye import inverse, solve, summarize, transform
-from policy_sim.control.robot import CONTROLLED_JOINTS
+from hexfellow_deploy.robotics.calibration.charuco import detect
+from hexfellow_deploy.robotics.calibration.handeye import inverse, solve, summarize, transform
+from hexfellow_deploy.robotics.control.robot import CONTROLLED_JOINTS
 
 
 def error(estimate, truth):
@@ -108,7 +108,7 @@ def main():
                        'rendered': {'translation_mm': 1.0, 'rotation_deg': 0.2}},
         'inputs_sha256': {str(p): hashlib.sha256(p.read_bytes()).hexdigest() for p in (
             args.route / 'scene.xml', args.route / 'physics_trace.npz',
-            ROOT / 'src/policy_sim/calibration/handeye.py', Path(__file__))},
+            ROOT.parent / 'src/hexfellow_deploy/robotics/calibration/handeye.py', Path(__file__))},
     }
     for label, g, c in [('exact', exact_gs, exact_cs), ('rendered', gs, cs)]:
         result = solve(g[fit], c[fit])

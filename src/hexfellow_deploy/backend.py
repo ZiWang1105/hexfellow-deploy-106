@@ -6,7 +6,7 @@ import math
 from pathlib import Path
 import time
 
-from deploy_anything.components.interface.base_interface import DABaseInterface
+from hexfellow_deploy.runtime.components.interface.base_interface import DABaseInterface
 from .actuation import StreamContract, encode_mit, deployment
 from .reference import Receipt
 from .workspace import activate
@@ -73,7 +73,7 @@ class BackendProxy:
 
     def read_for_control(self, *, timeout_s, min_validity_s, stopped=lambda: False, on_wait=None):
         """Refresh before entering stateful IK; never renew sensor/command clocks."""
-        from policy_sim.control.feedback_policy import (
+        from hexfellow_deploy.robotics.control.feedback_policy import (
             validate_received, received_deadline, FeedbackSkewError)
         if (not all(math.isfinite(x) for x in (timeout_s, min_validity_s))
                 or not 0 < min_validity_s < timeout_s):

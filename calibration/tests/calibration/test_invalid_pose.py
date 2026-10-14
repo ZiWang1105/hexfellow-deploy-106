@@ -11,7 +11,7 @@ import calibration_runtime as runtime
 from calibration_outcomes import InvalidCalibrationPose
 from calibration_path import LocalChecker,PathChecker
 from calibration_sequence import Sequence
-from policy_sim.hardware.x7 import HardwareSafetyError
+from hexfellow_deploy.robotics.hardware.x7 import HardwareSafetyError
 
 
 def state_at(t,offset=0.):

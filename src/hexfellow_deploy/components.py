@@ -7,7 +7,7 @@ import threading
 import time
 import json
 
-from deploy_anything.components.interface.base_interface import DABaseInterface
+from hexfellow_deploy.runtime.components.interface.base_interface import DABaseInterface
 from .reference import ReferenceOwner
 from .timing import CycleBudget
 from .workspace import activate, build_shared_executor

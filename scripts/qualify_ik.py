@@ -90,7 +90,7 @@ def main():
             (output/f'{profile}_{mode}.json').write_text(json.dumps(samples))
             print(json.dumps(case), flush=True)
     report['revisions'] = {name:subprocess.check_output(['git','rev-parse','HEAD'], cwd=path, text=True).strip()
-                           for name,path in [('workspace', root), ('UMI_Hardware', root/'third_party/UMI_Hardware')]}
+                           for name,path in [('workspace', root), ('robot_resources', root/'robot_resources')]}
     report['native_qualified'] = False
     report['solver_cases_passed'] = all(
         case['fault'] is None and case['ticks'] == case['accepted'] == 1100

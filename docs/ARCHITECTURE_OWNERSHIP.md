@@ -5,8 +5,10 @@ agent application. `workspace.activate()` selects a configuration directory only
 it no longer checks for application source or adds that source to `sys.path`.
 
 The default checkout contains all configurations and assets needed by the IK
-viewer. The low-level PinkIK/native controller and Deploy Anything are pinned
-submodules of this repository. Their source and licenses stay in those submodules.
+viewer. The PinkIK/native implementation, process manager and shared-memory topics are
+owned source modules in this repository. Robot URDF, meshes and configuration
+live under `robot_resources`. There are no solver or process-runtime submodules.
+Original attribution and source hashes are retained in NOTICE and the provenance manifest.
 The robot adapter, runtime and application use one canonical controller instance
 and command contract, not separate copies of the IK implementation.
 

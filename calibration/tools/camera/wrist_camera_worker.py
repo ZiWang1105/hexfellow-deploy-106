@@ -27,7 +27,7 @@ import numpy as np
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / 'src'))
-from policy_sim.calibration.charuco import detect
+from hexfellow_deploy.robotics.calibration.charuco import detect
 
 WIDTH, HEIGHT, FPS = 1280, 720, 30
 DEFAULT_SERIAL = '243222074562'
@@ -309,7 +309,7 @@ class RealSenseRGB:
 class SimulationRGB:
     def __init__(self, scene, serial, k=DEFAULT_K):
         import mujoco
-        from policy_sim.control.robot import CONTROLLED_JOINTS
+        from hexfellow_deploy.robotics.control.robot import CONTROLLED_JOINTS
         self.mujoco = mujoco
         self.model = mujoco.MjModel.from_xml_path(str(scene))
         self.data = mujoco.MjData(self.model)

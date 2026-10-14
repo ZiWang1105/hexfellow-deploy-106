@@ -2,7 +2,7 @@
 import json
 import time
 import numpy as np
-from deploy_anything.components.comms.wrappers import ArrayCommWrapper
+from hexfellow_deploy.runtime.components.comms.wrappers import ArrayCommWrapper
 
 
 class JsonTopic(ArrayCommWrapper):

@@ -5,7 +5,7 @@ from pathlib import Path
 import numpy as np
 from scipy.spatial.transform import Rotation
 from validate_calibration_poses import Study,ROOT
-from policy_sim.calibration.handeye import jacobian
+from hexfellow_deploy.robotics.calibration.handeye import jacobian
 OUT=ROOT/'runs/camera-calibration-40deg/route'
 s=Study(json.loads((ROOT/'runs/camera-calibration/robot-snapshot.json').read_text()),OUT)
 source=json.loads((ROOT/'runs/camera-calibration-40deg/sample/vision_candidates.json').read_text())

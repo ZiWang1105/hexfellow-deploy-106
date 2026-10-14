@@ -4,7 +4,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 WORKSPACE = ROOT.parent
-UPSTREAM = Path(os.environ.get('HEXFELLOW_CALIBRATION_UMI', WORKSPACE/'third_party/UMI_Hardware')).resolve()
+UPSTREAM = WORKSPACE/'robot_resources'
 PROJECTS = Path.home()/'projects'
 
 def desktop_robot_paths():

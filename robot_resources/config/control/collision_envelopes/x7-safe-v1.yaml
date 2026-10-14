@@ -1,0 +1,12 @@
+schema_version: 1
+envelope_id: x7-safe-v1
+profile_id: x7-safe-v1
+profile_sha256: a5885bfc4a8f87608d4c895ba2ebb09fb591858a89df2bd0419722b518269ab0
+geometry_payload_sha256: 0f73d28614fe4e979e7edc683e8e7b3d7815f0f3ddeec1a8f00c06e3dab18ee9
+reference_dt_s: 0.02
+maximum_relative_step_scale: 1.0
+stopping_distance:
+  method: inherited_approved_v2
+  worst_case_m: 0.008
+  applied_m: 0.008
+guard_distance_m: 0.002

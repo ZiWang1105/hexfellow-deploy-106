@@ -9,11 +9,11 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[2]
 from calibration_paths import UPSTREAM
 DEPLOYMENT=UPSTREAM
-sys.path.insert(0,str(ROOT/'src'))
+sys.path.insert(0,str(ROOT.parent/'src'))
 import cv2,mujoco,numpy as np,pinocchio as pin
 from scipy.optimize import least_squares
 from scipy.spatial.transform import Rotation
-from policy_sim.control.robot import LEFT_ARM_JOINTS
+from hexfellow_deploy.robotics.control.robot import LEFT_ARM_JOINTS
 from validate_calibration_poses import Study
 from calibration_path import LocalChecker
 from validate_camera_overlay import OverlayRenderer,digest
@@ -35,11 +35,11 @@ def main():
     code='''import argparse,json,sys,numpy as np
 from types import SimpleNamespace
 sys.path.insert(0,sys.argv[1]+'/src')
-from policy_sim.hardware import session
-from policy_sim.control.motion_profile import controller_config_for_profile
-from policy_sim.control.ik_core import PinkIKCore
-from policy_sim.hardware.whole_body import WholeBodyState
-from policy_sim.paths import PROJECT_ROOT
+from hexfellow_deploy.robotics.hardware import session
+from hexfellow_deploy.robotics.control.motion_profile import controller_config_for_profile
+from hexfellow_deploy.robotics.control.ik_core import PinkIKCore
+from hexfellow_deploy.robotics.hardware.whole_body import WholeBodyState
+from hexfellow_deploy.robotics.paths import PROJECT_ROOT
 p=argparse.ArgumentParser();session.add_arguments(p)
 a=p.parse_args(['--mode','sim','--robot-config',sys.argv[2]])
 a.control_group='coupled';a.tracking_state='measured'

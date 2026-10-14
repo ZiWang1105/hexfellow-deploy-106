@@ -9,8 +9,8 @@ import pytest
 from hexfellow_deploy.workspace import activate
 ROOT = activate(Path(__file__).resolve().parents[1])
 from hexfellow_deploy.native import ContinuousGate, StreamEndpoint
-from policy_sim.hardware.mit_wire import brake_packet, send_checked
-from policy_sim.hardware.sdk_transport import CheckedUDP
+from hexfellow_deploy.robotics.hardware.mit_wire import brake_packet, send_checked
+from hexfellow_deploy.robotics.hardware.sdk_transport import CheckedUDP
 from hex_device.generated.public_api_down_pb2 import APIDown
 
 

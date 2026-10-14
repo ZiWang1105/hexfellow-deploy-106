@@ -2,13 +2,13 @@
 """Render actual offline simulated joint feedback and validate synthetic ChArUco views."""
 import json,sys,math
 from pathlib import Path
-ROOT=Path(__file__).resolve().parents[2];sys.path.insert(0,str(ROOT/'src'))
+ROOT=Path(__file__).resolve().parents[2];sys.path.insert(0,str(ROOT.parent/'src'))
 import av,cv2,mujoco,numpy as np,pinocchio as pin
 from scipy.spatial.transform import Rotation
 from PIL import Image,ImageDraw,ImageFont
-from policy_sim.calibration.charuco import detect
-from policy_sim.calibration.handeye import solve,summarize,inverse
-from policy_sim.control.robot import CONTROLLED_JOINTS
+from hexfellow_deploy.robotics.calibration.charuco import detect
+from hexfellow_deploy.robotics.calibration.handeye import solve,summarize,inverse
+from hexfellow_deploy.robotics.control.robot import CONTROLLED_JOINTS
 OUT=ROOT/'runs/camera-calibration-40deg/route'
 r=json.loads((OUT/'route.json').read_text());phy=json.loads((OUT/'physics_report.json').read_text());tr=np.load(OUT/'physics_trace.npz')
 m=mujoco.MjModel.from_xml_path(str(OUT/'scene.xml'));d=mujoco.MjData(m)

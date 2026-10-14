@@ -33,7 +33,7 @@ class LocalChecker:
     def select_route(self,q):
         # Re-evaluate images after applying the real controller's tighter limits.
         import cv2,mujoco
-        from policy_sim.calibration.charuco import detect
+        from hexfellow_deploy.robotics.calibration.charuco import detect
         s=self.study
         import pinocchio as pin
         s.q0[s.pi]=np.asarray(q)[3:]
@@ -264,7 +264,7 @@ class PathChecker:
 
 
 if __name__=='__main__':
-    sys.path.insert(0,str(ROOT/'src'))
+    sys.path.insert(0,str(ROOT.parent/'src'))
     route=json.loads((ROOT/'artifacts/reference/camera-calibration/initial-right-route.json').read_text())
     checker=LocalChecker(Path(sys.argv[1]),route,sys.argv[2] or None if len(sys.argv)>2 else None,sys.argv[3] or None if len(sys.argv)>3 else None)
     print('READY '+str(checker.study.scene),flush=True)

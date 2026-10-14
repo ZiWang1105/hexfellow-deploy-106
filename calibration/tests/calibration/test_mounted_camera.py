@@ -7,8 +7,8 @@ import mujoco
 import numpy as np
 import pinocchio as pin
 import pytest
-from policy_sim.control.robot_model import load_robot_model
-from policy_sim.scene.builder import build_tabletop_scene
+from hexfellow_deploy.robotics.control.robot_model import load_robot_model
+from hexfellow_deploy.robotics.scene.builder import build_tabletop_scene
 
 ROOT=Path(__file__).resolve().parents[2]
 sys.path.insert(0,str(ROOT/'tools/camera'))

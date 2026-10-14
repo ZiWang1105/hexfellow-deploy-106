@@ -7,8 +7,8 @@ import numpy as np
 import pytest
 from scipy.spatial.transform import Rotation
 
-from policy_sim.calibration.handeye import inverse, retract, transform
-from policy_sim.calibration.wrist_handeye import camera_from_board, solve, summarize
+from hexfellow_deploy.robotics.calibration.handeye import inverse, retract, transform
+from hexfellow_deploy.robotics.calibration.wrist_handeye import camera_from_board, solve, summarize
 
 ROOT = Path(__file__).resolve().parents[2]
 SPEC = importlib.util.spec_from_file_location('solve_wrist_calibration',
@@ -101,7 +101,7 @@ def test_rejects_degenerate_invalid_and_unpaired_data():
 @pytest.mark.parametrize('side', ['left', 'right'])
 def test_recovers_ground_truth_with_actual_robot_forward_kinematics(side):
     import pinocchio as pin
-    from policy_sim.control.robot import BASE_FRAME, LEFT_ARM_JOINTS, RIGHT_ARM_JOINTS
+    from hexfellow_deploy.robotics.control.robot import BASE_FRAME, LEFT_ARM_JOINTS, RIGHT_ARM_JOINTS
     joints = LEFT_ARM_JOINTS if side == 'left' else RIGHT_ARM_JOINTS
     parent = 'maver_x4_asm_mount1' if side == 'left' else 'maver_x4_asm_mount2'
     serial = '230422271628' if side == 'left' else '243222074562'

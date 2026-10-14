@@ -7,8 +7,7 @@ needed to install or run the robot simulator.
 
 ## Install and launch
 
-On Ubuntu, install `build-essential`, `libeigen3-dev`, and `uv`. Clone recursively
-with access to the pinned private dependencies, then run:
+On Ubuntu, install `build-essential`, `libeigen3-dev`, and `uv`. Clone this repository normally (no submodules), then run:
 
 ```bash
 ./scripts/setup_sim.sh
@@ -41,14 +40,15 @@ configuration and provenance remain available under the selected output director
 
 ## Ownership and optional applications
 
-- `control/`: paired TCP execution, upstream IK adapter, startup, limits.
-- `robot/`: measured-joint FK, assembly and pinned upstream resolution.
+- `control/`: paired TCP execution, owned IK adapter, startup, limits.
+- `robot/`: measured-joint FK, assembly and owned resource resolution.
 - `hardware/`: deployment parsing, native endpoint and camera capture adapters.
 - `interfaces/`: measured sensor and action contracts, depth/camera geometry.
 - `sim/`: MuJoCo scene construction, sensors, assets and recording.
 - `skills/`: existing robot-relative primitive sequencing; no model/API client.
-- `third_party/UMI_Hardware`: explicitly pinned solver/native-controller dependency.
-- `third_party/deploy-anything`: explicitly pinned process/topic runtime.
+- `robotics/`: owned PinkIK core, MIT model, device transport and calibration algorithms.
+- `runtime/`: owned process lifecycle, configuration and shared-memory communication.
+- `robot_resources/`: robot URDF, meshes and static controller/camera configurations.
 
 The application retains its model client, prompts, grounding, task catalog and
 scoring. It explicitly passes `--agent-plugin module.name`; that module exports
@@ -81,8 +81,7 @@ MUJOCO_GL=egl OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 \
   .venv/bin/python -m pytest tests -q
 ```
 
-Camera calibration tests use a separate process because their overlay intentionally
-extends the upstream package:
+Camera calibration tests use a separate process to keep their tool import setup separate:
 
 ```bash
 MUJOCO_GL=egl OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 \
@@ -91,6 +90,25 @@ MUJOCO_GL=egl OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 \
 
 Standalone validation also copies the worktree into an unrelated directory,
 creates a fresh virtual environment, builds its native extension, and blocks all
-imports of the agent package while exercising simulation and real GUI input.
+imports of the agent package and both removed packages while exercising simulation and real GUI input.
 Passing these checks establishes repository independence and modeled behavior,
 not hardware reliability or physical safety qualification.
+
+## Dependency removal (2026-10-14)
+
+The former `policy_sim` and `deploy_anything` packages are not dependencies.
+The two Git submodules have been removed. The native collision/constraint kernel
+is built by this package as `_hexfellow_collision_kernel`. The Python modules
+are owned under `hexfellow_deploy.robotics` and `hexfellow_deploy.runtime`;
+calibration uses the same owned code. Scientific dependencies such as MuJoCo,
+Pinocchio, Pink, and the QP solver remain ordinary versioned Python packages.
+
+Historical names in provenance and original source comments retain attribution;
+see [NOTICE.md](../NOTICE.md). They do not trigger external imports or downloads.
+Existing local hardware source bindings will differ after the code relocation.
+This extraction does not regenerate approvals or re-enable device motion.
+
+The October 14 isolated-install, import-blocking, solver, calibration and native
+mouse-drag results are recorded in [owned-runtime validation](validation/owned_runtime_20261014.json).
+The migration leaves three preexisting application navigation-test assertions
+unresolved; the robot deployment and calibration suites pass.

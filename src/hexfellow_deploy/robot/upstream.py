@@ -1,57 +1,40 @@
-"""Resolve the Git submodule, never an unrelated sibling policy_sim checkout."""
-import importlib
+"""Compatibility names for the deployment-owned robot resources and provenance.
+
+No external solver package, Git submodule, or sys.path modification is used.
+Existing application adapters retain these names while using the owned runtime.
+"""
 import hashlib
 from pathlib import Path
 import subprocess
-import sys
-
 
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
-UMI_ROOT = PROJECT_ROOT / "third_party/UMI_Hardware"
-
+RESOURCE_ROOT = PROJECT_ROOT / "robot_resources"
+UMI_ROOT = RESOURCE_ROOT  # Historical application import; resources are owned here.
 
 def load_umi():
-    if not (UMI_ROOT / "src/policy_sim/control/ik_core.py").is_file():
-        raise RuntimeError("Initialize UMI: git submodule update --init --recursive")
-    source = str(UMI_ROOT / "src")
-    if source not in sys.path:
-        sys.path.insert(0, source)
-    package = importlib.import_module("policy_sim")
-    if Path(package.__file__).resolve() != UMI_ROOT / "src/policy_sim/__init__.py":
-        raise RuntimeError("policy_sim was imported from outside third_party/UMI_Hardware")
-    return UMI_ROOT
-
+    from hexfellow_deploy.robotics import paths
+    if paths.PROJECT_ROOT != RESOURCE_ROOT or not (RESOURCE_ROOT / "urdf").is_dir():
+        raise RuntimeError("The hexfellow-deploy robot resources are missing")
+    return RESOURCE_ROOT
 
 def umi_revision():
-    return subprocess.check_output(
-        ["git", "-C", str(UMI_ROOT), "rev-parse", "HEAD"], text=True).strip()
-
+    result = subprocess.run(["git", "-C", str(PROJECT_ROOT), "rev-parse", "HEAD"],
+                            capture_output=True, text=True)
+    return result.stdout.strip() if result.returncode == 0 else "source-archive"
 
 def gitlink_revision():
-    entry = subprocess.check_output(
-        ["git", "-C", str(PROJECT_ROOT), "ls-files", "--stage", "third_party/UMI_Hardware"],
-        text=True).split()
-    if len(entry) != 4 or entry[0] != "160000":
-        raise RuntimeError("third_party/UMI_Hardware must be a staged Git submodule")
-    return entry[1]
-
+    """Legacy scene field: now identifies this repository, not a submodule."""
+    return umi_revision()
 
 def umi_provenance():
-    """Record editable source/configuration as well as the compiled extension."""
-    load_umi()
-    import _policy_sim_collision_kernel as native
-
-    paths = sorted((UMI_ROOT / "src/policy_sim").rglob("*.py"))
-    paths += sorted(p for p in (UMI_ROOT / "config/control").rglob("*")
-                    if p.suffix in {".yaml", ".json"})
-    paths += [UMI_ROOT / "urdf/maver_x4_gp80.urdf", UMI_ROOT / "setup.py",
-              UMI_ROOT / "src/policy_sim/control/collision_kernel.cpp"]
-    return {
-        "commit": umi_revision(), "gitlink": gitlink_revision(),
-        "worktree_status": subprocess.check_output(
-            ["git", "-C", str(UMI_ROOT), "status", "--porcelain"], text=True),
-        "source_sha256": {str(p.relative_to(UMI_ROOT)): hashlib.sha256(p.read_bytes()).hexdigest()
-                          for p in paths},
-        "native_kernel_abi": native.KERNEL_ABI_VERSION,
-        "native_kernel_sha256": hashlib.sha256(Path(native.__file__).read_bytes()).hexdigest(),
-    }
+    """Hash owned code, static resources, and the compiled native kernel."""
+    import _hexfellow_collision_kernel as native
+    paths = sorted((PROJECT_ROOT / "src/hexfellow_deploy").rglob("*.py"))
+    paths += sorted((RESOURCE_ROOT / "config").rglob("*.yaml"))
+    paths += sorted((RESOURCE_ROOT / "config").rglob("*.json"))
+    paths += [RESOURCE_ROOT / "urdf/maver_x4_gp80.urdf", PROJECT_ROOT / "setup.py",
+              PROJECT_ROOT / "src/hexfellow_deploy/robotics/control/collision_kernel.cpp"]
+    return {"commit": umi_revision(), "source_owner": "hexfellow-deploy",
+            "source_sha256": {str(p.relative_to(PROJECT_ROOT)): hashlib.sha256(p.read_bytes()).hexdigest() for p in paths},
+            "native_kernel_abi": native.KERNEL_ABI_VERSION,
+            "native_kernel_sha256": hashlib.sha256(Path(native.__file__).read_bytes()).hexdigest()}

@@ -11,8 +11,8 @@ ROOT = activate(Path(__file__).resolve().parents[1])
 from hexfellow_deploy.actuation import StreamContract, deployment, encode_mit
 from hexfellow_deploy.native import ContinuousGate, NativeDriver, StreamEndpoint
 from hexfellow_deploy.robot.joints import JOINTS, LEFT, RIGHT
-from policy_sim.control.mit_command import MitCommand
-from policy_sim.hardware.mit_wire import authorize_group
+from hexfellow_deploy.robotics.control.mit_command import MitCommand
+from hexfellow_deploy.robotics.hardware.mit_wire import authorize_group
 from hex_device.generated.public_api_down_pb2 import APIDown
 
 
@@ -230,7 +230,7 @@ def test_native_leaf_reuses_calibrated_mit_encoding_for_complete_frame(monkeypat
     from hexfellow_deploy.control.gripper import BinaryGripperServo
     from hexfellow_deploy.hardware.device import BinaryMotorTargets
     from hexfellow_deploy.hardware.umi_device import native_packet
-    from policy_sim.hardware.whole_body import WholeBodyState
+    from hexfellow_deploy.robotics.hardware.whole_body import WholeBodyState
 
     monkeypatch.setattr('time.monotonic', lambda: 100.)
     config, mapping, profile, metadata = deployment(ROOT, Path('configs/hardware/desktop.yaml'))
@@ -331,7 +331,7 @@ def test_native_fault_evidence_survives_close_buffer_clear_and_identifies_device
     from collections import deque
     import json
     import threading
-    from policy_sim.hardware.x7 import HardwareSafetyError
+    from hexfellow_deploy.robotics.hardware.x7 import HardwareSafetyError
     from hexfellow_deploy.backend import diagnostic_value
     gate = ContinuousGate('right', clock=lambda: 100.)
     gate.transition('active')

@@ -7,8 +7,8 @@ import pytest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / 'tools/camera'))
 from calibration_runtime import CalibrationController, CalibrationSource, describe_arm_arrival_timeout
-from policy_sim.hardware import session
-from policy_sim.hardware.x7 import HardwareSafetyError
+from hexfellow_deploy.robotics.hardware import session
+from hexfellow_deploy.robotics.hardware.x7 import HardwareSafetyError
 
 
 def recorded_failure():

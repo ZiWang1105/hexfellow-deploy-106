@@ -21,8 +21,8 @@ import numpy as np
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / 'src'))
-from policy_sim.calibration.handeye import solve, summarize
-from policy_sim.calibration.operator import Rehearsal
+from hexfellow_deploy.robotics.calibration.handeye import solve, summarize
+from hexfellow_deploy.robotics.calibration.operator import Rehearsal
 
 
 class Console:
@@ -132,7 +132,7 @@ def main():
     args = parser.parse_args()
     console = Console(args.route, args.verified, args.output)
     token = secrets.token_urlsafe(32)
-    page = (ROOT / 'src/policy_sim/calibration/operator.html').read_text().replace('__TOKEN__', token)
+    page = (ROOT.parent / 'src/hexfellow_deploy/robotics/calibration/operator.html').read_text().replace('__TOKEN__', token)
 
     class Handler(BaseHTTPRequestHandler):
         def log_message(self, *args):

@@ -6,12 +6,12 @@ import json
 from pathlib import Path
 import sys
 import time
-ROOT=Path(__file__).resolve().parents[2]; sys.path.insert(0,str(ROOT/'src'))
+ROOT=Path(__file__).resolve().parents[2]; sys.path.insert(0,str(ROOT.parent/'src'))
 import numpy as np
 import pinocchio as pin
-from policy_sim.hardware.whole_body import RobotMapping
-from policy_sim.hardware.hexfellow_endpoint import HexWholeBodyEndpoint
-from policy_sim.control.robot import CONTROLLED_JOINTS, BASE_FRAME
+from hexfellow_deploy.robotics.hardware.whole_body import RobotMapping
+from hexfellow_deploy.robotics.hardware.hexfellow_endpoint import HexWholeBodyEndpoint
+from hexfellow_deploy.robotics.control.robot import CONTROLLED_JOINTS, BASE_FRAME
 from calibration_paths import UPSTREAM
 
 

@@ -1,0 +1,131 @@
+schema_version: 1
+profile_id: x7-safe-v1
+robot: maver_x4
+arm_model: archer_x7
+control_dt_s: 0.02
+qualification:
+  simulation: candidate
+  hardware: uncommissioned
+target_limits:
+  linear_velocity_m_s: 0.15
+  angular_velocity_rad_s: 0.45
+arm_limits:
+  velocity_rad_s:
+  - 0.8
+  - 0.8
+  - 0.8
+  - 0.8
+  - 0.8
+  - 0.8
+  - 0.8
+  - 0.8
+  - 0.8
+  - 0.8
+  - 0.8
+  - 0.8
+  - 0.8
+  - 0.8
+  acceleration_rad_s2:
+  - 6.0
+  - 6.0
+  - 6.0
+  - 6.0
+  - 6.0
+  - 6.0
+  - 6.0
+  - 6.0
+  - 6.0
+  - 6.0
+  - 6.0
+  - 6.0
+  - 6.0
+  - 6.0
+  jerk_rad_s3:
+  - 1200.0
+  - 1200.0
+  - 1200.0
+  - 1200.0
+  - 1200.0
+  - 1200.0
+  - 1200.0
+  - 1200.0
+  - 1200.0
+  - 1200.0
+  - 1200.0
+  - 1200.0
+  - 1200.0
+  - 1200.0
+  position_margin_rad: 0.012
+vendor_hard_limits:
+  urdf_position_lower_rad:
+  - -2.7925
+  - -1.2217
+  - -2.7925
+  - -1.0472
+  - -2.7925
+  - -0.87266
+  - -0.7854
+  - -2.7925
+  - -1.2217
+  - -2.7925
+  - -1.0472
+  - -2.7925
+  - -0.87266
+  - -0.7854
+  urdf_position_upper_rad:
+  - 2.7925
+  - 2.1817
+  - 2.7925
+  - 2.1817
+  - 2.7925
+  - 0.87266
+  - 0.7854
+  - 2.7925
+  - 2.1817
+  - 2.7925
+  - 2.1817
+  - 2.7925
+  - 0.87266
+  - 0.7854
+  urdf_velocity_rad_s:
+  - 6.0
+  - 6.0
+  - 6.0
+  - 6.0
+  - 12.56
+  - 12.56
+  - 12.56
+  - 6.0
+  - 6.0
+  - 6.0
+  - 6.0
+  - 12.56
+  - 12.56
+  - 12.56
+  sdk_velocity_rad_s:
+  - 3.77
+  - 3.77
+  - 3.77
+  - 3.77
+  - 12.56
+  - 12.56
+  - 12.56
+  - 3.77
+  - 3.77
+  - 3.77
+  - 3.77
+  - 12.56
+  - 12.56
+  - 12.56
+self_collision:
+  geometry_config: config/control/self_collision_proxies.v2.yaml
+  geometry_payload_sha256: 0f73d28614fe4e979e7edc683e8e7b3d7815f0f3ddeec1a8f00c06e3dab18ee9
+  envelope_config: config/control/collision_envelopes/x7-safe-v1.yaml
+provenance:
+  basis: existing_policy_sim_limits
+  note: Legacy fallback retained exactly for regression and rollback.
+  manufacturer_update: '2026-09-12: operating torque=continuous; GP80 joint gains;
+    prior qualifications superseded. See docs/hexfellow_hardware_parameters.md.'
+hardware_capabilities:
+  path: config/hardware/hexfellow_capabilities.yaml
+  sha256: f5672189e982a1d29a4e46316a438e83205b2391b09a7dc5429b22cb688985bf

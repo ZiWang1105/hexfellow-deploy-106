@@ -6,11 +6,11 @@ from pathlib import Path
 import sys
 import time
 ROOT=Path(__file__).resolve().parents[2]
-sys.path.insert(0,str(ROOT/'src'))
+sys.path.insert(0,str(ROOT.parent/'src'))
 import cv2
 import numpy as np
 import pyzed.sl as sl
-from policy_sim.calibration.charuco import detect
+from hexfellow_deploy.robotics.calibration.charuco import detect
 
 
 def main():

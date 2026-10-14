@@ -1,4 +1,4 @@
-# Loaded directly from third_party/UMI_Hardware; upstream profile is unmodified.
+# Loaded directly from robot_resources; upstream profile is unmodified.
 motion_profile: x7-gp80-highspeed-fixed-base-v1
 # V1's reference tracking path still closes its joint-feedback loop every tick.
 measured_pose_tracking: false

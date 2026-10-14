@@ -6,7 +6,7 @@ import numpy as np
 from scipy.optimize import least_squares
 from scipy.spatial.transform import Rotation
 from validate_calibration_poses import Study,ROOT
-from policy_sim.control.motion_profile import controller_config_for_profile
+from hexfellow_deploy.robotics.control.motion_profile import controller_config_for_profile
 
 OUT=ROOT/'runs/centered-calibration';OUT.mkdir(parents=True,exist_ok=True)
 attachment=json.loads((ROOT/'config/camera/board_right_outward.json').read_text())

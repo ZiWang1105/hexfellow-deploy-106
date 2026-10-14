@@ -1,0 +1,991 @@
+<?xml version='1.0' encoding='utf-8'?>
+<robot name="maver_x4_gp80">
+  <link name="maver_x4_asm_maver_x4_base_link">
+    <inertial>
+      <origin xyz="-0.00051929 0.022743 0.12782" rpy="0 0 0" />
+      <mass value="3.464" />
+      <inertia ixx="0.6655" ixy="-0.00054813" ixz="-0.0016176" iyy="0.46727" iyz="-0.0021138" izz="1.1037" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/maver_x4_asm_maver_x4_base_link.stl" />
+      </geometry>
+      <material name="maver_x4_asm_maver_x4_base_link_color">
+        <color rgba="0.75 0.75 0.75 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/maver_x4_asm_maver_x4_base_link.stl" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="maver_x4_asm_maver_x4_link_yaw1">
+    <inertial>
+      <origin xyz="-0.010257 -0.0011369 -0.064839" rpy="0 0 0" />
+      <mass value="0.8259" />
+      <inertia ixx="0.00060151" ixy="0.0000129" ixz="-0.00009069" iyy="0.00078014" iyz="0.00001444" izz="0.0006025" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/maver_x4_asm_maver_x4_link_yaw.stl" />
+      </geometry>
+      <material name="maver_x4_asm_maver_x4_link_yaw1_color">
+        <color rgba="0.64705882 0.61960784 0.58823529 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/maver_x4_asm_maver_x4_link_yaw.stl" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="maver_x4_asm_maver_x4_link_wheel1">
+    <inertial>
+      <origin xyz="5e-7 0.0023009 -8.8e-7" rpy="0 0 0" />
+      <mass value="0.36495" />
+      <inertia ixx="0.00041642" ixy="0" ixz="0" iyy="0.00075667" iyz="0" izz="0.00041642" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/maver_x4_asm_maver_x4_link_wheel.stl" />
+      </geometry>
+      <material name="maver_x4_asm_maver_x4_link_wheel1_color">
+        <color rgba="0.1 0.1 0.1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/maver_x4_asm_maver_x4_link_wheel.stl" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="maver_x4_asm_maver_x4_link_yaw2">
+    <inertial>
+      <origin xyz="-0.010257 -0.0011369 -0.064839" rpy="0 0 0" />
+      <mass value="0.8259" />
+      <inertia ixx="0.00060151" ixy="0.0000129" ixz="-0.00009069" iyy="0.00078014" iyz="0.00001444" izz="0.0006025" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/maver_x4_asm_maver_x4_link_yaw.stl" />
+      </geometry>
+      <material name="maver_x4_asm_maver_x4_link_yaw2_color">
+        <color rgba="0.64705882 0.61960784 0.58823529 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/maver_x4_asm_maver_x4_link_yaw.stl" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="maver_x4_asm_maver_x4_link_wheel2">
+    <inertial>
+      <origin xyz="5e-7 0.0023009 -8.8e-7" rpy="0 0 0" />
+      <mass value="0.36495" />
+      <inertia ixx="0.00041642" ixy="0" ixz="0" iyy="0.00075667" iyz="0" izz="0.00041642" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/maver_x4_asm_maver_x4_link_wheel.stl" />
+      </geometry>
+      <material name="maver_x4_asm_maver_x4_link_wheel2_color">
+        <color rgba="0.1 0.1 0.1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/maver_x4_asm_maver_x4_link_wheel.stl" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="maver_x4_asm_maver_x4_link_yaw3">
+    <inertial>
+      <origin xyz="-0.010257 -0.0011369 -0.064839" rpy="0 0 0" />
+      <mass value="0.8259" />
+      <inertia ixx="0.00060151" ixy="0.0000129" ixz="-0.00009069" iyy="0.00078014" iyz="0.00001444" izz="0.0006025" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/maver_x4_asm_maver_x4_link_yaw.stl" />
+      </geometry>
+      <material name="maver_x4_asm_maver_x4_link_yaw3_color">
+        <color rgba="0.64705882 0.61960784 0.58823529 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/maver_x4_asm_maver_x4_link_yaw.stl" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="maver_x4_asm_maver_x4_link_wheel3">
+    <inertial>
+      <origin xyz="5e-7 0.0023009 -8.8e-7" rpy="0 0 0" />
+      <mass value="0.36495" />
+      <inertia ixx="0.00041642" ixy="0" ixz="0" iyy="0.00075667" iyz="0" izz="0.00041642" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/maver_x4_asm_maver_x4_link_wheel.stl" />
+      </geometry>
+      <material name="maver_x4_asm_maver_x4_link_wheel3_color">
+        <color rgba="0.1 0.1 0.1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/maver_x4_asm_maver_x4_link_wheel.stl" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="maver_x4_asm_maver_x4_link_yaw4">
+    <inertial>
+      <origin xyz="-0.010257 -0.0011369 -0.064839" rpy="0 0 0" />
+      <mass value="0.8259" />
+      <inertia ixx="0.00060151" ixy="0.0000129" ixz="-0.00009069" iyy="0.00078014" iyz="0.00001444" izz="0.0006025" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/maver_x4_asm_maver_x4_link_yaw.stl" />
+      </geometry>
+      <material name="maver_x4_asm_maver_x4_link_yaw4_color">
+        <color rgba="0.64705882 0.61960784 0.58823529 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/maver_x4_asm_maver_x4_link_yaw.stl" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="maver_x4_asm_maver_x4_link_wheel4">
+    <inertial>
+      <origin xyz="5e-7 0.0023009 -8.8e-7" rpy="0 0 0" />
+      <mass value="0.36495" />
+      <inertia ixx="0.00041642" ixy="0" ixz="0" iyy="0.00075667" iyz="0" izz="0.00041642" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/maver_x4_asm_maver_x4_link_wheel.stl" />
+      </geometry>
+      <material name="maver_x4_asm_maver_x4_link_wheel4_color">
+        <color rgba="0.1 0.1 0.1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/maver_x4_asm_maver_x4_link_wheel.stl" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="maver_x4_asm_robot_base">
+    <inertial>
+      <origin xyz="-0.03712188 0 0.00498396" rpy="0 0 0" />
+      <mass value="1.22820216" />
+      <inertia ixx="0.01302521" ixy="0" ixz="1.2e-7" iyy="0.01105491" iyz="0" izz="0.02405997" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/maver_x4_asm_robot_base_visual.stl" />
+      </geometry>
+      <material name="maver_x4_asm_robot_base_color">
+        <color rgba="0.08235294 0.08235294 0.08235294 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/maver_x4_asm_robot_base_visual.stl" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="maver_x4_asm_robot_link1">
+    <inertial>
+      <origin xyz="-0.03712188 0 -0.05701604" rpy="0 0 0" />
+      <mass value="1.22820216" />
+      <inertia ixx="0.01302521" ixy="0" ixz="1.2e-7" iyy="0.01105491" iyz="0" izz="0.02405997" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/maver_x4_asm_robot_link1_visual.stl" />
+      </geometry>
+      <material name="maver_x4_asm_robot_link1_color">
+        <color rgba="0.08235294 0.08235294 0.08235294 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/maver_x4_asm_robot_link1_visual.stl" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="maver_x4_asm_URDF_base_link">
+    <inertial>
+      <origin xyz="-0.16613237 0.00016547 0.2421699" rpy="0 0 0" />
+      <mass value="43.19144813" />
+      <inertia ixx="0.9827343" ixy="0.00009723" ixz="-0.03340276" iyy="0.96853995" iyz="-0.00002687" izz="0.17700405" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/maver_x4_asm_urdf_base_link.stl" />
+      </geometry>
+      <material name="maver_x4_asm_URDF_base_link_color">
+        <color rgba="0.79215686 0.81960784 0.93333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/maver_x4_asm_urdf_base_link.stl" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="maver_x4_asm_URDF_link_1">
+    <inertial>
+      <origin xyz="-0.06511779 0.00006635 -0.2479597" rpy="0 0 0" />
+      <mass value="9.51599029" />
+      <inertia ixx="0.26929279" ixy="0.00006376" ixz="0.00550648" iyy="0.26931256" iyz="-0.00014987" izz="0.02653023" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/maver_x4_asm_urdf_link_1.stl" />
+      </geometry>
+      <material name="maver_x4_asm_URDF_link_1_color">
+        <color rgba="0.79215686 0.81960784 0.93333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/maver_x4_asm_urdf_link_1.stl" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="maver_x4_asm_7_urdf_SLDASM_base_link">
+    <inertial>
+      <origin xyz="-0.00321383 4e-8 0.03750248" rpy="0 0 0" />
+      <mass value="0.54734478" />
+      <inertia ixx="0.00062055" ixy="0" ixz="-0.00001859" iyy="0.00068363" iyz="0" izz="0.00061151" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/maver_x4_asm_7_urdf_sldasm_base_link.stl" />
+      </geometry>
+      <material name="maver_x4_asm_7_urdf_SLDASM_base_link_color">
+        <color rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/maver_x4_asm_7_urdf_sldasm_base_link.stl" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="maver_x4_asm_7_urdf_SLDASM_link_1">
+    <inertial>
+      <origin xyz="0.00777809 0.00006419 0.04626724" rpy="0 0 0" />
+      <mass value="0.29457446" />
+      <inertia ixx="0.00030682" ixy="-1.1e-7" ixz="0.00004205" iyy="0.00028949" iyz="-5.1e-7" izz="0.00026538" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/maver_x4_asm_7_urdf_sldasm_link_1.stl" />
+      </geometry>
+      <material name="maver_x4_asm_7_urdf_SLDASM_link_1_color">
+        <color rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/maver_x4_asm_7_urdf_sldasm_link_1.stl" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="maver_x4_asm_7_urdf_SLDASM_link_2">
+    <inertial>
+      <origin xyz="-0.0001219 0.00011417 0.07500411" rpy="0 0 0" />
+      <mass value="0.40410289" />
+      <inertia ixx="0.00068162" ixy="-1e-8" ixz="-8e-8" iyy="0.00054334" iyz="-0.00000124" izz="0.00034899" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/maver_x4_asm_7_urdf_sldasm_link_2.stl" />
+      </geometry>
+      <material name="maver_x4_asm_7_urdf_SLDASM_link_2_color">
+        <color rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/maver_x4_asm_7_urdf_sldasm_link_2.stl" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="maver_x4_asm_7_urdf_SLDASM_link_3">
+    <inertial>
+      <origin xyz="0.00002627 0.00003282 0.07470664" rpy="0 0 0" />
+      <mass value="0.38898141" />
+      <inertia ixx="0.00116524" ixy="0" ixz="7.7e-7" iyy="0.00100528" iyz="0.00000124" izz="0.00027962" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/maver_x4_asm_7_urdf_sldasm_link_3.stl" />
+      </geometry>
+      <material name="maver_x4_asm_7_urdf_SLDASM_link_3_color">
+        <color rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/maver_x4_asm_7_urdf_sldasm_link_3.stl" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="maver_x4_asm_7_urdf_SLDASM_link_4">
+    <inertial>
+      <origin xyz="-0.00025892 0.00007443 0.0147825" rpy="0 0 0" />
+      <mass value="0.26710115" />
+      <inertia ixx="0.00024335" ixy="-8e-8" ixz="-0.00000103" iyy="0.00020189" iyz="-2e-8" izz="0.00015122" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/maver_x4_asm_7_urdf_sldasm_link_4.stl" />
+      </geometry>
+      <material name="maver_x4_asm_7_urdf_SLDASM_link_4_color">
+        <color rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/maver_x4_asm_7_urdf_sldasm_link_4.stl" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="maver_x4_asm_7_urdf_SLDASM_link_5">
+    <inertial>
+      <origin xyz="-0.00003644 -0.00028155 0.07684261" rpy="0 0 0" />
+      <mass value="0.57404104" />
+      <inertia ixx="0.00162309" ixy="-0.00000176" ixz="-0.00000926" iyy="0.00147489" iyz="-0.00001961" izz="0.00038522" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/maver_x4_asm_7_urdf_sldasm_link_5.stl" />
+      </geometry>
+      <material name="maver_x4_asm_7_urdf_SLDASM_link_5_color">
+        <color rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/maver_x4_asm_7_urdf_sldasm_link_5.stl" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="maver_x4_asm_7_urdf_SLDASM_link_6">
+    <inertial>
+      <origin xyz="0.00189458 -0.00020118 -0.00013597" rpy="0 0 0" />
+      <mass value="0.14481036" />
+      <inertia ixx="0.00006143" ixy="-5.4e-7" ixz="3e-8" iyy="0.00006689" iyz="1e-8" izz="0.00007129" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/maver_x4_asm_7_urdf_sldasm_link_6.stl" />
+      </geometry>
+      <material name="maver_x4_asm_7_urdf_SLDASM_link_6_color">
+        <color rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/maver_x4_asm_7_urdf_sldasm_link_6.stl" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="maver_x4_asm_7_urdf_SLDASM_link_7">
+    <inertial>
+      <origin xyz="0.00056041 0 0.01560222" rpy="0 0 0" />
+      <mass value="0.02018925" />
+      <inertia ixx="0.00000939" ixy="0" ixz="0.00000281" iyy="0.00001104" iyz="0" izz="0.00000498" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/maver_x4_asm_7_urdf_sldasm_link_7.stl" />
+      </geometry>
+      <material name="maver_x4_asm_7_urdf_SLDASM_link_7_color">
+        <color rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/maver_x4_asm_7_urdf_sldasm_link_7.stl" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="maver_x4_asm_7_urdf_SLDASM2_base_link">
+    <inertial>
+      <origin xyz="-0.00321383 4e-8 0.03750248" rpy="0 0 0" />
+      <mass value="0.54734478" />
+      <inertia ixx="0.00062055" ixy="0" ixz="-0.00001859" iyy="0.00068363" iyz="0" izz="0.00061151" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/maver_x4_asm_7_urdf_sldasm2_base_link.stl" />
+      </geometry>
+      <material name="maver_x4_asm_7_urdf_SLDASM2_base_link_color">
+        <color rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/maver_x4_asm_7_urdf_sldasm2_base_link.stl" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="maver_x4_asm_7_urdf_SLDASM2_link_1">
+    <inertial>
+      <origin xyz="0.00777809 0.00006419 0.04626724" rpy="0 0 0" />
+      <mass value="0.29457446" />
+      <inertia ixx="0.00030682" ixy="-1.1e-7" ixz="0.00004205" iyy="0.00028949" iyz="-5.1e-7" izz="0.00026538" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/maver_x4_asm_7_urdf_sldasm2_link_1.stl" />
+      </geometry>
+      <material name="maver_x4_asm_7_urdf_SLDASM2_link_1_color">
+        <color rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/maver_x4_asm_7_urdf_sldasm2_link_1.stl" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="maver_x4_asm_7_urdf_SLDASM2_link_2">
+    <inertial>
+      <origin xyz="-0.0001219 0.00011417 0.07500411" rpy="0 0 0" />
+      <mass value="0.40410289" />
+      <inertia ixx="0.00068162" ixy="-1e-8" ixz="-8e-8" iyy="0.00054334" iyz="-0.00000124" izz="0.00034899" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/maver_x4_asm_7_urdf_sldasm2_link_2.stl" />
+      </geometry>
+      <material name="maver_x4_asm_7_urdf_SLDASM2_link_2_color">
+        <color rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/maver_x4_asm_7_urdf_sldasm2_link_2.stl" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="maver_x4_asm_7_urdf_SLDASM2_link_3">
+    <inertial>
+      <origin xyz="0.00002627 0.00003282 0.07470664" rpy="0 0 0" />
+      <mass value="0.38898141" />
+      <inertia ixx="0.00116524" ixy="0" ixz="7.7e-7" iyy="0.00100528" iyz="0.00000124" izz="0.00027962" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/maver_x4_asm_7_urdf_sldasm2_link_3.stl" />
+      </geometry>
+      <material name="maver_x4_asm_7_urdf_SLDASM2_link_3_color">
+        <color rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/maver_x4_asm_7_urdf_sldasm2_link_3.stl" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="maver_x4_asm_7_urdf_SLDASM2_link_4">
+    <inertial>
+      <origin xyz="-0.00025892 0.00007443 0.0147825" rpy="0 0 0" />
+      <mass value="0.26710115" />
+      <inertia ixx="0.00024335" ixy="-8e-8" ixz="-0.00000103" iyy="0.00020189" iyz="-2e-8" izz="0.00015122" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/maver_x4_asm_7_urdf_sldasm2_link_4.stl" />
+      </geometry>
+      <material name="maver_x4_asm_7_urdf_SLDASM2_link_4_color">
+        <color rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/maver_x4_asm_7_urdf_sldasm2_link_4.stl" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="maver_x4_asm_7_urdf_SLDASM2_link_5">
+    <inertial>
+      <origin xyz="-0.00003644 -0.00028155 0.07684261" rpy="0 0 0" />
+      <mass value="0.57404104" />
+      <inertia ixx="0.00162309" ixy="-0.00000176" ixz="-0.00000926" iyy="0.00147489" iyz="-0.00001961" izz="0.00038522" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/maver_x4_asm_7_urdf_sldasm2_link_5.stl" />
+      </geometry>
+      <material name="maver_x4_asm_7_urdf_SLDASM2_link_5_color">
+        <color rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/maver_x4_asm_7_urdf_sldasm2_link_5.stl" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="maver_x4_asm_7_urdf_SLDASM2_link_6">
+    <inertial>
+      <origin xyz="0.00189458 -0.00020118 -0.00013597" rpy="0 0 0" />
+      <mass value="0.14481036" />
+      <inertia ixx="0.00006143" ixy="-5.4e-7" ixz="3e-8" iyy="0.00006689" iyz="1e-8" izz="0.00007129" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/maver_x4_asm_7_urdf_sldasm2_link_6.stl" />
+      </geometry>
+      <material name="maver_x4_asm_7_urdf_SLDASM2_link_6_color">
+        <color rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/maver_x4_asm_7_urdf_sldasm2_link_6.stl" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="maver_x4_asm_7_urdf_SLDASM2_link_7">
+    <inertial>
+      <origin xyz="0.00056041 0 0.01560222" rpy="0 0 0" />
+      <mass value="0.02018925" />
+      <inertia ixx="0.00000939" ixy="0" ixz="0.00000281" iyy="0.00001104" iyz="0" izz="0.00000498" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/maver_x4_asm_7_urdf_sldasm2_link_7.stl" />
+      </geometry>
+      <material name="maver_x4_asm_7_urdf_SLDASM2_link_7_color">
+        <color rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/maver_x4_asm_7_urdf_sldasm2_link_7.stl" />
+      </geometry>
+    </collision>
+  </link>
+  <link name="maver_x4_asm_maver_x4_mount1">
+  </link>
+  <link name="maver_x4_asm_robot_mount1">
+  </link>
+  <link name="maver_x4_asm_URDF_mount1">
+  </link>
+  <link name="maver_x4_asm_URDF_mount2">
+  </link>
+  <link name="maver_x4_asm_mount1">
+  </link>
+  <link name="maver_x4_asm_mount2">
+  </link>
+  <joint name="maver_x4_asm_maver_x4_joint_yaw1" type="fixed">
+    <parent link="maver_x4_asm_maver_x4_base_link" />
+    <child link="maver_x4_asm_maver_x4_link_yaw1" />
+    <origin xyz="0.212 0.14 0.1625" rpy="0 0 0" />
+  </joint>
+  <joint name="maver_x4_asm_maver_x4_joint_wheel1" type="fixed">
+    <parent link="maver_x4_asm_maver_x4_link_yaw1" />
+    <child link="maver_x4_asm_maver_x4_link_wheel1" />
+    <origin xyz="-0.02 0 -0.1" rpy="0 0 0" />
+  </joint>
+  <joint name="maver_x4_asm_maver_x4_joint_yaw2" type="fixed">
+    <parent link="maver_x4_asm_maver_x4_base_link" />
+    <child link="maver_x4_asm_maver_x4_link_yaw2" />
+    <origin xyz="-0.212 0.14 0.1625" rpy="0 0 0" />
+  </joint>
+  <joint name="maver_x4_asm_maver_x4_joint_wheel2" type="fixed">
+    <parent link="maver_x4_asm_maver_x4_link_yaw2" />
+    <child link="maver_x4_asm_maver_x4_link_wheel2" />
+    <origin xyz="-0.02 0 -0.1" rpy="0 0 0" />
+  </joint>
+  <joint name="maver_x4_asm_maver_x4_joint_yaw3" type="fixed">
+    <parent link="maver_x4_asm_maver_x4_base_link" />
+    <child link="maver_x4_asm_maver_x4_link_yaw3" />
+    <origin xyz="-0.212 -0.14 0.1625" rpy="0 0 0" />
+  </joint>
+  <joint name="maver_x4_asm_maver_x4_joint_wheel3" type="fixed">
+    <parent link="maver_x4_asm_maver_x4_link_yaw3" />
+    <child link="maver_x4_asm_maver_x4_link_wheel3" />
+    <origin xyz="-0.02 0 -0.1" rpy="0 0 0" />
+  </joint>
+  <joint name="maver_x4_asm_maver_x4_joint_yaw4" type="fixed">
+    <parent link="maver_x4_asm_maver_x4_base_link" />
+    <child link="maver_x4_asm_maver_x4_link_yaw4" />
+    <origin xyz="0.212 -0.14 0.1625" rpy="0 0 0" />
+  </joint>
+  <joint name="maver_x4_asm_maver_x4_joint_wheel4" type="fixed">
+    <parent link="maver_x4_asm_maver_x4_link_yaw4" />
+    <child link="maver_x4_asm_maver_x4_link_wheel4" />
+    <origin xyz="-0.02 0 -0.1" rpy="0 0 0" />
+  </joint>
+  <joint name="maver_x4_asm_robot_joint1" type="fixed">
+    <parent link="maver_x4_asm_robot_base" />
+    <child link="maver_x4_asm_robot_link1" />
+    <origin xyz="0 0 0.062" rpy="0 0 0" />
+  </joint>
+  <joint name="maver_x4_asm_URDF_joint_1" type="prismatic">
+    <parent link="maver_x4_asm_URDF_base_link" />
+    <child link="maver_x4_asm_URDF_link_1" />
+    <origin xyz="-0.0381 0 0.625" rpy="0 0 0" />
+    <axis xyz="0 0 1" />
+    <limit lower="0" upper="0.435" effort="10" velocity="0.24" />
+  </joint>
+  <joint name="maver_x4_asm_7_urdf_SLDASM_joint_1" type="revolute">
+    <parent link="maver_x4_asm_7_urdf_SLDASM_base_link" />
+    <child link="maver_x4_asm_7_urdf_SLDASM_link_1" />
+    <origin xyz="0 0 0.0853" rpy="0 0 0" />
+    <axis xyz="0 0 1" />
+    <limit lower="-2.7925" upper="2.7925" effort="52.0" velocity="6.0" />
+  </joint>
+  <joint name="maver_x4_asm_7_urdf_SLDASM_joint_2" type="revolute">
+    <parent link="maver_x4_asm_7_urdf_SLDASM_link_1" />
+    <child link="maver_x4_asm_7_urdf_SLDASM_link_2" />
+    <origin xyz="0.015 0 0.06" rpy="0 0 0" />
+    <axis xyz="0 1 0" />
+    <limit lower="-1.2217" upper="2.1817" effort="52.0" velocity="6.0" />
+  </joint>
+  <joint name="maver_x4_asm_7_urdf_SLDASM_joint_3" type="revolute">
+    <parent link="maver_x4_asm_7_urdf_SLDASM_link_2" />
+    <child link="maver_x4_asm_7_urdf_SLDASM_link_3" />
+    <origin xyz="0 0 0.124" rpy="0 0 0" />
+    <axis xyz="0 0 -1" />
+    <limit lower="-2.7925" upper="2.7925" effort="28.0" velocity="6.0" />
+  </joint>
+  <joint name="maver_x4_asm_7_urdf_SLDASM_joint_4" type="revolute">
+    <parent link="maver_x4_asm_7_urdf_SLDASM_link_3" />
+    <child link="maver_x4_asm_7_urdf_SLDASM_link_4" />
+    <origin xyz="0 0 0.1715" rpy="0 0 0" />
+    <axis xyz="0 1 0" />
+    <limit lower="-1.0472" upper="2.1817" effort="28.0" velocity="6.0" />
+  </joint>
+  <joint name="maver_x4_asm_7_urdf_SLDASM_joint_5" type="revolute">
+    <parent link="maver_x4_asm_7_urdf_SLDASM_link_4" />
+    <child link="maver_x4_asm_7_urdf_SLDASM_link_5" />
+    <origin xyz="0 0 0.059" rpy="0 0 0" />
+    <axis xyz="0 0 -1" />
+    <limit lower="-2.7925" upper="2.7925" effort="6.8" velocity="12.56" />
+  </joint>
+  <joint name="maver_x4_asm_7_urdf_SLDASM_joint_6" type="revolute">
+    <parent link="maver_x4_asm_7_urdf_SLDASM_link_5" />
+    <child link="maver_x4_asm_7_urdf_SLDASM_link_6" />
+    <origin xyz="0 0 0.2055" rpy="0 0 0" />
+    <axis xyz="0 -1 0" />
+    <limit lower="-0.87266" upper="0.87266" effort="6.8" velocity="12.56" />
+  </joint>
+  <joint name="maver_x4_asm_7_urdf_SLDASM_joint_7" type="revolute">
+    <parent link="maver_x4_asm_7_urdf_SLDASM_link_6" />
+    <child link="maver_x4_asm_7_urdf_SLDASM_link_7" />
+    <origin xyz="-0.0235 0 0" rpy="0 0 0" />
+    <axis xyz="1 0 0" />
+    <limit lower="-0.7854" upper="0.7854" effort="6.8" velocity="12.56" />
+  </joint>
+  <joint name="maver_x4_asm_7_urdf_SLDASM2_joint_1" type="revolute">
+    <parent link="maver_x4_asm_7_urdf_SLDASM2_base_link" />
+    <child link="maver_x4_asm_7_urdf_SLDASM2_link_1" />
+    <origin xyz="0 0 0.0853" rpy="0 0 0" />
+    <axis xyz="0 0 1" />
+    <limit lower="-2.7925" upper="2.7925" effort="52.0" velocity="6.0" />
+  </joint>
+  <joint name="maver_x4_asm_7_urdf_SLDASM2_joint_2" type="revolute">
+    <parent link="maver_x4_asm_7_urdf_SLDASM2_link_1" />
+    <child link="maver_x4_asm_7_urdf_SLDASM2_link_2" />
+    <origin xyz="0.015 0 0.06" rpy="0 0 0" />
+    <axis xyz="0 1 0" />
+    <limit lower="-1.2217" upper="2.1817" effort="52.0" velocity="6.0" />
+  </joint>
+  <joint name="maver_x4_asm_7_urdf_SLDASM2_joint_3" type="revolute">
+    <parent link="maver_x4_asm_7_urdf_SLDASM2_link_2" />
+    <child link="maver_x4_asm_7_urdf_SLDASM2_link_3" />
+    <origin xyz="0 0 0.124" rpy="0 0 0" />
+    <axis xyz="0 0 -1" />
+    <limit lower="-2.7925" upper="2.7925" effort="28.0" velocity="6.0" />
+  </joint>
+  <joint name="maver_x4_asm_7_urdf_SLDASM2_joint_4" type="revolute">
+    <parent link="maver_x4_asm_7_urdf_SLDASM2_link_3" />
+    <child link="maver_x4_asm_7_urdf_SLDASM2_link_4" />
+    <origin xyz="0 0 0.1715" rpy="0 0 0" />
+    <axis xyz="0 1 0" />
+    <limit lower="-1.0472" upper="2.1817" effort="28.0" velocity="6.0" />
+  </joint>
+  <joint name="maver_x4_asm_7_urdf_SLDASM2_joint_5" type="revolute">
+    <parent link="maver_x4_asm_7_urdf_SLDASM2_link_4" />
+    <child link="maver_x4_asm_7_urdf_SLDASM2_link_5" />
+    <origin xyz="0 0 0.059" rpy="0 0 0" />
+    <axis xyz="0 0 -1" />
+    <limit lower="-2.7925" upper="2.7925" effort="6.8" velocity="12.56" />
+  </joint>
+  <joint name="maver_x4_asm_7_urdf_SLDASM2_joint_6" type="revolute">
+    <parent link="maver_x4_asm_7_urdf_SLDASM2_link_5" />
+    <child link="maver_x4_asm_7_urdf_SLDASM2_link_6" />
+    <origin xyz="0 0 0.2055" rpy="0 0 0" />
+    <axis xyz="0 -1 0" />
+    <limit lower="-0.87266" upper="0.87266" effort="6.8" velocity="12.56" />
+  </joint>
+  <joint name="maver_x4_asm_7_urdf_SLDASM2_joint_7" type="revolute">
+    <parent link="maver_x4_asm_7_urdf_SLDASM2_link_6" />
+    <child link="maver_x4_asm_7_urdf_SLDASM2_link_7" />
+    <origin xyz="-0.0235 0 0" rpy="0 0 0" />
+    <axis xyz="1 0 0" />
+    <limit lower="-0.7854" upper="0.7854" effort="6.8" velocity="12.56" />
+  </joint>
+  <joint name="maver_x4_asm_maver_x4_mount1_frame" type="fixed">
+    <parent link="maver_x4_asm_maver_x4_base_link" />
+    <child link="maver_x4_asm_maver_x4_mount1" />
+    <origin xyz="0.035 0 0.23750001" rpy="0 0 0" />
+  </joint>
+  <joint name="maver_x4_asm_robot_mount1_frame" type="fixed">
+    <parent link="maver_x4_asm_robot_base" />
+    <child link="maver_x4_asm_robot_mount1" />
+    <origin xyz="0 0 0.01" rpy="0 0 0" />
+  </joint>
+  <joint name="maver_x4_asm_URDF_mount1_frame" type="fixed">
+    <parent link="maver_x4_asm_URDF_link_1" />
+    <child link="maver_x4_asm_URDF_mount1" />
+    <origin xyz="-0.0455 0.1 0.0163896" rpy="-1.57079633 0 0" />
+  </joint>
+  <joint name="maver_x4_asm_URDF_mount2_frame" type="fixed">
+    <parent link="maver_x4_asm_URDF_link_1" />
+    <child link="maver_x4_asm_URDF_mount2" />
+    <origin xyz="-0.0455 -0.1 0.0163896" rpy="1.57079633 0 0" />
+  </joint>
+  <joint name="maver_x4_asm_attach_robot_root" type="fixed">
+    <parent link="maver_x4_asm_maver_x4_mount1" />
+    <child link="maver_x4_asm_robot_base" />
+    <origin xyz="0 0 0" rpy="0 0 0" />
+  </joint>
+  <joint name="maver_x4_asm_attach_URDF_root" type="fixed">
+    <parent link="maver_x4_asm_robot_mount1" />
+    <child link="maver_x4_asm_URDF_base_link" />
+    <origin xyz="0.118 0 0" rpy="0 0 0" />
+  </joint>
+  <joint name="maver_x4_asm_attach_7_urdf_SLDASM_root" type="fixed">
+    <parent link="maver_x4_asm_URDF_mount1" />
+    <child link="maver_x4_asm_7_urdf_SLDASM_base_link" />
+    <origin xyz="0 0 0" rpy="0 0 0" />
+  </joint>
+  <joint name="maver_x4_asm_attach_7_urdf_SLDASM2_root" type="fixed">
+    <parent link="maver_x4_asm_URDF_mount2" />
+    <child link="maver_x4_asm_7_urdf_SLDASM2_base_link" />
+    <origin xyz="0 0 0" rpy="0 0 0" />
+  </joint>
+  <joint name="maver_x4_asm_mount1_frame" type="fixed">
+    <parent link="maver_x4_asm_7_urdf_SLDASM_link_7" />
+    <child link="maver_x4_asm_mount1" />
+    <origin xyz="0.02348191 0 0.042" rpy="0 0 0" />
+  </joint>
+  <joint name="maver_x4_asm_mount2_frame" type="fixed">
+    <parent link="maver_x4_asm_7_urdf_SLDASM2_link_7" />
+    <child link="maver_x4_asm_mount2" />
+    <origin xyz="0.02348191 0 0.042" rpy="0 0 0" />
+  </joint>
+  <link name="robot_base">
+    <inertial>
+      <origin xyz="0.00003207 0.00004116 0.04297674" rpy="0 0 0" />
+      <mass value="0.530" />
+      <inertia ixx="0.00043292" ixy="0.00000309" ixz="0.00000052" iyy="0.00038073" iyz="0.00000073" izz="0.00025998" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/hexfellow_gp80/base_link.STL" />
+      </geometry>
+      <material name="robot_gp80_material">
+        <color rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/hexfellow_gp80/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="attach_robot_root" type="fixed">
+    <parent link="maver_x4_asm_mount1" />
+    <child link="robot_base" />
+    <origin xyz="0 0 0" rpy="0 0 0" />
+  </joint>
+  <link name="robot2_base">
+    <inertial>
+      <origin xyz="0.00003207 0.00004116 0.04297674" rpy="0 0 0" />
+      <mass value="0.530" />
+      <inertia ixx="0.00043292" ixy="0.00000309" ixz="0.00000052" iyy="0.00038073" iyz="0.00000073" izz="0.00025998" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/hexfellow_gp80/base_link.STL" />
+      </geometry>
+      <material name="robot2_gp80_material">
+        <color rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/hexfellow_gp80/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="attach_robot2_root" type="fixed">
+    <parent link="maver_x4_asm_mount2" />
+    <child link="robot2_base" />
+    <origin xyz="0 0 0" rpy="0 0 0" />
+  </joint>
+  <!-- ZED short triangular v5: 65 mm shelf datum, nominal 55-degree mount; simulation/view study only. -->
+<link name="zed_camera_link" />
+  <link name="zed_camera_center">
+    <visual>
+      <origin rpy="0 0 0" xyz="-0.01 0 0.0" />
+      <geometry>
+        <mesh filename="meshes/zed/zed2i.stl" />
+      </geometry>
+      <material name="cam_mat">
+        <color rgba="0.25 0.25 0.25 1.0" />
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="-0.01 0 0.0" />
+      <geometry>
+        <mesh filename="meshes/zed/zed2i.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.166" />
+      <inertia ixx="0.00043" iyy="0.00004" izz="0.00043" ixy="0" ixz="0" iyz="0" />
+    </inertial>
+  </link>
+  <joint name="zed_camera_center_joint" type="fixed">
+    <parent link="zed_camera_link" />
+    <child link="zed_camera_center" />
+    <origin rpy="0 0.0 0" xyz="0 0 0.015" />
+  </joint>
+  <link name="zed_left_camera_frame" />
+  <joint name="zed_left_camera_joint" type="fixed">
+    <parent link="zed_camera_center" />
+    <child link="zed_left_camera_frame" />
+    <origin rpy="0 0 0" xyz="-0.01 0.06 0" />
+  </joint>
+  <link name="zed_left_camera_frame_optical" />
+  <joint name="zed_left_camera_optical_joint" type="fixed">
+    <origin rpy="-1.5707963267948966 0.0 -1.5707963267948966" xyz="0 0 0" />
+    <parent link="zed_left_camera_frame" />
+    <child link="zed_left_camera_frame_optical" />
+  </joint>
+  <link name="zed_right_camera_frame" />
+  <joint name="zed_right_camera_joint" type="fixed">
+    <parent link="zed_camera_center" />
+    <child link="zed_right_camera_frame" />
+    <origin rpy="0 0 0" xyz="-0.01 -0.06 0" />
+  </joint>
+  <link name="zed_right_camera_frame_optical" />
+  <joint name="zed_right_camera_optical_joint" type="fixed">
+    <origin rpy="-1.5707963267948966 0.0 -1.5707963267948966" xyz="0 0 0" />
+    <parent link="zed_right_camera_frame" />
+    <child link="zed_right_camera_frame_optical" />
+  </joint>
+  <link name="zed_mount">
+    <inertial>
+      <mass value="0.10848282993058736" />
+      <origin xyz="-0.012175820831803246 -4.020393360390112e-12 0.03852358055085968" />
+      <inertia ixx="0.00012241534030928557" iyy="0.00012176959088600822" izz="4.1463130869496507e-05" ixy="3.885223356495315e-15" ixz="1.707709148132823e-05" iyz="1.289541734569125e-14" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/zed/zed_short_triangular_55deg_mm.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+      <material name="zed_mount_material">
+        <color rgba="0.06 0.28 0.32 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" />
+      <geometry>
+        <mesh filename="meshes/zed/zed_short_triangular_55deg_mm.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="zed_bracket_mount" type="fixed">
+    <parent link="maver_x4_asm_URDF_link_1" />
+    <child link="zed_mount" />
+    <origin xyz="0.04 0 0.08" rpy="0 0 0" />
+  </joint>
+  <joint name="zed_camera_mount" type="fixed">
+    <parent link="zed_mount" />
+    <child link="zed_camera_link" />
+    <origin xyz="0.0024574561328669755 0 0.06672072930905314" rpy="0 0.9599310885968813 0" />
+  </joint>
+</robot>

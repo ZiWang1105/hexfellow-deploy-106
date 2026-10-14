@@ -22,7 +22,7 @@ import trimesh
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / 'src'))
-from policy_sim.calibration.charuco import detect
+from hexfellow_deploy.robotics.calibration.charuco import detect
 from wrist_calibration_geometry import DEFAULT_PLAN, installed_camera_transforms, load_plan
 
 JOINTS = ['mobile_base_x', 'mobile_base_y', 'mobile_base_yaw', 'maver_x4_asm_URDF_joint_1']

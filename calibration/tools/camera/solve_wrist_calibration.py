@@ -19,7 +19,7 @@ import numpy as np
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / 'src'))
-from policy_sim.calibration.wrist_handeye import camera_from_board, solve, validate
+from hexfellow_deploy.robotics.calibration.wrist_handeye import camera_from_board, solve, validate
 
 
 def _eligible(row):
