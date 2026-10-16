@@ -566,7 +566,8 @@ class HexWholeBodyEndpoint:
             check_power(state, acquiring=acquiring or not self.owned)
         for name, row in state.health.items():
             if row["parking_stop"] is not None:
-                raise HardwareSafetyError(f"{name} parking/emergency stop is active")
+                raise HardwareSafetyError(
+                    f"{name} parking/emergency stop is active: {row['parking_stop']}")
             if name == "theta":
                 if row['state'] == 'LsEmergencyStop':
                     raise HardwareSafetyError('theta parking/emergency stop is active')

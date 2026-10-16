@@ -1242,10 +1242,17 @@ class PinkIKCore:
         # Measured-origin lift commands still retain reference acceleration and
         # jerk history. Pink's continuous sqrt(2*a*distance) bound alone cannot
         # keep that history feasible against the next discrete position bound.
+        # A hard-locked lift does not integrate from measured feedback and cannot
+        # execute the governor's recovery motion. Keep its persistent reference
+        # and lock equality instead. Physical range/velocity validation remains
+        # active; the native fixed-lift owner independently supervises the brake,
+        # measured drift and feedback age. Do not apply this exception to a
+        # movable lift merely because its current requested velocity is zero.
         self._measured_lift_boundary_governor = (
             FiniteBaseBoundaryGovernor(self.model, [self._base_dofs],
                                        self._acceleration_limits, self._jerk_limits)
-            if config.mit_servo is not None and self._lift_reference_governor is None else None)
+            if (config.mit_servo is not None and self._lift_reference_governor is None
+                and self._base_dofs not in self._locked_indices) else None)
         if self._measured_lift_boundary_governor is not None:
             self._measured_lift_boundary_governor.labels = ("lift_measured_lower", "lift_measured_upper")
         if precision or config.effort_regularization_cost > 0:

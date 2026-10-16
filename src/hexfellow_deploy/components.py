@@ -124,6 +124,17 @@ class ControlComponent(DABaseInterface):
                             executor.observation_hold(measured)
                         elif request["operation"] == "hold":
                             executor.hold(measured)
+                        elif request["operation"] == "manual_base":
+                            # Delayed keyboard packets are a normal stop condition,
+                            # never a reason to extend their original input lease.
+                            if time.monotonic() >= float(request['expires_s']):
+                                executor.hold(measured)
+                            else:
+                                executor.manual_base(request['velocity_body'], request['expires_s'], measured)
+                        elif request["operation"] == "scan_pulse":
+                            if not 0 <= time.monotonic()-float(request['created_s']) <= .5:
+                                raise ValueError('Scan pulse timestamp is invalid or expired')
+                            executor.scan_pulse(request['delta_xy_m'], request['yaw_rad'], measured)
                         elif request["operation"] == "target":
                             observed = request["observed"]
                             if started-observed["timestamp_s"] > 90:

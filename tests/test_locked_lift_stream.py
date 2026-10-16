@@ -13,6 +13,30 @@ from hexfellow_deploy.actuation import StreamContract, deployment, encode_mit
 from hexfellow_deploy.robot.joints import JOINTS, LIFT
 
 
+def test_recorded_braked_lift_endpoint_velocity_passes_without_changing_feedback():
+    record = json.loads((Path(__file__).parent/'fixtures/locked_lift_endpoint_223536.json').read_text())
+    metadata = deployment(ROOT, Path('configs/hardware/desktop.yaml'))[3]
+    executor = build_shared_executor(metadata, .02)
+    seed = record['seed']
+    executor.ik.initialize_reference(seed, stationary_reference=True)
+    measured = record['fault_feedback']
+    original = copy.deepcopy(measured)
+    executor.ik.control_clock = lambda: record['control_timestamp']
+    executor.ik.feedback_provider = lambda _: record['feedback_received']
+    contract = StreamContract(.1, .1, metadata=metadata, clock=executor.ik.control_clock)
+    contract.seed(seed)
+    command, _ = executor.tick(measured)
+    result = executor.ik.last_result
+    frame = dict(sequence=1, created_s=record['control_timestamp'], measured=measured,
+                 received=record['feedback_received'], command=command, mit=encode_mit(result.mit),
+                 reference_velocity={n:float(result.velocity[i]) for n,i in executor.ik.indices.items()})
+    contract.accept(frame, measured)
+    assert command['joint_positions'][LIFT] == pytest.approx(seed['joint_positions'][LIFT], abs=1e-10)
+    assert result.velocity[executor.ik.indices[LIFT]] == pytest.approx(0., abs=1e-10)
+    assert measured == original
+    assert executor.ik.last_source['joint_positions'][LIFT] == original['joint_positions'][LIFT]
+
+
 def test_recorded_fixed_lift_frame_reproduces_old_rejection_and_passes_current_contract():
     record = json.loads((Path(__file__).parent/'fixtures/fixed_lift_rejected_232851.json').read_text())
     frame = record['frame']

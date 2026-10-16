@@ -1,0 +1,110 @@
+{
+  "source_run": "slam_manual_20261015_223536",
+  "seed": {
+    "timestamp_s": 430026.73538247,
+    "joint_positions": {
+      "maver_x4_asm_URDF_joint_1": 0.42199806301275666,
+      "maver_x4_asm_7_urdf_SLDASM_joint_1": 1.6029842571254893,
+      "maver_x4_asm_7_urdf_SLDASM_joint_2": 1.5605412258063012,
+      "maver_x4_asm_7_urdf_SLDASM_joint_3": 0.024760478674547514,
+      "maver_x4_asm_7_urdf_SLDASM_joint_4": -0.044994344399128916,
+      "maver_x4_asm_7_urdf_SLDASM_joint_5": -0.08414813398982907,
+      "maver_x4_asm_7_urdf_SLDASM_joint_6": -0.10166457671712088,
+      "maver_x4_asm_7_urdf_SLDASM_joint_7": 0.21277272265966274,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_1": -1.5752832705337325,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_2": 1.5912608888489062,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_3": 0.05491956533026993,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_4": -0.07346886277425613,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_5": -0.2306432992329078,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_6": -0.10667847681189943,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_7": 0.10392719837925218
+    },
+    "joint_velocities": {
+      "maver_x4_asm_URDF_joint_1": -0.0,
+      "maver_x4_asm_7_urdf_SLDASM_joint_1": 0.0,
+      "maver_x4_asm_7_urdf_SLDASM_joint_2": 0.0,
+      "maver_x4_asm_7_urdf_SLDASM_joint_3": -0.0,
+      "maver_x4_asm_7_urdf_SLDASM_joint_4": 0.0,
+      "maver_x4_asm_7_urdf_SLDASM_joint_5": 0.0001928711195705823,
+      "maver_x4_asm_7_urdf_SLDASM_joint_6": -0.0,
+      "maver_x4_asm_7_urdf_SLDASM_joint_7": -0.0,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_1": 0.0,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_2": 0.0,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_3": -0.0,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_4": 0.0,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_5": -0.0,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_6": -0.0,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_7": -0.0
+    },
+    "gripper_state": {
+      "left": "closed",
+      "right": "closed"
+    }
+  },
+  "fault_feedback": {
+    "timestamp_s": 430043.040957904,
+    "joint_positions": {
+      "maver_x4_asm_URDF_joint_1": 0.4219958159277877,
+      "maver_x4_asm_7_urdf_SLDASM_joint_1": 1.603776713997356,
+      "maver_x4_asm_7_urdf_SLDASM_joint_2": 1.5570260529044784,
+      "maver_x4_asm_7_urdf_SLDASM_joint_3": 0.024785588479111116,
+      "maver_x4_asm_7_urdf_SLDASM_joint_4": -0.043182158390226065,
+      "maver_x4_asm_7_urdf_SLDASM_joint_5": -0.0845891534663462,
+      "maver_x4_asm_7_urdf_SLDASM_joint_6": -0.10233569331182084,
+      "maver_x4_asm_7_urdf_SLDASM_joint_7": 0.2127247857600413,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_1": -1.5730223965710666,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_2": 1.5884756551123604,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_3": 0.054748433452008326,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_4": -0.07274082111125571,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_5": -0.23115172997451755,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_6": -0.10751287847093488,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_7": 0.10368751388114505
+    },
+    "joint_velocities": {
+      "maver_x4_asm_URDF_joint_1": 0.00017117223938251837,
+      "maver_x4_asm_7_urdf_SLDASM_joint_1": 0.0,
+      "maver_x4_asm_7_urdf_SLDASM_joint_2": -0.0012920492476087553,
+      "maver_x4_asm_7_urdf_SLDASM_joint_3": -0.0,
+      "maver_x4_asm_7_urdf_SLDASM_joint_4": -0.00011609717877064177,
+      "maver_x4_asm_7_urdf_SLDASM_joint_5": -0.0006703675806433833,
+      "maver_x4_asm_7_urdf_SLDASM_joint_6": 0.00038199716885824067,
+      "maver_x4_asm_7_urdf_SLDASM_joint_7": -0.0,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_1": 0.0,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_2": 0.0,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_3": -0.0,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_4": 0.0,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_5": -0.0,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_6": -0.0,
+      "maver_x4_asm_7_urdf_SLDASM2_joint_7": -0.0
+    },
+    "gripper_state": {
+      "left": "closed",
+      "right": "closed"
+    }
+  },
+  "control_timestamp": 430043.050879887,
+  "feedback_received": {
+    "left": 430043.046696095,
+    "right": 430043.043566629,
+    "theta": 430043.040957904,
+    "base": 430043.046927155
+  },
+  "fault_info": [
+    "boundary_state_unrecoverable",
+    {
+      "exception": "BoundaryStateUnrecoverable",
+      "message": "finite base state is outside the braking envelope",
+      "reaction_s": 0.049964541997760535,
+      "dt_s": 0.02,
+      "boundaries": [
+        {
+          "label": "lift_measured_upper",
+          "available_distance": -6.615555300155752e-06,
+          "minimum_closing_velocity": -0.01,
+          "allowed_closing_velocity": 0.0,
+          "previous_closing_velocity": 0.0
+        }
+      ]
+    }
+  ]
+}

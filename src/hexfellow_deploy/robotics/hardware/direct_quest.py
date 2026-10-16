@@ -104,7 +104,16 @@ def check_start_position(state, *, allow_lift_retreat=False):
                 or not np.all(np.isfinite(position)) or not np.all(np.isfinite(limits))):
             raise HardwareSafetyError(f"invalid {side} initial joint bounds")
         if np.any(position < limits[:, 0] + .012) or np.any(position > limits[:, 1] - .012):
-            raise HardwareSafetyError(f"{side} starts inside joint endpoint margin; reposition before acquisition")
+            violations = np.flatnonzero((position < limits[:, 0] + .012)
+                                        | (position > limits[:, 1] - .012))
+            detail = '; '.join(
+                f"J{i+1}: measured {np.degrees(position[i]):.3f} deg; "
+                f"SDK range [{np.degrees(limits[i, 0]):.3f}, {np.degrees(limits[i, 1]):.3f}] deg; "
+                f"startup range [{np.degrees(limits[i, 0]+.012):.3f}, "
+                f"{np.degrees(limits[i, 1]-.012):.3f}] deg"
+                for i in violations)
+            raise HardwareSafetyError(
+                f"{side} starts inside joint endpoint margin; reposition before acquisition; {detail}")
 
 
 class DirectDownlinkGate:

@@ -4,6 +4,7 @@ There is no localization input or inferred chassis pose. A policy-estimated
 object XY point or relative yaw can request ONE pulse, then reobservation.
 The same executor receives physical encoder packets from either transport.
 """
+import time
 import numpy as np
 from scipy.spatial.transform import Rotation
 
@@ -34,6 +35,8 @@ class PoseExecutor:
         self.navigation = None
         self.requires_base = False
         self._base_reference = np.zeros(3)
+        self.manual_base_command = None
+        self.manual_base_ready = False
 
     def start_carry(self, preset, measured):
         from .startup_pose import CarryStartup
@@ -46,6 +49,7 @@ class PoseExecutor:
         if action.skill is not None:
             raise ValueError('Skills require the shared deployment SkillExecutor')
         self.startup = None
+        self.manual_base_command = None
         validate_sensor_packet(measured)
         # Base-relative pose from the latest image. Chassis motion consumes it;
         # there is no world/odometry anchor and no integrated travel estimate.
@@ -106,6 +110,51 @@ class PoseExecutor:
         self.needs_observation = False
         self.navigation = None
         self.requires_base = False
+        self.manual_base_command = None
+        self.manual_base_ready = False
+
+    def manual_base(self, velocity_body, expires_s, measured):
+        """Leased operator velocity; expiration is checked in the control owner.
+
+        Keep the original input deadline, never renew it from a cached request.
+        Existing base acceleration bounds also apply to release and expiration.
+        """
+        velocity = np.asarray(velocity_body, dtype=float)
+        remaining = float(expires_s)-time.monotonic()
+        if (velocity.shape != (3,) or not np.isfinite(velocity).all()
+                or not np.isfinite(remaining) or not 0 < remaining <= .25
+                or np.linalg.norm(velocity[:2]) > self.base_motion.max_speed_m_s+1e-12
+                or abs(velocity[2]) > self.base_motion.max_yaw_rate_rad_s+1e-12):
+            raise ValueError('Invalid manual base velocity or expired input lease')
+        if self.manual_base_command is None:
+            self.hold(measured)
+        self.manual_base_command = (velocity.copy(), float(expires_s))
+
+    def scan_pulse(self, delta_xy_m, yaw_rad, measured):
+        """Operator scan displacement request, consumed as one bounded pulse.
+
+        This is commanded travel, not odometry. Preserve both arm references
+        and gripper commands. Never disguise a scan vector as an object estimate.
+        """
+        delta = np.asarray(delta_xy_m, dtype=float)
+        if delta.shape != (2,) or not np.isfinite(delta).all() or not np.isfinite(yaw_rad):
+            raise ValueError('Scan pulse must contain finite XY and yaw')
+        if np.linalg.norm(delta) > 0 and yaw_rad != 0:
+            raise ValueError('Translate and turn in separate scan pulses')
+        area = self.base_motion.pulse_s-self.base_motion.ramp_s
+        velocity = np.r_[delta, yaw_rad]/area
+        if (np.linalg.norm(velocity[:2]) > self.base_motion.max_speed_m_s+1e-12
+                or abs(velocity[2]) > self.base_motion.max_yaw_rate_rad_s+1e-12):
+            raise ValueError('Scan pulse exceeds configured base limits')
+        if self.startup is not None and not self.startup.complete:
+            raise ValueError('Complete startup before scanning')
+        self.hold(measured)
+        self.target = {}
+        self.requires_base = True
+        self.pulse_started_s = None
+        self.pulse_velocity = velocity
+        self.navigation = dict(source='operator_scan_plan', requested_delta_xy_m=delta.tolist(),
+                               yaw_rad=float(yaw_rad), requires_base=True)
 
     def tick(self, measured):
         command, diagnostic = self._tick(measured)
@@ -137,6 +186,19 @@ class PoseExecutor:
                       "ik_status": ik_diagnostic.status}
         if self.startup is not None:
             diagnostic.update(self.startup.update(measured))
+            return command, diagnostic
+        if self.manual_base_command is not None:
+            velocity, expires = self.manual_base_command
+            live = time.monotonic() < expires
+            # Match scan/navigation's one-time arm braking gate. Rechecking HOLD
+            # every tick would chop base motion whenever the arm hold solver
+            # briefly reports BRAKING while maintaining its reference.
+            if self.ik.core.control_state == 'HOLD':
+                self.manual_base_ready = True
+            if live and self.manual_base_ready:
+                command['base_velocity_body'] = velocity.tolist()
+            diagnostic.update(mode='manual_base' if live else 'manual_input_expired',
+                              input_expires_s=expires)
             return command, diagnostic
         if self.navigation is not None:
             diagnostic["navigation"] = dict(self.navigation)

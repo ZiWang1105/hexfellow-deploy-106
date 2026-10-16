@@ -90,10 +90,12 @@ class CameraAvailability:
 
 
 class SimulationCamera(DABaseInterface):
-    def __init__(self, name, plant_state, images, workspace, scene, output, fps=15, time_budget=.04):
+    def __init__(self, name, plant_state, images, workspace, scene, output, fps=15, time_budget=.04,
+                 record_evaluation=False):
         super().__init__(name, [plant_state, images], time_budget)
         self.source, self.images = plant_state, images
         self.workspace, self.scene, self.output, self.fps = workspace, scene, output, fps
+        self.record_evaluation = record_evaluation
 
     def initialize(self):
         if not math.isfinite(self.fps) or not 0 < self.fps <= 120:
@@ -122,6 +124,7 @@ class SimulationCamera(DABaseInterface):
         option.geomgroup[3] = 0
         option.sitegroup[:] = 0
         self._ready.value = True
+        evaluation = (output/'evaluation_camera.jsonl').open('w') if self.record_evaluation else None
         try:
             while not self.stopping:
                 started = time.monotonic()
@@ -136,8 +139,18 @@ class SimulationCamera(DABaseInterface):
                     depth = read_policy_depth(renderer, scene, maps)
                     kin.update(row['measured']['joint_positions'])
                     self.images.put(row['measured'], rgb, depth, scene.camera_k.tolist(), kin.packet())
+                    if evaluation is not None:
+                        import numpy as np
+                        camera_id = scene.model.camera('policy_rgb').id
+                        transform = np.eye(4)
+                        transform[:3, :3] = scene.data.cam_xmat[camera_id].reshape(3, 3) @ np.diag([1., -1., -1.])
+                        transform[:3, 3] = scene.data.cam_xpos[camera_id]
+                        evaluation.write(json.dumps(dict(timestamp_s=row['measured']['timestamp_s'],
+                            sim_s=row['sim_s'], T_world_from_optical=transform.tolist()))+'\n')
                 time.sleep(max(0., 1/self.fps-(time.monotonic()-started)))
         finally:
+            if evaluation is not None:
+                evaluation.close()
             renderer.close()
 
 
