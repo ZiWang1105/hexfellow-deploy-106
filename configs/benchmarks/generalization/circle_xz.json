@@ -1,0 +1,29 @@
+{
+  "name": "circle_xz",
+  "type": "cartesian",
+  "kind": "circle",
+  "distance": 0.09,
+  "basis": [
+    [
+      0,
+      0,
+      1
+    ],
+    [
+      1,
+      0,
+      0
+    ],
+    [
+      0,
+      1,
+      0
+    ]
+  ],
+  "arms": [
+    "right"
+  ],
+  "posture": "extended",
+  "split": "heldout",
+  "description": "Fixed-orientation circle in the base XZ plane. Initial research logs used the incorrect identifier circle_xy; geometry is unchanged."
+}

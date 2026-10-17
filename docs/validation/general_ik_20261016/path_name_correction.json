@@ -1,0 +1,6 @@
+{
+  "old": "circle_xy",
+  "new": "circle_xz",
+  "reason": "Saved basis maps original YZ circle into XZ, not XY. Correct case naming only; all numeric geometry, timing, acceptance and controller parameters unchanged.",
+  "original_inline_spec": "candidate_brackets/plan.json"
+}

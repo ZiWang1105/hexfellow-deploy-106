@@ -1,0 +1,29 @@
+{
+  "name": "seven_joint_arc",
+  "type": "joint",
+  "delta": [
+    1.2,
+    -0.45,
+    0.375,
+    -0.375,
+    0.3,
+    0.225,
+    0.15
+  ],
+  "waves": [
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  ],
+  "arms": [
+    "right"
+  ],
+  "posture": "extended",
+  "split": "train"
+}

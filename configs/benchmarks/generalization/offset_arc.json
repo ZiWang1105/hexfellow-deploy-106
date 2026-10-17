@@ -1,0 +1,29 @@
+{
+  "name": "offset_arc",
+  "type": "joint",
+  "delta": [
+    1.05,
+    -0.3,
+    0.25,
+    -0.3,
+    0.22,
+    0.15,
+    0.1
+  ],
+  "waves": [
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  ],
+  "arms": [
+    "right"
+  ],
+  "posture": "extended_offset",
+  "split": "heldout"
+}

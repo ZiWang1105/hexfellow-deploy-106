@@ -1,0 +1,28 @@
+{
+  "name": "translate_rotate",
+  "type": "cartesian",
+  "kind": "rotate",
+  "distance": 0.25,
+  "basis": [
+    [
+      1,
+      0,
+      0
+    ],
+    [
+      0,
+      1,
+      0
+    ],
+    [
+      0,
+      0,
+      1
+    ]
+  ],
+  "arms": [
+    "right"
+  ],
+  "posture": "extended",
+  "split": "train"
+}

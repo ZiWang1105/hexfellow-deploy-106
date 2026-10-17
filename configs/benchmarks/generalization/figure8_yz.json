@@ -1,0 +1,28 @@
+{
+  "name": "figure8_yz",
+  "type": "cartesian",
+  "kind": "figure8",
+  "distance": 0.09,
+  "basis": [
+    [
+      1,
+      0,
+      0
+    ],
+    [
+      0,
+      1,
+      0
+    ],
+    [
+      0,
+      0,
+      1
+    ]
+  ],
+  "arms": [
+    "right"
+  ],
+  "posture": "extended",
+  "split": "heldout"
+}

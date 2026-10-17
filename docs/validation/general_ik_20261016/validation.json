@@ -1,0 +1,2827 @@
+{
+  "branch": "feat/ik-1p2mps-benchmark",
+  "base_commit": "e4a20859abf884c54798f5ce03fef1b667390352",
+  "hardware_opened": false,
+  "physical_limits_changed": false,
+  "defaults_changed": false,
+  "training_paths": 8,
+  "heldout_paths": 12,
+  "training_simulations": 256,
+  "speed_search_simulations": 120,
+  "final_check_simulations": 17,
+  "tests": {
+    "passed": 483,
+    "skipped": 1,
+    "seconds": 79.35
+  },
+  "baseline": {
+    "circle_xz": {
+      "split": "heldout",
+      "requested_pass": null,
+      "requested_fail": 0.2,
+      "screened_ceiling": 0.8061026066925544,
+      "public_tcp": null,
+      "run": null
+    },
+    "circle_yz": {
+      "split": "train",
+      "requested_pass": 0.8497063595494521,
+      "requested_fail": null,
+      "screened_ceiling": 0.8497063595494521,
+      "public_tcp": {
+        "frame": "public pad-center TCP; fixed tool transform from run metadata",
+        "position_mm": {
+          "rms": 1.8499894044809997,
+          "p50": 1.0300744436067597,
+          "p95": 4.067708686541144,
+          "p99": 5.049258489652457,
+          "max": 5.126063515774446
+        },
+        "final_position_mm": [
+          0.3234995166704774
+        ],
+        "per_arm_position_mm": {
+          "right": {
+            "rms": 1.8499894044809997,
+            "p50": 1.0300744436067597,
+            "p95": 4.067708686541144,
+            "p99": 5.049258489652457,
+            "max": 5.126063515774446
+          }
+        },
+        "per_arm_orientation_deg": {
+          "right": {
+            "rms": 0.6504709330132643,
+            "p50": 0.09200366234077913,
+            "p95": 1.6879994646209868,
+            "p99": 2.4982178426260813,
+            "max": 2.5381734364200215
+          }
+        },
+        "orientation_deg": {
+          "rms": 0.6504709330132643,
+          "p50": 0.09200366234077913,
+          "p95": 1.6879994646209868,
+          "p99": 2.4982178426260813,
+          "max": 2.5381734364200215
+        },
+        "moving_arm_speed": {
+          "right": {
+            "peak_m_s": 0.8959118218392597,
+            "time_at_or_above_1p2_m_s": 0.0,
+            "longest_continuous_interval_at_or_above_1p2_m_s": 0.0
+          }
+        },
+        "tracking_acceptance": {
+          "completed": true,
+          "position_rms_5mm": true,
+          "position_p95_10mm": true,
+          "orientation_p95_2deg": true,
+          "final_position_1mm": true,
+          "limits": true,
+          "no_planner_failures": true,
+          "no_modeled_contacts": true,
+          "no_torque_saturation": true
+        },
+        "tracking_accepted": true,
+        "fast_tracking_accepted": false,
+        "source_sha256": {
+          "trace.npz": "45c47822a90e221ad50041891621472fe1ce7d58e4ad0415937d5f4b229d9f35",
+          "metadata.json": "1ca921ebc4f9337dadd9299140c8eafad8e6db081d26b8bd34cfce8a282c7938",
+          "summary.json": "081bf0056dfb227b6debf7939716ee2892ca5efef5a2999474b93c01fcb9b5f3"
+        }
+      },
+      "run": "x7-gp80-fast-trajectory-sim-v1__circle_yz__0.849706360"
+    },
+    "compact_arc": {
+      "split": "heldout",
+      "requested_pass": 0.75803216978743,
+      "requested_fail": null,
+      "screened_ceiling": 0.75803216978743,
+      "public_tcp": {
+        "frame": "public pad-center TCP; fixed tool transform from run metadata",
+        "position_mm": {
+          "rms": 1.1195019461216589,
+          "p50": 0.8284283042473266,
+          "p95": 2.243184179435905,
+          "p99": 2.3615134211811712,
+          "max": 2.369939520291267
+        },
+        "final_position_mm": [
+          0.306275021249318
+        ],
+        "per_arm_position_mm": {
+          "right": {
+            "rms": 1.1195019461216589,
+            "p50": 0.8284283042473266,
+            "p95": 2.243184179435905,
+            "p99": 2.3615134211811712,
+            "max": 2.369939520291267
+          }
+        },
+        "per_arm_orientation_deg": {
+          "right": {
+            "rms": 0.1216446533504461,
+            "p50": 0.08886159206662567,
+            "p95": 0.2501528686926684,
+            "p99": 0.2628558760344856,
+            "max": 0.2637616731492099
+          }
+        },
+        "orientation_deg": {
+          "rms": 0.1216446533504461,
+          "p50": 0.08886159206662567,
+          "p95": 0.2501528686926684,
+          "p99": 0.2628558760344856,
+          "max": 0.2637616731492099
+        },
+        "moving_arm_speed": {
+          "right": {
+            "peak_m_s": 0.7544041746488072,
+            "time_at_or_above_1p2_m_s": 0.0,
+            "longest_continuous_interval_at_or_above_1p2_m_s": 0.0
+          }
+        },
+        "tracking_acceptance": {
+          "completed": true,
+          "position_rms_5mm": true,
+          "position_p95_10mm": true,
+          "orientation_p95_2deg": true,
+          "final_position_1mm": true,
+          "limits": true,
+          "no_planner_failures": true,
+          "no_modeled_contacts": true,
+          "no_torque_saturation": true
+        },
+        "tracking_accepted": true,
+        "fast_tracking_accepted": false,
+        "source_sha256": {
+          "trace.npz": "2d2db05ea035fd36b647356c7cd43a01dccd4af0542c3608ed5d5c55a93f214f",
+          "metadata.json": "155dc553c2caa089b4583bb75f6366c1e71dc673dfec1fdc05c2c6f20e3c769c",
+          "summary.json": "760aa681bf68cb999ef38069e4866c5ea722a4473189b0c02ab467d4bc500835"
+        }
+      },
+      "run": "x7-gp80-fast-trajectory-sim-v1__compact_arc__0.758032170"
+    },
+    "compact_left": {
+      "split": "heldout",
+      "requested_pass": 0.7561998829771595,
+      "requested_fail": null,
+      "screened_ceiling": 0.7561998829771595,
+      "public_tcp": {
+        "frame": "public pad-center TCP; fixed tool transform from run metadata",
+        "position_mm": {
+          "rms": 1.0863263375843835,
+          "p50": 0.7666009369347107,
+          "p95": 2.18409007695224,
+          "p99": 2.293222755830347,
+          "max": 2.300575008086374
+        },
+        "final_position_mm": [
+          0.31078915995495043
+        ],
+        "per_arm_position_mm": {
+          "left": {
+            "rms": 1.0863263375843835,
+            "p50": 0.7666009369347107,
+            "p95": 2.18409007695224,
+            "p99": 2.293222755830347,
+            "max": 2.300575008086374
+          }
+        },
+        "per_arm_orientation_deg": {
+          "left": {
+            "rms": 0.11878100973525012,
+            "p50": 0.07547902299355054,
+            "p95": 0.24587766225452085,
+            "p99": 0.2558679588342169,
+            "max": 0.25657499842340825
+          }
+        },
+        "orientation_deg": {
+          "rms": 0.11878100973525012,
+          "p50": 0.07547902299355054,
+          "p95": 0.24587766225452085,
+          "p99": 0.2558679588342169,
+          "max": 0.25657499842340825
+        },
+        "moving_arm_speed": {
+          "left": {
+            "peak_m_s": 0.7479587074403754,
+            "time_at_or_above_1p2_m_s": 0.0,
+            "longest_continuous_interval_at_or_above_1p2_m_s": 0.0
+          }
+        },
+        "tracking_acceptance": {
+          "completed": true,
+          "position_rms_5mm": true,
+          "position_p95_10mm": true,
+          "orientation_p95_2deg": true,
+          "final_position_1mm": true,
+          "limits": true,
+          "no_planner_failures": true,
+          "no_modeled_contacts": true,
+          "no_torque_saturation": true
+        },
+        "tracking_accepted": true,
+        "fast_tracking_accepted": false,
+        "source_sha256": {
+          "trace.npz": "106e8cd58d0ba35d9f14201f31f234674febdb368d25ca21e1565bb9b143dd52",
+          "metadata.json": "1e228d4cc25002f5c05fc4f540fad60c27085d776c2d40b77e2ff30da29cff8b",
+          "summary.json": "9ed914d7857e8833ba32ef970da48e60194a79086803155a751dd7dac3f39316"
+        }
+      },
+      "run": "x7-gp80-fast-trajectory-sim-v1__compact_left__0.756199883"
+    },
+    "curved_reversal": {
+      "split": "train",
+      "requested_pass": 1.0741678181528853,
+      "requested_fail": null,
+      "screened_ceiling": 1.0741678181528853,
+      "public_tcp": {
+        "frame": "public pad-center TCP; fixed tool transform from run metadata",
+        "position_mm": {
+          "rms": 1.4567727334419054,
+          "p50": 0.9982027919785788,
+          "p95": 2.93124919962653,
+          "p99": 3.127355168286192,
+          "max": 3.137021525068686
+        },
+        "final_position_mm": [
+          0.3466744356543585
+        ],
+        "per_arm_position_mm": {
+          "right": {
+            "rms": 1.4567727334419054,
+            "p50": 0.9982027919785788,
+            "p95": 2.93124919962653,
+            "p99": 3.127355168286192,
+            "max": 3.137021525068686
+          }
+        },
+        "per_arm_orientation_deg": {
+          "right": {
+            "rms": 0.16639585576755736,
+            "p50": 0.13505816114915403,
+            "p95": 0.3156571605596354,
+            "p99": 0.3343832494812054,
+            "max": 0.33563563673274294
+          }
+        },
+        "orientation_deg": {
+          "rms": 0.16639585576755736,
+          "p50": 0.13505816114915403,
+          "p95": 0.3156571605596354,
+          "p99": 0.3343832494812054,
+          "max": 0.33563563673274294
+        },
+        "moving_arm_speed": {
+          "right": {
+            "peak_m_s": 1.062280926961778,
+            "time_at_or_above_1p2_m_s": 0.0,
+            "longest_continuous_interval_at_or_above_1p2_m_s": 0.0
+          }
+        },
+        "tracking_acceptance": {
+          "completed": true,
+          "position_rms_5mm": true,
+          "position_p95_10mm": true,
+          "orientation_p95_2deg": true,
+          "final_position_1mm": true,
+          "limits": true,
+          "no_planner_failures": true,
+          "no_modeled_contacts": true,
+          "no_torque_saturation": true
+        },
+        "tracking_accepted": true,
+        "fast_tracking_accepted": false,
+        "source_sha256": {
+          "trace.npz": "a51b61c6f7070bcec23e5eeb633d0aab10054c532c391b50681e4c7cd030536e",
+          "metadata.json": "876126eabf022d4c42d968e620dbc6b36cfba3fdf0ee908453968bc12b382046",
+          "summary.json": "75a31ee1d18f64f2288d9e28900f45955df7f5c7204de08681226d6e32e4e069"
+        }
+      },
+      "run": "x7-gp80-fast-trajectory-sim-v1__curved_reversal__1.074167818"
+    },
+    "diagonal_fixed": {
+      "split": "heldout",
+      "requested_pass": 0.5319711953836019,
+      "requested_fail": 0.5561517042646748,
+      "screened_ceiling": 0.7737762841943301,
+      "public_tcp": {
+        "frame": "public pad-center TCP; fixed tool transform from run metadata",
+        "position_mm": {
+          "rms": 1.117355645493233,
+          "p50": 0.9186804620576208,
+          "p95": 2.0467543238551023,
+          "p99": 2.3158089831493784,
+          "max": 2.339316039028701
+        },
+        "final_position_mm": [
+          0.34664161760357143
+        ],
+        "per_arm_position_mm": {
+          "right": {
+            "rms": 1.117355645493233,
+            "p50": 0.9186804620576208,
+            "p95": 2.0467543238551023,
+            "p99": 2.3158089831493784,
+            "max": 2.339316039028701
+          }
+        },
+        "per_arm_orientation_deg": {
+          "right": {
+            "rms": 0.1536494589030124,
+            "p50": 0.08672893354701969,
+            "p95": 0.36130696436691495,
+            "p99": 0.3966886845665121,
+            "max": 0.39963528698880973
+          }
+        },
+        "orientation_deg": {
+          "rms": 0.1536494589030124,
+          "p50": 0.08672893354701969,
+          "p95": 0.36130696436691495,
+          "p99": 0.3966886845665121,
+          "max": 0.39963528698880973
+        },
+        "moving_arm_speed": {
+          "right": {
+            "peak_m_s": 0.5431859194989497,
+            "time_at_or_above_1p2_m_s": 0.0,
+            "longest_continuous_interval_at_or_above_1p2_m_s": 0.0
+          }
+        },
+        "tracking_acceptance": {
+          "completed": true,
+          "position_rms_5mm": true,
+          "position_p95_10mm": true,
+          "orientation_p95_2deg": true,
+          "final_position_1mm": true,
+          "limits": true,
+          "no_planner_failures": true,
+          "no_modeled_contacts": true,
+          "no_torque_saturation": true
+        },
+        "tracking_accepted": true,
+        "fast_tracking_accepted": false,
+        "source_sha256": {
+          "trace.npz": "c6fc16034df20592939a94d3c0d93909a7d724cdde631775183d9afc90de5c60",
+          "metadata.json": "9027b0a760dbf5833067c5be7ee955d31ada9f9c0e30683a1333c490aa74a1a9",
+          "summary.json": "0b45be4f37516de201fdcf3f748beb27a961784b77602ff37a116d97c69da16b"
+        }
+      },
+      "run": "x7-gp80-fast-trajectory-sim-v1__diagonal_fixed__0.531971195"
+    },
+    "double_curvature": {
+      "split": "heldout",
+      "requested_pass": 1.0420130248716373,
+      "requested_fail": null,
+      "screened_ceiling": 1.0420130248716373,
+      "public_tcp": {
+        "frame": "public pad-center TCP; fixed tool transform from run metadata",
+        "position_mm": {
+          "rms": 1.6014263274783356,
+          "p50": 1.2300480430228824,
+          "p95": 3.2458155574993914,
+          "p99": 3.476223887739175,
+          "max": 3.489518049831179
+        },
+        "final_position_mm": [
+          0.3467593276197677
+        ],
+        "per_arm_position_mm": {
+          "right": {
+            "rms": 1.6014263274783356,
+            "p50": 1.2300480430228824,
+            "p95": 3.2458155574993914,
+            "p99": 3.476223887739175,
+            "max": 3.489518049831179
+          }
+        },
+        "per_arm_orientation_deg": {
+          "right": {
+            "rms": 0.15438188011817017,
+            "p50": 0.10707640961158743,
+            "p95": 0.31430582775088356,
+            "p99": 0.3374078235510505,
+            "max": 0.33873922447610333
+          }
+        },
+        "orientation_deg": {
+          "rms": 0.15438188011817017,
+          "p50": 0.10707640961158743,
+          "p95": 0.31430582775088356,
+          "p99": 0.3374078235510505,
+          "max": 0.33873922447610333
+        },
+        "moving_arm_speed": {
+          "right": {
+            "peak_m_s": 1.0417299187391944,
+            "time_at_or_above_1p2_m_s": 0.0,
+            "longest_continuous_interval_at_or_above_1p2_m_s": 0.0
+          }
+        },
+        "tracking_acceptance": {
+          "completed": true,
+          "position_rms_5mm": true,
+          "position_p95_10mm": true,
+          "orientation_p95_2deg": true,
+          "final_position_1mm": true,
+          "limits": true,
+          "no_planner_failures": true,
+          "no_modeled_contacts": true,
+          "no_torque_saturation": true
+        },
+        "tracking_accepted": true,
+        "fast_tracking_accepted": false,
+        "source_sha256": {
+          "trace.npz": "eecd6d134eb0a02a1c9d47695b2f5123964e57debd6726c291645265653f8e7c",
+          "metadata.json": "5a2a32600b415902635b30b62e9a49d33c40a5c46c80617c31308f2bf86a30ee",
+          "summary.json": "c233df6cdb636e7c547e312ff7a487f62076507569d30255172d5c1e3dcc12bd"
+        }
+      },
+      "run": "x7-gp80-fast-trajectory-sim-v1__double_curvature__1.042013025"
+    },
+    "dual_lateral": {
+      "split": "heldout",
+      "requested_pass": 0.7737762841943298,
+      "requested_fail": null,
+      "screened_ceiling": 0.7737762841943298,
+      "public_tcp": {
+        "frame": "public pad-center TCP; fixed tool transform from run metadata",
+        "position_mm": {
+          "rms": 1.575123607854429,
+          "p50": 0.9876175781164627,
+          "p95": 3.0160587614048096,
+          "p99": 3.154145012564692,
+          "max": 3.164802315881216
+        },
+        "final_position_mm": [
+          0.33799047429501794,
+          0.33802300576232197
+        ],
+        "per_arm_position_mm": {
+          "left": {
+            "rms": 1.5750911407896948,
+            "p50": 0.9876175781164627,
+            "p95": 3.013810829305183,
+            "p99": 3.152293797417163,
+            "max": 3.164297146582833
+          },
+          "right": {
+            "rms": 1.5751560742499535,
+            "p50": 0.9875190107662111,
+            "p95": 3.01418333246261,
+            "p99": 3.1528122806699446,
+            "max": 3.164802315881216
+          }
+        },
+        "per_arm_orientation_deg": {
+          "left": {
+            "rms": 0.16320427841100796,
+            "p50": 0.08763771053483141,
+            "p95": 0.35953766352825295,
+            "p99": 0.38737852368097725,
+            "max": 0.3891524163614404
+          },
+          "right": {
+            "rms": 0.16323715255096538,
+            "p50": 0.08764378100093065,
+            "p95": 0.35957354025015614,
+            "p99": 0.38742632294818585,
+            "max": 0.3891975053054101
+          }
+        },
+        "orientation_deg": {
+          "rms": 0.16322071630863058,
+          "p50": 0.08764232926476939,
+          "p95": 0.3597931844950126,
+          "p99": 0.38817073419432085,
+          "max": 0.3891975053054101
+        },
+        "moving_arm_speed": {
+          "left": {
+            "peak_m_s": 0.8094492582639561,
+            "time_at_or_above_1p2_m_s": 0.0,
+            "longest_continuous_interval_at_or_above_1p2_m_s": 0.0
+          },
+          "right": {
+            "peak_m_s": 0.8094288507927294,
+            "time_at_or_above_1p2_m_s": 0.0,
+            "longest_continuous_interval_at_or_above_1p2_m_s": 0.0
+          }
+        },
+        "tracking_acceptance": {
+          "completed": true,
+          "position_rms_5mm": true,
+          "position_p95_10mm": true,
+          "orientation_p95_2deg": true,
+          "final_position_1mm": true,
+          "limits": true,
+          "no_planner_failures": true,
+          "no_modeled_contacts": true,
+          "no_torque_saturation": true
+        },
+        "tracking_accepted": true,
+        "fast_tracking_accepted": false,
+        "source_sha256": {
+          "trace.npz": "4ca8ce0f548ee954450b978f643881c2fbb6693c822bdaf8cf7d0db7be3ee7d6",
+          "metadata.json": "cb25f53c980e86439be204ee5151ecefcd801d0315fdb2b5fadcf00e273a4b18",
+          "summary.json": "16c40fa5ac0ea0ef4b1dcb1da097641365c0dd741868557fd0b5907a768d857d"
+        }
+      },
+      "run": "x7-gp80-fast-trajectory-sim-v1__dual_lateral__0.773776284"
+    },
+    "dual_wave": {
+      "split": "heldout",
+      "requested_pass": 1.0133145807754205,
+      "requested_fail": null,
+      "screened_ceiling": 1.0133145807754205,
+      "public_tcp": {
+        "frame": "public pad-center TCP; fixed tool transform from run metadata",
+        "position_mm": {
+          "rms": 1.6539845015366381,
+          "p50": 1.1663630734206474,
+          "p95": 3.452070634190566,
+          "p99": 3.6767508085550697,
+          "max": 3.691572423497998
+        },
+        "final_position_mm": [
+          0.3464696717335047,
+          0.3465017981157446
+        ],
+        "per_arm_position_mm": {
+          "left": {
+            "rms": 1.6539465242835338,
+            "p50": 1.1663630734206474,
+            "p95": 3.422036538888375,
+            "p99": 3.6752270724080054,
+            "max": 3.6911281390701394
+          },
+          "right": {
+            "rms": 1.6540224779177644,
+            "p50": 1.166277957738556,
+            "p95": 3.422413707707627,
+            "p99": 3.6756998003760835,
+            "max": 3.691572423497998
+          }
+        },
+        "per_arm_orientation_deg": {
+          "left": {
+            "rms": 0.1823891000438451,
+            "p50": 0.13799346765785891,
+            "p95": 0.3499601179107288,
+            "p99": 0.37447940633061716,
+            "max": 0.3761459952683653
+          },
+          "right": {
+            "rms": 0.18240502020506955,
+            "p50": 0.13800489282675255,
+            "p95": 0.34997318050470266,
+            "p99": 0.3744988943417725,
+            "max": 0.376162287922263
+          }
+        },
+        "orientation_deg": {
+          "rms": 0.18239706029815228,
+          "p50": 0.13800489282675255,
+          "p95": 0.3528358869791317,
+          "p99": 0.3746334278339294,
+          "max": 0.376162287922263
+        },
+        "moving_arm_speed": {
+          "left": {
+            "peak_m_s": 1.015654582211719,
+            "time_at_or_above_1p2_m_s": 0.0,
+            "longest_continuous_interval_at_or_above_1p2_m_s": 0.0
+          },
+          "right": {
+            "peak_m_s": 1.0156552328671513,
+            "time_at_or_above_1p2_m_s": 0.0,
+            "longest_continuous_interval_at_or_above_1p2_m_s": 0.0
+          }
+        },
+        "tracking_acceptance": {
+          "completed": true,
+          "position_rms_5mm": true,
+          "position_p95_10mm": true,
+          "orientation_p95_2deg": true,
+          "final_position_1mm": true,
+          "limits": true,
+          "no_planner_failures": true,
+          "no_modeled_contacts": true,
+          "no_torque_saturation": true
+        },
+        "tracking_accepted": true,
+        "fast_tracking_accepted": false,
+        "source_sha256": {
+          "trace.npz": "5bd9874705295dcf9263e9204b4f2cbf38db50be111c7cb0957edfee52c15f82",
+          "metadata.json": "501cd459c3ffbac0d053c80e00a497a9ec0e794d319ee76d52aab383586742bd",
+          "summary.json": "1b12ad98841e21444c8ffdad8b7fd3047129a3522a7c915e9125d0902bfc6c4d"
+        }
+      },
+      "run": "x7-gp80-fast-trajectory-sim-v1__dual_wave__1.013314581"
+    },
+    "elbow_reach": {
+      "split": "train",
+      "requested_pass": 0.7974706508574504,
+      "requested_fail": null,
+      "screened_ceiling": 0.7974706508574504,
+      "public_tcp": {
+        "frame": "public pad-center TCP; fixed tool transform from run metadata",
+        "position_mm": {
+          "rms": 1.5048667673217764,
+          "p50": 0.8136754073842194,
+          "p95": 3.314925012479153,
+          "p99": 3.4633698049961987,
+          "max": 3.473406788837826
+        },
+        "final_position_mm": [
+          0.34591093398257405
+        ],
+        "per_arm_position_mm": {
+          "right": {
+            "rms": 1.5048667673217764,
+            "p50": 0.8136754073842194,
+            "p95": 3.314925012479153,
+            "p99": 3.4633698049961987,
+            "max": 3.473406788837826
+          }
+        },
+        "per_arm_orientation_deg": {
+          "right": {
+            "rms": 0.1535793204816719,
+            "p50": 0.08690856327415243,
+            "p95": 0.33810957227790267,
+            "p99": 0.351848291934145,
+            "max": 0.3527917497585259
+          }
+        },
+        "orientation_deg": {
+          "rms": 0.1535793204816719,
+          "p50": 0.08690856327415243,
+          "p95": 0.33810957227790267,
+          "p99": 0.351848291934145,
+          "max": 0.3527917497585259
+        },
+        "moving_arm_speed": {
+          "right": {
+            "peak_m_s": 0.8075133638157808,
+            "time_at_or_above_1p2_m_s": 0.0,
+            "longest_continuous_interval_at_or_above_1p2_m_s": 0.0
+          }
+        },
+        "tracking_acceptance": {
+          "completed": true,
+          "position_rms_5mm": true,
+          "position_p95_10mm": true,
+          "orientation_p95_2deg": true,
+          "final_position_1mm": true,
+          "limits": true,
+          "no_planner_failures": true,
+          "no_modeled_contacts": true,
+          "no_torque_saturation": true
+        },
+        "tracking_accepted": true,
+        "fast_tracking_accepted": false,
+        "source_sha256": {
+          "trace.npz": "1b21c9a345b352483c5564bfb07eb4ffe7f4d16a7b896748693f49ca641e37d8",
+          "metadata.json": "b25642e82441f8a85518392aa75d25c04eb137194411f9be6996558da8f68b73",
+          "summary.json": "631c2503c28a5feb7b87c79a5e725a1e274f8fc179d1cbd3300f5f8af3fdc38b"
+        }
+      },
+      "run": "x7-gp80-fast-trajectory-sim-v1__elbow_reach__0.797470651"
+    },
+    "figure8_yz": {
+      "split": "heldout",
+      "requested_pass": 0.7886244066131708,
+      "requested_fail": null,
+      "screened_ceiling": 0.7886244066131708,
+      "public_tcp": {
+        "frame": "public pad-center TCP; fixed tool transform from run metadata",
+        "position_mm": {
+          "rms": 1.7258159763914123,
+          "p50": 0.8726232731527822,
+          "p95": 4.5442248698144345,
+          "p99": 5.683250702734276,
+          "max": 5.78728386693128
+        },
+        "final_position_mm": [
+          0.3446258891871871
+        ],
+        "per_arm_position_mm": {
+          "right": {
+            "rms": 1.7258159763914123,
+            "p50": 0.8726232731527822,
+            "p95": 4.5442248698144345,
+            "p99": 5.683250702734276,
+            "max": 5.78728386693128
+          }
+        },
+        "per_arm_orientation_deg": {
+          "right": {
+            "rms": 0.7644648741565595,
+            "p50": 0.07594284176502758,
+            "p95": 1.6815241957277556,
+            "p99": 3.849466603313162,
+            "max": 3.9719914461164745
+          }
+        },
+        "orientation_deg": {
+          "rms": 0.7644648741565595,
+          "p50": 0.07594284176502758,
+          "p95": 1.6815241957277556,
+          "p99": 3.849466603313162,
+          "max": 3.9719914461164745
+        },
+        "moving_arm_speed": {
+          "right": {
+            "peak_m_s": 0.7966684028924258,
+            "time_at_or_above_1p2_m_s": 0.0,
+            "longest_continuous_interval_at_or_above_1p2_m_s": 0.0
+          }
+        },
+        "tracking_acceptance": {
+          "completed": true,
+          "position_rms_5mm": true,
+          "position_p95_10mm": true,
+          "orientation_p95_2deg": true,
+          "final_position_1mm": true,
+          "limits": true,
+          "no_planner_failures": true,
+          "no_modeled_contacts": true,
+          "no_torque_saturation": true
+        },
+        "tracking_accepted": true,
+        "fast_tracking_accepted": false,
+        "source_sha256": {
+          "trace.npz": "01f9091fd6cfa8d972751aa5c6de22cc3650950da2495994189c2827ac4ed4a4",
+          "metadata.json": "0185185ca0a0ba88fc135d0cd71b86198e18e8065ec7c6a5ce74deb3c9d4bd34",
+          "summary.json": "61a6493260744a751f3155a279a7272cc9bce51ebb48eda91a1a0836bfd24d38"
+        }
+      },
+      "run": "x7-gp80-fast-trajectory-sim-v1__figure8_yz__0.788624407"
+    },
+    "inward_fixed": {
+      "split": "train",
+      "requested_pass": 0.6045127220268204,
+      "requested_fail": 0.6286932309078932,
+      "screened_ceiling": 0.7737762841943301,
+      "public_tcp": {
+        "frame": "public pad-center TCP; fixed tool transform from run metadata",
+        "position_mm": {
+          "rms": 2.7225868576024306,
+          "p50": 1.094698393178071,
+          "p95": 6.439307566051625,
+          "p99": 6.884475734715592,
+          "max": 6.941024970723714
+        },
+        "final_position_mm": [
+          0.34523372560314053
+        ],
+        "per_arm_position_mm": {
+          "right": {
+            "rms": 2.7225868576024306,
+            "p50": 1.094698393178071,
+            "p95": 6.439307566051625,
+            "p99": 6.884475734715592,
+            "max": 6.941024970723714
+          }
+        },
+        "per_arm_orientation_deg": {
+          "right": {
+            "rms": 0.4035086444373316,
+            "p50": 0.18857756853144725,
+            "p95": 0.8157586821456763,
+            "p99": 0.8350676545089639,
+            "max": 0.8418093361892949
+          }
+        },
+        "orientation_deg": {
+          "rms": 0.4035086444373316,
+          "p50": 0.18857756853144725,
+          "p95": 0.8157586821456763,
+          "p99": 0.8350676545089639,
+          "max": 0.8418093361892949
+        },
+        "moving_arm_speed": {
+          "right": {
+            "peak_m_s": 0.5820718140659898,
+            "time_at_or_above_1p2_m_s": 0.0,
+            "longest_continuous_interval_at_or_above_1p2_m_s": 0.0
+          }
+        },
+        "tracking_acceptance": {
+          "completed": true,
+          "position_rms_5mm": true,
+          "position_p95_10mm": true,
+          "orientation_p95_2deg": true,
+          "final_position_1mm": true,
+          "limits": true,
+          "no_planner_failures": true,
+          "no_modeled_contacts": true,
+          "no_torque_saturation": true
+        },
+        "tracking_accepted": true,
+        "fast_tracking_accepted": false,
+        "source_sha256": {
+          "trace.npz": "1aaaf1b3c2e47ef32e7d8584d94b89f8b30b92511000a71efa5d331f09ad9231",
+          "metadata.json": "3c68785ac654781341ad5c98e5b78c494932389e3307ea6e3665151a1d6aabef",
+          "summary.json": "179d458d43cd5d46d924db7e8043eba74bcf1959e6fef5e2e6b1c53be5b84541"
+        }
+      },
+      "run": "x7-gp80-fast-trajectory-sim-v1__inward_fixed__0.604512722"
+    },
+    "left_sweep": {
+      "split": "heldout",
+      "requested_pass": 1.4116477230388775,
+      "requested_fail": null,
+      "screened_ceiling": 1.4116477230388775,
+      "public_tcp": {
+        "frame": "public pad-center TCP; fixed tool transform from run metadata",
+        "position_mm": {
+          "rms": 2.122617005731211,
+          "p50": 1.3083886774578803,
+          "p95": 4.300907019806588,
+          "p99": 4.4456150327873045,
+          "max": 4.4553754453451235
+        },
+        "final_position_mm": [
+          0.34636549601021016
+        ],
+        "per_arm_position_mm": {
+          "left": {
+            "rms": 2.122617005731211,
+            "p50": 1.3083886774578803,
+            "p95": 4.300907019806588,
+            "p99": 4.4456150327873045,
+            "max": 4.4553754453451235
+          }
+        },
+        "per_arm_orientation_deg": {
+          "left": {
+            "rms": 0.20941773004147468,
+            "p50": 0.12877756496094211,
+            "p95": 0.4447941020886396,
+            "p99": 0.45984618015186063,
+            "max": 0.4608871383389378
+          }
+        },
+        "orientation_deg": {
+          "rms": 0.20941773004147468,
+          "p50": 0.12877756496094211,
+          "p95": 0.4447941020886396,
+          "p99": 0.45984618015186063,
+          "max": 0.4608871383389378
+        },
+        "moving_arm_speed": {
+          "left": {
+            "peak_m_s": 1.3956598562260736,
+            "time_at_or_above_1p2_m_s": 0.38,
+            "longest_continuous_interval_at_or_above_1p2_m_s": 0.19
+          }
+        },
+        "tracking_acceptance": {
+          "completed": true,
+          "position_rms_5mm": true,
+          "position_p95_10mm": true,
+          "orientation_p95_2deg": true,
+          "final_position_1mm": true,
+          "limits": true,
+          "no_planner_failures": true,
+          "no_modeled_contacts": true,
+          "no_torque_saturation": true
+        },
+        "tracking_accepted": true,
+        "fast_tracking_accepted": true,
+        "source_sha256": {
+          "trace.npz": "088b2e7fbba4a02676d31b4272aaf4f583d716b1b8c5e7cc5c6b327589f8d46c",
+          "metadata.json": "1359585c2aefdb66a801b356c1ec7475a9bd8bcaf126d7ab8e5554a1f8074a17",
+          "summary.json": "d7a10ed3c3553e92397a5a68f1fdd851cab11194410c6c644b7e0f6b63f79ac2"
+        }
+      },
+      "run": "x7-gp80-fast-trajectory-sim-v1__left_sweep__1.411647723"
+    },
+    "left_vertical": {
+      "split": "heldout",
+      "requested_pass": 1.0504468679527827,
+      "requested_fail": 1.085461763551209,
+      "screened_ceiling": 1.120476659149635,
+      "public_tcp": {
+        "frame": "public pad-center TCP; fixed tool transform from run metadata",
+        "position_mm": {
+          "rms": 1.4042562821855378,
+          "p50": 1.1731076058975087,
+          "p95": 2.499105810174227,
+          "p99": 2.9549607666143536,
+          "max": 2.9891573816129364
+        },
+        "final_position_mm": [
+          0.34881059597888076
+        ],
+        "per_arm_position_mm": {
+          "left": {
+            "rms": 1.4042562821855378,
+            "p50": 1.1731076058975087,
+            "p95": 2.499105810174227,
+            "p99": 2.9549607666143536,
+            "max": 2.9891573816129364
+          }
+        },
+        "per_arm_orientation_deg": {
+          "left": {
+            "rms": 0.6536539540704371,
+            "p50": 0.08710178645754119,
+            "p95": 1.657120010798017,
+            "p99": 1.901530120798906,
+            "max": 1.9174608582530914
+          }
+        },
+        "orientation_deg": {
+          "rms": 0.6536539540704371,
+          "p50": 0.08710178645754119,
+          "p95": 1.657120010798017,
+          "p99": 1.901530120798906,
+          "max": 1.9174608582530914
+        },
+        "moving_arm_speed": {
+          "left": {
+            "peak_m_s": 1.0737918875989192,
+            "time_at_or_above_1p2_m_s": 0.0,
+            "longest_continuous_interval_at_or_above_1p2_m_s": 0.0
+          }
+        },
+        "tracking_acceptance": {
+          "completed": true,
+          "position_rms_5mm": true,
+          "position_p95_10mm": true,
+          "orientation_p95_2deg": true,
+          "final_position_1mm": true,
+          "limits": true,
+          "no_planner_failures": true,
+          "no_modeled_contacts": true,
+          "no_torque_saturation": true
+        },
+        "tracking_accepted": true,
+        "fast_tracking_accepted": false,
+        "source_sha256": {
+          "trace.npz": "fe7c6e8b178691230770926efdd2e2ee4f0571812721c4b829cc0b42220d0589",
+          "metadata.json": "06d7f532c2212e38b6428190f1db85bd71810924110494e5cb139f4e26eaab7e",
+          "summary.json": "e397f229a1c4dced8d750e3a5c56984ce04aeb3f32d297bae2ac7c97962a771c"
+        }
+      },
+      "run": "x7-gp80-fast-trajectory-sim-v1__left_vertical__1.050446868"
+    },
+    "offset_arc": {
+      "split": "heldout",
+      "requested_pass": 1.4249998243014648,
+      "requested_fail": null,
+      "screened_ceiling": 1.4249998243014648,
+      "public_tcp": {
+        "frame": "public pad-center TCP; fixed tool transform from run metadata",
+        "position_mm": {
+          "rms": 2.242974991682645,
+          "p50": 1.2213997927290121,
+          "p95": 4.562703610824864,
+          "p99": 4.756591399040288,
+          "max": 4.769848721920559
+        },
+        "final_position_mm": [
+          0.33763117947403193
+        ],
+        "per_arm_position_mm": {
+          "right": {
+            "rms": 2.242974991682645,
+            "p50": 1.2213997927290121,
+            "p95": 4.562703610824864,
+            "p99": 4.756591399040288,
+            "max": 4.769848721920559
+          }
+        },
+        "per_arm_orientation_deg": {
+          "right": {
+            "rms": 0.22038823285355388,
+            "p50": 0.11399543827127781,
+            "p95": 0.4925103941673547,
+            "p99": 0.5064928976878745,
+            "max": 0.5075380612317625
+          }
+        },
+        "orientation_deg": {
+          "rms": 0.22038823285355388,
+          "p50": 0.11399543827127781,
+          "p95": 0.4925103941673547,
+          "p99": 0.5064928976878745,
+          "max": 0.5075380612317625
+        },
+        "moving_arm_speed": {
+          "right": {
+            "peak_m_s": 1.415736230438758,
+            "time_at_or_above_1p2_m_s": 0.41000000000000003,
+            "longest_continuous_interval_at_or_above_1p2_m_s": 0.21
+          }
+        },
+        "tracking_acceptance": {
+          "completed": true,
+          "position_rms_5mm": true,
+          "position_p95_10mm": true,
+          "orientation_p95_2deg": true,
+          "final_position_1mm": true,
+          "limits": true,
+          "no_planner_failures": true,
+          "no_modeled_contacts": true,
+          "no_torque_saturation": true
+        },
+        "tracking_accepted": true,
+        "fast_tracking_accepted": true,
+        "source_sha256": {
+          "trace.npz": "e611088b0e69a696b20450db1b2a81ada3041c910d3d9efe51e7c75c970ead4c",
+          "metadata.json": "ed4c4087ee4a1c9a3f61067a06042cda253421d977b06de6ebbab71bb847973d",
+          "summary.json": "69565b4736b4ff8388461f89ab3a81372d93e54900f5d4a5cb15fa9be5f61a5d"
+        }
+      },
+      "run": "x7-gp80-fast-trajectory-sim-v1__offset_arc__1.424999824"
+    },
+    "rounded_corner": {
+      "split": "heldout",
+      "requested_pass": 0.8980682565504606,
+      "requested_fail": null,
+      "screened_ceiling": 0.8980682565504606,
+      "public_tcp": {
+        "frame": "public pad-center TCP; fixed tool transform from run metadata",
+        "position_mm": {
+          "rms": 1.523561124798251,
+          "p50": 0.9358546960612438,
+          "p95": 3.0952813997182,
+          "p99": 3.8463770638573505,
+          "max": 3.9903326339541487
+        },
+        "final_position_mm": [
+          0.34423034727259894
+        ],
+        "per_arm_position_mm": {
+          "right": {
+            "rms": 1.523561124798251,
+            "p50": 0.9358546960612438,
+            "p95": 3.0952813997182,
+            "p99": 3.8463770638573505,
+            "max": 3.9903326339541487
+          }
+        },
+        "per_arm_orientation_deg": {
+          "right": {
+            "rms": 0.16226020906855973,
+            "p50": 0.06764820462242029,
+            "p95": 0.3481416672595585,
+            "p99": 0.45830234257099917,
+            "max": 0.48828917353959833
+          }
+        },
+        "orientation_deg": {
+          "rms": 0.16226020906855973,
+          "p50": 0.06764820462242029,
+          "p95": 0.3481416672595585,
+          "p99": 0.45830234257099917,
+          "max": 0.48828917353959833
+        },
+        "moving_arm_speed": {
+          "right": {
+            "peak_m_s": 0.9487199683244139,
+            "time_at_or_above_1p2_m_s": 0.0,
+            "longest_continuous_interval_at_or_above_1p2_m_s": 0.0
+          }
+        },
+        "tracking_acceptance": {
+          "completed": true,
+          "position_rms_5mm": true,
+          "position_p95_10mm": true,
+          "orientation_p95_2deg": true,
+          "final_position_1mm": true,
+          "limits": true,
+          "no_planner_failures": true,
+          "no_modeled_contacts": true,
+          "no_torque_saturation": true
+        },
+        "tracking_accepted": true,
+        "fast_tracking_accepted": false,
+        "source_sha256": {
+          "trace.npz": "5a4b00f04ed590b23e019a32b38402db0ea63567d479e631071759a76ff61fd2",
+          "metadata.json": "5ecd49fe09af4c65fbb6df04a240fbfe6bfb2db4a16fbc26b9bbbf33356390a4",
+          "summary.json": "912b3bc7906d373c723639552cac31a1fecd23916ded2d263e6a39e7801c9986"
+        }
+      },
+      "run": "x7-gp80-fast-trajectory-sim-v1__rounded_corner__0.898068257"
+    },
+    "seven_joint_arc": {
+      "split": "train",
+      "requested_pass": 1.4250001337114442,
+      "requested_fail": null,
+      "screened_ceiling": 1.4250001337114442,
+      "public_tcp": {
+        "frame": "public pad-center TCP; fixed tool transform from run metadata",
+        "position_mm": {
+          "rms": 2.2729845681459593,
+          "p50": 1.1531237800586962,
+          "p95": 4.6128765197204356,
+          "p99": 4.806009568290916,
+          "max": 4.814686494563238
+        },
+        "final_position_mm": [
+          0.3462208655329372
+        ],
+        "per_arm_position_mm": {
+          "right": {
+            "rms": 2.2729845681459593,
+            "p50": 1.1531237800586962,
+            "p95": 4.6128765197204356,
+            "p99": 4.806009568290916,
+            "max": 4.814686494563238
+          }
+        },
+        "per_arm_orientation_deg": {
+          "right": {
+            "rms": 0.21375942663757644,
+            "p50": 0.1066954642150753,
+            "p95": 0.47106947248871245,
+            "p99": 0.4906681570844317,
+            "max": 0.4918792777855248
+          }
+        },
+        "orientation_deg": {
+          "rms": 0.21375942663757644,
+          "p50": 0.1066954642150753,
+          "p95": 0.47106947248871245,
+          "p99": 0.4906681570844317,
+          "max": 0.4918792777855248
+        },
+        "moving_arm_speed": {
+          "right": {
+            "peak_m_s": 1.4150258580745947,
+            "time_at_or_above_1p2_m_s": 0.48,
+            "longest_continuous_interval_at_or_above_1p2_m_s": 0.24
+          }
+        },
+        "tracking_acceptance": {
+          "completed": true,
+          "position_rms_5mm": true,
+          "position_p95_10mm": true,
+          "orientation_p95_2deg": true,
+          "final_position_1mm": true,
+          "limits": true,
+          "no_planner_failures": true,
+          "no_modeled_contacts": true,
+          "no_torque_saturation": true
+        },
+        "tracking_accepted": true,
+        "fast_tracking_accepted": true,
+        "source_sha256": {
+          "trace.npz": "baeb49038a6ffaccd852838d6bad9761d2da69d90897b0f9089d0814d7f26d34",
+          "metadata.json": "0452c58e81ec18d6a10eb4ef024671518c2cc1cf235ce7409c5192b546681945",
+          "summary.json": "92351600b35b7c96cdc828aac606c9b6f48d74fc57e198d408ac1c057ff4206f"
+        }
+      },
+      "run": "x7-gp80-fast-trajectory-sim-v1__seven_joint_arc__1.425000134"
+    },
+    "shoulder_sweep": {
+      "split": "train",
+      "requested_pass": 1.4250029436147522,
+      "requested_fail": null,
+      "screened_ceiling": 1.4250029436147522,
+      "public_tcp": {
+        "frame": "public pad-center TCP; fixed tool transform from run metadata",
+        "position_mm": {
+          "rms": 2.122093188536142,
+          "p50": 1.3021017073808843,
+          "p95": 4.299093514126486,
+          "p99": 4.440404782670982,
+          "max": 4.449711312376607
+        },
+        "final_position_mm": [
+          0.34657621392880067
+        ],
+        "per_arm_position_mm": {
+          "right": {
+            "rms": 2.122093188536142,
+            "p50": 1.3021017073808843,
+            "p95": 4.299093514126486,
+            "p99": 4.440404782670982,
+            "max": 4.449711312376607
+          }
+        },
+        "per_arm_orientation_deg": {
+          "right": {
+            "rms": 0.20912663105146545,
+            "p50": 0.12676851571475828,
+            "p95": 0.4449464051760642,
+            "p99": 0.45987940129382393,
+            "max": 0.4608394470904814
+          }
+        },
+        "orientation_deg": {
+          "rms": 0.20912663105146545,
+          "p50": 0.12676851571475828,
+          "p95": 0.4449464051760642,
+          "p99": 0.45987940129382393,
+          "max": 0.4608394470904814
+        },
+        "moving_arm_speed": {
+          "right": {
+            "peak_m_s": 1.4071684682873407,
+            "time_at_or_above_1p2_m_s": 0.4,
+            "longest_continuous_interval_at_or_above_1p2_m_s": 0.2
+          }
+        },
+        "tracking_acceptance": {
+          "completed": true,
+          "position_rms_5mm": true,
+          "position_p95_10mm": true,
+          "orientation_p95_2deg": true,
+          "final_position_1mm": true,
+          "limits": true,
+          "no_planner_failures": true,
+          "no_modeled_contacts": true,
+          "no_torque_saturation": true
+        },
+        "tracking_accepted": true,
+        "fast_tracking_accepted": true,
+        "source_sha256": {
+          "trace.npz": "febfc73130ceeba8358497e7e94d4b74220809c813a3d8fa60180f408dc9c979",
+          "metadata.json": "fbb39c7585d2b3c6b67f4de1a0472bd931bfea8b8874ba0d24e931bd45b37dcb",
+          "summary.json": "a5069d8c9dc7513f5cf5ee2e131106446437a547d19f7edfa18694202b6e6d80"
+        }
+      },
+      "run": "x7-gp80-fast-trajectory-sim-v1__shoulder_sweep__1.425002944"
+    },
+    "translate_rotate": {
+      "split": "train",
+      "requested_pass": 0.6895820096876244,
+      "requested_fail": 0.7171652900751293,
+      "screened_ceiling": 0.8826649724001592,
+      "public_tcp": {
+        "frame": "public pad-center TCP; fixed tool transform from run metadata",
+        "position_mm": {
+          "rms": 1.0468981014391787,
+          "p50": 1.0159333243925959,
+          "p95": 1.594102866292792,
+          "p99": 1.7056741225862435,
+          "max": 1.7156635327357297
+        },
+        "final_position_mm": [
+          0.34624049515382704
+        ],
+        "per_arm_position_mm": {
+          "right": {
+            "rms": 1.0468981014391787,
+            "p50": 1.0159333243925959,
+            "p95": 1.594102866292792,
+            "p99": 1.7056741225862435,
+            "max": 1.7156635327357297
+          }
+        },
+        "per_arm_orientation_deg": {
+          "right": {
+            "rms": 0.6410740927418779,
+            "p50": 0.15006778955859432,
+            "p95": 1.881568228545205,
+            "p99": 2.1224395664982865,
+            "max": 2.141343811153876
+          }
+        },
+        "orientation_deg": {
+          "rms": 0.6410740927418779,
+          "p50": 0.15006778955859432,
+          "p95": 1.881568228545205,
+          "p99": 2.1224395664982865,
+          "max": 2.141343811153876
+        },
+        "moving_arm_speed": {
+          "right": {
+            "peak_m_s": 0.7406111012302263,
+            "time_at_or_above_1p2_m_s": 0.0,
+            "longest_continuous_interval_at_or_above_1p2_m_s": 0.0
+          }
+        },
+        "tracking_acceptance": {
+          "completed": true,
+          "position_rms_5mm": true,
+          "position_p95_10mm": true,
+          "orientation_p95_2deg": true,
+          "final_position_1mm": true,
+          "limits": true,
+          "no_planner_failures": true,
+          "no_modeled_contacts": true,
+          "no_torque_saturation": true
+        },
+        "tracking_accepted": true,
+        "fast_tracking_accepted": false,
+        "source_sha256": {
+          "trace.npz": "1135b05d526aa8d88aedebac30fa694d1eb97f82bb33c43084ea86a3c85895fe",
+          "metadata.json": "39f12d38ef7447a6939d66677e41a4964a04b0479fe6984512697fddbaf5469c",
+          "summary.json": "44da0e04d610f6ec05153ddbdb26db591d0ea148e1d7b2d95425888886d0ce9a"
+        }
+      },
+      "run": "x7-gp80-fast-trajectory-sim-v1__translate_rotate__0.689582010"
+    },
+    "vertical_fixed": {
+      "split": "train",
+      "requested_pass": 1.0335998851329,
+      "requested_fail": 1.0718813623600445,
+      "screened_ceiling": 1.2250072712686222,
+      "public_tcp": {
+        "frame": "public pad-center TCP; fixed tool transform from run metadata",
+        "position_mm": {
+          "rms": 1.5355818880666448,
+          "p50": 1.1351904709115725,
+          "p95": 2.8059502932811045,
+          "p99": 3.079715305754913,
+          "max": 3.130434862437213
+        },
+        "final_position_mm": [
+          0.345842178759949
+        ],
+        "per_arm_position_mm": {
+          "right": {
+            "rms": 1.5355818880666448,
+            "p50": 1.1351904709115725,
+            "p95": 2.8059502932811045,
+            "p99": 3.079715305754913,
+            "max": 3.130434862437213
+          }
+        },
+        "per_arm_orientation_deg": {
+          "right": {
+            "rms": 0.6783806238153847,
+            "p50": 0.17817264749118605,
+            "p95": 1.7099597379716034,
+            "p99": 2.0003101702214643,
+            "max": 2.0207525376598645
+          }
+        },
+        "orientation_deg": {
+          "rms": 0.6783806238153847,
+          "p50": 0.17817264749118605,
+          "p95": 1.7099597379716034,
+          "p99": 2.0003101702214643,
+          "max": 2.0207525376598645
+        },
+        "moving_arm_speed": {
+          "right": {
+            "peak_m_s": 1.046752024923194,
+            "time_at_or_above_1p2_m_s": 0.0,
+            "longest_continuous_interval_at_or_above_1p2_m_s": 0.0
+          }
+        },
+        "tracking_acceptance": {
+          "completed": true,
+          "position_rms_5mm": true,
+          "position_p95_10mm": true,
+          "orientation_p95_2deg": true,
+          "final_position_1mm": true,
+          "limits": true,
+          "no_planner_failures": true,
+          "no_modeled_contacts": true,
+          "no_torque_saturation": true
+        },
+        "tracking_accepted": true,
+        "fast_tracking_accepted": false,
+        "source_sha256": {
+          "trace.npz": "9e5a2cb446aa5a19982e6448df28027e0e236a59113f683532ac2a2bf10fa4a8",
+          "metadata.json": "ce189286ab866b2d9ade83884999968407b19c36a9a67bcd38c118cd22f11063",
+          "summary.json": "48406faf7b6bd81efb94119d1738315ced20484a6beae4d823e6528671520f9e"
+        }
+      },
+      "run": "x7-gp80-fast-trajectory-sim-v1__vertical_fixed__1.033599885"
+    }
+  },
+  "candidate": {
+    "circle_xz": {
+      "split": "heldout",
+      "requested_pass": null,
+      "requested_fail": 0.2,
+      "screened_ceiling": 0.9872700333620972,
+      "public_tcp": null,
+      "run": null
+    },
+    "circle_yz": {
+      "split": "train",
+      "requested_pass": 0.9105893177911328,
+      "requested_fail": 0.9431103648551018,
+      "screened_ceiling": 1.040673506047009,
+      "public_tcp": {
+        "frame": "public pad-center TCP; fixed tool transform from run metadata",
+        "position_mm": {
+          "rms": 2.7242910119048314,
+          "p50": 1.0789672521848412,
+          "p95": 6.2620872177753935,
+          "p99": 7.47784222414944,
+          "max": 7.631680386033965
+        },
+        "final_position_mm": [
+          0.3247393028256322
+        ],
+        "per_arm_position_mm": {
+          "right": {
+            "rms": 2.7242910119048314,
+            "p50": 1.0789672521848412,
+            "p95": 6.2620872177753935,
+            "p99": 7.47784222414944,
+            "max": 7.631680386033965
+          }
+        },
+        "per_arm_orientation_deg": {
+          "right": {
+            "rms": 0.7163191573885503,
+            "p50": 0.06412616761957478,
+            "p95": 1.8392865251316601,
+            "p99": 2.5032628157776537,
+            "max": 2.546692656519689
+          }
+        },
+        "orientation_deg": {
+          "rms": 0.7163191573885503,
+          "p50": 0.06412616761957478,
+          "p95": 1.8392865251316601,
+          "p99": 2.5032628157776537,
+          "max": 2.546692656519689
+        },
+        "moving_arm_speed": {
+          "right": {
+            "peak_m_s": 0.9559372263094729,
+            "time_at_or_above_1p2_m_s": 0.0,
+            "longest_continuous_interval_at_or_above_1p2_m_s": 0.0
+          }
+        },
+        "tracking_acceptance": {
+          "completed": true,
+          "position_rms_5mm": true,
+          "position_p95_10mm": true,
+          "orientation_p95_2deg": true,
+          "final_position_1mm": true,
+          "limits": true,
+          "no_planner_failures": true,
+          "no_modeled_contacts": true,
+          "no_torque_saturation": true
+        },
+        "tracking_accepted": true,
+        "fast_tracking_accepted": false,
+        "source_sha256": {
+          "trace.npz": "590289c64d7417905eb9d3f545d7454a53f8de701d855b57fd286cb338907848",
+          "metadata.json": "a35de00dc85f6206e030cee4fc7fe48bf02156ac811537d0ce80b0cca56146ad",
+          "summary.json": "9148124260e8dad7740dc5239ef9b9f403a5e3b6c96155707084f0c74df8b5b9"
+        }
+      },
+      "run": "x7-gp80-general-trajectory-sim-v2__circle_yz__0.910589318"
+    },
+    "compact_arc": {
+      "split": "heldout",
+      "requested_pass": 0.9550606872126676,
+      "requested_fail": null,
+      "screened_ceiling": 0.9550606872126676,
+      "public_tcp": {
+        "frame": "public pad-center TCP; fixed tool transform from run metadata",
+        "position_mm": {
+          "rms": 1.5219567121084112,
+          "p50": 1.0903482603461145,
+          "p95": 3.0782683842789353,
+          "p99": 3.2554794380736287,
+          "max": 3.272597153039476
+        },
+        "final_position_mm": [
+          0.306261246443207
+        ],
+        "per_arm_position_mm": {
+          "right": {
+            "rms": 1.5219567121084112,
+            "p50": 1.0903482603461145,
+            "p95": 3.0782683842789353,
+            "p99": 3.2554794380736287,
+            "max": 3.272597153039476
+          }
+        },
+        "per_arm_orientation_deg": {
+          "right": {
+            "rms": 0.16917839650358907,
+            "p50": 0.12386079599835965,
+            "p95": 0.3438830642570866,
+            "p99": 0.36577738067548254,
+            "max": 0.3674883089154636
+          }
+        },
+        "orientation_deg": {
+          "rms": 0.16917839650358907,
+          "p50": 0.12386079599835965,
+          "p95": 0.3438830642570866,
+          "p99": 0.36577738067548254,
+          "max": 0.3674883089154636
+        },
+        "moving_arm_speed": {
+          "right": {
+            "peak_m_s": 0.9588615383301026,
+            "time_at_or_above_1p2_m_s": 0.0,
+            "longest_continuous_interval_at_or_above_1p2_m_s": 0.0
+          }
+        },
+        "tracking_acceptance": {
+          "completed": true,
+          "position_rms_5mm": true,
+          "position_p95_10mm": true,
+          "orientation_p95_2deg": true,
+          "final_position_1mm": true,
+          "limits": true,
+          "no_planner_failures": true,
+          "no_modeled_contacts": true,
+          "no_torque_saturation": true
+        },
+        "tracking_accepted": true,
+        "fast_tracking_accepted": false,
+        "source_sha256": {
+          "trace.npz": "fc59079613a730171fc1c0a279bc71cbdf243091b455851d953af7a5fcbef0fa",
+          "metadata.json": "eda929fa4711c2a4d70efc5ce59295967015fe57f8c62a042f58ec185dba275f",
+          "summary.json": "5f27b80cfd0f2e92432ee032a4d8e87d81adb27a991c54dbcf9af9c31f5d8003"
+        }
+      },
+      "run": "x7-gp80-general-trajectory-sim-v2__compact_arc__0.955060687"
+    },
+    "compact_left": {
+      "split": "heldout",
+      "requested_pass": 0.952752150490963,
+      "requested_fail": null,
+      "screened_ceiling": 0.952752150490963,
+      "public_tcp": {
+        "frame": "public pad-center TCP; fixed tool transform from run metadata",
+        "position_mm": {
+          "rms": 1.4750169148639514,
+          "p50": 1.0062095665426538,
+          "p95": 2.9929025312361266,
+          "p99": 3.1655138230066764,
+          "max": 3.1747873796170674
+        },
+        "final_position_mm": [
+          0.3107851424874358
+        ],
+        "per_arm_position_mm": {
+          "left": {
+            "rms": 1.4750169148639514,
+            "p50": 1.0062095665426538,
+            "p95": 2.9929025312361266,
+            "p99": 3.1655138230066764,
+            "max": 3.1747873796170674
+          }
+        },
+        "per_arm_orientation_deg": {
+          "left": {
+            "rms": 0.16475806918630478,
+            "p50": 0.11382529724720125,
+            "p95": 0.3387318976023167,
+            "p99": 0.35610669495787195,
+            "max": 0.35759733934264654
+          }
+        },
+        "orientation_deg": {
+          "rms": 0.16475806918630478,
+          "p50": 0.11382529724720125,
+          "p95": 0.3387318976023167,
+          "p99": 0.35610669495787195,
+          "max": 0.35759733934264654
+        },
+        "moving_arm_speed": {
+          "left": {
+            "peak_m_s": 0.9504059252220072,
+            "time_at_or_above_1p2_m_s": 0.0,
+            "longest_continuous_interval_at_or_above_1p2_m_s": 0.0
+          }
+        },
+        "tracking_acceptance": {
+          "completed": true,
+          "position_rms_5mm": true,
+          "position_p95_10mm": true,
+          "orientation_p95_2deg": true,
+          "final_position_1mm": true,
+          "limits": true,
+          "no_planner_failures": true,
+          "no_modeled_contacts": true,
+          "no_torque_saturation": true
+        },
+        "tracking_accepted": true,
+        "fast_tracking_accepted": false,
+        "source_sha256": {
+          "trace.npz": "9345c2082535ab0c7189d69bd2e131c789623925056654ca742171f2ff6e8d77",
+          "metadata.json": "d988ac433fef04d01c7a0f682a0df1515685778ce240c896665e62c9a23a2934",
+          "summary.json": "3dd82ff37e65733117cbc892e90c883d96787304b8a2db701dd7553e68fa6ca4"
+        }
+      },
+      "run": "x7-gp80-general-trajectory-sim-v2__compact_left__0.952752150"
+    },
+    "curved_reversal": {
+      "split": "train",
+      "requested_pass": 1.283876107482633,
+      "requested_fail": null,
+      "screened_ceiling": 1.283876107482633,
+      "public_tcp": {
+        "frame": "public pad-center TCP; fixed tool transform from run metadata",
+        "position_mm": {
+          "rms": 1.833793208160663,
+          "p50": 1.277201926687447,
+          "p95": 3.7175150373123422,
+          "p99": 3.983944920571837,
+          "max": 3.99723853849932
+        },
+        "final_position_mm": [
+          0.3464430288908683
+        ],
+        "per_arm_position_mm": {
+          "right": {
+            "rms": 1.833793208160663,
+            "p50": 1.277201926687447,
+            "p95": 3.7175150373123422,
+            "p99": 3.983944920571837,
+            "max": 3.99723853849932
+          }
+        },
+        "per_arm_orientation_deg": {
+          "right": {
+            "rms": 0.20231812634970306,
+            "p50": 0.15941532648282938,
+            "p95": 0.3955367558810928,
+            "p99": 0.423298308112994,
+            "max": 0.4248349086978598
+          }
+        },
+        "orientation_deg": {
+          "rms": 0.20231812634970306,
+          "p50": 0.15941532648282938,
+          "p95": 0.3955367558810928,
+          "p99": 0.423298308112994,
+          "max": 0.4248349086978598
+        },
+        "moving_arm_speed": {
+          "right": {
+            "peak_m_s": 1.276114735388178,
+            "time_at_or_above_1p2_m_s": 0.18,
+            "longest_continuous_interval_at_or_above_1p2_m_s": 0.09
+          }
+        },
+        "tracking_acceptance": {
+          "completed": true,
+          "position_rms_5mm": true,
+          "position_p95_10mm": true,
+          "orientation_p95_2deg": true,
+          "final_position_1mm": true,
+          "limits": true,
+          "no_planner_failures": true,
+          "no_modeled_contacts": true,
+          "no_torque_saturation": true
+        },
+        "tracking_accepted": true,
+        "fast_tracking_accepted": false,
+        "source_sha256": {
+          "trace.npz": "930c4a31ceac2b9ebc4874891fddc33685bee02a2f5e6c99322dc6463c12604f",
+          "metadata.json": "a225ac03fdac0e201fb372d41d86d181572f509cf125d856bdec52d8bf047a97",
+          "summary.json": "08d4671e9466b6d0d0d08caedc49233083893eed809858130f5d1ec501d47fdc"
+        }
+      },
+      "run": "x7-gp80-general-trajectory-sim-v2__curved_reversal__1.283876107"
+    },
+    "diagonal_fixed": {
+      "split": "heldout",
+      "requested_pass": 0.5483795784558041,
+      "requested_fail": 0.5788451105922376,
+      "screened_ceiling": 0.974897028365874,
+      "public_tcp": {
+        "frame": "public pad-center TCP; fixed tool transform from run metadata",
+        "position_mm": {
+          "rms": 1.1547359865435036,
+          "p50": 0.9711320635249061,
+          "p95": 2.0057095936713356,
+          "p99": 2.2564304021721813,
+          "max": 2.27884979064439
+        },
+        "final_position_mm": [
+          0.3464306805917181
+        ],
+        "per_arm_position_mm": {
+          "right": {
+            "rms": 1.1547359865435036,
+            "p50": 0.9711320635249061,
+            "p95": 2.0057095936713356,
+            "p99": 2.2564304021721813,
+            "max": 2.27884979064439
+          }
+        },
+        "per_arm_orientation_deg": {
+          "right": {
+            "rms": 0.08394150767145864,
+            "p50": 0.06391208641912752,
+            "p95": 0.16417206163393247,
+            "p99": 0.1775828349216174,
+            "max": 0.17885915901217803
+          }
+        },
+        "orientation_deg": {
+          "rms": 0.08394150767145864,
+          "p50": 0.06391208641912752,
+          "p95": 0.16417206163393247,
+          "p99": 0.1775828349216174,
+          "max": 0.17885915901217803
+        },
+        "moving_arm_speed": {
+          "right": {
+            "peak_m_s": 0.5646141148030631,
+            "time_at_or_above_1p2_m_s": 0.0,
+            "longest_continuous_interval_at_or_above_1p2_m_s": 0.0
+          }
+        },
+        "tracking_acceptance": {
+          "completed": true,
+          "position_rms_5mm": true,
+          "position_p95_10mm": true,
+          "orientation_p95_2deg": true,
+          "final_position_1mm": true,
+          "limits": true,
+          "no_planner_failures": true,
+          "no_modeled_contacts": true,
+          "no_torque_saturation": true
+        },
+        "tracking_accepted": true,
+        "fast_tracking_accepted": false,
+        "source_sha256": {
+          "trace.npz": "6602bce7a58e319ffff1994b16e149b87ece36add758420de0075733cc981efd",
+          "metadata.json": "fd887e8b5d95d9b9732a64c9b60019cc6ff3077ffbecc349a16bcb69a73d8166",
+          "summary.json": "5ec4420f146b1d75cb3bf13bbee240cdaf6d69cac8a21f9a5d1d85e76780c7ed"
+        }
+      },
+      "run": "x7-gp80-general-trajectory-sim-v2__diagonal_fixed__0.548379578"
+    },
+    "double_curvature": {
+      "split": "heldout",
+      "requested_pass": 1.3128541443004056,
+      "requested_fail": null,
+      "screened_ceiling": 1.3128541443004056,
+      "public_tcp": {
+        "frame": "public pad-center TCP; fixed tool transform from run metadata",
+        "position_mm": {
+          "rms": 2.144838482189086,
+          "p50": 1.6364145678698372,
+          "p95": 4.514513152132978,
+          "p99": 4.863967488911918,
+          "max": 4.888329219328076
+        },
+        "final_position_mm": [
+          0.3462112326004434
+        ],
+        "per_arm_position_mm": {
+          "right": {
+            "rms": 2.144838482189086,
+            "p50": 1.6364145678698372,
+            "p95": 4.514513152132978,
+            "p99": 4.863967488911918,
+            "max": 4.888329219328076
+          }
+        },
+        "per_arm_orientation_deg": {
+          "right": {
+            "rms": 0.2063787855599304,
+            "p50": 0.1418009821906851,
+            "p95": 0.438976116167119,
+            "p99": 0.4766806503929914,
+            "max": 0.4792784861518186
+          }
+        },
+        "orientation_deg": {
+          "rms": 0.2063787855599304,
+          "p50": 0.1418009821906851,
+          "p95": 0.438976116167119,
+          "p99": 0.4766806503929914,
+          "max": 0.4792784861518186
+        },
+        "moving_arm_speed": {
+          "right": {
+            "peak_m_s": 1.3258742480613301,
+            "time_at_or_above_1p2_m_s": 0.19,
+            "longest_continuous_interval_at_or_above_1p2_m_s": 0.1
+          }
+        },
+        "tracking_acceptance": {
+          "completed": true,
+          "position_rms_5mm": true,
+          "position_p95_10mm": true,
+          "orientation_p95_2deg": true,
+          "final_position_1mm": true,
+          "limits": true,
+          "no_planner_failures": true,
+          "no_modeled_contacts": true,
+          "no_torque_saturation": true
+        },
+        "tracking_accepted": true,
+        "fast_tracking_accepted": true,
+        "source_sha256": {
+          "trace.npz": "41c1ec9962cab3793207c0e2722c80586823caebc0d2ef4afa770c63636e97cf",
+          "metadata.json": "679d083f0074021faaaa9e4d0df272e7db121977734051293d0ed37063eb0def",
+          "summary.json": "ffb626b2064d4dceeb5e5cb8e3b58c7504435c1494fa6b628d29ef2051e10ddb"
+        }
+      },
+      "run": "x7-gp80-general-trajectory-sim-v2__double_curvature__1.312854144"
+    },
+    "dual_lateral": {
+      "split": "heldout",
+      "requested_pass": 0.9748970283658738,
+      "requested_fail": null,
+      "screened_ceiling": 0.9748970283658738,
+      "public_tcp": {
+        "frame": "public pad-center TCP; fixed tool transform from run metadata",
+        "position_mm": {
+          "rms": 2.0444531971645876,
+          "p50": 1.4271349745078852,
+          "p95": 3.8228791590790103,
+          "p99": 3.953263177721583,
+          "max": 3.9616905957643644
+        },
+        "final_position_mm": [
+          0.33815866412761386,
+          0.33818994752992243
+        ],
+        "per_arm_position_mm": {
+          "left": {
+            "rms": 2.044453284504418,
+            "p50": 1.4272829723498266,
+            "p95": 3.82086725411683,
+            "p99": 3.952753010271901,
+            "max": 3.961353198414194
+          },
+          "right": {
+            "rms": 2.044453109824754,
+            "p50": 1.4270834997545236,
+            "p95": 3.820899288364567,
+            "p99": 3.9529699933369593,
+            "max": 3.9616905957643644
+          }
+        },
+        "per_arm_orientation_deg": {
+          "left": {
+            "rms": 0.2639053037048374,
+            "p50": 0.0851472286848382,
+            "p95": 0.6741498999599586,
+            "p99": 0.7652384772934246,
+            "max": 0.773372033887522
+          },
+          "right": {
+            "rms": 0.26393860779397593,
+            "p50": 0.0851446904350108,
+            "p95": 0.6742524328001464,
+            "p99": 0.7653254509691981,
+            "max": 0.7734531551392466
+          }
+        },
+        "orientation_deg": {
+          "rms": 0.2639219562747335,
+          "p50": 0.0851472286848382,
+          "p95": 0.6767769954370083,
+          "p99": 0.7654700730201336,
+          "max": 0.7734531551392466
+        },
+        "moving_arm_speed": {
+          "left": {
+            "peak_m_s": 1.0345174725858133,
+            "time_at_or_above_1p2_m_s": 0.0,
+            "longest_continuous_interval_at_or_above_1p2_m_s": 0.0
+          },
+          "right": {
+            "peak_m_s": 1.033917258948097,
+            "time_at_or_above_1p2_m_s": 0.0,
+            "longest_continuous_interval_at_or_above_1p2_m_s": 0.0
+          }
+        },
+        "tracking_acceptance": {
+          "completed": true,
+          "position_rms_5mm": true,
+          "position_p95_10mm": true,
+          "orientation_p95_2deg": true,
+          "final_position_1mm": true,
+          "limits": true,
+          "no_planner_failures": true,
+          "no_modeled_contacts": true,
+          "no_torque_saturation": true
+        },
+        "tracking_accepted": true,
+        "fast_tracking_accepted": false,
+        "source_sha256": {
+          "trace.npz": "e3f423831ce2c3ca28e8fbea9ab51b56bb0388fbae00479f179a47fa0703bf1f",
+          "metadata.json": "0086217b337b30ee538f023ea8969b4f895c62a91898995d0b4d4ca7ac46868d",
+          "summary.json": "8075544438243aabcafc524b0c4978d850bb50786e73535c0eda559c9cea5e7c"
+        }
+      },
+      "run": "x7-gp80-general-trajectory-sim-v2__dual_lateral__0.974897028"
+    },
+    "dual_wave": {
+      "split": "heldout",
+      "requested_pass": 1.2111425771984698,
+      "requested_fail": null,
+      "screened_ceiling": 1.2111425771984698,
+      "public_tcp": {
+        "frame": "public pad-center TCP; fixed tool transform from run metadata",
+        "position_mm": {
+          "rms": 2.111185864988369,
+          "p50": 1.4942317066088893,
+          "p95": 4.425213011523281,
+          "p99": 4.7725469330150325,
+          "max": 4.791548475543079
+        },
+        "final_position_mm": [
+          0.345804145187197,
+          0.34583933794844524
+        ],
+        "per_arm_position_mm": {
+          "left": {
+            "rms": 2.1110639682284162,
+            "p50": 1.4941731652112171,
+            "p95": 4.4110054411773785,
+            "p99": 4.766498894383249,
+            "max": 4.790832968203044
+          },
+          "right": {
+            "rms": 2.111307754710588,
+            "p50": 1.4942902480065612,
+            "p95": 4.41145165636333,
+            "p99": 4.767193268018905,
+            "max": 4.791548475543079
+          }
+        },
+        "per_arm_orientation_deg": {
+          "left": {
+            "rms": 0.22542349593731859,
+            "p50": 0.16970939984008218,
+            "p95": 0.44698521822155557,
+            "p99": 0.4828503980117098,
+            "max": 0.48531122333967397
+          },
+          "right": {
+            "rms": 0.22545469110925026,
+            "p50": 0.16972981999767364,
+            "p95": 0.4469962191359952,
+            "p99": 0.48288154395943517,
+            "max": 0.48534411517813875
+          }
+        },
+        "orientation_deg": {
+          "rms": 0.22543909406286405,
+          "p50": 0.1697196099188779,
+          "p95": 0.44841043531520924,
+          "p99": 0.4833679531579081,
+          "max": 0.48534411517813875
+        },
+        "moving_arm_speed": {
+          "left": {
+            "peak_m_s": 1.2245624587254818,
+            "time_at_or_above_1p2_m_s": 0.1,
+            "longest_continuous_interval_at_or_above_1p2_m_s": 0.05
+          },
+          "right": {
+            "peak_m_s": 1.224563044517564,
+            "time_at_or_above_1p2_m_s": 0.1,
+            "longest_continuous_interval_at_or_above_1p2_m_s": 0.05
+          }
+        },
+        "tracking_acceptance": {
+          "completed": true,
+          "position_rms_5mm": true,
+          "position_p95_10mm": true,
+          "orientation_p95_2deg": true,
+          "final_position_1mm": true,
+          "limits": true,
+          "no_planner_failures": true,
+          "no_modeled_contacts": true,
+          "no_torque_saturation": true
+        },
+        "tracking_accepted": true,
+        "fast_tracking_accepted": false,
+        "source_sha256": {
+          "trace.npz": "0824d5c1741c2bf5a20a64d4344be764e3f73619244aa284667aa0aaf1c6b2d0",
+          "metadata.json": "d84ce71fc83a1f0cdf2c59d5cb9ba1185a69592ec60cc42ada3f82d26cd4b2a2",
+          "summary.json": "02ca7715bcb3257031e7c5f09133b78c7047704a116199710dd352260b177ac2"
+        }
+      },
+      "run": "x7-gp80-general-trajectory-sim-v2__dual_wave__1.211142577"
+    },
+    "elbow_reach": {
+      "split": "train",
+      "requested_pass": 1.0047500596886667,
+      "requested_fail": null,
+      "screened_ceiling": 1.0047500596886667,
+      "public_tcp": {
+        "frame": "public pad-center TCP; fixed tool transform from run metadata",
+        "position_mm": {
+          "rms": 2.0015861475597556,
+          "p50": 1.095693831784343,
+          "p95": 4.52464985984398,
+          "p99": 4.728639558227463,
+          "max": 4.750444568691234
+        },
+        "final_position_mm": [
+          0.3448750403867456
+        ],
+        "per_arm_position_mm": {
+          "right": {
+            "rms": 2.0015861475597556,
+            "p50": 1.095693831784343,
+            "p95": 4.52464985984398,
+            "p99": 4.728639558227463,
+            "max": 4.750444568691234
+          }
+        },
+        "per_arm_orientation_deg": {
+          "right": {
+            "rms": 0.20014820096779096,
+            "p50": 0.10766057453665856,
+            "p95": 0.45502652008639805,
+            "p99": 0.47817704228203695,
+            "max": 0.47975154611520454
+          }
+        },
+        "orientation_deg": {
+          "rms": 0.20014820096779096,
+          "p50": 0.10766057453665856,
+          "p95": 0.45502652008639805,
+          "p99": 0.47817704228203695,
+          "max": 0.47975154611520454
+        },
+        "moving_arm_speed": {
+          "right": {
+            "peak_m_s": 1.0310683511032357,
+            "time_at_or_above_1p2_m_s": 0.0,
+            "longest_continuous_interval_at_or_above_1p2_m_s": 0.0
+          }
+        },
+        "tracking_acceptance": {
+          "completed": true,
+          "position_rms_5mm": true,
+          "position_p95_10mm": true,
+          "orientation_p95_2deg": true,
+          "final_position_1mm": true,
+          "limits": true,
+          "no_planner_failures": true,
+          "no_modeled_contacts": true,
+          "no_torque_saturation": true
+        },
+        "tracking_accepted": true,
+        "fast_tracking_accepted": false,
+        "source_sha256": {
+          "trace.npz": "ebf310129376f36cb71f1edb4f5b12132b548d5484a2320240fccb91de1258ad",
+          "metadata.json": "0d86c51de89b93f7a0688094e72a5a1e9da180c09def96df9c5d4fd1392422c1",
+          "summary.json": "51a0c3c2f79b0ecc4298afb427f5ceb53cc52be8739a2ecb1c5c5a80b3703bfc"
+        }
+      },
+      "run": "x7-gp80-general-trajectory-sim-v2__elbow_reach__1.004750060"
+    },
+    "figure8_yz": {
+      "split": "heldout",
+      "requested_pass": 0.8753139758174303,
+      "requested_fail": 0.905497216362859,
+      "screened_ceiling": 0.9658636974537161,
+      "public_tcp": {
+        "frame": "public pad-center TCP; fixed tool transform from run metadata",
+        "position_mm": {
+          "rms": 3.204975585333412,
+          "p50": 0.9263891839459026,
+          "p95": 9.058870808218739,
+          "p99": 12.786426191691461,
+          "max": 13.078825369050278
+        },
+        "final_position_mm": [
+          0.343507301814294
+        ],
+        "per_arm_position_mm": {
+          "right": {
+            "rms": 3.204975585333412,
+            "p50": 0.9263891839459026,
+            "p95": 9.058870808218739,
+            "p99": 12.786426191691461,
+            "max": 13.078825369050278
+          }
+        },
+        "per_arm_orientation_deg": {
+          "right": {
+            "rms": 0.7653083611977229,
+            "p50": 0.07300331724314589,
+            "p95": 1.7552388004066832,
+            "p99": 3.798410586930745,
+            "max": 3.9268286150623872
+          }
+        },
+        "orientation_deg": {
+          "rms": 0.7653083611977229,
+          "p50": 0.07300331724314589,
+          "p95": 1.7552388004066832,
+          "p99": 3.798410586930745,
+          "max": 3.9268286150623872
+        },
+        "moving_arm_speed": {
+          "right": {
+            "peak_m_s": 0.8583021788812153,
+            "time_at_or_above_1p2_m_s": 0.0,
+            "longest_continuous_interval_at_or_above_1p2_m_s": 0.0
+          }
+        },
+        "tracking_acceptance": {
+          "completed": true,
+          "position_rms_5mm": true,
+          "position_p95_10mm": true,
+          "orientation_p95_2deg": true,
+          "final_position_1mm": true,
+          "limits": true,
+          "no_planner_failures": true,
+          "no_modeled_contacts": true,
+          "no_torque_saturation": true
+        },
+        "tracking_accepted": true,
+        "fast_tracking_accepted": false,
+        "source_sha256": {
+          "trace.npz": "2a5d66a29ea5564d57d19c621992e838db1d3cccdc5c8b75be3ab85e9e901f4e",
+          "metadata.json": "22b9b98bbca1a15cd493874e967ddab06032f42c1d186889fceca330d759e3af",
+          "summary.json": "34aeedca4430c1830352bb2ee9ae2ba5f85b00babdd1d08c00033e5b62f3b0d9"
+        }
+      },
+      "run": "x7-gp80-general-trajectory-sim-v2__figure8_yz__0.875313976"
+    },
+    "inward_fixed": {
+      "split": "train",
+      "requested_pass": 0.6093106427286712,
+      "requested_fail": 0.6397761748651047,
+      "screened_ceiling": 0.974897028365874,
+      "public_tcp": {
+        "frame": "public pad-center TCP; fixed tool transform from run metadata",
+        "position_mm": {
+          "rms": 3.2286366646152813,
+          "p50": 1.06801287817524,
+          "p95": 7.861395157625074,
+          "p99": 8.293923055079782,
+          "max": 8.363300276399897
+        },
+        "final_position_mm": [
+          0.34649939656681905
+        ],
+        "per_arm_position_mm": {
+          "right": {
+            "rms": 3.2286366646152813,
+            "p50": 1.06801287817524,
+            "p95": 7.861395157625074,
+            "p99": 8.293923055079782,
+            "max": 8.363300276399897
+          }
+        },
+        "per_arm_orientation_deg": {
+          "right": {
+            "rms": 0.2143724356092153,
+            "p50": 0.11929748535985088,
+            "p95": 0.40975784782581104,
+            "p99": 0.46779983257415597,
+            "max": 0.47270288113905445
+          }
+        },
+        "orientation_deg": {
+          "rms": 0.2143724356092153,
+          "p50": 0.11929748535985088,
+          "p95": 0.40975784782581104,
+          "p99": 0.46779983257415597,
+          "max": 0.47270288113905445
+        },
+        "moving_arm_speed": {
+          "right": {
+            "peak_m_s": 0.5829902840713466,
+            "time_at_or_above_1p2_m_s": 0.0,
+            "longest_continuous_interval_at_or_above_1p2_m_s": 0.0
+          }
+        },
+        "tracking_acceptance": {
+          "completed": true,
+          "position_rms_5mm": true,
+          "position_p95_10mm": true,
+          "orientation_p95_2deg": true,
+          "final_position_1mm": true,
+          "limits": true,
+          "no_planner_failures": true,
+          "no_modeled_contacts": true,
+          "no_torque_saturation": true
+        },
+        "tracking_accepted": true,
+        "fast_tracking_accepted": false,
+        "source_sha256": {
+          "trace.npz": "fbb236146764ea8cf3e85b1ab8f99967522d47191a14593ecf31d994ad120214",
+          "metadata.json": "0ef6667ee873d50ea551afa4749d2112b6d3631d0ce3da446ae1e7f5d3b8df0c",
+          "summary.json": "17f2037a48146246f7c4b9e8658d1783f412dd09ac8691f8ca6882fc99fdfc62"
+        }
+      },
+      "run": "x7-gp80-general-trajectory-sim-v2__inward_fixed__0.609310643"
+    },
+    "left_sweep": {
+      "split": "heldout",
+      "requested_pass": 1.7785646812928497,
+      "requested_fail": null,
+      "screened_ceiling": 1.7785646812928497,
+      "public_tcp": {
+        "frame": "public pad-center TCP; fixed tool transform from run metadata",
+        "position_mm": {
+          "rms": 2.9419469106277947,
+          "p50": 1.9355116783370157,
+          "p95": 5.111673732426686,
+          "p99": 5.954893406956354,
+          "max": 6.045515837270942
+        },
+        "final_position_mm": [
+          0.338349202392499
+        ],
+        "per_arm_position_mm": {
+          "left": {
+            "rms": 2.9419469106277947,
+            "p50": 1.9355116783370157,
+            "p95": 5.111673732426686,
+            "p99": 5.954893406956354,
+            "max": 6.045515837270942
+          }
+        },
+        "per_arm_orientation_deg": {
+          "left": {
+            "rms": 0.3171794922185552,
+            "p50": 0.21943612398550044,
+            "p95": 0.5818577063974396,
+            "p99": 0.6761237676834428,
+            "max": 0.683768973648948
+          }
+        },
+        "orientation_deg": {
+          "rms": 0.3171794922185552,
+          "p50": 0.21943612398550044,
+          "p95": 0.5818577063974396,
+          "p99": 0.6761237676834428,
+          "max": 0.683768973648948
+        },
+        "moving_arm_speed": {
+          "left": {
+            "peak_m_s": 1.7536038859636969,
+            "time_at_or_above_1p2_m_s": 0.48,
+            "longest_continuous_interval_at_or_above_1p2_m_s": 0.24
+          }
+        },
+        "tracking_acceptance": {
+          "completed": true,
+          "position_rms_5mm": true,
+          "position_p95_10mm": true,
+          "orientation_p95_2deg": true,
+          "final_position_1mm": true,
+          "limits": true,
+          "no_planner_failures": true,
+          "no_modeled_contacts": true,
+          "no_torque_saturation": true
+        },
+        "tracking_accepted": true,
+        "fast_tracking_accepted": true,
+        "source_sha256": {
+          "trace.npz": "96d25d35ec4c2ae3080767af7e596d2be09589dc6f7ebaf7c8d9504d62bb0433",
+          "metadata.json": "653f21ee10c2985879904b2cfee0cf5359c6e720fffb949997fe23b75ae52baf",
+          "summary.json": "a8835f940452cd3ed2b16885cbd1c845ee60c36d0a69f56c375ecfcb0e7de762"
+        }
+      },
+      "run": "x7-gp80-general-trajectory-sim-v2__left_sweep__1.778564681"
+    },
+    "left_vertical": {
+      "split": "heldout",
+      "requested_pass": 1.1470161046325378,
+      "requested_fail": 1.1690741066447021,
+      "screened_ceiling": 1.4117121287785082,
+      "public_tcp": {
+        "frame": "public pad-center TCP; fixed tool transform from run metadata",
+        "position_mm": {
+          "rms": 2.539911673952882,
+          "p50": 1.2201470737549127,
+          "p95": 5.534014522986044,
+          "p99": 7.193433241050075,
+          "max": 7.292950503353756
+        },
+        "final_position_mm": [
+          0.3492673836597442
+        ],
+        "per_arm_position_mm": {
+          "left": {
+            "rms": 2.539911673952882,
+            "p50": 1.2201470737549127,
+            "p95": 5.534014522986044,
+            "p99": 7.193433241050075,
+            "max": 7.292950503353756
+          }
+        },
+        "per_arm_orientation_deg": {
+          "left": {
+            "rms": 0.8251688936617725,
+            "p50": 0.10230834692454556,
+            "p95": 1.882303600776014,
+            "p99": 2.1320421075017086,
+            "max": 2.1484379881237037
+          }
+        },
+        "orientation_deg": {
+          "rms": 0.8251688936617725,
+          "p50": 0.10230834692454556,
+          "p95": 1.882303600776014,
+          "p99": 2.1320421075017086,
+          "max": 2.1484379881237037
+        },
+        "moving_arm_speed": {
+          "left": {
+            "peak_m_s": 1.1439999123353657,
+            "time_at_or_above_1p2_m_s": 0.0,
+            "longest_continuous_interval_at_or_above_1p2_m_s": 0.0
+          }
+        },
+        "tracking_acceptance": {
+          "completed": true,
+          "position_rms_5mm": true,
+          "position_p95_10mm": true,
+          "orientation_p95_2deg": true,
+          "final_position_1mm": true,
+          "limits": true,
+          "no_planner_failures": true,
+          "no_modeled_contacts": true,
+          "no_torque_saturation": true
+        },
+        "tracking_accepted": true,
+        "fast_tracking_accepted": false,
+        "source_sha256": {
+          "trace.npz": "4c22130f9329272421fc29a2ab095eda30470e3a8c67ad2e93370d7ecb0e8992",
+          "metadata.json": "e05b760027a68cdf1575a3cf27b779b7a950a16eea8d51c2f2f31b66297f6d59",
+          "summary.json": "b9236a47b876b0c74981d9c4afb5e20c456609d460de2f0ea42ede20221c83f8"
+        }
+      },
+      "run": "x7-gp80-general-trajectory-sim-v2__left_vertical__1.147016105"
+    },
+    "offset_arc": {
+      "split": "heldout",
+      "requested_pass": 1.7203906249999998,
+      "requested_fail": 1.74859375,
+      "screened_ceiling": 1.805,
+      "public_tcp": {
+        "frame": "public pad-center TCP; fixed tool transform from run metadata",
+        "position_mm": {
+          "rms": 4.136236252296627,
+          "p50": 1.6821940476895056,
+          "p95": 9.802994268566792,
+          "p99": 11.489523225272563,
+          "max": 11.60505003113397
+        },
+        "final_position_mm": [
+          0.3385805298957185
+        ],
+        "per_arm_position_mm": {
+          "right": {
+            "rms": 4.136236252296627,
+            "p50": 1.6821940476895056,
+            "p95": 9.802994268566792,
+            "p99": 11.489523225272563,
+            "max": 11.60505003113397
+          }
+        },
+        "per_arm_orientation_deg": {
+          "right": {
+            "rms": 0.44323772935443223,
+            "p50": 0.1828749671632127,
+            "p95": 0.9678129287460271,
+            "p99": 1.1043877643077789,
+            "max": 1.113807466187936
+          }
+        },
+        "orientation_deg": {
+          "rms": 0.44323772935443223,
+          "p50": 0.1828749671632127,
+          "p95": 0.9678129287460271,
+          "p99": 1.1043877643077789,
+          "max": 1.113807466187936
+        },
+        "moving_arm_speed": {
+          "right": {
+            "peak_m_s": 1.6738252992802747,
+            "time_at_or_above_1p2_m_s": 0.52,
+            "longest_continuous_interval_at_or_above_1p2_m_s": 0.27
+          }
+        },
+        "tracking_acceptance": {
+          "completed": true,
+          "position_rms_5mm": true,
+          "position_p95_10mm": true,
+          "orientation_p95_2deg": true,
+          "final_position_1mm": true,
+          "limits": true,
+          "no_planner_failures": true,
+          "no_modeled_contacts": true,
+          "no_torque_saturation": true
+        },
+        "tracking_accepted": true,
+        "fast_tracking_accepted": true,
+        "source_sha256": {
+          "trace.npz": "95617a48ec33bf9169a250ccd559a6aad97129dc4936d4cb19c1f8a16592ee4b",
+          "metadata.json": "bdf159d04ffc059dc58fb2f773831d3e44a9e1d5448122b343b36f9a6dea5121",
+          "summary.json": "06d649c2b9d30a8994188caef65de748c908034150d15c82f1c40a662d07fdf1"
+        }
+      },
+      "run": "x7-gp80-general-trajectory-sim-v2__offset_arc__1.720390625"
+    },
+    "rounded_corner": {
+      "split": "heldout",
+      "requested_pass": 1.1314951006703147,
+      "requested_fail": null,
+      "screened_ceiling": 1.1314951006703147,
+      "public_tcp": {
+        "frame": "public pad-center TCP; fixed tool transform from run metadata",
+        "position_mm": {
+          "rms": 2.7659222730240938,
+          "p50": 1.2717263314637397,
+          "p95": 6.528601331500646,
+          "p99": 7.304869627841908,
+          "max": 7.4692457663224125
+        },
+        "final_position_mm": [
+          0.34820275714380394
+        ],
+        "per_arm_position_mm": {
+          "right": {
+            "rms": 2.7659222730240938,
+            "p50": 1.2717263314637397,
+            "p95": 6.528601331500646,
+            "p99": 7.304869627841908,
+            "max": 7.4692457663224125
+          }
+        },
+        "per_arm_orientation_deg": {
+          "right": {
+            "rms": 0.6867885916392513,
+            "p50": 0.08936282406075055,
+            "p95": 1.621825897891617,
+            "p99": 2.4167924883250334,
+            "max": 2.496849528327527
+          }
+        },
+        "orientation_deg": {
+          "rms": 0.6867885916392513,
+          "p50": 0.08936282406075055,
+          "p95": 1.621825897891617,
+          "p99": 2.4167924883250334,
+          "max": 2.496849528327527
+        },
+        "moving_arm_speed": {
+          "right": {
+            "peak_m_s": 1.180761808983845,
+            "time_at_or_above_1p2_m_s": 0.0,
+            "longest_continuous_interval_at_or_above_1p2_m_s": 0.0
+          }
+        },
+        "tracking_acceptance": {
+          "completed": true,
+          "position_rms_5mm": true,
+          "position_p95_10mm": true,
+          "orientation_p95_2deg": true,
+          "final_position_1mm": true,
+          "limits": true,
+          "no_planner_failures": true,
+          "no_modeled_contacts": true,
+          "no_torque_saturation": true
+        },
+        "tracking_accepted": true,
+        "fast_tracking_accepted": false,
+        "source_sha256": {
+          "trace.npz": "31f6ae3729d3eb2ddffaee322f8fb24e19dd5592aea68d5b02ce2e43e981c4f9",
+          "metadata.json": "9e1c164d2cc0645f52609908bbb97d5bd8c6134df1877027a1705357f7ec3dd1",
+          "summary.json": "0b7d45bd543540b42300d8c3621dac2cc3dc0f99adcac22a63f4cf383c74fc67"
+        }
+      },
+      "run": "x7-gp80-general-trajectory-sim-v2__rounded_corner__1.131495101"
+    },
+    "seven_joint_arc": {
+      "split": "train",
+      "requested_pass": 1.7203906249999998,
+      "requested_fail": 1.74859375,
+      "screened_ceiling": 1.805,
+      "public_tcp": {
+        "frame": "public pad-center TCP; fixed tool transform from run metadata",
+        "position_mm": {
+          "rms": 3.8116301321659356,
+          "p50": 1.4258881548671356,
+          "p95": 8.744776983733262,
+          "p99": 10.41014276161947,
+          "max": 10.519496621862938
+        },
+        "final_position_mm": [
+          0.34654427274339067
+        ],
+        "per_arm_position_mm": {
+          "right": {
+            "rms": 3.8116301321659356,
+            "p50": 1.4258881548671356,
+            "p95": 8.744776983733262,
+            "p99": 10.41014276161947,
+            "max": 10.519496621862938
+          }
+        },
+        "per_arm_orientation_deg": {
+          "right": {
+            "rms": 0.37750573437756935,
+            "p50": 0.14855384720632508,
+            "p95": 0.7992217340388712,
+            "p99": 0.9000470104747678,
+            "max": 0.905786632364612
+          }
+        },
+        "orientation_deg": {
+          "rms": 0.37750573437756935,
+          "p50": 0.14855384720632508,
+          "p95": 0.7992217340388712,
+          "p99": 0.9000470104747678,
+          "max": 0.905786632364612
+        },
+        "moving_arm_speed": {
+          "right": {
+            "peak_m_s": 1.6761375531936453,
+            "time_at_or_above_1p2_m_s": 0.59,
+            "longest_continuous_interval_at_or_above_1p2_m_s": 0.3
+          }
+        },
+        "tracking_acceptance": {
+          "completed": true,
+          "position_rms_5mm": true,
+          "position_p95_10mm": true,
+          "orientation_p95_2deg": true,
+          "final_position_1mm": true,
+          "limits": true,
+          "no_planner_failures": true,
+          "no_modeled_contacts": true,
+          "no_torque_saturation": true
+        },
+        "tracking_accepted": true,
+        "fast_tracking_accepted": true,
+        "source_sha256": {
+          "trace.npz": "addb5046240725aa40c24904015bb4bd3518caf05665795050bfbcd492046c0b",
+          "metadata.json": "428bf962dbf227b68903ad3027646a4c17306a0b18108c3b276c433ad55a0cb3",
+          "summary.json": "37866ccd56a5a765f5d95453b8bd8a7633584222340cb0126d87119f1f457ed8"
+        }
+      },
+      "run": "x7-gp80-general-trajectory-sim-v2__seven_joint_arc__1.720390625"
+    },
+    "shoulder_sweep": {
+      "split": "train",
+      "requested_pass": 1.805,
+      "requested_fail": null,
+      "screened_ceiling": 1.805,
+      "public_tcp": {
+        "frame": "public pad-center TCP; fixed tool transform from run metadata",
+        "position_mm": {
+          "rms": 3.0558859330030512,
+          "p50": 2.060370149964351,
+          "p95": 5.095859122523132,
+          "p99": 6.069645394090922,
+          "max": 6.170989618590566
+        },
+        "final_position_mm": [
+          0.33804405178395225
+        ],
+        "per_arm_position_mm": {
+          "right": {
+            "rms": 3.0558859330030512,
+            "p50": 2.060370149964351,
+            "p95": 5.095859122523132,
+            "p99": 6.069645394090922,
+            "max": 6.170989618590566
+          }
+        },
+        "per_arm_orientation_deg": {
+          "right": {
+            "rms": 0.31696301116381265,
+            "p50": 0.22433857751634123,
+            "p95": 0.578813825427721,
+            "p99": 0.6741373756278636,
+            "max": 0.6813485291450885
+          }
+        },
+        "orientation_deg": {
+          "rms": 0.31696301116381265,
+          "p50": 0.22433857751634123,
+          "p95": 0.578813825427721,
+          "p99": 0.6741373756278636,
+          "max": 0.6813485291450885
+        },
+        "moving_arm_speed": {
+          "right": {
+            "peak_m_s": 1.7737689856290042,
+            "time_at_or_above_1p2_m_s": 0.5,
+            "longest_continuous_interval_at_or_above_1p2_m_s": 0.25
+          }
+        },
+        "tracking_acceptance": {
+          "completed": true,
+          "position_rms_5mm": true,
+          "position_p95_10mm": true,
+          "orientation_p95_2deg": true,
+          "final_position_1mm": true,
+          "limits": true,
+          "no_planner_failures": true,
+          "no_modeled_contacts": true,
+          "no_torque_saturation": true
+        },
+        "tracking_accepted": true,
+        "fast_tracking_accepted": true,
+        "source_sha256": {
+          "trace.npz": "f9efaaadd6a44aab784dac1af8ca5c18363c86ee5fcd6051ef1f6977efbae199",
+          "metadata.json": "af6ef2d69b6f8abc0a1d0f75dec76ddfaead25e5a188782a8c55f04887b8775b",
+          "summary.json": "f391c82ec5a283cf8d21bc4eb32b5e57f2a27bfe0b62b39d8ae2f1f4a6481993"
+        }
+      },
+      "run": "x7-gp80-general-trajectory-sim-v2__shoulder_sweep__1.805000000"
+    },
+    "translate_rotate": {
+      "split": "train",
+      "requested_pass": 0.6950551117073986,
+      "requested_fail": 0.7298078672927686,
+      "screened_ceiling": 1.1120881787318377,
+      "public_tcp": {
+        "frame": "public pad-center TCP; fixed tool transform from run metadata",
+        "position_mm": {
+          "rms": 1.4023937439624998,
+          "p50": 1.0714097952380692,
+          "p95": 3.2363956576869746,
+          "p99": 4.1186293259807645,
+          "max": 4.1854472626774895
+        },
+        "final_position_mm": [
+          0.3465898135271459
+        ],
+        "per_arm_position_mm": {
+          "right": {
+            "rms": 1.4023937439624998,
+            "p50": 1.0714097952380692,
+            "p95": 3.2363956576869746,
+            "p99": 4.1186293259807645,
+            "max": 4.1854472626774895
+          }
+        },
+        "per_arm_orientation_deg": {
+          "right": {
+            "rms": 0.5503500775893172,
+            "p50": 0.10786420786503435,
+            "p95": 1.5930170077356547,
+            "p99": 1.8102808943714717,
+            "max": 1.8278943113304695
+          }
+        },
+        "orientation_deg": {
+          "rms": 0.5503500775893172,
+          "p50": 0.10786420786503435,
+          "p95": 1.5930170077356547,
+          "p99": 1.8102808943714717,
+          "max": 1.8278943113304695
+        },
+        "moving_arm_speed": {
+          "right": {
+            "peak_m_s": 0.7464611877970011,
+            "time_at_or_above_1p2_m_s": 0.0,
+            "longest_continuous_interval_at_or_above_1p2_m_s": 0.0
+          }
+        },
+        "tracking_acceptance": {
+          "completed": true,
+          "position_rms_5mm": true,
+          "position_p95_10mm": true,
+          "orientation_p95_2deg": true,
+          "final_position_1mm": true,
+          "limits": true,
+          "no_planner_failures": true,
+          "no_modeled_contacts": true,
+          "no_torque_saturation": true
+        },
+        "tracking_accepted": true,
+        "fast_tracking_accepted": false,
+        "source_sha256": {
+          "trace.npz": "a87222a56a5011c32991f4a700f09d6dbb7bf99e43190e2ba7b5775c917d5b00",
+          "metadata.json": "6aec3ded2f4d99edade3fdf5a595f1648cae943ae2412438b7d196d157ed6f88",
+          "summary.json": "2f3e00a0abaee25a464692b1a4d701df46cbd3136207e0c179ad64f6d0078f98"
+        }
+      },
+      "run": "x7-gp80-general-trajectory-sim-v2__translate_rotate__0.695055112"
+    },
+    "vertical_fixed": {
+      "split": "train",
+      "requested_pass": 1.1093276965296615,
+      "requested_fail": 1.1334435160194367,
+      "screened_ceiling": 1.5434124473456161,
+      "public_tcp": {
+        "frame": "public pad-center TCP; fixed tool transform from run metadata",
+        "position_mm": {
+          "rms": 3.053600633411719,
+          "p50": 1.1186319476234008,
+          "p95": 7.920704283319684,
+          "p99": 9.435514494722009,
+          "max": 9.53446209071944
+        },
+        "final_position_mm": [
+          0.3467137851593073
+        ],
+        "per_arm_position_mm": {
+          "right": {
+            "rms": 3.053600633411719,
+            "p50": 1.1186319476234008,
+            "p95": 7.920704283319684,
+            "p99": 9.435514494722009,
+            "max": 9.53446209071944
+          }
+        },
+        "per_arm_orientation_deg": {
+          "right": {
+            "rms": 0.8047360340129602,
+            "p50": 0.10209066584547283,
+            "p95": 1.8347671107644292,
+            "p99": 2.1063150311380756,
+            "max": 2.123541800681613
+          }
+        },
+        "orientation_deg": {
+          "rms": 0.8047360340129602,
+          "p50": 0.10209066584547283,
+          "p95": 1.8347671107644292,
+          "p99": 2.1063150311380756,
+          "max": 2.123541800681613
+        },
+        "moving_arm_speed": {
+          "right": {
+            "peak_m_s": 1.09975847385524,
+            "time_at_or_above_1p2_m_s": 0.0,
+            "longest_continuous_interval_at_or_above_1p2_m_s": 0.0
+          }
+        },
+        "tracking_acceptance": {
+          "completed": true,
+          "position_rms_5mm": true,
+          "position_p95_10mm": true,
+          "orientation_p95_2deg": true,
+          "final_position_1mm": true,
+          "limits": true,
+          "no_planner_failures": true,
+          "no_modeled_contacts": true,
+          "no_torque_saturation": true
+        },
+        "tracking_accepted": true,
+        "fast_tracking_accepted": false,
+        "source_sha256": {
+          "trace.npz": "24af8b4a97985ef12621990246b0892b66164c8484f0f01fdc96758ce962bd9a",
+          "metadata.json": "091af72aae710f9f28bb8005fb7e551d54bf08b28ba0262ee650e6cef270316b",
+          "summary.json": "821ac4da08027a7e2bb058dabc76c6a12cfcc7cf70feb514aad1a48b5eabf076"
+        }
+      },
+      "run": "x7-gp80-general-trajectory-sim-v2__vertical_fixed__1.109327697"
+    }
+  },
+  "exact_nominal_repeat": true,
+  "mass_mismatch_passes": 0,
+  "mass_mismatch_trials": 8,
+  "scope": "Deterministic MIT simulation; control-rate TCP sampling, physics-step contact/torque audit. No payload, physical robot, realtime or force qualification.",
+  "environment": "Local venv reuses installed third-party packages and unchanged native kernel; owned source resolves from this worktree. Not a clean-install check.",
+  "sha256": {
+    "robot_resources/config/control/motion_profiles/x7-gp80-general-trajectory-sim-v2.yaml": "85bc491919a12de96665c89adfc31cddd2080ef7af2035980da026c8a8552208",
+    "configs/benchmarks/generalization/circle_xz.json": "5ac2e03b4ca3b5e7716dec07ee35a6d959dba882a70dcde65323760da11a7b63",
+    "configs/benchmarks/generalization/circle_yz.json": "ef417ebe11c75c666db4632df42df18e0002031cb6c18726121083c00d23905c",
+    "configs/benchmarks/generalization/compact_arc.json": "300eca1e622a2f0f1c0a6caf0f2f2ee912fa4aad2476d96dc48d20783c67a9f0",
+    "configs/benchmarks/generalization/compact_left.json": "46495ab7cb9098c0c436be3cf2a39b19a378d55e21567f817abd416b1c18b7c0",
+    "configs/benchmarks/generalization/curved_reversal.json": "1fdce7c756990373937672169624d382582169d85b5e589440f98452a4a39151",
+    "configs/benchmarks/generalization/diagonal_fixed.json": "a4e37ee8fa2fbf9336f6aaf3001dbffd8670f68a9d9907ef04d3cb65c09ff5f4",
+    "configs/benchmarks/generalization/double_curvature.json": "6472f783b1aa95c253539c8b27f7a43491d5b165c740c8703e378db9023600f3",
+    "configs/benchmarks/generalization/dual_lateral.json": "c7039fd901d7ab393559d86fcfa5a695fc02fc2a2e2bffec13b044d56273aa11",
+    "configs/benchmarks/generalization/dual_wave.json": "d6aca02e26dc05fb175a5dc5e640ad810bd36937a4fc5c97315942ddb4f32e58",
+    "configs/benchmarks/generalization/elbow_reach.json": "26dde07dd1b9276834deba812d846cef87e2ece017d0aa9465a86b23153ac4ee",
+    "configs/benchmarks/generalization/figure8_yz.json": "1075be82038b384f669257c18e4b59990263309bc894cf9bebcf304db71f8d22",
+    "configs/benchmarks/generalization/inward_fixed.json": "650951a65b848fdf99b533dd5ddd48c54d4041c267471f3afbe8a756351b8efe",
+    "configs/benchmarks/generalization/left_sweep.json": "4eb2c1cd69ed9eef93f4fdf3127ebffedd8d768155240e6ac0b535fc4e134896",
+    "configs/benchmarks/generalization/left_vertical.json": "da1f548aca9b1c3f0c39e6b294726efd3d1e83c526709525239be45768a10ab4",
+    "configs/benchmarks/generalization/offset_arc.json": "2c92553e6bd24b3bca2ccfa60f75104714708459966097155b819052772594bb",
+    "configs/benchmarks/generalization/rounded_corner.json": "3a180b903ce58e03c81f3b07d309200c609429e2468657eac4f284bfc6a23d7f",
+    "configs/benchmarks/generalization/seven_joint_arc.json": "4f9dd09652480000b75100d2c96fed2df710828def522de4f097572555471027",
+    "configs/benchmarks/generalization/shoulder_sweep.json": "7a22f336aa8239f4ad8fca08a3bf1c608429f796f52afb3309a17c5247b663fb",
+    "configs/benchmarks/generalization/suite.json": "76f25c3e2762d0fb3ddcac036ee7d056f54f0d7777ee32ea7cc64534eed59ca0",
+    "configs/benchmarks/generalization/translate_rotate.json": "cffc4ea21e52b165e8f80a77a6839734ee7fcc37c7c0e75da3e2f5130653d314",
+    "configs/benchmarks/generalization/vertical_fixed.json": "cfeca8918e98360b635366d1cdaf107ddd40a192e586bcd5c8b7279befe19c42",
+    "src/hexfellow_deploy/benchmark/__init__.py": "c0f32202679f982eb9aa9000e5cc3c9f010e4fd57415b982e936567459a0b76c",
+    "src/hexfellow_deploy/benchmark/diverse.py": "0f3722f0657bdcc24feda85b31b5f2b7c91ebf5941ab033f8fe122eaac7fc55d",
+    "src/hexfellow_deploy/benchmark/general_report.py": "05a9eb893852ba1f8546d9b2652fd53ea9d04add41c80e81e94b377c2a34e8db",
+    "src/hexfellow_deploy/benchmark/general_speed_search.py": "800e28e315eab754af9acb000731d592ee069372518af3bfd96f58b720beb68f",
+    "src/hexfellow_deploy/benchmark/general_suite.py": "1ea2b91af1d6be573a6f094a4228d0de5e1b7fd0146c4d6fed52a7195010e4ac",
+    "src/hexfellow_deploy/benchmark/general_video.py": "8e22a94c306a3b4ce520be1905f2f01401fbb4caf129e710156be6ce0ed3bae0",
+    "src/hexfellow_deploy/benchmark/nonlinear.py": "4a9759ff015fe767246fdfc9308e22830f2800cc357597e51c193e211ad5160a",
+    "src/hexfellow_deploy/benchmark/profiles.py": "c61516fbaed9b428033f5d026809890bdd4a06c86494b2e1d9090a1ce1b50dac",
+    "src/hexfellow_deploy/benchmark/public_tcp.py": "c13c7a3cabcd64aa44582157519d92a09715bffc4c2013d55e21383cc257fbf5",
+    "src/hexfellow_deploy/benchmark/report.py": "ff3ca52e48fcf99cef3b17b9bc66349735ef66ec1e0761a963138bd5c3d5a7d5",
+    "src/hexfellow_deploy/benchmark/run.py": "aa5b0199769f83cf980f8d997535767b7ced65cec520f66b141a2d0f21e53c65",
+    "src/hexfellow_deploy/benchmark/suite.py": "2993dcfd0ce579fc2c53323e8b66ea8b90d83467d327558ee7a4cf0470812f6f",
+    "src/hexfellow_deploy/benchmark/trajectories.py": "70567443a7a33fa6af7868ae4eabe748ecb2aeffa20a8778a80e86e9d5219a0e",
+    "docs/GENERAL_IK.md": "05cc4c90e7ab10569ad6a620ebb02a9d51d7977854dcc1ca86602b7e68bfc731",
+    "docs/validation/general_ik_20261016/trajectory_gallery.png": "dbc1cb6fd0ca7b0ac2d96a16e79a2e855f2e394f339e33c75e391dbe8485966e",
+    "docs/validation/general_ik_20261016/passing_speeds.png": "a270700ca5cd8abdca30f53c3c10f31b3b160f98a2048fbde1e2a78c6c747470",
+    "runs/general_search_20261016/report_final/general_ik_montage.mp4": "b15fd57c2321c31155ca7bd6ddd0423a5f0a3f7e30da15f754aec00fdefaaa78"
+  },
+  "targeted_tests_after_path_name_correction": {
+    "passed": 25,
+    "seconds": 2.11
+  }
+}

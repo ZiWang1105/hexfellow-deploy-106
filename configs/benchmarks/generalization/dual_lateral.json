@@ -1,0 +1,29 @@
+{
+  "name": "dual_lateral",
+  "type": "cartesian",
+  "kind": "lateral",
+  "distance": 0.2,
+  "basis": [
+    [
+      1,
+      0,
+      0
+    ],
+    [
+      0,
+      1,
+      0
+    ],
+    [
+      0,
+      0,
+      1
+    ]
+  ],
+  "arms": [
+    "left",
+    "right"
+  ],
+  "posture": "extended_offset",
+  "split": "heldout"
+}

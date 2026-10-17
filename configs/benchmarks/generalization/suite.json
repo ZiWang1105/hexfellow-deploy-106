@@ -1,0 +1,86 @@
+{
+  "schema": 1,
+  "selection": "Tune only train; freeze parameters before heldout",
+  "cases": [
+    {
+      "path": "shoulder_sweep.json",
+      "split": "train"
+    },
+    {
+      "path": "elbow_reach.json",
+      "split": "train"
+    },
+    {
+      "path": "seven_joint_arc.json",
+      "split": "train"
+    },
+    {
+      "path": "curved_reversal.json",
+      "split": "train"
+    },
+    {
+      "path": "vertical_fixed.json",
+      "split": "train"
+    },
+    {
+      "path": "inward_fixed.json",
+      "split": "train"
+    },
+    {
+      "path": "circle_yz.json",
+      "split": "train"
+    },
+    {
+      "path": "translate_rotate.json",
+      "split": "train"
+    },
+    {
+      "path": "left_sweep.json",
+      "split": "heldout"
+    },
+    {
+      "path": "dual_wave.json",
+      "split": "heldout"
+    },
+    {
+      "path": "offset_arc.json",
+      "split": "heldout"
+    },
+    {
+      "path": "double_curvature.json",
+      "split": "heldout"
+    },
+    {
+      "path": "figure8_yz.json",
+      "split": "heldout"
+    },
+    {
+      "path": "circle_xz.json",
+      "split": "heldout"
+    },
+    {
+      "path": "rounded_corner.json",
+      "split": "heldout"
+    },
+    {
+      "path": "left_vertical.json",
+      "split": "heldout"
+    },
+    {
+      "path": "compact_arc.json",
+      "split": "heldout"
+    },
+    {
+      "path": "compact_left.json",
+      "split": "heldout"
+    },
+    {
+      "path": "dual_lateral.json",
+      "split": "heldout"
+    },
+    {
+      "path": "diagonal_fixed.json",
+      "split": "heldout"
+    }
+  ]
+}

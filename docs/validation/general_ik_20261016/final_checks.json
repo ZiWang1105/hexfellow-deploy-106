@@ -1,0 +1,5796 @@
+[
+  {
+    "name": "shoulder_sweep_mass0.9",
+    "path": "shoulder_sweep",
+    "command": [
+      "/home/ziwang/projects/hexfellow-deploy-general-ik/.venv/bin/python",
+      "-m",
+      "hexfellow_deploy.benchmark.run",
+      "--trajectory-spec",
+      "/home/ziwang/projects/hexfellow-deploy-general-ik/configs/benchmarks/generalization/shoulder_sweep.json",
+      "--profile",
+      "/home/ziwang/projects/hexfellow-deploy-general-ik/robot_resources/config/control/motion_profiles/x7-gp80-general-trajectory-sim-v2.yaml",
+      "--speed",
+      "1.805",
+      "--derivatives",
+      "--output",
+      "/home/ziwang/projects/hexfellow-deploy-general-ik/runs/general_search_20261016/final_checks/shoulder_sweep_mass0.9",
+      "--plant-mass-scale",
+      "0.9"
+    ],
+    "exit_code": 0,
+    "mass_scale": 0.9,
+    "profile_ablation": null,
+    "result": {
+      "completed": true,
+      "failure": null,
+      "samples": 395,
+      "status_counts": {
+        "TRACKING": 395
+      },
+      "boundary_counts": {},
+      "metrics": {
+        "measured": {
+          "position_mm": {
+            "rms": 3.4955743429183523,
+            "p50": 2.7116324253734203,
+            "p95": 6.169933752703341,
+            "p99": 6.555069181616218,
+            "max": 6.660980035470339
+          },
+          "orientation_deg": {
+            "rms": 0.34609895613636943,
+            "p50": 0.27105016662698733,
+            "p95": 0.6185684435453085,
+            "p99": 0.6265140721736869,
+            "max": 0.6284093712974359
+          },
+          "final_position_mm": [
+            1.9926554190918198
+          ],
+          "final_orientation_deg": [
+            0.20179000324739418
+          ]
+        },
+        "conditioned": {
+          "position_mm": {
+            "rms": 10.44135662861094,
+            "p50": 7.200707244188557,
+            "p95": 17.899036602663735,
+            "p99": 18.03585954171455,
+            "max": 18.04497701720699
+          },
+          "orientation_deg": {
+            "rms": 0.9430167168869559,
+            "p50": 0.6503230643615463,
+            "p95": 1.6165745226945676,
+            "p99": 1.6289326915853377,
+            "max": 1.6297562040465003
+          },
+          "final_position_mm": [
+            0.0
+          ],
+          "final_orientation_deg": [
+            0.0
+          ]
+        },
+        "command": {
+          "position_mm": {
+            "rms": 2.541109073309583,
+            "p50": 1.7808611066132176,
+            "p95": 5.696058036325597,
+            "p99": 6.977204363430294,
+            "max": 7.0685547222641265
+          },
+          "orientation_deg": {
+            "rms": 0.18090763337137417,
+            "p50": 0.14659612235357353,
+            "p95": 0.3502616376736863,
+            "p99": 0.4769391032081606,
+            "max": 0.49106305936435235
+          },
+          "final_position_mm": [
+            7.2122960010932e-08
+          ],
+          "final_orientation_deg": [
+            1.9794635760173987e-09
+          ]
+        },
+        "achieved_speed_m_s": {
+          "rms": 1.0495898380433875,
+          "p50": 0.7316674985527575,
+          "p95": 1.7665681250267653,
+          "p99": 1.8042395781489171,
+          "max": 1.806970360492202
+        },
+        "requested_speed_m_s": {
+          "rms": 1.0443099964332883,
+          "p50": 0.7200285471505283,
+          "p95": 1.7889916228869167,
+          "p99": 1.8039640002932482,
+          "max": 1.804995521654748
+        },
+        "requested_acceleration_m_s2": {
+          "rms": 6.611333624334339,
+          "p50": 6.531325576926029,
+          "p95": 9.395661375309555,
+          "p99": 9.427898836474702,
+          "max": 9.428487407361192
+        },
+        "time_at_or_above_1p2_m_s": 0.53,
+        "longest_continuous_interval_at_or_above_1p2_m_s": 0.27,
+        "moving_arm_speed": {
+          "right": {
+            "peak_m_s": 1.806970360492202,
+            "time_at_or_above_1p2_m_s": 0.53,
+            "longest_continuous_interval_at_or_above_1p2_m_s": 0.27
+          }
+        },
+        "solve_ms": {
+          "rms": 2.2670416456433986,
+          "p50": 2.162278979085386,
+          "p95": 2.875378291355445,
+          "p99": 3.736910328734666,
+          "max": 5.09966496611014
+        },
+        "deadline_exceeded_ticks": 0,
+        "first_solve_ms": 5.09966496611014,
+        "solve_ms_after_initial_hold": {
+          "rms": 2.2421086168337334,
+          "p50": 2.169110986869782,
+          "p95": 2.685057383496315,
+          "p99": 3.2691685226745903,
+          "max": 3.7361180293373764
+        },
+        "deadline_exceeded_ticks_after_initial_hold": 0,
+        "reference_joint_speed_max_rad_s": [
+          0.011817384810240585,
+          0.017499708248429724,
+          0.03834418829487653,
+          0.0027014138433156475,
+          0.030336595065766234,
+          0.0022936727414799908,
+          0.022777895938848977,
+          2.28672721879502,
+          1.2537011053520797,
+          2.2473323703940813,
+          0.44205137667351607,
+          1.7428565960167868,
+          1.183910278991108,
+          1.3165525980609811
+        ],
+        "measured_joint_speed_max_rad_s": [
+          0.0245786816586589,
+          0.015700309032507923,
+          0.035423840761530406,
+          0.011041903004022148,
+          0.025865508831167068,
+          0.0072392275167719455,
+          0.018783322534058105,
+          2.3012119862156446,
+          1.1922009457783358,
+          2.0930699015975147,
+          0.4220318388176161,
+          1.5016719004682093,
+          0.9847543030620693,
+          1.0854969793580505
+        ],
+        "reference_acceleration_max_rad_s2": [
+          0.5724806288041685,
+          0.23567533393132672,
+          0.3552331607940478,
+          0.23861182319672994,
+          0.28871212768783233,
+          0.27716313154652905,
+          0.37578285594250527,
+          15.10348414728917,
+          15.724601557888873,
+          18.909846017649944,
+          12.02495408455499,
+          19.004057123946126,
+          11.515075669472639,
+          13.355741672557164
+        ],
+        "reference_jerk_max_rad_s3": [
+          68.40337810635397,
+          36.14544786934664,
+          9.160198027310111,
+          23.861181747620503,
+          4.613485693755476,
+          50.653040569380124,
+          74.29554332842037,
+          471.82070726025313,
+          471.8207072602354,
+          906.1342771150026,
+          847.5886760516491,
+          989.368697191486,
+          588.2029501890695,
+          844.708629407317
+        ],
+        "reference_jerk_rms_rad_s3": 73.79366676966085,
+        "hold_tcp_speed_m_s": {
+          "rms": 4.605403339898258e-05,
+          "p50": 2.6564558374587595e-07,
+          "p95": 6.383404005185979e-05,
+          "p99": 0.00023002274059623652,
+          "max": 0.00028661134710997345
+        },
+        "encoder_fk_vs_mujoco_m": {
+          "rms": 1.7682402929778294e-08,
+          "p50": 1.79919347100845e-08,
+          "p95": 1.799224421546141e-08,
+          "p99": 1.7997599698584482e-08,
+          "max": 1.7999810536588167e-08
+        }
+      },
+      "contacts": {
+        "contact_steps": 0,
+        "minimum_distance_m": 0.0,
+        "maximum_torque_nm": [
+          6.379869968777058,
+          1.6131624547170134,
+          1.9950950966281198,
+          2.1205037358174934,
+          0.0310280965416192,
+          0.34184338656114743,
+          0.3491071219811487,
+          13.192889608427294,
+          2.871037361390677,
+          4.25907768367972,
+          4.157663625779605,
+          2.1349054683022075,
+          1.6021843338463029,
+          1.3647224760395602
+        ],
+        "saturated_steps": 0,
+        "pairs": [],
+        "scope": "Every physics step; only collision-enabled MuJoCo geometry, not complete mesh clearance"
+      },
+      "hardware_qualified": false,
+      "constraint_checks": {
+        "reference_position_margin_rad": 0.1003993229114869,
+        "measured_position_margin_rad": 0.10026885264972996,
+        "reference_velocity_ratio": 0.9000000000000004,
+        "measured_velocity_ratio": 0.9057008507929654,
+        "reference_acceleration_ratio": 1.0000000000000013,
+        "reference_jerk_ratio": 1.0000000000000404,
+        "planner_failures": 0
+      },
+      "tracking_acceptance": {
+        "completed": true,
+        "position_rms_5mm": true,
+        "position_p95_10mm": true,
+        "orientation_p95_2deg": true,
+        "final_position_1mm": false,
+        "limits": true,
+        "no_planner_failures": true,
+        "no_modeled_contacts": true,
+        "no_torque_saturation": true
+      },
+      "tracking_accepted": false,
+      "fast_tracking_accepted": false
+    },
+    "public_tcp": {
+      "frame": "public pad-center TCP; fixed tool transform from run metadata",
+      "position_mm": {
+        "rms": 3.4271307143628893,
+        "p50": 2.6403881852753943,
+        "p95": 6.008644398585809,
+        "p99": 6.598185008267231,
+        "max": 6.704280031002139
+      },
+      "final_position_mm": [
+        1.9395348213077788
+      ],
+      "per_arm_position_mm": {
+        "right": {
+          "rms": 3.4271307143628893,
+          "p50": 2.6403881852753943,
+          "p95": 6.008644398585809,
+          "p99": 6.598185008267231,
+          "max": 6.704280031002139
+        }
+      },
+      "per_arm_orientation_deg": {
+        "right": {
+          "rms": 0.34609895613636943,
+          "p50": 0.27105016662698733,
+          "p95": 0.6185684435453085,
+          "p99": 0.6265140721736869,
+          "max": 0.6284093712974359
+        }
+      },
+      "orientation_deg": {
+        "rms": 0.34609895613636943,
+        "p50": 0.27105016662698733,
+        "p95": 0.6185684435453085,
+        "p99": 0.6265140721736869,
+        "max": 0.6284093712974359
+      },
+      "moving_arm_speed": {
+        "right": {
+          "peak_m_s": 1.7605074781836367,
+          "time_at_or_above_1p2_m_s": 0.5,
+          "longest_continuous_interval_at_or_above_1p2_m_s": 0.25
+        }
+      },
+      "tracking_acceptance": {
+        "completed": true,
+        "position_rms_5mm": true,
+        "position_p95_10mm": true,
+        "orientation_p95_2deg": true,
+        "final_position_1mm": false,
+        "limits": true,
+        "no_planner_failures": true,
+        "no_modeled_contacts": true,
+        "no_torque_saturation": true
+      },
+      "tracking_accepted": false,
+      "fast_tracking_accepted": false,
+      "source_sha256": {
+        "trace.npz": "e725addb37fa39555c66a06e64d913ef3c0308726e88ae6dfcca2662dc8bd697",
+        "metadata.json": "8046209a8d49796861c377d4b2d5f7384aa2151b26d175d8395fc32012f81272",
+        "summary.json": "1538eb4fd0f1e990601d72f1aa9a05b7e28e916f0738e830b3b8121939cbd650"
+      }
+    }
+  },
+  {
+    "name": "shoulder_sweep_mass1.1",
+    "path": "shoulder_sweep",
+    "command": [
+      "/home/ziwang/projects/hexfellow-deploy-general-ik/.venv/bin/python",
+      "-m",
+      "hexfellow_deploy.benchmark.run",
+      "--trajectory-spec",
+      "/home/ziwang/projects/hexfellow-deploy-general-ik/configs/benchmarks/generalization/shoulder_sweep.json",
+      "--profile",
+      "/home/ziwang/projects/hexfellow-deploy-general-ik/robot_resources/config/control/motion_profiles/x7-gp80-general-trajectory-sim-v2.yaml",
+      "--speed",
+      "1.805",
+      "--derivatives",
+      "--output",
+      "/home/ziwang/projects/hexfellow-deploy-general-ik/runs/general_search_20261016/final_checks/shoulder_sweep_mass1.1",
+      "--plant-mass-scale",
+      "1.1"
+    ],
+    "exit_code": 0,
+    "mass_scale": 1.1,
+    "profile_ablation": null,
+    "result": {
+      "completed": true,
+      "failure": null,
+      "samples": 395,
+      "status_counts": {
+        "TRACKING": 395
+      },
+      "boundary_counts": {},
+      "metrics": {
+        "measured": {
+          "position_mm": {
+            "rms": 4.468135382893077,
+            "p50": 3.4852411689118914,
+            "p95": 8.570572799482003,
+            "p99": 9.081628693834586,
+            "max": 9.118077046681437
+          },
+          "orientation_deg": {
+            "rms": 0.4700007914129698,
+            "p50": 0.36277558064962134,
+            "p95": 0.8024189678398108,
+            "p99": 0.8949793616807528,
+            "max": 0.9007843283900533
+          },
+          "final_position_mm": [
+            2.6956612360180814
+          ],
+          "final_orientation_deg": [
+            0.30837385981029813
+          ]
+        },
+        "conditioned": {
+          "position_mm": {
+            "rms": 10.44135662861094,
+            "p50": 7.200707244188557,
+            "p95": 17.899036602663735,
+            "p99": 18.03585954171455,
+            "max": 18.04497701720699
+          },
+          "orientation_deg": {
+            "rms": 0.9430167168869559,
+            "p50": 0.6503230643615463,
+            "p95": 1.6165745226945676,
+            "p99": 1.6289326915853377,
+            "max": 1.6297562040465003
+          },
+          "final_position_mm": [
+            0.0
+          ],
+          "final_orientation_deg": [
+            0.0
+          ]
+        },
+        "command": {
+          "position_mm": {
+            "rms": 2.5524587952161677,
+            "p50": 1.6153435075187237,
+            "p95": 5.8310018995627155,
+            "p99": 7.178158211066388,
+            "max": 7.261931754372927
+          },
+          "orientation_deg": {
+            "rms": 0.17342879337968536,
+            "p50": 0.14778743615987527,
+            "p95": 0.3324776374652482,
+            "p99": 0.44424980230458316,
+            "max": 0.45386433728317194
+          },
+          "final_position_mm": [
+            2.4061801530824783e-07
+          ],
+          "final_orientation_deg": [
+            1.5853389349976244e-08
+          ]
+        },
+        "achieved_speed_m_s": {
+          "rms": 1.0622926238800667,
+          "p50": 0.7189092475047341,
+          "p95": 1.7973412190826061,
+          "p99": 1.8328713663955687,
+          "max": 1.8359460501387481
+        },
+        "requested_speed_m_s": {
+          "rms": 1.0443099964332883,
+          "p50": 0.7200285471505283,
+          "p95": 1.7889916228869167,
+          "p99": 1.8039640002932482,
+          "max": 1.804995521654748
+        },
+        "requested_acceleration_m_s2": {
+          "rms": 6.611333624334339,
+          "p50": 6.531325576926029,
+          "p95": 9.395661375309555,
+          "p99": 9.427898836474702,
+          "max": 9.428487407361192
+        },
+        "time_at_or_above_1p2_m_s": 0.52,
+        "longest_continuous_interval_at_or_above_1p2_m_s": 0.26,
+        "moving_arm_speed": {
+          "right": {
+            "peak_m_s": 1.8359460501387481,
+            "time_at_or_above_1p2_m_s": 0.52,
+            "longest_continuous_interval_at_or_above_1p2_m_s": 0.26
+          }
+        },
+        "solve_ms": {
+          "rms": 2.2775881614327504,
+          "p50": 2.188498037867248,
+          "p95": 2.737552509643137,
+          "p99": 3.3362957614008337,
+          "max": 3.612666972912848
+        },
+        "deadline_exceeded_ticks": 0,
+        "first_solve_ms": 3.612666972912848,
+        "solve_ms_after_initial_hold": {
+          "rms": 2.2767386667658864,
+          "p50": 2.1924240281805396,
+          "p95": 2.715998102212325,
+          "p99": 3.2741886365693063,
+          "max": 3.586299018934369
+        },
+        "deadline_exceeded_ticks_after_initial_hold": 0,
+        "reference_joint_speed_max_rad_s": [
+          0.01180693334710915,
+          0.01747904161337836,
+          0.03835530342579318,
+          0.003987382445432219,
+          0.030347875621687462,
+          0.003267056908514497,
+          0.022794351105670414,
+          2.2867272187950203,
+          1.2621501795552108,
+          2.2548810314177015,
+          0.41636416170990376,
+          1.75376143776532,
+          1.1830266413099328,
+          1.3160331675583838
+        ],
+        "measured_joint_speed_max_rad_s": [
+          0.030186564595423387,
+          0.016312017308023993,
+          0.035526845930540764,
+          0.016044344764425414,
+          0.02592324604728098,
+          0.009251901803896975,
+          0.018821368252860272,
+          2.333747590977821,
+          1.2107522488726334,
+          2.119663859817899,
+          0.4441044883202087,
+          1.51781109929681,
+          0.9876845655989581,
+          1.0874902019879487
+        ],
+        "reference_acceleration_max_rad_s2": [
+          0.37928660058147307,
+          0.1818275561519124,
+          0.35430239906845096,
+          0.3674383321130228,
+          0.28931950032910925,
+          0.3267056908507228,
+          0.22290456717564874,
+          14.97752700991668,
+          16.301811849952774,
+          18.909846017649944,
+          11.837162243362673,
+          19.0226094526867,
+          11.525391019727705,
+          13.127607265858831
+        ],
+        "reference_jerk_max_rad_s3": [
+          37.928673448542064,
+          11.52495247423918,
+          21.50864937236489,
+          36.74383378335477,
+          18.2306220855361,
+          48.53169580788574,
+          23.33544726601526,
+          471.82070726023983,
+          471.8207072602365,
+          918.9581929573931,
+          792.0722199766622,
+          831.1471302156658,
+          570.6961250028345,
+          716.4666228039906
+        ],
+        "reference_jerk_rms_rad_s3": 72.97734233661726,
+        "hold_tcp_speed_m_s": {
+          "rms": 0.0001214300259765577,
+          "p50": 1.3580681831332763e-06,
+          "p95": 0.00025857450560188265,
+          "p99": 0.0005757074699590236,
+          "max": 0.000628256678250741
+        },
+        "encoder_fk_vs_mujoco_m": {
+          "rms": 1.7701939221843705e-08,
+          "p50": 1.8009022377067777e-08,
+          "p95": 1.8011890767832313e-08,
+          "p99": 1.8013028023407166e-08,
+          "max": 1.8024455442762736e-08
+        }
+      },
+      "contacts": {
+        "contact_steps": 0,
+        "minimum_distance_m": 0.0,
+        "maximum_torque_nm": [
+          7.289418016772345,
+          1.8536484508654212,
+          2.3042202323532592,
+          2.4546442258397576,
+          0.0309373086180873,
+          0.4010331231160519,
+          0.4057173919261781,
+          15.59423349632388,
+          3.163253120789932,
+          4.675268047114145,
+          4.93799909886738,
+          2.2351411823495084,
+          1.7029849973815416,
+          1.4836734425683886
+        ],
+        "saturated_steps": 0,
+        "pairs": [],
+        "scope": "Every physics step; only collision-enabled MuJoCo geometry, not complete mesh clearance"
+      },
+      "hardware_qualified": false,
+      "constraint_checks": {
+        "reference_position_margin_rad": 0.10014592230335184,
+        "measured_position_margin_rad": 0.09901915107733383,
+        "reference_velocity_ratio": 0.9000000000000006,
+        "measured_velocity_ratio": 0.9185060704296953,
+        "reference_acceleration_ratio": 1.0000000000000013,
+        "reference_jerk_ratio": 1.0000000000000122,
+        "planner_failures": 0
+      },
+      "tracking_acceptance": {
+        "completed": true,
+        "position_rms_5mm": true,
+        "position_p95_10mm": true,
+        "orientation_p95_2deg": true,
+        "final_position_1mm": false,
+        "limits": true,
+        "no_planner_failures": true,
+        "no_modeled_contacts": true,
+        "no_torque_saturation": true
+      },
+      "tracking_accepted": false,
+      "fast_tracking_accepted": false
+    },
+    "public_tcp": {
+      "frame": "public pad-center TCP; fixed tool transform from run metadata",
+      "position_mm": {
+        "rms": 4.359554869261671,
+        "p50": 3.4078317480009765,
+        "p95": 8.372774551262703,
+        "p99": 8.888791555181365,
+        "max": 8.925387048079626
+      },
+      "final_position_mm": [
+        2.6097700787477707
+      ],
+      "per_arm_position_mm": {
+        "right": {
+          "rms": 4.359554869261671,
+          "p50": 3.4078317480009765,
+          "p95": 8.372774551262703,
+          "p99": 8.888791555181365,
+          "max": 8.925387048079626
+        }
+      },
+      "per_arm_orientation_deg": {
+        "right": {
+          "rms": 0.4700007914129698,
+          "p50": 0.36277558064962134,
+          "p95": 0.8024189678398108,
+          "p99": 0.8949793616807528,
+          "max": 0.9007843283900533
+        }
+      },
+      "orientation_deg": {
+        "rms": 0.4700007914129698,
+        "p50": 0.36277558064962134,
+        "p95": 0.8024189678398108,
+        "p99": 0.8949793616807528,
+        "max": 0.9007843283900533
+      },
+      "moving_arm_speed": {
+        "right": {
+          "peak_m_s": 1.7885440303540814,
+          "time_at_or_above_1p2_m_s": 0.51,
+          "longest_continuous_interval_at_or_above_1p2_m_s": 0.26
+        }
+      },
+      "tracking_acceptance": {
+        "completed": true,
+        "position_rms_5mm": true,
+        "position_p95_10mm": true,
+        "orientation_p95_2deg": true,
+        "final_position_1mm": false,
+        "limits": true,
+        "no_planner_failures": true,
+        "no_modeled_contacts": true,
+        "no_torque_saturation": true
+      },
+      "tracking_accepted": false,
+      "fast_tracking_accepted": false,
+      "source_sha256": {
+        "trace.npz": "c4255722d7039c155186952df6b0cb8e0ca0de9f990fa4dc81f7e477bb19b9ed",
+        "metadata.json": "f268f0b985876bb1b3222ec04b14abd9f798b6c451ebc1dfbfab4280e915868c",
+        "summary.json": "1ef476e9b71644f9e099b5feb5a9a953960711abeb4a7aa0feb892eff0ec72d1"
+      }
+    }
+  },
+  {
+    "name": "dual_wave_mass0.9",
+    "path": "dual_wave",
+    "command": [
+      "/home/ziwang/projects/hexfellow-deploy-general-ik/.venv/bin/python",
+      "-m",
+      "hexfellow_deploy.benchmark.run",
+      "--trajectory-spec",
+      "/home/ziwang/projects/hexfellow-deploy-general-ik/configs/benchmarks/generalization/dual_wave.json",
+      "--profile",
+      "/home/ziwang/projects/hexfellow-deploy-general-ik/robot_resources/config/control/motion_profiles/x7-gp80-general-trajectory-sim-v2.yaml",
+      "--speed",
+      "1.2111425771984698",
+      "--derivatives",
+      "--output",
+      "/home/ziwang/projects/hexfellow-deploy-general-ik/runs/general_search_20261016/final_checks/dual_wave_mass0.9",
+      "--plant-mass-scale",
+      "0.9"
+    ],
+    "exit_code": 0,
+    "mass_scale": 0.9,
+    "profile_ablation": null,
+    "result": {
+      "completed": true,
+      "failure": null,
+      "samples": 414,
+      "status_counts": {
+        "TRACKING": 414
+      },
+      "boundary_counts": {},
+      "metrics": {
+        "measured": {
+          "position_mm": {
+            "rms": 2.498190338526147,
+            "p50": 2.0300015325893517,
+            "p95": 4.582550302219545,
+            "p99": 4.871421776326562,
+            "max": 4.883334604630488
+          },
+          "orientation_deg": {
+            "rms": 0.23344206723289132,
+            "p50": 0.19000945900356192,
+            "p95": 0.40035926103297,
+            "p99": 0.430490277460377,
+            "max": 0.43175135480500565
+          },
+          "final_position_mm": [
+            2.0272511301819285,
+            2.02754542346739
+          ],
+          "final_orientation_deg": [
+            0.1925602548452294,
+            0.19257291190780945
+          ]
+        },
+        "conditioned": {
+          "position_mm": {
+            "rms": 6.9415258821844015,
+            "p50": 5.851657001212509,
+            "p95": 11.891399369741942,
+            "p99": 12.09875765416858,
+            "max": 12.105941033773448
+          },
+          "orientation_deg": {
+            "rms": 0.7603986850994733,
+            "p50": 0.6828207916485565,
+            "p95": 1.1626341510690756,
+            "p99": 1.18114859338539,
+            "max": 1.1818441867520355
+          },
+          "final_position_mm": [
+            0.0,
+            0.0
+          ],
+          "final_orientation_deg": [
+            0.0,
+            0.0
+          ]
+        },
+        "command": {
+          "position_mm": {
+            "rms": 1.1811166513475704,
+            "p50": 1.1217385108220905,
+            "p95": 1.8944227037344537,
+            "p99": 2.1422456724513292,
+            "max": 2.152929668748174
+          },
+          "orientation_deg": {
+            "rms": 0.1484729499924802,
+            "p50": 0.134522220655807,
+            "p95": 0.28784717141990734,
+            "p99": 0.31508114094370077,
+            "max": 0.3167780905733552
+          },
+          "final_position_mm": [
+            7.312130895122694e-08,
+            7.311378818362471e-08
+          ],
+          "final_orientation_deg": [
+            6.470527768998333e-10,
+            6.477871289646579e-10
+          ]
+        },
+        "achieved_speed_m_s": {
+          "rms": 0.7021970749470977,
+          "p50": 0.5798365338564395,
+          "p95": 1.212248553059048,
+          "p99": 1.2354077072189882,
+          "max": 1.2378449272419798
+        },
+        "requested_speed_m_s": {
+          "rms": 0.6942965294022905,
+          "p50": 0.5816199570142089,
+          "p95": 1.188547390110508,
+          "p99": 1.210264792513115,
+          "max": 1.2109186126291247
+        },
+        "requested_acceleration_m_s2": {
+          "rms": 4.8984525744555825,
+          "p50": 4.520235033208381,
+          "p95": 8.060656962947613,
+          "p99": 8.381304359345744,
+          "max": 8.40132735505959
+        },
+        "time_at_or_above_1p2_m_s": 0.11,
+        "longest_continuous_interval_at_or_above_1p2_m_s": 0.06,
+        "moving_arm_speed": {
+          "left": {
+            "peak_m_s": 1.2378405824631646,
+            "time_at_or_above_1p2_m_s": 0.11,
+            "longest_continuous_interval_at_or_above_1p2_m_s": 0.06
+          },
+          "right": {
+            "peak_m_s": 1.2378449272419798,
+            "time_at_or_above_1p2_m_s": 0.11,
+            "longest_continuous_interval_at_or_above_1p2_m_s": 0.06
+          }
+        },
+        "solve_ms": {
+          "rms": 2.243163941836705,
+          "p50": 2.1776869834866375,
+          "p95": 2.739740681136027,
+          "p99": 3.301515631028451,
+          "max": 3.6186990328133106
+        },
+        "deadline_exceeded_ticks": 0,
+        "first_solve_ms": 3.3861949923448265,
+        "solve_ms_after_initial_hold": {
+          "rms": 2.2538460872721875,
+          "p50": 2.1941629820503294,
+          "p95": 2.740876661846414,
+          "p99": 3.301515631028451,
+          "max": 3.6186990328133106
+        },
+        "deadline_exceeded_ticks_after_initial_hold": 0,
+        "reference_joint_speed_max_rad_s": [
+          2.1641226378477696,
+          0.7760402488215425,
+          0.18850841297576784,
+          1.039802391941041,
+          0.950964946374558,
+          0.4233602858213229,
+          0.5022582224539381,
+          2.16412235224653,
+          0.7760352321873862,
+          0.1885098619331581,
+          1.0398035189446573,
+          0.9509569896743116,
+          0.42336522055915177,
+          0.5016247703772769
+        ],
+        "measured_joint_speed_max_rad_s": [
+          2.1408489292511694,
+          0.7855302492730124,
+          0.17028276771663695,
+          1.0116440024047353,
+          0.8226967786244715,
+          0.40077666196153217,
+          0.43818877603570267,
+          2.1408154111304274,
+          0.7855840120775097,
+          0.17027973735149338,
+          1.011597768153075,
+          0.822414893614564,
+          0.40070137164669223,
+          0.4371235913384857
+        ],
+        "reference_acceleration_max_rad_s2": [
+          12.2416027663371,
+          4.872140714823181,
+          1.7239862999931521,
+          6.125546208905691,
+          4.889340128144992,
+          2.4924001634376607,
+          2.540936199783661,
+          12.241613757985869,
+          4.872114993672294,
+          1.7240045277514382,
+          6.1255110394134,
+          4.889360474348781,
+          2.492422831857402,
+          2.5408602352835206
+        ],
+        "reference_jerk_max_rad_s3": [
+          186.20554810800152,
+          81.8519891060947,
+          24.793118375755405,
+          86.1684104047538,
+          70.44860538951494,
+          50.653040569380124,
+          74.29554332842037,
+          186.2050537598898,
+          81.85125429742318,
+          24.793543736261892,
+          86.16912454801808,
+          70.44911877901072,
+          50.65020094141283,
+          74.33264631998728
+        ],
+        "reference_jerk_rms_rad_s3": 23.18210712037105,
+        "hold_tcp_speed_m_s": {
+          "rms": 1.0262824456159163e-05,
+          "p50": 5.2028966087046245e-08,
+          "p95": 2.2220707630038337e-05,
+          "p99": 4.9362785528045144e-05,
+          "max": 5.358717892528056e-05
+        },
+        "encoder_fk_vs_mujoco_m": {
+          "rms": 1.7350290503092803e-08,
+          "p50": 1.7991866994730288e-08,
+          "p95": 1.799318781376947e-08,
+          "p99": 1.7997739669173862e-08,
+          "max": 1.7999810536588167e-08
+        }
+      },
+      "contacts": {
+        "contact_steps": 0,
+        "minimum_distance_m": 0.0,
+        "maximum_torque_nm": [
+          11.846348736400557,
+          3.2473419522941924,
+          3.1493728695963057,
+          3.1890543251924157,
+          1.0728617093741377,
+          0.7476530988191818,
+          0.8272368512840509,
+          11.847628137374102,
+          3.248048262036548,
+          3.1513329254650273,
+          3.189490611789381,
+          1.0717917043888505,
+          0.7475286564589432,
+          0.8274697374314286
+        ],
+        "saturated_steps": 0,
+        "pairs": [],
+        "scope": "Every physics step; only collision-enabled MuJoCo geometry, not complete mesh clearance"
+      },
+      "hardware_qualified": false,
+      "constraint_checks": {
+        "reference_position_margin_rad": 0.6103735826168035,
+        "measured_position_margin_rad": 0.610328178356044,
+        "reference_velocity_ratio": 0.851745830484027,
+        "measured_velocity_ratio": 0.8425858670372378,
+        "reference_acceleration_ratio": 0.5819180998019271,
+        "reference_jerk_ratio": 0.3946531918644667,
+        "planner_failures": 0
+      },
+      "tracking_acceptance": {
+        "completed": true,
+        "position_rms_5mm": true,
+        "position_p95_10mm": true,
+        "orientation_p95_2deg": true,
+        "final_position_1mm": false,
+        "limits": true,
+        "no_planner_failures": true,
+        "no_modeled_contacts": true,
+        "no_torque_saturation": true
+      },
+      "tracking_accepted": false,
+      "fast_tracking_accepted": false
+    },
+    "public_tcp": {
+      "frame": "public pad-center TCP; fixed tool transform from run metadata",
+      "position_mm": {
+        "rms": 2.43879174474155,
+        "p50": 1.975323681371067,
+        "p95": 4.467088999921486,
+        "p99": 4.75225283863222,
+        "max": 4.76322287441782
+      },
+      "final_position_mm": [
+        1.973216472023651,
+        1.9735010245134696
+      ],
+      "per_arm_position_mm": {
+        "left": {
+          "rms": 2.4385351197736234,
+          "p50": 1.9748136053094907,
+          "p95": 4.463098159860683,
+          "p99": 4.741775440284353,
+          "max": 4.763143272368858
+        },
+        "right": {
+          "rms": 2.4390483427086282,
+          "p50": 1.9755592316062334,
+          "p95": 4.463675087425483,
+          "p99": 4.741842599666322,
+          "max": 4.76322287441782
+        }
+      },
+      "per_arm_orientation_deg": {
+        "left": {
+          "rms": 0.23340030786676855,
+          "p50": 0.18996140942692252,
+          "p95": 0.3999074323599319,
+          "p99": 0.42930398827053423,
+          "max": 0.43175135480500565
+        },
+        "right": {
+          "rms": 0.23348381913021118,
+          "p50": 0.19001097001113973,
+          "p95": 0.3999350220498382,
+          "p99": 0.42927978614807116,
+          "max": 0.43173176988252376
+        }
+      },
+      "orientation_deg": {
+        "rms": 0.23344206723289132,
+        "p50": 0.19000945900356192,
+        "p95": 0.40035926103297,
+        "p99": 0.430490277460377,
+        "max": 0.43175135480500565
+      },
+      "moving_arm_speed": {
+        "left": {
+          "peak_m_s": 1.2129845947675366,
+          "time_at_or_above_1p2_m_s": 0.07,
+          "longest_continuous_interval_at_or_above_1p2_m_s": 0.04
+        },
+        "right": {
+          "peak_m_s": 1.2129886344530831,
+          "time_at_or_above_1p2_m_s": 0.07,
+          "longest_continuous_interval_at_or_above_1p2_m_s": 0.04
+        }
+      },
+      "tracking_acceptance": {
+        "completed": true,
+        "position_rms_5mm": true,
+        "position_p95_10mm": true,
+        "orientation_p95_2deg": true,
+        "final_position_1mm": false,
+        "limits": true,
+        "no_planner_failures": true,
+        "no_modeled_contacts": true,
+        "no_torque_saturation": true
+      },
+      "tracking_accepted": false,
+      "fast_tracking_accepted": false,
+      "source_sha256": {
+        "trace.npz": "b8f2f658cf5b7d63722106dfa062a9712ce3ac7facc73151f06e670160e7f6cd",
+        "metadata.json": "1a4e898cb830cdf12f7885d19070d61a8e6fdc4d31716f08050e32733abf6a9a",
+        "summary.json": "d228ef0b5a37d8feca7ad32d3a0a5fcaa61671513d67e2fb7f8b61769640e24c"
+      }
+    }
+  },
+  {
+    "name": "dual_wave_mass1.1",
+    "path": "dual_wave",
+    "command": [
+      "/home/ziwang/projects/hexfellow-deploy-general-ik/.venv/bin/python",
+      "-m",
+      "hexfellow_deploy.benchmark.run",
+      "--trajectory-spec",
+      "/home/ziwang/projects/hexfellow-deploy-general-ik/configs/benchmarks/generalization/dual_wave.json",
+      "--profile",
+      "/home/ziwang/projects/hexfellow-deploy-general-ik/robot_resources/config/control/motion_profiles/x7-gp80-general-trajectory-sim-v2.yaml",
+      "--speed",
+      "1.2111425771984698",
+      "--derivatives",
+      "--output",
+      "/home/ziwang/projects/hexfellow-deploy-general-ik/runs/general_search_20261016/final_checks/dual_wave_mass1.1",
+      "--plant-mass-scale",
+      "1.1"
+    ],
+    "exit_code": 0,
+    "mass_scale": 1.1,
+    "profile_ablation": null,
+    "result": {
+      "completed": true,
+      "failure": null,
+      "samples": 414,
+      "status_counts": {
+        "TRACKING": 414
+      },
+      "boundary_counts": {},
+      "metrics": {
+        "measured": {
+          "position_mm": {
+            "rms": 4.019979586172271,
+            "p50": 2.885969072804218,
+            "p95": 7.830135322936909,
+            "p99": 8.342853200384743,
+            "max": 8.366501805298888
+          },
+          "orientation_deg": {
+            "rms": 0.4288551491716103,
+            "p50": 0.34686514838387206,
+            "p95": 0.7757684780187999,
+            "p99": 0.8308213591955279,
+            "max": 0.8326508672093205
+          },
+          "final_position_mm": [
+            2.7331259313744227,
+            2.7334887026697587
+          ],
+          "final_orientation_deg": [
+            0.2989565775287607,
+            0.298988200239181
+          ]
+        },
+        "conditioned": {
+          "position_mm": {
+            "rms": 6.9415258821844015,
+            "p50": 5.851657001212509,
+            "p95": 11.891399369741942,
+            "p99": 12.09875765416858,
+            "max": 12.105941033773448
+          },
+          "orientation_deg": {
+            "rms": 0.7603986850994733,
+            "p50": 0.6828207916485565,
+            "p95": 1.1626341510690756,
+            "p99": 1.18114859338539,
+            "max": 1.1818441867520355
+          },
+          "final_position_mm": [
+            0.0,
+            0.0
+          ],
+          "final_orientation_deg": [
+            0.0,
+            0.0
+          ]
+        },
+        "command": {
+          "position_mm": {
+            "rms": 1.0751068163273136,
+            "p50": 0.9917136079476194,
+            "p95": 1.7330773397815618,
+            "p99": 1.944546713008203,
+            "max": 1.9534155824239263
+          },
+          "orientation_deg": {
+            "rms": 0.13559926270895792,
+            "p50": 0.1191550755608794,
+            "p95": 0.2723825655666819,
+            "p99": 0.29542582344194984,
+            "max": 0.29675590166285665
+          },
+          "final_position_mm": [
+            9.590973321911222e-08,
+            9.59780095633357e-08
+          ],
+          "final_orientation_deg": [
+            3.468098172178568e-10,
+            3.4571207393566363e-10
+          ]
+        },
+        "achieved_speed_m_s": {
+          "rms": 0.7121101414025484,
+          "p50": 0.5870242422107833,
+          "p95": 1.2384713171556034,
+          "p99": 1.256872702988483,
+          "max": 1.2609424819720987
+        },
+        "requested_speed_m_s": {
+          "rms": 0.6942965294022905,
+          "p50": 0.5816199570142089,
+          "p95": 1.188547390110508,
+          "p99": 1.210264792513115,
+          "max": 1.2109186126291247
+        },
+        "requested_acceleration_m_s2": {
+          "rms": 4.8984525744555825,
+          "p50": 4.520235033208381,
+          "p95": 8.060656962947613,
+          "p99": 8.381304359345744,
+          "max": 8.40132735505959
+        },
+        "time_at_or_above_1p2_m_s": 0.14,
+        "longest_continuous_interval_at_or_above_1p2_m_s": 0.07,
+        "moving_arm_speed": {
+          "left": {
+            "peak_m_s": 1.2609388369700116,
+            "time_at_or_above_1p2_m_s": 0.14,
+            "longest_continuous_interval_at_or_above_1p2_m_s": 0.07
+          },
+          "right": {
+            "peak_m_s": 1.2609424819720987,
+            "time_at_or_above_1p2_m_s": 0.14,
+            "longest_continuous_interval_at_or_above_1p2_m_s": 0.07
+          }
+        },
+        "solve_ms": {
+          "rms": 2.308018242687524,
+          "p50": 2.2111344733275473,
+          "p95": 2.9553705011494444,
+          "p99": 3.349971554707736,
+          "max": 5.7275680010207
+        },
+        "deadline_exceeded_ticks": 0,
+        "first_solve_ms": 2.9124600114300847,
+        "solve_ms_after_initial_hold": {
+          "rms": 2.3171030754423723,
+          "p50": 2.227645512903109,
+          "p95": 2.9553705011494444,
+          "p99": 3.401938109309413,
+          "max": 5.7275680010207
+        },
+        "deadline_exceeded_ticks_after_initial_hold": 0,
+        "reference_joint_speed_max_rad_s": [
+          2.156843912148759,
+          0.7711862422415605,
+          0.18646084312360273,
+          1.0407924811425997,
+          0.9509400709899557,
+          0.4233524380116465,
+          0.5025347317863893,
+          2.156840851977341,
+          0.7711794691889399,
+          0.18646220735657085,
+          1.0407930712514004,
+          0.9509328676560974,
+          0.4233585309670466,
+          0.5025368639641501
+        ],
+        "measured_joint_speed_max_rad_s": [
+          2.162066147361281,
+          0.8010834013880606,
+          0.18466621448088813,
+          1.027395024354033,
+          0.8248846555351256,
+          0.4086458487511313,
+          0.43766726073624496,
+          2.162034567681097,
+          0.8011412627805412,
+          0.18467036193915914,
+          1.0273607275543026,
+          0.8248073201039942,
+          0.4085616564858699,
+          0.4377016015080053
+        ],
+        "reference_acceleration_max_rad_s2": [
+          12.110450001718531,
+          4.803427751777906,
+          1.7197786573152156,
+          6.074172799646532,
+          4.884942948618864,
+          2.4742689076658664,
+          2.5369304233375356,
+          12.110429895217555,
+          4.803416123687676,
+          1.719811435499792,
+          6.074191114612898,
+          4.884891073199038,
+          2.474300339801394,
+          2.5369825875149132
+        ],
+        "reference_jerk_max_rad_s3": [
+          191.94948179871102,
+          82.498741284829,
+          24.481598164997585,
+          86.58261027593437,
+          70.48575588302013,
+          48.53169580788574,
+          73.90227066807641,
+          191.94687266725313,
+          82.49813191851538,
+          24.482187053702752,
+          86.5833497201279,
+          70.4863018428642,
+          48.564930968828115,
+          74.45664341802494
+        ],
+        "reference_jerk_rms_rad_s3": 22.890616451243154,
+        "hold_tcp_speed_m_s": {
+          "rms": 1.3068953615719746e-05,
+          "p50": 2.270475144692303e-07,
+          "p95": 3.689645392015183e-05,
+          "p99": 4.0072113383427015e-05,
+          "max": 6.362441908161908e-05
+        },
+        "encoder_fk_vs_mujoco_m": {
+          "rms": 1.7366808092857056e-08,
+          "p50": 1.8008995604672814e-08,
+          "p95": 1.800981714653961e-08,
+          "p99": 1.8019012565092794e-08,
+          "max": 1.802206832820895e-08
+        }
+      },
+      "contacts": {
+        "contact_steps": 0,
+        "minimum_distance_m": 0.0,
+        "maximum_torque_nm": [
+          14.032152314437496,
+          3.824284288011796,
+          3.843920140009061,
+          3.784977757453589,
+          1.0862132317220592,
+          0.8278263716746199,
+          0.9236784549766779,
+          14.033858009509004,
+          3.8249406951366893,
+          3.846177417204359,
+          3.784882050162082,
+          1.084924517044282,
+          0.8277167350714407,
+          0.9238737687444987
+        ],
+        "saturated_steps": 0,
+        "pairs": [],
+        "scope": "Every physics step; only collision-enabled MuJoCo geometry, not complete mesh clearance"
+      },
+      "hardware_qualified": false,
+      "constraint_checks": {
+        "reference_position_margin_rad": 0.6103340034393808,
+        "measured_position_margin_rad": 0.609839817388051,
+        "reference_velocity_ratio": 0.8488811017681281,
+        "measured_velocity_ratio": 0.8509364460403438,
+        "reference_acceleration_ratio": 0.575683091467329,
+        "reference_jerk_ratio": 0.40682716727996576,
+        "planner_failures": 0
+      },
+      "tracking_acceptance": {
+        "completed": true,
+        "position_rms_5mm": true,
+        "position_p95_10mm": true,
+        "orientation_p95_2deg": true,
+        "final_position_1mm": false,
+        "limits": true,
+        "no_planner_failures": true,
+        "no_modeled_contacts": true,
+        "no_torque_saturation": true
+      },
+      "tracking_accepted": false,
+      "fast_tracking_accepted": false
+    },
+    "public_tcp": {
+      "frame": "public pad-center TCP; fixed tool transform from run metadata",
+      "position_mm": {
+        "rms": 3.9044892226689893,
+        "p50": 2.7840842894822093,
+        "p95": 7.624860577181753,
+        "p99": 8.117467490518827,
+        "max": 8.140860777630508
+      },
+      "final_position_mm": [
+        2.6471488907647927,
+        2.647495674744857
+      ],
+      "per_arm_position_mm": {
+        "left": {
+          "rms": 3.904140472976785,
+          "p50": 2.7837076401097525,
+          "p95": 7.615825636706896,
+          "p99": 8.107679138713133,
+          "max": 8.13963457641895
+        },
+        "right": {
+          "rms": 3.90483794121359,
+          "p50": 2.784460938854666,
+          "p95": 7.617161043751181,
+          "p99": 8.108916130679688,
+          "max": 8.140860777630508
+        }
+      },
+      "per_arm_orientation_deg": {
+        "left": {
+          "rms": 0.42881912677466116,
+          "p50": 0.34681249928980656,
+          "p95": 0.7754199428572187,
+          "p99": 0.8288876508325129,
+          "max": 0.8325959556136462
+        },
+        "right": {
+          "rms": 0.42889116854305265,
+          "p50": 0.3469177974779375,
+          "p95": 0.7754553766092547,
+          "p99": 0.8289435155054001,
+          "max": 0.8326508672093205
+        }
+      },
+      "orientation_deg": {
+        "rms": 0.4288551491716103,
+        "p50": 0.34686514838387206,
+        "p95": 0.7757684780187999,
+        "p99": 0.8308213591955279,
+        "max": 0.8326508672093205
+      },
+      "moving_arm_speed": {
+        "left": {
+          "peak_m_s": 1.2354547248820358,
+          "time_at_or_above_1p2_m_s": 0.1,
+          "longest_continuous_interval_at_or_above_1p2_m_s": 0.05
+        },
+        "right": {
+          "peak_m_s": 1.2354581935112265,
+          "time_at_or_above_1p2_m_s": 0.1,
+          "longest_continuous_interval_at_or_above_1p2_m_s": 0.05
+        }
+      },
+      "tracking_acceptance": {
+        "completed": true,
+        "position_rms_5mm": true,
+        "position_p95_10mm": true,
+        "orientation_p95_2deg": true,
+        "final_position_1mm": false,
+        "limits": true,
+        "no_planner_failures": true,
+        "no_modeled_contacts": true,
+        "no_torque_saturation": true
+      },
+      "tracking_accepted": false,
+      "fast_tracking_accepted": false,
+      "source_sha256": {
+        "trace.npz": "cc6e02a7fac7c038b0fe3f29508826eea1b5238e7d68ec415a94681ca97565d0",
+        "metadata.json": "be9c39fc3ef810f4703e78e042a9aee44a7c2b6c6ee1278717bcec649e2d8a19",
+        "summary.json": "e8371c3a8e12f42c0426a3e18ba7f0bac2c935e4d2ba69a54f1ca2e4e198dd2b"
+      }
+    }
+  },
+  {
+    "name": "seven_joint_arc_mass1.1",
+    "path": "seven_joint_arc",
+    "command": [
+      "/home/ziwang/projects/hexfellow-deploy-general-ik/.venv/bin/python",
+      "-m",
+      "hexfellow_deploy.benchmark.run",
+      "--trajectory-spec",
+      "/home/ziwang/projects/hexfellow-deploy-general-ik/configs/benchmarks/generalization/seven_joint_arc.json",
+      "--profile",
+      "/home/ziwang/projects/hexfellow-deploy-general-ik/robot_resources/config/control/motion_profiles/x7-gp80-general-trajectory-sim-v2.yaml",
+      "--speed",
+      "1.7203906249999998",
+      "--derivatives",
+      "--output",
+      "/home/ziwang/projects/hexfellow-deploy-general-ik/runs/general_search_20261016/final_checks/seven_joint_arc_mass1.1",
+      "--plant-mass-scale",
+      "1.1"
+    ],
+    "exit_code": 0,
+    "mass_scale": 1.1,
+    "profile_ablation": null,
+    "result": {
+      "completed": true,
+      "failure": null,
+      "samples": 427,
+      "status_counts": {
+        "TRACKING": 427
+      },
+      "boundary_counts": {},
+      "metrics": {
+        "measured": {
+          "position_mm": {
+            "rms": 4.89973025024144,
+            "p50": 3.6326999871281207,
+            "p95": 9.423028579480135,
+            "p99": 10.777522586747764,
+            "max": 10.880707304515612
+          },
+          "orientation_deg": {
+            "rms": 0.5158226208713164,
+            "p50": 0.32339479908677726,
+            "p95": 1.0703385553302232,
+            "p99": 1.1660042930628993,
+            "max": 1.1739538049305442
+          },
+          "final_position_mm": [
+            2.7346123413250774
+          ],
+          "final_orientation_deg": [
+            0.299915882507298
+          ]
+        },
+        "conditioned": {
+          "position_mm": {
+            "rms": 9.94511960649454,
+            "p50": 6.99674426478956,
+            "p95": 17.08189311110983,
+            "p99": 17.182882002844554,
+            "max": 17.200820743284655
+          },
+          "orientation_deg": {
+            "rms": 0.9757045551088327,
+            "p50": 0.7187865326613792,
+            "p95": 1.6398310173297213,
+            "p99": 1.6514844757873326,
+            "max": 1.6521307107451213
+          },
+          "final_position_mm": [
+            0.0
+          ],
+          "final_orientation_deg": [
+            0.0
+          ]
+        },
+        "command": {
+          "position_mm": {
+            "rms": 3.882350707821539,
+            "p50": 1.4982097273845407,
+            "p95": 9.214467261741087,
+            "p99": 11.122526615063162,
+            "max": 11.253841487993398
+          },
+          "orientation_deg": {
+            "rms": 0.16734863269171607,
+            "p50": 0.13214629327678556,
+            "p95": 0.3459719648983446,
+            "p99": 0.4550099465348015,
+            "max": 0.4632496610734451
+          },
+          "final_position_mm": [
+            5.888744398065257e-08
+          ],
+          "final_orientation_deg": [
+            3.5385697025752273e-10
+          ]
+        },
+        "achieved_speed_m_s": {
+          "rms": 1.009865103791453,
+          "p50": 0.712452852991608,
+          "p95": 1.7141370870810941,
+          "p99": 1.7297984206107622,
+          "max": 1.732701359946926
+        },
+        "requested_speed_m_s": {
+          "rms": 0.9946313791900384,
+          "p50": 0.6978137313996066,
+          "p95": 1.703858457549278,
+          "p99": 1.7195982758394588,
+          "max": 1.71987296043761
+        },
+        "requested_acceleration_m_s2": {
+          "rms": 5.339790101275636,
+          "p50": 5.658778290343699,
+          "p95": 7.4221979485216725,
+          "p99": 7.531756899803078,
+          "max": 7.533657487586352
+        },
+        "time_at_or_above_1p2_m_s": 0.61,
+        "longest_continuous_interval_at_or_above_1p2_m_s": 0.31,
+        "moving_arm_speed": {
+          "right": {
+            "peak_m_s": 1.732701359946926,
+            "time_at_or_above_1p2_m_s": 0.61,
+            "longest_continuous_interval_at_or_above_1p2_m_s": 0.31
+          }
+        },
+        "solve_ms": {
+          "rms": 2.0595971354774925,
+          "p50": 1.9898160244338214,
+          "p95": 2.546218712814152,
+          "p99": 3.0673834378831097,
+          "max": 3.3166949870064855
+        },
+        "deadline_exceeded_ticks": 0,
+        "first_solve_ms": 3.1547319958917797,
+        "solve_ms_after_initial_hold": {
+          "rms": 1.9960725299567288,
+          "p50": 1.9875820144079626,
+          "p95": 2.0423057198058814,
+          "p99": 2.078461805358529,
+          "max": 2.145528036635369
+        },
+        "deadline_exceeded_ticks_after_initial_hold": 0,
+        "reference_joint_speed_max_rad_s": [
+          0.015037715502508138,
+          0.02300830258621718,
+          0.04975471767712686,
+          0.003987382445432219,
+          0.03957357481539344,
+          0.003267056908514497,
+          0.02966426578850559,
+          2.28672721879502,
+          0.9943955595546533,
+          0.5537002153226166,
+          1.4086496278844824,
+          1.7145255144050873,
+          0.49068024300723134,
+          1.0162835903801153
+        ],
+        "measured_joint_speed_max_rad_s": [
+          0.030186564595423387,
+          0.021550704319855327,
+          0.04568452498130782,
+          0.016044344764425414,
+          0.03383979407596699,
+          0.009251901803896975,
+          0.024635764041587384,
+          2.2843925567396135,
+          1.0132368512434295,
+          0.5847353289222631,
+          1.350789104607147,
+          1.4876227975187162,
+          0.44775039520995985,
+          0.8798480338508605
+        ],
+        "reference_acceleration_max_rad_s2": [
+          0.37928660058147307,
+          0.21203478221406766,
+          0.4656066968613863,
+          0.3674383321130228,
+          0.37188067818193227,
+          0.3267056908507228,
+          0.2787605803288476,
+          19.55637518211184,
+          9.458593880019581,
+          16.03139533561157,
+          18.909846017649933,
+          22.50492477901642,
+          10.894314587515074,
+          14.174952062909728
+        ],
+        "reference_jerk_max_rad_s3": [
+          37.928673448542064,
+          20.635436223897656,
+          21.50864937236489,
+          36.74383378335477,
+          18.2306220855361,
+          48.53169580788574,
+          23.33544726601526,
+          471.82070726025756,
+          471.8207072602369,
+          810.7242803239799,
+          918.9581929573865,
+          1077.8384969408505,
+          950.3795316216924,
+          673.3881310703149
+        ],
+        "reference_jerk_rms_rad_s3": 66.73699869953226,
+        "hold_tcp_speed_m_s": {
+          "rms": 1.058306973279728e-05,
+          "p50": 1.9437739706598347e-07,
+          "p95": 3.103962726806969e-05,
+          "p99": 3.500849186011508e-05,
+          "max": 4.19453767208881e-05
+        },
+        "encoder_fk_vs_mujoco_m": {
+          "rms": 1.7570121278277336e-08,
+          "p50": 1.8009057883775487e-08,
+          "p95": 1.8009907802105414e-08,
+          "p99": 1.8013745945653182e-08,
+          "max": 1.8023490184729064e-08
+        }
+      },
+      "contacts": {
+        "contact_steps": 0,
+        "minimum_distance_m": 0.0,
+        "maximum_torque_nm": [
+          7.289418016772345,
+          1.9010238607807537,
+          2.3042202323532592,
+          2.509656718911401,
+          0.03783176922751519,
+          0.403965443209506,
+          0.4057173919261781,
+          13.934129503853796,
+          5.000342542591312,
+          4.211456940135093,
+          5.134039538658385,
+          1.9416485752487844,
+          0.7502715433368783,
+          1.9408562456535634
+        ],
+        "saturated_steps": 0,
+        "pairs": [],
+        "scope": "Every physics step; only collision-enabled MuJoCo geometry, not complete mesh clearance"
+      },
+      "hardware_qualified": false,
+      "constraint_checks": {
+        "reference_position_margin_rad": 0.44785399940745235,
+        "measured_position_margin_rad": 0.4472941930622826,
+        "reference_velocity_ratio": 0.9000000000000004,
+        "measured_velocity_ratio": 0.8990811340186994,
+        "reference_acceleration_ratio": 1.0000000000000007,
+        "reference_jerk_ratio": 1.0000000000000497,
+        "planner_failures": 0
+      },
+      "tracking_acceptance": {
+        "completed": true,
+        "position_rms_5mm": true,
+        "position_p95_10mm": true,
+        "orientation_p95_2deg": true,
+        "final_position_1mm": false,
+        "limits": true,
+        "no_planner_failures": true,
+        "no_modeled_contacts": true,
+        "no_torque_saturation": true
+      },
+      "tracking_accepted": false,
+      "fast_tracking_accepted": false
+    },
+    "public_tcp": {
+      "frame": "public pad-center TCP; fixed tool transform from run metadata",
+      "position_mm": {
+        "rms": 4.807060489032469,
+        "p50": 3.534320647727541,
+        "p95": 9.273592391622346,
+        "p99": 10.66722935718792,
+        "max": 10.776463539451422
+      },
+      "final_position_mm": [
+        2.6484222317121793
+      ],
+      "per_arm_position_mm": {
+        "right": {
+          "rms": 4.807060489032469,
+          "p50": 3.534320647727541,
+          "p95": 9.273592391622346,
+          "p99": 10.66722935718792,
+          "max": 10.776463539451422
+        }
+      },
+      "per_arm_orientation_deg": {
+        "right": {
+          "rms": 0.5158226208713164,
+          "p50": 0.32339479908677726,
+          "p95": 1.0703385553302232,
+          "p99": 1.1660042930628993,
+          "max": 1.1739538049305442
+        }
+      },
+      "orientation_deg": {
+        "rms": 0.5158226208713164,
+        "p50": 0.32339479908677726,
+        "p95": 1.0703385553302232,
+        "p99": 1.1660042930628993,
+        "max": 1.1739538049305442
+      },
+      "moving_arm_speed": {
+        "right": {
+          "peak_m_s": 1.6910801254383485,
+          "time_at_or_above_1p2_m_s": 0.59,
+          "longest_continuous_interval_at_or_above_1p2_m_s": 0.3
+        }
+      },
+      "tracking_acceptance": {
+        "completed": true,
+        "position_rms_5mm": true,
+        "position_p95_10mm": true,
+        "orientation_p95_2deg": true,
+        "final_position_1mm": false,
+        "limits": true,
+        "no_planner_failures": true,
+        "no_modeled_contacts": true,
+        "no_torque_saturation": true
+      },
+      "tracking_accepted": false,
+      "fast_tracking_accepted": false,
+      "source_sha256": {
+        "trace.npz": "ec7905efa792944695c6f3a8a4628281204584ff7a5589246f65455abe3d3358",
+        "metadata.json": "e3bb6ec1a142470874fe3acd3346d5a1fae8b89be6f518f451ab96d08fcb3be2",
+        "summary.json": "7b90773574212ca0e59774d7e134b2f6378fd90ac97024c10ae6f5f6db497d05"
+      }
+    }
+  },
+  {
+    "name": "seven_joint_arc_mass0.9",
+    "path": "seven_joint_arc",
+    "command": [
+      "/home/ziwang/projects/hexfellow-deploy-general-ik/.venv/bin/python",
+      "-m",
+      "hexfellow_deploy.benchmark.run",
+      "--trajectory-spec",
+      "/home/ziwang/projects/hexfellow-deploy-general-ik/configs/benchmarks/generalization/seven_joint_arc.json",
+      "--profile",
+      "/home/ziwang/projects/hexfellow-deploy-general-ik/robot_resources/config/control/motion_profiles/x7-gp80-general-trajectory-sim-v2.yaml",
+      "--speed",
+      "1.7203906249999998",
+      "--derivatives",
+      "--output",
+      "/home/ziwang/projects/hexfellow-deploy-general-ik/runs/general_search_20261016/final_checks/seven_joint_arc_mass0.9",
+      "--plant-mass-scale",
+      "0.9"
+    ],
+    "exit_code": 0,
+    "mass_scale": 0.9,
+    "profile_ablation": null,
+    "result": {
+      "completed": true,
+      "failure": null,
+      "samples": 427,
+      "status_counts": {
+        "TRACKING": 427
+      },
+      "boundary_counts": {},
+      "metrics": {
+        "measured": {
+          "position_mm": {
+            "rms": 4.177148148535332,
+            "p50": 2.1860106493063283,
+            "p95": 9.063367249464434,
+            "p99": 10.79331785212335,
+            "max": 10.8995571858769
+          },
+          "orientation_deg": {
+            "rms": 0.3805445132479596,
+            "p50": 0.23042131373884678,
+            "p95": 0.796563704532436,
+            "p99": 0.8981078106074911,
+            "max": 0.905796724394958
+          },
+          "final_position_mm": [
+            2.026830453228366
+          ],
+          "final_orientation_deg": [
+            0.1929296449555143
+          ]
+        },
+        "conditioned": {
+          "position_mm": {
+            "rms": 9.94511960649454,
+            "p50": 6.99674426478956,
+            "p95": 17.08189311110983,
+            "p99": 17.182882002844554,
+            "max": 17.200820743284655
+          },
+          "orientation_deg": {
+            "rms": 0.9757045551088327,
+            "p50": 0.7187865326613792,
+            "p95": 1.6398310173297213,
+            "p99": 1.6514844757873326,
+            "max": 1.6521307107451213
+          },
+          "final_position_mm": [
+            0.0
+          ],
+          "final_orientation_deg": [
+            0.0
+          ]
+        },
+        "command": {
+          "position_mm": {
+            "rms": 3.7928148578273566,
+            "p50": 1.7355413032193852,
+            "p95": 8.984688486525782,
+            "p99": 10.8713286660913,
+            "max": 10.999149658055329
+          },
+          "orientation_deg": {
+            "rms": 0.17990739906162725,
+            "p50": 0.15141548340740416,
+            "p95": 0.35955351285264886,
+            "p99": 0.47548950894089115,
+            "max": 0.4834174398084143
+          },
+          "final_position_mm": [
+            4.571476000249427e-08
+          ],
+          "final_orientation_deg": [
+            4.1619922436668584e-10
+          ]
+        },
+        "achieved_speed_m_s": {
+          "rms": 0.9988586580493519,
+          "p50": 0.7108547818436035,
+          "p95": 1.691462502183769,
+          "p99": 1.7028898066835783,
+          "max": 1.705381349739368
+        },
+        "requested_speed_m_s": {
+          "rms": 0.9946313791900384,
+          "p50": 0.6978137313996066,
+          "p95": 1.703858457549278,
+          "p99": 1.7195982758394588,
+          "max": 1.71987296043761
+        },
+        "requested_acceleration_m_s2": {
+          "rms": 5.339790101275636,
+          "p50": 5.658778290343699,
+          "p95": 7.4221979485216725,
+          "p99": 7.531756899803078,
+          "max": 7.533657487586352
+        },
+        "time_at_or_above_1p2_m_s": 0.61,
+        "longest_continuous_interval_at_or_above_1p2_m_s": 0.31,
+        "moving_arm_speed": {
+          "right": {
+            "peak_m_s": 1.705381349739368,
+            "time_at_or_above_1p2_m_s": 0.61,
+            "longest_continuous_interval_at_or_above_1p2_m_s": 0.31
+          }
+        },
+        "solve_ms": {
+          "rms": 2.063997322658416,
+          "p50": 2.0003970130346715,
+          "p95": 2.5932569988071914,
+          "p99": 2.988617203664035,
+          "max": 3.1850889790803194
+        },
+        "deadline_exceeded_ticks": 0,
+        "first_solve_ms": 3.1850889790803194,
+        "solve_ms_after_initial_hold": {
+          "rms": 1.9985819555273598,
+          "p50": 1.997580984607339,
+          "p95": 2.0487007102929056,
+          "p99": 2.0830393151845783,
+          "max": 2.1509670186787844
+        },
+        "deadline_exceeded_ticks_after_initial_hold": 0,
+        "reference_joint_speed_max_rad_s": [
+          0.015056632632950354,
+          0.02285466909530926,
+          0.049818779660952585,
+          0.0027014138433156475,
+          0.039555637427548744,
+          0.0022936727414799908,
+          0.029627069640066138,
+          2.28672721879502,
+          0.9914587665725184,
+          0.5536204435124522,
+          1.4205879221924806,
+          1.71324440422356,
+          0.4915851295718995,
+          1.031340295584995
+        ],
+        "measured_joint_speed_max_rad_s": [
+          0.0245786816586589,
+          0.021472330850528517,
+          0.045290698481598675,
+          0.011041903004022148,
+          0.03375143633405792,
+          0.0072392275167719455,
+          0.024648126747315497,
+          2.2645864119366617,
+          0.9850907376221806,
+          0.5755001434505013,
+          1.3505486522701853,
+          1.4812809034065353,
+          0.4479854410373918,
+          0.8880027524594429
+        ],
+        "reference_acceleration_max_rad_s2": [
+          0.5724806288041685,
+          0.23567533393132672,
+          0.46607407774674586,
+          0.23861182319672994,
+          0.3717211771394901,
+          0.27716313154652905,
+          0.37578285594250527,
+          19.565248904369923,
+          9.513632022517424,
+          15.631742034544352,
+          18.909846017649922,
+          22.298905101362966,
+          10.775355919061912,
+          14.170216922347489
+        ],
+        "reference_jerk_max_rad_s3": [
+          68.40337810635397,
+          36.14544786934664,
+          9.160198027310111,
+          23.861181747620503,
+          5.391859737272006,
+          50.653040569380124,
+          74.29554332842037,
+          471.82070726024426,
+          471.8207072602354,
+          755.5484587604063,
+          901.7886406370067,
+          1140.8870327950372,
+          785.3531416900482,
+          723.2527335638994
+        ],
+        "reference_jerk_rms_rad_s3": 66.14908352968868,
+        "hold_tcp_speed_m_s": {
+          "rms": 8.326874164557795e-06,
+          "p50": 3.311449315502553e-08,
+          "p95": 1.7157977054710605e-05,
+          "p99": 4.0371957389698414e-05,
+          "max": 4.4281140217589254e-05
+        },
+        "encoder_fk_vs_mujoco_m": {
+          "rms": 1.755377761918491e-08,
+          "p50": 1.7991892780825496e-08,
+          "p95": 1.799279512589081e-08,
+          "p99": 1.799793508585882e-08,
+          "max": 1.7999810536588167e-08
+        }
+      },
+      "contacts": {
+        "contact_steps": 0,
+        "minimum_distance_m": 0.0,
+        "maximum_torque_nm": [
+          6.379869968777058,
+          1.6131624547170134,
+          1.9950950966281198,
+          2.1205037358174934,
+          0.03841036681895904,
+          0.34184338656114743,
+          0.3491071219811487,
+          11.927886811439109,
+          4.316118187455061,
+          3.4907081224311867,
+          4.529930820918082,
+          1.9140895749805438,
+          0.7168190516898871,
+          1.804251255051316
+        ],
+        "saturated_steps": 0,
+        "pairs": [],
+        "scope": "Every physics step; only collision-enabled MuJoCo geometry, not complete mesh clearance"
+      },
+      "hardware_qualified": false,
+      "constraint_checks": {
+        "reference_position_margin_rad": 0.4517259042598675,
+        "measured_position_margin_rad": 0.45166107766778363,
+        "reference_velocity_ratio": 0.9000000000000004,
+        "measured_velocity_ratio": 0.8912859190161642,
+        "reference_acceleration_ratio": 1.0000000000000002,
+        "reference_jerk_ratio": 1.0000000000000215,
+        "planner_failures": 0
+      },
+      "tracking_acceptance": {
+        "completed": true,
+        "position_rms_5mm": true,
+        "position_p95_10mm": true,
+        "orientation_p95_2deg": true,
+        "final_position_1mm": false,
+        "limits": true,
+        "no_planner_failures": true,
+        "no_modeled_contacts": true,
+        "no_torque_saturation": true
+      },
+      "tracking_accepted": false,
+      "fast_tracking_accepted": false
+    },
+    "public_tcp": {
+      "frame": "public pad-center TCP; fixed tool transform from run metadata",
+      "position_mm": {
+        "rms": 4.133914611336502,
+        "p50": 2.1222873689066137,
+        "p95": 9.081348390354446,
+        "p99": 10.825070025269298,
+        "max": 10.932067284350362
+      },
+      "final_position_mm": [
+        1.972755041439385
+      ],
+      "per_arm_position_mm": {
+        "right": {
+          "rms": 4.133914611336502,
+          "p50": 2.1222873689066137,
+          "p95": 9.081348390354446,
+          "p99": 10.825070025269298,
+          "max": 10.932067284350362
+        }
+      },
+      "per_arm_orientation_deg": {
+        "right": {
+          "rms": 0.3805445132479596,
+          "p50": 0.23042131373884678,
+          "p95": 0.796563704532436,
+          "p99": 0.8981078106074911,
+          "max": 0.905796724394958
+        }
+      },
+      "orientation_deg": {
+        "rms": 0.3805445132479596,
+        "p50": 0.23042131373884678,
+        "p95": 0.796563704532436,
+        "p99": 0.8981078106074911,
+        "max": 0.905796724394958
+      },
+      "moving_arm_speed": {
+        "right": {
+          "peak_m_s": 1.6646201889016552,
+          "time_at_or_above_1p2_m_s": 0.59,
+          "longest_continuous_interval_at_or_above_1p2_m_s": 0.3
+        }
+      },
+      "tracking_acceptance": {
+        "completed": true,
+        "position_rms_5mm": true,
+        "position_p95_10mm": true,
+        "orientation_p95_2deg": true,
+        "final_position_1mm": false,
+        "limits": true,
+        "no_planner_failures": true,
+        "no_modeled_contacts": true,
+        "no_torque_saturation": true
+      },
+      "tracking_accepted": false,
+      "fast_tracking_accepted": false,
+      "source_sha256": {
+        "trace.npz": "865358d10df82f373042f5e7a87c2b26981b9b70786fb710bf1502f5919af156",
+        "metadata.json": "b2afb90f54b2bb52ea4187c7f00f0c299b1e430ccf6ea9014ef7792ba3f9a134",
+        "summary.json": "0caae3fcbd989bbaea7879ef0def3a65fd3107f6cb981bf63660c2753687c6d6"
+      }
+    }
+  },
+  {
+    "name": "circle_yz_mass0.9",
+    "path": "circle_yz",
+    "command": [
+      "/home/ziwang/projects/hexfellow-deploy-general-ik/.venv/bin/python",
+      "-m",
+      "hexfellow_deploy.benchmark.run",
+      "--trajectory-spec",
+      "/home/ziwang/projects/hexfellow-deploy-general-ik/configs/benchmarks/generalization/circle_yz.json",
+      "--profile",
+      "/home/ziwang/projects/hexfellow-deploy-general-ik/robot_resources/config/control/motion_profiles/x7-gp80-general-trajectory-sim-v2.yaml",
+      "--speed",
+      "0.9105893177911328",
+      "--derivatives",
+      "--output",
+      "/home/ziwang/projects/hexfellow-deploy-general-ik/runs/general_search_20261016/final_checks/circle_yz_mass0.9",
+      "--plant-mass-scale",
+      "0.9"
+    ],
+    "exit_code": 0,
+    "mass_scale": 0.9,
+    "profile_ablation": null,
+    "result": {
+      "completed": true,
+      "failure": null,
+      "samples": 510,
+      "status_counts": {
+        "TRACKING": 510
+      },
+      "boundary_counts": {
+        "joint_upper:14": 2
+      },
+      "metrics": {
+        "measured": {
+          "position_mm": {
+            "rms": 2.8739159885926497,
+            "p50": 2.2861879232573075,
+            "p95": 5.5638369767849,
+            "p99": 7.820926362626842,
+            "max": 7.971064984363535
+          },
+          "orientation_deg": {
+            "rms": 0.7459020478910257,
+            "p50": 0.24830238721256895,
+            "p95": 1.6947796147393204,
+            "p99": 2.316771239882312,
+            "max": 2.3594348020087317
+          },
+          "final_position_mm": [
+            2.020781357163976
+          ],
+          "final_orientation_deg": [
+            0.18677629169962584
+          ]
+        },
+        "conditioned": {
+          "position_mm": {
+            "rms": 5.8003315903580575,
+            "p50": 5.101555225487868,
+            "p95": 9.052384879576604,
+            "p99": 9.099859977261614,
+            "max": 9.102640623995221
+          },
+          "orientation_deg": {
+            "rms": 0.0,
+            "p50": 0.0,
+            "p95": 0.0,
+            "p99": 0.0,
+            "max": 0.0
+          },
+          "final_position_mm": [
+            0.0
+          ],
+          "final_orientation_deg": [
+            0.0
+          ]
+        },
+        "command": {
+          "position_mm": {
+            "rms": 2.873556566146509,
+            "p50": 0.9423456066120587,
+            "p95": 6.408174977298652,
+            "p99": 8.499141319702918,
+            "max": 8.615810281140067
+          },
+          "orientation_deg": {
+            "rms": 0.5986377091892326,
+            "p50": 0.15333854813955652,
+            "p95": 1.4471484181152237,
+            "p99": 2.1916196801341936,
+            "max": 2.2326831342607285
+          },
+          "final_position_mm": [
+            8.142276206658754e-09
+          ],
+          "final_orientation_deg": [
+            3.0469779260230656e-10
+          ]
+        },
+        "achieved_speed_m_s": {
+          "rms": 0.5990396024154047,
+          "p50": 0.527782535856299,
+          "p95": 0.9339303981133124,
+          "p99": 0.946245984277305,
+          "max": 0.9487749825234434
+        },
+        "requested_speed_m_s": {
+          "rms": 0.5801852312725609,
+          "p50": 0.5129050150445356,
+          "p95": 0.9058583101611228,
+          "p99": 0.9103364979872871,
+          "max": 0.9105738170009834
+        },
+        "requested_acceleration_m_s2": {
+          "rms": 4.601946320681259,
+          "p50": 2.834515810073156,
+          "p95": 8.207042484644866,
+          "p99": 8.287191783124806,
+          "max": 8.291450830098839
+        },
+        "time_at_or_above_1p2_m_s": 0.0,
+        "longest_continuous_interval_at_or_above_1p2_m_s": 0.0,
+        "moving_arm_speed": {
+          "right": {
+            "peak_m_s": 0.9487749825234434,
+            "time_at_or_above_1p2_m_s": 0.0,
+            "longest_continuous_interval_at_or_above_1p2_m_s": 0.0
+          }
+        },
+        "solve_ms": {
+          "rms": 2.0062110996732136,
+          "p50": 1.997145009227097,
+          "p95": 2.06888509565033,
+          "p99": 2.2999454336240888,
+          "max": 2.9375170124694705
+        },
+        "deadline_exceeded_ticks": 0,
+        "first_solve_ms": 2.7846010052599013,
+        "solve_ms_after_initial_hold": {
+          "rms": 2.0089010057564347,
+          "p50": 2.0033215114381164,
+          "p95": 2.089094897382892,
+          "p99": 2.2993068798677996,
+          "max": 2.9375170124694705
+        },
+        "deadline_exceeded_ticks_after_initial_hold": 0,
+        "reference_joint_speed_max_rad_s": [
+          0.03351322673182481,
+          0.07866608428277756,
+          0.14891422438380364,
+          0.0027014138433156475,
+          0.1260165563508032,
+          0.015463071881784305,
+          0.09306826518328391,
+          2.02880831478342,
+          1.9872386285053645,
+          1.4248990036729137,
+          1.1469050716180893,
+          1.7227330368544325,
+          1.7528815216969207,
+          1.7522445456345381
+        ],
+        "measured_joint_speed_max_rad_s": [
+          0.03106855070368565,
+          0.07415781040026258,
+          0.13514924447808824,
+          0.011041903004022148,
+          0.10762078071944739,
+          0.012688275928799744,
+          0.0776709080265546,
+          1.9611264039010177,
+          1.9368993882123202,
+          1.2992745909819872,
+          1.083218805369065,
+          1.4734183273902903,
+          1.5143223432637483,
+          1.5270326489643071
+        ],
+        "reference_acceleration_max_rad_s2": [
+          0.5724806288041685,
+          0.7120522414516516,
+          1.3497253223365215,
+          0.23861182319672994,
+          1.1532296741518122,
+          0.27716313154652905,
+          0.8523189903953954,
+          15.338232350522073,
+          21.036660935882033,
+          11.899569668469484,
+          18.909846017649922,
+          21.29496325457012,
+          30.43571039012132,
+          26.652073624529194
+        ],
+        "reference_jerk_max_rad_s3": [
+          68.40337810635397,
+          36.14544786934664,
+          19.341762046889322,
+          23.861181747620503,
+          16.709659923806473,
+          50.653040569380124,
+          74.29554332842037,
+          339.7689053892705,
+          471.82070726023767,
+          661.982903795516,
+          918.9581929573876,
+          869.4442931123803,
+          2058.694098210534,
+          1381.0929450825095
+        ],
+        "reference_jerk_rms_rad_s3": 65.8556359108345,
+        "hold_tcp_speed_m_s": {
+          "rms": 1.0017559398978764e-05,
+          "p50": 3.461028807539824e-08,
+          "p95": 1.0441785448399008e-05,
+          "p99": 5.132633700110017e-05,
+          "max": 6.317789415198857e-05
+        },
+        "encoder_fk_vs_mujoco_m": {
+          "rms": 1.7973540267991333e-08,
+          "p50": 1.7992005364908952e-08,
+          "p95": 1.810135128810953e-08,
+          "p99": 1.8181599242308103e-08,
+          "max": 1.8188180776382162e-08
+        }
+      },
+      "contacts": {
+        "contact_steps": 0,
+        "minimum_distance_m": 0.0,
+        "maximum_torque_nm": [
+          6.379869968777058,
+          1.6131624547170134,
+          1.9950950966281198,
+          2.2686449452415616,
+          0.09662537343321276,
+          0.34184338656114743,
+          0.3491071219811487,
+          11.192893567333357,
+          6.667741016293689,
+          3.7694319089733312,
+          6.247003776956944,
+          2.064949974622344,
+          2.351730729914302,
+          2.0569218874403816
+        ],
+        "saturated_steps": 0,
+        "pairs": [],
+        "scope": "Every physics step; only collision-enabled MuJoCo geometry, not complete mesh clearance"
+      },
+      "hardware_qualified": false,
+      "constraint_checks": {
+        "reference_position_margin_rad": 0.14308177007035683,
+        "measured_position_margin_rad": 0.14283198559363353,
+        "reference_velocity_ratio": 0.7984894167950835,
+        "measured_velocity_ratio": 0.7718514692106487,
+        "reference_acceleration_ratio": 1.0000000000000027,
+        "reference_jerk_ratio": 1.0000000000000075,
+        "planner_failures": 0
+      },
+      "tracking_acceptance": {
+        "completed": true,
+        "position_rms_5mm": true,
+        "position_p95_10mm": true,
+        "orientation_p95_2deg": true,
+        "final_position_1mm": false,
+        "limits": true,
+        "no_planner_failures": true,
+        "no_modeled_contacts": true,
+        "no_torque_saturation": true
+      },
+      "tracking_accepted": false,
+      "fast_tracking_accepted": false
+    },
+    "public_tcp": {
+      "frame": "public pad-center TCP; fixed tool transform from run metadata",
+      "position_mm": {
+        "rms": 2.9286670844014075,
+        "p50": 2.233042457365343,
+        "p95": 5.923802035796642,
+        "p99": 8.379381196600017,
+        "max": 8.54710073410822
+      },
+      "final_position_mm": [
+        1.9673281657289652
+      ],
+      "per_arm_position_mm": {
+        "right": {
+          "rms": 2.9286670844014075,
+          "p50": 2.233042457365343,
+          "p95": 5.923802035796642,
+          "p99": 8.379381196600017,
+          "max": 8.54710073410822
+        }
+      },
+      "per_arm_orientation_deg": {
+        "right": {
+          "rms": 0.7459020478910257,
+          "p50": 0.24830238721256895,
+          "p95": 1.6947796147393204,
+          "p99": 2.316771239882312,
+          "max": 2.3594348020087317
+        }
+      },
+      "orientation_deg": {
+        "rms": 0.7459020478910257,
+        "p50": 0.24830238721256895,
+        "p95": 1.6947796147393204,
+        "p99": 2.316771239882312,
+        "max": 2.3594348020087317
+      },
+      "moving_arm_speed": {
+        "right": {
+          "peak_m_s": 0.9423357361902133,
+          "time_at_or_above_1p2_m_s": 0.0,
+          "longest_continuous_interval_at_or_above_1p2_m_s": 0.0
+        }
+      },
+      "tracking_acceptance": {
+        "completed": true,
+        "position_rms_5mm": true,
+        "position_p95_10mm": true,
+        "orientation_p95_2deg": true,
+        "final_position_1mm": false,
+        "limits": true,
+        "no_planner_failures": true,
+        "no_modeled_contacts": true,
+        "no_torque_saturation": true
+      },
+      "tracking_accepted": false,
+      "fast_tracking_accepted": false,
+      "source_sha256": {
+        "trace.npz": "12fb0dfb12d8efefbcd375d7a94815b5c5eaa6e86b501ab243bd4423b174b542",
+        "metadata.json": "9690e9e5711048c52b06e9a4f91be2ca8b2ebd2d12c836f8998a1933358e9ea8",
+        "summary.json": "9a8954f9e49a96e0b31a3e4de3a271f7faae289c9afa22d62618672f2b2692a7"
+      }
+    }
+  },
+  {
+    "name": "circle_yz_mass1.1",
+    "path": "circle_yz",
+    "command": [
+      "/home/ziwang/projects/hexfellow-deploy-general-ik/.venv/bin/python",
+      "-m",
+      "hexfellow_deploy.benchmark.run",
+      "--trajectory-spec",
+      "/home/ziwang/projects/hexfellow-deploy-general-ik/configs/benchmarks/generalization/circle_yz.json",
+      "--profile",
+      "/home/ziwang/projects/hexfellow-deploy-general-ik/robot_resources/config/control/motion_profiles/x7-gp80-general-trajectory-sim-v2.yaml",
+      "--speed",
+      "0.9105893177911328",
+      "--derivatives",
+      "--output",
+      "/home/ziwang/projects/hexfellow-deploy-general-ik/runs/general_search_20261016/final_checks/circle_yz_mass1.1",
+      "--plant-mass-scale",
+      "1.1"
+    ],
+    "exit_code": 0,
+    "mass_scale": 1.1,
+    "profile_ablation": null,
+    "result": {
+      "completed": true,
+      "failure": null,
+      "samples": 510,
+      "status_counts": {
+        "TRACKING": 510
+      },
+      "boundary_counts": {
+        "joint_upper:14": 1
+      },
+      "metrics": {
+        "measured": {
+          "position_mm": {
+            "rms": 4.253541662670356,
+            "p50": 3.0581684769595783,
+            "p95": 8.76618581238828,
+            "p99": 10.157697915130413,
+            "max": 10.257856521966904
+          },
+          "orientation_deg": {
+            "rms": 0.7844821699591304,
+            "p50": 0.32028993849456416,
+            "p95": 1.9774270967840852,
+            "p99": 2.698591518171123,
+            "max": 2.734487136867261
+          },
+          "final_position_mm": [
+            2.6845011193124186
+          ],
+          "final_orientation_deg": [
+            0.28615002622355373
+          ]
+        },
+        "conditioned": {
+          "position_mm": {
+            "rms": 5.8003315903580575,
+            "p50": 5.101555225487868,
+            "p95": 9.052384879576604,
+            "p99": 9.099859977261614,
+            "max": 9.102640623995221
+          },
+          "orientation_deg": {
+            "rms": 0.0,
+            "p50": 0.0,
+            "p95": 0.0,
+            "p99": 0.0,
+            "max": 0.0
+          },
+          "final_position_mm": [
+            0.0
+          ],
+          "final_orientation_deg": [
+            0.0
+          ]
+        },
+        "command": {
+          "position_mm": {
+            "rms": 2.879386984411008,
+            "p50": 0.95826533427712,
+            "p95": 6.486299711735293,
+            "p99": 8.686679679905765,
+            "max": 8.794804582755226
+          },
+          "orientation_deg": {
+            "rms": 0.5851997665979047,
+            "p50": 0.15723498571466035,
+            "p95": 1.4749782725685592,
+            "p99": 2.201080993504688,
+            "max": 2.2435076356392063
+          },
+          "final_position_mm": [
+            8.032357093309585e-09
+          ],
+          "final_orientation_deg": [
+            1.6496642808692983e-09
+          ]
+        },
+        "achieved_speed_m_s": {
+          "rms": 0.609894576368695,
+          "p50": 0.5290301160760195,
+          "p95": 0.9529979962384325,
+          "p99": 0.9711718589441721,
+          "max": 0.9735273420455415
+        },
+        "requested_speed_m_s": {
+          "rms": 0.5801852312725609,
+          "p50": 0.5129050150445356,
+          "p95": 0.9058583101611228,
+          "p99": 0.9103364979872871,
+          "max": 0.9105738170009834
+        },
+        "requested_acceleration_m_s2": {
+          "rms": 4.601946320681259,
+          "p50": 2.834515810073156,
+          "p95": 8.207042484644866,
+          "p99": 8.287191783124806,
+          "max": 8.291450830098839
+        },
+        "time_at_or_above_1p2_m_s": 0.0,
+        "longest_continuous_interval_at_or_above_1p2_m_s": 0.0,
+        "moving_arm_speed": {
+          "right": {
+            "peak_m_s": 0.9735273420455415,
+            "time_at_or_above_1p2_m_s": 0.0,
+            "longest_continuous_interval_at_or_above_1p2_m_s": 0.0
+          }
+        },
+        "solve_ms": {
+          "rms": 2.011688483389861,
+          "p50": 1.9980715005658567,
+          "p95": 2.0622622803784902,
+          "p99": 2.2326074226293713,
+          "max": 4.020989988930523
+        },
+        "deadline_exceeded_ticks": 0,
+        "first_solve_ms": 4.020989988930523,
+        "solve_ms_after_initial_hold": {
+          "rms": 2.0089560024317037,
+          "p50": 2.007169008720666,
+          "p95": 2.0622622803784902,
+          "p99": 2.2326074226293713,
+          "max": 2.4466600152663887
+        },
+        "deadline_exceeded_ticks_after_initial_hold": 0,
+        "reference_joint_speed_max_rad_s": [
+          0.03351594514990658,
+          0.07866411747217775,
+          0.1489121698748022,
+          0.003987382445432219,
+          0.1260172004242324,
+          0.015465623512939293,
+          0.09306790855482334,
+          2.0268402871578486,
+          1.976989111505601,
+          1.4377623617350401,
+          1.1536498502970005,
+          1.7301633059052137,
+          1.768674634995171,
+          1.7710926304758046
+        ],
+        "measured_joint_speed_max_rad_s": [
+          0.031269305893518055,
+          0.07440297024677094,
+          0.13614485338294713,
+          0.016044344764425414,
+          0.10786522234777074,
+          0.012666516470710758,
+          0.07770685464347972,
+          1.9795656781850126,
+          1.9737809560169197,
+          1.3203205878906676,
+          1.1030316272140146,
+          1.483894427713921,
+          1.5271978489201339,
+          1.5578772301259527
+        ],
+        "reference_acceleration_max_rad_s2": [
+          0.37928660058147307,
+          0.7110439814571003,
+          1.3493781353686105,
+          0.3674383321130228,
+          1.153809166956197,
+          0.3267056908507228,
+          0.8528182234040289,
+          14.887037637513101,
+          21.036660935881994,
+          11.772441212247692,
+          18.909846017649922,
+          22.697606917186764,
+          30.43571039012132,
+          27.57032545939817
+        ],
+        "reference_jerk_max_rad_s3": [
+          37.928673448542064,
+          10.090380166860418,
+          21.50864937236489,
+          36.74383378335477,
+          18.2306220855361,
+          48.53169580788574,
+          23.33544726601526,
+          359.2340651551829,
+          471.8207072602354,
+          473.2992618422793,
+          918.9581929573886,
+          868.5942972072947,
+          1809.131613184698,
+          1356.768245037354
+        ],
+        "reference_jerk_rms_rad_s3": 64.07056846505051,
+        "hold_tcp_speed_m_s": {
+          "rms": 2.310370846673547e-05,
+          "p50": 2.853032881524221e-07,
+          "p95": 7.126934791700029e-05,
+          "p99": 8.881041310832877e-05,
+          "max": 8.922846271919353e-05
+        },
+        "encoder_fk_vs_mujoco_m": {
+          "rms": 1.7990058352769598e-08,
+          "p50": 1.800900266135579e-08,
+          "p95": 1.8119920988346485e-08,
+          "p99": 1.8203821320985565e-08,
+          "max": 1.821748592408873e-08
+        }
+      },
+      "contacts": {
+        "contact_steps": 0,
+        "minimum_distance_m": 0.0,
+        "maximum_torque_nm": [
+          7.289418016772345,
+          1.9079292577489184,
+          2.3042202323532592,
+          2.779867418391291,
+          0.0898138224402345,
+          0.40570539044248677,
+          0.4057173919261781,
+          13.450270498034314,
+          7.508209829397401,
+          4.449613916025839,
+          7.375636976167101,
+          2.1294363547024204,
+          2.47712982917123,
+          2.1544446324778193
+        ],
+        "saturated_steps": 0,
+        "pairs": [],
+        "scope": "Every physics step; only collision-enabled MuJoCo geometry, not complete mesh clearance"
+      },
+      "hardware_qualified": false,
+      "constraint_checks": {
+        "reference_position_margin_rad": 0.14208708604947629,
+        "measured_position_margin_rad": 0.1417819488461889,
+        "reference_velocity_ratio": 0.7977148491735254,
+        "measured_velocity_ratio": 0.7791087173507834,
+        "reference_acceleration_ratio": 1.0000000000000009,
+        "reference_jerk_ratio": 1.0000000000000027,
+        "planner_failures": 0
+      },
+      "tracking_acceptance": {
+        "completed": true,
+        "position_rms_5mm": true,
+        "position_p95_10mm": true,
+        "orientation_p95_2deg": true,
+        "final_position_1mm": false,
+        "limits": true,
+        "no_planner_failures": true,
+        "no_modeled_contacts": true,
+        "no_torque_saturation": true
+      },
+      "tracking_accepted": false,
+      "fast_tracking_accepted": false
+    },
+    "public_tcp": {
+      "frame": "public pad-center TCP; fixed tool transform from run metadata",
+      "position_mm": {
+        "rms": 4.2398090571234235,
+        "p50": 2.9671670047988794,
+        "p95": 8.653102883034967,
+        "p99": 10.081984967375854,
+        "max": 10.196089562469329
+      },
+      "final_position_mm": [
+        2.6021846965331856
+      ],
+      "per_arm_position_mm": {
+        "right": {
+          "rms": 4.2398090571234235,
+          "p50": 2.9671670047988794,
+          "p95": 8.653102883034967,
+          "p99": 10.081984967375854,
+          "max": 10.196089562469329
+        }
+      },
+      "per_arm_orientation_deg": {
+        "right": {
+          "rms": 0.7844821699591304,
+          "p50": 0.32028993849456416,
+          "p95": 1.9774270967840852,
+          "p99": 2.698591518171123,
+          "max": 2.734487136867261
+        }
+      },
+      "orientation_deg": {
+        "rms": 0.7844821699591304,
+        "p50": 0.32028993849456416,
+        "p95": 1.9774270967840852,
+        "p99": 2.698591518171123,
+        "max": 2.734487136867261
+      },
+      "moving_arm_speed": {
+        "right": {
+          "peak_m_s": 0.9666945857290843,
+          "time_at_or_above_1p2_m_s": 0.0,
+          "longest_continuous_interval_at_or_above_1p2_m_s": 0.0
+        }
+      },
+      "tracking_acceptance": {
+        "completed": true,
+        "position_rms_5mm": true,
+        "position_p95_10mm": true,
+        "orientation_p95_2deg": true,
+        "final_position_1mm": false,
+        "limits": true,
+        "no_planner_failures": true,
+        "no_modeled_contacts": true,
+        "no_torque_saturation": true
+      },
+      "tracking_accepted": false,
+      "fast_tracking_accepted": false,
+      "source_sha256": {
+        "trace.npz": "c49997b33789a275af99542fbc9a2fd13639906945163d2b4c579f8989cd31db",
+        "metadata.json": "c124e7bac0aed1f9ddb3179362d85814a811e259a10649d9e6f0cf2ca358eeb5",
+        "summary.json": "5899ad4ecf5439cc1c57c6360bd2b15107c52d3db3082af3df5d4bebcea3b1c5"
+      }
+    }
+  },
+  {
+    "name": "shoulder_sweep_envelope_only",
+    "path": "shoulder_sweep",
+    "command": [
+      "/home/ziwang/projects/hexfellow-deploy-general-ik/.venv/bin/python",
+      "-m",
+      "hexfellow_deploy.benchmark.run",
+      "--trajectory-spec",
+      "/home/ziwang/projects/hexfellow-deploy-general-ik/configs/benchmarks/generalization/shoulder_sweep.json",
+      "--profile",
+      "/home/ziwang/projects/hexfellow-deploy-general-ik/runs/general_search_20261016/profiles/wide_base.yaml",
+      "--speed",
+      "1.805",
+      "--derivatives",
+      "--output",
+      "/home/ziwang/projects/hexfellow-deploy-general-ik/runs/general_search_20261016/final_checks/shoulder_sweep_envelope_only",
+      "--plant-mass-scale",
+      "1.0"
+    ],
+    "exit_code": 0,
+    "mass_scale": 1.0,
+    "profile_ablation": "/home/ziwang/projects/hexfellow-deploy-general-ik/runs/general_search_20261016/profiles/wide_base.yaml",
+    "result": {
+      "completed": true,
+      "failure": null,
+      "samples": 395,
+      "status_counts": {
+        "TRACKING": 395
+      },
+      "boundary_counts": {},
+      "metrics": {
+        "measured": {
+          "position_mm": {
+            "rms": 3.1964438869723333,
+            "p50": 2.0239220503315742,
+            "p95": 5.469717251183125,
+            "p99": 6.313566166665495,
+            "max": 6.407714818253367
+          },
+          "orientation_deg": {
+            "rms": 0.3871244954570155,
+            "p50": 0.23945124988840977,
+            "p95": 0.8484594843189979,
+            "p99": 1.0383667337531834,
+            "max": 1.0503456247447058
+          },
+          "final_position_mm": [
+            0.35416216180495536
+          ],
+          "final_orientation_deg": [
+            0.05575376509663449
+          ]
+        },
+        "conditioned": {
+          "position_mm": {
+            "rms": 10.44135662861094,
+            "p50": 7.200707244188557,
+            "p95": 17.899036602663735,
+            "p99": 18.03585954171455,
+            "max": 18.04497701720699
+          },
+          "orientation_deg": {
+            "rms": 0.9430167168869559,
+            "p50": 0.6503230643615463,
+            "p95": 1.6165745226945676,
+            "p99": 1.6289326915853377,
+            "max": 1.6297562040465003
+          },
+          "final_position_mm": [
+            0.0
+          ],
+          "final_orientation_deg": [
+            0.0
+          ]
+        },
+        "command": {
+          "position_mm": {
+            "rms": 2.516024691583817,
+            "p50": 1.7234446264028387,
+            "p95": 5.590925950103813,
+            "p99": 6.843381584270609,
+            "max": 6.925140439073953
+          },
+          "orientation_deg": {
+            "rms": 0.27043391891185775,
+            "p50": 0.14973750036861622,
+            "p95": 0.6233143640702635,
+            "p99": 0.8101883494627551,
+            "max": 0.8253771005265746
+          },
+          "final_position_mm": [
+            1.2071991488826642e-07
+          ],
+          "final_orientation_deg": [
+            3.274661041580752e-09
+          ]
+        },
+        "achieved_speed_m_s": {
+          "rms": 1.0569437768171877,
+          "p50": 0.7245166248574382,
+          "p95": 1.7885373906786934,
+          "p99": 1.8159209739708755,
+          "max": 1.8184990820382723
+        },
+        "requested_speed_m_s": {
+          "rms": 1.0443099964332883,
+          "p50": 0.7200285471505283,
+          "p95": 1.7889916228869167,
+          "p99": 1.8039640002932482,
+          "max": 1.804995521654748
+        },
+        "requested_acceleration_m_s2": {
+          "rms": 6.611333624334339,
+          "p50": 6.531325576926029,
+          "p95": 9.395661375309555,
+          "p99": 9.427898836474702,
+          "max": 9.428487407361192
+        },
+        "time_at_or_above_1p2_m_s": 0.52,
+        "longest_continuous_interval_at_or_above_1p2_m_s": 0.26,
+        "moving_arm_speed": {
+          "right": {
+            "peak_m_s": 1.8184990820382723,
+            "time_at_or_above_1p2_m_s": 0.52,
+            "longest_continuous_interval_at_or_above_1p2_m_s": 0.26
+          }
+        },
+        "solve_ms": {
+          "rms": 2.031970524120464,
+          "p50": 1.9060809863731265,
+          "p95": 2.5167839834466554,
+          "p99": 2.990997107699514,
+          "max": 4.285004048142582
+        },
+        "deadline_exceeded_ticks": 0,
+        "first_solve_ms": 3.109047014731914,
+        "solve_ms_after_initial_hold": {
+          "rms": 2.0711560396328075,
+          "p50": 1.9346940098330379,
+          "p95": 2.65945628634654,
+          "p99": 2.9956942668650304,
+          "max": 4.285004048142582
+        },
+        "deadline_exceeded_ticks_after_initial_hold": 0,
+        "reference_joint_speed_max_rad_s": [
+          0.009870741150266335,
+          0.01460310358105515,
+          0.03189891040967675,
+          0.0009367532495297872,
+          0.025240851824694554,
+          0.0027138831428564986,
+          0.018974171097845934,
+          2.2867272187950194,
+          1.2642352520160582,
+          2.2449417442138455,
+          0.43092761035069505,
+          1.745918794546818,
+          1.2536046620594432,
+          1.3490896899888172
+        ],
+        "measured_joint_speed_max_rad_s": [
+          0.009595116393857416,
+          0.013328019057088181,
+          0.02963632584811592,
+          0.0030576573140856608,
+          0.021537834130268503,
+          0.008471962723045078,
+          0.015618931401017819,
+          2.3179221726215715,
+          1.210035633540137,
+          2.1068617146838546,
+          0.44614338838539275,
+          1.5050058096637584,
+          1.0335367310962766,
+          1.1115878658659317
+        ],
+        "reference_acceleration_max_rad_s2": [
+          0.11999709075797568,
+          0.16938614870744134,
+          0.2830997188419112,
+          0.09367533067361077,
+          0.22958125213815017,
+          0.271388314284631,
+          0.2916712112252929,
+          14.993713978560574,
+          18.66914665616107,
+          18.909846017649954,
+          11.930930684499113,
+          23.06097332242074,
+          13.352793772085148,
+          15.624118888566695
+        ],
+        "reference_jerk_max_rad_s3": [
+          17.65032928047256,
+          20.33880994244083,
+          10.741008992342419,
+          12.57802549757657,
+          5.873060141079216,
+          47.5504625739455,
+          46.86309962221517,
+          471.82070726024426,
+          471.8207072602365,
+          918.9581929573886,
+          711.4542759024384,
+          1089.7212177401273,
+          632.5603222791798,
+          660.212893850799
+        ],
+        "reference_jerk_rms_rad_s3": 75.85999361090312,
+        "hold_tcp_speed_m_s": {
+          "rms": 8.090665062295376e-05,
+          "p50": 4.091213882600136e-07,
+          "p95": 0.00014483279415790902,
+          "p99": 0.00039584076227154185,
+          "max": 0.00044679919992801566
+        },
+        "encoder_fk_vs_mujoco_m": {
+          "rms": 1.7692203938845448e-08,
+          "p50": 1.8000537335734682e-08,
+          "p95": 1.8001006783018276e-08,
+          "p99": 1.8001360819058155e-08,
+          "max": 1.800181787173179e-08
+        }
+      },
+      "contacts": {
+        "contact_steps": 0,
+        "minimum_distance_m": 0.0,
+        "maximum_torque_nm": [
+          6.507208809737392,
+          1.6958578768515906,
+          2.0690129039092824,
+          2.221295576005815,
+          0.026082471114148742,
+          0.3582458471040924,
+          0.35937721669186085,
+          14.412117167699023,
+          3.051234085983481,
+          4.4616309369915825,
+          4.637824190705572,
+          2.180965262829602,
+          1.7030116110349027,
+          1.343416306700533
+        ],
+        "saturated_steps": 0,
+        "pairs": [],
+        "scope": "Every physics step; only collision-enabled MuJoCo geometry, not complete mesh clearance"
+      },
+      "hardware_qualified": false,
+      "constraint_checks": {
+        "reference_position_margin_rad": 0.10109676838598769,
+        "measured_position_margin_rad": 0.10044988661507737,
+        "reference_velocity_ratio": 0.9000000000000002,
+        "measured_velocity_ratio": 0.9122775721621451,
+        "reference_acceleration_ratio": 1.0000000000000018,
+        "reference_jerk_ratio": 1.0000000000000215,
+        "planner_failures": 0
+      },
+      "tracking_acceptance": {
+        "completed": true,
+        "position_rms_5mm": true,
+        "position_p95_10mm": true,
+        "orientation_p95_2deg": true,
+        "final_position_1mm": true,
+        "limits": true,
+        "no_planner_failures": true,
+        "no_modeled_contacts": true,
+        "no_torque_saturation": true
+      },
+      "tracking_accepted": true,
+      "fast_tracking_accepted": true
+    },
+    "public_tcp": {
+      "frame": "public pad-center TCP; fixed tool transform from run metadata",
+      "position_mm": {
+        "rms": 3.1507361135036382,
+        "p50": 1.9622303005785724,
+        "p95": 5.465802846671887,
+        "p99": 6.299595643566113,
+        "max": 6.394853199717136
+      },
+      "final_position_mm": [
+        0.3377395355492198
+      ],
+      "per_arm_position_mm": {
+        "right": {
+          "rms": 3.1507361135036382,
+          "p50": 1.9622303005785724,
+          "p95": 5.465802846671887,
+          "p99": 6.299595643566113,
+          "max": 6.394853199717136
+        }
+      },
+      "per_arm_orientation_deg": {
+        "right": {
+          "rms": 0.3871244954570155,
+          "p50": 0.23945124988840977,
+          "p95": 0.8484594843189979,
+          "p99": 1.0383667337531834,
+          "max": 1.0503456247447058
+        }
+      },
+      "orientation_deg": {
+        "rms": 0.3871244954570155,
+        "p50": 0.23945124988840977,
+        "p95": 0.8484594843189979,
+        "p99": 1.0383667337531834,
+        "max": 1.0503456247447058
+      },
+      "moving_arm_speed": {
+        "right": {
+          "peak_m_s": 1.7714488337767689,
+          "time_at_or_above_1p2_m_s": 0.5,
+          "longest_continuous_interval_at_or_above_1p2_m_s": 0.25
+        }
+      },
+      "tracking_acceptance": {
+        "completed": true,
+        "position_rms_5mm": true,
+        "position_p95_10mm": true,
+        "orientation_p95_2deg": true,
+        "final_position_1mm": true,
+        "limits": true,
+        "no_planner_failures": true,
+        "no_modeled_contacts": true,
+        "no_torque_saturation": true
+      },
+      "tracking_accepted": true,
+      "fast_tracking_accepted": true,
+      "source_sha256": {
+        "trace.npz": "3487bec277366d4cecfe49a5992cc92f0c03ee5f693c6859e9f26617fe79c22c",
+        "metadata.json": "398d571222e5034c3b4ee2508fa0d8cefe5ef04e1760c66a21ea9bcd41a2e52b",
+        "summary.json": "f22203f2fdf2e4ad6af02fc7fd71742b2cd068553819c792c99adf22c7be9dc0"
+      }
+    }
+  },
+  {
+    "name": "seven_joint_arc_envelope_only",
+    "path": "seven_joint_arc",
+    "command": [
+      "/home/ziwang/projects/hexfellow-deploy-general-ik/.venv/bin/python",
+      "-m",
+      "hexfellow_deploy.benchmark.run",
+      "--trajectory-spec",
+      "/home/ziwang/projects/hexfellow-deploy-general-ik/configs/benchmarks/generalization/seven_joint_arc.json",
+      "--profile",
+      "/home/ziwang/projects/hexfellow-deploy-general-ik/runs/general_search_20261016/profiles/wide_base.yaml",
+      "--speed",
+      "1.7203906249999998",
+      "--derivatives",
+      "--output",
+      "/home/ziwang/projects/hexfellow-deploy-general-ik/runs/general_search_20261016/final_checks/seven_joint_arc_envelope_only",
+      "--plant-mass-scale",
+      "1.0"
+    ],
+    "exit_code": 0,
+    "mass_scale": 1.0,
+    "profile_ablation": "/home/ziwang/projects/hexfellow-deploy-general-ik/runs/general_search_20261016/profiles/wide_base.yaml",
+    "result": {
+      "completed": true,
+      "failure": null,
+      "samples": 427,
+      "status_counts": {
+        "TRACKING": 427
+      },
+      "boundary_counts": {},
+      "metrics": {
+        "measured": {
+          "position_mm": {
+            "rms": 4.126824610649369,
+            "p50": 1.4670080658079971,
+            "p95": 10.27394070652484,
+            "p99": 11.864729056946635,
+            "max": 11.9555211103739
+          },
+          "orientation_deg": {
+            "rms": 0.6394514247371649,
+            "p50": 0.1464026487159444,
+            "p95": 1.5221548678862413,
+            "p99": 1.7537981589979503,
+            "max": 1.7691848852115375
+          },
+          "final_position_mm": [
+            0.3631807716490348
+          ],
+          "final_orientation_deg": [
+            0.05538414918547747
+          ]
+        },
+        "conditioned": {
+          "position_mm": {
+            "rms": 9.94511960649454,
+            "p50": 6.99674426478956,
+            "p95": 17.08189311110983,
+            "p99": 17.182882002844554,
+            "max": 17.200820743284655
+          },
+          "orientation_deg": {
+            "rms": 0.9757045551088327,
+            "p50": 0.7187865326613792,
+            "p95": 1.6398310173297213,
+            "p99": 1.6514844757873326,
+            "max": 1.6521307107451213
+          },
+          "final_position_mm": [
+            0.0
+          ],
+          "final_orientation_deg": [
+            0.0
+          ]
+        },
+        "command": {
+          "position_mm": {
+            "rms": 4.084769222355051,
+            "p50": 1.5510445327099585,
+            "p95": 10.514977471180046,
+            "p99": 12.268442789020982,
+            "max": 12.373186784468132
+          },
+          "orientation_deg": {
+            "rms": 0.4249811756809478,
+            "p50": 0.13897655213123283,
+            "p95": 1.1022125138734173,
+            "p99": 1.3285875678991435,
+            "max": 1.3428894854133742
+          },
+          "final_position_mm": [
+            4.415275456836386e-08
+          ],
+          "final_orientation_deg": [
+            9.71483651090458e-10
+          ]
+        },
+        "achieved_speed_m_s": {
+          "rms": 1.0049852525141316,
+          "p50": 0.7226063845433239,
+          "p95": 1.7028408735241554,
+          "p99": 1.715960269792683,
+          "max": 1.7192030849918787
+        },
+        "requested_speed_m_s": {
+          "rms": 0.9946313791900384,
+          "p50": 0.6978137313996066,
+          "p95": 1.703858457549278,
+          "p99": 1.7195982758394588,
+          "max": 1.71987296043761
+        },
+        "requested_acceleration_m_s2": {
+          "rms": 5.339790101275636,
+          "p50": 5.658778290343699,
+          "p95": 7.4221979485216725,
+          "p99": 7.531756899803078,
+          "max": 7.533657487586352
+        },
+        "time_at_or_above_1p2_m_s": 0.6,
+        "longest_continuous_interval_at_or_above_1p2_m_s": 0.3,
+        "moving_arm_speed": {
+          "right": {
+            "peak_m_s": 1.7192030849918787,
+            "time_at_or_above_1p2_m_s": 0.6,
+            "longest_continuous_interval_at_or_above_1p2_m_s": 0.3
+          }
+        },
+        "solve_ms": {
+          "rms": 2.027941406836068,
+          "p50": 1.928843033965677,
+          "p95": 2.4063759832642972,
+          "p99": 3.0053313262760644,
+          "max": 3.3111939555965364
+        },
+        "deadline_exceeded_ticks": 0,
+        "first_solve_ms": 2.638939011376351,
+        "solve_ms_after_initial_hold": {
+          "rms": 2.059445412796869,
+          "p50": 1.947787997778505,
+          "p95": 2.514773898292333,
+          "p99": 3.0406646581832324,
+          "max": 3.3111939555965364
+        },
+        "deadline_exceeded_ticks_after_initial_hold": 0,
+        "reference_joint_speed_max_rad_s": [
+          0.01256882098125038,
+          0.018950123021869776,
+          0.04125373320117307,
+          0.001290888481473626,
+          0.0327400116347786,
+          0.0027138831428564986,
+          0.024552753741098256,
+          2.28672721879502,
+          1.0877723553580079,
+          0.5858040211247958,
+          1.3953821618629048,
+          1.7129645617444667,
+          0.4571622688044494,
+          1.0589132410324933
+        ],
+        "measured_joint_speed_max_rad_s": [
+          0.0116562513412187,
+          0.017817037411686953,
+          0.03771596929757456,
+          0.0034895191182281863,
+          0.027963965016731204,
+          0.008471962723045078,
+          0.020394774918874578,
+          2.270463249444756,
+          1.1189264466132485,
+          0.6119089754320194,
+          1.335036294334079,
+          1.4833537816136138,
+          0.4200714129876598,
+          0.918877904133927
+        ],
+        "reference_acceleration_max_rad_s2": [
+          0.11999709075797568,
+          0.1679368065251985,
+          0.3684347363741118,
+          0.09367533067361077,
+          0.29395896877472943,
+          0.271388314284631,
+          0.2916712112252929,
+          21.036660935881923,
+          7.704094168623968,
+          17.51633440873911,
+          18.2176113733177,
+          18.686141536934553,
+          6.028595736390205,
+          12.501258205614796
+        ],
+        "reference_jerk_max_rad_s3": [
+          17.65032928047256,
+          15.14920629585374,
+          10.741008992342419,
+          12.57802549757657,
+          5.873060141079216,
+          47.5504625739455,
+          46.86309962221517,
+          471.82070726023983,
+          459.45489689463636,
+          865.1208671532092,
+          749.6789657632896,
+          876.5334971038598,
+          357.7657359573913,
+          648.1179798208103
+        ],
+        "reference_jerk_rms_rad_s3": 57.10300091331813,
+        "hold_tcp_speed_m_s": {
+          "rms": 4.71010338288805e-06,
+          "p50": 7.160410715689182e-08,
+          "p95": 1.4194845176178951e-05,
+          "p99": 1.7628445153699633e-05,
+          "max": 1.765118153781627e-05
+        },
+        "encoder_fk_vs_mujoco_m": {
+          "rms": 1.7562031288998068e-08,
+          "p50": 1.800054201758591e-08,
+          "p95": 1.800103526124195e-08,
+          "p99": 1.8002195574146573e-08,
+          "max": 1.801004992366862e-08
+        }
+      },
+      "contacts": {
+        "contact_steps": 0,
+        "minimum_distance_m": 0.0,
+        "maximum_torque_nm": [
+          6.518663727431488,
+          1.7276106315408981,
+          2.0922136974303953,
+          2.251719497126203,
+          0.031813059565299895,
+          0.3628113752692852,
+          0.35978657552421867,
+          12.989872982194782,
+          4.591915813508336,
+          3.741902041425135,
+          5.268363917400819,
+          1.975185660033432,
+          0.6641836267906159,
+          1.9339417103937464
+        ],
+        "saturated_steps": 0,
+        "pairs": [],
+        "scope": "Every physics step; only collision-enabled MuJoCo geometry, not complete mesh clearance"
+      },
+      "hardware_qualified": false,
+      "constraint_checks": {
+        "reference_position_margin_rad": 0.42051300162737015,
+        "measured_position_margin_rad": 0.42019980034082305,
+        "reference_velocity_ratio": 0.9000000000000004,
+        "measured_velocity_ratio": 0.8935988987689796,
+        "reference_acceleration_ratio": 0.9999999999999974,
+        "reference_jerk_ratio": 1.0000000000000122,
+        "planner_failures": 0
+      },
+      "tracking_acceptance": {
+        "completed": true,
+        "position_rms_5mm": true,
+        "position_p95_10mm": false,
+        "orientation_p95_2deg": true,
+        "final_position_1mm": true,
+        "limits": true,
+        "no_planner_failures": true,
+        "no_modeled_contacts": true,
+        "no_torque_saturation": true
+      },
+      "tracking_accepted": false,
+      "fast_tracking_accepted": false
+    },
+    "public_tcp": {
+      "frame": "public pad-center TCP; fixed tool transform from run metadata",
+      "position_mm": {
+        "rms": 4.080947011894819,
+        "p50": 1.4308939216397722,
+        "p95": 10.2350105498627,
+        "p99": 11.837985033209701,
+        "max": 11.92734991489217
+      },
+      "final_position_mm": [
+        0.34694954566994346
+      ],
+      "per_arm_position_mm": {
+        "right": {
+          "rms": 4.080947011894819,
+          "p50": 1.4308939216397722,
+          "p95": 10.2350105498627,
+          "p99": 11.837985033209701,
+          "max": 11.92734991489217
+        }
+      },
+      "per_arm_orientation_deg": {
+        "right": {
+          "rms": 0.6394514247371649,
+          "p50": 0.1464026487159444,
+          "p95": 1.5221548678862413,
+          "p99": 1.7537981589979503,
+          "max": 1.7691848852115375
+        }
+      },
+      "orientation_deg": {
+        "rms": 0.6394514247371649,
+        "p50": 0.1464026487159444,
+        "p95": 1.5221548678862413,
+        "p99": 1.7537981589979503,
+        "max": 1.7691848852115375
+      },
+      "moving_arm_speed": {
+        "right": {
+          "peak_m_s": 1.6769284896953547,
+          "time_at_or_above_1p2_m_s": 0.59,
+          "longest_continuous_interval_at_or_above_1p2_m_s": 0.3
+        }
+      },
+      "tracking_acceptance": {
+        "completed": true,
+        "position_rms_5mm": true,
+        "position_p95_10mm": false,
+        "orientation_p95_2deg": true,
+        "final_position_1mm": true,
+        "limits": true,
+        "no_planner_failures": true,
+        "no_modeled_contacts": true,
+        "no_torque_saturation": true
+      },
+      "tracking_accepted": false,
+      "fast_tracking_accepted": false,
+      "source_sha256": {
+        "trace.npz": "b79a41890f6a75c3c6654d0164caa6d8e5224721a89bf573bb0a7733e0b2c126",
+        "metadata.json": "cd25cf6ad0b2d3e80696d06e1f5339d0dbbee8548ce22de0831a2c4640ca0608",
+        "summary.json": "7710f6ca97d1dcdddba5482a3d91f448f3b833aa66c78055a61b9ab6e0adb3f8"
+      }
+    }
+  },
+  {
+    "name": "vertical_fixed_envelope_only",
+    "path": "vertical_fixed",
+    "command": [
+      "/home/ziwang/projects/hexfellow-deploy-general-ik/.venv/bin/python",
+      "-m",
+      "hexfellow_deploy.benchmark.run",
+      "--trajectory-spec",
+      "/home/ziwang/projects/hexfellow-deploy-general-ik/configs/benchmarks/generalization/vertical_fixed.json",
+      "--profile",
+      "/home/ziwang/projects/hexfellow-deploy-general-ik/runs/general_search_20261016/profiles/wide_base.yaml",
+      "--speed",
+      "1.1093276965296615",
+      "--derivatives",
+      "--output",
+      "/home/ziwang/projects/hexfellow-deploy-general-ik/runs/general_search_20261016/final_checks/vertical_fixed_envelope_only",
+      "--plant-mass-scale",
+      "1.0"
+    ],
+    "exit_code": 0,
+    "mass_scale": 1.0,
+    "profile_ablation": "/home/ziwang/projects/hexfellow-deploy-general-ik/runs/general_search_20261016/profiles/wide_base.yaml",
+    "result": {
+      "completed": true,
+      "failure": null,
+      "samples": 412,
+      "status_counts": {
+        "TRACKING": 412
+      },
+      "boundary_counts": {
+        "joint_upper:14": 6
+      },
+      "metrics": {
+        "measured": {
+          "position_mm": {
+            "rms": 2.0529933068233537,
+            "p50": 1.156082918970661,
+            "p95": 4.638800390204855,
+            "p99": 5.714685812136145,
+            "max": 5.7835391905099565
+          },
+          "orientation_deg": {
+            "rms": 1.2103489750993717,
+            "p50": 0.16443086038105814,
+            "p95": 2.86659568724141,
+            "p99": 3.193504732724016,
+            "max": 3.2178380422563033
+          },
+          "final_position_mm": [
+            0.3653193080338399
+          ],
+          "final_orientation_deg": [
+            0.05585390323075117
+          ]
+        },
+        "conditioned": {
+          "position_mm": {
+            "rms": 6.479848173203102,
+            "p50": 4.642413838167325,
+            "p95": 11.007255366201951,
+            "p99": 11.08530389522242,
+            "max": 11.091511434973889
+          },
+          "orientation_deg": {
+            "rms": 0.0,
+            "p50": 0.0,
+            "p95": 0.0,
+            "p99": 0.0,
+            "max": 0.0
+          },
+          "final_position_mm": [
+            0.0
+          ],
+          "final_orientation_deg": [
+            0.0
+          ]
+        },
+        "command": {
+          "position_mm": {
+            "rms": 2.923563008233668,
+            "p50": 1.4905982611752415,
+            "p95": 6.163713267635554,
+            "p99": 6.712815062533908,
+            "max": 6.774009327373113
+          },
+          "orientation_deg": {
+            "rms": 1.0229791390862593,
+            "p50": 0.17050337157970008,
+            "p95": 2.3896611643116445,
+            "p99": 2.689386245389451,
+            "max": 2.7122556979838004
+          },
+          "final_position_mm": [
+            5.682483754040505e-08
+          ],
+          "final_orientation_deg": [
+            1.3738461786286583e-09
+          ]
+        },
+        "achieved_speed_m_s": {
+          "rms": 0.6659208425317212,
+          "p50": 0.49560044764221634,
+          "p95": 1.1059947442963902,
+          "p99": 1.1147591961257703,
+          "max": 1.1155686770004565
+        },
+        "requested_speed_m_s": {
+          "rms": 0.6480556894233691,
+          "p50": 0.45875763482444276,
+          "p95": 1.0999867176037157,
+          "p99": 1.1087937393108342,
+          "max": 1.1092533079218863
+        },
+        "requested_acceleration_m_s2": {
+          "rms": 3.320476236774265,
+          "p50": 3.1193180052145446,
+          "p95": 5.02917674586212,
+          "p99": 5.051309578939326,
+          "max": 5.052287784187455
+        },
+        "time_at_or_above_1p2_m_s": 0.0,
+        "longest_continuous_interval_at_or_above_1p2_m_s": 0.0,
+        "moving_arm_speed": {
+          "right": {
+            "peak_m_s": 1.1155686770004565,
+            "time_at_or_above_1p2_m_s": 0.0,
+            "longest_continuous_interval_at_or_above_1p2_m_s": 0.0
+          }
+        },
+        "solve_ms": {
+          "rms": 1.973082467885628,
+          "p50": 1.931637991219759,
+          "p95": 2.190143006737344,
+          "p99": 2.4439936201088113,
+          "max": 3.1614950275979936
+        },
+        "deadline_exceeded_ticks": 0,
+        "first_solve_ms": 2.704582002479583,
+        "solve_ms_after_initial_hold": {
+          "rms": 1.9782051535281948,
+          "p50": 1.9527320109773427,
+          "p95": 2.1920991595834494,
+          "p99": 2.2768037969945,
+          "max": 3.1614950275979936
+        },
+        "deadline_exceeded_ticks_after_initial_hold": 0,
+        "reference_joint_speed_max_rad_s": [
+          0.011500156728068258,
+          0.016794152885010363,
+          0.037474967295393395,
+          0.0009367532495297872,
+          0.029561342253934732,
+          0.0027138831428564986,
+          0.022144874992594463,
+          2.28672721879502,
+          1.0048903776289035,
+          1.0712915998634418,
+          2.1961418640343378,
+          1.4514186105378384,
+          1.7637783582605873,
+          1.7465307438124897
+        ],
+        "measured_joint_speed_max_rad_s": [
+          0.010683206794324416,
+          0.01599048238669591,
+          0.03411890098256061,
+          0.0030576573140856608,
+          0.02524974083458892,
+          0.008471962723045078,
+          0.018436094183977892,
+          2.294529005021369,
+          0.962373607147374,
+          0.9662203038966046,
+          2.0811011408561453,
+          1.259682099790845,
+          1.5367627564302773,
+          1.4918568826388021
+        ],
+        "reference_acceleration_max_rad_s2": [
+          0.11999709075797568,
+          0.14725777489454275,
+          0.3365391706599715,
+          0.09367533067361077,
+          0.26615928916710624,
+          0.271388314284631,
+          0.2916712112252929,
+          21.03666093588197,
+          14.217728079127642,
+          18.909846017649944,
+          18.909846017649933,
+          22.49716623402971,
+          13.68570892014116,
+          28.622644946049224
+        ],
+        "reference_jerk_max_rad_s3": [
+          17.65032928047256,
+          15.14920629585374,
+          10.741008992342419,
+          12.57802549757657,
+          5.873060141079216,
+          47.5504625739455,
+          46.86309962221517,
+          471.82070726024426,
+          471.82070726023545,
+          893.584000854909,
+          829.787068728926,
+          924.4457998217204,
+          799.4312257682501,
+          1746.0574585947118
+        ],
+        "reference_jerk_rms_rad_s3": 81.07718440853306,
+        "hold_tcp_speed_m_s": {
+          "rms": 9.17807093599489e-06,
+          "p50": 1.002091383577299e-07,
+          "p95": 2.7718702816996358e-05,
+          "p99": 3.627077874516201e-05,
+          "max": 3.702260922983991e-05
+        },
+        "encoder_fk_vs_mujoco_m": {
+          "rms": 1.7948747210844453e-08,
+          "p50": 1.8000538476979865e-08,
+          "p95": 1.800084992690087e-08,
+          "p99": 1.8002945015292745e-08,
+          "max": 1.8003512675342827e-08
+        }
+      },
+      "contacts": {
+        "contact_steps": 0,
+        "minimum_distance_m": 0.0,
+        "maximum_torque_nm": [
+          6.507208809737392,
+          1.68974362252996,
+          2.0693381435225717,
+          2.226775694220663,
+          0.02959080252557955,
+          0.35858293460491303,
+          0.35934793912505836,
+          12.179818108832023,
+          3.070850468957019,
+          5.212249742066859,
+          4.308838616861266,
+          1.638099626416249,
+          2.376483867848883,
+          2.455844829976562
+        ],
+        "saturated_steps": 0,
+        "pairs": [],
+        "scope": "Every physics step; only collision-enabled MuJoCo geometry, not complete mesh clearance"
+      },
+      "hardware_qualified": false,
+      "constraint_checks": {
+        "reference_position_margin_rad": 0.1212109878979627,
+        "measured_position_margin_rad": 0.12113499181915,
+        "reference_velocity_ratio": 0.9000000000000004,
+        "measured_velocity_ratio": 0.9030705925682797,
+        "reference_acceleration_ratio": 1.0000000000000013,
+        "reference_jerk_ratio": 1.0000000000000215,
+        "planner_failures": 0
+      },
+      "tracking_acceptance": {
+        "completed": true,
+        "position_rms_5mm": true,
+        "position_p95_10mm": true,
+        "orientation_p95_2deg": false,
+        "final_position_1mm": true,
+        "limits": true,
+        "no_planner_failures": true,
+        "no_modeled_contacts": true,
+        "no_torque_saturation": true
+      },
+      "tracking_accepted": false,
+      "fast_tracking_accepted": false
+    },
+    "public_tcp": {
+      "frame": "public pad-center TCP; fixed tool transform from run metadata",
+      "position_mm": {
+        "rms": 2.1622061284772776,
+        "p50": 1.1477452298287203,
+        "p95": 5.06947631480645,
+        "p99": 6.30284894946681,
+        "max": 6.376510517862717
+      },
+      "final_position_mm": [
+        0.34891279563771177
+      ],
+      "per_arm_position_mm": {
+        "right": {
+          "rms": 2.1622061284772776,
+          "p50": 1.1477452298287203,
+          "p95": 5.06947631480645,
+          "p99": 6.30284894946681,
+          "max": 6.376510517862717
+        }
+      },
+      "per_arm_orientation_deg": {
+        "right": {
+          "rms": 1.2103489750993717,
+          "p50": 0.16443086038105814,
+          "p95": 2.86659568724141,
+          "p99": 3.193504732724016,
+          "max": 3.2178380422563033
+        }
+      },
+      "orientation_deg": {
+        "rms": 1.2103489750993717,
+        "p50": 0.16443086038105814,
+        "p95": 2.86659568724141,
+        "p99": 3.193504732724016,
+        "max": 3.2178380422563033
+      },
+      "moving_arm_speed": {
+        "right": {
+          "peak_m_s": 1.107686524433787,
+          "time_at_or_above_1p2_m_s": 0.0,
+          "longest_continuous_interval_at_or_above_1p2_m_s": 0.0
+        }
+      },
+      "tracking_acceptance": {
+        "completed": true,
+        "position_rms_5mm": true,
+        "position_p95_10mm": true,
+        "orientation_p95_2deg": false,
+        "final_position_1mm": true,
+        "limits": true,
+        "no_planner_failures": true,
+        "no_modeled_contacts": true,
+        "no_torque_saturation": true
+      },
+      "tracking_accepted": false,
+      "fast_tracking_accepted": false,
+      "source_sha256": {
+        "trace.npz": "00b3e79f72a17ab658dd70663d89ccc391e10e7680becef7d106f3ae8d4e2fe8",
+        "metadata.json": "e248cd0c1d40618210dcda61f8a27b6f3490f0cf7ed66f0e90a574ac7c976e70",
+        "summary.json": "9ec7852a5f865a215fc03ca55aee010818b51f3abdca2d080483e09352570900"
+      }
+    }
+  },
+  {
+    "name": "circle_yz_envelope_only",
+    "path": "circle_yz",
+    "command": [
+      "/home/ziwang/projects/hexfellow-deploy-general-ik/.venv/bin/python",
+      "-m",
+      "hexfellow_deploy.benchmark.run",
+      "--trajectory-spec",
+      "/home/ziwang/projects/hexfellow-deploy-general-ik/configs/benchmarks/generalization/circle_yz.json",
+      "--profile",
+      "/home/ziwang/projects/hexfellow-deploy-general-ik/runs/general_search_20261016/profiles/wide_base.yaml",
+      "--speed",
+      "0.9105893177911328",
+      "--derivatives",
+      "--output",
+      "/home/ziwang/projects/hexfellow-deploy-general-ik/runs/general_search_20261016/final_checks/circle_yz_envelope_only",
+      "--plant-mass-scale",
+      "1.0"
+    ],
+    "exit_code": 0,
+    "mass_scale": 1.0,
+    "profile_ablation": "/home/ziwang/projects/hexfellow-deploy-general-ik/runs/general_search_20261016/profiles/wide_base.yaml",
+    "result": {
+      "completed": true,
+      "failure": null,
+      "samples": 510,
+      "status_counts": {
+        "TRACKING": 510
+      },
+      "boundary_counts": {},
+      "metrics": {
+        "measured": {
+          "position_mm": {
+            "rms": 2.1267052822548016,
+            "p50": 1.0822448994206477,
+            "p95": 4.709594341317497,
+            "p99": 5.8206869636296314,
+            "max": 5.905953368148977
+          },
+          "orientation_deg": {
+            "rms": 0.961610664410191,
+            "p50": 0.10928589162035318,
+            "p95": 2.3489607584078622,
+            "p99": 3.167459972663979,
+            "max": 3.221923624610857
+          },
+          "final_position_mm": [
+            0.3346947375198699
+          ],
+          "final_orientation_deg": [
+            0.050207339435981164
+          ]
+        },
+        "conditioned": {
+          "position_mm": {
+            "rms": 5.8003315903580575,
+            "p50": 5.101555225487868,
+            "p95": 9.052384879576604,
+            "p99": 9.099859977261614,
+            "max": 9.102640623995221
+          },
+          "orientation_deg": {
+            "rms": 0.0,
+            "p50": 0.0,
+            "p95": 0.0,
+            "p99": 0.0,
+            "max": 0.0
+          },
+          "final_position_mm": [
+            0.0
+          ],
+          "final_orientation_deg": [
+            0.0
+          ]
+        },
+        "command": {
+          "position_mm": {
+            "rms": 2.1667502869496382,
+            "p50": 1.0093592293546192,
+            "p95": 4.652826040788426,
+            "p99": 5.311678518842854,
+            "max": 5.369806528271329
+          },
+          "orientation_deg": {
+            "rms": 0.8214190883343793,
+            "p50": 0.16151383925228308,
+            "p95": 1.9647313413373722,
+            "p99": 2.842665689025299,
+            "max": 2.8871666577038764
+          },
+          "final_position_mm": [
+            8.01725777044981e-09
+          ],
+          "final_orientation_deg": [
+            4.351324275769005e-10
+          ]
+        },
+        "achieved_speed_m_s": {
+          "rms": 0.6067540505409417,
+          "p50": 0.5285588899892736,
+          "p95": 0.9485017946047075,
+          "p99": 0.9597241368304177,
+          "max": 0.9617602530419337
+        },
+        "requested_speed_m_s": {
+          "rms": 0.5801852312725609,
+          "p50": 0.5129050150445356,
+          "p95": 0.9058583101611228,
+          "p99": 0.9103364979872871,
+          "max": 0.9105738170009834
+        },
+        "requested_acceleration_m_s2": {
+          "rms": 4.601946320681259,
+          "p50": 2.834515810073156,
+          "p95": 8.207042484644866,
+          "p99": 8.287191783124806,
+          "max": 8.291450830098839
+        },
+        "time_at_or_above_1p2_m_s": 0.0,
+        "longest_continuous_interval_at_or_above_1p2_m_s": 0.0,
+        "moving_arm_speed": {
+          "right": {
+            "peak_m_s": 0.9617602530419337,
+            "time_at_or_above_1p2_m_s": 0.0,
+            "longest_continuous_interval_at_or_above_1p2_m_s": 0.0
+          }
+        },
+        "solve_ms": {
+          "rms": 2.0388889759606514,
+          "p50": 1.9367780187167227,
+          "p95": 2.456495916703715,
+          "p99": 3.0134406115394063,
+          "max": 3.5683049936778843
+        },
+        "deadline_exceeded_ticks": 0,
+        "first_solve_ms": 2.5626160204410553,
+        "solve_ms_after_initial_hold": {
+          "rms": 2.065305004432308,
+          "p50": 1.956534484634176,
+          "p95": 2.510236616944894,
+          "p99": 3.050471690366975,
+          "max": 3.5683049936778843
+        },
+        "deadline_exceeded_ticks_after_initial_hold": 0,
+        "reference_joint_speed_max_rad_s": [
+          0.029666838036075144,
+          0.06407824192610032,
+          0.12465728077981751,
+          0.0019634852429546374,
+          0.10424969535144342,
+          0.010488945877687186,
+          0.07725300153131802,
+          1.9790763882117097,
+          1.913635391289858,
+          1.6034006800825402,
+          1.153623463010853,
+          1.7234341082216598,
+          1.7598314980124885,
+          1.7636421582108766
+        ],
+        "measured_joint_speed_max_rad_s": [
+          0.027565284095091423,
+          0.060630654124053746,
+          0.11344466388014744,
+          0.004546757375812733,
+          0.08911792758003427,
+          0.008587500289145514,
+          0.06447727296434906,
+          1.930347656370904,
+          1.900881252025464,
+          1.4647468369818926,
+          1.0983716981155753,
+          1.4757183743098827,
+          1.5213230412510819,
+          1.5576438337533989
+        ],
+        "reference_acceleration_max_rad_s2": [
+          0.24824751489278643,
+          0.5486782752425972,
+          1.0715789253882815,
+          0.09367533067361077,
+          0.9049234630349525,
+          0.271388314284631,
+          0.6712334596081448,
+          15.502546551621144,
+          21.03666093588199,
+          11.855481180760297,
+          16.062570383730385,
+          19.985888332795543,
+          30.435710390121304,
+          22.11587255041316
+        ],
+        "reference_jerk_max_rad_s3": [
+          17.65032928047256,
+          15.14920629585374,
+          14.810093755876785,
+          12.57802549757657,
+          12.583841665645185,
+          47.5504625739455,
+          46.86309962221517,
+          373.4056091333437,
+          471.82070726023767,
+          407.15517084974005,
+          824.9901161143441,
+          795.2920789890072,
+          1754.3876444825958,
+          1500.6406132653847
+        ],
+        "reference_jerk_rms_rad_s3": 61.255422972705226,
+        "hold_tcp_speed_m_s": {
+          "rms": 2.038243792528804e-05,
+          "p50": 1.333283958464871e-07,
+          "p95": 4.939962840473115e-05,
+          "p99": 9.485468315970481e-05,
+          "max": 0.00010140113868365186
+        },
+        "encoder_fk_vs_mujoco_m": {
+          "rms": 1.7981820120173386e-08,
+          "p50": 1.8000536926256476e-08,
+          "p95": 1.810690295827055e-08,
+          "p99": 1.8188399034802614e-08,
+          "max": 1.8196058720567912e-08
+        }
+      },
+      "contacts": {
+        "contact_steps": 0,
+        "minimum_distance_m": 0.0,
+        "maximum_torque_nm": [
+          6.534892567863011,
+          1.731423769748318,
+          2.0854548467250993,
+          2.469909149153665,
+          0.07798591962007961,
+          0.3663758193915081,
+          0.35934793912505836,
+          12.202314910164205,
+          7.054661738030347,
+          4.440607691608022,
+          6.5751613542330745,
+          2.010517941732516,
+          2.4692730671450303,
+          2.1794781757928163
+        ],
+        "saturated_steps": 0,
+        "pairs": [],
+        "scope": "Every physics step; only collision-enabled MuJoCo geometry, not complete mesh clearance"
+      },
+      "hardware_qualified": false,
+      "constraint_checks": {
+        "reference_position_margin_rad": 0.15619239115020223,
+        "measured_position_margin_rad": 0.15596001641957224,
+        "reference_velocity_ratio": 0.7789161447639207,
+        "measured_velocity_ratio": 0.7597377056845824,
+        "reference_acceleration_ratio": 1.0000000000000007,
+        "reference_jerk_ratio": 1.0000000000000075,
+        "planner_failures": 0
+      },
+      "tracking_acceptance": {
+        "completed": true,
+        "position_rms_5mm": true,
+        "position_p95_10mm": true,
+        "orientation_p95_2deg": false,
+        "final_position_1mm": true,
+        "limits": true,
+        "no_planner_failures": true,
+        "no_modeled_contacts": true,
+        "no_torque_saturation": true
+      },
+      "tracking_accepted": false,
+      "fast_tracking_accepted": false
+    },
+    "public_tcp": {
+      "frame": "public pad-center TCP; fixed tool transform from run metadata",
+      "position_mm": {
+        "rms": 2.192938312960059,
+        "p50": 1.071791717359811,
+        "p95": 4.895939000177748,
+        "p99": 5.969347489694897,
+        "max": 6.040837760886868
+      },
+      "final_position_mm": [
+        0.32039066719991666
+      ],
+      "per_arm_position_mm": {
+        "right": {
+          "rms": 2.192938312960059,
+          "p50": 1.071791717359811,
+          "p95": 4.895939000177748,
+          "p99": 5.969347489694897,
+          "max": 6.040837760886868
+        }
+      },
+      "per_arm_orientation_deg": {
+        "right": {
+          "rms": 0.961610664410191,
+          "p50": 0.10928589162035318,
+          "p95": 2.3489607584078622,
+          "p99": 3.167459972663979,
+          "max": 3.221923624610857
+        }
+      },
+      "orientation_deg": {
+        "rms": 0.961610664410191,
+        "p50": 0.10928589162035318,
+        "p95": 2.3489607584078622,
+        "p99": 3.167459972663979,
+        "max": 3.221923624610857
+      },
+      "moving_arm_speed": {
+        "right": {
+          "peak_m_s": 0.9541416523277032,
+          "time_at_or_above_1p2_m_s": 0.0,
+          "longest_continuous_interval_at_or_above_1p2_m_s": 0.0
+        }
+      },
+      "tracking_acceptance": {
+        "completed": true,
+        "position_rms_5mm": true,
+        "position_p95_10mm": true,
+        "orientation_p95_2deg": false,
+        "final_position_1mm": true,
+        "limits": true,
+        "no_planner_failures": true,
+        "no_modeled_contacts": true,
+        "no_torque_saturation": true
+      },
+      "tracking_accepted": false,
+      "fast_tracking_accepted": false,
+      "source_sha256": {
+        "trace.npz": "b027c408b72f7c8216b08e19225ef1d14c9ba7334d5054df02029f57bc661d40",
+        "metadata.json": "78a2beb341a8f6fc11d955da840c6cb924d4071e179d11fa2ce3617926ef97bf",
+        "summary.json": "4a854993bb783776a1f9b222a3eff9bbbc069e2f6a8d072224b1d9689d0337ec"
+      }
+    }
+  },
+  {
+    "name": "dual_wave_envelope_only",
+    "path": "dual_wave",
+    "command": [
+      "/home/ziwang/projects/hexfellow-deploy-general-ik/.venv/bin/python",
+      "-m",
+      "hexfellow_deploy.benchmark.run",
+      "--trajectory-spec",
+      "/home/ziwang/projects/hexfellow-deploy-general-ik/configs/benchmarks/generalization/dual_wave.json",
+      "--profile",
+      "/home/ziwang/projects/hexfellow-deploy-general-ik/runs/general_search_20261016/profiles/wide_base.yaml",
+      "--speed",
+      "1.2111425771984698",
+      "--derivatives",
+      "--output",
+      "/home/ziwang/projects/hexfellow-deploy-general-ik/runs/general_search_20261016/final_checks/dual_wave_envelope_only",
+      "--plant-mass-scale",
+      "1.0"
+    ],
+    "exit_code": 0,
+    "mass_scale": 1.0,
+    "profile_ablation": "/home/ziwang/projects/hexfellow-deploy-general-ik/runs/general_search_20261016/profiles/wide_base.yaml",
+    "result": {
+      "completed": true,
+      "failure": null,
+      "samples": 414,
+      "status_counts": {
+        "TRACKING": 414
+      },
+      "boundary_counts": {},
+      "metrics": {
+        "measured": {
+          "position_mm": {
+            "rms": 2.159549778320769,
+            "p50": 1.4983214492472756,
+            "p95": 4.536362027388353,
+            "p99": 4.881341464124925,
+            "max": 4.9020589167351725
+          },
+          "orientation_deg": {
+            "rms": 0.23132778336715804,
+            "p50": 0.17457134864197504,
+            "p95": 0.45058000084664357,
+            "p99": 0.4853772377702996,
+            "max": 0.4872659992949935
+          },
+          "final_position_mm": [
+            0.36232896640387285,
+            0.36236530710750997
+          ],
+          "final_orientation_deg": [
+            0.05521218320070285,
+            0.05522389212269393
+          ]
+        },
+        "conditioned": {
+          "position_mm": {
+            "rms": 6.9415258821844015,
+            "p50": 5.851657001212509,
+            "p95": 11.891399369741942,
+            "p99": 12.09875765416858,
+            "max": 12.105941033773448
+          },
+          "orientation_deg": {
+            "rms": 0.7603986850994733,
+            "p50": 0.6828207916485565,
+            "p95": 1.1626341510690756,
+            "p99": 1.18114859338539,
+            "max": 1.1818441867520355
+          },
+          "final_position_mm": [
+            0.0,
+            0.0
+          ],
+          "final_orientation_deg": [
+            0.0,
+            0.0
+          ]
+        },
+        "command": {
+          "position_mm": {
+            "rms": 1.1088169842137576,
+            "p50": 1.0273706743682076,
+            "p95": 1.7700738275455548,
+            "p99": 2.0060057351669665,
+            "max": 2.0173676893545647
+          },
+          "orientation_deg": {
+            "rms": 0.14322973116650398,
+            "p50": 0.12283890760941604,
+            "p95": 0.27656548431879846,
+            "p99": 0.30496506469268414,
+            "max": 0.3064025182828753
+          },
+          "final_position_mm": [
+            7.201834581443366e-08,
+            7.199945934909111e-08
+          ],
+          "final_orientation_deg": [
+            1.7035430895930046e-09,
+            1.7055848416683899e-09
+          ]
+        },
+        "achieved_speed_m_s": {
+          "rms": 0.7070586276526433,
+          "p50": 0.5773704101693924,
+          "p95": 1.226864864922895,
+          "p99": 1.2454145900243698,
+          "max": 1.2487583834116116
+        },
+        "requested_speed_m_s": {
+          "rms": 0.6942965294022905,
+          "p50": 0.5816199570142089,
+          "p95": 1.188547390110508,
+          "p99": 1.210264792513115,
+          "max": 1.2109186126291247
+        },
+        "requested_acceleration_m_s2": {
+          "rms": 4.8984525744555825,
+          "p50": 4.520235033208381,
+          "p95": 8.060656962947613,
+          "p99": 8.381304359345744,
+          "max": 8.40132735505959
+        },
+        "time_at_or_above_1p2_m_s": 0.14,
+        "longest_continuous_interval_at_or_above_1p2_m_s": 0.07,
+        "moving_arm_speed": {
+          "left": {
+            "peak_m_s": 1.2487555106235873,
+            "time_at_or_above_1p2_m_s": 0.14,
+            "longest_continuous_interval_at_or_above_1p2_m_s": 0.07
+          },
+          "right": {
+            "peak_m_s": 1.2487583834116116,
+            "time_at_or_above_1p2_m_s": 0.14,
+            "longest_continuous_interval_at_or_above_1p2_m_s": 0.07
+          }
+        },
+        "solve_ms": {
+          "rms": 2.0345443828124217,
+          "p50": 1.9435954745858908,
+          "p95": 2.407158291316591,
+          "p99": 3.0256881046807393,
+          "max": 3.2413939479738474
+        },
+        "deadline_exceeded_ticks": 0,
+        "first_solve_ms": 2.6534860371612012,
+        "solve_ms_after_initial_hold": {
+          "rms": 2.038151613403002,
+          "p50": 1.945253519807011,
+          "p95": 2.389321633381768,
+          "p99": 3.0256881046807393,
+          "max": 3.2413939479738474
+        },
+        "deadline_exceeded_ticks_after_initial_hold": 0,
+        "reference_joint_speed_max_rad_s": [
+          2.1957761761336236,
+          0.8281422294191678,
+          0.21379374799948705,
+          1.0383720534994942,
+          0.851875997562091,
+          0.4411632576704503,
+          0.45210467571717833,
+          2.195774095240431,
+          0.8281364775207843,
+          0.21379834848739196,
+          1.038368369076348,
+          0.8518842464774398,
+          0.44116919111362607,
+          0.45219909832666155
+        ],
+        "measured_joint_speed_max_rad_s": [
+          2.1846050767539755,
+          0.8439240414769105,
+          0.1511839528306267,
+          1.0182221260555118,
+          0.738768780054179,
+          0.4194028192299919,
+          0.39720103895037023,
+          2.184571334855473,
+          0.8439799804956893,
+          0.15116329729198064,
+          1.0181850467517644,
+          0.7387392205512545,
+          0.4193268527479716,
+          0.3970937221323459
+        ],
+        "reference_acceleration_max_rad_s2": [
+          12.455862878451462,
+          5.096870887045451,
+          1.2477677232172357,
+          6.014842191118652,
+          3.922916869216009,
+          2.6600639945898035,
+          2.0937392333719993,
+          12.455878911001172,
+          5.096846705696639,
+          1.2475917127004452,
+          6.0148690300218135,
+          3.92292677037524,
+          2.6601307062250585,
+          2.092852793150662
+        ],
+        "reference_jerk_max_rad_s3": [
+          189.40949945631436,
+          84.39573014658754,
+          33.69605406803533,
+          84.59707674940509,
+          59.77854048754725,
+          47.5504625739455,
+          47.90828371938227,
+          189.4079642841851,
+          84.39501774701648,
+          33.10370879341495,
+          84.59785619472379,
+          59.78466364694137,
+          47.56634506420113,
+          55.0261199098645
+        ],
+        "reference_jerk_rms_rad_s3": 22.766629281101345,
+        "hold_tcp_speed_m_s": {
+          "rms": 9.329877085024434e-06,
+          "p50": 1.1904203251790082e-07,
+          "p95": 2.8631315895540338e-05,
+          "p99": 3.432897001513913e-05,
+          "max": 3.512236818769872e-05
+        },
+        "encoder_fk_vs_mujoco_m": {
+          "rms": 1.735861728795578e-08,
+          "p50": 1.8000536114965196e-08,
+          "p95": 1.800126221018318e-08,
+          "p99": 1.8007091154101637e-08,
+          "max": 1.801041886162334e-08
+        }
+      },
+      "contacts": {
+        "contact_steps": 0,
+        "minimum_distance_m": 0.0,
+        "maximum_torque_nm": [
+          12.970468864797738,
+          3.5725350576702226,
+          3.4804598004059244,
+          3.5549543313226195,
+          0.9706712750426654,
+          0.8017546296954574,
+          0.8244046003092764,
+          12.972009117488767,
+          3.573118308511397,
+          3.4825353188178383,
+          3.5549312513905704,
+          0.969710850860622,
+          0.8016532048204734,
+          0.8245148865135361
+        ],
+        "saturated_steps": 0,
+        "pairs": [],
+        "scope": "Every physics step; only collision-enabled MuJoCo geometry, not complete mesh clearance"
+      },
+      "hardware_qualified": false,
+      "constraint_checks": {
+        "reference_position_margin_rad": 0.6149740356114664,
+        "measured_position_margin_rad": 0.6146196653967974,
+        "reference_velocity_ratio": 0.8642038902924375,
+        "measured_velocity_ratio": 0.859807218333033,
+        "reference_acceleration_ratio": 0.5921034212114591,
+        "reference_jerk_ratio": 0.4014438038469664,
+        "planner_failures": 0
+      },
+      "tracking_acceptance": {
+        "completed": true,
+        "position_rms_5mm": true,
+        "position_p95_10mm": true,
+        "orientation_p95_2deg": true,
+        "final_position_1mm": true,
+        "limits": true,
+        "no_planner_failures": true,
+        "no_modeled_contacts": true,
+        "no_torque_saturation": true
+      },
+      "tracking_accepted": true,
+      "fast_tracking_accepted": false
+    },
+    "public_tcp": {
+      "frame": "public pad-center TCP; fixed tool transform from run metadata",
+      "position_mm": {
+        "rms": 2.1067826434718415,
+        "p50": 1.4518336505901055,
+        "p95": 4.426070394215299,
+        "p99": 4.76377435073875,
+        "max": 4.783548635701088
+      },
+      "final_position_mm": [
+        0.3461602093030451,
+        0.34619377419046515
+      ],
+      "per_arm_position_mm": {
+        "left": {
+          "rms": 2.1068076695968267,
+          "p50": 1.4523071535593344,
+          "p95": 4.410713413997293,
+          "p99": 4.75920366127464,
+          "max": 4.78289743944698
+        },
+        "right": {
+          "rms": 2.106757617049572,
+          "p50": 1.451112917828781,
+          "p95": 4.4111294698865455,
+          "p99": 4.7598365577851665,
+          "max": 4.783548635701088
+        }
+      },
+      "per_arm_orientation_deg": {
+        "left": {
+          "rms": 0.2313292851271408,
+          "p50": 0.17470584032587871,
+          "p95": 0.44938651782361155,
+          "p99": 0.48482055548624947,
+          "max": 0.48724237231624024
+        },
+        "right": {
+          "rms": 0.2313262815974259,
+          "p50": 0.1744368569580714,
+          "p95": 0.4493913135911193,
+          "p99": 0.48484268347680476,
+          "max": 0.4872659992949935
+        }
+      },
+      "orientation_deg": {
+        "rms": 0.23132778336715804,
+        "p50": 0.17457134864197504,
+        "p95": 0.45058000084664357,
+        "p99": 0.4853772377702996,
+        "max": 0.4872659992949935
+      },
+      "moving_arm_speed": {
+        "left": {
+          "peak_m_s": 1.2236811854691447,
+          "time_at_or_above_1p2_m_s": 0.1,
+          "longest_continuous_interval_at_or_above_1p2_m_s": 0.05
+        },
+        "right": {
+          "peak_m_s": 1.2236838828779986,
+          "time_at_or_above_1p2_m_s": 0.1,
+          "longest_continuous_interval_at_or_above_1p2_m_s": 0.05
+        }
+      },
+      "tracking_acceptance": {
+        "completed": true,
+        "position_rms_5mm": true,
+        "position_p95_10mm": true,
+        "orientation_p95_2deg": true,
+        "final_position_1mm": true,
+        "limits": true,
+        "no_planner_failures": true,
+        "no_modeled_contacts": true,
+        "no_torque_saturation": true
+      },
+      "tracking_accepted": true,
+      "fast_tracking_accepted": false,
+      "source_sha256": {
+        "trace.npz": "39eb3b6abe934da50323bab90a638120579ca86a36a293536c86c1afc42a89cf",
+        "metadata.json": "73c890f73f124176ac6df2ac4cee0491e4024bac68a376f70033c786290d798c",
+        "summary.json": "8997b3292b0d60a90c39b54112315b26d66200be7cea0bdf0882fd83aa44c782"
+      }
+    }
+  },
+  {
+    "name": "left_vertical_envelope_only",
+    "path": "left_vertical",
+    "command": [
+      "/home/ziwang/projects/hexfellow-deploy-general-ik/.venv/bin/python",
+      "-m",
+      "hexfellow_deploy.benchmark.run",
+      "--trajectory-spec",
+      "/home/ziwang/projects/hexfellow-deploy-general-ik/configs/benchmarks/generalization/left_vertical.json",
+      "--profile",
+      "/home/ziwang/projects/hexfellow-deploy-general-ik/runs/general_search_20261016/profiles/wide_base.yaml",
+      "--speed",
+      "1.1470161046325378",
+      "--derivatives",
+      "--output",
+      "/home/ziwang/projects/hexfellow-deploy-general-ik/runs/general_search_20261016/final_checks/left_vertical_envelope_only",
+      "--plant-mass-scale",
+      "1.0"
+    ],
+    "exit_code": 0,
+    "mass_scale": 1.0,
+    "profile_ablation": "/home/ziwang/projects/hexfellow-deploy-general-ik/runs/general_search_20261016/profiles/wide_base.yaml",
+    "result": {
+      "completed": true,
+      "failure": null,
+      "samples": 391,
+      "status_counts": {
+        "TRACKING": 391
+      },
+      "boundary_counts": {},
+      "metrics": {
+        "measured": {
+          "position_mm": {
+            "rms": 1.7931823932187207,
+            "p50": 1.1333167324891114,
+            "p95": 3.3825158077810076,
+            "p99": 4.357455877600817,
+            "max": 4.43539070558476
+          },
+          "orientation_deg": {
+            "rms": 1.2073670221418544,
+            "p50": 0.234683164448071,
+            "p95": 2.8367052661830416,
+            "p99": 3.178776389645928,
+            "max": 3.200213483001065
+          },
+          "final_position_mm": [
+            0.36616650431984354
+          ],
+          "final_orientation_deg": [
+            0.05615963835942083
+          ]
+        },
+        "conditioned": {
+          "position_mm": {
+            "rms": 6.609274427350319,
+            "p50": 4.492002528276751,
+            "p95": 11.368671228424764,
+            "p99": 11.461024551432127,
+            "max": 11.467505377835252
+          },
+          "orientation_deg": {
+            "rms": 0.0,
+            "p50": 0.0,
+            "p95": 0.0,
+            "p99": 0.0,
+            "max": 0.0
+          },
+          "final_position_mm": [
+            0.0
+          ],
+          "final_orientation_deg": [
+            0.0
+          ]
+        },
+        "command": {
+          "position_mm": {
+            "rms": 2.916455272132883,
+            "p50": 1.6722491390207743,
+            "p95": 5.944214518406695,
+            "p99": 6.616571888804969,
+            "max": 6.653219093463006
+          },
+          "orientation_deg": {
+            "rms": 0.9829514131219348,
+            "p50": 0.1599435697190808,
+            "p95": 2.3114655645655144,
+            "p99": 2.622811030150727,
+            "max": 2.6426799618656904
+          },
+          "final_position_mm": [
+            5.8853245770684375e-08
+          ],
+          "final_orientation_deg": [
+            1.6855375027332144e-09
+          ]
+        },
+        "achieved_speed_m_s": {
+          "rms": 0.6820887007858576,
+          "p50": 0.4821134314386884,
+          "p95": 1.1475709116954949,
+          "p99": 1.1602287227336996,
+          "max": 1.163370365495446
+        },
+        "requested_speed_m_s": {
+          "rms": 0.6610283780180534,
+          "p50": 0.4491643875684458,
+          "p95": 1.137846604974602,
+          "p99": 1.1463493018784543,
+          "max": 1.146925789249695
+        },
+        "requested_acceleration_m_s2": {
+          "rms": 4.002304722963888,
+          "p50": 3.669320604848547,
+          "p95": 6.145659549150749,
+          "p99": 6.171617784452514,
+          "max": 6.172884425191914
+        },
+        "time_at_or_above_1p2_m_s": 0.0,
+        "longest_continuous_interval_at_or_above_1p2_m_s": 0.0,
+        "moving_arm_speed": {
+          "left": {
+            "peak_m_s": 1.163370365495446,
+            "time_at_or_above_1p2_m_s": 0.0,
+            "longest_continuous_interval_at_or_above_1p2_m_s": 0.0
+          }
+        },
+        "solve_ms": {
+          "rms": 2.009399069308926,
+          "p50": 1.9304960151202977,
+          "p95": 2.3365940141957253,
+          "p99": 2.9856788343749945,
+          "max": 3.0949299689382315
+        },
+        "deadline_exceeded_ticks": 0,
+        "first_solve_ms": 2.5856989668682218,
+        "solve_ms_after_initial_hold": {
+          "rms": 2.027910968009658,
+          "p50": 1.9426289945840836,
+          "p95": 2.4207009992096573,
+          "p99": 3.0019678000826393,
+          "max": 3.0949299689382315
+        },
+        "deadline_exceeded_ticks_after_initial_hold": 0,
+        "reference_joint_speed_max_rad_s": [
+          2.28672721879502,
+          0.9703150266982884,
+          1.2022775704052873,
+          1.769619978237227,
+          1.4305724910998525,
+          1.7634888077541822,
+          1.7528226805414686,
+          0.009586850214826905,
+          0.013676172679604946,
+          0.030864180779579867,
+          0.0009368609988133971,
+          0.024247582276958925,
+          0.002714543508609713,
+          0.018166220740384178
+        ],
+        "measured_joint_speed_max_rad_s": [
+          2.305518549100209,
+          0.9413623342420305,
+          1.0906022718698534,
+          1.6873167028636733,
+          1.226259446176431,
+          1.5410477023991054,
+          1.509954763895992,
+          0.00880438175120285,
+          0.013165791347309387,
+          0.02807708006232091,
+          0.003057687123203184,
+          0.02071082913281178,
+          0.008474026904409092,
+          0.015154314388702593
+        ],
+        "reference_acceleration_max_rad_s2": [
+          21.03666093588199,
+          13.996459095540208,
+          18.90984601764994,
+          18.909846017649922,
+          19.99002093463672,
+          19.72233193733097,
+          30.435710390121272,
+          0.12007378319105,
+          0.11969459298114114,
+          0.28065433588486605,
+          0.09368610560197176,
+          0.22103471641042072,
+          0.27145435085995245,
+          0.29178267482297865
+        ],
+        "reference_jerk_max_rad_s3": [
+          471.8207072602485,
+          471.8207072602354,
+          778.8477230753681,
+          918.9581929573877,
+          726.4613914532591,
+          1130.3472137497226,
+          1553.2658223384208,
+          17.6649118475515,
+          15.175130495013283,
+          10.795465367329767,
+          12.577791962944309,
+          5.8007369996453,
+          47.56634506420113,
+          46.88712630564358
+        ],
+        "reference_jerk_rms_rad_s3": 88.82215826127091,
+        "hold_tcp_speed_m_s": {
+          "rms": 1.0915219744818937e-05,
+          "p50": 1.4996266550549924e-07,
+          "p95": 3.255792750731147e-05,
+          "p99": 3.7532661456340316e-05,
+          "max": 3.791670667955558e-05
+        },
+        "encoder_fk_vs_mujoco_m": {
+          "rms": 1.79578177231316e-08,
+          "p50": 1.8000545855355894e-08,
+          "p95": 1.8001003552876687e-08,
+          "p99": 1.8003979940852127e-08,
+          "max": 1.800747228500766e-08
+        }
+      },
+      "contacts": {
+        "contact_steps": 0,
+        "minimum_distance_m": 0.0,
+        "maximum_torque_nm": [
+          12.535997802970456,
+          3.1313082307133016,
+          5.388131581957907,
+          4.681538873013039,
+          1.660477435313785,
+          2.3992322073701455,
+          2.480487909393716,
+          6.508515291328791,
+          1.7082829881476016,
+          2.0703193720426327,
+          2.2144016233624484,
+          0.02300020143118431,
+          0.35934305945595396,
+          0.3593042053666792
+        ],
+        "saturated_steps": 0,
+        "pairs": [],
+        "scope": "Every physics step; only collision-enabled MuJoCo geometry, not complete mesh clearance"
+      },
+      "hardware_qualified": false,
+      "constraint_checks": {
+        "reference_position_margin_rad": 0.18575925336679477,
+        "measured_position_margin_rad": 0.18578847509981689,
+        "reference_velocity_ratio": 0.9000000000000004,
+        "measured_velocity_ratio": 0.907395808794187,
+        "reference_acceleration_ratio": 1.000000000000001,
+        "reference_jerk_ratio": 1.0000000000000306,
+        "planner_failures": 0
+      },
+      "tracking_acceptance": {
+        "completed": true,
+        "position_rms_5mm": true,
+        "position_p95_10mm": true,
+        "orientation_p95_2deg": false,
+        "final_position_1mm": true,
+        "limits": true,
+        "no_planner_failures": true,
+        "no_modeled_contacts": true,
+        "no_torque_saturation": true
+      },
+      "tracking_accepted": false,
+      "fast_tracking_accepted": false
+    },
+    "public_tcp": {
+      "frame": "public pad-center TCP; fixed tool transform from run metadata",
+      "position_mm": {
+        "rms": 1.877073031359753,
+        "p50": 1.145029290025848,
+        "p95": 3.714407633441926,
+        "p99": 4.808704804021147,
+        "max": 4.891649489835819
+      },
+      "final_position_mm": [
+        0.3496438726327706
+      ],
+      "per_arm_position_mm": {
+        "left": {
+          "rms": 1.877073031359753,
+          "p50": 1.145029290025848,
+          "p95": 3.714407633441926,
+          "p99": 4.808704804021147,
+          "max": 4.891649489835819
+        }
+      },
+      "per_arm_orientation_deg": {
+        "left": {
+          "rms": 1.2073670221418544,
+          "p50": 0.234683164448071,
+          "p95": 2.8367052661830416,
+          "p99": 3.178776389645928,
+          "max": 3.200213483001065
+        }
+      },
+      "orientation_deg": {
+        "rms": 1.2073670221418544,
+        "p50": 0.234683164448071,
+        "p95": 2.8367052661830416,
+        "p99": 3.178776389645928,
+        "max": 3.200213483001065
+      },
+      "moving_arm_speed": {
+        "left": {
+          "peak_m_s": 1.155739753143646,
+          "time_at_or_above_1p2_m_s": 0.0,
+          "longest_continuous_interval_at_or_above_1p2_m_s": 0.0
+        }
+      },
+      "tracking_acceptance": {
+        "completed": true,
+        "position_rms_5mm": true,
+        "position_p95_10mm": true,
+        "orientation_p95_2deg": false,
+        "final_position_1mm": true,
+        "limits": true,
+        "no_planner_failures": true,
+        "no_modeled_contacts": true,
+        "no_torque_saturation": true
+      },
+      "tracking_accepted": false,
+      "fast_tracking_accepted": false,
+      "source_sha256": {
+        "trace.npz": "f691376269e53ebc05887c5c70ed456d676ffdfaebb9a481f7eb90481c2b7594",
+        "metadata.json": "a94bd32bd0a08c483dc39577e584cbe7d903c9511e9b95a3126fd3b8f2aa6675",
+        "summary.json": "11f22abd9d0e98910f10ccb419ee18356d7af6e1673c3de4658adff211bfc308"
+      }
+    }
+  },
+  {
+    "name": "double_curvature_envelope_only",
+    "path": "double_curvature",
+    "command": [
+      "/home/ziwang/projects/hexfellow-deploy-general-ik/.venv/bin/python",
+      "-m",
+      "hexfellow_deploy.benchmark.run",
+      "--trajectory-spec",
+      "/home/ziwang/projects/hexfellow-deploy-general-ik/configs/benchmarks/generalization/double_curvature.json",
+      "--profile",
+      "/home/ziwang/projects/hexfellow-deploy-general-ik/runs/general_search_20261016/profiles/wide_base.yaml",
+      "--speed",
+      "1.3128541443004056",
+      "--derivatives",
+      "--output",
+      "/home/ziwang/projects/hexfellow-deploy-general-ik/runs/general_search_20261016/final_checks/double_curvature_envelope_only",
+      "--plant-mass-scale",
+      "1.0"
+    ],
+    "exit_code": 0,
+    "mass_scale": 1.0,
+    "profile_ablation": "/home/ziwang/projects/hexfellow-deploy-general-ik/runs/general_search_20261016/profiles/wide_base.yaml",
+    "result": {
+      "completed": true,
+      "failure": null,
+      "samples": 409,
+      "status_counts": {
+        "TRACKING": 409
+      },
+      "boundary_counts": {},
+      "metrics": {
+        "measured": {
+          "position_mm": {
+            "rms": 2.1920452718301777,
+            "p50": 1.6887600605118367,
+            "p95": 4.5794485745597155,
+            "p99": 4.950981775486747,
+            "max": 4.9767655936462605
+          },
+          "orientation_deg": {
+            "rms": 0.2054670949126994,
+            "p50": 0.13364553110389954,
+            "p95": 0.43414778317155495,
+            "p99": 0.4692840388464987,
+            "max": 0.4717567571238049
+          },
+          "final_position_mm": [
+            0.3625918884023191
+          ],
+          "final_orientation_deg": [
+            0.05526785685250525
+          ]
+        },
+        "conditioned": {
+          "position_mm": {
+            "rms": 7.671977843704375,
+            "p50": 6.4618341054822395,
+            "p95": 12.860786742562638,
+            "p99": 13.110623613911779,
+            "max": 13.119780438866204
+          },
+          "orientation_deg": {
+            "rms": 0.6828570084896883,
+            "p50": 0.6420019611281571,
+            "p95": 1.1226977451154654,
+            "p99": 1.1499522345202153,
+            "max": 1.1510188412390479
+          },
+          "final_position_mm": [
+            0.0
+          ],
+          "final_orientation_deg": [
+            0.0
+          ]
+        },
+        "command": {
+          "position_mm": {
+            "rms": 1.1109973976969942,
+            "p50": 0.9613928114386446,
+            "p95": 1.8778504816141324,
+            "p99": 1.9906063382524586,
+            "max": 2.00605945393018
+          },
+          "orientation_deg": {
+            "rms": 0.11273291895834389,
+            "p50": 0.11006328975994682,
+            "p95": 0.1744607568001032,
+            "p99": 0.1941889115398554,
+            "max": 0.1960471477940806
+          },
+          "final_position_mm": [
+            4.075763868673606e-08
+          ],
+          "final_orientation_deg": [
+            1.4818558784597958e-09
+          ]
+        },
+        "achieved_speed_m_s": {
+          "rms": 0.7792452492817759,
+          "p50": 0.6584167061911478,
+          "p95": 1.3253727991606128,
+          "p99": 1.3496385005720866,
+          "max": 1.3557482517031934
+        },
+        "requested_speed_m_s": {
+          "rms": 0.7673231552663888,
+          "p50": 0.6596618406506933,
+          "p95": 1.2911651202562477,
+          "p99": 1.310899603083529,
+          "max": 1.3128541404416751
+        },
+        "requested_acceleration_m_s2": {
+          "rms": 4.806183183101122,
+          "p50": 4.396777810508295,
+          "p95": 8.223087530715889,
+          "p99": 8.484802162627918,
+          "max": 8.500385538721785
+        },
+        "time_at_or_above_1p2_m_s": 0.22,
+        "longest_continuous_interval_at_or_above_1p2_m_s": 0.11,
+        "moving_arm_speed": {
+          "right": {
+            "peak_m_s": 1.3557482517031934,
+            "time_at_or_above_1p2_m_s": 0.22,
+            "longest_continuous_interval_at_or_above_1p2_m_s": 0.11
+          }
+        },
+        "solve_ms": {
+          "rms": 1.9734689429610965,
+          "p50": 1.9313269876874983,
+          "p95": 2.2065796074457467,
+          "p99": 2.861528131179512,
+          "max": 3.0283359810709953
+        },
+        "deadline_exceeded_ticks": 0,
+        "first_solve_ms": 2.828041964676231,
+        "solve_ms_after_initial_hold": {
+          "rms": 1.939937421217646,
+          "p50": 1.9171599997207522,
+          "p95": 2.1124957711435854,
+          "p99": 2.4757244810462007,
+          "max": 2.8918510070070624
+        },
+        "deadline_exceeded_ticks_after_initial_hold": 0,
+        "reference_joint_speed_max_rad_s": [
+          0.011069155828008161,
+          0.016567253607429226,
+          0.036134075792866475,
+          0.0009367532495297872,
+          0.028604407843832544,
+          0.0027138831428564986,
+          0.021485625847186635,
+          2.2101738423786714,
+          0.7104923892283654,
+          0.2613904275447503,
+          1.0794546584053903,
+          0.6293637752640546,
+          0.4784487393914302,
+          0.3161340066157644
+        ],
+        "measured_joint_speed_max_rad_s": [
+          0.010387214617731197,
+          0.01641319321722039,
+          0.03303127745044705,
+          0.0030576573140856608,
+          0.024426771427117158,
+          0.008471962723045078,
+          0.017830823477709333,
+          2.1886279446175907,
+          0.7258387060269558,
+          0.27540944836934833,
+          1.0415928658378415,
+          0.5458523299440043,
+          0.4443024931704018,
+          0.26181427824309994
+        ],
+        "reference_acceleration_max_rad_s2": [
+          0.11999709075797568,
+          0.15006333420901544,
+          0.32237725447786175,
+          0.09367533067361077,
+          0.25804918374140556,
+          0.271388314284631,
+          0.2916712112252929,
+          13.194000251114035,
+          6.286376537866239,
+          2.118410460076342,
+          11.017170073883053,
+          4.127662987667158,
+          4.882329507763827,
+          2.0423726591490996
+        ],
+        "reference_jerk_max_rad_s3": [
+          17.65032928047256,
+          15.14920629585374,
+          10.741008992342419,
+          12.57802549757657,
+          5.873060141079216,
+          47.5504625739455,
+          46.86309962221517,
+          210.7483302227565,
+          113.03655689146818,
+          45.10556266186405,
+          163.4237844611941,
+          90.31169776266113,
+          83.86496675853505,
+          46.88712630564358
+        ],
+        "reference_jerk_rms_rad_s3": 21.455590535037604,
+        "hold_tcp_speed_m_s": {
+          "rms": 1.0943903768573509e-05,
+          "p50": 1.430086825958256e-07,
+          "p95": 3.183876126822015e-05,
+          "p99": 4.0624611678307034e-05,
+          "max": 4.096423497619775e-05
+        },
+        "encoder_fk_vs_mujoco_m": {
+          "rms": 1.771524615824467e-08,
+          "p50": 1.8000540786661328e-08,
+          "p95": 1.8001158958055145e-08,
+          "p99": 1.8003388444914743e-08,
+          "max": 1.8011120367603455e-08
+        }
+      },
+      "contacts": {
+        "contact_steps": 0,
+        "minimum_distance_m": 0.0,
+        "maximum_torque_nm": [
+          6.514946025961706,
+          1.7303664358227877,
+          2.0875661844474678,
+          2.22259794051908,
+          0.02885055931100844,
+          0.3613813215767876,
+          0.36073192783336727,
+          13.406480201416656,
+          3.139900519305712,
+          3.7358566235816966,
+          3.80398267073636,
+          0.7152186882349483,
+          0.726663461698182,
+          0.8845146716692422
+        ],
+        "saturated_steps": 0,
+        "pairs": [],
+        "scope": "Every physics step; only collision-enabled MuJoCo geometry, not complete mesh clearance"
+      },
+      "hardware_qualified": false,
+      "constraint_checks": {
+        "reference_position_margin_rad": 0.6365190069185453,
+        "measured_position_margin_rad": 0.6362307354186959,
+        "reference_velocity_ratio": 0.8698704601893801,
+        "measured_velocity_ratio": 0.8613905209007793,
+        "reference_acceleration_ratio": 0.6271908023487316,
+        "reference_jerk_ratio": 0.4466703707146063,
+        "planner_failures": 0
+      },
+      "tracking_acceptance": {
+        "completed": true,
+        "position_rms_5mm": true,
+        "position_p95_10mm": true,
+        "orientation_p95_2deg": true,
+        "final_position_1mm": true,
+        "limits": true,
+        "no_planner_failures": true,
+        "no_modeled_contacts": true,
+        "no_torque_saturation": true
+      },
+      "tracking_accepted": true,
+      "fast_tracking_accepted": true
+    },
+    "public_tcp": {
+      "frame": "public pad-center TCP; fixed tool transform from run metadata",
+      "position_mm": {
+        "rms": 2.1423567613816465,
+        "p50": 1.653589724571846,
+        "p95": 4.4652294406295745,
+        "p99": 4.829057955527446,
+        "max": 4.854286421210372
+      },
+      "final_position_mm": [
+        0.3464039807567023
+      ],
+      "per_arm_position_mm": {
+        "right": {
+          "rms": 2.1423567613816465,
+          "p50": 1.653589724571846,
+          "p95": 4.4652294406295745,
+          "p99": 4.829057955527446,
+          "max": 4.854286421210372
+        }
+      },
+      "per_arm_orientation_deg": {
+        "right": {
+          "rms": 0.2054670949126994,
+          "p50": 0.13364553110389954,
+          "p95": 0.43414778317155495,
+          "p99": 0.4692840388464987,
+          "max": 0.4717567571238049
+        }
+      },
+      "orientation_deg": {
+        "rms": 0.2054670949126994,
+        "p50": 0.13364553110389954,
+        "p95": 0.43414778317155495,
+        "p99": 0.4692840388464987,
+        "max": 0.4717567571238049
+      },
+      "moving_arm_speed": {
+        "right": {
+          "peak_m_s": 1.3260100470541167,
+          "time_at_or_above_1p2_m_s": 0.19,
+          "longest_continuous_interval_at_or_above_1p2_m_s": 0.1
+        }
+      },
+      "tracking_acceptance": {
+        "completed": true,
+        "position_rms_5mm": true,
+        "position_p95_10mm": true,
+        "orientation_p95_2deg": true,
+        "final_position_1mm": true,
+        "limits": true,
+        "no_planner_failures": true,
+        "no_modeled_contacts": true,
+        "no_torque_saturation": true
+      },
+      "tracking_accepted": true,
+      "fast_tracking_accepted": true,
+      "source_sha256": {
+        "trace.npz": "334e3eaec5159febce320053200d539b2e276ac57f87128f607d95c2b06717a1",
+        "metadata.json": "cbccf5898625de30dbcef49c00abc166ed671ae9629159758ae54aea1031ef74",
+        "summary.json": "d6702e05689e5dff4596c3da39b455327cc97a41873034c185570f836450fb6d"
+      }
+    }
+  },
+  {
+    "name": "compact_left_envelope_only",
+    "path": "compact_left",
+    "command": [
+      "/home/ziwang/projects/hexfellow-deploy-general-ik/.venv/bin/python",
+      "-m",
+      "hexfellow_deploy.benchmark.run",
+      "--trajectory-spec",
+      "/home/ziwang/projects/hexfellow-deploy-general-ik/configs/benchmarks/generalization/compact_left.json",
+      "--profile",
+      "/home/ziwang/projects/hexfellow-deploy-general-ik/runs/general_search_20261016/profiles/wide_base.yaml",
+      "--speed",
+      "0.952752150490963",
+      "--derivatives",
+      "--output",
+      "/home/ziwang/projects/hexfellow-deploy-general-ik/runs/general_search_20261016/final_checks/compact_left_envelope_only",
+      "--plant-mass-scale",
+      "1.0"
+    ],
+    "exit_code": 0,
+    "mass_scale": 1.0,
+    "profile_ablation": "/home/ziwang/projects/hexfellow-deploy-general-ik/runs/general_search_20261016/profiles/wide_base.yaml",
+    "result": {
+      "completed": true,
+      "failure": null,
+      "samples": 371,
+      "status_counts": {
+        "TRACKING": 371
+      },
+      "boundary_counts": {},
+      "metrics": {
+        "measured": {
+          "position_mm": {
+            "rms": 1.5191830213727422,
+            "p50": 1.0421776868491484,
+            "p95": 3.0656013869047394,
+            "p99": 3.2511314955411144,
+            "max": 3.258819593565802
+          },
+          "orientation_deg": {
+            "rms": 0.16033346323448128,
+            "p50": 0.10814435277499246,
+            "p95": 0.33325864031924185,
+            "p99": 0.35134472191836125,
+            "max": 0.35245824909884715
+          },
+          "final_position_mm": [
+            0.32601312561131035
+          ],
+          "final_orientation_deg": [
+            0.05538479612680205
+          ]
+        },
+        "conditioned": {
+          "position_mm": {
+            "rms": 5.510591879674106,
+            "p50": 3.600515139526981,
+            "p95": 9.462829755009285,
+            "p99": 9.518200653036086,
+            "max": 9.523748719807559
+          },
+          "orientation_deg": {
+            "rms": 0.5809346285001027,
+            "p50": 0.3803229748939495,
+            "p95": 0.992836981822482,
+            "p99": 0.9996029494743472,
+            "max": 0.999811545496172
+          },
+          "final_position_mm": [
+            0.0
+          ],
+          "final_orientation_deg": [
+            0.0
+          ]
+        },
+        "command": {
+          "position_mm": {
+            "rms": 0.9140707604390415,
+            "p50": 0.8461964345765229,
+            "p95": 1.4009463012672265,
+            "p99": 1.454184088717137,
+            "max": 1.4633309418727656
+          },
+          "orientation_deg": {
+            "rms": 0.08793900989110832,
+            "p50": 0.08095162553962393,
+            "p95": 0.13956598511034238,
+            "p99": 0.151109624433154,
+            "max": 0.15154787544003367
+          },
+          "final_position_mm": [
+            1.7091656918692068e-08
+          ],
+          "final_orientation_deg": [
+            1.45896072129687e-10
+          ]
+        },
+        "achieved_speed_m_s": {
+          "rms": 0.5612663451283868,
+          "p50": 0.3522649978781627,
+          "p95": 0.9677622531075486,
+          "p99": 0.9751114123750142,
+          "max": 0.9766918769538836
+        },
+        "requested_speed_m_s": {
+          "rms": 0.5512069769446588,
+          "p50": 0.35971485879969495,
+          "p95": 0.9456598651499037,
+          "p99": 0.9522765560172967,
+          "max": 0.952747500515327
+        },
+        "requested_acceleration_m_s2": {
+          "rms": 4.422952297506006,
+          "p50": 4.429369257987325,
+          "p95": 6.622905119690609,
+          "p99": 6.791511526025346,
+          "max": 6.797233933384592
+        },
+        "time_at_or_above_1p2_m_s": 0.0,
+        "longest_continuous_interval_at_or_above_1p2_m_s": 0.0,
+        "moving_arm_speed": {
+          "left": {
+            "peak_m_s": 0.9766918769538836,
+            "time_at_or_above_1p2_m_s": 0.0,
+            "longest_continuous_interval_at_or_above_1p2_m_s": 0.0
+          }
+        },
+        "solve_ms": {
+          "rms": 1.9486071581599695,
+          "p50": 1.9160379888489842,
+          "p95": 2.137867995770648,
+          "p99": 2.5958783982787286,
+          "max": 3.05464502889663
+        },
+        "deadline_exceeded_ticks": 0,
+        "first_solve_ms": 2.583194989711046,
+        "solve_ms_after_initial_hold": {
+          "rms": 1.9466010898021942,
+          "p50": 1.8996779690496624,
+          "p95": 2.145983016816899,
+          "p99": 2.698575821705165,
+          "max": 3.05464502889663
+        },
+        "deadline_exceeded_ticks_after_initial_hold": 0,
+        "reference_joint_speed_max_rad_s": [
+          1.2866344771463394,
+          0.3750354777997394,
+          0.7047369292362314,
+          0.7717825388342474,
+          0.051679062628968375,
+          0.3676544920333079,
+          0.08513798556491545,
+          0.0049432008347940854,
+          0.0015908198868307933,
+          0.007058155768522609,
+          0.0006830170688852767,
+          0.0021230825172168966,
+          0.0039322974493517385,
+          0.0007749679945327282
+        ],
+        "measured_joint_speed_max_rad_s": [
+          1.2768615584123824,
+          0.3999743886552769,
+          0.7171846714230055,
+          0.7518854406610521,
+          0.04855462032328541,
+          0.30514779886300114,
+          0.09125983323303691,
+          0.0055191698767641986,
+          0.004492536614493361,
+          0.006745858697251765,
+          0.0024397284754001268,
+          0.0018775891054348159,
+          0.012179152725457108,
+          0.001143752746081727
+        ],
+        "reference_acceleration_max_rad_s2": [
+          9.96889838033751,
+          3.3562526787946605,
+          5.123628023166154,
+          6.567589835808224,
+          0.9352746670121455,
+          3.8042426268461798,
+          1.4607638925803026,
+          0.07239588936125331,
+          0.030440251222392748,
+          0.13792979688272203,
+          0.03586020366223823,
+          0.025185179161745376,
+          0.39504706161390507,
+          0.03289267690684653
+        ],
+        "reference_jerk_max_rad_s3": [
+          205.51029926383774,
+          86.4269738806498,
+          109.9819703938095,
+          144.05618332334575,
+          15.98926245709446,
+          70.84198900474625,
+          40.54344278988226,
+          7.29084602184106,
+          3.943693677458787,
+          20.30929010598719,
+          3.5536001500778007,
+          4.94480758633097,
+          69.85442438414513,
+          4.0253135365129875
+        ],
+        "reference_jerk_rms_rad_s3": 17.56900419495354,
+        "hold_tcp_speed_m_s": {
+          "rms": 4.056868408333714e-06,
+          "p50": 1.3191769009018802e-08,
+          "p95": 1.1198058870144679e-05,
+          "p99": 1.799658255150521e-05,
+          "max": 1.8218299548329416e-05
+        },
+        "encoder_fk_vs_mujoco_m": {
+          "rms": 2.3290991105836327e-09,
+          "p50": 2.383631807228128e-09,
+          "p95": 2.3838300540780542e-09,
+          "p99": 2.3882792180683114e-09,
+          "max": 2.4048431544197496e-09
+        }
+      },
+      "contacts": {
+        "contact_steps": 0,
+        "minimum_distance_m": 0.0,
+        "maximum_torque_nm": [
+          7.600614295596131,
+          5.600519118457726,
+          4.7753914613175255,
+          2.2232400580598437,
+          0.17429809638230154,
+          1.1092957977895281,
+          0.23042051806129038,
+          3.486978245901639,
+          3.9194820983663448,
+          2.294026673891352,
+          0.9562414417686114,
+          0.03574698804391119,
+          0.4980685514472043,
+          0.05780038247217334
+        ],
+        "saturated_steps": 0,
+        "pairs": [],
+        "scope": "Every physics step; only collision-enabled MuJoCo geometry, not complete mesh clearance"
+      },
+      "hardware_qualified": false,
+      "constraint_checks": {
+        "reference_position_margin_rad": 0.2845924578107789,
+        "measured_position_margin_rad": 0.28500307976821193,
+        "reference_velocity_ratio": 0.5063879154077211,
+        "measured_velocity_ratio": 0.5025415332121237,
+        "reference_acceleration_ratio": 0.4738821627026218,
+        "reference_jerk_ratio": 0.4355686304172486,
+        "planner_failures": 0
+      },
+      "tracking_acceptance": {
+        "completed": true,
+        "position_rms_5mm": true,
+        "position_p95_10mm": true,
+        "orientation_p95_2deg": true,
+        "final_position_1mm": true,
+        "limits": true,
+        "no_planner_failures": true,
+        "no_modeled_contacts": true,
+        "no_torque_saturation": true
+      },
+      "tracking_accepted": true,
+      "fast_tracking_accepted": false
+    },
+    "public_tcp": {
+      "frame": "public pad-center TCP; fixed tool transform from run metadata",
+      "position_mm": {
+        "rms": 1.4811001924039449,
+        "p50": 1.0159658625421493,
+        "p95": 2.9844538202954567,
+        "p99": 3.166617741438958,
+        "max": 3.1736385759605983
+      },
+      "final_position_mm": [
+        0.3107857543713027
+      ],
+      "per_arm_position_mm": {
+        "left": {
+          "rms": 1.4811001924039449,
+          "p50": 1.0159658625421493,
+          "p95": 2.9844538202954567,
+          "p99": 3.166617741438958,
+          "max": 3.1736385759605983
+        }
+      },
+      "per_arm_orientation_deg": {
+        "left": {
+          "rms": 0.16033346323448128,
+          "p50": 0.10814435277499246,
+          "p95": 0.33325864031924185,
+          "p99": 0.35134472191836125,
+          "max": 0.35245824909884715
+        }
+      },
+      "orientation_deg": {
+        "rms": 0.16033346323448128,
+        "p50": 0.10814435277499246,
+        "p95": 0.33325864031924185,
+        "p99": 0.35134472191836125,
+        "max": 0.35245824909884715
+      },
+      "moving_arm_speed": {
+        "left": {
+          "peak_m_s": 0.9505245623327854,
+          "time_at_or_above_1p2_m_s": 0.0,
+          "longest_continuous_interval_at_or_above_1p2_m_s": 0.0
+        }
+      },
+      "tracking_acceptance": {
+        "completed": true,
+        "position_rms_5mm": true,
+        "position_p95_10mm": true,
+        "orientation_p95_2deg": true,
+        "final_position_1mm": true,
+        "limits": true,
+        "no_planner_failures": true,
+        "no_modeled_contacts": true,
+        "no_torque_saturation": true
+      },
+      "tracking_accepted": true,
+      "fast_tracking_accepted": false,
+      "source_sha256": {
+        "trace.npz": "6ba079596592a6e4eceed54a68d02d3491a194144b53f194bd3d6359baee1c3b",
+        "metadata.json": "85d6b99bf2f9b44481a542d89af901110ace8c5b48d4822c49b6cb8c1a06e391",
+        "summary.json": "532973562d508133a4ee6f410e910a6151599f4014ae34221f4e466193e7a54d"
+      }
+    }
+  },
+  {
+    "name": "shoulder_repeat",
+    "path": "shoulder_sweep",
+    "command": [
+      "/home/ziwang/projects/hexfellow-deploy-general-ik/.venv/bin/python",
+      "-m",
+      "hexfellow_deploy.benchmark.run",
+      "--trajectory-spec",
+      "/home/ziwang/projects/hexfellow-deploy-general-ik/configs/benchmarks/generalization/shoulder_sweep.json",
+      "--profile",
+      "/home/ziwang/projects/hexfellow-deploy-general-ik/robot_resources/config/control/motion_profiles/x7-gp80-general-trajectory-sim-v2.yaml",
+      "--speed",
+      "1.805",
+      "--derivatives",
+      "--output",
+      "/home/ziwang/projects/hexfellow-deploy-general-ik/runs/general_search_20261016/final_checks/shoulder_repeat",
+      "--plant-mass-scale",
+      "1.0"
+    ],
+    "exit_code": 0,
+    "mass_scale": 1.0,
+    "profile_ablation": null,
+    "result": {
+      "completed": true,
+      "failure": null,
+      "samples": 395,
+      "status_counts": {
+        "TRACKING": 395
+      },
+      "boundary_counts": {},
+      "metrics": {
+        "measured": {
+          "position_mm": {
+            "rms": 3.11324113610477,
+            "p50": 2.1313787434384768,
+            "p95": 5.188789442265401,
+            "p99": 6.0686428076573975,
+            "max": 6.168208909141732
+          },
+          "orientation_deg": {
+            "rms": 0.31696301116381265,
+            "p50": 0.22433857751634123,
+            "p95": 0.578813825427721,
+            "p99": 0.6741373756278636,
+            "max": 0.6813485291450885
+          },
+          "final_position_mm": [
+            0.3544730962339191
+          ],
+          "final_orientation_deg": [
+            0.055774610631012904
+          ]
+        },
+        "conditioned": {
+          "position_mm": {
+            "rms": 10.44135662861094,
+            "p50": 7.200707244188557,
+            "p95": 17.899036602663735,
+            "p99": 18.03585954171455,
+            "max": 18.04497701720699
+          },
+          "orientation_deg": {
+            "rms": 0.9430167168869559,
+            "p50": 0.6503230643615463,
+            "p95": 1.6165745226945676,
+            "p99": 1.6289326915853377,
+            "max": 1.6297562040465003
+          },
+          "final_position_mm": [
+            0.0
+          ],
+          "final_orientation_deg": [
+            0.0
+          ]
+        },
+        "command": {
+          "position_mm": {
+            "rms": 2.5444853524560043,
+            "p50": 1.6906783041397049,
+            "p95": 5.7572205315017255,
+            "p99": 7.073909896740217,
+            "max": 7.1610829242233125
+          },
+          "orientation_deg": {
+            "rms": 0.17609697307456829,
+            "p50": 0.1459524987157811,
+            "p95": 0.337016125146164,
+            "p99": 0.4589174174174062,
+            "max": 0.47019204878832566
+          },
+          "final_position_mm": [
+            1.1339578898597885e-07
+          ],
+          "final_orientation_deg": [
+            2.7275228085099222e-09
+          ]
+        },
+        "achieved_speed_m_s": {
+          "rms": 1.0559654746207519,
+          "p50": 0.7246620106931745,
+          "p95": 1.781403077739735,
+          "p99": 1.8177900712501283,
+          "max": 1.8207281339844583
+        },
+        "requested_speed_m_s": {
+          "rms": 1.0443099964332883,
+          "p50": 0.7200285471505283,
+          "p95": 1.7889916228869167,
+          "p99": 1.8039640002932482,
+          "max": 1.804995521654748
+        },
+        "requested_acceleration_m_s2": {
+          "rms": 6.611333624334339,
+          "p50": 6.531325576926029,
+          "p95": 9.395661375309555,
+          "p99": 9.427898836474702,
+          "max": 9.428487407361192
+        },
+        "time_at_or_above_1p2_m_s": 0.52,
+        "longest_continuous_interval_at_or_above_1p2_m_s": 0.26,
+        "moving_arm_speed": {
+          "right": {
+            "peak_m_s": 1.8207281339844583,
+            "time_at_or_above_1p2_m_s": 0.52,
+            "longest_continuous_interval_at_or_above_1p2_m_s": 0.26
+          }
+        },
+        "solve_ms": {
+          "rms": 1.9305648203970882,
+          "p50": 1.917971996590495,
+          "p95": 1.9761829054914415,
+          "p99": 2.0413341152016073,
+          "max": 2.649187983479351
+        },
+        "deadline_exceeded_ticks": 0,
+        "first_solve_ms": 2.649187983479351,
+        "solve_ms_after_initial_hold": {
+          "rms": 1.9277719229222847,
+          "p50": 1.9181219977326691,
+          "p95": 1.9687356252688915,
+          "p99": 1.9891632627695799,
+          "max": 2.077209996059537
+        },
+        "deadline_exceeded_ticks_after_initial_hold": 0,
+        "reference_joint_speed_max_rad_s": [
+          0.011810704260695434,
+          0.017491180183777988,
+          0.0383473565276876,
+          0.0008789597055382158,
+          0.030341928575853692,
+          0.0028649074274411613,
+          0.022786716416754393,
+          2.28672721879502,
+          1.2581458333895974,
+          2.251535529258883,
+          0.4272303736292364,
+          1.7482816056482968,
+          1.1814776855292592,
+          1.3165979665104974
+        ],
+        "measured_joint_speed_max_rad_s": [
+          0.011425080018558666,
+          0.015976707693434983,
+          0.035482677330927,
+          0.003036040043975526,
+          0.02589394439416605,
+          0.008471962723047576,
+          0.018799095698919594,
+          2.3185681482925498,
+          1.2016389116295945,
+          2.107427559483803,
+          0.4332198327880724,
+          1.5096713965745558,
+          0.9863097205578654,
+          1.0887414353157845
+        ],
+        "reference_acceleration_max_rad_s2": [
+          0.12371728685437407,
+          0.1804512725235713,
+          0.35482293503287105,
+          0.08789597627434649,
+          0.28900154181416904,
+          0.28649074274338926,
+          0.3034860068828591,
+          15.037448937893005,
+          16.47779308278866,
+          18.909846017649954,
+          11.813884214421282,
+          19.3299059721628,
+          11.52143347588295,
+          13.309477668400637
+        ],
+        "reference_jerk_max_rad_s3": [
+          18.309108471862423,
+          17.082620798612414,
+          10.981416058369392,
+          11.254982804754256,
+          6.817014011793848,
+          51.00932381639832,
+          49.50153604170718,
+          471.82070726024426,
+          471.8207072602354,
+          918.9581929573931,
+          845.3353612547008,
+          940.2908540722898,
+          574.2769027964006,
+          734.4016734539737
+        ],
+        "reference_jerk_rms_rad_s3": 74.1554913592485,
+        "hold_tcp_speed_m_s": {
+          "rms": 7.637555934893452e-05,
+          "p50": 4.378774123139078e-07,
+          "p95": 0.00011160891646345607,
+          "p99": 0.0003781336140400538,
+          "max": 0.0004403987178739815
+        },
+        "encoder_fk_vs_mujoco_m": {
+          "rms": 1.7692199365549196e-08,
+          "p50": 1.800053751079911e-08,
+          "p95": 1.8001005442553683e-08,
+          "p99": 1.8001755058579316e-08,
+          "max": 1.8004059042811903e-08
+        }
+      },
+      "contacts": {
+        "contact_steps": 0,
+        "minimum_distance_m": 0.0,
+        "maximum_torque_nm": [
+          6.507171352034732,
+          1.6819197575463818,
+          2.072496998959423,
+          2.227903295202708,
+          0.030986047083293222,
+          0.35804117922141493,
+          0.35941391747360374,
+          14.386709552753445,
+          3.0209592554970754,
+          4.4490293583392315,
+          4.536867658928514,
+          2.1866214829471744,
+          1.6521073500199464,
+          1.431322452069466
+        ],
+        "saturated_steps": 0,
+        "pairs": [],
+        "scope": "Every physics step; only collision-enabled MuJoCo geometry, not complete mesh clearance"
+      },
+      "hardware_qualified": false,
+      "constraint_checks": {
+        "reference_position_margin_rad": 0.10063900603092157,
+        "measured_position_margin_rad": 0.1000251244936553,
+        "reference_velocity_ratio": 0.9000000000000004,
+        "measured_velocity_ratio": 0.9125318124139347,
+        "reference_acceleration_ratio": 1.0000000000000018,
+        "reference_jerk_ratio": 1.0000000000000215,
+        "planner_failures": 0
+      },
+      "tracking_acceptance": {
+        "completed": true,
+        "position_rms_5mm": true,
+        "position_p95_10mm": true,
+        "orientation_p95_2deg": true,
+        "final_position_1mm": true,
+        "limits": true,
+        "no_planner_failures": true,
+        "no_modeled_contacts": true,
+        "no_torque_saturation": true
+      },
+      "tracking_accepted": true,
+      "fast_tracking_accepted": true
+    },
+    "public_tcp": {
+      "frame": "public pad-center TCP; fixed tool transform from run metadata",
+      "position_mm": {
+        "rms": 3.0558859330030512,
+        "p50": 2.060370149964351,
+        "p95": 5.095859122523132,
+        "p99": 6.069645394090922,
+        "max": 6.170989618590566
+      },
+      "final_position_mm": [
+        0.33804405178395225
+      ],
+      "per_arm_position_mm": {
+        "right": {
+          "rms": 3.0558859330030512,
+          "p50": 2.060370149964351,
+          "p95": 5.095859122523132,
+          "p99": 6.069645394090922,
+          "max": 6.170989618590566
+        }
+      },
+      "per_arm_orientation_deg": {
+        "right": {
+          "rms": 0.31696301116381265,
+          "p50": 0.22433857751634123,
+          "p95": 0.578813825427721,
+          "p99": 0.6741373756278636,
+          "max": 0.6813485291450885
+        }
+      },
+      "orientation_deg": {
+        "rms": 0.31696301116381265,
+        "p50": 0.22433857751634123,
+        "p95": 0.578813825427721,
+        "p99": 0.6741373756278636,
+        "max": 0.6813485291450885
+      },
+      "moving_arm_speed": {
+        "right": {
+          "peak_m_s": 1.7737689856290042,
+          "time_at_or_above_1p2_m_s": 0.5,
+          "longest_continuous_interval_at_or_above_1p2_m_s": 0.25
+        }
+      },
+      "tracking_acceptance": {
+        "completed": true,
+        "position_rms_5mm": true,
+        "position_p95_10mm": true,
+        "orientation_p95_2deg": true,
+        "final_position_1mm": true,
+        "limits": true,
+        "no_planner_failures": true,
+        "no_modeled_contacts": true,
+        "no_torque_saturation": true
+      },
+      "tracking_accepted": true,
+      "fast_tracking_accepted": true,
+      "source_sha256": {
+        "trace.npz": "ab02a1c84343e6f1067349ea9f5445a9441b58fb1655cb6a15be3ad4ccd7620c",
+        "metadata.json": "47b6eba46c1f9da60fe1a82421e9482fba383c19789e73d7af347ad902fe4a27",
+        "summary.json": "59fb465e19b228f3829ed4203152b60ac4a355616fbc35509dfc02715ef216f2"
+      }
+    }
+  }
+]
