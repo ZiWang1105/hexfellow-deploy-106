@@ -110,6 +110,13 @@ limits the **whole diagnostic run after control startup**, not one model call.
 
 ## Controller diagnostics and offline analysis
 
+The [fast X7 IK benchmark](docs/IK_BENCHMARK.md) compares the current profiles,
+an AgileX-style nonlinear endpoint solver, and a 100 Hz differential IK candidate
+in the shared MIT plant. It includes analytic trajectories, per-joint constraint
+checks, a speed sweep, retained failures, plots, and a video replay command.
+The candidate exceeds 1.2 m/s on tested feasible paths; it remains a simulation
+experiment and does not change the default viewer or hardware profile.
+
 Open a native MuJoCo window with **draggable red TCP targets**, using the shared
 controller and simulator actuator process (run from a desktop terminal):
 

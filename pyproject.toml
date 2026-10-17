@@ -30,6 +30,7 @@ sim = [
 dev = ["pytest>=8"]
 hardware = ["hex-device==1.4.10"]
 validation = ["matplotlib>=3.8,<3.10"]
+benchmark = ["casadi==3.6.7"]
 calibration-video = ["av>=16,<17"]
 
 [tool.setuptools.package-data]

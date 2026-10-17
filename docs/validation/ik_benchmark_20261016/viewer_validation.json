@@ -1,0 +1,31 @@
+{
+  "report": {
+    "status": "viewer_closed",
+    "fault": null,
+    "backend": "simulation",
+    "policy_calls": 0,
+    "cost_usd": 0,
+    "request_interrupted": false,
+    "ticks": 735,
+    "termination": {
+      "reason": "viewer_closed"
+    },
+    "native_qualified": false,
+    "report_errors": [],
+    "shutdown_reports_present": true,
+    "evaluation": {
+      "retained_pickup": false,
+      "robot_static_contact_steps": 0,
+      "final_hold_verified": false,
+      "evaluated_body": null,
+      "sampling": "every_physics_step",
+      "timestep_s": 0.002,
+      "samples": 6963,
+      "complete": true,
+      "first_robot_static_contact": null,
+      "accepted": false
+    }
+  },
+  "target_requests": 9,
+  "hold_requests": 2
+}
