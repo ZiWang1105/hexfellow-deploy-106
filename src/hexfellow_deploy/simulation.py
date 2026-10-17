@@ -72,13 +72,7 @@ class LiftPositionServo:
 
 class SimulationPlant:
     def __init__(self, scene_path, output, *, submit_delay_s=0., effort_limits=None, profile=None,
-                 lift_speed_limit_m_s=.025, realtime=True):
-        if not np.isfinite(submit_delay_s) or submit_delay_s < 0:
-            raise ValueError('Submission delay must be finite and nonnegative')
-        if not realtime and submit_delay_s != 0:
-            # Before the first accepted reference, physics and simulation time
-            # remain stopped. A delay in that same clock could never expire.
-            raise ValueError('Offline stepping requires zero submission delay')
+                 lift_speed_limit_m_s=.025):
         import mujoco
         from hexfellow_deploy.sim.scene import build_scene
         from hexfellow_deploy.sim.scene_config import load_scene
@@ -87,7 +81,6 @@ class SimulationPlant:
         from hexfellow_deploy.robot.joints import LEFT, RIGHT
         from hexfellow_deploy.control.gripper import BinaryGripperServo
         self.mj = mujoco
-        self.realtime = bool(realtime)
         Path(output).mkdir(parents=True, exist_ok=True)
         self.scene = build_scene(load_scene(scene_path), Path(output) / "plant.xml")
         self.model, self.data = self.scene.model, self.scene.data
@@ -163,62 +156,55 @@ class SimulationPlant:
         self.gripper_request = dict(left=None, right=None)
         self.base_request = np.zeros(3)
         self._capture()
-        self.thread = None
-        if self.realtime:
-            self.thread = threading.Thread(target=self._run, name="mujoco-plant", daemon=True)
-            self.thread.start()
-
-    def clock(self):
-        return time.monotonic() if self.realtime else float(self.data.time)
+        self.thread = threading.Thread(target=self._run, name="mujoco-plant", daemon=True)
+        self.thread.start()
 
     def _capture(self):
-        measured = self.sensor.read(self.data.sensordata, self.clock())
+        measured = self.sensor.read(self.data.sensordata, time.monotonic())
         # Plant coordinates go only to the renderer, never the policy topic.
         self.snapshot = dict(measured=measured, received={n: measured["timestamp_s"] for n in ("left","right","theta","base")}, sim_s=float(self.data.time),
                              qpos=self.data.qpos.tolist(), qvel=self.data.qvel.tolist())
-
-    def _cycle(self):
-        pending = self.pending
-        if pending is not None and self.clock() >= pending[2]:
-            sequence, command, _, mit = pending
-            selected = mit.select(self.arm_names)
-            self.model.actuator_biasprm[self.arm_ids,1] = -selected.kp
-            self.model.actuator_biasprm[self.arm_ids,2] = -selected.kd
-            self.data.ctrl[self.arm_ids] = selected.motor_input()
-            from hexfellow_deploy.robot.joints import LIFT
-            self.lift_servo.target = command['joint_positions'][LIFT]
-            self.have_reference = True
-            self.base_request = np.asarray(command["base_velocity_body"])
-            self.gripper_request = dict(command["gripper_open"])
-            for (side, jaw), servo in self.grippers.items():
-                self.data.ctrl[self.model.actuator(f"position_{side}_jaw_{jaw}").id] = servo.step(
-                    self.gripper_request[side], .02)
-            self.pending = None
-            self.receipt = Receipt(sequence, self.clock(), "simulator_applied")
-        yaw = self.data.qpos[self.model.joint(self.base_joints[2]).qposadr[0]]
-        vx, vy, wz = self.base_request
-        twist = (np.cos(yaw)*vx-np.sin(yaw)*vy, np.sin(yaw)*vx+np.cos(yaw)*vy, wz)
-        for name, value in zip(self.base_joints, twist):
-            self.data.ctrl[self.model.actuator("velocity_" + name).id] = value
-        if not self.enabled or not self.have_reference:
-            self._capture()
-            return
-        self.lift_servo.step(self.data, self.model.opt.timestep)
-        self.mj.mj_step(self.model, self.data)
-        self.mj.mj_forward(self.model, self.data)
-        from hexfellow_deploy.sim.transport import check_numerics
-        check_numerics(self.data)
-        self.physics_audit.step(self.data)
-        self.max_torque = np.maximum(self.max_torque, np.abs(self.data.actuator_force[self.arm_ids]))
-        self.max_lift_speed = max(self.max_lift_speed, abs(float(self.data.qvel[self.lift_servo.dof])))
-        self.recorder.step()
-        self._capture()
 
     def _run(self):
         try:
             while not self.stop_event.is_set():
                 started = time.monotonic()
-                self._cycle()
+                pending = self.pending
+                if pending is not None and started >= pending[2]:
+                    sequence, command, _, mit = pending
+                    selected = mit.select(self.arm_names)
+                    self.model.actuator_biasprm[self.arm_ids,1] = -selected.kp
+                    self.model.actuator_biasprm[self.arm_ids,2] = -selected.kd
+                    self.data.ctrl[self.arm_ids] = selected.motor_input()
+                    from hexfellow_deploy.robot.joints import LIFT
+                    self.lift_servo.target = command['joint_positions'][LIFT]
+                    self.have_reference = True
+                    self.base_request = np.asarray(command["base_velocity_body"])
+                    self.gripper_request = dict(command["gripper_open"])
+                    for (side, jaw), servo in self.grippers.items():
+                        self.data.ctrl[self.model.actuator(f"position_{side}_jaw_{jaw}").id] = servo.step(
+                            self.gripper_request[side], .02)
+                    self.pending = None
+                    self.receipt = Receipt(sequence, time.monotonic(), "simulator_applied")
+                yaw = self.data.qpos[self.model.joint(self.base_joints[2]).qposadr[0]]
+                vx, vy, wz = self.base_request
+                twist = (np.cos(yaw)*vx-np.sin(yaw)*vy, np.sin(yaw)*vx+np.cos(yaw)*vy, wz)
+                for name, value in zip(self.base_joints, twist):
+                    self.data.ctrl[self.model.actuator("velocity_" + name).id] = value
+                if not self.enabled or not self.have_reference:
+                    self._capture()
+                    self.stop_event.wait(.002)
+                    continue
+                self.lift_servo.step(self.data, self.model.opt.timestep)
+                self.mj.mj_step(self.model, self.data)
+                self.mj.mj_forward(self.model, self.data)
+                from hexfellow_deploy.sim.transport import check_numerics
+                check_numerics(self.data)
+                self.physics_audit.step(self.data)
+                self.max_torque = np.maximum(self.max_torque, np.abs(self.data.actuator_force[self.arm_ids]))
+                self.max_lift_speed = max(self.max_lift_speed, abs(float(self.data.qvel[self.lift_servo.dof])))
+                self.recorder.step()
+                self._capture()
                 self.stop_event.wait(max(0., self.model.opt.timestep - (time.monotonic()-started)))
         except BaseException as error:
             self.error = f"{type(error).__name__}: {error}"
@@ -227,8 +213,6 @@ class SimulationPlant:
         from .startup_lift import LiftArrival, validate_target
         from hexfellow_deploy.robot.joints import LIFT
         validate_target(startup_lift_m)
-        if not self.realtime and startup_lift_m is not None:
-            raise ValueError('Offline startup lift motion requires an explicit stepped trajectory')
         self.enabled = True
         self.startup_lift_report = None
         if startup_lift_m is None:
@@ -264,25 +248,7 @@ class SimulationPlant:
             raise RuntimeError("An actuator reference is already pending")
         if mit is None:
             raise ValueError("PinkIK must provide its MIT reference for MIT simulation")
-        self.pending = (sequence, command, self.clock() + self.submit_delay, mit)
-
-    def advance(self, duration_s):
-        """Deterministic offline stepping of the same MIT plant, with simulation time.
-
-        This mode measures modeled tracking independently of OS scheduling. It
-        is not wall-clock runtime or hardware evidence. Never call it while the
-        real-time physics thread owns the plant.
-        """
-        if self.realtime:
-            raise RuntimeError('advance requires realtime=False')
-        if not self.enabled or (not self.have_reference and self.pending is None):
-            raise RuntimeError('Acquire and submit a reference before advancing physics')
-        count = round(duration_s / self.model.opt.timestep)
-        if count < 1 or not np.isclose(count*self.model.opt.timestep, duration_s, atol=1e-10, rtol=0):
-            raise ValueError('Duration must be a positive whole number of physics steps')
-        for _ in range(count):
-            self._cycle()
-        return self.read()
+        self.pending = (sequence, command, time.monotonic() + self.submit_delay, mit)
 
     def acknowledgement(self, sequence):
         receipt = self.receipt
@@ -290,10 +256,9 @@ class SimulationPlant:
 
     def close(self):
         self.stop_event.set()
-        if self.thread is not None:
-            self.thread.join(2)
-            if self.thread.is_alive():
-                raise RuntimeError("Simulation plant did not close")
+        self.thread.join(2)
+        if self.thread.is_alive():
+            raise RuntimeError("Simulation plant did not close")
         self.recorder.close()
         self.physics_audit.save(self.recorder.directory)
         import json
