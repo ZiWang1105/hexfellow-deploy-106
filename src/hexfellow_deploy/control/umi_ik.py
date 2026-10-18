@@ -90,6 +90,9 @@ class UMIPinkIK:
         self.last_source = None
         self.tracking_requested = False
         self.targets = None
+        self.target_twists = None
+        self.target_accelerations = None
+        self.target_sample_timestamp = None
         self.report = {
             "implementation": "hexfellow_deploy.robotics.control.ik_core.PinkIKCore",
             "upstream_commit": umi_revision(), "motion_profile": settings["motion_profile"],
@@ -120,15 +123,51 @@ class UMIPinkIK:
         self.pin.framesForwardKinematics(self.core.model, self.data, self.vector(joints))
         return {s: self.data.oMf[i].copy() for s, i in self.frame_ids.items()}
 
-    def track(self, targets):
+    def track(self, targets, *, body_twists=None, body_accelerations=None, sample_timestamp_s=None):
+        """Track paired pad-center poses, optionally with trajectory derivatives.
+
+        Derivatives are local body twists [linear m/s, angular rad/s] and their
+        time derivatives, expressed at the requested pad-center TCP. The rigid
+        tool transform maps them to the core fingertip frame. They do not
+        bypass Cartesian shaping, joint constraints or MIT effort checks.
+        Ordinary pose requests clear previous trajectory derivatives.
+        Derivative samples require a timestamp in the controller clock domain
+        and must be refreshed within two control periods. A stale sample may
+        not keep requesting nonzero motion indefinitely.
+        """
         if set(targets) != set(SIDES):
             raise ValueError("UMI tracking requires both left and right targets")
+        if body_accelerations is not None and body_twists is None:
+            raise ValueError('Target accelerations require target twists')
+        if body_twists is not None and (sample_timestamp_s is None
+                or not np.isfinite(sample_timestamp_s) or sample_timestamp_s < 0):
+            raise ValueError('Trajectory derivatives require a finite nonnegative sample timestamp')
+        if body_twists is None and sample_timestamp_s is not None:
+            raise ValueError('A trajectory sample timestamp requires target twists')
+        converted = []
+        for label, values in (('twists', body_twists), ('accelerations', body_accelerations)):
+            if values is None:
+                converted.append(None)
+                continue
+            if set(values) != set(SIDES):
+                raise ValueError(f'Target {label} require both arms')
+            result = {}
+            for side in SIDES:
+                value = np.asarray(values[side], dtype=float)
+                if value.shape != (6,) or not np.isfinite(value).all():
+                    raise ValueError(f'Target {label} must contain finite 6-vectors')
+                result[side] = self.policy_T_umi[side].inverse().action @ value
+            converted.append(result)
         self.requested_targets = {side: self.pin.SE3(rotation, position) * self.policy_T_umi[side]
                                   for side, (position, rotation) in targets.items()}
+        self.target_twists, self.target_accelerations = converted
+        self.target_sample_timestamp = sample_timestamp_s
         self.tracking_requested = True
 
     def hold(self):
         self.tracking_requested = False
+        self.target_twists = self.target_accelerations = None
+        self.target_sample_timestamp = None
         if self.initialized:
             self.core.request_stop()
 
@@ -150,6 +189,7 @@ class UMIPinkIK:
     def step(self, measured):
         validate_sensor_packet(measured)
         control_timestamp = self.control_clock() if self.control_clock else measured['timestamp_s']
+        self.check_target_time(control_timestamp)
         q = self.vector(measured["joint_positions"])
         velocity = self.vector(measured["joint_velocities"])
         if not self.initialized:
@@ -165,7 +205,9 @@ class UMIPinkIK:
         result = self.core.step(q, self.targets, measured_velocity=velocity,
                                 state_timestamp=state_timestamp,
                                 control_timestamp=control_timestamp,
-                                feedback_received=received, feedback_policy="strict")
+                                feedback_received=received, feedback_policy="strict",
+                                target_twists=self.target_twists,
+                                target_accelerations=self.target_accelerations)
         if not result.executable or result.diagnostics.fault:
             excess = [f'{name}={velocity[i]:.6f} (limit {self.core.model.velocityLimit[i]:.6f})'
                       for name, i in self.indices.items()
@@ -177,3 +219,9 @@ class UMIPinkIK:
                                 joint_positions=dict(measured['joint_positions']),
                                 feedback_received=dict(received) if received is not None else None)
         return {n: float(result.positions[i]) for n, i in self.indices.items()}, result.diagnostics
+
+    def check_target_time(self, control_timestamp):
+        if self.target_sample_timestamp is not None:
+            age = control_timestamp-self.target_sample_timestamp
+            if age < -1e-9 or age > 2*self.dt+1e-9:
+                raise RuntimeError(f'Trajectory derivative sample is stale or future-dated: age={age:.6f}s')

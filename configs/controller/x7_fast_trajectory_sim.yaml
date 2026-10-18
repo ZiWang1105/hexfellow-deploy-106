@@ -1,0 +1,5 @@
+# Experimental simulation profile. Not selected by hardware defaults.
+motion_profile: x7-gp80-fast-trajectory-sim-v1
+measured_pose_tracking: false
+arm_velocity_limit_rad_s: profile
+lift_velocity_limit_m_s: 0.025

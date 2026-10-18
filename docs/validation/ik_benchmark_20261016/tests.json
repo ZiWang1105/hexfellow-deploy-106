@@ -1,0 +1,8 @@
+{
+  "passed": 451,
+  "skipped": 1,
+  "duration_s": 70.76,
+  "command": "MUJOCO_GL=egl OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 .venv/bin/python -m pytest tests -q",
+  "test_file_sha256": "048d074a4865e67bdbca2005497894a15867bef417560da8ab4efc45d8cd3621",
+  "hardware_opened": false
+}
