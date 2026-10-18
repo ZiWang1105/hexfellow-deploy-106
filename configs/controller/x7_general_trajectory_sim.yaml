@@ -1,0 +1,5 @@
+# Uncommissioned simulation candidate; not a hardware or interactive default.
+motion_profile: x7-gp80-general-trajectory-sim-v2
+measured_pose_tracking: false
+arm_velocity_limit_rad_s: profile
+lift_velocity_limit_m_s: 0.025

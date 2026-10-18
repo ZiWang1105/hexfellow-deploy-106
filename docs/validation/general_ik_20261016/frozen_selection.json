@@ -1,0 +1,14 @@
+{
+  "profile": "robot_resources/config/control/motion_profiles/x7-gp80-general-trajectory-sim-v2.yaml",
+  "sha256": "85bc491919a12de96665c89adfc31cddd2080ef7af2035980da026c8a8552208",
+  "selection": "Training only. Same 18/24 passes as expanded-envelope baseline; lower RMS on 3 of 4 accepted high-speed training paths. This is a candidate, not uniform superiority.",
+  "training_suites": [
+    "train_initial",
+    "train_measured",
+    "train_balanced",
+    "train_fast2",
+    "train_multispeed"
+  ],
+  "heldout_simulations_started": false,
+  "arms_joint_limits_and_mit_unchanged": true
+}

@@ -1,0 +1,28 @@
+{
+  "name": "circle_yz",
+  "type": "cartesian",
+  "kind": "circle",
+  "distance": 0.1,
+  "basis": [
+    [
+      1,
+      0,
+      0
+    ],
+    [
+      0,
+      1,
+      0
+    ],
+    [
+      0,
+      0,
+      1
+    ]
+  ],
+  "arms": [
+    "right"
+  ],
+  "posture": "extended",
+  "split": "train"
+}

@@ -33,6 +33,19 @@ The [latest wrist results](calibration/docs/wrist_parameters_20261008.md) preser
 their candidate status: held-out RMS is 7.92 px for the left D405 and 13.62 px
 for the right D435i. These exports do not change production sensor selection.
 
+## Default IK
+
+The default runtime selects `x7-gp80-general-trajectory-sim-v2` at **100 Hz**,
+with target velocity limits of **2.0 m/s** and **4.0 rad/s**. The profile's
+acceleration, jerk, joint and effort constraints remain active. The name retains
+`sim` for benchmark provenance; selecting it does not qualify hardware safety.
+
+The original profile remains available by explicitly selecting
+`deployment_config=configs/hardware/desktop.yaml` and
+`timing.control_period_s=0.02`. Physical execution requires a machine-local
+configuration and matching research binding; repository templates remain
+uncommissioned. See [interactive hardware IK](docs/HARDWARE_INTERACTIVE_IK.md).
+
 ## Standalone installation
 
 Clone this repository normally; it has no Git submodules. The controller, robot contracts,
@@ -90,6 +103,7 @@ An agent application can supply its installed component via `policy.component`,
 or an explicit `--agent-plugin` module with `AGENT_COMPONENT` and optional task
 catalog/evaluation hooks. Agent requests and task scoring are not runtime dependencies.
 Existing application launchers pass their configuration workspace and plugin explicitly.
+For real-robot mouse dragging, see [interactive hardware IK](docs/HARDWARE_INTERACTIVE_IK.md).
 Physical operation still requires a locally configured deployment file and both
 `--execute --confirm-onsite-ready`; the default command above never opens hardware.
 

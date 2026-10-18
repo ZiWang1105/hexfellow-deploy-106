@@ -466,12 +466,15 @@ def load_motion_profile(reference: str | Path | None = None) -> MotionProfile:
             raise ValueError("v6 precision planner requires schema 22")
         if schema_version == 23:
             for optional in ("effort_regularization_cost", "stationary_cost_blend_s", "orientation_gain",
-                             "target_source_acceleration_gain", "target_source_acceleration_tau_s"):
+                             "target_source_acceleration_gain", "target_source_acceleration_tau_s",
+                             "measured_error_derivative_gain"):
                 if isinstance(raw_tuning, Mapping) and optional in raw_tuning:
                     tuning_keys = (*tuning_keys, optional)
         if not isinstance(raw_tuning, Mapping) or set(raw_tuning) != set(tuning_keys):
             raise ValueError("schema-v3 requires the complete controller_tuning contract")
         tuning = {key: float(raw_tuning[key]) for key in tuning_keys}
+        if not np.isfinite(tuning.get('measured_error_derivative_gain', 0.)) or not 0 <= tuning.get('measured_error_derivative_gain', 0.) <= 1:
+            raise ValueError('measured_error_derivative_gain must be in [0, 1]')
         if "orientation_gain" in tuning and not 0 < tuning["orientation_gain"] <= 1:
             raise ValueError("orientation gain must be in (0, 1]")
         if "base_anchor_gain" in tuning and not 0 < tuning["base_anchor_gain"] <= 1:

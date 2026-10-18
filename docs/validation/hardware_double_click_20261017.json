@@ -1,0 +1,17 @@
+{
+  "change": "Native double-click on TCP selects and enables without E; release deselects and holds",
+  "gui_run": "runs/hardware_double_click_enable",
+  "backend": "simulation",
+  "target_publications": 22,
+  "moved_side": "left",
+  "target_span_xyz_m": [
+    0.021184846645958502,
+    0.021184846598305662,
+    0.029959897409813196
+  ],
+  "control_fault": null,
+  "tests": "16 passed",
+  "devices_opened": false,
+  "preflight": "runs/double_click_preflight/preflight.json",
+  "automation_note": "Initial automation assertion expected right TCP; captured sphere was left. Recorded left target moved, right stayed fixed."
+}

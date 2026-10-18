@@ -138,7 +138,7 @@ def longest_interval(flags, dt):
 def summarize(trace, trajectory, dt):
     t = trace['time_s']
     active = trajectory.motion_mask(t)
-    arms = [0, 1] if trajectory.dual else [1]
+    arms = [SIDES.index(s) for s in trajectory.moving_arms] if hasattr(trajectory, 'moving_arms') else ([0, 1] if trajectory.dual else [1])
     output = {}
     for field in ('measured', 'conditioned', 'command'):
         reference, actual = trace['requested'][:, arms], trace[field][:, arms]
@@ -207,7 +207,7 @@ def _run(args):
     from hexfellow_deploy.robot.assembly import load_assembly
     adapter_config = output/'controller.yaml'
     adapter_config.write_text(yaml.safe_dump(dict(motion_profile=str(profile_path),
-        measured_pose_tracking=False, arm_velocity_limit_rad_s='profile', lift_velocity_limit_m_s=.025)))
+        measured_pose_tracking=args.measured_pose_tracking, arm_velocity_limit_rad_s='profile', lift_velocity_limit_m_s=.025)))
     kinematics = Kinematics(PROJECT_ROOT/'robot_resources/urdf/maver_x4_gp80_zed_40deg.urdf',
                            load_assembly(PROJECT_ROOT/'configs/robot/maver_gp80.yaml'))
     adapter = UMIPinkIK(kinematics, adapter_config)
@@ -215,10 +215,14 @@ def _run(args):
     if [core.model.names[i] for i in range(1, core.model.njoints)] != list(JOINTS):
         raise ValueError('Benchmark requires the documented 15-coordinate model order')
     dt = config.control_dt
-    q, velocity = initial_state(args.posture), np.zeros(15)
+    spec = json.loads(Path(args.trajectory_spec).read_text()) if args.trajectory_spec else None
+    q, velocity = initial_state(args.posture if spec is None else spec.get('posture', args.posture)), np.zeros(15)
     data = core.model.createData()
     start = poses(core.model, data, q)
-    if args.trajectory == 'swing':
+    if spec is not None:
+        from .diverse import DiverseTrajectory
+        trajectory = DiverseTrajectory(core.model, q, spec, args.speed)
+    elif args.trajectory == 'swing':
         screws = {s: pin.computeFrameJacobian(core.model, data, q,
             core.model.getFrameId(s+'_tcp'), pin.LOCAL)[:, 1 if s == 'left' else 8]
             * (-1. if s == 'left' else 1.) for s in SIDES}
@@ -252,6 +256,7 @@ def _run(args):
         clock='deterministic simulation time; compute timing is host wall time',
         tcp='Owned X7 core fingertip frames left_tcp/right_tcp in robot base; pad-center offset recorded separately',
         base='fixed command', lift='hard locked at initial measured height', dt_s=dt,
+        trajectory_spec=spec, moving_arms=getattr(trajectory, 'moving_arms', list(SIDES) if args.dual else ['right']),
         duration_s=trajectory.duration_s, initial_q=q, motion_start_s=trajectory.settle_s,
         motion_end_s=trajectory.motion_end_s, solver_parameters=None if nonlinear is None else nonlinear.parameters,
         python_runtime=runtime_state(),
@@ -265,6 +270,13 @@ def _run(args):
             from hexfellow_deploy.simulation import SimulationPlant
             plant = SimulationPlant(scene_path, output/'plant', profile=profile,
                 effort_limits=profile.mit_servo.torque_limit_nm, realtime=False)
+            if args.plant_mass_scale != 1.:
+                # Evaluator-only mismatch; IK retains its nominal model.
+                plant.model.body_mass[:] *= args.plant_mass_scale
+                plant.model.body_inertia[:] *= args.plant_mass_scale
+                plant.mj.mj_setConst(plant.model, plant.mj.MjData(plant.model))
+                plant.mj.mj_forward(plant.model, plant.data)
+                plant.mj.mj_saveModel(plant.model, str(output/'plant/plant.mjb'))
             plant.physics_audit = audit = ContactAudit(plant.physics_audit, plant.model)
             plant.acquire()
         for step in range(int(np.ceil(trajectory.duration_s/dt))+1):
@@ -404,15 +416,18 @@ def parser():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--output', required=True)
     p.add_argument('--plant', choices=('kinematic', 'mit'), default='mit')
+    p.add_argument('--plant-mass-scale', type=float, default=1., help='Evaluator-only mass/inertia multiplier; nominal IK model unchanged')
     p.add_argument('--solver', choices=('pink', 'nonlinear'), default='pink')
     p.add_argument('--version', choices=('v1', 'v2', 'v3'), default='v1')
     p.add_argument('--hz', type=float, default=50)
     p.add_argument('--profile', help='Existing immutable experimental profile; overrides profile-generation flags')
     p.add_argument('--fast', action='store_true', help='Candidate Cartesian envelope 1.5 m/s, 8 m/s², 120 m/s³')
     p.add_argument('--derivatives', action='store_true', help='Supply analytic target velocity/acceleration')
+    p.add_argument('--measured-pose-tracking', action='store_true', help='Use measured TCP feedback for the objective')
     p.add_argument('--dynamics', action='store_true', help='Nominal inertia feedforward ablation, MIT gains unchanged')
     p.add_argument('--tuning', default='{}', help='JSON controller_tuning overrides, saved in derived profile')
     p.add_argument('--trajectory', default='vertical', choices=('vertical', 'lateral', 'forward', 'circle', 'figure8', 'rotate', 'swing', 'joint_curve', 'rounded_rectangle'))
+    p.add_argument('--trajectory-spec', help='Frozen diverse path JSON; overrides trajectory, posture and dual flags')
     p.add_argument('--posture', default='nominal', choices=('nominal', 'heldout', 'extended', 'extended_offset'))
     p.add_argument('--preview-s', type=float, default=0., help='Explicit known-trajectory preview, never an evaluation time shift')
     p.add_argument('--joint-correction-gain', type=float, default=1., help='Nonlinear endpoint error feedback in s^-1')
@@ -425,6 +440,8 @@ def parser():
 
 def main():
     args = parser().parse_args()
+    if not np.isfinite(args.plant_mass_scale) or not .5 <= args.plant_mass_scale <= 1.5:
+        raise ValueError('Plant mass scale must be in [0.5, 1.5]')
     if args.hz not in (50, 100):
         raise ValueError('The current motion-profile schema supports 50 and 100 Hz')
     if not np.isfinite(args.preview_s) or not 0 <= args.preview_s <= .02:

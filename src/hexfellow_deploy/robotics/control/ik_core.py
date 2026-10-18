@@ -143,6 +143,7 @@ class PinkControllerConfig:
     target_tracking_bandwidth_s_inv: float = 12.0
     target_source_velocity_gain: float = 1.0
     target_source_acceleration_gain: float = 0.0
+    measured_error_derivative_gain: float = 0.0
     target_source_acceleration_tau_s: float = 0.06
     arm_posture_cost: float = 0.4
     arm_posture_min_fraction: float = 0.0
@@ -216,6 +217,8 @@ class PinkControllerConfig:
     allocator: WholeBodyAllocatorConfig = DEFAULT_WHOLE_BODY_ALLOCATOR_CONFIG
 
     def __post_init__(self) -> None:
+        if not np.isfinite(self.measured_error_derivative_gain) or not 0 <= self.measured_error_derivative_gain <= 1:
+            raise ValueError('measured_error_derivative_gain must be in [0, 1]')
         if self.tracking_objective not in {"legacy", "normalized_v1"} or self.stationary_arrival not in {"legacy", "continuous_v1"}:
             raise ValueError("invalid balanced tracking mode")
         if not np.isfinite(self.orientation_gain) or not 0 < self.orientation_gain <= 1:
@@ -467,6 +470,7 @@ class PinkControllerConfig:
                 and self.preparation_lift_velocity_m_s == profile.preparation_lift_velocity_m_s
                 and self.stationary_redundancy_hold == profile.stationary_redundancy_hold
                 and self.target_source_velocity_gain == profile.controller_tuning.get("target_source_velocity_gain", 1.)
+                and self.measured_error_derivative_gain == profile.controller_tuning.get('measured_error_derivative_gain', 0.)
                 and self.target_source_acceleration_gain == profile.controller_tuning.get(
                     "target_source_acceleration_gain", 0.)
                 and self.target_source_acceleration_tau_s == profile.controller_tuning.get(
@@ -3526,7 +3530,10 @@ class PinkIKCore:
                     break
                 if self._measured_tracking_active:
                     measured_objectives[task] = self.measured_tracker.objective(
-                        side, task, task_configuration, targets[side], dt)
+                        side, task, task_configuration, targets[side], dt,
+                        target_twist=None if target_twists is None else target_twists[side],
+                        target_acceleration=None if target_accelerations is None else target_accelerations[side],
+                        measured_joint_velocity=resolved_measured_velocity)
                     task.set_target(targets[side])
                     self._limited_targets[side] = targets[side].copy()
                     continue

@@ -1,0 +1,62 @@
+# Default general IK deployment, 100 Hz. Paths are relative to this YAML.
+# Fill local measured calibrations in an ignored configs/local/*.yaml copy.
+schema_version: 1
+robot:
+  urdf: ../../robot_resources/urdf/maver_x4_gp80_zed_40deg.urdf
+  assembly: ../robot/maver_gp80.yaml
+  mapping: ../../robot_resources/config/hardware/hexfellow_gp80_general_ik.json
+  research_release: null # existing local UMI research binding, not regenerated approval
+  network:
+    interface: eth0
+    arm_controller_ip: 'fe80::1'
+    theta_controller_ip: 'fe80::2'
+    base_controller_ip: 'fe80::3'
+  grippers:
+    # Wire IDs from this robot's telemetry; GP80's SDK type/default is not its ID.
+    left:
+      device_id: 1
+      closed_motor_rad: null # endpoint motor angle only; no aperture curve
+      open_motor_rad: null
+      max_torque_nm: 1.0 # legacy SDK opening threshold, not a hardware force cap
+      opening_max_torque_nm: 1.0
+      closure_enabled: false # unconfigured template; enable per device in the local configuration
+      encoder_boundary_tolerance_rad: 0.02 # measured feedback only; command limits unchanged
+    right:
+      device_id: 1
+      closed_motor_rad: null
+      open_motor_rad: null
+      max_torque_nm: 1.0
+      opening_max_torque_nm: 1.0
+      closure_enabled: false
+      encoder_boundary_tolerance_rad: 0.02
+  limits:
+    arm_velocity_rad_s: profile # per-joint bounds from the selected UMI profile
+    lift_velocity_m_s: 0.025
+    arm_following_error_rad: 0.12
+    lift_following_error_m: 0.02
+    base_linear_m_s: 0.4
+    base_angular_rad_s: 0.25
+    base_acceleration_m_s2: 2.0
+    base_angular_acceleration_rad_s2: 2.0
+  feedback_max_age_s: 0.1
+  feedback_max_skew_s: 0.05
+  command_ttl_s: 0.1
+  startup_command_timeout_s: 1.0
+  camera_encoder_max_skew_s: 0.08
+  camera_max_age_s: 0.25
+  policy_camera: head
+cameras: cameras.yaml
+# Each enabled policy camera needs a measured transform attached to an encoder FK frame.
+# JSON contains parent_frame and T_parent_from_optical (rigid 4x4).
+# Native UMI format also supported: mount_frame, T_mount_from_camera,
+# camera_frame. Acceptance annotations are preserved, not deployment gates.
+# The selected pinned candidate remains provisional.
+# Head camera parent must move with the lift; wrist parent moves with the relevant arm.
+camera_calibration:
+  head: ../../robot_resources/config/camera/zed_landmark_candidate_20260930.json
+  wrist: null
+controller: ../controller/x7_general_trajectory_sim.yaml
+base_motion: ../controller/base_motion.yaml
+max_observation_age_s: 90
+# Must be locally commissioned and explicitly selected with --execute as well.
+commissioned: false

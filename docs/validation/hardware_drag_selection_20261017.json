@@ -1,0 +1,22 @@
+{
+  "issue": "E cleared previously selected TCP handle",
+  "change": "Preserve selection on enable; add 1/2 handle selection; show selected side and input enabled state",
+  "gui_test": "runs/hardware_drag_selection_fix2",
+  "backend": "simulation",
+  "sequence": [
+    "2 selects right",
+    "E enables",
+    "Ctrl+right mouse drag",
+    "release holds"
+  ],
+  "target_publications": 24,
+  "right_target_span_xyz_m": [
+    0.020968045244390915,
+    0.020968045197225782,
+    0.029653293927719426
+  ],
+  "control_fault": null,
+  "hardware_devices_opened": false,
+  "tests": "16 passed",
+  "preflight": "runs/drag_selection_preflight/preflight.json"
+}

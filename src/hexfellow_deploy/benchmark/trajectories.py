@@ -201,19 +201,18 @@ def envelope_report(trajectory, profile, samples=4001):
     """Dense request screening, not a proof of joint/dynamic feasibility."""
     times = np.linspace(0., trajectory.duration_s, samples)
     linear_velocity, angular_velocity, linear_acceleration, angular_acceleration = [], [], [], []
+    moving = getattr(trajectory, 'moving_arms', ['right'])
     for t in times:
         target, twist, derivative = trajectory.sample(t)
-        rotation = target['right'].rotation
-        v, a = twist['right'], derivative['right']
-        linear_velocity.append(rotation@v[:3])
-        angular_velocity.append(rotation@v[3:])
-        linear_acceleration.append(rotation@(a[:3]+np.cross(v[3:], v[:3])))
-        angular_acceleration.append(rotation@a[3:])
+        linear_velocity.append([target[s].rotation@twist[s][:3] for s in moving])
+        angular_velocity.append([target[s].rotation@twist[s][3:] for s in moving])
+        linear_acceleration.append([target[s].rotation@(derivative[s][:3]+np.cross(twist[s][3:], twist[s][:3])) for s in moving])
+        angular_acceleration.append([target[s].rotation@derivative[s][3:] for s in moving])
     values = dict(linear_velocity=np.asarray(linear_velocity), angular_velocity=np.asarray(angular_velocity),
                   linear_acceleration=np.asarray(linear_acceleration), angular_acceleration=np.asarray(angular_acceleration))
     for part in ('linear', 'angular'):
         values[part+'_jerk'] = np.gradient(values[part+'_acceleration'], times, axis=0)
-    maxima = {key: float(np.max(np.linalg.norm(value, axis=1))) for key, value in values.items()}
+    maxima = {key: float(np.max(np.linalg.norm(value, axis=-1))) for key, value in values.items()}
     limits = dict(linear_velocity=profile.target_linear_velocity_m_s,
                   linear_acceleration=profile.target_linear_acceleration_m_s2,
                   linear_jerk=profile.target_linear_jerk_m_s3,

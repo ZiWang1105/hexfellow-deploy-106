@@ -57,7 +57,8 @@ class MeasuredPoseTracking:
             return True
         return False
 
-    def objective(self, side, task, configuration, target, dt):
+    def objective(self, side, task, configuration, target, dt, *,
+                  target_twist=None, target_acceleration=None, measured_joint_velocity=None):
         target = _validate_pose(target)
         current = configuration.get_transform_frame_to_world(task.frame)
         error = np.r_[target.translation-current.translation,
@@ -67,6 +68,42 @@ class MeasuredPoseTracking:
             desired[:3] = 0.
         if np.linalg.norm(error[3:]) <= self.config.target_orientation_deadband:
             desired[3:] = 0.
+        source_acceleration = np.zeros(6)
+        source_velocity = np.zeros(6)
+        if target_twist is not None:
+            twist = np.asarray(target_twist, dtype=float)
+            if twist.shape != (6,) or not np.isfinite(twist).all():
+                raise ValueError('Measured tracking target twist must be a finite 6-vector')
+            source_velocity = np.r_[target.rotation @ twist[:3], target.rotation @ twist[3:]]
+            desired += source_velocity
+            if target_acceleration is not None:
+                acceleration = np.asarray(target_acceleration, dtype=float)
+                if acceleration.shape != (6,) or not np.isfinite(acceleration).all():
+                    raise ValueError('Measured tracking target acceleration must be a finite 6-vector')
+                source_acceleration = np.r_[
+                    target.rotation @ (acceleration[:3] + np.cross(twist[3:], twist[:3])),
+                    target.rotation @ acceleration[3:]]
+        elif target_acceleration is not None:
+            raise ValueError('Measured tracking acceleration requires a target twist')
+        # LOCAL_WORLD_ALIGNED twist: measured TCP origin, world-aligned axes.
+        jacobian = configuration.get_frame_jacobian(task.frame).copy()
+        jacobian[:3] = current.rotation @ jacobian[:3]
+        jacobian[3:] = current.rotation @ jacobian[3:]
+        error_rate = np.zeros(6)
+        if self.config.measured_error_derivative_gain:
+            measured = np.asarray(measured_joint_velocity, dtype=float)
+            if measured.shape != (configuration.model.nv,) or not np.isfinite(measured).all():
+                raise ValueError('Measured error derivative requires finite measured joint velocity')
+            measured_velocity = jacobian @ measured
+            rotation_error = target.rotation @ current.rotation.T
+            error_rate[:3] = source_velocity[:3] - measured_velocity[:3]
+            error_rate[3:] = pin.Jlog3(rotation_error) @ (
+                rotation_error.T @ source_velocity[3:] - measured_velocity[3:])
+        # The derivative of v_target + K * pose_error includes K * error_rate.
+        # Omitting it leaves a lightly damped third-order position loop when K
+        # is raised. This opt-in term uses encoder velocities, never plant truth.
+        desired_acceleration = source_acceleration + (
+            self.config.measured_error_derivative_gain * self.config.frame_gain / dt * error_rate)
         velocity = self.velocity.get(side, np.zeros(6))
         acceleration = self.acceleration.get(side, np.zeros(6))
         jerk = np.zeros(6)
@@ -78,16 +115,13 @@ class MeasuredPoseTracking:
         for part, vmax, amax, jmax in limits:
             desired[part] *= min(1., .95*vmax/max(1e-12, np.linalg.norm(desired[part])))
             bandwidth = cfg.target_tracking_bandwidth_s_inv
-            proposed = bandwidth**2 * (desired[part]-velocity[part]) - 2*bandwidth*acceleration[part]
+            proposed = (bandwidth**2 * (desired[part]-velocity[part])
+                        + 2*bandwidth*(desired_acceleration[part]-acceleration[part]))
             jerk[part] = _tracking_jerk_with_braking_reserve(
                 proposed, acceleration[part], velocity[part], jmax, amax, vmax, dt)
         next_velocity = velocity + acceleration*dt + .5*jerk*dt**2
         next_acceleration = acceleration + jerk*dt
         self.velocity[side], self.acceleration[side] = next_velocity, next_acceleration
-        # LOCAL_WORLD_ALIGNED twist: origin at the measured TCP, axes in world.
-        jacobian = configuration.get_frame_jacobian(task.frame).copy()
-        jacobian[:3] = current.rotation @ jacobian[:3]
-        jacobian[3:] = current.rotation @ jacobian[3:]
         weight = np.asarray(task.cost)
         weighted_jacobian = weight[:, None] * jacobian
         desired_displacement = weight * next_velocity * dt
@@ -96,6 +130,7 @@ class MeasuredPoseTracking:
         linear = -weighted_jacobian.T @ desired_displacement
         self.observations[side] = dict(measured_pose=current.homogeneous.copy(),
             target_pose=target.homogeneous.copy(), error_world=error.copy(),
+            error_rate_world=error_rate.copy(),
             velocity_world=next_velocity.copy(), acceleration_world=next_acceleration.copy(),
             jerk_world=jerk.copy())
         return hessian, linear

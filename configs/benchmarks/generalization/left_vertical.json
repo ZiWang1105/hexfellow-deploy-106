@@ -1,0 +1,28 @@
+{
+  "name": "left_vertical",
+  "type": "cartesian",
+  "kind": "vertical",
+  "distance": 0.35,
+  "basis": [
+    [
+      1,
+      0,
+      0
+    ],
+    [
+      0,
+      1,
+      0
+    ],
+    [
+      0,
+      0,
+      1
+    ]
+  ],
+  "arms": [
+    "left"
+  ],
+  "posture": "extended",
+  "split": "heldout"
+}

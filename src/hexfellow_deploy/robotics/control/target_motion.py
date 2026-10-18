@@ -1061,6 +1061,7 @@ class ContinuousTargetMotionPlanner(C2TargetMotionPlanner):
             raise ValueError("source acceleration filter must be in [0.01, 0.5] s")
         self.source_acceleration_gain = float(source_acceleration_gain)
         self.source_acceleration_tau_s = float(source_acceleration_tau_s)
+        self._has_explicit_acceleration = False
         super().__init__(*args, **kwargs)
         self._sample = self._last_sample = None
         self.input_event = "initial"
@@ -1111,7 +1112,14 @@ class ContinuousTargetMotionPlanner(C2TargetMotionPlanner):
     def step(self, desired_pose, dt, *, sample=None, **kwargs):
         self._sample = sample
         self._tick_dt = dt
-        return super().step(desired_pose, dt, **kwargs)
+        # Explicit trajectory acceleration is already a derivative of the
+        # timestamped target. Do not replace it with a filtered pose secant.
+        # The parent validates the vectors before constructing any segment.
+        self._has_explicit_acceleration = kwargs.get('desired_body_acceleration') is not None
+        try:
+            return super().step(desired_pose, dt, **kwargs)
+        finally:
+            self._has_explicit_acceleration = False
 
     def _estimate_request(self, pose, dt):
         twist, acceleration = self._estimate_request_v4(pose, dt)
@@ -1187,6 +1195,11 @@ class ContinuousTargetMotionPlanner(C2TargetMotionPlanner):
             # Optional filtered source-acceleration feedforward (0 keeps the v4 law).
             source_acceleration = self._source_acceleration
             gain = self.source_acceleration_gain
+            if gain and self._has_explicit_acceleration:
+                twist, acceleration = destination.body_twist, destination.body_acceleration
+                source_acceleration = np.r_[
+                    destination.pose.rotation @ (acceleration[:3] + np.cross(twist[3:], twist[:3])),
+                    destination.pose.rotation @ acceleration[3:]]
             linear_jerk = (omega**3 * position_error
                            + 3 * omega**2 * (self.source_velocity_gain * source_linear - world_v)
                            - 3 * omega * (world_a - gain * source_acceleration[:3]))
