@@ -163,10 +163,13 @@ class RobotMapping:
         if sequence is None:
             return False
         if self.direct_quest:
+            from .research_profiles import HIGHSPEED_PROFILES
             expected_profiles = ({"x7-gp80-highspeed-fixed-base-v1", "x7-gp80-highspeed-fixed-base-v2", "x7-gp80-highspeed-fixed-base-v3", "x7-gp80-highspeed-fixed-base-v1", "x7-gp80-highspeed-fixed-base-v2", "x7-mit-manufacturer-v1", "x7-mit-highspeed-v10-base-v1",
                                   "x7-mit-highspeed-v10-base-drag-v1", "x7-mit-highspeed-v10-base-lift-v2",
                                   "x7-mit-highspeed-v10-base-lift-v3", "x7-mit-highspeed-v10-base-lift-v4"}
                                  if self.runtime_session else {"x7-mit-highspeed-v10"})
+            if self.runtime_session:
+                expected_profiles |= HIGHSPEED_PROFILES
             if (commissioning.get("allowed_live_stages") != ["whole-body"]
                     or commissioning.get("motion_profile") not in expected_profiles
                     or not isinstance(commissioning.get("profile_sha256"), str)
@@ -366,8 +369,8 @@ class RobotMapping:
         }
 
     def authorize(self, profile, stage, supplied_hash):
-        if profile is not None and profile.profile_id in {'x7-gp80-highspeed-fixed-base-v1', 'x7-gp80-highspeed-fixed-base-v2', 'x7-gp80-highspeed-fixed-base-v3'}:
-            from .research_profiles import require_offline_validation
+        from .research_profiles import HIGHSPEED_PROFILES, require_offline_validation
+        if profile is not None and profile.profile_id in HIGHSPEED_PROFILES:
             require_offline_validation(profile, mapping=self)
         from .x7 import authorize_live_profile
 

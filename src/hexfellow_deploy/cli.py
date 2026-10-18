@@ -17,21 +17,27 @@ def build(config_path, overrides=(), *, prompt=None, camera=True, execute_author
     from hexfellow_deploy.runtime.utils.config_utils import build_topic_registry, register_topic_resolver
     config = OmegaConf.merge(OmegaConf.load(config_path), OmegaConf.from_dotlist(list(overrides)))
     if interactive_ik:
-        if config.interface.backend.backend != 'simulation' or config.interface.backend.execute or prompt:
-            raise ValueError('Interactive IK requires simulation without a policy or hardware execution')
-        if 'agent' in config.interface:
+        if prompt or 'agent' in config.interface:
             raise ValueError('Interactive IK cannot share target ownership with an agent')
         config.interface.control.startup_carry = False
         config.interface.backend.startup_lift_m = None
         config.topics.viewer_status = dict(_target_='hexfellow_deploy.topics.JsonTopic', prefix='${topic_prefix}')
-        config.interface.viewer = dict(_target_='hexfellow_deploy.interactive.InteractiveIKViewer',
-            name='hexfellow_ik_viewer', plant_state='${topic:plant_state}', request='${topic:request}',
-            feedback='${topic:feedback}',
-            status='${topic:status}', decision='${topic:decision}', viewer_status='${topic:viewer_status}',
-            output='${output}', backend='${interface.backend.backend}')
+        common = dict(name='hexfellow_ik_viewer', request='${topic:request}', feedback='${topic:feedback}',
+                      status='${topic:status}', decision='${topic:decision}',
+                      viewer_status='${topic:viewer_status}', output='${output}')
+        if config.interface.backend.backend == 'hardware':
+            config.interface.control.interactive_hardware = True
+            config.interface.viewer = dict(_target_='hexfellow_deploy.hardware_interactive.HardwareIKViewer', **common)
+        else:
+            config.interface.viewer = dict(_target_='hexfellow_deploy.interactive.InteractiveIKViewer',
+                plant_state='${topic:plant_state}', backend='simulation', **common)
     if config.interface.backend.backend == 'hardware' and not (config.interface.backend.execute and execute_authorized):
         raise ValueError('Hardware requires --execute --confirm-onsite-ready')
     if config.interface.backend.backend == 'hardware':
+        # Reject mismatched controller cadence before any components open devices.
+        selected = validate_hardware_configuration(config)
+        print(f"Hardware IK: {selected['profile']} | "
+              f"{1/selected['actuation_limits']['dt_s']:g} Hz | SHA256 {selected['profile_sha256']}", flush=True)
         config.interface.camera = dict(_target_='hexfellow_deploy.camera.NativeCamera',
             name='hexfellow_camera', feedback='${topic:feedback}', images='${topic:images}',
             workspace='${workspace}', deployment_config='${deployment_config}', output='${output}', fps=15)
@@ -98,6 +104,20 @@ def build(config_path, overrides=(), *, prompt=None, camera=True, execute_author
     return config, topics, manager
 
 
+def validate_hardware_configuration(config):
+    """File-only authorization and cadence check; never creates a device driver."""
+    import math
+    from .actuation import deployment
+    _, _, _, metadata = deployment(Path(config.workspace), Path(config.deployment_config), execute=True)
+    period = float(config.timing.control_period_s)
+    if not math.isclose(period, metadata['actuation_limits']['dt_s'], rel_tol=0., abs_tol=1e-12):
+        raise ValueError(f"Control period {period} s differs from selected profile "
+                         f"{metadata['profile']} ({metadata['actuation_limits']['dt_s']} s)")
+    if not 0 < float(config.timing.compute_budget_s) < period:
+        raise ValueError('Compute budget must be positive and smaller than the selected control period')
+    return metadata
+
+
 def read_report(path, errors, *, required=False):
     """Keep final diagnostics usable when a child died before writing its report."""
     try:
@@ -148,6 +168,7 @@ def main():
     parser.add_argument('--output', required=True)
     parser.add_argument('--duration-s', type=float, default=None, help='Optional diagnostic duration; unset means unlimited')
     parser.add_argument('--execute', action='store_true')
+    parser.add_argument('--preflight', action='store_true', help='Validate hardware configuration and source binding, then exit without opening devices')
     parser.add_argument('--confirm-onsite-ready', action='store_true')
     parser.add_argument('--settle-s', type=float, default=0., help='Optional final HOLD interval after diagnostic duration')
     parser.add_argument('--evaluate-body', help='Offline scoring body name; never supplied to policy/control')
@@ -159,12 +180,12 @@ def main():
     parser.add_argument('--respect-policy-limits', action='store_true',
                         help='Opt in to agent YAML request, cost and wall-clock episode budgets')
     parser.add_argument('--no-camera', action='store_true', help='Controller-only simulation diagnostic')
-    parser.add_argument('--interactive-ik', action='store_true', help='Simulation mouse-drag TCP viewer; no policy calls')
+    parser.add_argument('--interactive-ik', action='store_true', help='Mouse-drag TCP viewer; hardware requires explicit execution and local configuration')
     parser.add_argument('--set', action='append', default=[], help='Hydra/OmegaConf dotlist override')
     args = parser.parse_args()
-    if args.interactive_ik and (args.action or args.prompt or args.task or args.execute or args.confirm_onsite_ready):
-        parser.error('--interactive-ik is simulation-only and cannot share input with a policy or action fixture')
-    if args.interactive_ik and not os.environ.get('DISPLAY'):
+    if args.interactive_ik and (args.action or args.prompt or args.task):
+        parser.error('--interactive-ik cannot share input with a policy or action fixture')
+    if args.interactive_ik and not args.preflight and not os.environ.get('DISPLAY'):
         parser.error('--interactive-ik needs a desktop DISPLAY; run from a desktop terminal')
     if args.action and args.prompt:
         parser.error('Choose an agent prompt or a controller fixture, not both')
@@ -204,6 +225,22 @@ def main():
     os.environ['HEXFELLOW_WORKSPACE'] = str(Path(args.workspace).expanduser().resolve())
     os.environ['HEXFELLOW_OUTPUT'] = str(output)
     os.environ['HEXFELLOW_TOPIC_PREFIX'] = 'hf_' + uuid.uuid4().hex[:12] + '_'
+    if args.preflight:
+        from omegaconf import OmegaConf
+        from .actuation import deployment
+        configured = OmegaConf.merge(OmegaConf.load(Path(args.config).resolve()), OmegaConf.from_dotlist(args.set))
+        try:
+            metadata = validate_hardware_configuration(configured)
+            report = dict(passed=True, devices_opened=False, profile=metadata['profile'],
+                          profile_sha256=metadata['profile_sha256'],
+                          control_period_s=metadata['actuation_limits']['dt_s'])
+        except (ValueError, RuntimeError, OSError, KeyError) as error:
+            report = dict(passed=False, devices_opened=False, error=str(error))
+        (output/'preflight.json').write_text(json.dumps(report, indent=2)+'\n')
+        print(json.dumps(report, indent=2))
+        if not report['passed']:
+            raise SystemExit(2)
+        return
     from .provenance import collect
     (output/'provenance.json').write_text(json.dumps(collect(os.environ['HEXFELLOW_WORKSPACE']), indent=2)+'\n')
     from omegaconf import OmegaConf

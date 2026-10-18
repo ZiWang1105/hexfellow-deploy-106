@@ -1,0 +1,38 @@
+{
+  "date": "2026-10-17",
+  "branch": "feat/ik-1p2mps-benchmark",
+  "profile": "x7-gp80-general-trajectory-sim-v2",
+  "profile_sha256": "ac1785da8217414b1a96e7ffad2d7a8045374fbe10aa46e8f522645ea4a98d4b",
+  "control_period_s": 0.01,
+  "hardware_devices_opened": false,
+  "hardware_qualified": false,
+  "full_tests": {
+    "passed": 499,
+    "skipped": 1,
+    "seconds": 77.83
+  },
+  "final_targeted_tests": {
+    "passed": 16,
+    "seconds": 5.11
+  },
+  "shared_runtime_desktop_test": {
+    "backend": "simulation",
+    "input": "X11 mouse drag through HardwareIKViewer",
+    "generated": 3475,
+    "accepted": 3475,
+    "fault": null,
+    "targets": 31,
+    "release_hold": true
+  },
+  "file_only_preflight": {
+    "passed": true,
+    "devices_opened": false,
+    "profile": "x7-gp80-general-trajectory-sim-v2",
+    "profile_sha256": "ac1785da8217414b1a96e7ffad2d7a8045374fbe10aa46e8f522645ea4a98d4b",
+    "control_period_s": 0.01
+  },
+  "local_config": "configs/local/general_ik_research_20261017/desktop.yaml",
+  "input_target_rate_m_s": 0.1,
+  "input_target_rate_rad_s": 0.3,
+  "limitation": "New IK parameters verified offline and admitted for explicit research; no hardware motion or high-speed hardware validation."
+}

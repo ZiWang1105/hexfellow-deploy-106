@@ -8,7 +8,9 @@ CANDIDATE_PROFILE = 'x7-gp80-highspeed-fixed-base-v2'
 HIGHSPEED_PROFILE = 'x7-gp80-highspeed-fixed-base-v1'
 HIGHSPEED_V2_PROFILE = 'x7-gp80-highspeed-fixed-base-v2'
 HIGHSPEED_V3_PROFILE = 'x7-gp80-highspeed-fixed-base-v3'
-HIGHSPEED_PROFILES = frozenset({HIGHSPEED_PROFILE, HIGHSPEED_V2_PROFILE, HIGHSPEED_V3_PROFILE})
+# Exact frozen benchmark candidate: research-only, never a commissioned default.
+GENERAL_IK_PROFILE = 'x7-gp80-general-trajectory-sim-v2'
+HIGHSPEED_PROFILES = frozenset({HIGHSPEED_PROFILE, HIGHSPEED_V2_PROFILE, HIGHSPEED_V3_PROFILE, GENERAL_IK_PROFILE})
 SUPPORTED_PROFILES = {PROFILE, CANDIDATE_PROFILE, *HIGHSPEED_PROFILES}
 RUNTIME = CONFIG_DIR / 'hardware/hexfellow_gp80_highspeed_j357.json'
 

@@ -1,0 +1,42 @@
+{
+  "date": "2026-10-17",
+  "hardware_devices_opened": false,
+  "hardware_motion_tested": false,
+  "full_suite": {
+    "passed": 493,
+    "skipped": 1,
+    "seconds": 77.63,
+    "note": "Before final preflight tests and diagnostic logging additions"
+  },
+  "final_targeted": {
+    "passed": 15,
+    "seconds": 6.29
+  },
+  "desktop_exercise": {
+    "backend": "simulation",
+    "viewer": "HardwareIKViewer",
+    "input": "X11 actual mouse drag and E key",
+    "target_publications": 58,
+    "manual_control_ticks": 96,
+    "total_control_ticks": 8094,
+    "accepted": 8094,
+    "fault": null,
+    "gripper_commands": {
+      "left": null,
+      "right": null
+    },
+    "release_requested_hold": true
+  },
+  "initial_gui_issue": "None request_id comparison at first enable; corrected before successful desktop exercise",
+  "profile": "x7-gp80-highspeed-fixed-base-v1",
+  "general_fast_candidate_enabled": false,
+  "target_rates": {
+    "linear_m_s": 0.1,
+    "angular_rad_s": 0.3
+  },
+  "input_lease_s": 0.25,
+  "local_configuration": "configs/local/interactive_hardware/desktop.yaml",
+  "local_configuration_tracked": false,
+  "hardware_qualified": false,
+  "evidence_directory": "runs/hardware_interactive_validation"
+}

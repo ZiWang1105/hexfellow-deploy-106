@@ -16,9 +16,10 @@ from .workspace import activate, build_shared_executor
 class ControlComponent(DABaseInterface):
     def __init__(self, name, request, status, frames, feedback, backend_status, workspace,
                  output, period_s, time_budget, health_timeout_s=.1, startup_carry=False,
-                 inject_every=0, inject_delay_s=0., receipts=None):
+                 inject_every=0, inject_delay_s=0., receipts=None, interactive_hardware=False):
         super().__init__(name, [request, status, frames, feedback, backend_status]
                          +([receipts] if receipts is not None else []), time_budget)
+        self.interactive_hardware = interactive_hardware
         self.receipts = receipts
         self.request, self.status = request, status
         self.frames, self.feedback, self.backend_status = frames, feedback, backend_status
@@ -83,6 +84,8 @@ class ControlComponent(DABaseInterface):
         try:
             plant = BackendProxy(self.frames, self.feedback, self.backend_status, receipts=self.receipts)
             executor = build_shared_executor(plant.metadata, self.period)
+            from .manual_tcp import ManualTCPControl
+            manual = ManualTCPControl(executor, self.period) if self.interactive_hardware else None
             executor.ik.control_clock = time.monotonic
             executor.ik.feedback_provider = plant.received_for
             executor.ik.report['actuation'] = 'Shared MIT frame -> DA actuator owner -> native SDK or MuJoCo torque servo'
@@ -116,7 +119,12 @@ class ControlComponent(DABaseInterface):
                 if request is not None and request["id"] != last_request and not final_hold:
                     last_request = request["id"]
                     try:
-                        if request['operation'] == 'final_hold':
+                        if manual is not None:
+                            manual.receive(request, measured, time.monotonic())
+                            if request['operation'] == 'final_hold':
+                                final_hold = True
+                                state = dict(state, final_hold=True)
+                        elif request['operation'] == 'final_hold':
                             executor.hold(measured)
                             final_hold = True
                             state = dict(state, final_hold=True)
@@ -146,9 +154,11 @@ class ControlComponent(DABaseInterface):
                             executor.submit(Action.from_dict(request["action"]), observed)
                         else:
                             raise ValueError("Unknown control request")
-                        state = dict(state, request_id=last_request, request_error=None)
+                        state = dict(state, request_id=last_request, request_error=None,
+                                     **({"manual_tcp": manual.report()} if manual is not None else {}))
                     except ValueError as error:
-                        state = dict(state, request_id=last_request, request_error=str(error))
+                        state = dict(state, request_id=last_request, request_error=str(error),
+                                     **({"manual_tcp": manual.report()} if manual is not None else {}))
                 if self.inject_every and ticks and ticks % self.inject_every == 0:
                     time.sleep(self.inject_delay)
                     # Read actual new feedback after the injected delay.
@@ -161,8 +171,14 @@ class ControlComponent(DABaseInterface):
                 measured = plant.read_for_control(timeout_s=self.health_timeout,
                     min_validity_s=self.time_budget, stopped=lambda: self.stopping, on_wait=feedback_wait)
                 plant.created_s = time.monotonic()
+                if manual is not None:
+                    manual.step(measured, plant.created_s)
+                    state = dict(state, manual_tcp=manual.report())
                 generated = owner.generate(lambda: executor.tick(measured))
                 sequence, (command, diagnostic) = generated
+                if manual is not None:
+                    diagnostic = dict(diagnostic, mode="manual_tcp" if manual.deadline is not None else "hold",
+                                      manual_tcp=manual.report())
                 solved = time.monotonic()
                 def publication_wait(retries):
                     nonlocal state
@@ -188,7 +204,9 @@ class ControlComponent(DABaseInterface):
                         mit=encode_mit(executor.ik.last_result.mit),
                         reference_velocity={n:float(executor.ik.last_result.velocity[i]) for n,i in executor.ik.indices.items()},
                         source_received=plant.received_for(measured),
-                        active_tcp_targets=None if executor.target is None or executor.requires_base else {
+                        active_tcp_targets={side: dict(position_m=pose.translation.tolist(), rotation=pose.rotation.tolist())
+                            for side,pose in manual.targets.items()} if manual is not None and manual.targets is not None
+                        else None if executor.target is None or executor.requires_base else {
                             side: dict(position_m=pos.tolist(),rotation=rot.tolist())
                             for side,(pos,rot) in executor.arm_targets.items()},
                         interval_ms=None if previous_solve_started is None else (started-previous_solve_started)*1000,

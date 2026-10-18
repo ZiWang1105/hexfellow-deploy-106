@@ -1,0 +1,16 @@
+{
+  "change": "Manual TCP rates use selected profile; tracking lag compares solved joint-reference FK with measured TCP",
+  "profile": "x7-gp80-general-trajectory-sim-v2",
+  "linear_limit_m_s": 2.0,
+  "angular_limit_rad_s": 4.0,
+  "control_period_s": 0.01,
+  "device_access": false,
+  "gui_backend": "simulation",
+  "gui_run": "runs/general_hardware_fast_input_preview",
+  "gui_target_publications": 19,
+  "gui_ticks": 1982,
+  "gui_fault": null,
+  "targeted_tests": "16 passed; additional 10 mm per 10 ms input regression: 4 passed",
+  "preflight": "runs/fast_input_preflight/preflight.json",
+  "hardware_motion_tested": false
+}
