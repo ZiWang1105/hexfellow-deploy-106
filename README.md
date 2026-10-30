@@ -83,6 +83,15 @@ policy / operator request (paired left/right TCP poses, grippers, base velocity)
 A MuJoCo window with draggable red TCP targets; the arms follow through the same IK and
 control path as the real robot (no policy, no API calls, no hardware):
 
+![Interactive IK in simulation](docs/media/interactive_ik.gif)
+
+*A scripted drag through the same request path as the mouse (red spheres: targets): both
+hands up to a work pose, a 6 cm circle, a 30° rotation, both arms together and a fast 10 cm
+flick. While a target moves the TCP lags it by up to ~3 cm and settles within ~3-5 mm; at
+the end both targets are just beyond reach and the arms hold steadily ~28 mm short.*
+
+To open the window:
+
 ```bash
 OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 .venv/bin/hexfellow-deploy \
   --interactive-ik --no-camera \
