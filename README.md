@@ -1,83 +1,87 @@
-# Hexfellow Deploy
+# Hexfellow Deploy (handover copy)
 
-One owned deployment runtime for the RGB-D agent, PinkIK controller and MIT
-actuator stream. MuJoCo and the real robot select different device adapters;
-they use the same controller, reference ownership, serialized commands, feedback
-contract and command-health checks.
+Deployment runtime for the **Hexfellow Maver X4** mobile manipulator (swerve base, lift,
+two 7-DoF arms, GP80 grippers, ZED 2i head camera): robot model, IK, control stack and a
+MuJoCo simulator with mouse-draggable IK targets. The same controller drives the
+simulator and the real robot; only the device adapters differ.
 
-The native SDK adapter and physical RGB-D adapter are implemented. The physical
-RGB-D/encoder matcher has passed a read-only connected-device test; the full
-physical agent task remains unqualified. Simulator results establish software and
-modeled-plant behavior, not firmware dynamics, network reliability or hardware
-stopping. See [architecture](docs/ARCHITECTURE.md) and [validation](docs/VALIDATION.md).
-The [historical alignment audit](docs/DEPLOY_ANYTHING_ALIGNMENT.md) records the
-original design comparison. The current implementation owns its process/topic
-runtime and PinkIK/native code; no external deployment or solver repository is required.
-Both physical GP80 hands use this repository's [feedback gripper controller](docs/GRIPPER_CONTROL.md),
-shared by the native policy adapter and the parent keyboard console.
-Native policy observations include [both calibrated wrist RGB views](docs/WRIST_RGB.md)
-alongside head RGB-D: four images per observation. Each wrist uses its own
-October 8 candidate extrinsics, active-profile intrinsics and matched encoder FK.
+This is a snapshot of `main` of `ZiWang1105/hexfellow-deploy` (commit `ac7da9d`, 2026-10-17).
+The original, more detailed README is in [docs/DETAILED_README.md](docs/DETAILED_README.md).
 
-Camera calibration code for the ZED 2i head and both RealSense wrists is now
-[consolidated here](calibration/README.md), with a common
-`./scripts/calibrate_camera.sh` launcher for collection, fitting, head landmark
-PnP refinement, measured-arm overlays and simulation checks. `list` shows the
-actions supported for each device. Both wrists have dedicated 30-pose routes,
-with measured-joint capture, simulation validation and automatic fitting.
+## Quick start (simulation)
 
-Saved head and both wrist extrinsics, SDK intrinsics, board scale and validation
-evidence are versioned in the [camera parameter guide](calibration/docs/camera_parameters.md)
-and [current parameter snapshot](calibration/config/camera/camera_parameters_20261008.json).
-The [latest wrist results](calibration/docs/wrist_parameters_20261008.md) preserve
-their candidate status: held-out RMS is 7.92 px for the left D405 and 13.62 px
-for the right D435i. These exports do not change production sensor selection.
-
-## Default IK
-
-The default runtime selects `x7-gp80-general-trajectory-sim-v2` at **100 Hz**,
-with target velocity limits of **2.0 m/s** and **4.0 rad/s**. The profile's
-acceleration, jerk, joint and effort constraints remain active. The name retains
-`sim` for benchmark provenance; selecting it does not qualify hardware safety.
-
-The original profile remains available by explicitly selecting
-`deployment_config=configs/hardware/desktop.yaml` and
-`timing.control_period_s=0.02`. Physical execution requires a machine-local
-configuration and matching research binding; repository templates remain
-uncommissioned. See [interactive hardware IK](docs/HARDWARE_INTERACTIVE_IK.md).
-
-## Standalone installation
-
-Clone this repository normally; it has no Git submodules. The controller, robot contracts,
-hardware adapters, MuJoCo scene builder/assets, skill executor and draggable TCP
-viewer are owned here. No agent application checkout or API key is needed for IK.
-
-On Ubuntu, install `build-essential` and `libeigen3-dev`, plus `uv`, then:
+Ubuntu, with `build-essential`, `libeigen3-dev` and [`uv`](https://github.com/astral-sh/uv):
 
 ```bash
-git clone git@github.com:ZiWang1105/hexfellow-deploy.git
-cd hexfellow-deploy
-./scripts/setup_sim.sh
+git clone https://github.com/ZiWang1105/hexfellow-deploy-106.git
+cd hexfellow-deploy-106
+./scripts/setup_sim.sh          # Python 3.10 .venv, simulation deps, builds the native extension
 ```
 
-The script creates a Python 3.10 `.venv`, installs the simulation dependencies,
-builds the owned native controller extension, and installs the owned process/topic
-runtime. No additional repository access is required. NumPy stays below 2 for Pinocchio.
-Source lineage and preserved license terms are recorded in [NOTICE.md](NOTICE.md).
-For native wire-format tests, also install the optional SDK (this opens no devices):
+Then open the interactive IK simulator (see below). Nothing in the simulation commands
+opens hardware.
 
-```bash
-uv pip install --python .venv/bin/python -e '.[hardware]'
-OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 .venv/bin/python -m pytest tests -q
+## 1. Robot model (URDF)
+
+`robot_resources/urdf/`
+
+| File | What it is |
+| --- | --- |
+| `maver_x4_asm_asm.urdf` | Maver X4 as delivered: base, lift, two 7-DoF arms, no grippers |
+| `maver_x4_gp80.urdf` | + a GP80 gripper on each arm |
+| `maver_x4_gp80_zed.urdf`, `maver_x4_gp80_zed_<N>deg.urdf` | + the ZED 2i head camera at a pitch of N deg (32/40/42/55) |
+| `vendor/hexfellow_gp80/xpkg_urdf_gp80.urdf` | the vendor's GP80 description |
+
+Meshes are in `robot_resources/urdf/meshes/`. Notes:
+
+* The GP80 is a **single rigid body** (`robot_base`, `robot2_base`); the URDF has no finger
+  joints. The grippers are driven open/closed by the gripper controller (section 3).
+* The URDF has **no TCP frame**: the IK adds it at load time from `tcp_offset_m` in the robot
+  model config (`src/hexfellow_deploy/robotics/control/robot_model.py`).
+* The default runtime config `configs/hardware/desktop.yaml` uses
+  `maver_x4_gp80_zed_40deg.urdf`.
+
+## 2. IK
+
+Differential IK with [Pink](https://github.com/stephane-caron/pink) on Pinocchio, solved as a
+QP each control tick, with joint, velocity, acceleration, jerk, effort and self-collision
+constraints. Default profile: `x7-gp80-general-trajectory-sim-v2` at 100 Hz (2.0 m/s,
+4.0 rad/s target limits).
+
+| Where | What |
+| --- | --- |
+| `src/hexfellow_deploy/robotics/control/ik_core.py` | the IK controller (entry point) |
+| `.../control/qp_pipeline.py`, `posture.py`, `posture_policy.py` | QP tasks and posture regularisation |
+| `.../control/self_collision.py`, `collision_kernel.cpp` | self-collision checks (native C++ kernel) |
+| `.../control/motion_profile.py`, `target_timing.py` | target trajectories and timing |
+| `configs/controller/` | controller profiles (`x7_general_trajectory_sim.yaml`, `umi_pink*.yaml`, ...) |
+| `docs/GENERAL_IK.md`, `docs/IK_BENCHMARK.md` | design notes and benchmarks |
+
+## 3. Control stack
+
+```
+policy / operator request (paired left/right TCP poses, grippers, base velocity)
+  -> IK (PinkIK, above)            joint references
+  -> MIT command                   position/velocity/torque + gains per joint
+  -> backend process               validation, ownership, command health
+  -> device adapter                MuJoCo simulator  |  Hexfellow SDK (real robot)
+  <- feedback (encoders, camera)   checked for freshness, order and consistency
 ```
 
-See [standalone ownership and migration](docs/STANDALONE.md). Calibration candidates
-retain their recorded qualification status; this extraction changes no IK gains,
-actuator limits, feedback checks, ownership rules, or hardware authorization.
+| Where | What |
+| --- | --- |
+| `src/hexfellow_deploy/robotics/control/` | MIT commands (`mit.py`, `mit_command.py`), limits (`command_limits.py`), following error, feedback policy, faults |
+| `src/hexfellow_deploy/robotics/hardware/` | real robot: SDK endpoint (`hexfellow_endpoint.py`, `x7.py`), whole-body mapping (`whole_body.py`), realtime loop, sessions |
+| `src/hexfellow_deploy/backend.py`, `native.py`, `actuation.py`, `control_topics.py` | the process/topic runtime between controller and devices |
+| `src/hexfellow_deploy/sim/` | MuJoCo scene builder, sensors, simulated transport |
+| `src/hexfellow_deploy/gripper_sdk.py`, `gripper_contract.py` | GP80 open/close control (`docs/GRIPPER_CONTROL.md`) |
+| `configs/hardware/`, `configs/robot/`, `configs/scenes/` | runtime, robot and scene configs |
+| `docs/ARCHITECTURE.md` | architecture and ownership rules |
 
-## Run
+## 4. Interactive simulator IK
 
-From this repository in a desktop terminal, open the interactive simulator:
+A MuJoCo window with draggable red TCP targets; the arms follow through the same IK and
+control path as the real robot (no policy, no API calls, no hardware):
 
 ```bash
 OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 .venv/bin/hexfellow-deploy \
@@ -85,118 +89,30 @@ OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 .venv/bin/hexfellow-deploy \
   --output "runs/interactive_ik_$(date +%Y%m%d_%H%M%S)"
 ```
 
-No `--workspace` is required. Defaults resolve this checkout's
-`configs/hardware/desktop.yaml`, controller profile, and example scene.
-That uncommissioned template is for simulation, not physical execution.
+* **Double-click** a red sphere to select the left or right TCP.
+* **Ctrl + right-drag** translates it, **Ctrl + left-drag** rotates it.
+* **Space** or **R**: hold and reset the handles to the measured TCP poses.
+* **Q** or close the window to quit.
+* A web dashboard runs at <http://127.0.0.1:8765/>.
+* `runs/<name>/interactive.jsonl` records the input, `control.jsonl` the measured and reference motion.
 
-For a headless MIT control diagnostic with a paired TCP target:
+Code: `src/hexfellow_deploy/interactive.py`.
 
-```bash
-OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 .venv/bin/hexfellow-deploy \
-  --no-camera --duration-s 8 \
-  --action tests/fixtures/paired_pose.json \
-  --set interface.control.startup_carry=false \
-  --output "runs/ik_$(date +%Y%m%d_%H%M%S)"
-```
+## Real robot
 
-An agent application can supply its installed component via `policy.component`,
-or an explicit `--agent-plugin` module with `AGENT_COMPONENT` and optional task
-catalog/evaluation hooks. Agent requests and task scoring are not runtime dependencies.
-Existing application launchers pass their configuration workspace and plugin explicitly.
-For real-robot mouse dragging, see [interactive hardware IK](docs/HARDWARE_INTERACTIVE_IK.md).
-Physical operation still requires a locally configured deployment file and both
-`--execute --confirm-onsite-ready`; the default command above never opens hardware.
+The same mouse dragging on the real robot is `src/hexfellow_deploy/hardware_interactive.py`,
+documented in [docs/HARDWARE_INTERACTIVE_IK.md](docs/HARDWARE_INTERACTIVE_IK.md). Hardware runs
+need the optional SDK (`uv pip install --python .venv/bin/python -e '.[hardware]'`), a
+machine-local deployment config and the explicit flags `--execute --confirm-onsite-ready`.
+The configs in this repository are uncommissioned templates; simulation results do not
+qualify hardware safety.
 
-The terminal prints the clickable dashboard URL, normally
-<http://127.0.0.1:8765/>. It displays RGB, control state, actuator acceptance,
-startup stage, model-call state and errors. The Agent activity panel appears above
-the camera images and shows the latest left/right TCP, binary grippers and base
-XY/yaw decision. The last action remains visible during inference; a failure
-before the first model call is stated explicitly. Raw telemetry is collapsible. API requests, sensor images, responses and reported costs are
-archived under `policy/`. Physical camera matching diagnostics are saved to
-`camera_health.json`, including frame ages, encoder skew and publication failures.
-Only the API client reads the external key file.
-
-Astra with medium effort is the default. There is no default execution duration,
-call count or API spending cap. Ctrl-C closes the run. `--duration-s` optionally
-limits the **whole diagnostic run after control startup**, not one model call.
-`--settle-s` optionally adds a final constrained HOLD interval after that budget.
-
-## Controller diagnostics and offline analysis
-
-The [fast X7 IK benchmark](docs/IK_BENCHMARK.md) compares the current profiles,
-an AgileX-style nonlinear endpoint solver, and a 100 Hz differential IK candidate
-in the shared MIT plant. It includes analytic trajectories, per-joint constraint
-checks, a speed sweep, retained failures, plots, and a video replay command.
-The candidate exceeds 1.2 m/s on tested feasible paths; it remains a simulation
-experiment and does not change the default viewer or hardware profile.
-
-Open a native MuJoCo window with **draggable red TCP targets**, using the shared
-controller and simulator actuator process (run from a desktop terminal):
-
-```bash
-cd ~/projects/hexfellow-deploy
-OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 .venv/bin/hexfellow-deploy \
-  --interactive-ik --no-camera \
-  --output "runs/interactive_ik_$(date +%Y%m%d_%H%M%S)"
-```
-
-Double-click a red sphere to select the left or right TCP. Hold Ctrl and drag
-with the right mouse button to translate, or the left button to rotate. Space
-or R requests constrained HOLD and resets both handles to measured TCP poses;
-drag again to resume. Q or closing the window shuts down the simulation. The
-overlay shows the selected arm, measured position/orientation tracking error,
-and controller rejections. The web dashboard remains available on port 8765
-(`--set interface.dashboard.port=8875` changes the dashboard port).
-
-This mode starts at the scene's initial pose without the carrying routine and
-makes no policy/API calls. It holds the lift reference fixed and preserves the
-initial binary gripper commands. It cannot be combined with an agent prompt,
-action fixture or hardware execution. No camera capture is needed. The display
-mirrors plant snapshots; its mocap handles never apply forces or alter plant
-state. Mouse input becomes an ordinary paired base-frame TCP request through
-the same PinkIK, reference ownership, command validation and MIT simulation
-path. Only the operator renderer sees world coordinates. `interactive.jsonl`
-records submitted input; `control.jsonl` records measured/reference behavior.
-No successful grasp or hardware qualification is implied by this diagnostic.
-
-A paired-pose test with deliberate scheduling and actuator delays, without API calls:
-
-```bash
-OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 .venv/bin/python -m hexfellow_deploy.cli \
-  --workspace . --duration-s 28 --no-camera \
-  --action tests/fixtures/paired_pose.json \
-  --set interface.control.startup_carry=false \
-  --set interface.control.inject_every=10 \
-  --set interface.control.inject_delay_s=0.03 \
-  --set interface.backend.submit_delay_s=0.03 \
-  --output "runs/delay_$(date +%Y%m%d_%H%M%S)"
-```
-
-Use `--set interface.dashboard.port=8875` to avoid another viewer's port.
-Overrides use OmegaConf YAML syntax; topics resolve through the actual DA registry.
-
-From this repository:
+## Tests
 
 ```bash
 OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 .venv/bin/python -m pytest tests -q
-.venv/bin/python scripts/analyze_mit_run.py runs/COMPLETED_RUN
-MUJOCO_GL=egl .venv/bin/python scripts/analyze_mit_run.py runs/COMPLETED_RUN --video
 ```
 
-The analyzer requires both owner final records before reading evaluation data.
-It writes `analysis/analysis.json`, `tcp_samples.npz` and `tcp_tracking.png`,
-separating actual-to-target, reference-to-target and actual-to-reference errors.
-`--video` replays the entire recorded trajectory into
-`analysis/replay/pickup.mp4`; it does not rerun physics or affect the policy.
-Every exported movie labels the overall run outcome and termination separately
-from per-frame grasp retention. A retained grasp in a failed episode stays labeled
-as a failed run.
-The older `qualify_ik.py` remains explicitly labeled as position-plant evidence.
+## Licenses
 
-Outputs also include source/dependency provenance, command/control records,
-backend metadata, termination reason and separate shutdown errors. Simulator
-base/object state is recorded for rendering and offline scoring only; it never
-enters policy/control observations.
-
-Solver/runtime source attribution and dependency-removal details are in [NOTICE.md](NOTICE.md) and [standalone setup](docs/STANDALONE.md).
+Source lineage and preserved license terms: [NOTICE.md](NOTICE.md), `licenses/`.
